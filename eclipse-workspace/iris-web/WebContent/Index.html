@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="lib/jquery.js"></script>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h3>Program:</h3>
+<textarea style="height:400px;" rows="4" cols="50" id="program"/></textarea>
+
+
+<h3>Query:</h3>
+	<button onclick="execute()" id="execute">Execute</button>
+<div id="results"></div>
+
+
+
+</body>
+
+<script>
+
+function execute(){
+	$.ajax({		
+		 type: "get",
+		  url: "http://localhost:8080/iris/test",
+		  data: { 
+			     loadProds: 1, 
+			     test: JSON.stringify({ "program": $("#program").val(), "query" : $("#query").val() }) // look here! 
+			    }, 
+		  contentType: "application/json; charset=utf-8",
+          success:function(response) {
+  		$("#results").text(response);
+  		}
+		})
+}
+</script>
+</html>
+
