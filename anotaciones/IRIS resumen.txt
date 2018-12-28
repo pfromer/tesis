@@ -1,0 +1,80 @@
+\api\org\deri\iris\api\
+TODA LAS INTERFACES (iAtom, iTuple, etc)
+
+
+\app\org\deri\iris\demo
+hay una demo. un archivo con un main donde se le pueden pasar parametros y ejecutar una tarea.
+en DemoW hay una demo harcodeada con cosas de los simpsons
+ProgramExecutor, en el constructor de la clase es donde se ejecuta el programa.
+
+\build
+hay muchos JAR files (archivos ejecutables supongo para buildear)
+
+config\logging.properties
+configuracion de log4J
+
+
+examples\
+Archivos DTG, creo que ahi se definien las ontologias
+QUE son los archivos dtg?
+
+/// First Level Datalog Query or Program///
+?- Parent(?x), hasSon(?x, 'http:/www.elet.polimi.it/dbgroup/kid/testNyaya.owl#Giorgio').
+?- @objectproperty(?Z3, 'http:/www.elet.polimi.it/dbgroup/kid/testNyaya.owl#hasSon', ?Z5, ?Z6, ?Z7, ?Z8, ?Z9, ?Z10, ?Z11, ?Z12, ?Z13, ?Z14, ?Z15, ?Z16, ?Z17).
+?- @i_class(?Z1, ?X, ?Z18, ?Z19).
+?- @i_objectproperty(?Z0, ?Z1, ?Z2, ?Z3, ?Z4).
+?- hasSon(?x, ?y).
+?- Parent(?x).
+?- Person(?x).
+
+examples\ddl_e_testdatalog
+hay archivos owl
+
+\lib
+librerias de java
+
+\logs
+los arvhivos de logs
+
+\nyayaTest
+hay muchas ontologiaas definidas, cada uno bajo una carpeta 
+	\sbox --QUE ES SBOX? 
+	\tboc
+
+
+
+creo que en este directorio es donde se parsean los programas
+\parser\org\deri\iris\compiler\
+	TreeWalker.java
+	Parser.java
+	BuiltinRegister.java
+	ParserException.java
+	
+\parser\org\deri\iris\parser\
+	MUUCHOS archivos de java.
+	
+\src\org\deri\iris
+
+src\org\deri\iris\basics\
+				Position.java
+
+
+		mas clases de java. creo que son las implementaciones de las interfaces en el directorio de API
+		
+\test\org\deri\iris\
+	clases de testing
+
+\web\pages
+	htmls/php que sirven de interface
+	
+	en demo.php:
+	
+			<p>Enter a datalog program in the textarea below, choose an evaluation 
+		method and press "Submit Query" to test IRIS. For help on the IRIS datalog syntax,
+		 see <a href="/syntax">here</a>. Please note that we placed a 30 seconds timeout per 
+		 query to avoid overloading our server.</p>
+
+MUY BUENO::
+\web\pages\user_guide.php
+
+		 

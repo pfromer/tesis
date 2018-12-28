@@ -1,0 +1,28 @@
+ bridging an apparent gap in expressive power between database query languages and description logics
+ we are now able to enrich DLs by stratiﬁed negation via mappings from DLs to Datalog± with stratiﬁed negation
+ we have a genuine interest in studying new fascinating tractable query languages
+ 
+ DL-Lite family
+ 
+ 
+ In the context of DLs, data complexity is the complexity of query answering over input ABoxes, when both the TBox and the query are ﬁxed
+ This scenario is very similar to query answering with well-known rule-based languages, such as Datalog. It is easy to see that plain Datalog can neither directly express DL-Lite disjointness constraints 
+ ConferencePaper included  ¬JournalPaper
+ 
+  plain Datalog not very well suited for ontological reasoning with inclusion axioms either 
+  Scientist inclded  existe
+  isAuthorOf
+
+ It is thus natural to ask whether Datalog can be suitably modiﬁed to nicely accommodate ontological axioms and constraints such as those expressible in the DL-Lite family
+
+Question1: What are the main modiﬁcations of Datalog that are required for ontological knowledge representation and query-answering?
+
+answer1:  we identiﬁed the possibility of having existentially quantiﬁed variables in rule heads as the main Datalog extension enabling ontological knowledge representation and reasoning
+( tuple generating dependencies (TGDs),)
+ restrict the rule syntax for achieving decidability. We thus require that the rule bodies of TGDs are guarded
+ This means that in each rule body of a TGD there must exist an atom, calledguard, in which all non existentially quantiﬁed variables of the rule occur as arguments
+ 
+
+Question2: Are there versions of Datalog that encompass the DL-Lite family of description logics, and that share the favorable data complexity bounds for query-answering with DL-Lite? If so, how do they look like? 
+
+ 

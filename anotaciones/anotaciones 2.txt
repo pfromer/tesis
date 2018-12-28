@@ -1,0 +1,9 @@
+tengo que computar los maximasl consistent subsets de la mejor forma que se me ocurra
+y ver en la parte de guardad si se me ocurre alguna mejora
+
+ver si puedo construir algo mejor
+
+
+la egd es una generalizacion de dependencia funcional.
+
+agregar funcionalidad de egds y negative constraints en mi programa.

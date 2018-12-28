@@ -1,0 +1,155 @@
+Para hacerlo andar:
+
+Click derecho en 
+org.deri.iris.demo/Demo.java
+run as->run configurations->arguments
+
+En el box de "Program arguments" escribir:
+
+
+program-file=-++-guardedExample.dtg guarded-rules
+
+
+
+
+Otra opcion: dejar ${string_prompt}, darle run desde el boton verde y poner ahi los program arguments
+
+
+
+
+esto me anduvo
+
+Init time: 0.0ms
+----------------------------------
+Query:      ?- r1(?x, ?y). ==>> 1 row in 0.0ms
+('a', 'b')
+----------------------------------
+Query:      ?- r2(?x). ==>> 2 rows in 0.0ms
+('b')
+('a')
+
+
+
+
+-------------
+
+
+program-file=C:\Git\nyaya\IRIS+-\examples\simple.dtg
+
+
+java.sql.SQLException: Data Source Unavailable, try connect() first...
+	at org.deri.iris.storage.StorageManager.getDataSource(StorageManager.java:184)
+	at org.deri.iris.storage.StorageManager.loadStoredRelation(StorageManager.java:317)
+	at org.deri.iris.storage.StorageManager.getStoredRelation(StorageManager.java:271)
+	at org.deri.iris.storage.relational.StoredRelation.<init>(StoredRelation.java:43)
+	at org.deri.iris.storage.RelationFactory.createRelation(RelationFactory.java:39)
+	at org.deri.iris.rules.compiler.RuleCompiler.compileBody(RuleCompiler.java:162)
+	at org.deri.iris.rules.compiler.RuleCompiler.compile(RuleCompiler.java:72)
+	at org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategy.<init>(StratifiedBottomUpEvaluationStrategy.java:109)
+	at org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategyFactory.createEvaluator(StratifiedBottomUpEvaluationStrategyFactory.java:58)
+	at org.deri.iris.KnowledgeBase.<init>(KnowledgeBase.java:111)
+	at org.deri.iris.KnowledgeBaseFactory.createKnowledgeBase(KnowledgeBaseFactory.java:72)
+	at org.deri.iris.demo.ProgramExecutor.<init>(ProgramExecutor.java:106)
+	at org.deri.iris.demo.Demo$ExecutionTask.run(Demo.java:236)
+	at java.lang.Thread.run(Unknown Source)
+java.sql.SQLException: Data Source Unavailable, try connect() first...
+	at org.deri.iris.storage.StorageManager.getDataSource(StorageManager.java:184)
+	at org.deri.iris.storage.StorageManager.loadStoredRelation(StorageManager.java:317)
+	at org.deri.iris.storage.StorageManager.getStoredRelation(StorageManager.java:271)
+	at org.deri.iris.storage.relational.StoredRelation.<init>(StoredRelation.java:43)
+	at org.deri.iris.storage.RelationFactory.createRelation(RelationFactory.java:39)
+	at org.deri.iris.rules.compiler.RuleCompiler.compileBody(RuleCompiler.java:162)
+	at org.deri.iris.rules.compiler.RuleCompiler.compile(RuleCompiler.java:72)
+	at org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategy.<init>(StratifiedBottomUpEvaluationStrategy.java:109)
+	at org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategyFactory.createEvaluator(StratifiedBottomUpEvaluationStrategyFactory.java:58)
+	at org.deri.iris.KnowledgeBase.<init>(KnowledgeBase.java:111)
+	at org.deri.iris.KnowledgeBaseFactory.createKnowledgeBase(KnowledgeBaseFactory.java:72)
+	at org.deri.iris.demo.ProgramExecutor.<init>(ProgramExecutor.java:106)
+	at org.deri.iris.demo.Demo$ExecutionTask.run(Demo.java:236)
+	at java.lang.Thread.run(Unknown Source)
+java.sql.SQLException: Data Source Unavailable, try connect() first...
+	at org.deri.iris.storage.StorageManager.getDataSource(StorageManager.java:184)
+	at org.deri.iris.storage.StorageManager.loadStoredRelation(StorageManager.java:317)
+	at org.deri.iris.storage.StorageManager.getStoredRelation(StorageManager.java:271)
+	at org.deri.iris.storage.relational.StoredRelation.<init>(StoredRelation.java:43)
+	at org.deri.iris.storage.RelationFactory.createRelation(RelationFactory.java:39)
+	at org.deri.iris.rules.compiler.RuleCompiler.compileBody(RuleCompiler.java:162)
+	at org.deri.iris.rules.compiler.RuleCompiler.compile(RuleCompiler.java:72)
+	at org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategy.<init>(StratifiedBottomUpEvaluationStrategy.java:109)
+	at org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategyFactory.createEvaluator(StratifiedBottomUpEvaluationStrategyFactory.java:58)
+	at org.deri.iris.KnowledgeBase.<init>(KnowledgeBase.java:111)
+	at org.deri.iris.KnowledgeBaseFactory.createKnowledgeBase(KnowledgeBaseFactory.java:72)
+	at org.deri.iris.demo.ProgramExecutor.<init>(ProgramExecutor.java:106)
+	at org.deri.iris.demo.Demo$ExecutionTask.run(Demo.java:236)
+	at java.lang.Thread.run(Unknown Source)
+Init time: 0.0ms
+----------------------------------
+Query:      ?- Q1(?X). ==>> 0 rows in 0.0ms
+----------------------------------
+Query:      ?- Q2(?X, ?Y). ==>> 0 rows in 0.0ms
+----------------------------------
+Query:      ?- Q3(?X). ==>> 0 rows in 0.0ms
+----------------------------------
+Query:      ?- Schema(?X). ==>> 0 rows in 0.0ms
+----------------------------------
+Query:      ?- Join(?Z2, ?Z17). ==>> 0 rows in 0.0ms
+
+
+program-file=C:\Git\nyaya\IRIS+-\examples\guardedCarlo.dtg guarded-rules
+se cuelga
+
+program-file=C:\Git\nyaya\IRIS+-\examples\guardedCarlo2.dtg guarded-rules magic-sets
+funciona
+
+---------
+el de employee no me funciona, me tira unsafe exception. considerar que no es guarded ni linear
+como lo puedo hacer guarded?
+creo que es sticky
+hay configuracion para sticky?
+
+
+org.deri.iris.RuleUnsafeException: Unbound variable in rule head: ?e2org.deri.iris.RuleUnsafeException: Unbound variable in rule head: ?e2
+
+	at org.deri.iris.rules.compiler.HeadSubstituter.<init>(HeadSubstituter.java:88)
+	at org.deri.iris.rules.compiler.RuleCompiler.compile(RuleCompiler.java:85)
+	at org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategy.<init>(StratifiedBottomUpEvaluationStrategy.java:99)
+	at org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategyFactory.createEvaluator(StratifiedBottomUpEvaluationStrategyFactory.java:58)
+	at org.deri.iris.KnowledgeBase.<init>(KnowledgeBase.java:111)
+	at org.deri.iris.KnowledgeBaseFactory.createKnowledgeBase(KnowledgeBaseFactory.java:72)
+	at org.deri.iris.demo.ProgramExecutor.<init>(ProgramExecutor.java:106)
+	at org.deri.iris.demo.Demo$ExecutionTask.run(Demo.java:236)
+	at java.lang.Thread.run(Unknown Source)
+
+OBSERVAR QUE FALLA ACA: (necesito probar con unsafe pero que sea guarded)
+
+	int i = 0;
+	for (IVariable variable : variablesToSubstitute) {
+	    int index = variables.indexOf(variable);
+	    if (index < 0)
+		if (guardedRules)
+		    /*
+		     * In the original IRIS, here a RuleUnsafeException(
+		     * "Unbound variable in rule head: " + variable ) is thrown.
+		     * We relax the constraint in order to accept unbounded
+		     * variables in the head.
+		     */
+		    mIndices[i++] = -1;
+		else
+		    throw new RuleUnsafeException(
+			    "Unbound variable in rule head: " + variable);
+	    else
+		mIndices[i++] = index;
+	}
+
+------
+este funciona: (observar weakly-guarded-rules)
+program-file=C:\Git\nyaya\IRIS+-\examples\employee.dtg unsafe-rules weakly-guarded-rules
+
+igual pero mas interesante
+program-file=C:\Git\nyaya\IRIS+-\examples\employee3.dtg unsafe-rules weakly-guarded-rules
+--
+OBSERVAR QUE con employee2 me falla este:
+program-file=C:\Git\nyaya\IRIS+-\examples\employee2.dtg unsafe-rules 
+
+pero no me falla:
+program-file=C:\Git\nyaya\IRIS+-\examples\employee2.dtg unsafe-rules guarded-rules

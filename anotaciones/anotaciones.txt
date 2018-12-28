@@ -1,0 +1,28 @@
+C:\Git\nyaya\IRIS+-\bin\org\deri\iris\evaluation
+C:\Git\nyaya\IRIS+-\test\org\deri\iris\evaluation
+C:\Git\nyaya\IRIS+-\src\org\deri\iris\evaluation
+
+
+C:\Git\nyaya\IRIS+-\api\org\deri\iris\api
+
+C:\Git\nyaya\IRIS+-\api
+
+TODAS LAS CARPETAS QUE ESTAN ACA SE BUILDEARON
+C:\Git\nyaya\IRIS+-\src\org\deri\iris
+
+
+TUVE QUE COPIAR la clase Expresivity.java
+y toda la carpeta \IRIS+-\api\org\deri\iris\api
+dentro de IRIS+-\src\org\deri\iris
+
+
+AGREGUE TODO ESTO:
+IRIS+-/src/org/deri/iris/Expressivity.java
+IRIS+-/src/org/deri/iris/api/
+IRIS+-/src/org/deri/iris/compiler/
+IRIS+-/src/org/deri/iris/demo/
+IRIS+-/src/org/deri/iris/parser/
+
+
+
+C:\Users\Pablo\eclipse-workspace\iris\config
