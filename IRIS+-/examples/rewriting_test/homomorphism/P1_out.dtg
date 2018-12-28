@@ -1,0 +1,55 @@
+/// Output for QueryRewritingTest class ///
+/// Created on: 2010/02/19 ///
+/// Queries in the program: 5///
+/// Rules in the program: 6 ///
+/// TGDs in the program: 1 ///
+/// Constraints in the program: 0 ///
+
+/// QUERIES: ///
+
+/// Input Query: Q_0(?0) :- edge(?0, ?1). ///
+/// Size of the rewriting [# of queries]:2 ///
+/// Size of the rewriting [# of symbols]:5 ///
+/// Rewriting Time: 0.550835[ms] ///
+/// Rewritten Program ///
+Q_0(?A0) :- Path1(?A0).
+Q_0(?A0) :- edge(?A0, ?A1).
+
+/// Input Query: Q_1(?0) :- edge(?0, ?1), edge(?1, ?2). ///
+/// Size of the rewriting [# of queries]:2 ///
+/// Size of the rewriting [# of symbols]:11 ///
+/// Rewriting Time: 0.737613[ms] ///
+/// Rewritten Program ///
+Q_1(?A0) :- Path1(?A1), edge(?A0, ?A1).
+Q_1(?A0) :- edge(?A0, ?A1), edge(?A1, ?A2).
+
+/// Input Query: Q_2(?0) :- edge(?0, ?1), edge(?1, ?2), edge(?2, ?3). ///
+/// Size of the rewriting [# of queries]:2 ///
+/// Size of the rewriting [# of symbols]:17 ///
+/// Rewriting Time: 1.181536[ms] ///
+/// Rewritten Program ///
+Q_2(?A0) :- edge(?A0, ?A1), edge(?A1, ?A2), edge(?A2, ?A3).
+Q_2(?A0) :- Path1(?A1), edge(?A0, ?A2), edge(?A2, ?A1).
+
+/// Input Query: Q_3(?0) :- edge(?0, ?1), edge(?1, ?2), edge(?2, ?3), edge(?3, ?4). ///
+/// Size of the rewriting [# of queries]:2 ///
+/// Size of the rewriting [# of symbols]:23 ///
+/// Rewriting Time: 2.71532[ms] ///
+/// Rewritten Program ///
+Q_3(?A0) :- edge(?A0, ?A1), edge(?A1, ?A2), edge(?A2, ?A3), edge(?A3, ?A4).
+Q_3(?A0) :- Path1(?A1), edge(?A0, ?A2), edge(?A2, ?A3), edge(?A3, ?A1).
+
+/// Input Query: Q_4(?0) :- edge(?0, ?1), edge(?1, ?2), edge(?2, ?3), edge(?3, ?4), edge(?4, ?5). ///
+/// Size of the rewriting [# of queries]:2 ///
+/// Size of the rewriting [# of symbols]:29 ///
+/// Rewriting Time: 6.941291[ms] ///
+/// Rewritten Program ///
+Q_4(?A0) :- Path1(?A1), edge(?A0, ?A2), edge(?A2, ?A3), edge(?A3, ?A4), edge(?A4, ?A1).
+Q_4(?A0) :- edge(?A0, ?A1), edge(?A1, ?A2), edge(?A2, ?A3), edge(?A3, ?A4), edge(?A4, ?A5).
+
+
+?- Q_0(?A0).
+?- Q_1(?A0).
+?- Q_2(?A0).
+?- Q_3(?A0).
+?- Q_4(?A0).

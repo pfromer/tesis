@@ -1,0 +1,15 @@
+==================SUMMARY==================
+Ontology file:             universityAUX.owl
+Query:                     Q(X0)  <-  affiliatedOrganizationOf(X1,X2) ^ worksFor(X0,X1)
+Number of assertions:      137
+Number of concept symbols: 35
+Number of role symbols:    31
+Running time:              1 milliseconds 
+Size of the rewriting (queries):     5
+Size of the rewriting (symbols):     286
+0: Q(X0)  <-  AUX0(X0,X1) ^ affiliatedOrganizationOf(X1,X2)
+1: Q(X0)  <-  AUX1(X0,X1) ^ affiliatedOrganizationOf(X1,X2)
+2: Q(X0)  <-  AUX2(X0,X1) ^ affiliatedOrganizationOf(X1,X2)
+3: Q(X0)  <-  affiliatedOrganizationOf(X1,X2) ^ headOf(X0,X1)
+4: Q(X0)  <-  affiliatedOrganizationOf(X1,X2) ^ worksFor(X0,X1)
+==================SUMMARY==================

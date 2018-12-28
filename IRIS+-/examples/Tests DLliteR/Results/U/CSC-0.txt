@@ -1,0 +1,12 @@
+==================SUMMARY==================
+Ontology file:             university.owl
+Query:                     Q(X0)  <-  affiliatedOrganizationOf(X1,X2) ^ worksFor(X0,X1)
+Number of assertions:      127
+Number of concept symbols: 34
+Number of role symbols:    26
+Running time:              1 milliseconds 
+Size of the rewriting (queries):     2
+Size of the rewriting (symbols):     118
+0: Q(X0)  <-  affiliatedOrganizationOf(X1,X2) ^ headOf(X0,X1)
+1: Q(X0)  <-  affiliatedOrganizationOf(X1,X2) ^ worksFor(X0,X1)
+==================SUMMARY==================

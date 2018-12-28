@@ -1,0 +1,13 @@
+/// Theory ///
+
+memberOf(?X, ?Y) :- worksFor(?X, ?Y).
+member(?X, ?Y) :- memberOf(?Y, ?X).
+memberOf(?Y, ?X) :- member(?X, ?Y).
+Person(?Y) :- member(?X, ?Y).
+Organization(?X) :- member(?X, ?Y).
+
+/// Queries ///
+
+Q4(?A,?B) :- Person(?A), worksFor(?A,?B), Organization(?B).
+
+?-Q4(?A,?B).

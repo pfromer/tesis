@@ -1,0 +1,37 @@
+==================SUMMARY==================
+Ontology file:             adolena.owl
+Query:                     Q(X0)  <-  Device(X0) ^ assistsWith(X0,X1)
+Number of assertions:      137
+Number of concept symbols: 74
+Number of role symbols:    5
+Running time:              350 milliseconds 
+Size of the rewriting (queries):     27
+Size of the rewriting (symbols):     901
+0: Q(X0)  <-  AssistiveDevice(X0)
+1: Q(X0)  <-  BatteryPowered_Wheelchair(X0)
+2: Q(X0)  <-  BrailleAlarmClock(X0)
+3: Q(X0)  <-  BraillePillOrganiser(X0)
+4: Q(X0)  <-  BrailleWatch(X0)
+5: Q(X0)  <-  BrailleWritingDevice(X0)
+6: Q(X0)  <-  Communication_Device(X0)
+7: Q(X0)  <-  Device(X0) ^ assistsWith(X0,X1)
+8: Q(X0)  <-  Device(X0) ^ isAssistedBy(X1,X0)
+9: Q(X0)  <-  FaceToFaceCommunicationDevice(X0)
+10: Q(X0)  <-  FaceToFaceCommunicationSoftware(X0)
+11: Q(X0)  <-  Foldable_Wheelchair(X0)
+12: Q(X0)  <-  LightweightFoldable_Wheelchair(X0)
+13: Q(X0)  <-  Lightweight_Wheelchair(X0)
+14: Q(X0)  <-  ListenDevice(X0)
+15: Q(X0)  <-  Manual_Wheelchair(X0)
+16: Q(X0)  <-  MobilityDevice(X0)
+17: Q(X0)  <-  Motorised_Wheelchair(X0)
+18: Q(X0)  <-  ReadingDevice(X0)
+19: Q(X0)  <-  SpeechDevice(X0)
+20: Q(X0)  <-  SymbolBoard(X0)
+21: Q(X0)  <-  TactileReading(X0)
+22: Q(X0)  <-  TalkingReading(X0)
+23: Q(X0)  <-  Talking_Thermometer(X0)
+24: Q(X0)  <-  TelephoneAid(X0)
+25: Q(X0)  <-  Wheelchair(X0)
+26: Q(X0)  <-  WritingDevice(X0)
+==================SUMMARY==================

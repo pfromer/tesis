@@ -1,0 +1,970 @@
+/// Output for QueryRewritingTest class ///
+/// Created on: 2010/02/22 ///
+/// Queries in the program: 5///
+/// Rules in the program: 89 ///
+/// TGDs in the program: 84 ///
+/// Constraints in the program: 0 ///
+
+/// QUERIES: ///
+
+/// Input Query: Q_0(?0) :- worksFor(?0, ?1), affiliatedOrganizationOf(?1, ?2). ///
+/// Size of the rewriting [# of queries]:2 ///
+/// Size of the rewriting [# of symbols]:12 ///
+/// Rewriting Time: 43.402657[ms] ///
+/// Rewritten Program ///
+Q_0(?A0) :- affiliatedOrganizationOf(?A1, ?A2), headOf(?A0, ?A1).
+Q_0(?A0) :- affiliatedOrganizationOf(?A1, ?A2), worksFor(?A0, ?A1).
+
+/// Input Query: Q_1(?0, ?1) :- Person(?0), teacherOf(?0, ?1), Course(?1). ///
+/// Size of the rewriting [# of queries]:148 ///
+/// Size of the rewriting [# of symbols]:1051 ///
+/// Rewriting Time: 833.04724[ms] ///
+/// Rewritten Program ///
+Q_1(?A0, ?A1) :- Employee(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- ResearchAssistant(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Professor(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), Dean(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- mastersDegreeFrom(?A0, ?A2), teacherOf(?A0, ?A1), teachingAssistantOf(?A3, ?A1).
+Q_1(?A0, ?A1) :- Dean(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), UndergraduateStudent(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), PostDoc(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), Lecturer(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), hasExamRecord(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), Employee(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- ExDean(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), VisitingProfessor(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- hasExamRecord(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1), worksFor(?A0, ?A3).
+Q_1(?A0, ?A1) :- UndergraduateStudent(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- ClericalStaff(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), headOf(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- ExDean(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- memberOf(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- memberOf(?A0, ?A2), teacherOf(?A0, ?A1), teachingAssistantOf(?A3, ?A1).
+Q_1(?A0, ?A1) :- ClericalStaff(?A0), GraduateCourse(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- degreeFrom(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), FacultyStaff(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Chair(?A0), Course(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1), undergraduateDegreeFrom(?A0, ?A3).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), teacherOf(?A0, ?A1), tenured(?A0, ?A2).
+Q_1(?A0, ?A1) :- Course(?A1), Lecturer(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), degreeFrom(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- ClericalStaff(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- publicationAuthor(?A2, ?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- ResearchAssistant(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), teacherOf(?A0, ?A1), tenured(?A0, ?A2).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), degreeFrom(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Director(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), Professor(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- teacherOf(?A0, ?A1), worksFor(?A0, ?A2).
+Q_1(?A0, ?A1) :- FullProfessor(?A0), GraduateCourse(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), Director(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), Person(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Person(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- SystemsStaff(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), mastersDegreeFrom(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), publicationAuthor(?A2, ?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), GraduateStudent(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- member(?A2, ?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- teacherOf(?A0, ?A1), undergraduateDegreeFrom(?A0, ?A2).
+Q_1(?A0, ?A1) :- Employee(?A0), GraduateCourse(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- AssistantProfessor(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Person(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- PostDoc(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), ResearchAssistant(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), FullProfessor(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- AssociateProfessor(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), Student(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Lecturer(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Director(?A0), GraduateCourse(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- advisor(?A0, ?A2), teacherOf(?A0, ?A1), teachingAssistantOf(?A3, ?A1).
+Q_1(?A0, ?A1) :- teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1), tenured(?A0, ?A3).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), teacherOf(?A0, ?A1), undergraduateDegreeFrom(?A0, ?A2).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), affiliateOf(?A2, ?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- advisor(?A2, ?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A3, ?A1).
+Q_1(?A0, ?A1) :- FacultyStaff(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), hasAlumnus(?A2, ?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- AdministrativeStaff(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Employee(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- Chair(?A0), GraduateCourse(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), mastersDegreeFrom(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), advisor(?A2, ?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- teacherOf(?A0, ?A1), tenured(?A0, ?A2).
+Q_1(?A0, ?A1) :- affiliateOf(?A2, ?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- ExDean(?A0), GraduateCourse(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- mastersDegreeFrom(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- AssociateProfessor(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), memberOf(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), publicationAuthor(?A2, ?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), UndergraduateStudent(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- ClericalStaff(?A0), Course(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), hasExamRecord(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), SystemsStaff(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- AssistantProfessor(?A0), GraduateCourse(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), teacherOf(?A0, ?A1), undergraduateDegreeFrom(?A0, ?A2).
+Q_1(?A0, ?A1) :- Student(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateStudent(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- SystemsStaff(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- affiliateOf(?A2, ?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A3, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), advisor(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- FacultyStaff(?A0), GraduateCourse(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Chair(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- headOf(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- FacultyStaff(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Dean(?A0), GraduateCourse(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), teacherOf(?A0, ?A1), worksFor(?A0, ?A2).
+Q_1(?A0, ?A1) :- Course(?A1), headOf(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- FullProfessor(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- UndergraduateStudent(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- Professor(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- Lecturer(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- Dean(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), doctoralDegreeFrom(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), affiliateOf(?A2, ?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- doctoralDegreeFrom(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- member(?A2, ?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A3, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), advisor(?A2, ?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), memberOf(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- publicationAuthor(?A2, ?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A3, ?A1).
+Q_1(?A0, ?A1) :- hasAlumnus(?A2, ?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), ResearchAssistant(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- advisor(?A2, ?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- AdministrativeStaff(?A0), GraduateCourse(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- PostDoc(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- advisor(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), ExDean(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Director(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- AdministrativeStaff(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- VisitingProfessor(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), teacherOf(?A0, ?A1), worksFor(?A0, ?A2).
+Q_1(?A0, ?A1) :- teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), advisor(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- AdministrativeStaff(?A0), Course(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- AssistantProfessor(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), Person(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- AssociateProfessor(?A0), Course(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), PostDoc(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- FullProfessor(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- doctoralDegreeFrom(?A0, ?A2), teacherOf(?A0, ?A1), teachingAssistantOf(?A3, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), SystemsStaff(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- hasAlumnus(?A2, ?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A3, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), hasAlumnus(?A2, ?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- hasExamRecord(?A0, ?A2), teacherOf(?A0, ?A1), teachingAssistantOf(?A3, ?A1).
+Q_1(?A0, ?A1) :- VisitingProfessor(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), GraduateStudent(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), Student(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), doctoralDegreeFrom(?A0, ?A2), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- degreeFrom(?A0, ?A2), teacherOf(?A0, ?A1), teachingAssistantOf(?A3, ?A1).
+Q_1(?A0, ?A1) :- Student(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- headOf(?A0, ?A2), teacherOf(?A0, ?A1), teachingAssistantOf(?A3, ?A1).
+Q_1(?A0, ?A1) :- Chair(?A0), teacherOf(?A0, ?A1), teachingAssistantOf(?A2, ?A1).
+Q_1(?A0, ?A1) :- Course(?A1), member(?A2, ?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), member(?A2, ?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), VisitingProfessor(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateCourse(?A1), Professor(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- GraduateStudent(?A0), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- AssistantProfessor(?A0), Course(?A1), teacherOf(?A0, ?A1).
+Q_1(?A0, ?A1) :- AssociateProfessor(?A0), GraduateCourse(?A1), teacherOf(?A0, ?A1).
+
+/// Input Query: Q_2(?0, ?1, ?2) :- Student(?0), advisor(?0, ?1), FacultyStaff(?1), takesCourse(?0, ?2), teacherOf(?1, ?2), Course(?2). ///
+/// Size of the rewriting [# of queries]:208 ///
+/// Size of the rewriting [# of symbols]:3104 ///
+/// Rewriting Time: 3907.1824[ms] ///
+/// Rewritten Program ///
+Q_2(?A0, ?A1, ?A2) :- Chair(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), Dean(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Chair(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssociateProfessor(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FullProfessor(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Chair(?A1), GraduateCourse(?A2), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Chair(?A1), Course(?A2), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- PostDoc(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2), tenured(?A1, ?A4).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), tenured(?A1, ?A3).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), FullProfessor(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssociateProfessor(?A1), GraduateCourse(?A2), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), FacultyStaff(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssistantProfessor(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssociateProfessor(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Chair(?A1), Course(?A2), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Professor(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), VisitingProfessor(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- UndergraduateStudent(?A0), VisitingProfessor(?A1), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssistantProfessor(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssistantProfessor(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Lecturer(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), Professor(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Lecturer(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssociateProfessor(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FacultyStaff(?A1), GraduateCourse(?A2), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), Lecturer(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), ExDean(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), PostDoc(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), tenured(?A1, ?A3).
+Q_2(?A0, ?A1, ?A2) :- FacultyStaff(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), Professor(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssistantProfessor(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Professor(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), Lecturer(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), tenured(?A1, ?A3).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), Lecturer(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- ExDean(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), FullProfessor(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- ExDean(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FullProfessor(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FacultyStaff(?A1), GraduateCourse(?A2), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Professor(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Chair(?A1), GraduateCourse(?A2), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), PostDoc(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), Professor(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Dean(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FacultyStaff(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Lecturer(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssociateProfessor(?A1), Course(?A2), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- PostDoc(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Chair(?A1), Course(?A2), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FullProfessor(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssistantProfessor(?A1), GraduateCourse(?A2), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Professor(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Chair(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FullProfessor(?A1), GraduateCourse(?A2), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- ResearchAssistant(?A0), VisitingProfessor(?A1), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FacultyStaff(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), PostDoc(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), tenured(?A1, ?A3).
+Q_2(?A0, ?A1, ?A2) :- FacultyStaff(?A1), GraduateCourse(?A2), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FacultyStaff(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Dean(?A1), GraduateCourse(?A2), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- ExDean(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), Lecturer(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssociateProfessor(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A4, ?A2).
+Q_2(?A0, ?A1, ?A2) :- VisitingProfessor(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), VisitingProfessor(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FullProfessor(?A1), GraduateCourse(?A2), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), Dean(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FacultyStaff(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssociateProfessor(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Student(?A0), VisitingProfessor(?A1), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), Lecturer(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- ResearchAssistant(?A0), VisitingProfessor(?A1), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), PostDoc(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- ExDean(?A1), GraduateCourse(?A2), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssociateProfessor(?A1), Course(?A2), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssistantProfessor(?A1), GraduateCourse(?A2), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- ExDean(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Dean(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssistantProfessor(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A4, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Dean(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Chair(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FacultyStaff(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A4, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), tenured(?A1, ?A3).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), ResearchAssistant(?A0), VisitingProfessor(?A1), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), tenured(?A1, ?A4).
+Q_2(?A0, ?A1, ?A2) :- ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssociateProfessor(?A1), GraduateCourse(?A2), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssistantProfessor(?A1), GraduateCourse(?A2), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Dean(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Professor(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- ExDean(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssistantProfessor(?A1), GraduateCourse(?A2), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- PostDoc(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssociateProfessor(?A1), GraduateCourse(?A2), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssociateProfessor(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), UndergraduateStudent(?A0), VisitingProfessor(?A1), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), Professor(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Professor(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- ExDean(?A1), GraduateCourse(?A2), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), PostDoc(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- UndergraduateStudent(?A0), VisitingProfessor(?A1), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Chair(?A1), Course(?A2), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- PostDoc(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FullProfessor(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A4, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FullProfessor(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssociateProfessor(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- PostDoc(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- ExDean(?A1), GraduateCourse(?A2), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Lecturer(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Professor(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A4, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Professor(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Chair(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssociateProfessor(?A1), GraduateCourse(?A2), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FullProfessor(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FacultyStaff(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), ExDean(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FacultyStaff(?A1), GraduateCourse(?A2), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), PostDoc(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), PostDoc(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Lecturer(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssistantProfessor(?A1), Course(?A2), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), ExDean(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), Student(?A0), VisitingProfessor(?A1), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Dean(?A1), GraduateCourse(?A2), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Lecturer(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A4, ?A2).
+Q_2(?A0, ?A1, ?A2) :- ExDean(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- VisitingProfessor(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A4, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssistantProfessor(?A1), Course(?A2), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Chair(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A4, ?A2).
+Q_2(?A0, ?A1, ?A2) :- ExDean(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), Lecturer(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Dean(?A1), GraduateCourse(?A2), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), UndergraduateStudent(?A0), VisitingProfessor(?A1), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), Student(?A0), VisitingProfessor(?A1), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), tenured(?A1, ?A3).
+Q_2(?A0, ?A1, ?A2) :- FullProfessor(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssistantProfessor(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Student(?A0), VisitingProfessor(?A1), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), Professor(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FullProfessor(?A1), GraduateCourse(?A2), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Dean(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), tenured(?A1, ?A4).
+Q_2(?A0, ?A1, ?A2) :- Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2), tenured(?A1, ?A4).
+Q_2(?A0, ?A1, ?A2) :- Lecturer(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- PostDoc(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Dean(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A4, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), Professor(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- ExDean(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A4, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), PostDoc(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Lecturer(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), tenured(?A1, ?A3).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), Dean(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssistantProfessor(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), FullProfessor(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssociateProfessor(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2), tenured(?A1, ?A4).
+Q_2(?A0, ?A1, ?A2) :- ExDean(?A1), GraduateCourse(?A2), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssistantProfessor(?A1), Course(?A2), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FullProfessor(?A1), GraduateCourse(?A2), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Dean(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), FullProfessor(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), Lecturer(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), tenured(?A1, ?A3).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), ExDean(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- PostDoc(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- PostDoc(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A4, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssociateProfessor(?A1), Course(?A2), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), FacultyStaff(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), tenured(?A1, ?A3).
+Q_2(?A0, ?A1, ?A2) :- advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A4, ?A2), tenured(?A1, ?A5).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), FacultyStaff(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Chair(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), FacultyStaff(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), Dean(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- FullProfessor(?A1), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Chair(?A1), GraduateCourse(?A2), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), ResearchAssistant(?A0), VisitingProfessor(?A1), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssociateProfessor(?A1), Course(?A2), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Chair(?A1), GraduateCourse(?A2), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), Lecturer(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssistantProfessor(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Dean(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), Professor(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), tenured(?A1, ?A4).
+Q_2(?A0, ?A1, ?A2) :- FacultyStaff(?A1), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A4, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Dean(?A1), GraduateCourse(?A2), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2), teachingAssistantOf(?A3, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Course(?A2), advisor(?A0, ?A1), hasExamRecord(?A0, ?A3), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- AssistantProfessor(?A1), Course(?A2), ResearchAssistant(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- GraduateCourse(?A2), Professor(?A1), UndergraduateStudent(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+Q_2(?A0, ?A1, ?A2) :- Chair(?A1), Student(?A0), advisor(?A0, ?A1), takesCourse(?A0, ?A2), teacherOf(?A1, ?A2).
+
+/// Input Query: Q_3(?0, ?1) :- Person(?0), worksFor(?0, ?1), Organization(?1). ///
+/// Size of the rewriting [# of queries]:0 ///
+/// Size of the rewriting [# of symbols]:0 ///
+/// Rewriting Time: 54245.47[ms] ///
+/// Rewritten Program ///
+
+/// Input Query: Q_4(?0) :- Person(?0), worksFor(?0, ?1), University(?1), hasAlumnus(?1, ?0). ///
+/// Size of the rewriting [# of queries]:568 ///
+/// Size of the rewriting [# of symbols]:6148 ///
+/// Rewriting Time: 6281.687[ms] ///
+/// Rewritten Program ///
+Q_4(?A0) :- Lecturer(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- advisor(?A0, ?A1), hasAlumnus(?A2, ?A0), isPartOfUniversity(?A3, ?A2), worksFor(?A0, ?A2).
+Q_4(?A0) :- degreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), undergraduateDegreeFrom(?A3, ?A2), worksFor(?A0, ?A2).
+Q_4(?A0) :- degreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), isPartOfUniversity(?A3, ?A2), worksFor(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), teacherOf(?A0, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- Employee(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasExamRecord(?A0, ?A2), headOf(?A0, ?A1), isPartOfUniversity(?A3, ?A1).
+Q_4(?A0) :- AssistantProfessor(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), member(?A2, ?A0), undergraduateDegreeFrom(?A3, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- SystemsStaff(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), tenured(?A0, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- ExDean(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- Person(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), mastersDegreeFrom(?A0, ?A3), worksFor(?A0, ?A1).
+Q_4(?A0) :- AssociateProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A0, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- Student(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- AssistantProfessor(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- ExDean(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), hasExamRecord(?A0, ?A3), headOf(?A0, ?A2).
+Q_4(?A0) :- ExDean(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- Person(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), mastersDegreeFrom(?A3, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), memberOf(?A0, ?A3), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), memberOf(?A0, ?A3), worksFor(?A0, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), memberOf(?A0, ?A3).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), doctoralDegreeFrom(?A0, ?A3), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- AdministrativeStaff(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A0, ?A2), mastersDegreeFrom(?A3, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- AssistantProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- ExDean(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), member(?A2, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1), memberOf(?A0, ?A3).
+Q_4(?A0) :- degreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), hasFaculty(?A2, ?A3), headOf(?A0, ?A2).
+Q_4(?A0) :- GraduateStudent(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- FacultyStaff(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- FullProfessor(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- Chair(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- SystemsStaff(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- Professor(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- AdministrativeStaff(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- FullProfessor(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- Employee(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasExamRecord(?A0, ?A2), headOf(?A0, ?A1), mastersDegreeFrom(?A3, ?A1).
+Q_4(?A0) :- Dean(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- degreeFrom(?A0, ?A1), doctoralDegreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), worksFor(?A0, ?A3).
+Q_4(?A0) :- University(?A1), doctoralDegreeFrom(?A0, ?A2), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- Chair(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- ResearchAssistant(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), tenured(?A0, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- VisitingProfessor(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), undergraduateDegreeFrom(?A0, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- ResearchAssistant(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- ResearchAssistant(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A0, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- AdministrativeStaff(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- Lecturer(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- AssociateProfessor(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), tenured(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1), memberOf(?A0, ?A3).
+Q_4(?A0) :- advisor(?A1, ?A0), hasAlumnus(?A2, ?A0), mastersDegreeFrom(?A3, ?A2), worksFor(?A0, ?A2).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), teacherOf(?A0, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- FacultyStaff(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), publicationAuthor(?A2, ?A0).
+Q_4(?A0) :- advisor(?A0, ?A1), hasAlumnus(?A2, ?A0), undergraduateDegreeFrom(?A3, ?A2), worksFor(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- AssociateProfessor(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1), publicationAuthor(?A3, ?A0).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasExamRecord(?A0, ?A2), undergraduateDegreeFrom(?A3, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- University(?A1), advisor(?A0, ?A2), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- affiliateOf(?A1, ?A0), degreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), headOf(?A0, ?A3).
+Q_4(?A0) :- VisitingProfessor(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- PostDoc(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- Director(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- Chair(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- Professor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- FullProfessor(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- University(?A1), VisitingProfessor(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- AdministrativeStaff(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- Person(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), publicationAuthor(?A2, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1), publicationAuthor(?A3, ?A0).
+Q_4(?A0) :- advisor(?A1, ?A0), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), mastersDegreeFrom(?A3, ?A2).
+Q_4(?A0) :- doctoralDegreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), hasFaculty(?A2, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- advisor(?A1, ?A0), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- PostDoc(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- advisor(?A1, ?A0), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), undergraduateDegreeFrom(?A3, ?A2).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), teacherOf(?A0, ?A2).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), teacherOf(?A0, ?A3).
+Q_4(?A0) :- UndergraduateStudent(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- ResearchAssistant(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- GraduateStudent(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1), memberOf(?A0, ?A3).
+Q_4(?A0) :- GraduateStudent(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1), undergraduateDegreeFrom(?A0, ?A3).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), tenured(?A0, ?A3).
+Q_4(?A0) :- SystemsStaff(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- AssistantProfessor(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), undergraduateDegreeFrom(?A0, ?A3), worksFor(?A0, ?A1).
+Q_4(?A0) :- FacultyStaff(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- University(?A1), affiliateOf(?A2, ?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- affiliateOf(?A1, ?A0), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), undergraduateDegreeFrom(?A3, ?A2).
+Q_4(?A0) :- advisor(?A0, ?A1), hasAlumnus(?A2, ?A0), hasFaculty(?A2, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- Student(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- advisor(?A1, ?A0), hasAlumnus(?A2, ?A0), hasFaculty(?A2, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- FacultyStaff(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- AssistantProfessor(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- Employee(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- Person(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- VisitingProfessor(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- ResearchAssistant(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), member(?A3, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), undergraduateDegreeFrom(?A0, ?A3).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), member(?A2, ?A0).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1), tenured(?A0, ?A3).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1), tenured(?A0, ?A3).
+Q_4(?A0) :- PostDoc(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- Lecturer(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- ExDean(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- ClericalStaff(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- Dean(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- Lecturer(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- Director(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- VisitingProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- University(?A1), advisor(?A0, ?A2), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1), tenured(?A0, ?A3).
+Q_4(?A0) :- University(?A1), degreeFrom(?A0, ?A2), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- degreeFrom(?A0, ?A1), degreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), headOf(?A0, ?A3).
+Q_4(?A0) :- Director(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- GraduateStudent(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- VisitingProfessor(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- Professor(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- FacultyStaff(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- GraduateStudent(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- Professor(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1), undergraduateDegreeFrom(?A0, ?A3).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasExamRecord(?A0, ?A2), mastersDegreeFrom(?A3, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), teacherOf(?A0, ?A2), undergraduateDegreeFrom(?A3, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- Dean(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- PostDoc(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), member(?A3, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- Dean(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A0, ?A2), mastersDegreeFrom(?A3, ?A1).
+Q_4(?A0) :- UndergraduateStudent(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- AdministrativeStaff(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- Dean(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- FullProfessor(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), memberOf(?A0, ?A2).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), worksFor(?A0, ?A3).
+Q_4(?A0) :- FacultyStaff(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- GraduateStudent(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- University(?A1), affiliateOf(?A2, ?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- Dean(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), member(?A3, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), worksFor(?A0, ?A2).
+Q_4(?A0) :- ClericalStaff(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- doctoralDegreeFrom(?A0, ?A1), doctoralDegreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), worksFor(?A0, ?A3).
+Q_4(?A0) :- AdministrativeStaff(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- Chair(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- ExDean(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), mastersDegreeFrom(?A0, ?A3).
+Q_4(?A0) :- Director(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- Lecturer(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- Lecturer(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- UndergraduateStudent(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- Employee(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- Dean(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- Dean(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- ExDean(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- ResearchAssistant(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- Employee(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- PostDoc(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- Dean(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- ResearchAssistant(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), tenured(?A0, ?A3), worksFor(?A0, ?A1).
+Q_4(?A0) :- advisor(?A1, ?A0), doctoralDegreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), worksFor(?A0, ?A3).
+Q_4(?A0) :- Professor(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), publicationAuthor(?A2, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), publicationAuthor(?A3, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- PostDoc(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- ExDean(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), teacherOf(?A0, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), memberOf(?A0, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- AssistantProfessor(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- UndergraduateStudent(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- ResearchAssistant(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), undergraduateDegreeFrom(?A0, ?A3).
+Q_4(?A0) :- degreeFrom(?A0, ?A1), doctoralDegreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), headOf(?A0, ?A3).
+Q_4(?A0) :- ResearchAssistant(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- SystemsStaff(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- Director(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- Employee(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1), teacherOf(?A0, ?A3).
+Q_4(?A0) :- FullProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- FacultyStaff(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), mastersDegreeFrom(?A0, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- Employee(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- SystemsStaff(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), memberOf(?A0, ?A2), undergraduateDegreeFrom(?A3, ?A1).
+Q_4(?A0) :- Student(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- AssistantProfessor(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), publicationAuthor(?A3, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), tenured(?A0, ?A2), undergraduateDegreeFrom(?A3, ?A1).
+Q_4(?A0) :- Student(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- GraduateStudent(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- Director(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- FullProfessor(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- SystemsStaff(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), memberOf(?A0, ?A3), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A3).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), tenured(?A0, ?A3), worksFor(?A0, ?A1).
+Q_4(?A0) :- PostDoc(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- FullProfessor(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- AssistantProfessor(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- AdministrativeStaff(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- AssociateProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), member(?A3, ?A0).
+Q_4(?A0) :- advisor(?A0, ?A1), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- Student(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- ClericalStaff(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- AdministrativeStaff(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A3).
+Q_4(?A0) :- Employee(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- ResearchAssistant(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- Student(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- Lecturer(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), mastersDegreeFrom(?A3, ?A2), worksFor(?A0, ?A2).
+Q_4(?A0) :- University(?A1), doctoralDegreeFrom(?A0, ?A2), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- Person(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- AdministrativeStaff(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- Professor(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- FullProfessor(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A0, ?A2), undergraduateDegreeFrom(?A3, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- FullProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1), member(?A3, ?A0).
+Q_4(?A0) :- Professor(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1), publicationAuthor(?A3, ?A0).
+Q_4(?A0) :- FullProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- SystemsStaff(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), isPartOfUniversity(?A3, ?A2), worksFor(?A0, ?A2).
+Q_4(?A0) :- Professor(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- advisor(?A0, ?A1), hasAlumnus(?A2, ?A0), mastersDegreeFrom(?A3, ?A2), worksFor(?A0, ?A2).
+Q_4(?A0) :- Lecturer(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), undergraduateDegreeFrom(?A0, ?A3), worksFor(?A0, ?A1).
+Q_4(?A0) :- AdministrativeStaff(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- UndergraduateStudent(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- VisitingProfessor(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasExamRecord(?A0, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- Chair(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- Professor(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- affiliateOf(?A1, ?A0), hasAlumnus(?A2, ?A0), undergraduateDegreeFrom(?A3, ?A2), worksFor(?A0, ?A2).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), undergraduateDegreeFrom(?A0, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- Professor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- VisitingProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1), member(?A3, ?A0).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), memberOf(?A0, ?A2).
+Q_4(?A0) :- Lecturer(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1), undergraduateDegreeFrom(?A0, ?A3).
+Q_4(?A0) :- ClericalStaff(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- FacultyStaff(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- SystemsStaff(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- affiliateOf(?A1, ?A0), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- PostDoc(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- Dean(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), worksFor(?A0, ?A3).
+Q_4(?A0) :- Employee(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), undergraduateDegreeFrom(?A3, ?A2), worksFor(?A0, ?A2).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), memberOf(?A0, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- ResearchAssistant(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasExamRecord(?A0, ?A2), headOf(?A0, ?A1), undergraduateDegreeFrom(?A3, ?A1).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A0, ?A2).
+Q_4(?A0) :- Professor(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- UndergraduateStudent(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- Person(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A0, ?A2).
+Q_4(?A0) :- FullProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- UndergraduateStudent(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- AssociateProfessor(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- FacultyStaff(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- degreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), undergraduateDegreeFrom(?A3, ?A2).
+Q_4(?A0) :- Chair(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- Person(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- affiliateOf(?A1, ?A0), hasAlumnus(?A2, ?A0), hasFaculty(?A2, ?A3), headOf(?A0, ?A2).
+Q_4(?A0) :- advisor(?A0, ?A1), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), mastersDegreeFrom(?A3, ?A2).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), member(?A3, ?A0).
+Q_4(?A0) :- ClericalStaff(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1), mastersDegreeFrom(?A0, ?A3).
+Q_4(?A0) :- advisor(?A0, ?A1), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- ClericalStaff(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- FacultyStaff(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- Director(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- Person(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- AssociateProfessor(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), teacherOf(?A0, ?A3), worksFor(?A0, ?A1).
+Q_4(?A0) :- ResearchAssistant(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A0, ?A2).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), hasExamRecord(?A0, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- ClericalStaff(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- Dean(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- Chair(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), mastersDegreeFrom(?A0, ?A3).
+Q_4(?A0) :- AssociateProfessor(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- GraduateStudent(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- Employee(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), publicationAuthor(?A3, ?A0).
+Q_4(?A0) :- advisor(?A1, ?A0), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- ExDean(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- AssistantProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- GraduateStudent(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- UndergraduateStudent(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A0, ?A2).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), hasExamRecord(?A0, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- PostDoc(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- PostDoc(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), member(?A2, ?A0).
+Q_4(?A0) :- Director(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- Chair(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- advisor(?A1, ?A0), degreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), headOf(?A0, ?A3).
+Q_4(?A0) :- FullProfessor(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- FacultyStaff(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- SystemsStaff(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- advisor(?A1, ?A0), hasAlumnus(?A2, ?A0), isPartOfUniversity(?A3, ?A2), worksFor(?A0, ?A2).
+Q_4(?A0) :- advisor(?A0, ?A1), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), undergraduateDegreeFrom(?A3, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), teacherOf(?A0, ?A2), undergraduateDegreeFrom(?A3, ?A1).
+Q_4(?A0) :- degreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), doctoralDegreeFrom(?A0, ?A3), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A0, ?A2), undergraduateDegreeFrom(?A3, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasExamRecord(?A0, ?A2), isPartOfUniversity(?A3, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- ExDean(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), publicationAuthor(?A3, ?A0).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), tenured(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A0, ?A2), undergraduateDegreeFrom(?A3, ?A1).
+Q_4(?A0) :- AssociateProfessor(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), member(?A3, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- ClericalStaff(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- degreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), isPartOfUniversity(?A3, ?A2).
+Q_4(?A0) :- advisor(?A1, ?A0), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), isPartOfUniversity(?A3, ?A2).
+Q_4(?A0) :- FullProfessor(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A0, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- affiliateOf(?A1, ?A0), degreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), worksFor(?A0, ?A3).
+Q_4(?A0) :- Lecturer(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- SystemsStaff(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), worksFor(?A0, ?A2).
+Q_4(?A0) :- VisitingProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- Student(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- Dean(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- AdministrativeStaff(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- PostDoc(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- Person(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), publicationAuthor(?A2, ?A0), undergraduateDegreeFrom(?A3, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasExamRecord(?A0, ?A2), hasFaculty(?A1, ?A3), worksFor(?A0, ?A1).
+Q_4(?A0) :- PostDoc(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- ClericalStaff(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- Student(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- advisor(?A0, ?A1), hasAlumnus(?A2, ?A0), hasFaculty(?A2, ?A3), headOf(?A0, ?A2).
+Q_4(?A0) :- affiliateOf(?A1, ?A0), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), isPartOfUniversity(?A3, ?A2).
+Q_4(?A0) :- FacultyStaff(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- affiliateOf(?A1, ?A0), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), mastersDegreeFrom(?A3, ?A2).
+Q_4(?A0) :- degreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), hasFaculty(?A2, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- ClericalStaff(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), memberOf(?A0, ?A2), undergraduateDegreeFrom(?A3, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- ClericalStaff(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- Person(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1), mastersDegreeFrom(?A0, ?A3).
+Q_4(?A0) :- AdministrativeStaff(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- AssociateProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- Student(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- Student(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- Person(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), tenured(?A0, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- GraduateStudent(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- AssociateProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- Person(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- SystemsStaff(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- Student(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- PostDoc(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- VisitingProfessor(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), undergraduateDegreeFrom(?A0, ?A3), worksFor(?A0, ?A1).
+Q_4(?A0) :- affiliateOf(?A1, ?A0), hasAlumnus(?A2, ?A0), mastersDegreeFrom(?A3, ?A2), worksFor(?A0, ?A2).
+Q_4(?A0) :- Person(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- advisor(?A0, ?A1), doctoralDegreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), worksFor(?A0, ?A3).
+Q_4(?A0) :- AssociateProfessor(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- Chair(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- AdministrativeStaff(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- Student(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), hasExamRecord(?A0, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1), teacherOf(?A0, ?A3).
+Q_4(?A0) :- ClericalStaff(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- FacultyStaff(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- Person(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- Chair(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- Chair(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- GraduateStudent(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- Professor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- SystemsStaff(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- GraduateStudent(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- degreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), mastersDegreeFrom(?A3, ?A2), worksFor(?A0, ?A2).
+Q_4(?A0) :- Dean(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- PostDoc(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- AssistantProfessor(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- Professor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- AssistantProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- SystemsStaff(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- AssociateProfessor(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), publicationAuthor(?A2, ?A0).
+Q_4(?A0) :- SystemsStaff(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- degreeFrom(?A0, ?A1), degreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), worksFor(?A0, ?A3).
+Q_4(?A0) :- VisitingProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- Chair(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), hasExamRecord(?A0, ?A3), headOf(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1), teacherOf(?A0, ?A3).
+Q_4(?A0) :- FullProfessor(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- GraduateStudent(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- PostDoc(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), publicationAuthor(?A3, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- Lecturer(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- Lecturer(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), undergraduateDegreeFrom(?A3, ?A2).
+Q_4(?A0) :- AssistantProfessor(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- UndergraduateStudent(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- doctoralDegreeFrom(?A0, ?A1), doctoralDegreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), headOf(?A0, ?A3).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), mastersDegreeFrom(?A0, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- Chair(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- Professor(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- UndergraduateStudent(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- AssistantProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A0, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- University(?A1), degreeFrom(?A0, ?A2), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- ResearchAssistant(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- Director(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), mastersDegreeFrom(?A0, ?A3), worksFor(?A0, ?A1).
+Q_4(?A0) :- AssociateProfessor(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- AdministrativeStaff(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), teacherOf(?A0, ?A3).
+Q_4(?A0) :- AssistantProfessor(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- VisitingProfessor(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- AssociateProfessor(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- ExDean(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A3).
+Q_4(?A0) :- advisor(?A0, ?A1), doctoralDegreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), headOf(?A0, ?A3).
+Q_4(?A0) :- FullProfessor(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- Dean(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), teacherOf(?A0, ?A3), worksFor(?A0, ?A1).
+Q_4(?A0) :- affiliateOf(?A1, ?A0), doctoralDegreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), worksFor(?A0, ?A3).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), teacherOf(?A0, ?A3), worksFor(?A0, ?A1).
+Q_4(?A0) :- AdministrativeStaff(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- ResearchAssistant(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- AssistantProfessor(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), memberOf(?A0, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- AssistantProfessor(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- Director(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- UndergraduateStudent(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- University(?A1), VisitingProfessor(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), tenured(?A0, ?A2), undergraduateDegreeFrom(?A3, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- advisor(?A1, ?A0), degreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), worksFor(?A0, ?A3).
+Q_4(?A0) :- Student(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- GraduateStudent(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- FacultyStaff(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- AssociateProfessor(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- Director(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- Chair(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- ExDean(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- Student(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), tenured(?A0, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- ClericalStaff(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- VisitingProfessor(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- ExDean(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- UndergraduateStudent(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- Lecturer(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- FullProfessor(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- doctoralDegreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), hasFaculty(?A2, ?A3), headOf(?A0, ?A2).
+Q_4(?A0) :- affiliateOf(?A1, ?A0), hasAlumnus(?A2, ?A0), isPartOfUniversity(?A3, ?A2), worksFor(?A0, ?A2).
+Q_4(?A0) :- Professor(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), memberOf(?A0, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- ResearchAssistant(?A0), hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- GraduateStudent(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- UndergraduateStudent(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- Employee(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- UndergraduateStudent(?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- Lecturer(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- Employee(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), publicationAuthor(?A3, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- doctoralDegreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- degreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- PostDoc(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- degreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), mastersDegreeFrom(?A3, ?A2).
+Q_4(?A0) :- Employee(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), publicationAuthor(?A2, ?A0), undergraduateDegreeFrom(?A3, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- GraduateStudent(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- Person(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), publicationAuthor(?A3, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), memberOf(?A0, ?A3).
+Q_4(?A0) :- Lecturer(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- FacultyStaff(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- Employee(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- University(?A1), advisor(?A2, ?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), tenured(?A0, ?A3).
+Q_4(?A0) :- UndergraduateStudent(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), member(?A2, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A0, ?A2), undergraduateDegreeFrom(?A3, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), tenured(?A0, ?A3), worksFor(?A0, ?A1).
+Q_4(?A0) :- Director(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- FacultyStaff(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasExamRecord(?A0, ?A2), hasFaculty(?A1, ?A3), headOf(?A0, ?A1).
+Q_4(?A0) :- SystemsStaff(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), member(?A2, ?A0), undergraduateDegreeFrom(?A3, ?A1).
+Q_4(?A0) :- ResearchAssistant(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- Chair(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- affiliateOf(?A1, ?A0), doctoralDegreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), headOf(?A0, ?A3).
+Q_4(?A0) :- affiliateOf(?A1, ?A0), hasAlumnus(?A2, ?A0), hasFaculty(?A2, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), mastersDegreeFrom(?A2, ?A1), member(?A3, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- advisor(?A0, ?A1), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), isPartOfUniversity(?A3, ?A2).
+Q_4(?A0) :- AdministrativeStaff(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- advisor(?A0, ?A1), degreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), headOf(?A0, ?A3).
+Q_4(?A0) :- Director(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- University(?A1), advisor(?A2, ?A0), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- doctoralDegreeFrom(?A0, ?A1), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2), isPartOfUniversity(?A3, ?A2).
+Q_4(?A0) :- ExDean(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- ClericalStaff(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- SystemsStaff(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- Chair(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), mastersDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), teacherOf(?A0, ?A2).
+Q_4(?A0) :- Employee(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), headOf(?A0, ?A2).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), isPartOfUniversity(?A2, ?A1).
+Q_4(?A0) :- advisor(?A1, ?A0), hasAlumnus(?A2, ?A0), hasFaculty(?A2, ?A3), headOf(?A0, ?A2).
+Q_4(?A0) :- Professor(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- VisitingProfessor(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), worksFor(?A0, ?A1).
+Q_4(?A0) :- Lecturer(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- Student(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- Student(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- Dean(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- Director(?A0), University(?A1), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- affiliateOf(?A1, ?A0), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- ExDean(?A0), hasAlumnus(?A1, ?A0), isPartOfUniversity(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- UndergraduateStudent(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), teacherOf(?A0, ?A3), worksFor(?A0, ?A2).
+Q_4(?A0) :- advisor(?A1, ?A0), hasAlumnus(?A2, ?A0), undergraduateDegreeFrom(?A3, ?A2), worksFor(?A0, ?A2).
+Q_4(?A0) :- Dean(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1), worksFor(?A0, ?A3).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasExamRecord(?A0, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- advisor(?A1, ?A0), doctoralDegreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), headOf(?A0, ?A3).
+Q_4(?A0) :- Person(?A0), hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- ClericalStaff(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1), undergraduateDegreeFrom(?A2, ?A1).
+Q_4(?A0) :- Employee(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- Director(?A0), hasAlumnus(?A1, ?A0), undergraduateDegreeFrom(?A2, ?A1), worksFor(?A0, ?A1).
+Q_4(?A0) :- AssociateProfessor(?A0), University(?A1), hasAlumnus(?A1, ?A0), worksFor(?A0, ?A1).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1), member(?A3, ?A0).
+Q_4(?A0) :- hasAlumnus(?A1, ?A0), hasFaculty(?A1, ?A2), headOf(?A0, ?A1).
+Q_4(?A0) :- advisor(?A0, ?A1), degreeFrom(?A2, ?A3), hasAlumnus(?A3, ?A0), worksFor(?A0, ?A3).
+Q_4(?A0) :- ClericalStaff(?A0), degreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- Director(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- VisitingProfessor(?A0), doctoralDegreeFrom(?A1, ?A2), hasAlumnus(?A2, ?A0), worksFor(?A0, ?A2).
+Q_4(?A0) :- ExDean(?A0), hasAlumnus(?A1, ?A0), headOf(?A0, ?A1).
+Q_4(?A0) :- University(?A1), hasAlumnus(?A1, ?A0), hasExamRecord(?A0, ?A2), worksFor(?A0, ?A1).
+
+
+?- Q_0(?A0).
+?- Q_1(?A0, ?A1).
+?- Q_2(?A0, ?A1, ?A2).
+?- Q_4(?A0).

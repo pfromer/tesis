@@ -1,0 +1,40 @@
+/// Output for QueryRewritingTest class ///
+/// Created on: 2010/02/19 ///
+/// Queries in the program: 3///
+/// Rules in the program: 7 ///
+/// TGDs in the program: 4 ///
+/// Constraints in the program: 0 ///
+
+/// QUERIES: ///
+
+/// Input Query: Q(?0) :- edge(?0, ?1). ///
+/// Size of the rewriting [# of queries]:3 ///
+/// Size of the rewriting [# of symbols]:7 ///
+/// Rewriting Time: 2.373275[ms] ///
+/// Rewritten Program ///
+Q(?A0) :- Path1(?A0).
+Q(?A0) :- Path2(?A0).
+Q(?A0) :- edge(?A0, ?A1).
+
+/// Input Query: Q(?0) :- edge(?0, ?1), edge(?1, ?2). ///
+/// Size of the rewriting [# of queries]:4 ///
+/// Size of the rewriting [# of symbols]:18 ///
+/// Rewriting Time: 12.408474[ms] ///
+/// Rewritten Program ///
+Q(?A0) :- Path2(?A0).
+Q(?A0) :- edge(?A0, ?A1), edge(?A1, ?A2).
+Q(?A0) :- Path1(?A1), edge(?A0, ?A1).
+Q(?A0) :- Path2(?A1), edge(?A0, ?A1).
+
+/// Input Query: Q(?0) :- edge(?0, ?1), edge(?1, ?2), edge(?2, ?3). ///
+/// Size of the rewriting [# of queries]:4 ///
+/// Size of the rewriting [# of symbols]:30 ///
+/// Rewriting Time: 51.600773[ms] ///
+/// Rewritten Program ///
+Q(?A0) :- Path1(?A1), edge(?A0, ?A2), edge(?A2, ?A1).
+Q(?A0) :- edge(?A0, ?A1), edge(?A1, ?A2), edge(?A2, ?A3).
+Q(?A0) :- Path2(?A1), edge(?A0, ?A2), edge(?A2, ?A1).
+Q(?A0) :- Path2(?A1), edge(?A0, ?A1).
+
+
+?- Q(?A0).

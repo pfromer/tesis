@@ -1,0 +1,30 @@
+/// Created by: OWL 2 Datalog +- Converter ///
+/// Author: Giorgio Orsi <orsi@elet.polimi.it> - Politecnico di Milano ///
+/// Created on: 2010/01/26 11:00:26 ///
+/// Include Storage Axioms: true///
+
+/// First Level Datalog Query or Program///
+?- Parent(?x), hasSon(?x, 'http:/www.elet.polimi.it/dbgroup/kid/testNyaya.owl#Giorgio').
+?- @objectproperty(?Z3, 'http:/www.elet.polimi.it/dbgroup/kid/testNyaya.owl#hasSon', ?Z5, ?Z6, ?Z7, ?Z8, ?Z9, ?Z10, ?Z11, ?Z12, ?Z13, ?Z14, ?Z15, ?Z16, ?Z17).
+?- @i_class(?Z1, ?X, ?Z18, ?Z19).
+?- @i_objectproperty(?Z0, ?Z1, ?Z2, ?Z3, ?Z4).
+?- hasSon(?x, ?y).
+?- Parent(?x).
+?- Person(?x).
+
+/// Converted TBOX ///
+Person(?Y) :- hasSon(?X, ?Y).
+aux_0(?X,?Y) :- Parent(?X).
+Parent(?X) :- hasSon(?X, ?Y).
+Person(?X) :- Parent(?X).
+hasSon(?X,?Y) :- aux_0(?X,?Y).
+Person(?Y) :- aux_0(?X,?Y).
+
+/// Total TBox Axioms: 4 ///
+
+/// Converted ABOX ///
+hasSon(?X, ?Y) :- @i_objectproperty(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @objectproperty(?Z3, 'http:/www.elet.polimi.it/dbgroup/kid/testNyaya.owl#hasSon', ?Z5, ?Z6, ?Z7, ?Z8, ?Z9, ?Z10, ?Z11, ?Z12, ?Z13, ?Z14, ?Z15, ?Z16, ?Z17), @i_class(?Z1, ?X, ?Z18, ?Z19), @i_class(?Z2, ?Y, ?Z20, ?Z21).
+Parent(?X) :- @i_class(?Z0, ?X, ?Z1, ?Z2), @class(?Z1, 'http:/www.elet.polimi.it/dbgroup/kid/testNyaya.owl#Parent', ?Z3, ?Z4).
+Person(?X) :- @i_class(?Z0, ?X, ?Z1, ?Z2), @class(?Z1, 'http:/www.elet.polimi.it/dbgroup/kid/testNyaya.owl#Person', ?Z3, ?Z4).
+
+/// Total ABox Axioms: 9 ///

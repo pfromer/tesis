@@ -1,0 +1,78 @@
+/// Converted SBox ///
+publicationAuthor(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#publicationAuthor', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Book(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Book').
+orgPublication(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#orgPublication', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Dean(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Dean').
+Student(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Student').
+Department(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Department').
+researchProject(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#researchProject', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+subOrganizationOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#subOrganizationOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Manual(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Manual').
+member(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#member', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+tenured(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#tenured', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+affiliateOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#affiliateOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+softwareDocumentation(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#softwareDocumentation', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Article(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Article').
+memberOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#memberOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+FullProfessor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#FullProfessor').
+UnofficialPublication(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#UnofficialPublication').
+listedCourse(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#listedCourse', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+researchInterest(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#researchInterest', ?Z9, ?Z10, ?Z11), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+TeachingAssistant(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#TeachingAssistant').
+Organization(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Organization').
+telephone(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#telephone', ?Z9, ?Z10, ?Z11), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+teacherOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#teacherOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+SystemsStaff(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#SystemsStaff').
+UndergraduateStudent(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#UndergraduateStudent').
+age(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#age', ?Z9, ?Z10, ?Z11), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+hasAlumnus(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#hasAlumnus', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+degreeFrom(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#degreeFrom', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Faculty(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Faculty').
+College(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#College').
+doctoralDegreeFrom(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#doctoralDegreeFrom', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+worksFor(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#worksFor', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+softwareVersion(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#softwareVersion', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+affiliatedOrganizationOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#affiliatedOrganizationOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+name(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#name', ?Z9, ?Z10, ?Z11), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Chair(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Chair').
+undergraduateDegreeFrom(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#undergraduateDegreeFrom', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+mastersDegreeFrom(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#mastersDegreeFrom', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+AdministrativeStaff(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#AdministrativeStaff').
+VisitingProfessor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#VisitingProfessor').
+Course(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Course').
+officeNumber(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#officeNumber', ?Z9, ?Z10, ?Z11), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+advisor(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#advisor', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Specification(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Specification').
+ResearchAssistant(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#ResearchAssistant').
+Employee(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Employee').
+Director(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Director').
+title(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#title', ?Z9, ?Z10, ?Z11), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+ResearchGroup(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#ResearchGroup').
+Program(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Program').
+publicationResearch(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#publicationResearch', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Work(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Work').
+AssociateProfessor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#AssociateProfessor').
+Publication(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Publication').
+ClericalStaff(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#ClericalStaff').
+ConferencePaper(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#ConferencePaper').
+takesCourse(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#takesCourse', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+GraduateStudent(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#GraduateStudent').
+Lecturer(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Lecturer').
+Institute(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Institute').
+Research(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Research').
+PostDoc(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#PostDoc').
+teachingAssistantOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#teachingAssistantOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+publicationDate(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#publicationDate', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+GraduateCourse(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#GraduateCourse').
+AssistantProfessor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#AssistantProfessor').
+Software(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Software').
+emailAddress(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#emailAddress', ?Z9, ?Z10, ?Z11), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+University(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#University').
+headOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#headOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Person(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Person').
+Professor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Professor').
+TechnicalReport(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#TechnicalReport').
+Schedule(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#Schedule').
+JournalArticle(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl#JournalArticle').
+
+/// Total SBox Axioms: 75 ///

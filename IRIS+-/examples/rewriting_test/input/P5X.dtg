@@ -1,0 +1,41 @@
+/// Created by: OWL 2 Datalog +- Converter ///
+/// Author: Giorgio Orsi <orsi@elet.polimi.it> - Politecnico di Milano ///
+/// Created on: 2011/11/23 09:21:31 ///
+/// Expressiveness: OWL-QL ///
+/// Storage Rules: DISABLED///
+
+/// Converted TBox ///
+AUX0(?X, ?Y) :- Path2(?X).
+AUX1(?X, ?Y) :- Path3(?X).
+AUX3(?X, ?Y) :- Path5(?X).
+Path1(?X) :- AUX0(?Y, ?X).
+edge(?X, ?Y) :- Path1(?X).
+edge(?X, ?Y) :- AUX0(?X, ?Y).
+edge(?X, ?Y) :- AUX1(?X, ?Y).
+Path3(?X) :- AUX2(?Y, ?X).
+Path2(?X) :- AUX1(?Y, ?X).
+AUX2(?X, ?Y) :- Path4(?X).
+Path4(?X) :- AUX3(?Y, ?X).
+edge(?X, ?Y) :- AUX3(?X, ?Y).
+edge(?X, ?Y) :- AUX2(?X, ?Y).
+
+/// Total TBox Axioms: 18 ///
+
+/// Converted ABox ///
+
+/// Total ABox Axioms: 0 ///
+
+/// Converted SBox ///
+
+/// Total SBox Axioms: 0 ///
+Q1(?A) :- edge(?A,?B).
+Q2(?A) :- edge(?A,?B), edge(?B,?C).
+Q3(?A) :- edge(?A,?B), edge(?B,?C), edge(?C,?D).
+Q4(?A) :- edge(?A,?B), edge(?B,?C), edge(?C,?D), edge(?D,?E).
+Q5(?A) :- edge(?A,?B), edge(?B,?C), edge(?C,?D), edge(?D,?E), edge(?E,?F).
+
+?-Q1(?A).
+?-Q2(?A).
+?-Q3(?A).
+?-Q4(?A).
+?-Q5(?A).

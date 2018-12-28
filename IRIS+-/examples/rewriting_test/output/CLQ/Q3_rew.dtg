@@ -1,0 +1,121 @@
+/// Query: Q3(?A, ?B, ?C) :- C3(?A, ?B, ?C), Sp(?D), C2(?A, ?D), Sp(?A).///
+/// Ontology: CLQ////// Created on: 2016-07-26-13:54:55 ///
+/// Rules in the program: 39 ///
+/// TGDs in the program: 35 ///
+/// Constraints in the program: 0 ///
+/// Theory expressivity: [STICKY] ///
+/// Decomposition: DECOMPOSE ///
+/// Subsumption Check Strategy: INTRADEC ///
+/// Negative Constraints Check Strategy: NONE ///
+
+/// ---------- METRICS ----------
+
+/// ----- SIZE -----
+/// Decomposition size: 4 queries.
+/// Decomposition: [Q3_1(?A, ?B, ?C) :- C3(?A, ?B, ?C)., Q3_2(?D) :- Sp(?D)., Q3_3(?A, ?D) :- C2(?A, ?D)., Q3_4(?A) :- Sp(?A).]
+/// # of queries: 45.
+/// # of atoms: 112.
+/// # of joins: 100.
+/// # of generated queries: 57.
+/// # of explored queries: 44.
+/// Constraints rewriting count: 0.
+/// # of queries purged via subcheck: 0.
+/// # of queries purged via nccheck: 0.
+
+/// ----- TIME -----
+/// Total: 70 msec.
+/// Backward rewriting: 69 msec.
+/// Factorisation: 7 msec.
+/// Query elimination: 0 msec.
+/// Negative contraints violation check: 0 msec.
+/// Subsumption Check: 43 msec.
+/// Query Decomposition: 0 msec.
+/// Rewriting Unfolding: 0 msec.
+/// Canonical Renaming: 2 msec.
+/// Dependency graph: 5 msec (constant).
+/// Cover graph: 0 msec (constant).
+/// Cleaning (aux predicates): 0 msec.
+/// Constraints rewriting time: 0 msec (constant).
+/// Overhead: 1 msec.
+
+/// ----- OTHER -----
+/// # Cover checks: 0.
+/// Covering cache hits: 0.
+/// Non-Covering cache hits: 0.
+/// # of eliminated atoms: 0.
+/// Max covering cache size: 0.
+/// Max non covering cache size: 0.
+/// # of subsumption checks: 1418.
+/// Subsumed cache hits: 0.
+/// Not Subsumed cache hits: 0.
+/// Max subsumption cache size: 0.
+/// Max not subsumed cache size: 834.
+/// Renaming count: 1879.
+/// Renaming cache hits: 1626.
+/// Cartesian cache hits: 0.
+/// MGU applications: 588.
+/// MGU cache hits: 454.
+/// Factor count: 0.
+/// Factor cache hits: 0.
+/// Non Factor cache hits: 0.
+
+/// ----- MEMORY -----
+/// # Rewriting Memory: 0 Kb.
+/// # P-Graph Memory: 0 Kb.
+/// # C-Graph Memory: 0 Kb.
+/// # NC rewriting Memory: 0 Kb.
+
+
+/// Rewritten Program ///
+Q3(?A, ?B, ?C) :- Q3_2(?D), Q3_4(?A), Q3_1(?A, ?B, ?C), Q3_3(?A, ?D).
+Q3_2(?U0) :- Sp(?U0).
+Q3_1(?U0, ?U1, ?U2) :- C3(?U0, ?U1, ?U2).
+Q3_1(?U0, ?U1, ?U2) :- C2(?U0, ?U1), E(?U0, ?U2), E(?U1, ?U2).
+Q3_1(?U0, ?U1, ?U2) :- C3(?U0, ?U2, ?U1).
+Q3_1(?U0, ?U1, ?U2) :- C3(?U1, ?U0, ?U2).
+Q3_1(?U0, ?U1, ?U2) :- C3(?U2, ?U0, ?U1).
+Q3_1(?U0, ?U1, ?U2) :- C3(?U1, ?U2, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- C3(?U2, ?U1, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- C2(?U1, ?U2), E(?U1, ?U0), E(?U2, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- E(?U1, ?U0), C2(?U2, ?U1), E(?U2, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- E(?U0, ?U2), E(?U1, ?U2), C2(?U1, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- C2(?U0, ?U1), E(?U1, ?U2), E(?U2, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- C2(?U0, ?U1), E(?U2, ?U1), E(?U0, ?U2).
+Q3_1(?U0, ?U1, ?U2) :- E(?U0, ?U1), E(?U0, ?U2), E(?U1, ?U2).
+Q3_1(?U0, ?U1, ?U2) :- E(?U0, ?U1), C2(?U0, ?U2), E(?U2, ?U1).
+Q3_1(?U0, ?U1, ?U2) :- E(?U0, ?U1), E(?U2, ?U1), C2(?U2, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- C2(?U0, ?U1), E(?U2, ?U1), E(?U2, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- E(?U0, ?U1), E(?U1, ?U2), E(?U2, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- E(?U1, ?U2), C2(?U1, ?U0), E(?U2, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- E(?U0, ?U2), E(?U1, ?U2), E(?U1, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- E(?U0, ?U1), E(?U2, ?U1), E(?U0, ?U2).
+Q3_1(?U0, ?U1, ?U2) :- E(?U0, ?U1), C2(?U1, ?U2), E(?U2, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- C2(?U1, ?U2), E(?U0, ?U2), E(?U1, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- E(?U1, ?U2), E(?U1, ?U0), E(?U2, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- E(?U2, ?U1), E(?U0, ?U2), C2(?U1, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- E(?U2, ?U1), C2(?U2, ?U0), E(?U1, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- E(?U0, ?U1), E(?U1, ?U2), C2(?U2, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- E(?U0, ?U1), E(?U2, ?U1), E(?U2, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- C2(?U0, ?U2), E(?U2, ?U1), E(?U1, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- E(?U0, ?U1), C2(?U0, ?U2), E(?U1, ?U2).
+Q3_1(?U0, ?U1, ?U2) :- E(?U0, ?U1), C2(?U2, ?U1), E(?U2, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- E(?U0, ?U2), E(?U1, ?U0), C2(?U2, ?U1).
+Q3_1(?U0, ?U1, ?U2) :- E(?U2, ?U1), E(?U1, ?U0), E(?U2, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- E(?U2, ?U1), E(?U0, ?U2), E(?U1, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- E(?U0, ?U1), E(?U0, ?U2), C2(?U2, ?U1).
+Q3_1(?U0, ?U1, ?U2) :- E(?U0, ?U1), C2(?U1, ?U2), E(?U0, ?U2).
+Q3_1(?U0, ?U1, ?U2) :- E(?U1, ?U2), C2(?U2, ?U0), E(?U1, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- E(?U2, ?U1), C2(?U1, ?U0), E(?U2, ?U0).
+Q3_1(?U0, ?U1, ?U2) :- C2(?U0, ?U2), E(?U1, ?U2), E(?U1, ?U0).
+Q3_4(?U0) :- Sp(?U0).
+Q3_3(?U0, ?U1) :- C2(?U0, ?U1).
+Q3_3(?U0, ?U1) :- E(?U0, ?U1).
+Q3_3(?U0, ?U1) :- C2(?U1, ?U0).
+Q3_3(?U0, ?U1) :- E(?U1, ?U0).
+
+?- Q3_1(?U0, ?U1, ?U2).
+?- Q3_4(?U0).
+?- Q3(?A, ?B, ?C).
+?- Q3_2(?U0).
+?- Q3_3(?U0, ?U1).
+

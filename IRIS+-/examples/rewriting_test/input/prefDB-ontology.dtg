@@ -1,0 +1,126 @@
+///////////////////
+/// PrefDB TBOX ///
+///////////////////
+
+food(?X) :- barbeque(?X).
+food(?X) :- local_flavor(?X).
+food(?X) :- hot_dogs(?X).
+food(?X) :- vegetarian(?X).
+food(?X) :- seafood(?X).
+food(?X) :- chicken_wings(?X).
+food(?X) :- pizza(?X).
+food(?X) :- dessert(?X).
+food(?X) :- sandwiches(?X).
+food(?X) :- gluten_free(?X).
+food(?X) :- burgers(?X).
+food(?X) :- fast_food(?X).
+dessert(?X) :- donuts(?X).
+dessert(?X) :- bagels(?X).
+dessert(?X) :- ice_cream(?X).
+place(?X) :- dance_clubs(?X).
+place(?X) :- juice_bars_and_smooties(?X).
+place(?X) :- cafes(?X).
+place(?X) :- bakeries(?X).
+place(?X) :- breweries(?X).
+place(?X) :- steakhouses(?X).
+place(?X) :- lounges(?X).
+place(?X) :- buffets(?X).
+place(?X) :- bars(?X).
+bars(?X) :- dive_bars(?X).
+bars(?X) :- pubs(?X).
+bars(?X) :- sports_bars(?X).
+bars(?X) :- sushi_bars(?X).
+bars(?X) :- wine_bars(?X).
+cuisine(?X) :- mexican(?X).
+cuisine(?X) :- american(?X).
+cuisine(?X) :- local_services(?X).
+cuisine(?X) :- asian(?X).
+cuisine(?X) :- middle_eastern(?X).
+cuisine(?X) :- mediterranean(?X).
+asian(?X) :- chinese(?X).
+asian(?X) :- indian(?X).
+asian(?X) :- thai(?X).
+asian(?X) :- korean(?X).
+asian(?X) :- japanese(?X).
+asian(?X) :- vietnamese(?X).
+mediterranean(?X) :- greek(?X).
+mediterranean(?X) :- italian(?X).
+mediterranean(?X) :- french(?X).
+hasName(?X,?Y) :- food(?X).
+inCity(?X,?Y) :- food(?X).
+inState(?X,?Y) :- food(?X).
+hasName(?X,?Y) :- cuisine(?X).
+inCity(?X,?Y) :- cuisine(?X).
+inState(?X,?Y) :- cuisine(?X).
+hasName(?X,?Y) :- place(?X).
+inCity(?X,?Y) :- place(?X).
+inState(?X,?Y) :- place(?X).
+
+//////////////////////
+/// PrefDB Queries ///
+//////////////////////
+
+Q0(?A) :- mediterranean (?A).
+
+?-Q0(?A).
+
+
+///////////////////
+/// PrefDB SBOX ///
+///////////////////
+
+bagels (?X) :- @business_categories(?X,'0').
+barbeque (?X) :- @business_categories(?X,'1').
+local_flavor (?X) :- @business_categories(?X,'2').
+hot_dogs (?X) :- @business_categories(?X,'3').
+vegetarian (?X) :- @business_categories(?X,'4').
+seafood (?X) :- @business_categories(?X,'5').
+chicken_wings (?X) :- @business_categories(?X,'6').
+pizza (?X) :- @business_categories(?X,'7').
+dessert (?X) :- @business_categories(?X,'8').
+sandwiches (?X) :- @business_categories(?X,'9').
+gluten_free (?X) :- @business_categories(?X,'10').
+burgers (?X) :- @business_categories(?X,'11').
+fast_food (?X) :- @business_categories(?X,'12').
+donuts (?X) :- @business_categories(?X,'13').
+ice_cream (?X) :- @business_categories(?X,'14').
+dance_clubs (?X) :- @business_categories(?X,'15').
+juice_bars_and_smooties (?X) :- @business_categories(?X,'16').
+cafes (?X) :- @business_categories(?X,'17').
+bakeries (?X) :- @business_categories(?X,'18').
+breweries (?X) :- @business_categories(?X,'19').
+steakhouses (?X) :- @business_categories(?X,'20').
+lounges (?X) :- @business_categories(?X,'21').
+buffets (?X) :- @business_categories(?X,'22').
+bars (?X) :- @business_categories(?X,'23').
+dive_bars (?X) :- @business_categories(?X,'24').
+pubs (?X) :- @business_categories(?X,'25').
+sports_bars (?X) :- @business_categories(?X,'26').
+sushi_bars (?X) :- @business_categories(?X,'27').
+wine_bars (?X) :- @business_categories(?X,'28').
+mexican (?X) :- @business_categories(?X,'29').
+american (?X) :- @business_categories(?X,'30').
+asian (?X) :- @business_categories(?X,'31').
+middle_eastern (?X) :- @business_categories(?X,'32').
+mediterranean (?X) :- @business_categories(?X,'33').
+chinese (?X) :- @business_categories(?X,'34').
+indian (?X) :- @business_categories(?X,'35').
+thai (?X) :- @business_categories(?X,'36').
+korean (?X) :- @business_categories(?X,'37').
+japanese (?X) :- @business_categories(?X,'38').
+vietnamese (?X) :- @business_categories(?X,'39').
+greek (?X) :- @business_categories(?X,'40').
+italian (?X) :- @business_categories(?X,'41').
+french (?X) :- @business_categories(?X,'42').
+food (?X) :- @business_categories(?X,'43').
+cuisine (?X) :- @business_categories(?X,'44').
+place (?X) :- @business_categories(?X,'45').
+hasName(?X, ?Y) :- @business(?X, ?Y, ?Z, ?T).
+inCity(?X, ?Y) :- @business(?X, ?T, ?Y, ?Z).
+inState(?X, ?Y):- @business(?X, ?T, ?Z, ?Y).
+
+/////////////////////
+/// DB Connection ///
+/////////////////////
+
+#DBConnection('_POSTGRES', '', '127.0.0.1', '5432', 'prefDB', 'preferences', 'jd', 'braNdinG').

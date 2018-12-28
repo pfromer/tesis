@@ -1,0 +1,47 @@
+/// First Level Datalog Query or Program ///
+?- Parent(?x), hasSon(?x, 'Giorgio').
+?- hasSon(?x, ?y).
+?- Parent(?x).
+?- Person(?x).
+
+/// Generated Linear Datalog Program ///
+Person(?Y), hasSon(?X, ?Y):- Parent(?X).
+Person(?Y) :- hasSon(?X, ?Y).
+Parent(?X) :- hasSon(?X, ?Y).
+
+/// Second Level Program ///
+
+Person(?Y) :- i_class(?X, ?Y, '21'). 
+Parent(?Y) :- i_class(?X, ?Y, '22').
+hasSon(?Y, ?Z) :- i_objectproperty(?X, ?Y, ?Z, '40').
+
+/// ABox , ///
+
+i_class('10', 'http://testing.org#Ermanna', '21').
+i_class('11', 'http://testing.org#Lucia', '22').
+i_class('12', 'http://testing.org#Giorgio', '20').
+i_class('13', 'http://testing.org#Katia', '20').
+i_class('14', 'http://testing.org#Manuela', '20').
+
+i_objectproperty('30', '10', '12', '40').
+i_objectproperty('31', '13', '14', '40').
+
+/// TBox ///
+class('20', 'http://testing.org#Thing', '1', '0').
+class('21', 'http://testing.org#Person', '1', '0').
+class('22', 'http://testing.org#Parent', '1', '0').
+class('23', 'http://testing.org#GenID_1', '1', '0').
+class('24', 'http://testing.org#GenID_2', '1', '0').
+
+objectproperty('40', 'hasSon', '0', '0', '0', '1', '0', '0', '1', '0', '1', '22', '21', '1', '0').
+
+objectpropertysomevaluesfrom('50', '40', '21', '23', '1', '0').
+
+collection('60', 'intersection', '24').
+
+collectionclasselement('70', '60', '23', '1', '0').
+collectionclasselement('71', '60', '21', '1', '0').
+
+classequivalent('80', '24', '22', '1', '0').
+
+

@@ -1,0 +1,74 @@
+/// Query: Q_0(?A) :- s(?B), t(?A, ?B).///
+/// Ontology: dl-lite-sbox////// Created on: 2015-05-12-09:51:30 ///
+/// Rules in the program: 12 ///
+/// TGDs in the program: 2 ///
+/// Constraints in the program: 0 ///
+/// Theory expressivity: [LINEAR, STICKY, GUARDED] ///
+/// Decomposition: DECOMPOSE ///
+/// Subsumption Check Strategy: INTRADEC ///
+/// Negative Constraints Check Strategy: NONE ///
+
+/// ---------- METRICS ----------
+
+/// ----- SIZE -----
+/// Decomposition size: 2 queries.
+/// Decomposition: [Q_0_1(?B) :- s(?B)., Q_0_2(?A, ?B) :- t(?A, ?B).]
+/// # of queries: 2.
+/// # of atoms: 4.
+/// # of joins: 2.
+/// # of generated queries: 1.
+/// # of explored queries: 3.
+/// Constraints rewriting count: 0.
+/// # of queries purged via subcheck: 0.
+/// # of queries purged via nccheck: 0.
+
+/// ----- TIME -----
+/// Total: 42 msec.
+/// Backward rewriting: 28 msec.
+/// Factorisation: 0 msec.
+/// Query elimination: 3 msec.
+/// Negative contraints violation check: 0 msec.
+/// Subsumption Check: 0 msec.
+/// Query Decomposition: 9 msec.
+/// Rewriting Unfolding: 2 msec.
+/// Canonical Renaming: 3 msec.
+/// Dependency graph: 0 msec (constant).
+/// Cover graph: 0 msec (constant).
+/// Cleaning (aux predicates): 2 msec.
+/// Constraints rewriting time: 0 msec (constant).
+/// Overhead: 14 msec.
+
+/// ----- OTHER -----
+/// # Cover checks: 2.
+/// Covering cache hits: 0.
+/// Non-Covering cache hits: 0.
+/// # of eliminated atoms: 0.
+/// Max covering cache size: 0.
+/// Max non covering cache size: 0.
+/// # of subsumption checks: 2.
+/// Subsumed cache hits: 0.
+/// Not Subsumed cache hits: 0.
+/// Max subsumption cache size: 0.
+/// Max not subsumed cache size: 0.
+/// Renaming count: 19.
+/// Renaming cache hits: 4.
+/// Cartesian cache hits: 0.
+/// MGU applications: 14.
+/// MGU cache hits: 4.
+/// Factor count: 0.
+/// Factor cache hits: 0.
+/// Non Factor cache hits: 0.
+
+/// ----- MEMORY -----
+/// # Rewriting Memory: 0 Kb.
+/// # P-Graph Memory: 0 Kb.
+/// # C-Graph Memory: 0 Kb.
+/// # NC rewriting Memory: 0 Kb.
+
+
+/// Rewritten Program ///
+Q_0(?U0) :- s(?U1), t(?U0, ?U1).
+Q_0(?U0) :- t(?U1, ?U2), t(?U0, ?U2).
+
+?- Q_0(?U0).
+

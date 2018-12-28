@@ -1,0 +1,94 @@
+/// Query: Q79(?X0) :- Organization(?X0).///
+/// Ontology: U////// Created on: 2015-05-13-17:56:13 ///
+/// Rules in the program: 173 ///
+/// TGDs in the program: 87 ///
+/// Constraints in the program: 0 ///
+/// Theory expressivity: [LINEAR, STICKY, GUARDED] ///
+/// Decomposition: MONOLITIC ///
+/// Subsumption Check Strategy: NONE ///
+/// Negative Constraints Check Strategy: NONE ///
+
+/// ---------- METRICS ----------
+
+/// ----- SIZE -----
+/// Decomposition size: 0 queries.
+/// Decomposition: null
+/// # of queries: 22.
+/// # of atoms: 22.
+/// # of joins: 0.
+/// # of generated queries: 27.
+/// # of explored queries: 25.
+/// Constraints rewriting count: 0.
+/// # of queries purged via subcheck: 0.
+/// # of queries purged via nccheck: 0.
+
+/// ----- TIME -----
+/// Total: 38 msec.
+/// Backward rewriting: 38 msec.
+/// Factorisation: 2 msec.
+/// Query elimination: 0 msec.
+/// Negative contraints violation check: 0 msec.
+/// Subsumption Check: 0 msec.
+/// Query Decomposition: 0 msec.
+/// Rewriting Unfolding: 0 msec.
+/// Canonical Renaming: 1 msec.
+/// Dependency graph: 25 msec (constant).
+/// Cover graph: 522 msec (constant).
+/// Cleaning (aux predicates): 0 msec.
+/// Constraints rewriting time: 0 msec (constant).
+/// Overhead: 0 msec.
+
+/// ----- OTHER -----
+/// # Cover checks: 0.
+/// Covering cache hits: 0.
+/// Non-Covering cache hits: 0.
+/// # of eliminated atoms: 0.
+/// Max covering cache size: 0.
+/// Max non covering cache size: 0.
+/// # of subsumption checks: 0.
+/// Subsumed cache hits: 0.
+/// Not Subsumed cache hits: 0.
+/// Max subsumption cache size: 0.
+/// Max not subsumed cache size: 0.
+/// Renaming count: 2250.
+/// Renaming cache hits: 2104.
+/// Cartesian cache hits: 0.
+/// MGU applications: 74.
+/// MGU cache hits: 34.
+/// Factor count: 0.
+/// Factor cache hits: 0.
+/// Non Factor cache hits: 0.
+
+/// ----- MEMORY -----
+/// # Rewriting Memory: 0 Kb.
+/// # P-Graph Memory: 0 Kb.
+/// # C-Graph Memory: 0 Kb.
+/// # NC rewriting Memory: 0 Kb.
+
+
+/// Rewritten Program ///
+Q79(?U0) :- Organization(?U0).
+Q79(?U0) :- University(?U0).
+Q79(?U0) :- Program(?U0).
+Q79(?U0) :- affiliatedOrganizationOf(?U1, ?U0).
+Q79(?U0) :- member(?U0, ?U1).
+Q79(?U0) :- orgPublication(?U0, ?U1).
+Q79(?U0) :- affiliatedOrganizationOf(?U0, ?U1).
+Q79(?U0) :- College(?U0).
+Q79(?U0) :- affiliateOf(?U0, ?U1).
+Q79(?U0) :- Faculty(?U0).
+Q79(?U0) :- memberOf(?U1, ?U0).
+Q79(?U0) :- isPartOfUniversity(?U0, ?U1).
+Q79(?U0) :- hasFaculty(?U1, ?U0).
+Q79(?U0) :- undergraduateDegreeFrom(?U1, ?U0).
+Q79(?U0) :- isPartOfUniversity(?U1, ?U0).
+Q79(?U0) :- hasAlumnus(?U0, ?U1).
+Q79(?U0) :- degreeFrom(?U1, ?U0).
+Q79(?U0) :- doctoralDegreeFrom(?U1, ?U0).
+Q79(?U0) :- hasFaculty(?U0, ?U1).
+Q79(?U0) :- mastersDegreeFrom(?U1, ?U0).
+Q79(?U0) :- worksFor(?U1, ?U0).
+Q79(?U0) :- headOf(?U1, ?U0).
+
+?- Q79(?U0).
+

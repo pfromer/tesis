@@ -1,0 +1,189 @@
+/// Converted TBox ///
+Natural_Feature(?X) :- is_manmade(?X, ?Y).
+Water_Feature(?X) :- Geyser(?X).
+Land_Feature(?X) :- Lava(?X).
+Recreation_Feature(?X) :- Reserve(?X).
+Place(?X) :- State(?X).
+Airport(?X) :- code(?X, ?Y).
+Researcher(?X) :- Computer_Science_Researcher(?X).
+Publication_Classification(?Y) :- classified_with(?X, ?Y).
+Publication(?X) :- Scientific_Publication(?X).
+Publication(?X) :- Volume(?X, ?Y).
+Place(?Y) :- occurred_in(?X, ?Y).
+Thing(?X) :- Event(?X).
+Professor(?X) :- Statistics_Professor(?X).
+Terrorist_Attack(?X) :- fatalities(?X, ?Y).
+Terrorist_Attack(?X) :- attack_type(?X, ?Y).
+Terrorist(?X) :- scars_and_marks(?X, ?Y).
+Terrorist(?X) :- reward(?X, ?Y).
+Thing(?X) :- Academic_Department(?X).
+University(?X) :- has_academic_department(?X, ?Y).
+Scientific_Publication(?X) :- classified_with(?X, ?Y).
+Transport_Structure(?X) :- Bridge(?X).
+Publication(?X) :- page_numbers(?X, ?Y).
+Place(?X) :- County(?X).
+Place(?X) :- Civil(?X).
+Airport(?X) :- airport_code(?X, ?Y).
+Water_Feature(?X) :- Bar(?X).
+Water_Feature(?X) :- Bay(?X).
+Terrorist(?X) :- hair(?X, ?Y).
+Person(?X) :- has_citizenship_in(?X, ?Y).
+Terrorist(?X) :- sex(?X, ?Y).
+Professor(?X) :- faculty_member_at(?X, ?Y).
+Land_Feature(?X) :- Cave(?X).
+City(?X) :- latitude_longitude(?X, ?Y).
+Terrorist(?X) :- place_of_birth(?X, ?Y).
+Event(?X) :- description(?X, ?Y).
+Terrorist_Attack(?X) :- injured(?X, ?Y).
+City(?X) :- altitude(?X, ?Y).
+Organization(?X) :- Terrorist_Organization(?X).
+Terrorist(?X) :- weight(?X, ?Y).
+Place(?X) :- City(?X).
+Extraction_Structure(?X) :- Mine(?X).
+Land_Feature(?X) :- Slope(?X).
+Person(?X) :- synonym(?X, ?Y).
+Recreation_Feature(?X) :- Park(?X).
+Water_Feature(?X) :- Channel(?X).
+Land_Feature(?X) :- Flat(?X).
+Water_Feature(?X) :- Island(?X).
+Event(?X) :- type_of_event(?X, ?Y).
+Organization(?Y) :- member_of(?X, ?Y).
+Person(?X) :- Professor(?X).
+Thing(?X) :- Manmade_Structure(?X).
+Place(?Y) :- located_in(?X, ?Y).
+Organization(?X) :- Company(?X).
+Person(?X) :- Politician(?X).
+Water_Structure(?X) :- Well(?X).
+Scientific_Publication(?X) :- publication_keywords(?X, ?Y).
+Organization(?X) :- Financial_Organization(?X).
+Water_Feature(?X) :- Cape(?X).
+Place(?X) :- Locale(?X).
+Manmade_Structure(?X) :- Landmark(?X).
+Place(?X) :- Region(?X).
+Academic_Department(?Y) :- has_academic_department(?X, ?Y).
+Land_Feature(?X) :- Basin(?X).
+Terrorist(?X) :- build(?X, ?Y).
+Water_Feature(?X) :- Spring(?X).
+Organization(?Y) :- leader_of(?X, ?Y).
+Academic_Department(?X) :- Mathematics_Department(?X).
+Terrorist(?X) :- eye(?X, ?Y).
+Water_Structure(?X) :- Reservoir(?X).
+Event(?X) :- event_date(?X, ?Y).
+Place(?X) :- topo_map(?X, ?Y).
+Country(?Y) :- has_citizenship_in(?X, ?Y).
+Manmade_Structure(?X) :- Complex(?X).
+Manmade_Structure(?X) :- Water_Structure(?X).
+Thing(?X) :- elevation(?X, ?Y).
+Terrorist(?X) :- remarks(?X, ?Y).
+Water_Structure(?X) :- Canal(?X).
+Thing(?X) :- Publication_Classification(?X).
+Terrorist(?X) :- complexion(?X, ?Y).
+Thing(?X) :- ACM_Subject_Descriptors(?X).
+affiliated_with(?X, ?Y) :- member_of(?X, ?Y).
+Place(?X) :- est_population(?X, ?Y).
+Organization(?X) :- responsible_for(?X, ?Y).
+Terrorist(?X) :- languages(?X, ?Y).
+Thing(?X) :- located_in(?X, ?Y).
+Publication(?X) :- Journal(?X).
+Terrorist(?X) :- date_of_birth_used(?X, ?Y).
+Water_Feature(?X) :- Arroyo(?X).
+Publication(?X) :- Book(?X).
+Person(?X) :- Researcher(?X).
+Academic_Department(?X) :- Statistics_Department(?X).
+Professor(?X) :- Physics_Professor(?X).
+Water_Feature(?X) :- Lake(?X).
+Complex(?X) :- Airport(?X).
+Place(?X) :- elevation(?X, ?Y).
+Place(?X) :- Country(?X).
+Event(?X) :- Terrorist_Attack(?X).
+Financial_Organization(?X) :- address(?X, ?Y).
+Manmade_Structure(?X) :- Building(?X).
+Thing(?X) :- Publication(?X).
+Extraction_Structure(?X) :- Oilfield(?X).
+Academic_Department(?X) :- Physics_Department(?X).
+Person(?X) :- extracted_by_person(?X, ?Y).
+Place(?Y) :- lives_in(?X, ?Y).
+Academic_Department(?Y) :- faculty_member_at(?X, ?Y).
+Building(?X) :- School(?X).
+Land_Feature(?X) :- Forest(?X).
+Professor(?X) :- Computer_Science_Professor(?X).
+Land_Feature(?X) :- Gap(?X).
+Land_Feature(?X) :- Summit(?X).
+Publication_Classification(?X) :- ACM_Top_level_Classification(?X).
+Terrorist(?X) :- caution(?X, ?Y).
+Building(?X) :- Tower(?X).
+Land_Feature(?X) :- Valley(?X).
+Complex(?X) :- Cemetery(?X).
+Terrorist_Attack(?X) :- target_type(?X, ?Y).
+Recreation_Feature(?X) :- Trail(?X).
+Water_Feature(?X) :- Stream(?X).
+Terrorist(?X) :- height(?X, ?Y).
+Water_Feature(?X) :- Rapids(?X).
+Publication(?X) :- published_in(?X, ?Y).
+Place(?X) :- geographic_description(?X, ?Y).
+Professor(?X) :- Engineering_Professor(?X).
+Water_Structure(?X) :- Dam(?X).
+Publication(?Y) :- listed_author_in(?X, ?Y).
+Building(?X) :- Hospital(?X).
+Water_Feature(?X) :- Isthmus(?X).
+Organization(?Y) :- affiliated_with(?X, ?Y).
+Terrorist_Attack(?X) :- location(?X, ?Y).
+Publication(?X) :- Download_link(?X, ?Y).
+Building(?X) :- Church(?X).
+Organization(?X) :- Academic_Organization(?X).
+Complex(?X) :- University(?X).
+Transport_Structure(?X) :- Crossing(?X).
+Person(?X) :- leader_of(?X, ?Y).
+Publication_Classification(?X) :- ACM_Second_level_Classification(?X).
+Person(?X) :- lives_in(?X, ?Y).
+Natural_Feature(?X) :- Glacier(?X).
+Organization(?X) :- Political_Organization(?X).
+Land_Feature(?X) :- Crater(?X).
+Financial_Organization(?X) :- bank_type(?X, ?Y).
+Water_Feature(?X) :- Sea(?X).
+Land_Feature(?X) :- Natural_Bench(?X).
+Publication(?X) :- URL_link(?X, ?Y).
+Thing(?X) :- Natural_Feature(?X).
+Water_Feature(?X) :- Gut(?X).
+Water_Structure(?X) :- Harbor(?X).
+Water_Feature(?X) :- Levee(?X).
+Land_Feature(?X) :- Area(?X).
+Natural_Feature(?X) :- Recreation_Feature(?X).
+Natural_Feature(?X) :- Water_Feature(?X).
+Land_Feature(?X) :- Natural_Pillar(?X).
+Water_Feature(?X) :- Natural_Bend(?X).
+Manmade_Structure(?X) :- Transport_Structure(?X).
+Water_Feature(?X) :- Beach(?X).
+Thing(?X) :- Organization(?X).
+Natural_Feature(?X) :- Land_Feature(?X).
+Thing(?X) :- topo_map(?X, ?Y).
+Person(?X) :- member_of(?X, ?Y).
+Land_Feature(?X) :- Plain(?X).
+Land_Feature(?X) :- Natural_Arch(?X).
+Water_Feature(?X) :- Swamp(?X).
+member_of(?X, ?Y) :- leader_of(?X, ?Y).
+Event(?Y) :- responsible_for(?X, ?Y).
+Event(?X) :- occurred_in(?X, ?Y).
+Publication_Classification(?X) :- ACM_Third_level_Classification(?X).
+Water_Feature(?X) :- Falls(?X).
+Academic_Department(?X) :- Computer_Science_Department(?X).
+Land_Feature(?X) :- Ridge(?X).
+Place(?X) :- bounding_box(?X, ?Y).
+Transport_Structure(?X) :- Tunnel(?X).
+Land_Feature(?X) :- Range(?X).
+Person(?X) :- affiliated_with(?X, ?Y).
+Professor(?X) :- Mathematics_Professor(?X).
+Publication(?X) :- Conference(?X).
+Academic_Department(?X) :- Engineering_Department(?X).
+Manmade_Structure(?X) :- Extraction_Structure(?X).
+Place(?X) :- boundary(?X, ?Y).
+Publication(?X) :- Year_pulished(?X, ?Y).
+Publication(?Y) :- published_in(?X, ?Y).
+Researcher(?X) :- listed_author_in(?X, ?Y).
+City(?X) :- attribute_country(?X, ?Y).
+Land_Feature(?X) :- Woods(?X).
+Land_Feature(?X) :- Cliff(?X).
+Person(?X) :- Terrorist(?X).
+Publication(?X) :- No(?X, ?Y).
+
+/// Total TBox Axioms: 187 ///

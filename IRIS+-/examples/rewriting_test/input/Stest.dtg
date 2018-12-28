@@ -1,0 +1,22 @@
+/// Created by: OWL 2 Datalog +- Converter ///
+/// Author: Giorgio Orsi <orsi@elet.polimi.it> - Politecnico di Milano ///
+/// Created on: 2010/01/27 18:16:28 ///
+/// Include Storage Axioms: false///
+
+/// Converted TBOX ///
+company(?X,?V,?W) :- stockPortfolio(?X,?Y,?Z).
+stock(?Y,?V,?W) :- stockPortfolio(?X,?Y,?Z).
+finIndex(?Y,?Z,?W) :- listComponent(?X,?Y).
+stock(?X,?Z,?W) :- listComponent(?X,?Y).
+hasStock(?Y,?X) :- stockPortfolio(?X,?Y,?Z).
+stockPortfolio(?Y,?X,?Z) :- hasStock(?X,?Y).
+stockPortfolio(?V,?X,?W) :- stock(?X,?Y,?Z).
+finInstrument(?X) :- stock(?X,?Y,?Z).
+legalPerson(?X) :- company(?X,?Y,?Z).
+
+
+Q1(?A,?B,?C) :- finInstrument(?A), stockPortfolio(?B,?A,?D), company(?B,?E,?F), listComponent(?A,?C), finIndex(?C,?G,?H).
+
+?- Q1(?A,?B,?C).
+
+/// Total ABox Axioms: 0 ///

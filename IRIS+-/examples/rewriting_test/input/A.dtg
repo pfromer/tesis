@@ -1,0 +1,430 @@
+/// Created by: OWL 2 Datalog +- Converter ///
+/// Author: Giorgio Orsi <orsi@elet.polimi.it> - Politecnico di Milano ///
+/// Created on: 2011/11/23 09:25:39 ///
+/// Expressiveness: OWL-QL ///
+/// Storage Rules: DISABLED///
+
+/// Converted TBox ///
+!HearingDisability(?X) :- SpeechDisability(?X).
+aux_0(?X,?Y) :- TalkingReading(?X).
+aux_1(?X,?Y) :- Little_or_No_Speech(?X).
+!Device(?X) :- Disability(?X).
+!HearingDisability(?X) :- PhysicalDisability(?X).
+VisualDisability(?X) :- Blind(?X).
+aux_2(?X,?Y) :- PhysicalDisability(?X).
+Device(?X) :- AssistiveDevice(?X).
+TactileReading(?X) :- BrailleWatch(?X).
+Communication_Device(?X) :- ListenDevice(?X).
+Disability(?X) :- MentalDisability(?X).
+aux_3(?X,?Y) :- BrailleWritingDevice(?X).
+SpeechDisability(?X) :- Stuttering(?X).
+!Ability(?X) :- Disability(?X).
+HearingAbility(?X) :- Hear_partially(?X).
+Communication_Device(?X) :- SpeechDevice(?X).
+PhysicalDisability(?X) :- Paraplegia(?X).
+aux_4(?X,?Y) :- ListenDevice(?X).
+VisualDisability(?X) :- LowVision(?X).
+aux_5(?X,?Y) :- Wheelchair(?X).
+Foldable_Wheelchair(?X) :- LightweightFoldable_Wheelchair(?X).
+SensoryAbility(?X) :- SightAbility(?X).
+aux_6(?X,?Y) :- FaceToFaceCommunicationDevice(?X).
+aux_7(?X,?Y) :- Disability(?X).
+!Manual_Wheelchair(?X) :- Motorised_Wheelchair(?X).
+PhysicalDisability(?X) :- Muscular_dystrophy(?X).
+AssistiveDevice(?X) :- Communication_Device(?X).
+TalkingReading(?X) :- Talking_Thermometer(?X).
+Disability(?X) :- HearingDisability(?X).
+aux_8(?X,?Y) :- Motorised_Wheelchair(?X).
+FaceToFaceCommunicationDevice(?X) :- FaceToFaceCommunicationSoftware(?X).
+MentalDisability(?X) :- Autism(?X).
+Disability(?X) :- VisualDisability(?X).
+isAssistedBy(?X, ?Y) :- assistsWith(?Y, ?X).
+assistsWith(?Y, ?X) :- isAssistedBy(?X, ?Y).
+Ability(?X) :- SpeechAbility(?X).
+aux_9(?X,?Y) :- TactileReading(?X).
+aux_10(?X,?Y) :- SpeechDevice(?X).
+ReadingDevice(?X) :- TalkingReading(?X).
+!SpeechDisability(?X) :- VisualDisability(?X).
+SightAbility(?X) :- See(?X).
+MobilityDevice(?X) :- Wheelchair(?X).
+Wheelchair(?X) :- Motorised_Wheelchair(?X).
+SpeechDisability(?X) :- Little_or_No_Speech(?X).
+SpeechDevice(?X) :- TelephoneAid(?X).
+PhysicalDisability(?X) :- Spina_Bifida(?X).
+Communication_Device(?X) :- FaceToFaceCommunicationDevice(?X).
+aux_11(?X,?Y) :- Ability(?X).
+HearingDisability(?X) :- Hard_of_hearing(?X).
+SensoryAbility(?X) :- TactileAbility(?X).
+!Communication_Device(?X) :- MobilityDevice(?X).
+!Ability(?X) :- Device(?X).
+aux_12(?X,?Y) :- Manual_Wheelchair(?X).
+LimbMobility(?X) :- UpperLimbMobility(?X).
+!HearingDisability(?X) :- VisualDisability(?X).
+TactileReading(?X) :- BraillePillOrganiser(?X).
+aux_13(?X,?Y) :- Manual_Wheelchair(?X).
+Ability(?X) :- PhysicalAbility(?X).
+PhysicalDisability(?X) :- Multiple_sclerosis(?X).
+HearingDisability(?X) :- Deaf(?X).
+Communication_Device(?X) :- WritingDevice(?X).
+Disability(?X) :- PhysicalDisability(?X).
+aux_14(?X,?Y) :- MobilityDevice(?X).
+affects(?X, ?Y) :- isAffectedBy(?Y, ?X).
+isAffectedBy(?Y, ?X) :- affects(?X, ?Y).
+aux_15(?X,?Y) :- Motorised_Wheelchair(?X).
+Manual_Wheelchair(?X) :- Lightweight_Wheelchair(?X).
+MovementAbility(?X) :- Reach(?X).
+HearingDisability(?X) :- Deafened(?X).
+FaceToFaceCommunicationDevice(?X) :- SymbolBoard(?X).
+SensoryAbility(?X) :- HearingAbility(?X).
+Disability(?X) :- SpeechDisability(?X).
+aux_16(?X,?Y) :- Paraplegia(?X).
+PhysicalDisability(?X) :- Kyphosis(?X).
+MovementAbility(?X) :- LimbMobility(?X).
+!MentalDisability(?X) :- SpeechDisability(?X).
+PhysicalDisability(?X) :- Osteogensis_Imperfecta(?X).
+Communication_Device(?X) :- ReadingDevice(?X).
+Manual_Wheelchair(?X) :- Foldable_Wheelchair(?X).
+PhysicalDisability(?X) :- Hemiplegia(?X).
+aux_17(?X,?Y) :- Quadriplegia(?X).
+aux_18(?X,?Y) :- HearingDisability(?X).
+SightAbility(?X) :- See_partially(?X).
+PhysicalDisability(?X) :- Poliomyelitis(?X).
+PhysicalDisability(?X) :- Amputation(?X).
+PhysicalDisability(?X) :- Dystonia(?X).
+PhysicalDisability(?X) :- Quadriplegia(?X).
+PhysicalDisability(?X) :- Achondroplasia(?X).
+!SensoryAbility(?X) :- SpeechAbility(?X).
+!PhysicalAbility(?X) :- SensoryAbility(?X).
+Ability(?X) :- SensoryAbility(?X).
+ReadingDevice(?X) :- TactileReading(?X).
+!PhysicalDisability(?X) :- SpeechDisability(?X).
+WritingDevice(?X) :- BrailleWritingDevice(?X).
+PhysicalDisability(?X) :- Guillaume_Barre(?X).
+PhysicalDisability(?X) :- Scoliosis(?X).
+!LowerLimbMobility(?X) :- UpperLimbMobility(?X).
+PhysicalDisability(?X) :- Cerebral_palsy(?X).
+aux_19(?X,?Y) :- AssistiveDevice(?X).
+aux_20(?X,?Y) :- ReadingDevice(?X).
+aux_21(?X,?Y) :- TactileReading(?X).
+!MentalDisability(?X) :- VisualDisability(?X).
+HearingAbility(?X) :- Hear(?X).
+LimbMobility(?X) :- LowerLimbMobility(?X).
+!PhysicalAbility(?X) :- SpeechAbility(?X).
+aux_22(?X,?Y) :- Ability(?X).
+aux_23(?X,?Y) :- TalkingReading(?X).
+!MentalDisability(?X) :- PhysicalDisability(?X).
+aux_24(?X,?Y) :- Deaf(?X).
+Wheelchair(?X) :- Manual_Wheelchair(?X).
+Motorised_Wheelchair(?X) :- BatteryPowered_Wheelchair(?X).
+MentalDisability(?X) :- Epilepsy(?X).
+!PhysicalDisability(?X) :- VisualDisability(?X).
+TactileReading(?X) :- BrailleAlarmClock(?X).
+AssistiveDevice(?X) :- MobilityDevice(?X).
+!HearingDisability(?X) :- MentalDisability(?X).
+Lightweight_Wheelchair(?X) :- LightweightFoldable_Wheelchair(?X).
+MentalDisability(?X) :- IntellectualDisability(?X).
+aux_25(?X,?Y) :- Quadriplegia(?X).
+ListenDevice(?X) :- TelephoneAid(?X).
+PhysicalAbility(?X) :- MovementAbility(?X).
+isAssistedBy(?X,?Y) :- aux_11(?X,?Y).
+Device(?Y) :- aux_11(?X,?Y).
+assistsWith(?X,?Y) :- aux_10(?X,?Y).
+SpeechAbility(?Y) :- aux_10(?X,?Y).
+requiresAbility(?X,?Y) :- aux_13(?X,?Y).
+UpperLimbMobility(?Y) :- aux_13(?X,?Y).
+assistsWith(?X,?Y) :- aux_12(?X,?Y).
+LowerLimbMobility(?Y) :- aux_12(?X,?Y).
+assistsWith(?X,?Y) :- aux_15(?X,?Y).
+LowerLimbMobility(?Y) :- aux_15(?X,?Y).
+assistsWith(?X,?Y) :- aux_14(?X,?Y).
+MovementAbility(?Y) :- aux_14(?X,?Y).
+affects(?X,?Y) :- aux_1(?X,?Y).
+SpeechAbility(?Y) :- aux_1(?X,?Y).
+affects(?X,?Y) :- aux_2(?X,?Y).
+PhysicalAbility(?Y) :- aux_2(?X,?Y).
+requiresAbility(?X,?Y) :- aux_0(?X,?Y).
+HearingAbility(?Y) :- aux_0(?X,?Y).
+assistsWith(?X,?Y) :- aux_5(?X,?Y).
+LimbMobility(?Y) :- aux_5(?X,?Y).
+assistsWith(?X,?Y) :- aux_6(?X,?Y).
+SpeechAbility(?Y) :- aux_6(?X,?Y).
+assistsWith(?X,?Y) :- aux_3(?X,?Y).
+SightAbility(?Y) :- aux_3(?X,?Y).
+assistsWith(?X,?Y) :- aux_4(?X,?Y).
+HearingAbility(?Y) :- aux_4(?X,?Y).
+assistsWith(?X,?Y) :- aux_9(?X,?Y).
+SightAbility(?Y) :- aux_9(?X,?Y).
+affects(?X,?Y) :- aux_7(?X,?Y).
+Ability(?Y) :- aux_7(?X,?Y).
+assistsWith(?X,?Y) :- aux_8(?X,?Y).
+UpperLimbMobility(?Y) :- aux_8(?X,?Y).
+affects(?X,?Y) :- aux_25(?X,?Y).
+LowerLimbMobility(?Y) :- aux_25(?X,?Y).
+assistsWith(?X,?Y) :- aux_23(?X,?Y).
+SightAbility(?Y) :- aux_23(?X,?Y).
+affects(?X,?Y) :- aux_24(?X,?Y).
+SpeechAbility(?Y) :- aux_24(?X,?Y).
+requiresAbility(?X,?Y) :- aux_21(?X,?Y).
+TactileAbility(?Y) :- aux_21(?X,?Y).
+isAffectedBy(?X,?Y) :- aux_22(?X,?Y).
+Disability(?Y) :- aux_22(?X,?Y).
+assistsWith(?X,?Y) :- aux_20(?X,?Y).
+SightAbility(?Y) :- aux_20(?X,?Y).
+assistsWith(?X,?Y) :- aux_19(?X,?Y).
+Ability(?Y) :- aux_19(?X,?Y).
+affects(?X,?Y) :- aux_18(?X,?Y).
+HearingAbility(?Y) :- aux_18(?X,?Y).
+affects(?X,?Y) :- aux_17(?X,?Y).
+UpperLimbMobility(?Y) :- aux_17(?X,?Y).
+affects(?X,?Y) :- aux_16(?X,?Y).
+LowerLimbMobility(?Y) :- aux_16(?X,?Y).
+
+/// Total TBox Axioms: 121 ///
+
+/// Converted ABox ///
+
+/// Total ABox Axioms: 0 ///
+
+/// Converted SBox ///
+
+/// Total SBox Axioms: 0 ///
+
+Q1(?A) :- Device(?A), assistsWith(?A,?B).
+Q2(?A) :- Device(?A), assistsWith(?A,?B), UpperLimbMobility(?B).
+Q3(?A) :- Device(?A), assistsWith(?A,?B), Hear(?B), affects(?C,?B), Autism(?C).
+Q4(?A) :- Device(?A), assistsWith(?A,?B), PhysicalAbility(?B).
+Q5(?A) :- Device(?A), assistsWith(?A,?B), PhysicalAbility(?B), affects(?C,?B), Quadriplegia(?C).
+Q6(?X0) :- MovementAbility(?X0).
+Q7(?X0) :- assistsWith(?X0,?X1), LimbMobility(?X1).
+Q8(?X0) :- isAffectedBy(?X1,?X0), SpeechAbility(?X1).
+Q9(?X0) :- assistsWith(?X0,?X1), isAssistedBy(?X1,?X2), Device(?X2).
+Q10(?X0) :- SensoryAbility(?X0).
+Q11(?X0) :- Communication_Device(?X0).
+Q12(?X0) :- affects(?X0,?X1), assistsWith(?X2,?X1).
+Q13(?X0) :- requiresAbility(?X0,?X1).
+Q14(?X0) :- isAssistedBy(?X1,?X0), LimbMobility(?X1).
+Q15(?X0) :- assistsWith(?X0,?X1), SpeechAbility(?X1).
+Q16(?X0) :- HearingAbility(?X0).
+Q17(?X0) :- assistsWith(?X1,?X0).
+Q18(?X0) :- isAffectedBy(?X1,?X0), assistsWith(?X2,?X1), Device(?X2).
+Q19(?X0) :- assistsWith(?X1,?X0), Device(?X1).
+Q20(?X0,?X1) :- affects(?X0,?X1).
+Q21(?X0,?X1) :- isAffectedBy(?X0,?X1).
+Q22(?X0) :- isAssistedBy(?X1,?X0), assistsWith(?X2,?X1), Device(?X2).
+Q23(?X0) :- Motorised_Wheelchair(?X0).
+Q24(?X0) :- requiresAbility(?X0,?X1), assistsWith(?X2,?X1), Device(?X2).
+Q25(?X0) :- TactileReading(?X0).
+Q26(?X0) :- LimbMobility(?X0).
+Q27(?X0) :- assistsWith(?X0,?X1), assistsWith(?X2,?X1).
+Q28(?X0) :- SpeechDisability(?X0).
+Q29(?X0) :- Wheelchair(?X0).
+Q30(?X0) :- PhysicalDisability(?X0).
+Q31(?X0) :- affects(?X0,?X1), SpeechAbility(?X1).
+Q32(?X0) :- MentalDisability(?X0).
+Q33(?X0) :- Ability(?X0).
+Q34(?X0) :- affects(?X0,?X1), SensoryAbility(?X1).
+Q35(?X0) :- isAssistedBy(?X1,?X0), SpeechAbility(?X1).
+Q36(?X0) :- requiresAbility(?X0,?X1), assistsWith(?X2,?X1).
+Q37(?X0) :- MobilityDevice(?X0).
+Q38(?X0) :- isAffectedBy(?X1,?X0), SensoryAbility(?X1).
+Q39(?X0) :- isAssistedBy(?X1,?X0), MovementAbility(?X1).
+Q40(?X0,?X1) :- assistsWith(?X1,?X0).
+Q41(?X0) :- isAffectedBy(?X1,?X0), LimbMobility(?X1).
+Q42(?X0) :- isAssistedBy(?X1,?X0), SightAbility(?X1).
+Q43(?X0) :- isAffectedBy(?X1,?X0), LowerLimbMobility(?X1).
+Q44(?X0) :- assistsWith(?X0,?X1), Ability(?X1).
+Q45(?X0) :- requiresAbility(?X0,?X1), PhysicalAbility(?X1).
+Q46(?X0,?X1) :- isAssistedBy(?X0,?X1).
+Q47(?X0) :- isAssistedBy(?X1,?X0), isAssistedBy(?X1,?X2), Device(?X2).
+Q48(?X0) :- assistsWith(?X0,?X1), PhysicalAbility(?X1).
+Q49(?X0) :- isAssistedBy(?X0,?X1), Device(?X1).
+Q50(?X0) :- FaceToFaceCommunicationDevice(?X0).
+Q51(?X0) :- requiresAbility(?X0,?X1), MovementAbility(?X1).
+Q52(?X0) :- affects(?X1,?X0).
+Q53(?X0) :- affects(?X0,?X1).
+Q54(?X0) :- isAffectedBy(?X1,?X0), PhysicalAbility(?X1).
+Q55(?X0) :- affects(?X0,?X1), Ability(?X1).
+Q56(?X0) :- assistsWith(?X0,?X1).
+Q57(?X0) :- Device(?X0).
+Q58(?X0) :- isAffectedBy(?X1,?X0).
+Q59(?X0) :- affects(?X0,?X1), MovementAbility(?X1).
+Q60(?X0) :- requiresAbility(?X0,?X1), HearingAbility(?X1).
+Q61(?X0) :- affects(?X0,?X1), UpperLimbMobility(?X1).
+Q62(?X0) :- assistsWith(?X0,?X1), MovementAbility(?X1).
+Q63(?X0) :- affects(?X0,?X1), assistsWith(?X2,?X1), Device(?X2).
+Q64(?X0) :- HearingDisability(?X0).
+Q65(?X0) :- Lightweight_Wheelchair(?X0).
+Q66(?X0) :- assistsWith(?X0,?X1), SightAbility(?X1).
+Q67(?X0) :- assistsWith(?X0,?X1), UpperLimbMobility(?X1).
+Q68(?X0) :- affects(?X0,?X1), isAssistedBy(?X1,?X2), Device(?X2).
+Q69(?X0) :- isAssistedBy(?X1,?X0).
+Q70(?X0) :- isAssistedBy(?X1,?X0), UpperLimbMobility(?X1).
+Q71(?X0) :- requiresAbility(?X0,?X1), Ability(?X1).
+Q72(?X0) :- isAssistedBy(?X1,?X0), LowerLimbMobility(?X1).
+Q73(?X0,?X1) :- isAssistedBy(?X1,?X0).
+Q74(?X0) :- isAffectedBy(?X0,?X1).
+Q75(?X0,?X1) :- isAffectedBy(?X1,?X0).
+Q76(?X0) :- affects(?X0,?X1), HearingAbility(?X1).
+Q77(?X0) :- requiresAbility(?X0,?X1), LimbMobility(?X1).
+Q78(?X0) :- ListenDevice(?X0).
+Q79(?X0) :- isAffectedBy(?X1,?X0), Ability(?X1).
+Q80(?X0,?X1) :- assistsWith(?X0,?X1).
+Q81(?X0) :- PhysicalAbility(?X0).
+Q82(?X0) :- isAssistedBy(?X1,?X0), isAssistedBy(?X1,?X2).
+Q83(?X0) :- affects(?X0,?X1), LimbMobility(?X1).
+Q84(?X0) :- ReadingDevice(?X0).
+Q85(?X0) :- isAffectedBy(?X1,?X0), UpperLimbMobility(?X1).
+Q86(?X0) :- requiresAbility(?X0,?X1), isAssistedBy(?X1,?X2).
+Q87(?X0) :- isAffectedBy(?X1,?X0), assistsWith(?X2,?X1).
+Q88(?X0) :- isAssistedBy(?X1,?X0), Ability(?X1).
+Q89(?X0) :- isAffectedBy(?X1,?X0), isAssistedBy(?X1,?X2).
+Q90(?X0) :- requiresAbility(?X0,?X1), TactileAbility(?X1).
+Q91(?X0) :- isAssistedBy(?X1,?X0), HearingAbility(?X1).
+Q92(?X0) :- requiresAbility(?X0,?X1), UpperLimbMobility(?X1).
+Q93(?X0,?X1) :- affects(?X1,?X0).
+Q94(?X0) :- requiresAbility(?X0,?X1), isAssistedBy(?X1,?X2), Device(?X2).
+Q95(?X0) :- isAssistedBy(?X1,?X0), SensoryAbility(?X1).
+Q96(?X0) :- assistsWith(?X0,?X1), SensoryAbility(?X1).
+Q97(?X0) :- isAffectedBy(?X1,?X0), MovementAbility(?X1).
+Q98(?X0) :- Manual_Wheelchair(?X0).
+Q99(?X0) :- assistsWith(?X0,?X1), isAssistedBy(?X1,?X2).
+Q100(?X0) :- assistsWith(?X0,?X1), assistsWith(?X2,?X1), Device(?X2).
+Q101(?X0) :- affects(?X0,?X1), PhysicalAbility(?X1).
+Q102(?X0) :- affects(?X0,?X1), LowerLimbMobility(?X1).
+Q103(?X0) :- SightAbility(?X0).
+Q104(?X0) :- TalkingReading(?X0).
+Q105(?X0) :- SpeechDevice(?X0).
+Q106(?X0) :- WritingDevice(?X0).
+Q107(?X0) :- Disability(?X0).
+Q108(?X0) :- Foldable_Wheelchair(?X0).
+Q109(?X0) :- requiresAbility(?X0,?X1), SensoryAbility(?X1).
+Q110(?X0) :- AssistiveDevice(?X0).
+Q111(?X0) :- isAffectedBy(?X1,?X0), isAssistedBy(?X1,?X2), Device(?X2).
+Q112(?X0) :- isAssistedBy(?X1,?X0), PhysicalAbility(?X1).
+Q113(?X0) :- affects(?X0,?X1), isAssistedBy(?X1,?X2).
+Q114(?X0) :- VisualDisability(?X0).
+Q115(?X0) :- isAssistedBy(?X1,?X0), assistsWith(?X2,?X1).
+Q116(?X0) :- isAssistedBy(?X0,?X1).
+Q117(?X0) :- isAffectedBy(?X1,?X0), HearingAbility(?X1).
+Q118(?X0) :- assistsWith(?X0,?X1), HearingAbility(?X1).
+Q119(?X0) :- assistsWith(?X0,?X1), LowerLimbMobility(?X1).
+
+?-Q1(?A).
+?-Q2(?A).
+?-Q3(?A).
+?-Q4(?A).
+?-Q5(?A).
+?- Q6(?X0).
+?- Q7(?X0).
+?- Q8(?X0).
+?- Q9(?X0).
+?- Q10(?X0).
+?- Q11(?X0).
+?- Q12(?X0).
+?- Q13(?X0).
+?- Q14(?X0).
+?- Q15(?X0).
+?- Q16(?X0).
+?- Q17(?X0).
+?- Q18(?X0).
+?- Q19(?X0).
+?- Q20(?X0,?X1).
+?- Q21(?X0,?X1).
+?- Q22(?X0).
+?- Q23(?X0).
+?- Q24(?X0).
+?- Q25(?X0).
+?- Q26(?X0).
+?- Q27(?X0).
+?- Q28(?X0).
+?- Q29(?X0).
+?- Q30(?X0).
+?- Q31(?X0).
+?- Q32(?X0).
+?- Q33(?X0).
+?- Q34(?X0).
+?- Q35(?X0).
+?- Q36(?X0).
+?- Q37(?X0).
+?- Q38(?X0).
+?- Q39(?X0).
+?- Q40(?X0,?X1).
+?- Q41(?X0).
+?- Q42(?X0).
+?- Q43(?X0).
+?- Q44(?X0).
+?- Q45(?X0).
+?- Q46(?X0,?X1).
+?- Q47(?X0).
+?- Q48(?X0).
+?- Q49(?X0).
+?- Q50(?X0).
+?- Q51(?X0).
+?- Q52(?X0).
+?- Q53(?X0).
+?- Q54(?X0).
+?- Q55(?X0).
+?- Q56(?X0).
+?- Q57(?X0).
+?- Q58(?X0).
+?- Q59(?X0).
+?- Q60(?X0).
+?- Q61(?X0).
+?- Q62(?X0).
+?- Q63(?X0).
+?- Q64(?X0).
+?- Q65(?X0).
+?- Q66(?X0).
+?- Q67(?X0).
+?- Q68(?X0).
+?- Q69(?X0).
+?- Q70(?X0).
+?- Q71(?X0).
+?- Q72(?X0).
+?- Q73(?X0,?X1).
+?- Q74(?X0).
+?- Q75(?X0,?X1).
+?- Q76(?X0).
+?- Q77(?X0).
+?- Q78(?X0).
+?- Q79(?X0).
+?- Q80(?X0,?X1).
+?- Q81(?X0).
+?- Q82(?X0).
+?- Q83(?X0).
+?- Q84(?X0).
+?- Q85(?X0).
+?- Q86(?X0).
+?- Q87(?X0).
+?- Q88(?X0).
+?- Q89(?X0).
+?- Q90(?X0).
+?- Q91(?X0).
+?- Q92(?X0).
+?- Q93(?X0,?X1).
+?- Q94(?X0).
+?- Q95(?X0).
+?- Q96(?X0).
+?- Q97(?X0).
+?- Q98(?X0).
+?- Q99(?X0).
+?- Q100(?X0).
+?- Q101(?X0).
+?- Q102(?X0).
+?- Q103(?X0).
+?- Q104(?X0).
+?- Q105(?X0).
+?- Q106(?X0).
+?- Q107(?X0).
+?- Q108(?X0).
+?- Q109(?X0).
+?- Q110(?X0).
+?- Q111(?X0).
+?- Q112(?X0).
+?- Q113(?X0).
+?- Q114(?X0).
+?- Q115(?X0).
+?- Q116(?X0).
+?- Q117(?X0).
+?- Q118(?X0).
+?- Q119(?X0).

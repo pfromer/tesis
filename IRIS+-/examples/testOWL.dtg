@@ -1,0 +1,106 @@
+/// First Level Datalog Query or Program///
+?- Parent(?x), hasSon(?x, 'Giorgio').
+?- hasSon(?x, ?y).
+?- Parent(?x).
+?- Person(?x).
+
+/// ABox ///
+classAssertion('Ermanna', 'Person').
+classAssertion('Lucia', 'Parent').
+objectPropertyAssertion('hasSon', 'Ermanna', 'Giorgio').
+objectPropertyAssertion('hasSon', 'Katia', 'Manuela').
+
+/// TBox ///
+equivalentClasses('Parent', 'anon2').
+intersectionOf('anon2', 'Person', 'anon1').
+objectSomeValuesFrom('anon1', 'hasSon', 'Person').
+objectPropertyRange('hasSon', 'Person').
+objectPropertyDomain('hasSon', 'Person').
+
+/// Second Level Program - must be compiled once for every different TBOX ///
+Parent(?x) :- classAssertion(?x, 'Parent').
+hasSon(?x, ?y) :- objectPropertyAssertion('hasSon', ?x, ?y).
+Person(?x) :- classAssertion(?x, 'Person').
+
+/// EL++ Inference Rules (complete) ///
+
+/// ==== ABOX + TBOX === ///
+
+// objectSomeValuesFrom //
+classAssertion(?x, ?A) :- objectSomeValuesFrom (?A, ?R, ?C), objectPropertyAssertion(?R, ?x, ?y), classAssertion(?y, ?C).
+classAssertion(?y, ?C) :- objectPropertyAssertion(?R, ?x, ?y), classAssertion(?x, ?A), objectSomeValuesFrom (?A, ?R, ?C).
+objectPropertyAssertion(?R, ?x, ?y) :- classAssertion(?x, ?A), objectSomeValuesFrom (?A, ?R, ?C). //TGD
+
+// subClassOf //
+classAssertion(?x, ?D) :- subClassOf(?C, ?D), classAssertion(?x, ?C).
+
+// subObjectPropertyOf //
+objectPropertyAssertion(?S, ?x, ?y) :- subObjectPropertyOf(?R, ?S), objectPropertyAssertion(?R, ?x, ?y).
+
+// objectPropertyRange //
+classAssertion(?y, ?C) :- objectPropertyRange(?R, ?C), objectPropertyAssertion(?R, ?x, ?y).
+
+// objectPropertyDomain //
+classAssertion(?x, ?C) :- objectPropertyDomain(?R, ?C), objectPropertyAssertion(?R, ?x, ?y).
+
+// objectIntersectionOf //
+classAssertion(?x, ?C) :- intersectionOf(?A, ?C, ?D), classAssertion(?x, ?A).
+classAssertion(?x, ?D) :- intersectionOf(?A, ?C, ?D), classAssertion(?x, ?A).
+classAssertion(?x, ?A) :- intersectionOf(?A, ?C, ?D), classAssertion(?x, ?C), classAssertion(?x, ?D).
+
+// objectHasValue //
+classAssertion(?x, ?A) :- objectHasValue (?A, ?R, ?y), objectPropertyAssertion(?R, ?x, ?y).
+objectPropertyAssertion(?R, ?x, ?y) :- objectHasValue (?A, ?R, ?y), classAssertion(?x, ?A).
+
+// objectExistsSelf //
+objectPropertyAssertion(?R, ?x, ?x) :- objectExistsSelf(?C, ?R), classAssertion(?x, ?C).
+classAssertion(?x, ?C) :- objectExistsSelf(?C, ?R), objectPropertyAssertion(?R, ?x, ?x).
+
+// objectOneOf //
+classAssertion(?x, ?C) :- objectOneOf(?C, ?x).
+sameIndividual(?x, ?y) :- objectOneOf(?C, ?x), classAssertion(?y, ?C).
+
+// transitivity //
+//objectPropertyAssertion(?R, ?x, ?z) :- trans(?R), objectPropertyAssertion(?R, ?x, ?y), objectPropertyAssertion(?R, ?y, ?z).
+
+// reflexivity //
+objectPropertyAssertion(?R, ?x, ?x) :- reflex(?R), objectPropertyDomain(?R, ?C), classAssertion(?x, ?C).
+
+// property chains //
+//objectPropertyAssertion(?T, ?x, ?z) :- subObjectPropertyChain(?R, ?S, ?T), objectPropertyAssertion(?R, ?x, ?y), objectPropertyAssertion(?S, ?y, ?z).
+
+/// === T-BOX Only === ///
+
+// equivalentClasses //
+subClassOf(?C, ?D) :- equivalentClasses(?C, ?D).
+subClassOf(?D, ?C) :- equivalentClasses(?C, ?D).
+equivalentClasses(?C, ?D) :- subClassOf(?C, ?D), subClassOf(?D, ?C).
+
+// equivalentObjectProperty //
+subObjectPropertyOf(?R, ?S) :- equivalentObjectProperty(?R, ?S).
+subObjectPropertyOf(?S, ?R) :- equivalentObjectProperty(?R, ?S).
+equivalentObjectProperty(?R, ?S) :- subObjectPropertyOf(?S, ?R), subObjectPropertyOf(?R, ?S).
+
+// disjointClasses symmetry //
+disjointClasses(?D, ?C) :- disjointClasses(?C, ?D).
+
+// subClassOf transitivity //
+subClassOf(?C, ?E) :- subClassOf(?C, ?D), subClassOf(?D, ?E).
+
+// subObjectProperty transitivity //
+subObjectPropertyOf(?C, ?E) :- subObjectPropertyOf(?C, ?D), subObjectPropertyOf(?D, ?E).
+
+/// === A-BOX Only === ///
+
+// sameIndividual //
+//objectPropertyAssertion(?R, ?z, ?y) :- sameIndividual(?x, ?z),  objectPropertyAssertion(?R, ?x, ?y).
+//objectPropertyAssertion(?R, ?x, ?z) :- sameIndividual(?y, ?z),  objectPropertyAssertion(?R, ?x, ?y).
+
+// sameIndividual Symmetry //
+sameIndividual(?y, ?x) :- sameIndividual(?x, ?y).
+
+// sameIndividual Transitivity //
+//sameIndividual(?x, ?z) :- sameIndividual(?x, ?y), sameIndividual(?y, ?z).
+
+// differentIndividuals symmetry //
+differentIndividuals(?y, ?x) :- differentIndividuals(?x, ?y).

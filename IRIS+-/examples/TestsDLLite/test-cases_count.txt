@@ -1,0 +1,3 @@
+Rewriting Size (queries): 30
+Rewriting Size (symbols): 510
+Rewriting Size (joins): 270

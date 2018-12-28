@@ -1,0 +1,406 @@
+/// Created by: OWL 2 Datalog +- Converter ///
+/// Author: Giorgio Orsi <orsi@elet.polimi.it> - Politecnico di Milano ///
+/// Created on: 2011/11/23 09:26:00 ///
+/// Expressiveness: OWL-QL ///
+/// Storage Rules: DISABLED///
+
+/// Converted TBox ///
+AUX19(?X, ?Y) :- HearingDisability(?X).
+!HearingDisability(?X) :- SpeechDisability(?X).
+AUX3(?X, ?Y) :- FaceToFaceCommunicationDevice(?X).
+!Device(?X) :- Disability(?X).
+assistsWith(?X, ?Y) :- AUX14(?X, ?Y).
+assistsWith(?X, ?Y) :- AUX13(?X, ?Y).
+affects(?X, ?Y) :- AUX24(?X, ?Y).
+!HearingDisability(?X) :- PhysicalDisability(?X).
+VisualDisability(?X) :- Blind(?X).
+Device(?X) :- AssistiveDevice(?X).
+TactileReading(?X) :- BrailleWatch(?X).
+Communication_Device(?X) :- ListenDevice(?X).
+Ability(?X) :- AUX18(?Y, ?X).
+assistsWith(?X, ?Y) :- AUX3(?X, ?Y).
+Disability(?X) :- MentalDisability(?X).
+SpeechDisability(?X) :- Stuttering(?X).
+!Ability(?X) :- Disability(?X).
+HearingAbility(?X) :- Hear_partially(?X).
+Communication_Device(?X) :- SpeechDevice(?X).
+AUX11(?X, ?Y) :- BrailleWritingDevice(?X).
+HearingAbility(?X) :- AUX9(?Y, ?X).
+PhysicalDisability(?X) :- Paraplegia(?X).
+AUX21(?X, ?Y) :- PhysicalDisability(?X).
+AUX9(?X, ?Y) :- TalkingReading(?X).
+assistsWith(?X, ?Y) :- AUX12(?X, ?Y).
+AUX23(?X, ?Y) :- Quadriplegia(?X).
+AUX22(?X, ?Y) :- Paraplegia(?X).
+AUX10(?X, ?Y) :- SpeechDevice(?X).
+VisualDisability(?X) :- LowVision(?X).
+Foldable_Wheelchair(?X) :- LightweightFoldable_Wheelchair(?X).
+SensoryAbility(?X) :- SightAbility(?X).
+affects(?X, ?Y) :- AUX19(?X, ?Y).
+AUX5(?X, ?Y) :- ReadingDevice(?X).
+HearingAbility(?X) :- AUX4(?Y, ?X).
+UpperLimbMobility(?X) :- AUX24(?Y, ?X).
+requiresAbility(?X, ?Y) :- AUX7(?X, ?Y).
+SightAbility(?X) :- AUX6(?Y, ?X).
+assistsWith(?X, ?Y) :- AUX11(?X, ?Y).
+!Manual_Wheelchair(?X) :- Motorised_Wheelchair(?X).
+AUX18(?X, ?Y) :- Disability(?X).
+AUX24(?X, ?Y) :- Quadriplegia(?X).
+PhysicalDisability(?X) :- Muscular_dystrophy(?X).
+affects(?X, ?Y) :- AUX25(?X, ?Y).
+SightAbility(?X) :- AUX5(?Y, ?X).
+AssistiveDevice(?X) :- Communication_Device(?X).
+MovementAbility(?X) :- AUX12(?Y, ?X).
+TalkingReading(?X) :- Talking_Thermometer(?X).
+LowerLimbMobility(?X) :- AUX16(?Y, ?X).
+requiresAbility(?X, ?Y) :- AUX15(?X, ?Y).
+Disability(?X) :- HearingDisability(?X).
+SpeechAbility(?X) :- AUX3(?Y, ?X).
+FaceToFaceCommunicationDevice(?X) :- FaceToFaceCommunicationSoftware(?X).
+MentalDisability(?X) :- Autism(?X).
+Disability(?X) :- VisualDisability(?X).
+AUX1(?X, ?Y) :- Ability(?X).
+isAssistedBy(?X, ?Y) :- assistsWith(?Y, ?X).
+assistsWith(?Y, ?X) :- isAssistedBy(?X, ?Y).
+Ability(?X) :- SpeechAbility(?X).
+ReadingDevice(?X) :- TalkingReading(?X).
+AUX0(?X, ?Y) :- Ability(?X).
+!SpeechDisability(?X) :- VisualDisability(?X).
+AUX25(?X, ?Y) :- Little_or_No_Speech(?X).
+SightAbility(?X) :- See(?X).
+MobilityDevice(?X) :- Wheelchair(?X).
+Wheelchair(?X) :- Motorised_Wheelchair(?X).
+SpeechDisability(?X) :- Little_or_No_Speech(?X).
+PhysicalDisability(?X) :- Spina_Bifida(?X).
+SpeechDevice(?X) :- TelephoneAid(?X).
+TactileAbility(?X) :- AUX7(?Y, ?X).
+Communication_Device(?X) :- FaceToFaceCommunicationDevice(?X).
+HearingDisability(?X) :- Hard_of_hearing(?X).
+SensoryAbility(?X) :- TactileAbility(?X).
+!Communication_Device(?X) :- MobilityDevice(?X).
+!Ability(?X) :- Device(?X).
+LimbMobility(?X) :- UpperLimbMobility(?X).
+assistsWith(?X, ?Y) :- AUX6(?X, ?Y).
+AUX2(?X, ?Y) :- AssistiveDevice(?X).
+!HearingDisability(?X) :- VisualDisability(?X).
+TactileReading(?X) :- BraillePillOrganiser(?X).
+LowerLimbMobility(?X) :- AUX23(?Y, ?X).
+LowerLimbMobility(?X) :- AUX22(?Y, ?X).
+Disability(?X) :- AUX0(?Y, ?X).
+Ability(?X) :- PhysicalAbility(?X).
+Device(?X) :- AUX1(?Y, ?X).
+PhysicalDisability(?X) :- Multiple_sclerosis(?X).
+AUX15(?X, ?Y) :- Manual_Wheelchair(?X).
+Communication_Device(?X) :- WritingDevice(?X).
+HearingDisability(?X) :- Deaf(?X).
+Disability(?X) :- PhysicalDisability(?X).
+LimbMobility(?X) :- AUX13(?Y, ?X).
+affects(?X, ?Y) :- isAffectedBy(?Y, ?X).
+isAffectedBy(?Y, ?X) :- affects(?X, ?Y).
+AUX16(?X, ?Y) :- Motorised_Wheelchair(?X).
+affects(?X, ?Y) :- AUX22(?X, ?Y).
+Manual_Wheelchair(?X) :- Lightweight_Wheelchair(?X).
+AUX13(?X, ?Y) :- Wheelchair(?X).
+MovementAbility(?X) :- Reach(?X).
+HearingDisability(?X) :- Deafened(?X).
+FaceToFaceCommunicationDevice(?X) :- SymbolBoard(?X).
+SensoryAbility(?X) :- HearingAbility(?X).
+Disability(?X) :- SpeechDisability(?X).
+MovementAbility(?X) :- LimbMobility(?X).
+PhysicalDisability(?X) :- Kyphosis(?X).
+SpeechAbility(?X) :- AUX10(?Y, ?X).
+UpperLimbMobility(?X) :- AUX15(?Y, ?X).
+!MentalDisability(?X) :- SpeechDisability(?X).
+PhysicalDisability(?X) :- Osteogensis_Imperfecta(?X).
+assistsWith(?X, ?Y) :- AUX4(?X, ?Y).
+Communication_Device(?X) :- ReadingDevice(?X).
+Manual_Wheelchair(?X) :- Foldable_Wheelchair(?X).
+PhysicalDisability(?X) :- Hemiplegia(?X).
+requiresAbility(?X, ?Y) :- AUX9(?X, ?Y).
+AUX4(?X, ?Y) :- ListenDevice(?X).
+assistsWith(?X, ?Y) :- AUX8(?X, ?Y).
+affects(?X, ?Y) :- AUX18(?X, ?Y).
+SightAbility(?X) :- See_partially(?X).
+LowerLimbMobility(?X) :- AUX14(?Y, ?X).
+AUX6(?X, ?Y) :- TactileReading(?X).
+SpeechAbility(?X) :- AUX20(?Y, ?X).
+PhysicalDisability(?X) :- Poliomyelitis(?X).
+PhysicalDisability(?X) :- Amputation(?X).
+PhysicalDisability(?X) :- Dystonia(?X).
+HearingAbility(?X) :- AUX19(?Y, ?X).
+SightAbility(?X) :- AUX8(?Y, ?X).
+PhysicalDisability(?X) :- Quadriplegia(?X).
+AUX17(?X, ?Y) :- Motorised_Wheelchair(?X).
+PhysicalDisability(?X) :- Achondroplasia(?X).
+!SensoryAbility(?X) :- SpeechAbility(?X).
+AUX7(?X, ?Y) :- TactileReading(?X).
+!PhysicalAbility(?X) :- SensoryAbility(?X).
+SightAbility(?X) :- AUX11(?Y, ?X).
+Ability(?X) :- SensoryAbility(?X).
+ReadingDevice(?X) :- TactileReading(?X).
+!PhysicalDisability(?X) :- SpeechDisability(?X).
+WritingDevice(?X) :- BrailleWritingDevice(?X).
+PhysicalDisability(?X) :- Guillaume_Barre(?X).
+PhysicalDisability(?X) :- Scoliosis(?X).
+!LowerLimbMobility(?X) :- UpperLimbMobility(?X).
+AUX14(?X, ?Y) :- Manual_Wheelchair(?X).
+PhysicalDisability(?X) :- Cerebral_palsy(?X).
+assistsWith(?X, ?Y) :- AUX17(?X, ?Y).
+Ability(?X) :- AUX2(?Y, ?X).
+AUX12(?X, ?Y) :- MobilityDevice(?X).
+assistsWith(?X, ?Y) :- AUX5(?X, ?Y).
+!MentalDisability(?X) :- VisualDisability(?X).
+AUX20(?X, ?Y) :- Deaf(?X).
+isAffectedBy(?X, ?Y) :- AUX0(?X, ?Y).
+AUX8(?X, ?Y) :- TalkingReading(?X).
+assistsWith(?X, ?Y) :- AUX10(?X, ?Y).
+HearingAbility(?X) :- Hear(?X).
+LimbMobility(?X) :- LowerLimbMobility(?X).
+!PhysicalAbility(?X) :- SpeechAbility(?X).
+affects(?X, ?Y) :- AUX23(?X, ?Y).
+!MentalDisability(?X) :- PhysicalDisability(?X).
+Wheelchair(?X) :- Manual_Wheelchair(?X).
+Motorised_Wheelchair(?X) :- BatteryPowered_Wheelchair(?X).
+MentalDisability(?X) :- Epilepsy(?X).
+!PhysicalDisability(?X) :- VisualDisability(?X).
+affects(?X, ?Y) :- AUX20(?X, ?Y).
+affects(?X, ?Y) :- AUX21(?X, ?Y).
+assistsWith(?X, ?Y) :- AUX2(?X, ?Y).
+TactileReading(?X) :- BrailleAlarmClock(?X).
+PhysicalAbility(?X) :- AUX21(?Y, ?X).
+isAssistedBy(?X, ?Y) :- AUX1(?X, ?Y).
+AssistiveDevice(?X) :- MobilityDevice(?X).
+!HearingDisability(?X) :- MentalDisability(?X).
+Lightweight_Wheelchair(?X) :- LightweightFoldable_Wheelchair(?X).
+MentalDisability(?X) :- IntellectualDisability(?X).
+ListenDevice(?X) :- TelephoneAid(?X).
+SpeechAbility(?X) :- AUX25(?Y, ?X).
+PhysicalAbility(?X) :- MovementAbility(?X).
+UpperLimbMobility(?X) :- AUX17(?Y, ?X).
+assistsWith(?X, ?Y) :- AUX16(?X, ?Y).
+
+/// Total TBox Axioms: 173 ///
+
+/// Converted ABox ///
+
+/// Total ABox Axioms: 0 ///
+
+/// Converted SBox ///
+
+/// Total SBox Axioms: 0 ///
+
+Q1(?A) :- Device(?A), assistsWith(?A,?B).
+Q2(?A) :- Device(?A), assistsWith(?A,?B), UpperLimbMobility(?B).
+Q3(?A) :- Device(?A), assistsWith(?A,?B), Hear(?B), affects(?C,?B), Autism(?C).
+Q4(?A) :- Device(?A), assistsWith(?A,?B), PhysicalAbility(?B).
+Q5(?A) :- Device(?A), assistsWith(?A,?B), PhysicalAbility(?B), affects(?C,?B), Quadriplegia(?C).
+Q6(?X0) :- hasRole(?X0,?X1), Time_Dependent(?X1).
+Q7(?X0) :- Scientist(?X0).
+Q8(?X0) :- isLocationPartMemberOf(?X0,?X1), Location_Part_Relation(?X1).
+Q9(?X0) :- hasRole(?X0,?X1).
+Q10(?X0) :- isRelationMemberOf(?X0,?X1).
+Q11(?X0) :- isRelationMemberOf(?X0,?X1), Location_Part_Relation(?X1).
+Q12(?X0) :- Economic_Organisation(?X0).
+Q13(?X0) :- hasLocationContainerMember(?X0,?X1).
+Q14(?X0) :- isLocationPartMemberOf(?X0,?X1), VicodiOI(?X1).
+Q15(?X0) :- Functionary(?X0).
+Q16(?X0) :- hasLocationPartMember(?X0,?X1).
+Q17(?X0) :- hasRole(?X0,?X1), Role(?X1).
+Q18(?X0) :- Entertainer(?X0).
+Q19(?X0) :- isLocationPartMemberOf(?X0,?X1).
+Q20(?X0) :- Movement(?X0).
+Q21(?X0) :- Location_Part_Relation(?X0).
+Q22(?X0) :- hasLocationPartMember(?X0,?X1), Location(?X1).
+Q23(?X0) :- hasLocationContainerMember(?X0,?X1), VicodiOI(?X1).
+Q24(?X0) :- hasRelationMember(?X0,?X1), Flavour(?X1).
+Q25(?X0) :- Educational_Organisation(?X0).
+Q26(?X0) :- hasRole(?X0,?X1), VicodiOI(?X1).
+Q27(?X0) :- isLocationContainerMemberOf(?X0,?X1), Location_Part_Relation(?X1).
+Q28(?X0) :- Military_Organisation(?X0).
+Q29(?X0) :- related(?X0,?X1), Location(?X1).
+Q30(?X0) :- VicodiOI(?X0).
+Q31(?X0) :- Flavour(?X0).
+Q32(?X0) :- exists(?X0,?X1), VicodiOI(?X1).
+Q33(?X0) :- Role(?X0).
+Q34(?X0) :- related(?X0,?X1), VicodiOI(?X1).
+Q35(?X0) :- Individual(?X0).
+Q36(?X0) :- hasCategory(?X0,?X1), Category(?X1).
+Q37(?X0) :- isLocationContainerMemberOf(?X0,?X1), VicodiOI(?X1).
+Q38(?X0) :- Vehicle(?X0).
+Q39(?X0) :- related(?X0,?X1), Time_Dependent(?X1).
+Q40(?X0,?X1) :- related(?X0,?X1).
+Q41(?X0) :- Artefact(?X0).
+Q42(?X0) :- hasLocationContainerMember(?X0,?X1), Time_Dependent(?X1).
+Q43(?X0) :- Natural_Object(?X0).
+Q44(?X0) :- isRelationMemberOf(?X0,?X1), Time_Dependent_Relation(?X1).
+Q45(?X0) :- isLocationPartMemberOf(?X0,?X1), Time_Dependent(?X1).
+Q46(?X0) :- Organisation(?X0).
+Q47(?X0) :- Artist(?X0).
+Q48(?X0) :- Leader(?X0).
+Q49(?X0) :- Social_Group(?X0).
+Q50(?X0) :- Magnate(?X0).
+Q51(?X0) :- Settlement(?X0).
+Q52(?X0) :- isRelationMemberOf(?X0,?X1), VicodiOI(?X1).
+Q53(?X0) :- related(?X0,?X1).
+Q54(?X0) :- hasRelationMember(?X0,?X1), Time_Dependent(?X1).
+Q55(?X0) :- Political_Organisation(?X0).
+Q56(?X0) :- hasRelationMember(?X0,?X1), Location(?X1).
+Q57(?X0) :- exists(?X0,?X1).
+Q58(?X0) :- Ideology(?X0).
+Q59(?X0) :- hasCategory(?X0,?X1), VicodiOI(?X1).
+Q60(?X0) :- hasLocationContainerMember(?X0,?X1), Flavour(?X1).
+Q61(?X0) :- hasCategory(?X0,?X1).
+Q62(?X0) :- Time_Dependent_Relation(?X0).
+Q63(?X0) :- related(?X0,?X1), Category(?X1).
+Q64(?X0,?X1) :- hasRelationMember(?X0,?X1).
+Q65(?X0) :- isRelationMemberOf(?X0,?X1), Time_Dependent(?X1).
+Q66(?X0) :- isLocationPartMemberOf(?X0,?X1), Time_Dependent_Relation(?X1).
+Q67(?X0) :- Intellectual_Construct(?X0).
+Q68(?X0) :- Time_Dependent(?X0).
+Q69(?X0) :- related(?X0,?X1), Role(?X1).
+Q70(?X0) :- hasLocationPartMember(?X0,?X1), VicodiOI(?X1).
+Q71(?X0) :- Geographical_Feature(?X0).
+Q72(?X0,?X1) :- isRelationMemberOf(?X0,?X1).
+Q73(?X0) :- Writing(?X0).
+Q74(?X0) :- hasRelationMember(?X0,?X1), VicodiOI(?X1).
+Q75(?X0) :- isLocationContainerMemberOf(?X0,?X1).
+Q76(?X0) :- exists(?X0,?X1), Time(?X1).
+Q77(?X0) :- isLocationContainerMemberOf(?X0,?X1), Time_Dependent_Relation(?X1).
+Q78(?X0) :- Building(?X0).
+Q79(?X0) :- Person_Role(?X0).
+Q80(?X0) :- hasRelationMember(?X0,?X1).
+Q81(?X0) :- related(?X0,?X1), Time_Dependent_Relation(?X1).
+Q82(?X0) :- hasLocationContainerMember(?X0,?X1), Location(?X1).
+Q83(?X0) :- Secular_Leader(?X0).
+Q84(?X0) :- Conceptual_Object(?X0).
+Q85(?X0) :- related(?X0,?X1), Location_Part_Relation(?X1).
+Q86(?X0) :- Management_Organisation(?X0).
+Q87(?X0) :- Discoverer(?X0).
+Q88(?X0) :- hasLocationPartMember(?X0,?X1), Flavour(?X1).
+Q89(?X0) :- Head_of_State(?X0).
+Q90(?X0) :- Work_of_Art(?X0).
+Q91(?X0) :- Religious_Organisation(?X0).
+Q92(?X0) :- Event(?X0).
+Q93(?X0) :- Minister(?X0).
+Q94(?X0) :- Abstract_Notion(?X0).
+Q95(?X0) :- Object(?X0).
+Q96(?X0) :- Location(?X0).
+Q97(?X0) :- Cultural_Organisation(?X0).
+Q98(?X0) :- hasLocationPartMember(?X0,?X1), Time_Dependent(?X1).
+Q99(?X0) :- Time(?X0).
+Q100(?X0) :- Religious_Leader(?X0).
+Q101(?X0) :- Symbol(?X0).
+Q102(?X0) :- isLocationContainerMemberOf(?X0,?X1), Time_Dependent(?X1).
+Q103(?X0) :- related(?X0,?X1), Time(?X1).
+Q104(?X0) :- Category(?X0).
+Q105(?X0) :- related(?X0,?X1), Flavour(?X1).
+Q106(?X0) :- Creator(?X0).
+Q107(?X0) :- Life_Event(?X0).
+
+?-Q1(?A).
+?-Q2(?A).
+?-Q3(?A).
+?-Q4(?A).
+?-Q5(?A).
+?- Q6(?X0).
+?- Q7(?X0).
+?- Q8(?X0).
+?- Q9(?X0).
+?- Q10(?X0).
+?- Q11(?X0).
+?- Q12(?X0).
+?- Q13(?X0).
+?- Q14(?X0).
+?- Q15(?X0).
+?- Q16(?X0).
+?- Q17(?X0).
+?- Q18(?X0).
+?- Q19(?X0).
+?- Q20(?X0).
+?- Q21(?X0).
+?- Q22(?X0).
+?- Q23(?X0).
+?- Q24(?X0).
+?- Q25(?X0).
+?- Q26(?X0).
+?- Q27(?X0).
+?- Q28(?X0).
+?- Q29(?X0).
+?- Q30(?X0).
+?- Q31(?X0).
+?- Q32(?X0).
+?- Q33(?X0).
+?- Q34(?X0).
+?- Q35(?X0).
+?- Q36(?X0).
+?- Q37(?X0).
+?- Q38(?X0).
+?- Q39(?X0).
+?- Q40(?X0,?X1).
+?- Q41(?X0).
+?- Q42(?X0).
+?- Q43(?X0).
+?- Q44(?X0).
+?- Q45(?X0).
+?- Q46(?X0).
+?- Q47(?X0).
+?- Q48(?X0).
+?- Q49(?X0).
+?- Q50(?X0).
+?- Q51(?X0).
+?- Q52(?X0).
+?- Q53(?X0).
+?- Q54(?X0).
+?- Q55(?X0).
+?- Q56(?X0).
+?- Q57(?X0).
+?- Q58(?X0).
+?- Q59(?X0).
+?- Q60(?X0).
+?- Q61(?X0).
+?- Q62(?X0).
+?- Q63(?X0).
+?- Q64(?X0,?X1).
+?- Q65(?X0).
+?- Q66(?X0).
+?- Q67(?X0).
+?- Q68(?X0).
+?- Q69(?X0).
+?- Q70(?X0).
+?- Q71(?X0).
+?- Q72(?X0,?X1).
+?- Q73(?X0).
+?- Q74(?X0).
+?- Q75(?X0).
+?- Q76(?X0).
+?- Q77(?X0).
+?- Q78(?X0).
+?- Q79(?X0).
+?- Q80(?X0).
+?- Q81(?X0).
+?- Q82(?X0).
+?- Q83(?X0).
+?- Q84(?X0).
+?- Q85(?X0).
+?- Q86(?X0).
+?- Q87(?X0).
+?- Q88(?X0).
+?- Q89(?X0).
+?- Q90(?X0).
+?- Q91(?X0).
+?- Q92(?X0).
+?- Q93(?X0).
+?- Q94(?X0).
+?- Q95(?X0).
+?- Q96(?X0).
+?- Q97(?X0).
+?- Q98(?X0).
+?- Q99(?X0).
+?- Q100(?X0).
+?- Q101(?X0).
+?- Q102(?X0).
+?- Q103(?X0).
+?- Q104(?X0).
+?- Q105(?X0).
+?- Q106(?X0).
+?- Q107(?X0).

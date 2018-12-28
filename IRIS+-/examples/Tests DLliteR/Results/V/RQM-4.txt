@@ -1,0 +1,40 @@
+==================SUMMARY==================
+Ontology file:             v.owl
+Query:                     Q(X0)  <-  Discoverer(X2) ^ Individual(X0) ^ Inventor(X3) ^ Scientist(X1) ^ hasRole(X0,X1) ^ hasRole(X0,X2) ^ hasRole(X0,X3)
+Number of assertions:      222
+Number of concept symbols: 194
+Number of role symbols:    10
+Running time:              31 milliseconds 
+Size of the rewriting (queries):     30
+Size of the rewriting (symbols):     3761
+0: Q(X0)  <-  Astronaut(X1) ^ Economist(X2) ^ Fictional-Person(X0) ^ Inventor(X3) ^ hasRole(X0,X2) ^ hasRole(X0,X1) ^ hasRole(X0,X3)
+1: Q(X0)  <-  Astronaut(X1) ^ Economist(X2) ^ Individual(X0) ^ Inventor(X3) ^ hasRole(X0,X2) ^ hasRole(X0,X1) ^ hasRole(X0,X3)
+2: Q(X0)  <-  Astronaut(X1) ^ Economist(X2) ^ Inventor(X3) ^ Person(X0) ^ hasRole(X0,X2) ^ hasRole(X0,X1) ^ hasRole(X0,X3)
+3: Q(X0)  <-  Astronaut(X1) ^ Fictional-Person(X0) ^ Geographer(X2) ^ Inventor(X3) ^ hasRole(X0,X2) ^ hasRole(X0,X1) ^ hasRole(X0,X3)
+4: Q(X0)  <-  Astronaut(X1) ^ Fictional-Person(X0) ^ Inventor(X2) ^ Philosopher(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+5: Q(X0)  <-  Astronaut(X1) ^ Fictional-Person(X0) ^ Inventor(X2) ^ Psychologist(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+6: Q(X0)  <-  Astronaut(X1) ^ Fictional-Person(X0) ^ Inventor(X2) ^ Scientist(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+7: Q(X0)  <-  Astronaut(X1) ^ Geographer(X2) ^ Individual(X0) ^ Inventor(X3) ^ hasRole(X0,X2) ^ hasRole(X0,X1) ^ hasRole(X0,X3)
+8: Q(X0)  <-  Astronaut(X1) ^ Geographer(X2) ^ Inventor(X3) ^ Person(X0) ^ hasRole(X0,X2) ^ hasRole(X0,X1) ^ hasRole(X0,X3)
+9: Q(X0)  <-  Astronaut(X1) ^ Individual(X0) ^ Inventor(X2) ^ Philosopher(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+10: Q(X0)  <-  Astronaut(X1) ^ Individual(X0) ^ Inventor(X2) ^ Psychologist(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+11: Q(X0)  <-  Astronaut(X1) ^ Individual(X0) ^ Inventor(X2) ^ Scientist(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+12: Q(X0)  <-  Astronaut(X1) ^ Inventor(X2) ^ Person(X0) ^ Philosopher(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+13: Q(X0)  <-  Astronaut(X1) ^ Inventor(X2) ^ Person(X0) ^ Psychologist(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+14: Q(X0)  <-  Astronaut(X1) ^ Inventor(X2) ^ Person(X0) ^ Scientist(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+15: Q(X0)  <-  Discoverer(X1) ^ Economist(X2) ^ Fictional-Person(X0) ^ Inventor(X3) ^ hasRole(X0,X2) ^ hasRole(X0,X1) ^ hasRole(X0,X3)
+16: Q(X0)  <-  Discoverer(X1) ^ Economist(X2) ^ Individual(X0) ^ Inventor(X3) ^ hasRole(X0,X2) ^ hasRole(X0,X1) ^ hasRole(X0,X3)
+17: Q(X0)  <-  Discoverer(X1) ^ Economist(X2) ^ Inventor(X3) ^ Person(X0) ^ hasRole(X0,X2) ^ hasRole(X0,X1) ^ hasRole(X0,X3)
+18: Q(X0)  <-  Discoverer(X1) ^ Fictional-Person(X0) ^ Geographer(X2) ^ Inventor(X3) ^ hasRole(X0,X2) ^ hasRole(X0,X1) ^ hasRole(X0,X3)
+19: Q(X0)  <-  Discoverer(X1) ^ Fictional-Person(X0) ^ Inventor(X2) ^ Philosopher(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+20: Q(X0)  <-  Discoverer(X1) ^ Fictional-Person(X0) ^ Inventor(X2) ^ Psychologist(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+21: Q(X0)  <-  Discoverer(X1) ^ Fictional-Person(X0) ^ Inventor(X2) ^ Scientist(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+22: Q(X0)  <-  Discoverer(X1) ^ Geographer(X2) ^ Individual(X0) ^ Inventor(X3) ^ hasRole(X0,X2) ^ hasRole(X0,X1) ^ hasRole(X0,X3)
+23: Q(X0)  <-  Discoverer(X1) ^ Geographer(X2) ^ Inventor(X3) ^ Person(X0) ^ hasRole(X0,X2) ^ hasRole(X0,X1) ^ hasRole(X0,X3)
+24: Q(X0)  <-  Discoverer(X1) ^ Individual(X0) ^ Inventor(X2) ^ Philosopher(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+25: Q(X0)  <-  Discoverer(X1) ^ Individual(X0) ^ Inventor(X2) ^ Psychologist(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+26: Q(X0)  <-  Discoverer(X1) ^ Inventor(X2) ^ Person(X0) ^ Philosopher(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+27: Q(X0)  <-  Discoverer(X1) ^ Inventor(X2) ^ Person(X0) ^ Psychologist(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+28: Q(X0)  <-  Discoverer(X1) ^ Inventor(X2) ^ Person(X0) ^ Scientist(X3) ^ hasRole(X0,X3) ^ hasRole(X0,X1) ^ hasRole(X0,X2)
+29: Q(X0)  <-  Discoverer(X2) ^ Individual(X0) ^ Inventor(X3) ^ Scientist(X1) ^ hasRole(X0,X1) ^ hasRole(X0,X2) ^ hasRole(X0,X3)
+==================SUMMARY==================

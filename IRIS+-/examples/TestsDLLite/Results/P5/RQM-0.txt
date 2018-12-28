@@ -1,0 +1,16 @@
+==================SUMMARY==================
+Ontology file:             s.owl
+Query:                     Q(X0)  <-  StockExchangeMember(X0)
+Number of assertions:      51
+Number of concept symbols: 18
+Number of role symbols:    12
+Running time:              15 milliseconds 
+Size of the rewriting (queries):     6
+Size of the rewriting (symbols):     158
+0: Q(X0)  <-  Dealer(X0)
+1: Q(X0)  <-  StockBroker(X0)
+2: Q(X0)  <-  StockExchangeMember(X0)
+3: Q(X0)  <-  StockTrader(X0)
+4: Q(X0)  <-  Trader(X0)
+5: Q(X0)  <-  isExecutedBy(X1,X0)
+==================SUMMARY==================

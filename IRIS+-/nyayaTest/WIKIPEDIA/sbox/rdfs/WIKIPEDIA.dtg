@@ -1,0 +1,11 @@
+/// Converted SBox ///
+redirectsTo(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.systemone.at/2006/03/wikipedia#redirectsTo'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Category(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.systemone.at/2006/03/wikipedia#Category').
+link(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.systemone.at/2006/03/wikipedia#link'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+modified(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.org/dc/elements/1.1/modified'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+internalLink(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.systemone.at/2006/03/wikipedia#internalLink'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+contributor(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.org/dc/elements/1.1/contributor'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+interwikiLink(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://www.systemone.at/2006/03/wikipedia#interwikiLink'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Article(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.systemone.at/2006/03/wikipedia#Article').
+
+/// Total SBox Axioms: 8 ///

@@ -1,0 +1,308 @@
+/// Converted TBox ///
+name(?X, ?Y) :- synonym(?X, ?Y).
+scientificName(?X,?Y) :- Taxon(?X).
+structuredNameType(?X, ?Y) :- biotechName(?X, ?Y).
+Status(?Y) :- status(?X, ?Y).
+Annotation(?X) :- Polymorphism_Annotation(?X).
+memberOf(?X, ?Y) :- member(?Y, ?X).
+member(?Y, ?X) :- memberOf(?X, ?Y).
+RNA(?X) :- Transcribed_RNA(?X).
+name(?X, ?Y) :- otherName(?X, ?Y).
+Sequence_Caution_Annotation(?X) :- Frameshift_Annotation(?X).
+Cluster(?X) :- member(?X, ?Y).
+Family_Membership_Statement(?X) :- fused(?X, ?Y).
+Endpoint_Statement(?X) :- limit(?X, ?Y).
+author(?X, ?Y) :- group(?X, ?Y).
+structuredNameType(?X, ?Y) :- fullName(?X, ?Y).
+DNA(?X) :- Other_DNA(?X).
+structuredNameType(?X, ?Y) :- internationalNonproprietaryName(?X, ?Y).
+Sequence_Annotation(?X) :- Natural_Variation_Annotation(?X).
+Sequence(?X) :- sequenceFor(?X, ?Y).
+Cluster(?X) :- identity(?X, ?Y).
+Structured_Name(?X) :- structuredNameType(?X, ?Y).
+Molecule_Processing_Annotation(?X) :- Signal_Peptide_Annotation(?X).
+Modified_Sequence(?X) :- basedOn(?X, ?Y).
+Nucleotide_Resource(?X) :- locatedOn(?X, ?Y).
+locatedOn(?X, ?Y) :- Nucleotide_Resource(?X).
+Nucleotide_Resource(?Y) :- translatedFrom(?X, ?Y).
+Mass_Spectrometry_Annotation(?X) :- measuredValue(?X, ?Y).
+RNA_Editing_Annotation(?X) :- frameshift(?X, ?Y).
+Citation_Statement(?X) :- scope(?X, ?Y).
+Statement(?X) :- Citation_Statement(?X).
+Sample_Source(?X) :- Strain(?X).
+Tissue(?Y) :- isolatedFrom(?X, ?Y).
+Annotation(?X) :- Toxic_Dose_Annotation(?X).
+RNA_Editing_Annotation(?X) :- position(?X, ?Y).
+Kinetics_Annotation(?X) :- measuredAffinity(?X, ?Y).
+Biophysicochemical_Annotation(?X) :- Kinetics_Annotation(?X).
+name(?X,?Y) :- Gene(?X).
+Sequence(?X) :- Known_Sequence(?X).
+Site_Annotation(?X) :- Metal_Binding_Annotation(?X).
+Unpublished_Citation(?X) :- Observation_Citation(?X).
+Sequence(?X) :- length(?X, ?Y).
+Simple_Sequence(?X) :- precursor(?X, ?Y).
+Interaction(?X) :- xeno(?X, ?Y).
+Statement(?X) :- Nucleotide_Mapping_Statement(?X).
+Citation(?X) :- locator(?X, ?Y).
+Annotation(?X) :- Catalytic_Activity_Annotation(?X).
+Annotation(?X) :- Caution_Annotation(?X).
+aux_0(?X,?Y) :- Protein(?X).
+Statement(?X) :- Endpoint_Statement(?X).
+Alternative_Products_Annotation(?X) :- Ribosomal_Frameshifting(?X).
+Sequence_Caution_Annotation(?X) :- Erroneous_Initiation_Annotation(?X).
+RNA(?X) :- MRNA(?X).
+Enzyme(?Y) :- enzyme(?X, ?Y).
+Citation(?X) :- Published_Citation(?X).
+Sequence_Annotation(?X) :- Molecule_Processing_Annotation(?X).
+Absorption_Annotation(?X) :- maximum(?X, ?Y).
+Protein(?X) :- domain(?X, ?Y).
+Taxon(?X) :- complete(?X, ?Y).
+Modification_Annotation(?X) :- Disulfide_Bond_Annotation(?X).
+Mass_Spectrometry_Annotation(?X) :- measuredError(?X, ?Y).
+Annotation(?X) :- Pharmaceutical_Annotation(?X).
+Alternative_Products_Annotation(?X) :- Alternative_Initiation_Annotation(?X).
+Gene(?X) :- orfName(?X, ?Y).
+Subcellular_Location(?Y) :- relatedLocation(?X, ?Y).
+Subcellular_Location(?Y) :- encodedIn(?X, ?Y).
+Structure_Mapping_Statement(?X) :- chain(?X, ?Y).
+Taxon(?Y) :- host(?X, ?Y).
+Subcellular_Location(?Y) :- location(?X, ?Y).
+Published_Citation(?Y) :- erratum(?X, ?Y).
+Experimental_Information_Annotation(?X) :- Mass_Spectrometry_Annotation(?X).
+Taxon(?X) :- partOfLineage(?X, ?Y).
+Domain_Assignment_Statement(?X) :- falseNegative(?X, ?Y).
+Published_Citation(?X) :- Journal_Citation(?X).
+Biophysicochemical_Annotation(?X) :- Absorption_Annotation(?X).
+Published_Citation(?X) :- erratum(?X, ?Y).
+Protein(?X) :- interaction(?X, ?Y).
+Book_Citation(?X) :- publisher(?X, ?Y).
+Experimental_Information_Annotation(?X) :- Sequence_Conflict_Annotation(?X).
+Annotation(?X) :- Disease_Annotation(?X).
+Family_Membership_Statement(?X) :- domains(?X, ?Y).
+Simple_Sequence(?X) :- fragment(?X, ?Y).
+Annotation(?X) :- Developmental_Stage_Annotation(?X).
+Modification_Annotation(?X) :- Glycosylation_Annotation(?X).
+Site_Annotation(?X) :- Active_Site_Annotation(?X).
+Subcellular_Location_Annotation(?X) :- locatedIn(?X, ?Y).
+Statement(?X) :- Structure_Mapping_Statement(?X).
+Annotation(?X) :- Subunit_Annotation(?X).
+Method(?Y) :- method(?X, ?Y).
+Biophysicochemical_Annotation(?X) :- PH_Dependence_Annotation(?X).
+Resource(?X) :- Nucleotide_Resource(?X).
+Transcript_Resource(?X) :- translatedTo(?X, ?Y).
+name(?X, ?Y) :- commonName(?X, ?Y).
+Protein(?X) :- encodedBy(?X, ?Y).
+sequenceFor(?X, ?Y) :- sequence(?Y, ?X).
+sequence(?Y, ?X) :- sequenceFor(?X, ?Y).
+name(?X,?Y) :- Electronic_Citation(?X).
+Class(?X) :- Enzyme(?X).
+Annotation(?X) :- PTM_Annotation(?X).
+Image(?Y) :- depiction(?X, ?Y).
+Subcellular_Location(?X) :- relatedLocation(?X, ?Y).
+Sample_Source(?X) :- Transposon(?X).
+part(?X, ?Y) :- domain(?X, ?Y).
+Biophysicochemical_Annotation(?X) :- Redox_Potential_Annotation(?X).
+Taxon(?X) :- scientificName(?X, ?Y).
+Experimental_Information_Annotation(?X) :- Sequence_Uncertainty_Annotation(?X).
+Molecule(?X) :- RNA(?X).
+Citation(?Y) :- citation(?X, ?Y).
+Sequence_Caution_Annotation(?X) :- Erroneous_Gene_Model_Prediction(?X).
+Interaction(?Y) :- interaction(?X, ?Y).
+Enzyme(?X) :- cofactor(?X, ?Y).
+Molecule_Processing_Annotation(?X) :- Initiator_Methionine_Annotation(?X).
+Region_Annotation(?X) :- Repeat_Annotation(?X).
+Taxon(?X) :- commonName(?X, ?Y).
+Method(?X) :- Structure_Determination_Method(?X).
+Class(?X) :- Database(?X).
+name(?X, ?Y) :- mnemonic(?X, ?Y).
+Annotation(?X) :- Biophysicochemical_Annotation(?X).
+name(?X,?Y) :- Part(?X).
+Citation_Statement(?X) :- context(?X, ?Y).
+Resource(?X) :- Transcript_Resource(?X).
+Alternative_Sequence_Annotation(?Y) :- modification(?X, ?Y).
+Molecule(?X) :- DNA(?X).
+replacedBy(?X, ?Y) :- replaces(?Y, ?X).
+replaces(?Y, ?X) :- replacedBy(?X, ?Y).
+Published_Citation(?X) :- Electronic_Citation(?X).
+Subcellular_Location_Annotation(?X) :- location(?X, ?Y).
+Cluster(?Y) :- seedFor(?X, ?Y).
+Taxon(?Y) :- commonTaxon(?X, ?Y).
+Subcellular_Location(?Y) :- locatedIn(?X, ?Y).
+Sequence(?X) :- Unknown_Sequence(?X).
+Modification_Annotation(?X) :- Modified_Residue_Annotation(?X).
+erratumFor(?X, ?Y) :- erratum(?Y, ?X).
+erratum(?Y, ?X) :- erratumFor(?X, ?Y).
+Strain(?Y) :- strain(?X, ?Y).
+Sample_Source(?X) :- Tissue(?X).
+Sequence_Annotation(?X) :- Secondary_Structure_Annotation(?X).
+Cluster(?X) :- commonTaxon(?X, ?Y).
+Annotation(?X) :- Function_Annotation(?X).
+Taxon(?X) :- strain(?X, ?Y).
+Molecule_Processing_Annotation(?X) :- Peptide_Annotation(?X).
+Secondary_Structure_Annotation(?X) :- Helix_Annotation(?X).
+Known_Sequence(?X) :- External_Sequence(?X).
+Natural_Variation_Annotation(?X) :- Natural_Variant_Annotation(?X).
+Structure_Resource(?X) :- method(?X, ?Y).
+method(?X, ?Y) :- Structure_Resource(?X).
+structuredNameType(?X, ?Y) :- shortName(?X, ?Y).
+Published_Citation(?X) :- Thesis_Citation(?X).
+Region_Annotation(?X) :- Zinc_Finger_Annotation(?X).
+Sequence(?X) :- representativeFor(?X, ?Y).
+Annotation(?X) :- Subcellular_Location_Annotation(?X).
+Sequence_Annotation(?X) :- Region_Annotation(?X).
+Taxon(?Y) :- organism(?X, ?Y).
+DNA(?X) :- Unassigned_DNA(?X).
+Citation(?X) :- author(?X, ?Y).
+Published_Citation(?X) :- erratumFor(?X, ?Y).
+Alternative_Products_Annotation(?X) :- Alternative_Splicing_Annotation(?X).
+Class(?X) :- Pathway(?X).
+Annotation(?X) :- Pathway_Annotation(?X).
+Annotation(?X) :- Alternative_Products_Annotation(?X).
+Domain_Assignment_Statement(?X) :- partial(?X, ?Y).
+Subcellular_Location(?Y) :- partOf(?X, ?Y).
+name(?X, ?Y) :- scientificName(?X, ?Y).
+Database(?X) :- implicit(?X, ?Y).
+Annotation(?X) :- RNA_Editing_Annotation(?X).
+Published_Citation(?X) :- Patent_Citation(?X).
+Molecule_Processing_Annotation(?X) :- Transit_Peptide_Annotation(?X).
+Citation(?X) :- Unpublished_Citation(?X).
+Interaction(?X) :- participant(?X, ?Y).
+Taxon(?X) :- synonym(?X, ?Y).
+External_Sequence(?Y) :- conflictingSequence(?X, ?Y).
+Sequence(?X) :- seedFor(?X, ?Y).
+Database(?X) :- abstract(?X, ?Y).
+Citation(?X) :- authorsIncomplete(?X, ?Y).
+Kinetics_Annotation(?X) :- measuredActivity(?X, ?Y).
+Region_Annotation(?X) :- Motif_Annotation(?X).
+Annotation(?X) :- Sequence_Annotation(?X).
+Participant(?Y) :- participant(?X, ?Y).
+part(?X, ?Y) :- component(?X, ?Y).
+structuredNameType(?X, ?Y) :- allergenName(?X, ?Y).
+Resource(?X) :- Structure_Resource(?X).
+Taxon(?X) :- host(?X, ?Y).
+Citation(?X) :- date(?X, ?Y).
+Molecule_Processing_Annotation(?X) :- Chain_Annotation(?X).
+Cluster(?Y) :- representativeFor(?X, ?Y).
+Statement(?X) :- source(?X, ?Y).
+Region_Annotation(?X) :- Nucleotide_Binding_Annotation(?X).
+Concept(?Y) :- classifiedWith(?X, ?Y).
+name(?X,?Y) :- Sample_Source(?X).
+Annotation(?X) :- Enzyme_Regulation_Annotation(?X).
+Rank(?Y) :- rank(?X, ?Y).
+Protein(?X) :- created(?X, ?Y).
+organism(?X, ?Y) :- Protein(?X).
+Protein(?X) :- encodedIn(?X, ?Y).
+Molecule(?Y) :- locatedOn(?X, ?Y).
+Image(?X) :- height(?X, ?Y).
+Subcellular_Location(?X) :- partOf(?X, ?Y).
+Structure_Resource(?X) :- resolution(?X, ?Y).
+Protein(?X) :- organism(?X, ?Y).
+RNA(?X) :- Genomic_RNA(?X).
+Nucleotide_Resource(?X) :- locatedOn(?X, ?Y).
+Protein(?X) :- annotation(?X, ?Y).
+Sequence_Caution_Annotation(?X) :- Erroneous_Translation_Annotation(?X).
+Annotation(?X) :- Tissue_Specificity_Annotation(?X).
+Structured_Name(?Y) :- submittedName(?X, ?Y).
+Statement(?X) :- Family_Membership_Statement(?X).
+Citation(?X) :- group(?X, ?Y).
+Taxon(?X) :- rank(?X, ?Y).
+DNA(?X) :- Genomic_DNA(?X).
+Image(?X) :- width(?X, ?Y).
+Part(?Y) :- part(?X, ?Y).
+Secondary_Structure_Annotation(?X) :- Turn_Annotation(?X).
+Sequence_Annotation(?X) :- Sequence_Caution_Annotation(?X).
+Taxon(?X) :- depiction(?X, ?Y).
+Annotation(?X) :- Domain_Annotation(?X).
+Published_Citation(?X) :- Book_Citation(?X).
+Cluster(?Y) :- memberOf(?X, ?Y).
+Published_Citation(?Y) :- erratumFor(?X, ?Y).
+name(?X,?Y) :- Book_Citation(?X).
+aux_1(?X,?Y) :- Protein(?X).
+Region_Annotation(?X) :- Transmembrane_Annotation(?X).
+Published_Citation(?X) :- Submission_Citation(?X).
+RNA(?X) :- Unassigned_RNA(?X).
+Book_Citation(?X) :- editor(?X, ?Y).
+Region_Annotation(?X) :- NP_Binding_Annotation(?X).
+Sequence_Annotation(?X) :- Modification_Annotation(?X).
+Simple_Sequence(?X) :- mass(?X, ?Y).
+Database(?Y) :- database(?X, ?Y).
+Protein(?X) :- component(?X, ?Y).
+Annotation(?X) :- Allergen_Annotation(?X).
+name(?X,?Y) :- Journal_Citation(?X).
+Secondary_Structure_Annotation(?X) :- Beta_Strand_Annotation(?X).
+Resource(?X) :- database(?X, ?Y).
+Annotation(?X) :- Cofactor_Annotation(?X).
+Sequence_Annotation(?X) :- Experimental_Information_Annotation(?X).
+Structured_Name(?Y) :- recommendedName(?X, ?Y).
+Family_Membership_Statement(?X) :- atypical(?X, ?Y).
+Transcript_Resource(?X) :- transcribedFrom(?X, ?Y).
+Class(?X) :- Concept(?X).
+Region_Annotation(?X) :- Compositional_Bias_Annotation(?X).
+Simple_Sequence(?Y) :- basedOn(?X, ?Y).
+Statement(?X) :- Domain_Assignment_Statement(?X).
+Range(?Y) :- range(?X, ?Y).
+Annotation(?X) :- Disruption_Phenotype_Annotation(?X).
+Protein(?X) :- memberOf(?X, ?Y).
+Gene(?X) :- locusName(?X, ?Y).
+Structured_Name(?Y) :- alternativeName(?X, ?Y).
+Site_Annotation(?X) :- Binding_Site_Annotation(?X).
+!Published_Citation(?X) :- Unpublished_Citation(?X).
+Domain_Assignment_Statement(?X) :- hits(?X, ?Y).
+Enzyme(?X) :- activity(?X, ?Y).
+Interaction(?X) :- experiments(?X, ?Y).
+Sequence_Annotation(?X) :- Site_Annotation(?X).
+Sequence(?Y) :- sequence(?X, ?Y).
+Annotation(?X) :- Biotechnology_Annotation(?X).
+Molecule_Processing_Annotation(?X) :- Propeptide_Annotation(?X).
+Protein(?X) :- isolatedFrom(?X, ?Y).
+Region_Annotation(?X) :- Calcium_Binding_Annotation(?X).
+Modification_Annotation(?X) :- Cross_link_Annotation(?X).
+Biophysicochemical_Annotation(?X) :- Temperature_Dependence_Annotation(?X).
+structuredNameType(?X, ?Y) :- cdAntigenName(?X, ?Y).
+Sequence_Annotation(?X) :- range(?X, ?Y).
+RNA(?X) :- Other_RNA(?X).
+Thesis_Citation(?X) :- institution(?X, ?Y).
+Modification_Annotation(?X) :- Non_standard_Residue_Annotation(?X).
+Modified_Sequence(?X) :- modification(?X, ?Y).
+Citation(?X) :- title(?X, ?Y).
+name(?X, ?Y) :- orfName(?X, ?Y).
+Natural_Variation_Annotation(?X) :- Alternative_Sequence_Annotation(?X).
+Protein(?X) :- classifiedWith(?X, ?Y).
+Region_Annotation(?X) :- Topological_Domain_Annotation(?X).
+Known_Sequence(?X) :- Modified_Sequence(?X).
+Annotation(?X) :- Induction_Annotation(?X).
+Part(?Y) :- component(?X, ?Y).
+Interaction(?X) :- negative(?X, ?Y).
+Annotation(?X) :- Similarity_Annotation(?X).
+Experimental_Information_Annotation(?X) :- Non_adjacent_Residues_Annotation(?X).
+Region_Annotation(?X) :- Domain_Extent_Annotation(?X).
+Taxon(?X) :- otherName(?X, ?Y).
+Status(?X) :- Concept_Status(?X).
+Region_Annotation(?X) :- Coiled_Coil_Annotation(?X).
+database(?X, ?Y) :- Submission_Citation(?X).
+Known_Sequence(?X) :- Simple_Sequence(?X).
+Protein(?Y) :- member(?X, ?Y).
+Alternative_Products_Annotation(?X) :- Alternative_Promoter_Usage_Annotation(?X).
+Annotation(?Y) :- annotation(?X, ?Y).
+name(?X, ?Y) :- locusName(?X, ?Y).
+Experimental_Information_Annotation(?X) :- Non_terminal_Residue_Annotation(?X).
+External_Sequence(?X) :- translatedFrom(?X, ?Y).
+Gene(?Y) :- encodedBy(?X, ?Y).
+Submission_Citation(?X) :- submittedTo(?X, ?Y).
+Class(?X) :- Taxon(?X).
+Method(?X) :- Mass_Measurement_Method(?X).
+institution(?X,?Y) :- Thesis_Citation(?X).
+Sequence_Caution_Annotation(?X) :- Erroneous_Termination_Annotation(?X).
+Resource(?X) :- database(?X, ?Y).
+database(?X, ?Y) :- Resource(?X).
+Experimental_Information_Annotation(?X) :- Mutagenesis_Annotation(?X).
+Database(?X) :- pattern(?X, ?Y).
+Modification_Annotation(?X) :- Lipidation_Annotation(?X).
+RNA(?X) :- Viral_cRNA(?X).
+Part(?Y) :- domain(?X, ?Y).
+existence(?X,?Y) :- aux_1(?X,?Y).
+Protein(?Y) :- aux_1(?X,?Y).
+sequence(?X,?Y) :- aux_0(?X,?Y).
+Simple_Sequence(?Y) :- aux_0(?X,?Y).
+
+/// Total TBox Axioms: 363 ///

@@ -1,0 +1,30 @@
+/// Created by: OWL 2 Datalog +- Converter ///
+/// Author: Giorgio Orsi <orsi@elet.polimi.it> - Politecnico di Milano ///
+/// Created on: 2011/11/23 09:19:41 ///
+/// Expressiveness: OWL-QL ///
+/// Storage Rules: DISABLED///
+
+/// Converted TBox ///
+edge(?X, ?Y) :- Path1(?X).
+
+/// Total TBox Axioms: 2 ///
+
+/// Converted ABox ///
+
+/// Total ABox Axioms: 0 ///
+
+/// Converted SBox ///
+
+/// Total SBox Axioms: 0 ///
+
+Q1(?A) :- edge(?A,?B).
+Q2(?A) :- edge(?A,?B), edge(?B,?C).
+Q3(?A) :- edge(?A,?B), edge(?B,?C), edge(?C,?D).
+Q4(?A) :- edge(?A,?B), edge(?B,?C), edge(?C,?D), edge(?D,?E).
+Q5(?A) :- edge(?A,?B), edge(?B,?C), edge(?C,?D), edge(?D,?E), edge(?E,?F).
+
+?-Q1(?A).
+?-Q2(?A).
+?-Q3(?A).
+?-Q4(?A).
+?-Q5(?A).

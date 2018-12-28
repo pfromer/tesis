@@ -1,0 +1,8 @@
+/// Converted TBox ///
+Article(?Y) :- redirectsTo(?X, ?Y).
+Article(?X) :- Category(?X).
+link(?X, ?Y) :- interwikiLink(?X, ?Y).
+Article(?X) :- redirectsTo(?X, ?Y).
+link(?X, ?Y) :- internalLink(?X, ?Y).
+
+/// Total TBox Axioms: 5 ///

@@ -1,0 +1,12 @@
+==================SUMMARY==================
+Ontology file:             stockexchange.owl
+Query:                     Q(X0,X1)  <-  Person(X0) ^ Stock(X1) ^ hasStock(X0,X1)
+Number of assertions:      51
+Number of concept symbols: 18
+Number of role symbols:    12
+Running time:              141 milliseconds 
+Size of the rewriting (queries):     2
+Size of the rewriting (symbols):     66
+0: Q(X0,X1)  <-  belongsToCompany(X1,X0)
+1: Q(X0,X1)  <-  hasStock(X0,X1)
+==================SUMMARY==================

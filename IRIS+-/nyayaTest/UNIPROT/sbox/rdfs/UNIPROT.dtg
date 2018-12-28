@@ -1,0 +1,257 @@
+/// Converted SBox ///
+name(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/name'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+synonym(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/synonym'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Taxon(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Taxon').
+structuredNameType(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/structuredNameType'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+biotechName(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/biotechName'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+status(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/status'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Annotation').
+Polymorphism_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Polymorphism_Annotation').
+RNA(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/RNA').
+Transcribed_RNA(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Transcribed_RNA').
+otherName(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/otherName'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Sequence_Caution_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Sequence_Caution_Annotation').
+Frameshift_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Frameshift_Annotation').
+Cluster(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Cluster').
+member(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/member'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Family_Membership_Statement(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Family_Membership_Statement').
+fused(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/fused'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Endpoint_Statement(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Endpoint_Statement').
+limit(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/limit'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+author(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/author'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+group(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/group'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+fullName(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/fullName'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+DNA(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/DNA').
+Other_DNA(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Other_DNA').
+internationalNonproprietaryName(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/internationalNonproprietaryName'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Sequence_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Sequence_Annotation').
+Natural_Variation_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Natural_Variation_Annotation').
+Sequence(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Sequence').
+sequenceFor(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/sequenceFor'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+identity(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/identity'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Structured_Name(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Structured_Name').
+Molecule_Processing_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Molecule_Processing_Annotation').
+Signal_Peptide_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Signal_Peptide_Annotation').
+Modified_Sequence(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Modified_Sequence').
+basedOn(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/basedOn'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Nucleotide_Resource(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Nucleotide_Resource').
+locatedOn(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/locatedOn'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+translatedFrom(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/translatedFrom'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Mass_Spectrometry_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Mass_Spectrometry_Annotation').
+measuredValue(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/measuredValue'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+RNA_Editing_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/RNA_Editing_Annotation').
+frameshift(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/frameshift'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Citation_Statement(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Citation_Statement').
+scope(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/scope'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Statement(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement').
+Sample_Source(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Sample_Source').
+Strain(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Strain').
+isolatedFrom(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/isolatedFrom'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Toxic_Dose_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Toxic_Dose_Annotation').
+position(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/position'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Kinetics_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Kinetics_Annotation').
+measuredAffinity(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/measuredAffinity'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Biophysicochemical_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Biophysicochemical_Annotation').
+Gene(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Gene').
+Known_Sequence(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Known_Sequence').
+Site_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Site_Annotation').
+Metal_Binding_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Metal_Binding_Annotation').
+Unpublished_Citation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Unpublished_Citation').
+Observation_Citation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Observation_Citation').
+length(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/length'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Simple_Sequence(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Simple_Sequence').
+precursor(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/precursor'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Interaction(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Interaction').
+xeno(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/xeno'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Nucleotide_Mapping_Statement(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Nucleotide_Mapping_Statement').
+Citation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Citation').
+locator(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/locator'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Catalytic_Activity_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Catalytic_Activity_Annotation').
+Caution_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Caution_Annotation').
+Protein(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Protein').
+Alternative_Products_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Alternative_Products_Annotation').
+Ribosomal_Frameshifting(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Ribosomal_Frameshifting').
+Erroneous_Initiation_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Erroneous_Initiation_Annotation').
+MRNA(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/MRNA').
+enzyme(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/enzyme'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Published_Citation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Published_Citation').
+Absorption_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Absorption_Annotation').
+maximum(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/maximum'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+domain(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/domain'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+complete(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/complete'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Modification_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Modification_Annotation').
+Disulfide_Bond_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Disulfide_Bond_Annotation').
+measuredError(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/measuredError'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Pharmaceutical_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Pharmaceutical_Annotation').
+Alternative_Initiation_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Alternative_Initiation_Annotation').
+orfName(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/orfName'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+relatedLocation(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/relatedLocation'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+encodedIn(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/encodedIn'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Structure_Mapping_Statement(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Structure_Mapping_Statement').
+chain(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/chain'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+host(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/host'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+location(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/location'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+erratum(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/erratum'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Experimental_Information_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Experimental_Information_Annotation').
+partOfLineage(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/partOfLineage'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Domain_Assignment_Statement(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Domain_Assignment_Statement').
+falseNegative(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/falseNegative'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Journal_Citation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Journal_Citation').
+interaction(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/interaction'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Book_Citation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Book_Citation').
+publisher(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/publisher'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Sequence_Conflict_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Sequence_Conflict_Annotation').
+Disease_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Disease_Annotation').
+domains(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/domains'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+fragment(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/fragment'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Developmental_Stage_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Developmental_Stage_Annotation').
+Glycosylation_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Glycosylation_Annotation').
+Active_Site_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Active_Site_Annotation').
+Subcellular_Location_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Subcellular_Location_Annotation').
+locatedIn(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/locatedIn'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Subunit_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Subunit_Annotation').
+method(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/method'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+PH_Dependence_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/PH_Dependence_Annotation').
+Resource(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Resource').
+Transcript_Resource(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Transcript_Resource').
+translatedTo(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/translatedTo'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+commonName(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/commonName'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+encodedBy(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/encodedBy'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Electronic_Citation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Electronic_Citation').
+Class(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.w3.org/2002/07/owl#Class').
+Enzyme(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Enzyme').
+PTM_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/PTM_Annotation').
+depiction(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/depiction'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Subcellular_Location(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Subcellular_Location').
+Transposon(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Transposon').
+part(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/part'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Redox_Potential_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Redox_Potential_Annotation').
+scientificName(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/scientificName'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Sequence_Uncertainty_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Sequence_Uncertainty_Annotation').
+Molecule(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Molecule').
+citation(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/citation'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Erroneous_Gene_Model_Prediction(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Erroneous_Gene_Model_Prediction').
+cofactor(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/cofactor'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Initiator_Methionine_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Initiator_Methionine_Annotation').
+Region_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Region_Annotation').
+Repeat_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Repeat_Annotation').
+Method(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Method').
+Structure_Determination_Method(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Structure_Determination_Method').
+Database(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Database').
+mnemonic(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/mnemonic'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Part(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Part').
+context(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/context'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+modification(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/modification'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+seedFor(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/seedFor'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+commonTaxon(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/commonTaxon'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Unknown_Sequence(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Unknown_Sequence').
+Modified_Residue_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Modified_Residue_Annotation').
+strain(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/strain'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Tissue(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Tissue').
+Secondary_Structure_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Secondary_Structure_Annotation').
+Function_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Function_Annotation').
+Peptide_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Peptide_Annotation').
+Helix_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Helix_Annotation').
+External_Sequence(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/External_Sequence').
+Natural_Variant_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Natural_Variant_Annotation').
+Structure_Resource(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Structure_Resource').
+shortName(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/shortName'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Thesis_Citation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Thesis_Citation').
+Zinc_Finger_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Zinc_Finger_Annotation').
+representativeFor(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/representativeFor'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+organism(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/organism'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Unassigned_DNA(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Unassigned_DNA').
+erratumFor(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/erratumFor'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Alternative_Splicing_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Alternative_Splicing_Annotation').
+Pathway(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Pathway').
+Pathway_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Pathway_Annotation').
+partial(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/partial'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+partOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/partOf'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+implicit(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/implicit'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Patent_Citation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Patent_Citation').
+Transit_Peptide_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Transit_Peptide_Annotation').
+participant(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/participant'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+conflictingSequence(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/conflictingSequence'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+abstract(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/abstract'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+authorsIncomplete(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/authorsIncomplete'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+measuredActivity(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/measuredActivity'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Motif_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Motif_Annotation').
+component(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/component'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+allergenName(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/allergenName'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+date(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/date'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Chain_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Chain_Annotation').
+source(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/source'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Nucleotide_Binding_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Nucleotide_Binding_Annotation').
+classifiedWith(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/classifiedWith'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Enzyme_Regulation_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Enzyme_Regulation_Annotation').
+rank(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/rank'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+created(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/created'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Image(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Image').
+height(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/height'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+resolution(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/resolution'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Genomic_RNA(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Genomic_RNA').
+annotation(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/annotation'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Erroneous_Translation_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Erroneous_Translation_Annotation').
+Tissue_Specificity_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Tissue_Specificity_Annotation').
+submittedName(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/submittedName'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Genomic_DNA(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Genomic_DNA').
+width(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/width'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Turn_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Turn_Annotation').
+Domain_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Domain_Annotation').
+memberOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/memberOf'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Transmembrane_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Transmembrane_Annotation').
+Submission_Citation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Submission_Citation').
+Unassigned_RNA(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Unassigned_RNA').
+editor(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/editor'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+NP_Binding_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/NP_Binding_Annotation').
+mass(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/mass'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+database(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/database'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Allergen_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Allergen_Annotation').
+Beta_Strand_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Beta_Strand_Annotation').
+Cofactor_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Cofactor_Annotation').
+recommendedName(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/recommendedName'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+atypical(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/atypical'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+transcribedFrom(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/transcribedFrom'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Concept(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Concept').
+Compositional_Bias_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Compositional_Bias_Annotation').
+range(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/range'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Disruption_Phenotype_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Disruption_Phenotype_Annotation').
+locusName(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/locusName'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+alternativeName(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/alternativeName'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Binding_Site_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Binding_Site_Annotation').
+hits(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/hits'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+activity(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/activity'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+experiments(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/experiments'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+sequence(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/sequence'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Biotechnology_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Biotechnology_Annotation').
+Propeptide_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Propeptide_Annotation').
+Calcium_Binding_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Calcium_Binding_Annotation').
+Cross_link_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Cross-link_Annotation').
+Temperature_Dependence_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Temperature_Dependence_Annotation').
+cdAntigenName(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/cdAntigenName'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Other_RNA(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Other_RNA').
+institution(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/institution'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Non_standard_Residue_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Non-standard_Residue_Annotation').
+title(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/title'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Alternative_Sequence_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Alternative_Sequence_Annotation').
+Topological_Domain_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Topological_Domain_Annotation').
+Induction_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Induction_Annotation').
+negative(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/negative'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Similarity_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Similarity_Annotation').
+Non_adjacent_Residues_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Non-adjacent_Residues_Annotation').
+Domain_Extent_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Domain_Extent_Annotation').
+Status(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Status').
+Concept_Status(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Concept_Status').
+Coiled_Coil_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Coiled_Coil_Annotation').
+Alternative_Promoter_Usage_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Alternative_Promoter_Usage_Annotation').
+Non_terminal_Residue_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Non-terminal_Residue_Annotation').
+submittedTo(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/submittedTo'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Mass_Measurement_Method(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Mass_Measurement_Method').
+Erroneous_Termination_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Erroneous_Termination_Annotation').
+Mutagenesis_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Mutagenesis_Annotation').
+pattern(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://purl.uniprot.org/core/pattern'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Lipidation_Annotation(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Lipidation_Annotation').
+Viral_cRNA(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://purl.uniprot.org/core/Viral_cRNA').
+existence(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://purl.uniprot.org/core/existence'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+
+/// Total SBox Axioms: 254 ///

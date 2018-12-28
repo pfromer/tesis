@@ -1,0 +1,69 @@
+/// Created by: OWL 2 Datalog +- Converter ///
+/// Author: Giorgio Orsi <orsi@elet.polimi.it> - Politecnico di Milano ///
+/// Created on: 2010/01/27 18:17:15 ///
+/// Include Storage Axioms: true///
+
+/// Converted TBOX ///
+StockExchangeList(?Y) :- isListedIn(?X, ?Y).
+Person(?X) :- hasAddress(?X, ?Y).
+isExecutedFor(?X, ?Y) :- Transaction(?X).
+Stock(?X) :- belongsToCompany(?X, ?Y).
+belongsToCompany(?X, ?Y) :- hasStock(?Y, ?X).
+hasStock(?X, ?Y) :- belongsToCompany(?Y, ?X).
+Person(?X) :- StockExchangeMember(?X).
+inverseofhasAddress(?X, ?Y) :- Address(?X).
+StockBroker(?X) :- Dealer(?X).
+Person(?Y) :- inverseofhasAddress(?X, ?Y).
+StockTrader(?X) :- Trader(?X).
+Trader(?X) :- StockTrader(?X).
+Person(?X) :- LegalPerson(?X).
+hasAddress(?X, ?Y) :- Person(?X).
+StockExchangeMember(?X) :- StockBroker(?X).
+FinantialInstrument(?Y) :- involvesInstrument(?X, ?Y).
+Stock(?Y) :- listsStock(?X, ?Y).
+Transaction(?Y) :- isTradedIn(?X, ?Y).
+Transaction(?X) :- Offer(?X).
+StockExchangeMember(?Y) :- isExecutedBy(?X, ?Y).
+involvesInstrument(?X, ?Y) :- Transaction(?X).
+isListedIn(?X, ?Y) :- listsStock(?Y, ?X).
+listsStock(?X, ?Y) :- isListedIn(?Y, ?X).
+!LegalPerson(?X) :- PhysicalPerson(?X).
+Company(?Y) :- belongsToCompany(?X, ?Y).
+Transaction(?X) :- isExecutedFor(?X, ?Y).
+isTradedIn(?X, ?Y) :- involvesInstrument(?Y, ?X).
+involvesInstrument(?X, ?Y) :- isTradedIn(?Y, ?X).
+Transaction(?X) :- involvesInstrument(?X, ?Y).
+Dealer(?X) :- Trader(?X).
+Trader(?X) :- Dealer(?X).
+isListedIn(?X, ?Y) :- Stock(?X).
+StockBroker(?X) :- Trader(?X).
+belongsToCompany(?X, ?Y) :- Stock(?X).
+LegalPerson(?X) :- Company(?X).
+Address(?Y) :- hasAddress(?X, ?Y).
+Stock(?Y) :- hasStock(?X, ?Y).
+Stock(?X) :- isListedIn(?X, ?Y).
+StockBroker(?X) :- StockTrader(?X).
+Investor(?Y) :- isExecutedFor(?X, ?Y).
+Transaction(?X) :- isExecutedBy(?X, ?Y).
+Person(?X) :- PhysicalPerson(?X).
+FinantialInstrument(?X) :- Stock(?X).
+Company(?X) :- hasStock(?X, ?Y).
+tradesOnBehalfOf(?X, ?Y) :- StockBroker(?X).
+Address(?X) :- inverseofhasAddress(?X, ?Y).
+Person(?X) :- Investor(?X).
+inverseofhasAddress(?X, ?Y) :- hasAddress(?Y, ?X).
+hasAddress(?X, ?Y) :- inverseofhasAddress(?Y, ?X).
+isExecutedBy(?X, ?Y) :- Transaction(?X).
+usesBroker(?X, ?Y) :- tradesOnBehalfOf(?Y, ?X).
+tradesOnBehalfOf(?X, ?Y) :- usesBroker(?Y, ?X).
+Transaction(?X) :- Acquisition(?X).
+
+/// Total TBox Axioms: 49 ///
+
+Q_1(?A,?C) :- isExecutedBy(?A,?B), isExecutedFor(?A,?C), StockExchangeMember(?C), hasAddress(?B,?E), hasAddress(?C,?E).
+Q_0(?A,?C) :- isExecutedBy(?A,?B), isExecutedFor(?A,?C), StockExchangeMember(?C), hasAddress(?B,?E), inverseofhasAddress(?E,?C).
+
+?- Q_1(?A,?C).
+?- Q_0(?A,?C).
+
+/// Total ABox Axioms: 0 ///

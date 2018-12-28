@@ -1,0 +1,20 @@
+hasParent(?X,?Y) :- person(?X).
+person(?X) :- hasParent(?X,?Y).
+person(?Y) :- hasParent(?X,?Y).
+hasParent(?X,?Y) :- hasMother(?X,?Y).
+hasParent(?X,?Y) :- hasFather(?X,?Y).
+man(?Y) :- hasFather(?X,?Y).
+woman(?Y) :- hasMother(?X,?Y).
+person(?X) :- man(?X).
+person(?X) :- woman(?X).
+hasMother(?Y,?X) :- mother(?X).
+hasFather(?Y,?X) :- father(?X).
+
+hasParent("Giorgio","Roberto").
+person("Stela").
+man("Roberto").
+
+Q(?A) :- man(?A).
+
+?-Q(?A).
+

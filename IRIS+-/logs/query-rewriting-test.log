@@ -1,0 +1,132 @@
+2016-08-12 11:02:54 deri.iris.queryrewriting.QueryRewritingTest [INFO] Decomposition: DECOMPOSE
+2016-08-12 11:02:54 deri.iris.queryrewriting.QueryRewritingTest [INFO] Rewriting Language: UCQ
+2016-08-12 11:02:54 deri.iris.queryrewriting.QueryRewritingTest [INFO] Atom Coverage Strategy: TRANSITIVE
+2016-08-12 11:02:54 deri.iris.queryrewriting.QueryRewritingTest [INFO] Subsumption Check Strategy: INTRADEC
+2016-08-12 11:02:54 deri.iris.queryrewriting.QueryRewritingTest [INFO] Negative Constraints Check Strategy NONE
+2016-08-12 11:02:54 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing file: George3
+2016-08-12 11:02:54 deri.iris.queryrewriting.QueryRewritingTest [INFO] Expressivity: [LINEAR, STICKY, GUARDED]
+2016-08-12 11:02:54 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing propagation graph.
+2016-08-12 11:02:54 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Propagation Graph:
+(V[1],V[1]) -> {
+	([],[])
+}
+(V[2],V[2]) -> {
+	([],[])
+}
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[3],R[3]) -> {
+	([],[])
+}
+(R[2],V[2]) -> {
+	([R[2], V[2]],[V(?X, ?Y) :- R(?X, ?Y, ?Z).])
+}
+(R[1],V[1]) -> {
+	([R[1], V[1]],[V(?X, ?Y) :- R(?X, ?Y, ?Z).])
+}
+(F[1],F[1]) -> {
+	([],[])
+}
+(F[2],F[2]) -> {
+	([],[])
+}
+(V[2],F[2]) -> {
+	([V[2], F[2]],[F(?X, ?Y) :- V(?X, ?Y).])
+}
+(V[1],F[1]) -> {
+	([V[1], F[1]],[F(?X, ?Y) :- V(?X, ?Y).])
+}
+(F[2],V[1]) -> {
+	([F[2], V[1]],[V(?Y, ?Z) :- F(?X, ?Y).])
+}
+Nodes: 7
+Edges: 12
+Longest Path: 1
+
+
+2016-08-12 11:02:54 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing cover graph.
+2016-08-12 11:02:54 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Cover Graph:
+(V[1],V[1]) -> {
+	([],[])
+}
+(V[2],V[2]) -> {
+	([],[])
+}
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[3],R[3]) -> {
+	([],[])
+}
+(F[1],F[1]) -> {
+	([],[])
+}
+(F[2],F[2]) -> {
+	([],[])
+}
+(R[2],V[1]) -> {
+	([R[2], V[2], F[2], V[1]],[V(?X, ?Y) :- R(?X, ?Y, ?Z)., F(?X, ?Y) :- V(?X, ?Y)., V(?Y, ?Z) :- F(?X, ?Y).])
+}
+(F[2],V[1]) -> {
+	([F[2], V[1]],[V(?Y, ?Z) :- F(?X, ?Y).])
+}
+(V[2],F[1]) -> {
+	([V[2], F[2], V[1], F[1]],[F(?X, ?Y) :- V(?X, ?Y)., V(?Y, ?Z) :- F(?X, ?Y)., F(?X, ?Y) :- V(?X, ?Y).])
+}
+(R[1],V[1]) -> {
+	([R[1], V[1]],[V(?X, ?Y) :- R(?X, ?Y, ?Z).])
+}
+(R[2],F[2]) -> {
+	([R[2], V[2], F[2]],[V(?X, ?Y) :- R(?X, ?Y, ?Z)., F(?X, ?Y) :- V(?X, ?Y).])
+}
+(V[2],F[2]) -> {
+	([V[2], F[2]],[F(?X, ?Y) :- V(?X, ?Y).])
+}
+(V[1],F[1]) -> {
+	([V[1], F[1]],[F(?X, ?Y) :- V(?X, ?Y).])
+}
+(R[2],F[1]) -> {
+	([R[2], V[2], F[2], V[1], F[1]],[V(?X, ?Y) :- R(?X, ?Y, ?Z)., F(?X, ?Y) :- V(?X, ?Y)., V(?Y, ?Z) :- F(?X, ?Y)., F(?X, ?Y) :- V(?X, ?Y).])
+}
+(F[2],F[1]) -> {
+	([F[2], V[1], F[1]],[V(?Y, ?Z) :- F(?X, ?Y)., F(?X, ?Y) :- V(?X, ?Y).])
+}
+(V[2],V[1]) -> {
+	([V[2], F[2], V[1]],[F(?X, ?Y) :- V(?X, ?Y)., V(?Y, ?Z) :- F(?X, ?Y).])
+}
+(R[2],V[2]) -> {
+	([R[2], V[2]],[V(?X, ?Y) :- R(?X, ?Y, ?Z).])
+}
+(R[1],F[1]) -> {
+	([R[1], V[1], F[1]],[V(?X, ?Y) :- R(?X, ?Y, ?Z)., F(?X, ?Y) :- V(?X, ?Y).])
+}
+Nodes: 7
+Edges: 19
+Longest Path: 4
+
+
+2016-08-12 11:02:54 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Finished rewriting constraints.
+2016-08-12 11:02:54 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing query: Q1(?A) :- V(?B, ?C), V(?A, ?B).
+2016-08-12 11:02:54 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2016-08-12 11:02:54 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2016-08-12 11:02:54 deri.iris.queryrewriting.RewritingUtils [DEBUG] Computing affected positions.
+2016-08-12 11:02:54 deri.iris.queryrewriting.RewritingUtils [DEBUG] Get the components.
+2016-08-12 11:02:54 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2016-08-12 11:02:54 deri.iris.queryrewriting.LinearRewriter [TRACE] |4 [3]
+2016-08-12 11:02:54 deri.iris.queryrewriting.LinearRewriter [TRACE] |7 [3]
+2016-08-12 11:02:54 deri.iris.queryrewriting.LinearRewriter [TRACE] |10 [3]
+2016-08-12 11:02:54 deri.iris.queryrewriting.LinearRewriter [TRACE] |12 [2]
+2016-08-12 11:02:54 deri.iris.queryrewriting.LinearRewriter [TRACE] |13 [1]
+2016-08-12 11:02:54 deri.iris.queryrewriting.LinearRewriter [TRACE] |13 [0]
+2016-08-12 11:02:54 deri.iris.queryrewriting.LinearRewriter [DEBUG] Cleaning auxiliary predicates from 13 queries.
+2016-08-12 11:02:54 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2016-08-12 11:02:54 deri.iris.queryrewriting.LinearRewriter [DEBUG] Applying intra-decomposition subsumption check on 13 queries.
+2016-08-12 11:02:54 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2016-08-12 11:02:54 deri.iris.queryrewriting.QueryRewritingTest [INFO] Writing the output at: /home/giorsi/Development/workspace/irispm/IRIS+-/examples/rewriting_test/output/George3/Q1_rew.dtg

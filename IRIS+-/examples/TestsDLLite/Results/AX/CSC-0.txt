@@ -1,0 +1,51 @@
+==================SUMMARY==================
+Ontology file:             adolenaAUX.owl
+Query:                     Q(X0)  <-  Device(X0) ^ assistsWith(X0,X1)
+Number of assertions:      189
+Number of concept symbols: 74
+Number of role symbols:    31
+Running time:              765 milliseconds 
+Size of the rewriting (queries):     41
+Size of the rewriting (symbols):     1385
+0: Q(X0)  <-  AUX1(X1,X0)
+1: Q(X0)  <-  AUX10(X0,X1) ^ Device(X0)
+2: Q(X0)  <-  AUX11(X0,X1) ^ Device(X0)
+3: Q(X0)  <-  AUX12(X0,X1) ^ Device(X0)
+4: Q(X0)  <-  AUX13(X0,X1) ^ Device(X0)
+5: Q(X0)  <-  AUX14(X0,X1) ^ Device(X0)
+6: Q(X0)  <-  AUX16(X0,X1) ^ Device(X0)
+7: Q(X0)  <-  AUX17(X0,X1) ^ Device(X0)
+8: Q(X0)  <-  AUX2(X0,X1) ^ Device(X0)
+9: Q(X0)  <-  AUX3(X0,X1) ^ Device(X0)
+10: Q(X0)  <-  AUX4(X0,X1) ^ Device(X0)
+11: Q(X0)  <-  AUX5(X0,X1) ^ Device(X0)
+12: Q(X0)  <-  AUX6(X0,X1) ^ Device(X0)
+13: Q(X0)  <-  AUX8(X0,X1) ^ Device(X0)
+14: Q(X0)  <-  AssistiveDevice(X0)
+15: Q(X0)  <-  BatteryPowered_Wheelchair(X0)
+16: Q(X0)  <-  BrailleAlarmClock(X0)
+17: Q(X0)  <-  BraillePillOrganiser(X0)
+18: Q(X0)  <-  BrailleWatch(X0)
+19: Q(X0)  <-  BrailleWritingDevice(X0)
+20: Q(X0)  <-  Communication_Device(X0)
+21: Q(X0)  <-  Device(X0) ^ assistsWith(X0,X1)
+22: Q(X0)  <-  Device(X0) ^ isAssistedBy(X1,X0)
+23: Q(X0)  <-  FaceToFaceCommunicationDevice(X0)
+24: Q(X0)  <-  FaceToFaceCommunicationSoftware(X0)
+25: Q(X0)  <-  Foldable_Wheelchair(X0)
+26: Q(X0)  <-  LightweightFoldable_Wheelchair(X0)
+27: Q(X0)  <-  Lightweight_Wheelchair(X0)
+28: Q(X0)  <-  ListenDevice(X0)
+29: Q(X0)  <-  Manual_Wheelchair(X0)
+30: Q(X0)  <-  MobilityDevice(X0)
+31: Q(X0)  <-  Motorised_Wheelchair(X0)
+32: Q(X0)  <-  ReadingDevice(X0)
+33: Q(X0)  <-  SpeechDevice(X0)
+34: Q(X0)  <-  SymbolBoard(X0)
+35: Q(X0)  <-  TactileReading(X0)
+36: Q(X0)  <-  TalkingReading(X0)
+37: Q(X0)  <-  Talking_Thermometer(X0)
+38: Q(X0)  <-  TelephoneAid(X0)
+39: Q(X0)  <-  Wheelchair(X0)
+40: Q(X0)  <-  WritingDevice(X0)
+==================SUMMARY==================

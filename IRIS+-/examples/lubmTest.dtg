@@ -1,0 +1,16 @@
+/// First Level Program ///
+Q(?X) :- Professor(?X).
+
+Professor(?X) :- VisitingProfessor(?X).
+Professor(?X) :- FullProfessor(?X).
+Professor(?X) :- AssociateProfessor(?X).
+Professor(?X) :- AssistantProfessor(?X).
+
+/// Converted SBox ///
+AssociateProfessor(?X) :- @i_class(?Z0, ?X, ?Z1, ?Z2), @class(?Z1, 'AssociateProfessor', ?Z3, ?Z4).
+AssistantProfessor(?X) :- @i_class(?Z0, ?X, ?Z1, ?Z2), @class(?Z1, 'AssistantProfessor', ?Z3, ?Z4).
+Professor(?X) :- @i_class(?Z0, ?X, ?Z1, ?Z2), @class(?Z1, 'Professor', ?Z3, ?Z4).
+FullProfessor(?X) :- @i_class(?Z0, ?X, ?Z1, ?Z2), @class(?Z1, 'FullProfessor', ?Z3, ?Z4).
+VisitingProfessor(?X) :- @i_class(?Z0, ?X, ?Z1, ?Z2), @class(?Z1, 'VisitingProfessor', ?Z3, ?Z4).
+
+?- Q(?X).

@@ -1,0 +1,5 @@
+Thing(?y, ?z, ?w):- Uses(?x, ?y).
+
+Uses('a', 'b').
+
+?- Thing(?x, ?y, ?z).

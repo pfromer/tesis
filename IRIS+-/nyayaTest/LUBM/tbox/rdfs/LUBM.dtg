@@ -1,0 +1,110 @@
+/// Converted TBox ///
+Publication(?X) :- publicationAuthor(?X, ?Y).
+degreeFrom(?X, ?Y) :- doctoralDegreeFrom(?X, ?Y).
+University(?Y) :- undergraduateDegreeFrom(?X, ?Y).
+Professor(?X) :- Dean(?X).
+Organization(?X) :- University(?X).
+Software(?X) :- softwareVersion(?X, ?Y).
+Research(?Y) :- publicationResearch(?X, ?Y).
+Organization(?X) :- Program(?X).
+Professor(?X) :- FullProfessor(?X).
+Person(?Y) :- publicationAuthor(?X, ?Y).
+Person(?X) :- title(?X, ?Y).
+Professor(?X) :- AssociateProfessor(?X).
+Organization(?Y) :- affiliatedOrganizationOf(?X, ?Y).
+Organization(?X) :- subOrganizationOf(?X, ?Y).
+Person(?Y) :- member(?X, ?Y).
+Organization(?Y) :- subOrganizationOf(?X, ?Y).
+memberOf(?X, ?Y) :- worksFor(?X, ?Y).
+Publication(?Y) :- softwareDocumentation(?X, ?Y).
+Employee(?X) :- AdministrativeStaff(?X).
+Organization(?X) :- ResearchGroup(?X).
+Professor(?X) :- AssistantProfessor(?X).
+Publication(?X) :- Book(?X).
+University(?X) :- hasAlumnus(?X, ?Y).
+aux_0(?X,?Y) :- Dean(?X).
+Employee(?X) :- Faculty(?X).
+Faculty(?X) :- Lecturer(?X).
+Person(?Y) :- affiliateOf(?X, ?Y).
+Person(?X) :- doctoralDegreeFrom(?X, ?Y).
+degreeFrom(?X, ?Y) :- mastersDegreeFrom(?X, ?Y).
+Professor(?Y) :- advisor(?X, ?Y).
+Work(?X) :- Course(?X).
+worksFor(?X, ?Y) :- headOf(?X, ?Y).
+Course(?Y) :- listedCourse(?X, ?Y).
+Person(?X) :- Director(?X).
+aux_1(?X,?Y) :- Chair(?X).
+Publication(?Y) :- orgPublication(?X, ?Y).
+Article(?X) :- JournalArticle(?X).
+Person(?X) :- telephone(?X, ?Y).
+Organization(?X) :- member(?X, ?Y).
+University(?Y) :- degreeFrom(?X, ?Y).
+Professor(?X) :- tenured(?X, ?Y).
+Research(?Y) :- researchProject(?X, ?Y).
+University(?Y) :- doctoralDegreeFrom(?X, ?Y).
+Person(?X) :- degreeFrom(?X, ?Y).
+Publication(?X) :- UnofficialPublication(?X).
+Organization(?X) :- orgPublication(?X, ?Y).
+AdministrativeStaff(?X) :- SystemsStaff(?X).
+Student(?X) :- ResearchAssistant(?X).
+Faculty(?X) :- PostDoc(?X).
+Person(?X) :- age(?X, ?Y).
+Publication(?X) :- Specification(?X).
+Professor(?X) :- Chair(?X).
+Work(?X) :- Research(?X).
+Person(?X) :- undergraduateDegreeFrom(?X, ?Y).
+Article(?X) :- ConferencePaper(?X).
+Person(?X) :- mastersDegreeFrom(?X, ?Y).
+aux_2(?X,?Y) :- TeachingAssistant(?X).
+Organization(?X) :- affiliatedOrganizationOf(?X, ?Y).
+Publication(?X) :- Software(?X).
+degreeFrom(?X, ?Y) :- undergraduateDegreeFrom(?X, ?Y).
+Publication(?X) :- Article(?X).
+Organization(?X) :- Department(?X).
+Faculty(?X) :- teacherOf(?X, ?Y).
+Professor(?X) :- VisitingProfessor(?X).
+TeachingAssistant(?X) :- teachingAssistantOf(?X, ?Y).
+aux_3(?X,?Y) :- Director(?X).
+Course(?Y) :- teachingAssistantOf(?X, ?Y).
+Organization(?X) :- College(?X).
+Article(?X) :- TechnicalReport(?X).
+Course(?X) :- GraduateCourse(?X).
+aux_4(?X,?Y) :- Student(?X).
+Publication(?X) :- publicationDate(?X, ?Y).
+Organization(?X) :- affiliateOf(?X, ?Y).
+ResearchGroup(?X) :- researchProject(?X, ?Y).
+aux_5(?X,?Y) :- Employee(?X).
+Person(?X) :- GraduateStudent(?X).
+AdministrativeStaff(?X) :- ClericalStaff(?X).
+Student(?X) :- UndergraduateStudent(?X).
+Person(?X) :- advisor(?X, ?Y).
+Organization(?X) :- Institute(?X).
+Schedule(?X) :- listedCourse(?X, ?Y).
+Person(?X) :- emailAddress(?X, ?Y).
+Software(?X) :- softwareDocumentation(?X, ?Y).
+Publication(?X) :- publicationResearch(?X, ?Y).
+aux_6(?X,?Y) :- ResearchAssistant(?X).
+Person(?Y) :- hasAlumnus(?X, ?Y).
+Faculty(?X) :- Professor(?X).
+Course(?Y) :- teacherOf(?X, ?Y).
+aux_7(?X,?Y) :- GraduateStudent(?X).
+University(?Y) :- mastersDegreeFrom(?X, ?Y).
+Publication(?X) :- Manual(?X).
+headOf(?X,?Y) :- aux_1(?X,?Y).
+Department(?Y) :- aux_1(?X,?Y).
+teachingAssistantOf(?X,?Y) :- aux_2(?X,?Y).
+Course(?Y) :- aux_2(?X,?Y).
+headOf(?X,?Y) :- aux_0(?X,?Y).
+College(?Y) :- aux_0(?X,?Y).
+worksFor(?X,?Y) :- aux_5(?X,?Y).
+Organization(?Y) :- aux_5(?X,?Y).
+worksFor(?X,?Y) :- aux_6(?X,?Y).
+ResearchGroup(?Y) :- aux_6(?X,?Y).
+headOf(?X,?Y) :- aux_3(?X,?Y).
+Program(?Y) :- aux_3(?X,?Y).
+takesCourse(?X,?Y) :- aux_4(?X,?Y).
+Course(?Y) :- aux_4(?X,?Y).
+takesCourse(?X,?Y) :- aux_7(?X,?Y).
+GraduateCourse(?Y) :- aux_7(?X,?Y).
+
+/// Total TBox Axioms: 91 ///

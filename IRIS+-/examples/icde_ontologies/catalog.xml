@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog id="file:/home/jd/development/workspace/IRIS+-/examples/icde_ontologies/" prefer="public" xml:base="file:/home/jd/development/workspace/IRIS+-/examples/icde_ontologies/" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri name="http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl" uri="lubm.owl"/>
+    <uri name="http://purl.uniprot.org/core/" uri="uniprot.owl"/>
+    <uri name="http://www.systemone.at/2006/03/wikipedia#" uri="wikipedia.owl"/>
+    <uri name="http://semantics.crl.ibm.com/univ-bench-dl.owl" uri="uobm.owl"/>
+    <uri name="http://lsdis.cs.uga.edu/proj/semdis/testbed/#" uri="sweto.owl"/>
+    <uri name="http://www.systemone.at/2006/03/wikipedia" uri="wikipedia.owl"/>
+</catalog>

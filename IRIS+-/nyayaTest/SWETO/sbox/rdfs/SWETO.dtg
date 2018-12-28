@@ -1,0 +1,186 @@
+/// Converted SBox ///
+ACM_Second_level_Classification(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#ACM_Second_level_Classification').
+target_type(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#target_type'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+URL_link(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#URL_link'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Spring(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Spring').
+publication_keywords(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#publication_keywords'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Levee(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Levee').
+Terrorist_Organization(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Terrorist_Organization').
+Slope(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Slope').
+Arroyo(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Arroyo').
+Locale(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Locale').
+published_in(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#published_in'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Person(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Person').
+boundary(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#boundary'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+height(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#height'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Engineering_Department(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Engineering_Department').
+languages(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#languages'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+attribute_country(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#attribute_country'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Mathematics_Professor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Mathematics_Professor').
+occurred_in(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#occurred_in'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+curation(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#curation'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+responsible_for(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#responsible_for'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Politician(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Politician').
+Isthmus(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Isthmus').
+Church(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Church').
+build(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#build'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Cliff(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Cliff').
+geographic_description(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#geographic_description'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Bridge(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Bridge').
+ACM_Top_level_Classification(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#ACM_Top_level_Classification').
+sex(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#sex'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Island(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Island').
+Physics_Professor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Physics_Professor').
+Complex(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Complex').
+listed_author_in(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#listed_author_in'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+location(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#location'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Park(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Park').
+Channel(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Channel').
+address(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#address'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Ridge(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Ridge').
+Mathematics_Department(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Mathematics_Department').
+Trail(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Trail').
+Statistics_Professor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Statistics_Professor').
+extractorId(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#extractorId'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+City(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#City').
+bounding_box(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#bounding_box'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Publication(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Publication').
+sourceId(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#sourceId'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Lake(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Lake').
+Engineering_Professor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Engineering_Professor').
+University(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#University').
+Company(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Company').
+Natural_Arch(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Natural_Arch').
+Harbor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Harbor').
+Falls(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Falls').
+Region(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Region').
+Woods(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Woods').
+Natural_Bend(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Natural_Bend').
+Political_Organization(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Political_Organization').
+Civil(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Civil').
+owner(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#owner'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Geyser(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Geyser').
+page_numbers(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#page_numbers'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Range(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Range').
+Professor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Professor').
+Tunnel(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Tunnel').
+ACM_Third_level_Classification(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#ACM_Third_level_Classification').
+fatalities(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#fatalities'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Summit(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Summit').
+Transport_Structure(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Transport_Structure').
+extraction_method(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#extraction_method'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Book(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Book').
+Airport(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Airport').
+weight(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#weight'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Stream(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Stream').
+extraction_tool(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#extraction_tool'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Gap(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Gap').
+Country(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Country').
+Recreation_Feature(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Recreation_Feature').
+synonym(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#synonym'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Swamp(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Swamp').
+Natural_Bench(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Natural_Bench').
+Extraction_Structure(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Extraction_Structure').
+Rapids(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Rapids').
+description(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#description'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+classified_with(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#classified_with'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Journal(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Journal').
+Crossing(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Crossing').
+Building(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Building').
+Terrorist(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Terrorist').
+Lava(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Lava').
+elevation(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#elevation'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Academic_Department(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Academic_Department').
+Physics_Department(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Physics_Department').
+affiliated_with(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#affiliated_with'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+has_academic_department(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#has_academic_department'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Hospital(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Hospital').
+parentURI(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#parentURI'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Cemetery(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Cemetery').
+No(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#No'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Computer_Science_Professor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Computer_Science_Professor').
+Reserve(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Reserve').
+attack_type(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#attack_type'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+faculty_member_at(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#faculty_member_at'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+County(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#County').
+Organization(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Organization').
+Statistics_Department(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Statistics_Department').
+Flat(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Flat').
+Well(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Well').
+hair(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#hair'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Natural_Feature(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Natural_Feature').
+airport_code(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#airport_code'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+scars_and_marks(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#scars_and_marks'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Researcher(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Researcher').
+Place(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Place').
+Financial_Organization(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Financial_Organization').
+Beach(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Beach').
+Download_link(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Download_link'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Oilfield(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Oilfield').
+Forest(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Forest').
+Scientific_Publication(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Scientific_Publication').
+event_date(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#event_date'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Manmade_Structure(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Manmade_Structure').
+Tower(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Tower').
+reward(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#reward'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Cave(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Cave').
+name(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#name'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Gut(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Gut').
+Academic_Organization(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Academic_Organization').
+Computer_Science_Department(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Computer_Science_Department').
+Sea(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Sea').
+remarks(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#remarks'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+complexion(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#complexion'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+member_of(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#member_of'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+date_of_birth_used(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#date_of_birth_used'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+type_of_event(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#type_of_event'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+eye(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#eye'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Cape(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Cape').
+is_manmade(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#is_manmade'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Water_Feature(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Water_Feature').
+Reservoir(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Reservoir').
+altitude(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#altitude'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+lives_in(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#lives_in'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Publication_Classification(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Publication_Classification').
+Natural_Pillar(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Natural_Pillar').
+Plain(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Plain').
+extracted_by_person(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#extracted_by_person'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Glacier(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Glacier').
+Bay(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Bay').
+injured(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#injured'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+topo_map(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#topo_map'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Bar(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Bar').
+extraction_update_date_time(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#extraction_update_date_time'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Landmark(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Landmark').
+Mine(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Mine').
+extraction_date_time(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#extraction_date_time'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+has_citizenship_in(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#has_citizenship_in'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Volume(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Volume'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Conference(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Conference').
+Area(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Area').
+School(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#School').
+caution(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#caution'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+source_location(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#source_location'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+code(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#code'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Year_pulished(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Year_pulished'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Canal(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Canal').
+Crater(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Crater').
+Land_Feature(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Land_Feature').
+ACM_Subject_Descriptors(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#ACM_Subject_Descriptors').
+located_in(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#located_in'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Computer_Science_Researcher(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Computer_Science_Researcher').
+leader_of(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#leader_of'), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Basin(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Basin').
+bank_type(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#bank_type'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+place_of_birth(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#place_of_birth'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Water_Structure(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Water_Structure').
+State(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#State').
+latitude_longitude(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#latitude_longitude'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Terrorist_Attack(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Terrorist_Attack').
+est_population(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#est_population'), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Dam(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Dam').
+Valley(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Valley').
+Thing(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Thing').
+Event(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://lsdis.cs.uga.edu/proj/semdis/testbed/#Event').
+
+/// Total SBox Axioms: 183 ///

@@ -1,0 +1,11 @@
+==================SUMMARY==================
+Ontology file:             university.owl
+Query:                     Q(X0,X1)  <-  Course(X1) ^ Person(X0) ^ teacherOf(X0,X1)
+Number of assertions:      127
+Number of concept symbols: 34
+Number of role symbols:    26
+Running time:              125 milliseconds 
+Size of the rewriting (queries):     1
+Size of the rewriting (symbols):     30
+0: Q(X0,X1)  <-  teacherOf(X0,X1)
+==================SUMMARY==================

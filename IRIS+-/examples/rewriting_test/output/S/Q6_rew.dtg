@@ -1,0 +1,78 @@
+/// Query: Q6(?X0) :- Person(?X2), hasStock(?X2, ?X1), listsStock(?X0, ?X1).///
+/// Ontology: S////// Created on: 2015-05-12-10:05:43 ///
+/// Rules in the program: 243 ///
+/// TGDs in the program: 52 ///
+/// Constraints in the program: 1 ///
+/// Theory expressivity: [LINEAR, GUARDED, STICKY] ///
+/// Decomposition: MONOLITIC ///
+/// Subsumption Check Strategy: NONE ///
+/// Negative Constraints Check Strategy: NONE ///
+
+/// ---------- METRICS ----------
+
+/// ----- SIZE -----
+/// Decomposition size: 0 queries.
+/// Decomposition: null
+/// # of queries: 6.
+/// # of atoms: 10.
+/// # of joins: 4.
+/// # of generated queries: 5.
+/// # of explored queries: 6.
+/// Constraints rewriting count: 0.
+/// # of queries purged via subcheck: 0.
+/// # of queries purged via nccheck: 0.
+
+/// ----- TIME -----
+/// Total: 9 msec.
+/// Backward rewriting: 8 msec.
+/// Factorisation: 0 msec.
+/// Query elimination: 0 msec.
+/// Negative contraints violation check: 0 msec.
+/// Subsumption Check: 0 msec.
+/// Query Decomposition: 0 msec.
+/// Rewriting Unfolding: 0 msec.
+/// Canonical Renaming: 0 msec.
+/// Dependency graph: 18 msec (constant).
+/// Cover graph: 16299 msec (constant).
+/// Cleaning (aux predicates): 0 msec.
+/// Constraints rewriting time: 0 msec (constant).
+/// Overhead: 1 msec.
+
+/// ----- OTHER -----
+/// # Cover checks: 26.
+/// Covering cache hits: 0.
+/// Non-Covering cache hits: 10.
+/// # of eliminated atoms: 3.
+/// Max covering cache size: 3.
+/// Max non covering cache size: 13.
+/// # of subsumption checks: 0.
+/// Subsumed cache hits: 0.
+/// Not Subsumed cache hits: 0.
+/// Max subsumption cache size: 0.
+/// Max not subsumed cache size: 0.
+/// Renaming count: 337.
+/// Renaming cache hits: 266.
+/// Cartesian cache hits: 0.
+/// MGU applications: 34.
+/// MGU cache hits: 14.
+/// Factor count: 4.
+/// Factor cache hits: 0.
+/// Non Factor cache hits: 0.
+
+/// ----- MEMORY -----
+/// # Rewriting Memory: 0 Kb.
+/// # P-Graph Memory: 0 Kb.
+/// # C-Graph Memory: 0 Kb.
+/// # NC rewriting Memory: 0 Kb.
+
+
+/// Rewritten Program ///
+Q6(?U0) :- hasStock(?U1, ?U2), listsStock(?U0, ?U2).
+Q6(?U0) :- hasStock(?U1, ?U2), isListedIn(?U2, ?U0).
+Q6(?U0) :- listsStock(?U0, ?U1), belongsToCompany(?U1, ?U2).
+Q6(?U0) :- isListedIn(?U1, ?U0), belongsToCompany(?U1, ?U2).
+Q6(?U0) :- listsStock(?U0, ?U1).
+Q6(?U0) :- isListedIn(?U1, ?U0).
+
+?- Q6(?U0).
+

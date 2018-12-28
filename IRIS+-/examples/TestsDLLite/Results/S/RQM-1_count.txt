@@ -1,0 +1,3 @@
+Rewriting Size (queries): 160
+Rewriting Size (atoms): 480
+Rewriting Size (joins): 320

@@ -1,0 +1,20 @@
+==================SUMMARY==================
+Ontology file:             u.owl
+Query:                     Q(X0)  <-  Person(X0) ^ University(X1) ^ hasAlumnus(X1,X0) ^ worksFor(X0,X1)
+Number of assertions:      127
+Number of concept symbols: 34
+Number of role symbols:    26
+Running time:              15262 milliseconds 
+Size of the rewriting (queries):     10
+Size of the rewriting (symbols):     932
+0: Q(X0)  <-  degreeFrom(X1,X2) ^ degreeFrom(X0,X2) ^ headOf(X0,X2) ^ headOf(X0,X3)
+1: Q(X0)  <-  degreeFrom(X1,X2) ^ degreeFrom(X0,X2) ^ worksFor(X0,X2) ^ worksFor(X0,X3)
+2: Q(X0)  <-  doctoralDegreeFrom(X1,X2) ^ doctoralDegreeFrom(X0,X2) ^ headOf(X0,X2) ^ headOf(X0,X3)
+3: Q(X0)  <-  doctoralDegreeFrom(X1,X2) ^ doctoralDegreeFrom(X0,X2) ^ worksFor(X0,X2) ^ worksFor(X0,X3)
+4: Q(X0)  <-  hasAlumnus(X1,X0) ^ hasAlumnus(X1,X2) ^ headOf(X0,X1) ^ headOf(X0,X3)
+5: Q(X0)  <-  hasAlumnus(X1,X0) ^ hasAlumnus(X1,X2) ^ worksFor(X0,X1) ^ worksFor(X0,X3)
+6: Q(X0)  <-  headOf(X0,X1) ^ headOf(X0,X2) ^ mastersDegreeFrom(X3,X1) ^ mastersDegreeFrom(X0,X1)
+7: Q(X0)  <-  headOf(X0,X1) ^ headOf(X0,X2) ^ undergraduateDegreeFrom(X3,X1) ^ undergraduateDegreeFrom(X0,X1)
+8: Q(X0)  <-  mastersDegreeFrom(X1,X2) ^ mastersDegreeFrom(X0,X2) ^ worksFor(X0,X2) ^ worksFor(X0,X3)
+9: Q(X0)  <-  undergraduateDegreeFrom(X1,X2) ^ undergraduateDegreeFrom(X0,X2) ^ worksFor(X0,X2) ^ worksFor(X0,X3)
+==================SUMMARY==================

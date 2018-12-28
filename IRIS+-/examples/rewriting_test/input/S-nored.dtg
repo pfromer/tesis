@@ -1,0 +1,19 @@
+Stock(?X) :- belongsToCompany(?X, ?Y).
+belongsToCompany(?X, ?Y) :- hasStock(?Y, ?X).
+Company(?Y) :- belongsToCompany(?X, ?Y).
+belongsToCompany(?X, ?Y) :- Stock(?X).
+LegalPerson(?X) :- Company(?X).
+Company(?X) :- hasStock(?X, ?Y).
+Stock(?Y) :- hasStock(?X, ?Y).
+Stock(?Y) :- listsStock(?X, ?Y).
+isListedIn(?X, ?Y) :- Stock(?X).
+Stock(?X) :- isListedIn(?X, ?Y).
+FinantialInstrument(?X) :- Stock(?X).
+
+Q_2(?A,?B,?C) :- FinantialInstrument(?A), belongsToCompany(?A,?B), Company(?B), hasStock(?B,?C), Stock(?C).
+
+?- Q_2(?A,?B,?C).
+
+Q_1() :- FinantialInstrument(?A), belongsToCompany(?A,?B), Company(?B), hasStock(?B,?C), Stock(?C).
+
+?- Q_1().

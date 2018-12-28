@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="org/deri/iris/evaluation/qsq/" kind="src" path="test"/>
+	<classpathentry kind="src" path="app"/>
+	<classpathentry excluding="org/deri/iris/evaluation/qsq/" kind="src" path="src"/>
+	<classpathentry kind="src" path="parser"/>
+	<classpathentry kind="src" path="api"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/guava-14.0.1.jar" sourcepath="/home/giorsi/.m2/repository/com/google/guava/guava/14.0.1/guava-14.0.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.11-bin.jar"/>
+	<classpathentry kind="lib" path="lib/ndmhash.jar"/>
+	<classpathentry kind="lib" path="lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="lib/opencsv-2.3.jar"/>
+	<classpathentry kind="lib" path="lib/postgresql-9.2-1003.jdbc4.jar"/>
+	<classpathentry kind="lib" path="lib/xmlunit1.0.jar"/>
+	<classpathentry kind="lib" path="lib/ext/jgrapht/jgrapht-jdk1.5-0.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/ext/sablecc/sablecc.jar"/>
+	<classpathentry kind="lib" path="lib/jgraph-5.13.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/jgrapht-core-0.9.0.jar"/>
+	<classpathentry kind="lib" path="lib/jgrapht-demo-0.9.0.jar"/>
+	<classpathentry kind="lib" path="lib/jgrapht-ext-0.9.0-uber.jar"/>
+	<classpathentry kind="lib" path="lib/jgrapht-ext-0.9.0.jar"/>
+	<classpathentry kind="lib" path="lib/jgraphx-2.0.0.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

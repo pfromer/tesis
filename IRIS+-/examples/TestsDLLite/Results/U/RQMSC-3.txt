@@ -1,0 +1,12 @@
+==================SUMMARY==================
+Ontology file:             u.owl
+Query:                     Q(X0,X1)  <-  Organization(X1) ^ Person(X0) ^ worksFor(X0,X1)
+Number of assertions:      127
+Number of concept symbols: 34
+Number of role symbols:    26
+Running time:              4093 milliseconds 
+Size of the rewriting (queries):     2
+Size of the rewriting (symbols):     124
+0: Q(X0,X1)  <-  headOf(X0,X1) ^ headOf(X2,X1) ^ headOf(X0,X3)
+1: Q(X0,X1)  <-  worksFor(X0,X1) ^ worksFor(X2,X1) ^ worksFor(X0,X3)
+==================SUMMARY==================

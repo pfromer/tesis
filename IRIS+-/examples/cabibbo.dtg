@@ -1,0 +1,22 @@
+/// Keys and FK constraints (Local to the schemas)///
+
+DS2_Person(?z, ?w, ?t):- DS2_Car(?x, ?y, ?z).
+
+/// Mappings ///
+DS2_Person(?x, ?y, ?z) :- DS1_Person(?x, ?y, ?z).
+DS2_Car(?x, ?y, ?z) :- DS1_Car(?x, ?y), DS1_Owner(?x, ?z).
+DS2_Car(?x, ?y, '') :- DS1_Car(?x, ?y), !DS1_Owner(?x, ?_).
+
+/// Queries ///
+?- DS2_Person(?x, ?y, ?z).
+?- DS2_Car(?x, ?y, ?z).
+
+/// DB Instance ///
+DS1_Person('p21', 'John', 'j@m').
+DS1_Person('p22', 'MJ', 'mj@m').
+
+DS1_Car('c85', 'Ferrari').
+DS1_Car('c86', 'Ford').
+
+DS1_Owner('c85', 'p22').
+

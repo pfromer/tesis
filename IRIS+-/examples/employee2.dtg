@@ -1,0 +1,8 @@
+employee(?m) :- manager(?m).
+directs(?m, ?p) :- manager(?m).
+director(?e) :- employee(?e), directs(?e, ?p).
+
+
+manager('jo').
+
+?- director(?X).

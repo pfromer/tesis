@@ -1,0 +1,278 @@
+/// Created by: OWL 2 Datalog +- Converter ///
+/// Author: Giorgio Orsi <orsi@elet.polimi.it> - Politecnico di Milano ///
+/// Created on: 2011/11/23 09:22:53 ///
+/// Expressiveness: OWL-QL ///
+/// Storage Rules: DISABLED///
+
+/// Converted TBox ///
+headOf(?X, ?Y) :- AUX2(?X, ?Y).
+degreeFrom(?X, ?Y) :- doctoralDegreeFrom(?X, ?Y).
+Faculty(?X) :- isPartOfUniversity(?X, ?Y).
+Professor(?X) :- Dean(?X).
+University(?Y) :- undergraduateDegreeFrom(?X, ?Y).
+Organization(?X) :- University(?X).
+headOf(?X, ?Y) :- AUX0(?X, ?Y).
+hasFaculty(?X, ?Y) :- isPartOfUniversity(?Y, ?X).
+isPartOfUniversity(?Y, ?X) :- hasFaculty(?X, ?Y).
+Person(?X) :- Employee(?X).
+Organization(?X) :- Program(?X).
+Professor(?X) :- FullProfessor(?X).
+Person(?Y) :- publicationAuthor(?X, ?Y).
+takesCourse(?X, ?Y) :- AUX4(?X, ?Y).
+University(?Y) :- isPartOfUniversity(?X, ?Y).
+FacultyStaff(?X) :- Professor(?X).
+FacultyStaff(?X) :- PostDoc(?X).
+Professor(?X) :- AssociateProfessor(?X).
+Organization(?Y) :- affiliatedOrganizationOf(?X, ?Y).
+Person(?Y) :- member(?X, ?Y).
+AUX4(?X, ?Y) :- Student(?X).
+AUX3(?X, ?Y) :- GraduateStudent(?X).
+GraduateCourse(?X) :- AUX3(?Y, ?X).
+memberOf(?X, ?Y) :- worksFor(?X, ?Y).
+Employee(?X) :- AdministrativeStaff(?X).
+Organization(?X) :- AUX1(?Y, ?X).
+Professor(?X) :- AssistantProfessor(?X).
+University(?X) :- hasAlumnus(?X, ?Y).
+Exam(?X) :- BachelorExam(?X).
+worksFor(?X, ?Y) :- AUX1(?X, ?Y).
+Person(?Y) :- affiliateOf(?X, ?Y).
+Employee(?X) :- FacultyStaff(?X).
+degreeFrom(?X, ?Y) :- mastersDegreeFrom(?X, ?Y).
+Person(?X) :- doctoralDegreeFrom(?X, ?Y).
+Professor(?Y) :- advisor(?X, ?Y).
+Work(?X) :- Course(?X).
+worksFor(?X, ?Y) :- headOf(?X, ?Y).
+Person(?X) :- Director(?X).
+Organization(?X) :- member(?X, ?Y).
+FacultyStaff(?X) :- Lecturer(?X).
+University(?Y) :- degreeFrom(?X, ?Y).
+AUX0(?X, ?Y) :- Director(?X).
+Professor(?X) :- tenured(?X, ?Y).
+University(?Y) :- doctoralDegreeFrom(?X, ?Y).
+member(?X, ?Y) :- memberOf(?Y, ?X).
+memberOf(?Y, ?X) :- member(?X, ?Y).
+Person(?X) :- degreeFrom(?X, ?Y).
+Student(?X) :- hasExamRecord(?X, ?Y).
+Organization(?X) :- orgPublication(?X, ?Y).
+AdministrativeStaff(?X) :- SystemsStaff(?X).
+Faculty(?Y) :- hasFaculty(?X, ?Y).
+College(?X) :- AUX2(?Y, ?X).
+Student(?X) :- ResearchAssistant(?X).
+AUX2(?X, ?Y) :- Dean(?X).
+ExamRecord(?Y) :- hasExamRecord(?X, ?Y).
+Professor(?X) :- Chair(?X).
+Person(?X) :- undergraduateDegreeFrom(?X, ?Y).
+Person(?X) :- mastersDegreeFrom(?X, ?Y).
+Organization(?X) :- affiliatedOrganizationOf(?X, ?Y).
+Course(?X) :- AUX4(?Y, ?X).
+degreeFrom(?X, ?Y) :- undergraduateDegreeFrom(?X, ?Y).
+Person(?X) :- Student(?X).
+Work(?X) :- Career(?X).
+Professor(?X) :- VisitingProfessor(?X).
+AUX1(?X, ?Y) :- Employee(?X).
+takesCourse(?X, ?Y) :- AUX3(?X, ?Y).
+Course(?Y) :- teachingAssistantOf(?X, ?Y).
+Organization(?X) :- College(?X).
+Course(?X) :- GraduateCourse(?X).
+degreeFrom(?X, ?Y) :- hasAlumnus(?Y, ?X).
+hasAlumnus(?Y, ?X) :- degreeFrom(?X, ?Y).
+Professor(?X) :- ExDean(?X).
+Organization(?X) :- affiliateOf(?X, ?Y).
+Work(?X) :- ExamRecord(?X).
+Program(?X) :- AUX0(?Y, ?X).
+Person(?X) :- GraduateStudent(?X).
+AdministrativeStaff(?X) :- ClericalStaff(?X).
+Student(?X) :- UndergraduateStudent(?X).
+Person(?X) :- advisor(?X, ?Y).
+University(?X) :- hasFaculty(?X, ?Y).
+Organization(?X) :- Faculty(?X).
+Person(?Y) :- hasAlumnus(?X, ?Y).
+FacultyStaff(?X) :- teacherOf(?X, ?Y).
+Course(?Y) :- teacherOf(?X, ?Y).
+University(?Y) :- mastersDegreeFrom(?X, ?Y).
+Work(?X) :- Exam(?X).
+Work(?X) :- Degree(?X).
+
+/// Total TBox Axioms: 84 ///
+
+/// Converted ABox ///
+
+/// Total ABox Axioms: 0 ///
+
+/// Converted SBox ///
+
+/// Total SBox Axioms: 0 ///
+
+Q1(?A) :- worksFor(?A,?B), affiliatedOrganizationOf(?B,?C).
+Q2(?A,?B) :- Person(?A), teacherOf(?A,?B), Course(?B).
+Q3(?A,?B,?C) :- Student(?A), advisor(?A,?B), FacultyStaff(?B), takesCourse(?A,?C), teacherOf(?B,?C), Course(?C).
+Q4(?A,?B) :- Person(?A), worksFor(?A,?B), Organization(?B).
+Q5(?A) :- Person(?A), worksFor(?A,?B), University(?B), hasAlumnus(?B,?A).
+Q6(?X0) :- FacultyStaff(?X0).
+Q7(?X0,?X1) :- member(?X1,?X0).
+Q8(?X0) :- undergraduateDegreeFrom(?X0,?X1), University(?X1).
+Q9(?X0) :- undergraduateDegreeFrom(?X0,?X1), Organization(?X1).
+Q10(?X0) :- University(?X0).
+Q11(?X0,?X1) :- hasFaculty(?X1,?X0).
+Q12(?X0) :- takesCourse(?X0,?X1), Work(?X1).
+Q13(?X0) :- isPartOfUniversity(?X0,?X1), University(?X1).
+Q14(?X0) :- headOf(?X0,?X1), Organization(?X1).
+Q15(?X0) :- isPartOfUniversity(?X1,?X0), Faculty(?X1).
+Q16(?X0) :- hasFaculty(?X1,?X0), Organization(?X1).
+Q17(?X0,?X1) :- degreeFrom(?X0,?X1).
+Q18(?X0) :- Person(?X0).
+Q19(?X0) :- Employee(?X0).
+Q20(?X0) :- degreeFrom(?X1,?X0), Person(?X1).
+Q21(?X0) :- doctoralDegreeFrom(?X0,?X1).
+Q22(?X0,?X1) :- isPartOfUniversity(?X0,?X1).
+Q23(?X0) :- memberOf(?X0,?X1), College(?X1).
+Q24(?X0) :- hasAlumnus(?X1,?X0), Organization(?X1).
+Q25(?X0) :- memberOf(?X0,?X1), Organization(?X1).
+Q26(?X0) :- worksFor(?X0,?X1).
+Q27(?X0) :- degreeFrom(?X0,?X1), Organization(?X1).
+Q28(?X0) :- hasFaculty(?X1,?X0).
+Q29(?X0,?X1) :- memberOf(?X0,?X1).
+Q30(?X0) :- takesCourse(?X0,?X1), GraduateCourse(?X1).
+Q31(?X0) :- doctoralDegreeFrom(?X0,?X1), Organization(?X1).
+Q32(?X0) :- member(?X1,?X0).
+Q33(?X0) :- AdministrativeStaff(?X0).
+Q34(?X0) :- memberOf(?X0,?X1).
+Q35(?X0) :- mastersDegreeFrom(?X0,?X1), Organization(?X1).
+Q36(?X0) :- Exam(?X0).
+Q37(?X0,?X1) :- worksFor(?X0,?X1).
+Q38(?X0) :- ExamRecord(?X0).
+Q39(?X0) :- isPartOfUniversity(?X0,?X1), Organization(?X1).
+Q40(?X0) :- hasFaculty(?X0,?X1).
+Q41(?X0) :- takesCourse(?X0,?X1).
+Q42(?X0) :- hasAlumnus(?X0,?X1), Person(?X1).
+Q43(?X0,?X1) :- member(?X0,?X1).
+Q44(?X0,?X1) :- hasAlumnus(?X1,?X0).
+Q45(?X0) :- isPartOfUniversity(?X1,?X0), Organization(?X1).
+Q46(?X0) :- hasAlumnus(?X1,?X0), University(?X1).
+Q47(?X0,?X1) :- isPartOfUniversity(?X1,?X0).
+Q48(?X0) :- hasAlumnus(?X0,?X1).
+Q49(?X0) :- member(?X1,?X0), Organization(?X1).
+Q50(?X0) :- Faculty(?X0).
+Q51(?X0) :- worksFor(?X0,?X1), Program(?X1).
+Q52(?X0) :- isPartOfUniversity(?X0,?X1).
+Q53(?X0) :- memberOf(?X1,?X0).
+Q54(?X0) :- headOf(?X0,?X1), Program(?X1).
+Q55(?X0,?X1) :- degreeFrom(?X1,?X0).
+Q56(?X0) :- doctoralDegreeFrom(?X0,?X1), University(?X1).
+Q57(?X0) :- memberOf(?X1,?X0), Person(?X1).
+Q58(?X0) :- degreeFrom(?X0,?X1), University(?X1).
+Q59(?X0) :- undergraduateDegreeFrom(?X0,?X1).
+Q60(?X0) :- Student(?X0).
+Q61(?X0) :- Professor(?X0).
+Q62(?X0) :- memberOf(?X0,?X1), Program(?X1).
+Q63(?X0) :- isPartOfUniversity(?X1,?X0).
+Q64(?X0) :- degreeFrom(?X1,?X0).
+Q65(?X0) :- Work(?X0).
+Q66(?X0) :- member(?X1,?X0), Program(?X1).
+Q67(?X0) :- headOf(?X0,?X1).
+Q68(?X0) :- Course(?X0).
+Q69(?X0) :- hasFaculty(?X0,?X1), Faculty(?X1).
+Q70(?X0) :- member(?X0,?X1), Person(?X1).
+Q71(?X0) :- mastersDegreeFrom(?X0,?X1).
+Q72(?X0) :- worksFor(?X0,?X1), Organization(?X1).
+Q73(?X0) :- member(?X1,?X0), College(?X1).
+Q74(?X0) :- hasFaculty(?X1,?X0), University(?X1).
+Q75(?X0) :- headOf(?X0,?X1), College(?X1).
+Q76(?X0) :- degreeFrom(?X0,?X1).
+Q77(?X0) :- worksFor(?X0,?X1), College(?X1).
+Q78(?X0) :- member(?X0,?X1).
+Q79(?X0) :- Organization(?X0).
+Q80(?X0,?X1) :- hasAlumnus(?X0,?X1).
+Q81(?X0) :- mastersDegreeFrom(?X0,?X1), University(?X1).
+Q82(?X0,?X1) :- hasFaculty(?X0,?X1).
+Q83(?X0,?X1) :- memberOf(?X1,?X0).
+Q84(?X0) :- hasFaculty(?X0,?X1), Organization(?X1).
+Q85(?X0) :- hasAlumnus(?X1,?X0).
+Q86(?X0) :- takesCourse(?X0,?X1), Course(?X1).
+
+?-Q1(?A).
+?-Q2(?A,?B).
+?-Q3(?A,?B,?C).
+?-Q4(?A,?B).
+?-Q5(?A).
+?- Q6(?X0).
+?- Q7(?X0,?X1).
+?- Q8(?X0).
+?- Q9(?X0).
+?- Q10(?X0).
+?- Q11(?X0,?X1).
+?- Q12(?X0).
+?- Q13(?X0).
+?- Q14(?X0).
+?- Q15(?X0).
+?- Q16(?X0).
+?- Q17(?X0,?X1).
+?- Q18(?X0).
+?- Q19(?X0).
+?- Q20(?X0).
+?- Q21(?X0).
+?- Q22(?X0,?X1).
+?- Q23(?X0).
+?- Q24(?X0).
+?- Q25(?X0).
+?- Q26(?X0).
+?- Q27(?X0).
+?- Q28(?X0).
+?- Q29(?X0,?X1).
+?- Q30(?X0).
+?- Q31(?X0).
+?- Q32(?X0).
+?- Q33(?X0).
+?- Q34(?X0).
+?- Q35(?X0).
+?- Q36(?X0).
+?- Q37(?X0,?X1).
+?- Q38(?X0).
+?- Q39(?X0).
+?- Q40(?X0).
+?- Q41(?X0).
+?- Q42(?X0).
+?- Q43(?X0,?X1).
+?- Q44(?X0,?X1).
+?- Q45(?X0).
+?- Q46(?X0).
+?- Q47(?X0,?X1).
+?- Q48(?X0).
+?- Q49(?X0).
+?- Q50(?X0).
+?- Q51(?X0).
+?- Q52(?X0).
+?- Q53(?X0).
+?- Q54(?X0).
+?- Q55(?X0,?X1).
+?- Q56(?X0).
+?- Q57(?X0).
+?- Q58(?X0).
+?- Q59(?X0).
+?- Q60(?X0).
+?- Q61(?X0).
+?- Q62(?X0).
+?- Q63(?X0).
+?- Q64(?X0).
+?- Q65(?X0).
+?- Q66(?X0).
+?- Q67(?X0).
+?- Q68(?X0).
+?- Q69(?X0).
+?- Q70(?X0).
+?- Q71(?X0).
+?- Q72(?X0).
+?- Q73(?X0).
+?- Q74(?X0).
+?- Q75(?X0).
+?- Q76(?X0).
+?- Q77(?X0).
+?- Q78(?X0).
+?- Q79(?X0).
+?- Q80(?X0,?X1).
+?- Q81(?X0).
+?- Q82(?X0,?X1).
+?- Q83(?X0,?X1).
+?- Q84(?X0).
+?- Q85(?X0).
+?- Q86(?X0).

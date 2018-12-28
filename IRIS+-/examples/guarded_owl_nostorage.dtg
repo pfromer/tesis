@@ -1,0 +1,27 @@
+/// First Level Datalog Query or Program///
+?- Parent(?x), hasSon(?x, 'Giorgio').
+?- hasSon(?x, ?y).
+?- Parent(?x).
+?- Person(?x).
+
+/// ABox ///
+Person('Ermanna').
+Parent('Lucia').
+hasSon('Ermanna', 'Giorgio').
+hasSon('Katia', 'Manuela').
+
+/// TBox ///
+anon2 (?x) :- Parent(?x).
+Parent(?x) :- anon2(?x).
+
+Person(?x) :- anon2(?x).
+anon1(?x) :- anon2(?x).
+anon2(?x) :- anon1(?x), Person(?x).
+
+hasSon(?x, ?y) :- anon1(?x).
+Person(?y) :- hasSon(?x, ?y), anon1(?x).
+anon1(?x) :- hasSon(?x, ?y), Person(?y).
+
+// Domain and Range //
+Person(?x) :- hasSon(?x, ?y).
+Person(?y) :- hasSon(?x, ?y).

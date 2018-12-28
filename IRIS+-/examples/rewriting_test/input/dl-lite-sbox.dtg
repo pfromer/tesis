@@ -1,0 +1,35 @@
+/// Students and Professors///
+
+/// Rules ///
+s(?Y) :- t(?X,?Y).
+t(?X, ?Z):- p(?X).
+
+/// Queries ///
+Q_0(?A) :- t(?A,?B), s(?B).
+Q_1(?A) :- t(?A,?B).
+Q_2(?A) :- p(?A).
+Q_3(?A) :- s(?A).
+Q_4(?A,?B) :- t(?A,?B), s(?A), p(?B).
+Q_5(?B) :- t(?A,?B), t(?B,?C), p(?A), p(?C).
+Q_C(?A) :- t(?A,'giorgio').
+
+/// Queries to be executed ///
+?- Q_0(?A).
+?- Q_1(?A).
+?- Q_2(?A).
+?- Q_3(?A).
+?- Q_4(?A,?B).
+?- Q_5(?B).
+?- Q_C(?A).
+
+/// SBOX ///
+s(?X) :- @student(?X).
+t(?X,?Y) :- @teaches(?X,?Y).
+p(?X) :- @professor(?X).
+
+/// Directives ///
+/// #DBConnection('DRIVER', 'PROTOCOL', 'HOST', 'PORT', 'DB_NAME', 'SCHEMA_NAME', 'USER', 'PASSWORD').
+/// DRIVER = {_ORACLE | _MYSQL | _POSTGRES}
+
+#DBConnection('_POSTGRES', '', '127.0.0.1', '5432', 'schoolDB', 'school', 'irispm', '1r1spm').
+

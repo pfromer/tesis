@@ -1,0 +1,15 @@
+==================SUMMARY==================
+Ontology file:             ux.owl
+Query:                     Q(X0,X1)  <-  Organization(X1) ^ Person(X0) ^ worksFor(X0,X1)
+Number of assertions:      137
+Number of concept symbols: 35
+Number of role symbols:    31
+Running time:              36247 milliseconds 
+Size of the rewriting (queries):     5
+Size of the rewriting (symbols):     283
+0: Q(X0,X1)  <-  AUX0(X2,X1) ^ AUX0(X0,X1) ^ AUX0(X0,X3)
+1: Q(X0,X1)  <-  AUX1(X2,X1) ^ AUX1(X0,X1) ^ AUX1(X0,X3)
+2: Q(X0,X1)  <-  AUX2(X2,X1) ^ AUX2(X0,X1) ^ AUX2(X0,X3)
+3: Q(X0,X1)  <-  headOf(X0,X1) ^ headOf(X2,X1) ^ headOf(X0,X3)
+4: Q(X0,X1)  <-  worksFor(X0,X1) ^ worksFor(X2,X1) ^ worksFor(X0,X3)
+==================SUMMARY==================

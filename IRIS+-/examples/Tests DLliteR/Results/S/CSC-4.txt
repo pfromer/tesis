@@ -1,0 +1,18 @@
+==================SUMMARY==================
+Ontology file:             stockexchange.owl
+Query:                     Q(X0,X1,X2,X3)  <-  Company(X1) ^ FinantialInstrument(X0) ^ Stock(X2) ^ StockExchangeList(X3) ^ belongsToCompany(X0,X1) ^ hasStock(X1,X2) ^ isListedIn(X1,X3)
+Number of assertions:      51
+Number of concept symbols: 18
+Number of role symbols:    12
+Running time:              233958 milliseconds 
+Size of the rewriting (queries):     8
+Size of the rewriting (symbols):     648
+0: Q(X0,X1,X2,X3)  <-  belongsToCompany(X0,X1) ^ hasStock(X1,X2) ^ isListedIn(X1,X3)
+1: Q(X0,X1,X2,X3)  <-  belongsToCompany(X0,X1) ^ hasStock(X1,X2) ^ listsStock(X3,X1)
+2: Q(X0,X1,X2,X3)  <-  belongsToCompany(X2,X1) ^ belongsToCompany(X0,X1) ^ isListedIn(X1,X3)
+3: Q(X0,X1,X2,X3)  <-  belongsToCompany(X2,X1) ^ belongsToCompany(X0,X1) ^ listsStock(X3,X1)
+4: Q(X0,X1,X2,X3)  <-  belongsToCompany(X2,X1) ^ hasStock(X1,X0) ^ isListedIn(X1,X3)
+5: Q(X0,X1,X2,X3)  <-  belongsToCompany(X2,X1) ^ hasStock(X1,X0) ^ listsStock(X3,X1)
+6: Q(X0,X1,X2,X3)  <-  hasStock(X1,X0) ^ hasStock(X1,X2) ^ isListedIn(X1,X3)
+7: Q(X0,X1,X2,X3)  <-  hasStock(X1,X0) ^ hasStock(X1,X2) ^ listsStock(X3,X1)
+==================SUMMARY==================

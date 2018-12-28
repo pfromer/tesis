@@ -1,0 +1,1175 @@
+2016-07-26 13:51:39 deri.iris.queryrewriting.QueryRewritingTest [INFO] Decomposition: DECOMPOSE
+2016-07-26 13:51:39 deri.iris.queryrewriting.QueryRewritingTest [INFO] Rewriting Language: NRDATALOG
+2016-07-26 13:51:39 deri.iris.queryrewriting.QueryRewritingTest [INFO] Atom Coverage Strategy: TRANSITIVE
+2016-07-26 13:51:39 deri.iris.queryrewriting.QueryRewritingTest [INFO] Subsumption Check Strategy: INTRADEC
+2016-07-26 13:51:39 deri.iris.queryrewriting.QueryRewritingTest [INFO] Negative Constraints Check Strategy NONE
+2016-07-26 13:51:39 deri.iris.queryrewriting.QueryRewritingTest [INFO] Created output directory: George
+2016-07-26 13:51:39 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing file: George
+2016-07-26 13:51:39 deri.iris.queryrewriting.QueryRewritingTest [INFO] Expressivity: [STICKY, GUARDED, LINEAR]
+2016-07-26 13:51:39 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing propagation graph.
+2016-07-26 13:51:39 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Propagation Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:51:39 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing cover graph.
+2016-07-26 13:51:39 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Cover Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:51:39 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Finished rewriting constraints.
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [INFO] Decomposition: DECOMPOSE
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [INFO] Rewriting Language: NRDATALOG
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [INFO] Atom Coverage Strategy: TRANSITIVE
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [INFO] Subsumption Check Strategy: INTRADEC
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [INFO] Negative Constraints Check Strategy NONE
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing file: George
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [INFO] Expressivity: [STICKY, GUARDED, LINEAR]
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing propagation graph.
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Propagation Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing cover graph.
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Cover Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Finished rewriting constraints.
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [INFO] Decomposition: DECOMPOSE
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [INFO] Rewriting Language: NRDATALOG
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [INFO] Atom Coverage Strategy: TRANSITIVE
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [INFO] Subsumption Check Strategy: INTRADEC
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [INFO] Negative Constraints Check Strategy NONE
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing file: George
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [INFO] Expressivity: [GUARDED, LINEAR, STICKY]
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing propagation graph.
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Propagation Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing cover graph.
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Cover Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:52:58 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Finished rewriting constraints.
+2016-07-26 13:53:26 deri.iris.queryrewriting.QueryRewritingTest [INFO] Decomposition: DECOMPOSE
+2016-07-26 13:53:26 deri.iris.queryrewriting.QueryRewritingTest [INFO] Rewriting Language: NRDATALOG
+2016-07-26 13:53:26 deri.iris.queryrewriting.QueryRewritingTest [INFO] Atom Coverage Strategy: TRANSITIVE
+2016-07-26 13:53:26 deri.iris.queryrewriting.QueryRewritingTest [INFO] Subsumption Check Strategy: INTRADEC
+2016-07-26 13:53:26 deri.iris.queryrewriting.QueryRewritingTest [INFO] Negative Constraints Check Strategy NONE
+2016-07-26 13:53:26 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing file: George
+2016-07-26 13:53:27 deri.iris.queryrewriting.QueryRewritingTest [INFO] Expressivity: [STICKY, GUARDED, LINEAR]
+2016-07-26 13:53:27 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing propagation graph.
+2016-07-26 13:53:27 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Propagation Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:53:27 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing cover graph.
+2016-07-26 13:53:27 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Cover Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:53:27 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Finished rewriting constraints.
+2016-07-26 13:53:42 deri.iris.queryrewriting.QueryRewritingTest [INFO] Decomposition: DECOMPOSE
+2016-07-26 13:53:42 deri.iris.queryrewriting.QueryRewritingTest [INFO] Rewriting Language: NRDATALOG
+2016-07-26 13:53:42 deri.iris.queryrewriting.QueryRewritingTest [INFO] Atom Coverage Strategy: TRANSITIVE
+2016-07-26 13:53:42 deri.iris.queryrewriting.QueryRewritingTest [INFO] Subsumption Check Strategy: INTRADEC
+2016-07-26 13:53:42 deri.iris.queryrewriting.QueryRewritingTest [INFO] Negative Constraints Check Strategy NONE
+2016-07-26 13:53:42 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing file: George
+2016-07-26 13:53:42 deri.iris.queryrewriting.QueryRewritingTest [INFO] Expressivity: [STICKY, GUARDED, LINEAR]
+2016-07-26 13:53:42 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing propagation graph.
+2016-07-26 13:53:42 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Propagation Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:53:42 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing cover graph.
+2016-07-26 13:53:42 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Cover Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:53:42 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Finished rewriting constraints.
+2016-07-26 13:54:25 deri.iris.queryrewriting.QueryRewritingTest [INFO] Decomposition: DECOMPOSE
+2016-07-26 13:54:25 deri.iris.queryrewriting.QueryRewritingTest [INFO] Rewriting Language: NRDATALOG
+2016-07-26 13:54:25 deri.iris.queryrewriting.QueryRewritingTest [INFO] Atom Coverage Strategy: TRANSITIVE
+2016-07-26 13:54:25 deri.iris.queryrewriting.QueryRewritingTest [INFO] Subsumption Check Strategy: INTRADEC
+2016-07-26 13:54:25 deri.iris.queryrewriting.QueryRewritingTest [INFO] Negative Constraints Check Strategy NONE
+2016-07-26 13:54:25 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing file: George
+2016-07-26 13:54:25 deri.iris.queryrewriting.QueryRewritingTest [INFO] Expressivity: [LINEAR, GUARDED, STICKY]
+2016-07-26 13:54:25 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing propagation graph.
+2016-07-26 13:54:25 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Propagation Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:54:25 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing cover graph.
+2016-07-26 13:54:25 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Cover Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:54:25 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Finished rewriting constraints.
+2016-07-26 13:54:55 deri.iris.queryrewriting.QueryRewritingTest [INFO] Decomposition: DECOMPOSE
+2016-07-26 13:54:55 deri.iris.queryrewriting.QueryRewritingTest [INFO] Rewriting Language: NRDATALOG
+2016-07-26 13:54:55 deri.iris.queryrewriting.QueryRewritingTest [INFO] Atom Coverage Strategy: TRANSITIVE
+2016-07-26 13:54:55 deri.iris.queryrewriting.QueryRewritingTest [INFO] Subsumption Check Strategy: INTRADEC
+2016-07-26 13:54:55 deri.iris.queryrewriting.QueryRewritingTest [INFO] Negative Constraints Check Strategy NONE
+2016-07-26 13:54:55 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing file: George
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [INFO] Expressivity: [LINEAR, GUARDED, STICKY]
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing propagation graph.
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Propagation Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing cover graph.
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Cover Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Finished rewriting constraints.
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing file: CLQ
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [INFO] Expressivity: [STICKY]
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing propagation graph.
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Propagation Graph:
+(E[1],E[1]) -> {
+	([],[])
+}
+(E[2],E[2]) -> {
+	([],[])
+}
+(E[2],E[1]) -> {
+	([E[2], E[1]],[E(?Y, ?X) :- E(?X, ?Y).])
+}
+(E[1],E[2]) -> {
+	([E[1], E[2]],[E(?Y, ?X) :- E(?X, ?Y).])
+}
+(C2[1],C2[1]) -> {
+	([],[])
+}
+(C2[2],C2[2]) -> {
+	([],[])
+}
+(E[2],C2[2]) -> {
+	([E[2], C2[2]],[C2(?X, ?Y) :- E(?X, ?Y).])
+}
+(E[1],C2[1]) -> {
+	([E[1], C2[1]],[C2(?X, ?Y) :- E(?X, ?Y).])
+}
+(C2[2],C2[1]) -> {
+	([C2[2], C2[1]],[C2(?Y, ?X) :- C2(?X, ?Y).])
+}
+(C2[1],C2[2]) -> {
+	([C2[1], C2[2]],[C2(?Y, ?X) :- C2(?X, ?Y).])
+}
+(C3[1],C3[1]) -> {
+	([],[])
+	([C3[1], C3[1]],[C3(?X, ?Y, ?Z) :- C3(?X, ?Y, ?Z).])
+	([C3[1], C3[1]],[C3(?X, ?Z, ?Y) :- C3(?X, ?Y, ?Z).])
+}
+(C3[2],C3[2]) -> {
+	([],[])
+	([C3[2], C3[2]],[C3(?X, ?Y, ?Z) :- C3(?X, ?Y, ?Z).])
+	([C3[2], C3[2]],[C3(?Z, ?Y, ?X) :- C3(?X, ?Y, ?Z).])
+}
+(C3[3],C3[3]) -> {
+	([],[])
+	([C3[3], C3[3]],[C3(?X, ?Y, ?Z) :- C3(?X, ?Y, ?Z).])
+	([C3[3], C3[3]],[C3(?Y, ?X, ?Z) :- C3(?X, ?Y, ?Z).])
+}
+(E[1],C3[2]) -> {
+	([E[1], C3[2]],[C3(?X, ?Y, ?Z) :- E(?Y, ?Z), C2(?X, ?Y), E(?X, ?Z).])
+}
+(C2[2],C3[2]) -> {
+	([C2[2], C3[2]],[C3(?X, ?Y, ?Z) :- E(?Y, ?Z), C2(?X, ?Y), E(?X, ?Z).])
+}
+(E[2],C3[3]) -> {
+	([E[2], C3[3]],[C3(?X, ?Y, ?Z) :- E(?Y, ?Z), C2(?X, ?Y), E(?X, ?Z).])
+}
+(C2[1],C3[1]) -> {
+	([C2[1], C3[1]],[C3(?X, ?Y, ?Z) :- E(?Y, ?Z), C2(?X, ?Y), E(?X, ?Z).])
+}
+(E[1],C3[1]) -> {
+	([E[1], C3[1]],[C3(?X, ?Y, ?Z) :- E(?Y, ?Z), C2(?X, ?Y), E(?X, ?Z).])
+}
+(C3[2],C3[3]) -> {
+	([C3[2], C3[3]],[C3(?X, ?Z, ?Y) :- C3(?X, ?Y, ?Z).])
+	([C3[2], C3[3]],[C3(?Z, ?X, ?Y) :- C3(?X, ?Y, ?Z).])
+}
+(C3[3],C3[2]) -> {
+	([C3[3], C3[2]],[C3(?X, ?Z, ?Y) :- C3(?X, ?Y, ?Z).])
+	([C3[3], C3[2]],[C3(?Y, ?Z, ?X) :- C3(?X, ?Y, ?Z).])
+}
+(C3[2],C3[1]) -> {
+	([C3[2], C3[1]],[C3(?Y, ?X, ?Z) :- C3(?X, ?Y, ?Z).])
+	([C3[2], C3[1]],[C3(?Y, ?Z, ?X) :- C3(?X, ?Y, ?Z).])
+}
+(C3[1],C3[2]) -> {
+	([C3[1], C3[2]],[C3(?Y, ?X, ?Z) :- C3(?X, ?Y, ?Z).])
+	([C3[1], C3[2]],[C3(?Z, ?X, ?Y) :- C3(?X, ?Y, ?Z).])
+}
+(C3[1],C3[3]) -> {
+	([C3[1], C3[3]],[C3(?Y, ?Z, ?X) :- C3(?X, ?Y, ?Z).])
+	([C3[1], C3[3]],[C3(?Z, ?Y, ?X) :- C3(?X, ?Y, ?Z).])
+}
+(C3[3],C3[1]) -> {
+	([C3[3], C3[1]],[C3(?Z, ?X, ?Y) :- C3(?X, ?Y, ?Z).])
+	([C3[3], C3[1]],[C3(?Z, ?Y, ?X) :- C3(?X, ?Y, ?Z).])
+}
+(C4[1],C4[1]) -> {
+	([],[])
+	([C4[1], C4[1]],[C4(?X, ?Y, ?Z, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[1]],[C4(?X, ?Y, ?W, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[1]],[C4(?X, ?W, ?Y, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[1]],[C4(?X, ?W, ?Z, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[1]],[C4(?X, ?Z, ?W, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[1]],[C4(?X, ?Z, ?Y, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[2],C4[2]) -> {
+	([],[])
+	([C4[2], C4[2]],[C4(?X, ?Y, ?Z, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[2]],[C4(?X, ?Y, ?W, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[2]],[C4(?Z, ?Y, ?X, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[2]],[C4(?Z, ?Y, ?W, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[2]],[C4(?W, ?Y, ?X, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[2]],[C4(?W, ?Y, ?Z, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[3],C4[3]) -> {
+	([],[])
+	([C4[3], C4[3]],[C4(?X, ?Y, ?Z, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[3]],[C4(?X, ?W, ?Z, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[3]],[C4(?Y, ?X, ?Z, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[3]],[C4(?Y, ?W, ?Z, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[3]],[C4(?W, ?X, ?Z, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[3]],[C4(?W, ?Y, ?Z, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[4],C4[4]) -> {
+	([],[])
+	([C4[4], C4[4]],[C4(?X, ?Y, ?Z, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[4]],[C4(?X, ?Z, ?Y, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[4]],[C4(?Y, ?X, ?Z, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[4]],[C4(?Y, ?Z, ?X, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[4]],[C4(?Z, ?Y, ?X, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[4]],[C4(?Z, ?X, ?Y, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(E[1],C4[2]) -> {
+	([E[1], C4[2]],[C4(?X, ?Y, ?Z, ?W) :- E(?Z, ?W), E(?X, ?W), E(?Y, ?W), C3(?X, ?Y, ?Z).])
+}
+(C3[2],C4[2]) -> {
+	([C3[2], C4[2]],[C4(?X, ?Y, ?Z, ?W) :- E(?Z, ?W), E(?X, ?W), E(?Y, ?W), C3(?X, ?Y, ?Z).])
+}
+(E[1],C4[3]) -> {
+	([E[1], C4[3]],[C4(?X, ?Y, ?Z, ?W) :- E(?Z, ?W), E(?X, ?W), E(?Y, ?W), C3(?X, ?Y, ?Z).])
+}
+(C3[3],C4[3]) -> {
+	([C3[3], C4[3]],[C4(?X, ?Y, ?Z, ?W) :- E(?Z, ?W), E(?X, ?W), E(?Y, ?W), C3(?X, ?Y, ?Z).])
+}
+(E[2],C4[4]) -> {
+	([E[2], C4[4]],[C4(?X, ?Y, ?Z, ?W) :- E(?Z, ?W), E(?X, ?W), E(?Y, ?W), C3(?X, ?Y, ?Z).])
+}
+(E[1],C4[1]) -> {
+	([E[1], C4[1]],[C4(?X, ?Y, ?Z, ?W) :- E(?Z, ?W), E(?X, ?W), E(?Y, ?W), C3(?X, ?Y, ?Z).])
+}
+(C3[1],C4[1]) -> {
+	([C3[1], C4[1]],[C4(?X, ?Y, ?Z, ?W) :- E(?Z, ?W), E(?X, ?W), E(?Y, ?W), C3(?X, ?Y, ?Z).])
+}
+(C4[3],C4[4]) -> {
+	([C4[3], C4[4]],[C4(?X, ?Y, ?W, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[4]],[C4(?X, ?W, ?Y, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[4]],[C4(?Y, ?X, ?W, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[4]],[C4(?Y, ?W, ?X, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[4]],[C4(?W, ?X, ?Y, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[4]],[C4(?W, ?Y, ?X, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[4],C4[3]) -> {
+	([C4[4], C4[3]],[C4(?X, ?Y, ?W, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[3]],[C4(?X, ?Z, ?W, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[3]],[C4(?Y, ?X, ?W, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[3]],[C4(?Y, ?Z, ?W, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[3]],[C4(?Z, ?Y, ?W, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[3]],[C4(?Z, ?X, ?W, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[2],C4[3]) -> {
+	([C4[2], C4[3]],[C4(?X, ?W, ?Y, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[3]],[C4(?X, ?Z, ?Y, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[3]],[C4(?Z, ?W, ?Y, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[3]],[C4(?Z, ?X, ?Y, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[3]],[C4(?W, ?X, ?Y, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[3]],[C4(?W, ?Z, ?Y, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[4],C4[2]) -> {
+	([C4[4], C4[2]],[C4(?X, ?W, ?Y, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[2]],[C4(?X, ?W, ?Z, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[2]],[C4(?Y, ?W, ?X, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[2]],[C4(?Y, ?W, ?Z, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[2]],[C4(?Z, ?W, ?X, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[2]],[C4(?Z, ?W, ?Y, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[2],C4[4]) -> {
+	([C4[2], C4[4]],[C4(?X, ?W, ?Z, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[4]],[C4(?X, ?Z, ?W, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[4]],[C4(?Z, ?W, ?X, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[4]],[C4(?Z, ?X, ?W, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[4]],[C4(?W, ?X, ?Z, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[4]],[C4(?W, ?Z, ?X, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[3],C4[2]) -> {
+	([C4[3], C4[2]],[C4(?X, ?Z, ?W, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[2]],[C4(?X, ?Z, ?Y, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[2]],[C4(?Y, ?Z, ?W, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[2]],[C4(?Y, ?Z, ?X, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[2]],[C4(?W, ?Z, ?Y, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[2]],[C4(?W, ?Z, ?X, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[2],C4[1]) -> {
+	([C4[2], C4[1]],[C4(?Y, ?X, ?Z, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[1]],[C4(?Y, ?X, ?W, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[1]],[C4(?Y, ?W, ?X, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[1]],[C4(?Y, ?W, ?Z, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[1]],[C4(?Y, ?Z, ?W, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[1]],[C4(?Y, ?Z, ?X, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[1],C4[2]) -> {
+	([C4[1], C4[2]],[C4(?Y, ?X, ?Z, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[2]],[C4(?Y, ?X, ?W, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[2]],[C4(?Z, ?X, ?Y, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[2]],[C4(?Z, ?X, ?W, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[2]],[C4(?W, ?X, ?Z, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[2]],[C4(?W, ?X, ?Y, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[1],C4[3]) -> {
+	([C4[1], C4[3]],[C4(?Y, ?W, ?X, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[3]],[C4(?Y, ?Z, ?X, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[3]],[C4(?Z, ?Y, ?X, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[3]],[C4(?Z, ?W, ?X, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[3]],[C4(?W, ?Z, ?X, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[3]],[C4(?W, ?Y, ?X, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[1],C4[4]) -> {
+	([C4[1], C4[4]],[C4(?Y, ?W, ?Z, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[4]],[C4(?Y, ?Z, ?W, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[4]],[C4(?Z, ?Y, ?W, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[4]],[C4(?Z, ?W, ?Y, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[4]],[C4(?W, ?Z, ?Y, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[4]],[C4(?W, ?Y, ?Z, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[3],C4[1]) -> {
+	([C4[3], C4[1]],[C4(?Z, ?Y, ?X, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[1]],[C4(?Z, ?Y, ?W, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[1]],[C4(?Z, ?W, ?X, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[1]],[C4(?Z, ?W, ?Y, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[1]],[C4(?Z, ?X, ?Y, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[1]],[C4(?Z, ?X, ?W, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[4],C4[1]) -> {
+	([C4[4], C4[1]],[C4(?W, ?X, ?Z, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[1]],[C4(?W, ?X, ?Y, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[1]],[C4(?W, ?Z, ?Y, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[1]],[C4(?W, ?Z, ?X, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[1]],[C4(?W, ?Y, ?X, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[1]],[C4(?W, ?Y, ?Z, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+}
+Nodes: 11
+Edges: 143
+Longest Path: 1
+
+
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing cover graph.
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Cover Graph:
+(E[1],E[1]) -> {
+	([],[])
+}
+(E[2],E[2]) -> {
+	([],[])
+}
+(E[2],E[1]) -> {
+	([E[2], E[1]],[E(?Y, ?X) :- E(?X, ?Y).])
+}
+(E[1],E[2]) -> {
+	([E[1], E[2]],[E(?Y, ?X) :- E(?X, ?Y).])
+}
+(C2[1],C2[1]) -> {
+	([],[])
+}
+(C2[2],C2[2]) -> {
+	([],[])
+}
+(E[2],C2[2]) -> {
+	([E[2], C2[2]],[C2(?X, ?Y) :- E(?X, ?Y).])
+}
+(E[1],C2[1]) -> {
+	([E[1], C2[1]],[C2(?X, ?Y) :- E(?X, ?Y).])
+}
+(C2[2],C2[1]) -> {
+	([C2[2], C2[1]],[C2(?Y, ?X) :- C2(?X, ?Y).])
+}
+(C2[1],C2[2]) -> {
+	([C2[1], C2[2]],[C2(?Y, ?X) :- C2(?X, ?Y).])
+}
+(C3[1],C3[1]) -> {
+	([],[])
+	([C3[1], C3[1]],[C3(?X, ?Y, ?Z) :- C3(?X, ?Y, ?Z).])
+	([C3[1], C3[1]],[C3(?X, ?Z, ?Y) :- C3(?X, ?Y, ?Z).])
+}
+(C3[2],C3[2]) -> {
+	([],[])
+	([C3[2], C3[2]],[C3(?X, ?Y, ?Z) :- C3(?X, ?Y, ?Z).])
+	([C3[2], C3[2]],[C3(?Z, ?Y, ?X) :- C3(?X, ?Y, ?Z).])
+}
+(C3[3],C3[3]) -> {
+	([],[])
+	([C3[3], C3[3]],[C3(?X, ?Y, ?Z) :- C3(?X, ?Y, ?Z).])
+	([C3[3], C3[3]],[C3(?Y, ?X, ?Z) :- C3(?X, ?Y, ?Z).])
+}
+(E[1],C3[2]) -> {
+	([E[1], C3[2]],[C3(?X, ?Y, ?Z) :- E(?Y, ?Z), C2(?X, ?Y), E(?X, ?Z).])
+}
+(C2[2],C3[2]) -> {
+	([C2[2], C3[2]],[C3(?X, ?Y, ?Z) :- E(?Y, ?Z), C2(?X, ?Y), E(?X, ?Z).])
+}
+(E[2],C3[3]) -> {
+	([E[2], C3[3]],[C3(?X, ?Y, ?Z) :- E(?Y, ?Z), C2(?X, ?Y), E(?X, ?Z).])
+}
+(C2[1],C3[1]) -> {
+	([C2[1], C3[1]],[C3(?X, ?Y, ?Z) :- E(?Y, ?Z), C2(?X, ?Y), E(?X, ?Z).])
+}
+(E[1],C3[1]) -> {
+	([E[1], C3[1]],[C3(?X, ?Y, ?Z) :- E(?Y, ?Z), C2(?X, ?Y), E(?X, ?Z).])
+}
+(C3[2],C3[3]) -> {
+	([C3[2], C3[3]],[C3(?X, ?Z, ?Y) :- C3(?X, ?Y, ?Z).])
+	([C3[2], C3[3]],[C3(?Z, ?X, ?Y) :- C3(?X, ?Y, ?Z).])
+}
+(C3[3],C3[2]) -> {
+	([C3[3], C3[2]],[C3(?X, ?Z, ?Y) :- C3(?X, ?Y, ?Z).])
+	([C3[3], C3[2]],[C3(?Y, ?Z, ?X) :- C3(?X, ?Y, ?Z).])
+}
+(C3[2],C3[1]) -> {
+	([C3[2], C3[1]],[C3(?Y, ?X, ?Z) :- C3(?X, ?Y, ?Z).])
+	([C3[2], C3[1]],[C3(?Y, ?Z, ?X) :- C3(?X, ?Y, ?Z).])
+}
+(C3[1],C3[2]) -> {
+	([C3[1], C3[2]],[C3(?Y, ?X, ?Z) :- C3(?X, ?Y, ?Z).])
+	([C3[1], C3[2]],[C3(?Z, ?X, ?Y) :- C3(?X, ?Y, ?Z).])
+}
+(C3[1],C3[3]) -> {
+	([C3[1], C3[3]],[C3(?Y, ?Z, ?X) :- C3(?X, ?Y, ?Z).])
+	([C3[1], C3[3]],[C3(?Z, ?Y, ?X) :- C3(?X, ?Y, ?Z).])
+}
+(C3[3],C3[1]) -> {
+	([C3[3], C3[1]],[C3(?Z, ?X, ?Y) :- C3(?X, ?Y, ?Z).])
+	([C3[3], C3[1]],[C3(?Z, ?Y, ?X) :- C3(?X, ?Y, ?Z).])
+}
+(C4[1],C4[1]) -> {
+	([],[])
+	([C4[1], C4[1]],[C4(?X, ?Y, ?Z, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[1]],[C4(?X, ?Y, ?W, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[1]],[C4(?X, ?W, ?Y, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[1]],[C4(?X, ?W, ?Z, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[1]],[C4(?X, ?Z, ?W, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[1]],[C4(?X, ?Z, ?Y, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[2],C4[2]) -> {
+	([],[])
+	([C4[2], C4[2]],[C4(?X, ?Y, ?Z, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[2]],[C4(?X, ?Y, ?W, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[2]],[C4(?Z, ?Y, ?X, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[2]],[C4(?Z, ?Y, ?W, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[2]],[C4(?W, ?Y, ?X, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[2]],[C4(?W, ?Y, ?Z, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[3],C4[3]) -> {
+	([],[])
+	([C4[3], C4[3]],[C4(?X, ?Y, ?Z, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[3]],[C4(?X, ?W, ?Z, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[3]],[C4(?Y, ?X, ?Z, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[3]],[C4(?Y, ?W, ?Z, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[3]],[C4(?W, ?X, ?Z, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[3]],[C4(?W, ?Y, ?Z, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[4],C4[4]) -> {
+	([],[])
+	([C4[4], C4[4]],[C4(?X, ?Y, ?Z, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[4]],[C4(?X, ?Z, ?Y, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[4]],[C4(?Y, ?X, ?Z, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[4]],[C4(?Y, ?Z, ?X, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[4]],[C4(?Z, ?Y, ?X, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[4]],[C4(?Z, ?X, ?Y, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(E[1],C4[2]) -> {
+	([E[1], C4[2]],[C4(?X, ?Y, ?Z, ?W) :- E(?Z, ?W), E(?X, ?W), E(?Y, ?W), C3(?X, ?Y, ?Z).])
+}
+(C3[2],C4[2]) -> {
+	([C3[2], C4[2]],[C4(?X, ?Y, ?Z, ?W) :- E(?Z, ?W), E(?X, ?W), E(?Y, ?W), C3(?X, ?Y, ?Z).])
+}
+(E[1],C4[3]) -> {
+	([E[1], C4[3]],[C4(?X, ?Y, ?Z, ?W) :- E(?Z, ?W), E(?X, ?W), E(?Y, ?W), C3(?X, ?Y, ?Z).])
+}
+(C3[3],C4[3]) -> {
+	([C3[3], C4[3]],[C4(?X, ?Y, ?Z, ?W) :- E(?Z, ?W), E(?X, ?W), E(?Y, ?W), C3(?X, ?Y, ?Z).])
+}
+(E[2],C4[4]) -> {
+	([E[2], C4[4]],[C4(?X, ?Y, ?Z, ?W) :- E(?Z, ?W), E(?X, ?W), E(?Y, ?W), C3(?X, ?Y, ?Z).])
+}
+(E[1],C4[1]) -> {
+	([E[1], C4[1]],[C4(?X, ?Y, ?Z, ?W) :- E(?Z, ?W), E(?X, ?W), E(?Y, ?W), C3(?X, ?Y, ?Z).])
+}
+(C3[1],C4[1]) -> {
+	([C3[1], C4[1]],[C4(?X, ?Y, ?Z, ?W) :- E(?Z, ?W), E(?X, ?W), E(?Y, ?W), C3(?X, ?Y, ?Z).])
+}
+(C4[3],C4[4]) -> {
+	([C4[3], C4[4]],[C4(?X, ?Y, ?W, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[4]],[C4(?X, ?W, ?Y, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[4]],[C4(?Y, ?X, ?W, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[4]],[C4(?Y, ?W, ?X, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[4]],[C4(?W, ?X, ?Y, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[4]],[C4(?W, ?Y, ?X, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[4],C4[3]) -> {
+	([C4[4], C4[3]],[C4(?X, ?Y, ?W, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[3]],[C4(?X, ?Z, ?W, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[3]],[C4(?Y, ?X, ?W, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[3]],[C4(?Y, ?Z, ?W, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[3]],[C4(?Z, ?Y, ?W, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[3]],[C4(?Z, ?X, ?W, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[2],C4[3]) -> {
+	([C4[2], C4[3]],[C4(?X, ?W, ?Y, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[3]],[C4(?X, ?Z, ?Y, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[3]],[C4(?Z, ?W, ?Y, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[3]],[C4(?Z, ?X, ?Y, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[3]],[C4(?W, ?X, ?Y, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[3]],[C4(?W, ?Z, ?Y, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[4],C4[2]) -> {
+	([C4[4], C4[2]],[C4(?X, ?W, ?Y, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[2]],[C4(?X, ?W, ?Z, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[2]],[C4(?Y, ?W, ?X, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[2]],[C4(?Y, ?W, ?Z, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[2]],[C4(?Z, ?W, ?X, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[2]],[C4(?Z, ?W, ?Y, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[2],C4[4]) -> {
+	([C4[2], C4[4]],[C4(?X, ?W, ?Z, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[4]],[C4(?X, ?Z, ?W, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[4]],[C4(?Z, ?W, ?X, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[4]],[C4(?Z, ?X, ?W, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[4]],[C4(?W, ?X, ?Z, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[4]],[C4(?W, ?Z, ?X, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[3],C4[2]) -> {
+	([C4[3], C4[2]],[C4(?X, ?Z, ?W, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[2]],[C4(?X, ?Z, ?Y, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[2]],[C4(?Y, ?Z, ?W, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[2]],[C4(?Y, ?Z, ?X, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[2]],[C4(?W, ?Z, ?Y, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[2]],[C4(?W, ?Z, ?X, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[2],C4[1]) -> {
+	([C4[2], C4[1]],[C4(?Y, ?X, ?Z, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[1]],[C4(?Y, ?X, ?W, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[1]],[C4(?Y, ?W, ?X, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[1]],[C4(?Y, ?W, ?Z, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[1]],[C4(?Y, ?Z, ?W, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[2], C4[1]],[C4(?Y, ?Z, ?X, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[1],C4[2]) -> {
+	([C4[1], C4[2]],[C4(?Y, ?X, ?Z, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[2]],[C4(?Y, ?X, ?W, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[2]],[C4(?Z, ?X, ?Y, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[2]],[C4(?Z, ?X, ?W, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[2]],[C4(?W, ?X, ?Z, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[2]],[C4(?W, ?X, ?Y, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[1],C4[3]) -> {
+	([C4[1], C4[3]],[C4(?Y, ?W, ?X, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[3]],[C4(?Y, ?Z, ?X, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[3]],[C4(?Z, ?Y, ?X, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[3]],[C4(?Z, ?W, ?X, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[3]],[C4(?W, ?Z, ?X, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[3]],[C4(?W, ?Y, ?X, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[1],C4[4]) -> {
+	([C4[1], C4[4]],[C4(?Y, ?W, ?Z, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[4]],[C4(?Y, ?Z, ?W, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[4]],[C4(?Z, ?Y, ?W, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[4]],[C4(?Z, ?W, ?Y, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[4]],[C4(?W, ?Z, ?Y, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[1], C4[4]],[C4(?W, ?Y, ?Z, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[3],C4[1]) -> {
+	([C4[3], C4[1]],[C4(?Z, ?Y, ?X, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[1]],[C4(?Z, ?Y, ?W, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[1]],[C4(?Z, ?W, ?X, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[1]],[C4(?Z, ?W, ?Y, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[1]],[C4(?Z, ?X, ?Y, ?W) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[3], C4[1]],[C4(?Z, ?X, ?W, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+}
+(C4[4],C4[1]) -> {
+	([C4[4], C4[1]],[C4(?W, ?X, ?Z, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[1]],[C4(?W, ?X, ?Y, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[1]],[C4(?W, ?Z, ?Y, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[1]],[C4(?W, ?Z, ?X, ?Y) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[1]],[C4(?W, ?Y, ?X, ?Z) :- C4(?X, ?Y, ?Z, ?W).])
+	([C4[4], C4[1]],[C4(?W, ?Y, ?Z, ?X) :- C4(?X, ?Y, ?Z, ?W).])
+}
+Nodes: 11
+Edges: 143
+Longest Path: 1
+
+
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Finished rewriting constraints.
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing query: Q1(?A, ?B, ?C) :- C3(?A, ?B, ?C).
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |7 [7]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |15 [13]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |32 [19]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |38 [15]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |38 [2]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |38 [0]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Cleaning auxiliary predicates from 38 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Applying intra-decomposition subsumption check on 38 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [INFO] Writing the output at: /home/giorsi/Development/workspace/IRIS+-/examples/rewriting_test/output/CLQ/Q1_rew.dtg
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing query: Q2(?A, ?B, ?C) :- C3(?A, ?B, ?C), Sp(?A).
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2016-07-26 13:54:56 deri.iris.queryrewriting.RewritingUtils [DEBUG] Computing affected positions.
+2016-07-26 13:54:56 deri.iris.queryrewriting.RewritingUtils [DEBUG] Get the components.
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] spawned thread to process component: Q2_1(?A, ?B, ?C) :- C3(?A, ?B, ?C).
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] spawned thread to process component: Q2_2(?A) :- Sp(?A).
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |1 [0]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Cleaning auxiliary predicates from 1 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Applying intra-decomposition subsumption check on 1 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |7 [7]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |15 [13]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |32 [19]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |38 [15]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |38 [2]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |38 [0]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Cleaning auxiliary predicates from 38 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Applying intra-decomposition subsumption check on 38 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [INFO] Writing the output at: /home/giorsi/Development/workspace/IRIS+-/examples/rewriting_test/output/CLQ/Q2_rew.dtg
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing query: Q3(?A, ?B, ?C) :- C3(?A, ?B, ?C), Sp(?D), C2(?A, ?D), Sp(?A).
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2016-07-26 13:54:56 deri.iris.queryrewriting.RewritingUtils [DEBUG] Computing affected positions.
+2016-07-26 13:54:56 deri.iris.queryrewriting.RewritingUtils [DEBUG] Get the components.
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] spawned thread to process component: Q3_1(?A, ?B, ?C) :- C3(?A, ?B, ?C).
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] spawned thread to process component: Q3_2(?D) :- Sp(?D).
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] spawned thread to process component: Q3_3(?A, ?D) :- C2(?A, ?D).
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |1 [0]
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] spawned thread to process component: Q3_4(?A) :- Sp(?A).
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |7 [7]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |1 [0]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Cleaning auxiliary predicates from 1 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Applying intra-decomposition subsumption check on 1 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Cleaning auxiliary predicates from 1 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Applying intra-decomposition subsumption check on 1 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |3 [2]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |4 [1]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |15 [13]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |4 [0]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Cleaning auxiliary predicates from 4 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Applying intra-decomposition subsumption check on 4 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |32 [19]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |38 [13]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |38 [2]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |38 [0]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Cleaning auxiliary predicates from 38 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Applying intra-decomposition subsumption check on 38 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [INFO] Writing the output at: /home/giorsi/Development/workspace/IRIS+-/examples/rewriting_test/output/CLQ/Q3_rew.dtg
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing query: Q4(?A1, ?B1, ?C1, ?A2, ?B2, ?C2) :- C2(?A1, ?A2), Sp(?A1), C3(?A2, ?B2, ?C2), C3(?A1, ?B1, ?C1), Sp(?A2).
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2016-07-26 13:54:56 deri.iris.queryrewriting.RewritingUtils [DEBUG] Computing affected positions.
+2016-07-26 13:54:56 deri.iris.queryrewriting.RewritingUtils [DEBUG] Get the components.
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] spawned thread to process component: Q4_1(?A1, ?A2) :- C2(?A1, ?A2).
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] spawned thread to process component: Q4_2(?A1) :- Sp(?A1).
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] spawned thread to process component: Q4_3(?A2, ?B2, ?C2) :- C3(?A2, ?B2, ?C2).
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |1 [0]
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] spawned thread to process component: Q4_4(?A1, ?B1, ?C1) :- C3(?A1, ?B1, ?C1).
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |3 [2]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Cleaning auxiliary predicates from 1 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Applying intra-decomposition subsumption check on 1 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |4 [1]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |4 [0]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Cleaning auxiliary predicates from 4 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Applying intra-decomposition subsumption check on 4 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |7 [7]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |15 [13]
+2016-07-26 13:54:56 deri.iris.queryrewriting.ParallelRewriter [DEBUG] spawned thread to process component: Q4_5(?A2) :- Sp(?A2).
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |1 [0]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Cleaning auxiliary predicates from 1 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Applying intra-decomposition subsumption check on 1 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |7 [7]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |32 [19]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |15 [13]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |32 [19]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |38 [13]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |38 [2]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |38 [0]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Cleaning auxiliary predicates from 38 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Applying intra-decomposition subsumption check on 38 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |38 [14]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |38 [2]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [TRACE] |38 [0]
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Cleaning auxiliary predicates from 38 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] Applying intra-decomposition subsumption check on 38 queries.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.FORewriter [DEBUG] done.
+2016-07-26 13:54:56 deri.iris.queryrewriting.QueryRewritingTest [INFO] Writing the output at: /home/giorsi/Development/workspace/IRIS+-/examples/rewriting_test/output/CLQ/Q4_rew.dtg
+2016-07-26 13:55:34 deri.iris.queryrewriting.QueryRewritingTest [INFO] Decomposition: DECOMPOSE
+2016-07-26 13:55:34 deri.iris.queryrewriting.QueryRewritingTest [INFO] Rewriting Language: NRDATALOG
+2016-07-26 13:55:34 deri.iris.queryrewriting.QueryRewritingTest [INFO] Atom Coverage Strategy: TRANSITIVE
+2016-07-26 13:55:34 deri.iris.queryrewriting.QueryRewritingTest [INFO] Subsumption Check Strategy: INTRADEC
+2016-07-26 13:55:34 deri.iris.queryrewriting.QueryRewritingTest [INFO] Negative Constraints Check Strategy NONE
+2016-07-26 13:55:34 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing file: George
+2016-07-26 13:55:34 deri.iris.queryrewriting.QueryRewritingTest [INFO] Expressivity: [LINEAR, GUARDED, STICKY]
+2016-07-26 13:55:34 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing propagation graph.
+2016-07-26 13:55:34 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Propagation Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:55:34 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing cover graph.
+2016-07-26 13:55:34 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Cover Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:55:34 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Finished rewriting constraints.
+2016-07-26 13:55:50 deri.iris.queryrewriting.QueryRewritingTest [INFO] Decomposition: DECOMPOSE
+2016-07-26 13:55:50 deri.iris.queryrewriting.QueryRewritingTest [INFO] Rewriting Language: NRDATALOG
+2016-07-26 13:55:51 deri.iris.queryrewriting.QueryRewritingTest [INFO] Atom Coverage Strategy: TRANSITIVE
+2016-07-26 13:55:51 deri.iris.queryrewriting.QueryRewritingTest [INFO] Subsumption Check Strategy: INTRADEC
+2016-07-26 13:55:52 deri.iris.queryrewriting.QueryRewritingTest [INFO] Negative Constraints Check Strategy NONE
+2016-07-26 13:56:55 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing file: George
+2016-07-26 13:56:55 deri.iris.queryrewriting.QueryRewritingTest [INFO] Expressivity: [GUARDED, LINEAR, STICKY]
+2016-07-26 13:56:55 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing propagation graph.
+2016-07-26 13:56:55 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Propagation Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:56:55 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing cover graph.
+2016-07-26 13:56:55 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Cover Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:56:55 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Finished rewriting constraints.
+2016-07-26 13:58:02 deri.iris.queryrewriting.QueryRewritingTest [INFO] Decomposition: DECOMPOSE
+2016-07-26 13:58:02 deri.iris.queryrewriting.QueryRewritingTest [INFO] Rewriting Language: NRDATALOG
+2016-07-26 13:58:02 deri.iris.queryrewriting.QueryRewritingTest [INFO] Atom Coverage Strategy: TRANSITIVE
+2016-07-26 13:58:02 deri.iris.queryrewriting.QueryRewritingTest [INFO] Subsumption Check Strategy: INTRADEC
+2016-07-26 13:58:02 deri.iris.queryrewriting.QueryRewritingTest [INFO] Negative Constraints Check Strategy NONE
+2016-07-26 13:58:02 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing file: George
+2016-07-26 13:58:02 deri.iris.queryrewriting.QueryRewritingTest [INFO] Expressivity: [LINEAR, GUARDED, STICKY]
+2016-07-26 13:58:02 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing propagation graph.
+2016-07-26 13:58:02 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Propagation Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:58:02 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing cover graph.
+2016-07-26 13:58:02 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Cover Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:58:02 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Finished rewriting constraints.
+2016-07-26 13:59:05 deri.iris.queryrewriting.QueryRewritingTest [INFO] Decomposition: DECOMPOSE
+2016-07-26 13:59:05 deri.iris.queryrewriting.QueryRewritingTest [INFO] Rewriting Language: NRDATALOG
+2016-07-26 13:59:05 deri.iris.queryrewriting.QueryRewritingTest [INFO] Atom Coverage Strategy: TRANSITIVE
+2016-07-26 13:59:05 deri.iris.queryrewriting.QueryRewritingTest [INFO] Subsumption Check Strategy: INTRADEC
+2016-07-26 13:59:05 deri.iris.queryrewriting.QueryRewritingTest [INFO] Negative Constraints Check Strategy NONE
+2016-07-26 13:59:05 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing file: George
+2016-07-26 13:59:05 deri.iris.queryrewriting.QueryRewritingTest [INFO] Expressivity: [STICKY, LINEAR, GUARDED]
+2016-07-26 13:59:05 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing propagation graph.
+2016-07-26 13:59:05 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Propagation Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:59:05 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing cover graph.
+2016-07-26 13:59:05 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Cover Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:59:05 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Finished rewriting constraints.
+2016-07-26 13:59:05 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing query: Q1(?A, ?B) :- Q(?A, ?B).
+2016-07-26 13:59:05 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2016-07-26 13:59:05 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2016-07-26 13:59:05 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2016-07-26 13:59:05 deri.iris.queryrewriting.LinearRewriter [TRACE] |1 [0]
+2016-07-26 13:59:05 deri.iris.queryrewriting.LinearRewriter [DEBUG] Cleaning auxiliary predicates from 1 queries.
+2016-07-26 13:59:05 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2016-07-26 13:59:05 deri.iris.queryrewriting.LinearRewriter [DEBUG] Applying intra-decomposition subsumption check on 1 queries.
+2016-07-26 13:59:05 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2016-07-26 13:59:05 deri.iris.queryrewriting.QueryRewritingTest [INFO] Writing the output at: /home/giorsi/Development/workspace/IRIS+-/examples/rewriting_test/output/George/Q1_rew.dtg
+2016-07-26 13:59:15 deri.iris.queryrewriting.QueryRewritingTest [INFO] Decomposition: DECOMPOSE
+2016-07-26 13:59:15 deri.iris.queryrewriting.QueryRewritingTest [INFO] Rewriting Language: NRDATALOG
+2016-07-26 13:59:15 deri.iris.queryrewriting.QueryRewritingTest [INFO] Atom Coverage Strategy: TRANSITIVE
+2016-07-26 13:59:15 deri.iris.queryrewriting.QueryRewritingTest [INFO] Subsumption Check Strategy: INTRADEC
+2016-07-26 13:59:15 deri.iris.queryrewriting.QueryRewritingTest [INFO] Negative Constraints Check Strategy NONE
+2016-07-26 13:59:15 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing file: George
+2016-07-26 13:59:15 deri.iris.queryrewriting.QueryRewritingTest [INFO] Expressivity: [STICKY, LINEAR, GUARDED]
+2016-07-26 13:59:15 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing propagation graph.
+2016-07-26 13:59:15 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Propagation Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:59:15 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing cover graph.
+2016-07-26 13:59:15 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Cover Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 13:59:15 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Finished rewriting constraints.
+2016-07-26 13:59:15 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing query: Q1(?A, ?B) :- R(?A, ?B).
+2016-07-26 13:59:15 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2016-07-26 13:59:15 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2016-07-26 13:59:15 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2016-07-26 13:59:15 deri.iris.queryrewriting.LinearRewriter [TRACE] |1 [0]
+2016-07-26 13:59:15 deri.iris.queryrewriting.LinearRewriter [DEBUG] Cleaning auxiliary predicates from 1 queries.
+2016-07-26 13:59:15 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2016-07-26 13:59:15 deri.iris.queryrewriting.LinearRewriter [DEBUG] Applying intra-decomposition subsumption check on 1 queries.
+2016-07-26 13:59:15 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2016-07-26 13:59:15 deri.iris.queryrewriting.QueryRewritingTest [INFO] Writing the output at: /home/giorsi/Development/workspace/IRIS+-/examples/rewriting_test/output/George/Q1_rew.dtg
+2016-07-26 14:01:37 deri.iris.queryrewriting.QueryRewritingTest [INFO] Decomposition: DECOMPOSE
+2016-07-26 14:01:37 deri.iris.queryrewriting.QueryRewritingTest [INFO] Rewriting Language: NRDATALOG
+2016-07-26 14:01:37 deri.iris.queryrewriting.QueryRewritingTest [INFO] Atom Coverage Strategy: TRANSITIVE
+2016-07-26 14:01:37 deri.iris.queryrewriting.QueryRewritingTest [INFO] Subsumption Check Strategy: INTRADEC
+2016-07-26 14:01:37 deri.iris.queryrewriting.QueryRewritingTest [INFO] Negative Constraints Check Strategy NONE
+2016-07-26 14:01:37 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing file: George
+2016-07-26 14:01:38 deri.iris.queryrewriting.QueryRewritingTest [INFO] Expressivity: [STICKY, LINEAR, GUARDED]
+2016-07-26 14:01:38 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing propagation graph.
+2016-07-26 14:01:38 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Propagation Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 14:01:38 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Computing cover graph.
+2016-07-26 14:01:38 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Cover Graph:
+(R[1],R[1]) -> {
+	([],[])
+}
+(R[2],R[2]) -> {
+	([],[])
+}
+(R[2],R[1]) -> {
+	([R[2], R[1]],[R(?Y, ?Z) :- R(?X, ?Y).])
+}
+Nodes: 2
+Edges: 3
+Longest Path: 1
+
+
+2016-07-26 14:01:38 deri.iris.queryrewriting.QueryRewritingTest [DEBUG] Finished rewriting constraints.
+2016-07-26 14:01:38 deri.iris.queryrewriting.QueryRewritingTest [INFO] Processing query: Q1(?A, ?B) :- R(?A, ?B).
+2016-07-26 14:01:38 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2016-07-26 14:01:38 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2016-07-26 14:01:38 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2016-07-26 14:01:38 deri.iris.queryrewriting.LinearRewriter [TRACE] |1 [0]
+2016-07-26 14:01:38 deri.iris.queryrewriting.LinearRewriter [DEBUG] Cleaning auxiliary predicates from 1 queries.
+2016-07-26 14:01:38 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2016-07-26 14:01:38 deri.iris.queryrewriting.LinearRewriter [DEBUG] Applying intra-decomposition subsumption check on 1 queries.
+2016-07-26 14:01:38 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2016-07-26 14:01:38 deri.iris.queryrewriting.QueryRewritingTest [INFO] Writing the output at: /home/giorsi/Development/workspace/IRIS+-/examples/rewriting_test/output/George/Q1_rew.dtg
+2016-07-26 14:05:39 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2016-07-26 14:05:39 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2016-07-26 14:05:39 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2016-07-26 14:05:39 deri.iris.queryrewriting.LinearRewriter [TRACE] |1 [0]
+2016-07-26 14:05:39 deri.iris.queryrewriting.LinearRewriter [DEBUG] Cleaning auxiliary predicates from 1 queries.
+2016-07-26 14:05:39 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2016-07-26 14:05:39 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Applying tail subsumption check on 1 queries.

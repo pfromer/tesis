@@ -1,0 +1,294 @@
+#DBConnection('oracle.jdbc.driver.OracleDriver', 'jdbc:oracle:thin:@', 'pamir.dia.uniroma3.it', '1521', 'Yaanii', 'SEMWEB', '0WL!IRIS').
+
+///Q_benchT1(?X) :- Student(?X).
+///Q_benchT2(?X) :- Student(?X).
+///Q_bench1(?X) :- UndergraduateStudent(?X), takesCourse(?X, 'http://www.Department0.University0.edu/Course0').
+///Q_bench2(?X) :- Employee(?X).
+///Q_bench3(?X) :- Student(?X), isMemberOf(?X, 'http://www.DepartmentO.University0.edu').
+Q_bench4(?X) :- Publication(?X), publicationAuthor(?X, ?Y), Faculty(?Y), isMemberOf(?Y, 'http://www.Department0.University0.edu').
+///Q_bench5(?X) :- ResearchGroup(?X), subOrganizationOf(?X, 'http://www.University0.edu').
+///Q_bench6(?X) :- Person(?X), hasAlumnus('http://www.University0.edu', ?X).
+///Q_bench7(?X) :- Person(?X), hasSameHomeTownWith(?X, 'http://www.Department0.University0.edu/FullProfessor0').
+///Q_bench8(?X) :- SportsLover(?X), hasMember('http://www.Department0.University0.edu', ?X). 
+///Q_bench9(?X) :- GraduateCourse(?X), isTaughtBy(?X, ?Y), isMemberOf(?Y, ?Z), subOrganizationOf(?Z, 'http://www.University0.edu').
+///Q_bench10(?X) :- isFriendOf (?X, 'http://www.Department0.University0.edu/FullProfessor0').
+///Q_bench11(?X) :- Person(?X), like(?X,?Z), Chair(?Z), isHeadOf(?Z, 'http://www.Department0.University0.edu'), like(?Z, ?Y).
+///Q_bench12(?X) :- Student(?X), takesCourse(?X, ?Y), isTaughtBy(?Y, 'http://www.Department0.University0.edu/FullProfessor0').
+///Q_bench13(?X) :- PeopleWithHobby(?X), isMemberOf(?X, 'http://www.Department0.University0.edu').
+///Q_bench14(?X) :- Woman(?X), Student(?X), isMemberOf(?X,?Y), subOrganizationOf(?Y, 'http://www.University0.edu').
+///Q_bench15(?X) :- PeopleWithManyHobbies(?X), isMemberOf(?X, 'http://www.Department0.University0.edu').
+///Q_bench16(?X, ?Y) :- GraduateStudent(?X), age(?X, ?Y).
+///Q_bench17(?X, ?Y) :- GraduateStudent(?X), isAdvisedBy(?X,?Y), age(?Y,?Z).
+
+?- Q_benchT1(?X).
+?- Q_benchT2(?X).
+?- Q_bench1(?X).
+?- Q_bench2(?X).
+?- Q_bench3(?X).
+?- Q_bench4(?X).
+?- Q_bench5(?X).
+?- Q_bench6(?X).
+?- Q_bench7(?X).
+?- Q_bench8(?X).
+?- Q_bench9(?X).
+?- Q_bench10(?X).
+?- Q_bench11(?X).
+?- Q_bench12(?X).
+?- Q_bench13(?X).
+?- Q_bench14(?X).
+?- Q_bench15(?X).
+?- Q_bench16(?X,?Y).
+?- Q_bench17(?X,?Y).
+
+Person(?X) :- hasDegreeFrom(?X, ?Y).
+Publication(?Y) :- orgPublication(?X, ?Y).
+aux_0(?X,?Y) :- SwimmingFan(?X).
+Faculty(?X) :- teacherOf(?X, ?Y).
+Person(?X) :- hasSameHomeTownWith(?X, ?Y).
+Publication(?X) :- Article(?X).
+Professor(?X) :- AssociateProfessor(?X).
+Organization(?X) :- Program(?X).
+aux_1(?X,?Y) :- anon_1(?X).
+FineArts(?X) :- Theatre_and_DanceClass(?X).
+Person(?Y) :- isFriendOf(?X, ?Y).
+Engineering(?X) :- Electrical_EngineeringClass(?X).
+Department(?Y) :- enrollIn(?X, ?Y).
+Organization(?X) :- isAffiliatedOrganizationOf(?X, ?Y).
+Science(?X) :- Marine_ScienceClass(?X).
+Sports(?X) :- TennisClass(?X).
+aux_2(?X,?Y) :- Student(?X).
+FineArts(?X) :- Modern_ArtsClass(?X).
+aux_3(?X,?Y) :- Director(?X).
+aux_4(?X,?Y) :- SportsLover(?X).
+Person(?X) :- emailAddress(?X, ?Y).
+Schedule(?X) :- listedCourse(?X, ?Y).
+Article(?X) :- TechnicalReport(?X).
+University(?Y) :- hasUndergraduateDegreeFrom(?X, ?Y).
+Person(?X) :- title(?X, ?Y).
+Person(?X) :- hasDoctoralDegreeFrom(?X, ?Y).
+Faculty(?X) :- PostDoc(?X).
+aux_5(?X,?Y) :- TeachingAssistant(?X).
+aux_6(?X,?Y) :- BaseballFan(?X).
+Person(?X) :- TeachingAssistant(?X).
+aux_7(?X,?Y) :- BaseballLover(?X).
+HumanitiesAndSocial(?X) :- EconomicsClass(?X).
+SupportingStaff(?X) :- ClericalStaff(?X).
+Professor(?X) :- AssistantProfessor(?X).
+Person(?X) :- isAdvisedBy(?X, ?Y).
+Research(?Y) :- publicationResearch(?X, ?Y).
+hasMember(?X, ?Y) :- hasStudent(?X, ?Y).
+Science(?X) :- ChemistryClass(?X).
+Faculty(?X) :- Professor(?X).
+Person(?X) :- Student(?X).
+Person(?X) :- telephone(?X, ?Y).
+HumanitiesAndSocial(?X) :- ReligionsClass(?X).
+Person(?X) :- BasketBallLover(?X).
+Publication(?X) :- publicationAuthor(?X, ?Y).
+Course(?X) :- GraduateCourse(?X).
+Science(?X) :- Materials_ScienceClass(?X).
+Science(?X) :- StatisticsClass(?X).
+Person(?X) :- BasketBallFan(?X).
+Publication(?Y) :- softwareDocumentation(?X, ?Y).
+Organization(?X) :- College(?X).
+Person(?X) :- hasUndergraduateDegreeFrom(?X, ?Y).
+Organization(?Y) :- isAffiliatedOrganizationOf(?X, ?Y).
+Course(?Y) :- teachingAssistantOf(?X, ?Y).
+FineArts(?X) :- Media_Arts_And_ciencesClass(?X).
+Person(?Y) :- isAffiliateOf(?X, ?Y).
+!Man(?X) :- Woman(?X).
+Student(?X) :- UndergraduateStudent(?X).
+!anon_1(?X) :- NonScienceStudent(?X).
+HumanitiesAndSocial(?X) :- PhilosophyClass(?X).
+Science(?X) :- PhysicsClass(?X).
+hasDegreeFrom(?X, ?Y) :- hasAlumnus(?Y, ?X).
+hasAlumnus(?Y, ?X) :- hasDegreeFrom(?X, ?Y).
+FineArts(?X) :- Performing_ArtsClass(?X).
+Publication(?X) :- Book(?X).
+GraduateStudent(?X) :- aux_8(?X,?Y).
+aux_8(?X,?Y) :- GraduateStudent(?X).
+Person(?X) :- BaseballLover(?X).
+Course(?X) :- isTaughtBy(?X, ?Y).
+Engineering(?X) :- Petroleuml_EngineeringClass(?X).
+HumanitiesAndSocial(?X) :- LinguisticsClass(?X).
+Person(?X) :- lastName(?X, ?Y).
+aux_9(?X,?Y) :- Employee(?X).
+SupportingStaff(?X) :- SystemsStaff(?X).
+Student(?Y) :- hasStudent(?X, ?Y).
+Person(?X) :- SportsLover(?X).
+Publication(?X) :- UnofficialPublication(?X).
+isFriendOf(?X, ?Y) :- isFriendOf(?Y, ?X).
+Software(?X) :- softwareDocumentation(?X, ?Y).
+Organization(?X) :- University(?X).
+worksFor(?X, ?Y) :- isHeadOf(?X, ?Y).
+Student(?X) :- ScienceStudent(?X).
+aux_10(?X,?Y) :- LeisureStudent(?X).
+Person(?Y) :- hasSameHomeTownWith(?X, ?Y).
+FineArts(?X) :- Asian_ArtsClass(?X).
+Engineering(?X) :- Computer_EngineeringClass(?X).
+hasDegreeFrom(?X, ?Y) :- hasMasterDegreeFrom(?X, ?Y).
+ResearchGroup(?X) :- researchProject(?X, ?Y).
+aux_11(?X,?Y) :- BasketBallLover(?X).
+aux_12(?X,?Y) :- WomanCollege(?X).
+Person(?X) :- Man(?X).
+HumanitiesAndSocial(?X) :- HistoryClass(?X).
+Faculty(?X) :- Lecturer(?X).
+isStudentOf(?X, ?Y) :- enrollIn(?X, ?Y).
+Person(?X) :- BaseballFan(?X).
+Professor(?X) :- Chair(?X).
+FineArts(?X) :- DramaClass(?X).
+like(?X, ?Y) :- isCrazyAbout(?X, ?Y).
+isStudentOf(?X, ?Y) :- hasStudent(?Y, ?X).
+hasStudent(?Y, ?X) :- isStudentOf(?X, ?Y).
+HumanitiesAndSocial(?X) :- Modern_LanguagesClass(?X).
+Insterest(?X) :- Music(?X).
+HumanitiesAndSocial(?X) :- EnglishClass(?X).
+Professor(?Y) :- isAdvisedBy(?X, ?Y).
+Engineering(?X) :- Mechanical_EngineeringClass(?X).
+Organization(?Y) :- isStudentOf(?X, ?Y).
+Publication(?X) :- Specification(?X).
+isTaughtBy(?X, ?Y) :- teacherOf(?Y, ?X).
+teacherOf(?Y, ?X) :- isTaughtBy(?X, ?Y).
+Faculty(?Y) :- isTaughtBy(?X, ?Y).
+Person(?Y) :- hasMember(?X, ?Y).
+hasSameHomeTownWith(?X, ?Y) :- hasSameHomeTownWith(?Y, ?X).
+Person(?X) :- firstName(?X, ?Y).
+Sports(?X) :- BasketBallClass(?X).
+Person(?X) :- ResearchAssistant(?X).
+PeopleWithHobby(?X) :- PeopleWithManyHobbies(?X).
+Sports(?X) :- BaseballClass(?X).
+Insterest(?X) :- Sports(?X).
+Course(?Y) :- listedCourse(?X, ?Y).
+Engineering(?X) :- Biomedical_EngineeringClass(?X).
+Person(?X) :- SwimmingFan(?X).
+Publication(?X) :- publicationDate(?X, ?Y).
+Person(?X) :- Woman(?X).
+Engineering(?X) :- Chemical_EngineeringClass(?X).
+FineArts(?X) :- Latin_ArtsClass(?X).
+Organization(?X) :- hasStudent(?X, ?Y).
+Article(?X) :- JournalArticle(?X).
+HumanitiesAndSocial(?X) :- HumanitiesClass(?X).
+Employee(?X) :- SupportingStaff(?X).
+Student(?X) :- isStudentOf(?X, ?Y).
+isMemberOf(?X, ?Y) :- worksFor(?X, ?Y).
+Student(?X) :- NonScienceStudent(?X).
+Person(?X) :- SportsFan(?X).
+University(?X) :- hasAlumnus(?X, ?Y).
+FineArts(?X) :- MusicsClass(?X).
+Engineering(?X) :- Aeronautical_EngineeringClass(?X).
+University(?Y) :- hasMasterDegreeFrom(?X, ?Y).
+AcademicSubject(?X) :- Engineering(?X).
+AcademicSubject(?X) :- HumanitiesAndSocial(?X).
+Science(?X) :- Computer_ScienceClass(?X).
+Organization(?X) :- Department(?X).
+AcademicSubject(?X) :- Science(?X).
+aux_13(?X,?Y) :- Chair(?X).
+FineArts(?X) :- Medieval_ArtsClass(?X).
+Engineering(?X) :- Civil_EngineeringClass(?X).
+AcademicSubject(?X) :- FineArts(?X).
+aux_14(?X,?Y) :- SwimmingLover(?X).
+aux_15(?X,?Y) :- TennisFan(?X).
+Engineering(?X) :- Industry_EngineeringClass(?X).
+hasDegreeFrom(?X, ?Y) :- hasDoctoralDegreeFrom(?X, ?Y).
+Engineering(?X) :- Materical_Science_EngineeringClass(?X).
+Science(?X) :- MathematicsClass(?X).
+University(?Y) :- hasDoctoralDegreeFrom(?X, ?Y).
+Article(?X) :- ConferencePaper(?X).
+Employee(?X) :- Faculty(?X).
+Organization(?X) :- hasMember(?X, ?Y).
+Person(?X) :- Director(?X).
+Professor(?X) :- VisitingProfessor(?X).
+Person(?X) :- Chair(?X).
+hasDegreeFrom(?X, ?Y) :- hasUndergraduateDegreeFrom(?X, ?Y).
+Science(?X) :- BiologyClass(?X).
+Professor(?X) :- FullProfessor(?X).
+Person(?X) :- Employee(?X).
+HumanitiesAndSocial(?X) :- PsychologyClass(?X).
+Person(?X) :- SwimmingLover(?X).
+aux_16(?X,?Y) :- WomanCollege(?X).
+Person(?Y) :- publicationAuthor(?X, ?Y).
+Professor(?X) :- Dean(?X).
+Person(?X) :- PeopleWithHobby(?X).
+TeachingAssistant(?X) :- teachingAssistantOf(?X, ?Y).
+Person(?Y) :- hasAlumnus(?X, ?Y).
+Person(?X) :- age(?X, ?Y).
+Research(?Y) :- researchProject(?X, ?Y).
+Work(?X) :- Course(?X).
+Science(?X) :- AstronomyClass(?X).
+Publication(?X) :- Software(?X).
+Person(?X) :- TennisFan(?X).
+Science(?X) :- GeosciencesClass(?X).
+isMemberOf(?X, ?Y) :- isStudentOf(?X, ?Y).
+Organization(?X) :- ResearchGroup(?X).
+Organization(?X) :- Institute(?X).
+aux_17(?X,?Y) :- SportsFan(?X).
+Person(?X) :- isFriendOf(?X, ?Y).
+Software(?X) :- softwareVersion(?X, ?Y).
+College(?X) :- WomanCollege(?X).
+FineArts(?X) :- ArchitectureClass(?X).
+Organization(?Y) :- subOrganizationOf(?X, ?Y).
+Person(?X) :- hasMasterDegreeFrom(?X, ?Y).
+Professor(?X) :- tenured(?X, ?Y).
+aux_18(?X,?Y) :- ScienceStudent(?X).
+Publication(?X) :- Manual(?X).
+isMemberOf(?X, ?Y) :- hasMember(?Y, ?X).
+hasMember(?Y, ?X) :- isMemberOf(?X, ?Y).
+Publication(?X) :- publicationResearch(?X, ?Y).
+Organization(?X) :- isAffiliateOf(?X, ?Y).
+Organization(?X) :- subOrganizationOf(?X, ?Y).
+Work(?X) :- Research(?X).
+Dean(?X) :- aux_19(?X,?Y).
+aux_19(?X,?Y) :- Dean(?X).
+HumanitiesAndSocial(?X) :- AnthropologyClass(?X).
+Sports(?X) :- SwimmingClass(?X).
+Course(?Y) :- teacherOf(?X, ?Y).
+AcademicSubject(?Y) :- hasMajor(?X, ?Y).
+aux_20(?X,?Y) :- BasketBallFan(?X).
+University(?Y) :- hasDegreeFrom(?X, ?Y).
+Organization(?X) :- orgPublication(?X, ?Y).
+aux_21(?X,?Y) :- ResearchAssistant(?X).
+Student(?X) :- takesCourse(?X, ?Y).
+like(?X, ?Y) :- PeopleWithHobby(?X).
+like(?X,?Y) :- aux_11(?X,?Y).
+BasketBallClass(?Y) :- aux_11(?X,?Y).
+takesCourse(?X,?Y) :- aux_10(?X,?Y).
+Course(?Y) :- aux_10(?X,?Y).
+isHeadOf(?X,?Y) :- aux_13(?X,?Y).
+Department(?Y) :- aux_13(?X,?Y).
+hasStudent(?X,?Y) :- aux_12(?X,?Y).
+Woman(?Y) :- aux_12(?X,?Y).
+isCrazyAbout(?X,?Y) :- aux_15(?X,?Y).
+TennisClass(?Y) :- aux_15(?X,?Y).
+like(?X,?Y) :- aux_14(?X,?Y).
+SwimmingClass(?Y) :- aux_14(?X,?Y).
+worksFor(?X,?Y) :- aux_21(?X,?Y).
+ResearchGroup(?Y) :- aux_21(?X,?Y).
+isCrazyAbout(?X,?Y) :- aux_20(?X,?Y).
+BasketBallClass(?Y) :- aux_20(?X,?Y).
+isHeadOf(?X,?Y) :- aux_19(?X,?Y).
+College(?Y) :- aux_19(?X,?Y).
+hasMajor(?X,?Y) :- aux_1(?X,?Y).
+Science(?Y) :- aux_1(?X,?Y).
+hasMajor(?X,?Y) :- aux_18(?X,?Y).
+Science(?Y) :- aux_18(?X,?Y).
+isStudentOf(?X,?Y) :- aux_2(?X,?Y).
+Organization(?Y) :- aux_2(?X,?Y).
+isCrazyAbout(?X,?Y) :- aux_17(?X,?Y).
+Sports(?Y) :- aux_17(?X,?Y).
+hasStudent(?X,?Y) :- aux_16(?X,?Y).
+UndergraduateStudent(?Y) :- aux_16(?X,?Y).
+isCrazyAbout(?X,?Y) :- aux_0(?X,?Y).
+SwimmingClass(?Y) :- aux_0(?X,?Y).
+teachingAssistantOf(?X,?Y) :- aux_5(?X,?Y).
+Course(?Y) :- aux_5(?X,?Y).
+isCrazyAbout(?X,?Y) :- aux_6(?X,?Y).
+BaseballClass(?Y) :- aux_6(?X,?Y).
+isHeadOf(?X,?Y) :- aux_3(?X,?Y).
+Program(?Y) :- aux_3(?X,?Y).
+like(?X,?Y) :- aux_4(?X,?Y).
+Sports(?Y) :- aux_4(?X,?Y).
+worksFor(?X,?Y) :- aux_9(?X,?Y).
+Organization(?Y) :- aux_9(?X,?Y).
+like(?X,?Y) :- aux_7(?X,?Y).
+BaseballClass(?Y) :- aux_7(?X,?Y).
+takesCourse(?X,?Y) :- aux_8(?X,?Y).
+GraduateCourse(?Y) :- aux_8(?X,?Y).

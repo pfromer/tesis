@@ -1,0 +1,21 @@
+==================SUMMARY==================
+Ontology file:             vicodi.owl
+Query:                     Q(X0,X1)  <-  Military-Person(X0) ^ hasRole(X1,X0) ^ related(X0,X2)
+Number of assertions:      222
+Number of concept symbols: 194
+Number of role symbols:    10
+Running time:              1 milliseconds 
+Size of the rewriting (queries):     11
+Size of the rewriting (symbols):     812
+0: Q(X0,X0)  <-  Military-Person(X0) ^ hasRole(X0,X0)
+1: Q(X0,X1)  <-  Military-Person(X0) ^ exists(X0,X2) ^ hasRole(X1,X0)
+2: Q(X0,X1)  <-  Military-Person(X0) ^ hasCategory(X0,X2) ^ hasRole(X1,X0)
+3: Q(X0,X1)  <-  Military-Person(X0) ^ hasLocationContainerMember(X0,X2) ^ hasRole(X1,X0)
+4: Q(X0,X1)  <-  Military-Person(X0) ^ hasLocationPartMember(X0,X2) ^ hasRole(X1,X0)
+5: Q(X0,X1)  <-  Military-Person(X0) ^ hasRelationMember(X0,X2) ^ hasRole(X1,X0)
+6: Q(X0,X1)  <-  Military-Person(X0) ^ hasRole(X0,X2) ^ hasRole(X1,X0)
+7: Q(X0,X1)  <-  Military-Person(X0) ^ hasRole(X1,X0) ^ isLocationContainerMemberOf(X0,X2)
+8: Q(X0,X1)  <-  Military-Person(X0) ^ hasRole(X1,X0) ^ isLocationPartMemberOf(X0,X2)
+9: Q(X0,X1)  <-  Military-Person(X0) ^ hasRole(X1,X0) ^ isRelationMemberOf(X0,X2)
+10: Q(X0,X1)  <-  Military-Person(X0) ^ hasRole(X1,X0) ^ related(X0,X2)
+==================SUMMARY==================

@@ -1,0 +1,160 @@
+/// Converted SBox ///
+listedCourse(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#listedCourse', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+BasketBallFan(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#BasketBallFan').
+DramaClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#DramaClass').
+Aeronautical_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Aeronautical_EngineeringClass').
+Lecturer(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Lecturer').
+UndergraduateStudent(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#UndergraduateStudent').
+Institute(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Institute').
+ResearchGroup(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#ResearchGroup').
+name(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#name', ?Z9, ?Z10, ?Z11), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+publicationResearch(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#publicationResearch', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+worksFor(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#worksFor', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+PostDoc(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#PostDoc').
+hasUndergraduateDegreeFrom(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#hasUndergraduateDegreeFrom', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+publicationDate(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#publicationDate', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Publication(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Publication').
+Petroleuml_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Petroleuml_EngineeringClass').
+Latin_ArtsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Latin_ArtsClass').
+hasMasterDegreeFrom(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#hasMasterDegreeFrom', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Organization(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Organization').
+PhilosophyClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#PhilosophyClass').
+Research(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Research').
+orgPublication(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#orgPublication', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+PsychologyClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#PsychologyClass').
+Computer_ScienceClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Computer_ScienceClass').
+Thing(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://www.w3.org/2002/07/owl#Thing').
+Person(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Person').
+MathematicsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#MathematicsClass').
+PeopleWithHobby(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#PeopleWithHobby').
+Director(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Director').
+hasDoctoralDegreeFrom(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#hasDoctoralDegreeFrom', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Dean(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Dean').
+BiologyClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#BiologyClass').
+SwimmingClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#SwimmingClass').
+Industry_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Industry_EngineeringClass').
+GraduateStudent(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#GraduateStudent').
+isCrazyAbout(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#isCrazyAbout', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+NonScienceStudent(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#NonScienceStudent').
+ResearchAssistant(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#ResearchAssistant').
+telephone(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#telephone', ?Z9, ?Z10, ?Z11), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+University(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#University').
+Music(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Music').
+Employee(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Employee').
+isHeadOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#isHeadOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+publicationAuthor(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#publicationAuthor', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+BasketBallLover(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#BasketBallLover').
+hasStudent(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#hasStudent', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+SportsLover(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#SportsLover').
+LeisureStudent(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#LeisureStudent').
+lastName(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#lastName', ?Z9, ?Z10, ?Z11), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+AcademicSubject(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#AcademicSubject').
+Performing_ArtsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Performing_ArtsClass').
+researchInterest(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#researchInterest', ?Z9, ?Z10, ?Z11), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Book(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Book').
+Civil_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Civil_EngineeringClass').
+Chair(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Chair').
+BaseballLover(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#BaseballLover').
+TennisClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#TennisClass').
+teachingAssistantOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#teachingAssistantOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+HistoryClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#HistoryClass').
+LinguisticsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#LinguisticsClass').
+EnglishClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#EnglishClass').
+title(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#title', ?Z9, ?Z10, ?Z11), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+BasketBallClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#BasketBallClass').
+WomanCollege(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#WomanCollege').
+ClericalStaff(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#ClericalStaff').
+Manual(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Manual').
+BaseballClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#BaseballClass').
+TechnicalReport(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#TechnicalReport').
+Sports(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Sports').
+age(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#age', ?Z9, ?Z10, ?Z11), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Modern_LanguagesClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Modern_LanguagesClass').
+PeopleWithManyHobbies(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#PeopleWithManyHobbies').
+softwareDocumentation(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#softwareDocumentation', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+like(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#like', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+firstName(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#firstName', ?Z9, ?Z10, ?Z11), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Department(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Department').
+isAdvisedBy(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#isAdvisedBy', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+isAffiliateOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#isAffiliateOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Marine_ScienceClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Marine_ScienceClass').
+softwareVersion(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#softwareVersion', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Science(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Science').
+College(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#College').
+hasAlumnus(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#hasAlumnus', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+MusicsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#MusicsClass').
+AssociateProfessor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#AssociateProfessor').
+researchProject(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#researchProject', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+SwimmingLover(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#SwimmingLover').
+AssistantProfessor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#AssistantProfessor').
+Schedule(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Schedule').
+ScienceStudent(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#ScienceStudent').
+SystemsStaff(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#SystemsStaff').
+hasSameHomeTownWith(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#hasSameHomeTownWith', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+hasDegreeFrom(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#hasDegreeFrom', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+AnthropologyClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#AnthropologyClass').
+isMemberOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#isMemberOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Mechanical_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Mechanical_EngineeringClass').
+FineArts(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#FineArts').
+Medieval_ArtsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Medieval_ArtsClass').
+Materical_Science_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Materical_Science_EngineeringClass').
+Insterest(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Insterest').
+EconomicsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#EconomicsClass').
+Program(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Program').
+isFriendOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#isFriendOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Computer_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Computer_EngineeringClass').
+ReligionsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#ReligionsClass').
+HumanitiesClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#HumanitiesClass').
+Biomedical_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Biomedical_EngineeringClass').
+Work(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Work').
+Asian_ArtsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Asian_ArtsClass').
+TennisFan(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#TennisFan').
+Professor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Professor').
+love(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#love', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+isTaughtBy(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#isTaughtBy', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+takesCourse(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#takesCourse', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+teacherOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#teacherOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+ConferencePaper(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#ConferencePaper').
+Student(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Student').
+BaseballFan(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#BaseballFan').
+StatisticsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#StatisticsClass').
+Software(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Software').
+emailAddress(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#emailAddress', ?Z9, ?Z10, ?Z11), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Faculty(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Faculty').
+TeachingAssistant(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#TeachingAssistant').
+SupportingStaff(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#SupportingStaff').
+tenured(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#tenured', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Media_Arts_And_ciencesClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Media_Arts_And_ciencesClass').
+FullProfessor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#FullProfessor').
+isStudentOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#isStudentOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+PhysicsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#PhysicsClass').
+VisitingProfessor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#VisitingProfessor').
+AstronomyClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#AstronomyClass').
+HumanitiesAndSocial(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#HumanitiesAndSocial').
+Modern_ArtsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Modern_ArtsClass').
+subOrganizationOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#subOrganizationOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+hasMember(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#hasMember', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+GraduateCourse(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#GraduateCourse').
+Specification(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Specification').
+Course(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Course').
+ArchitectureClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#ArchitectureClass').
+SwimmingFan(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#SwimmingFan').
+Article(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Article').
+Materials_ScienceClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Materials_ScienceClass').
+JournalArticle(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#JournalArticle').
+Woman(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Woman').
+UnofficialPublication(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#UnofficialPublication').
+enrollIn(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#enrollIn', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+isAffiliatedOrganizationOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#isAffiliatedOrganizationOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Engineering(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Engineering').
+ChemistryClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#ChemistryClass').
+Chemical_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Chemical_EngineeringClass').
+Man(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Man').
+hasMajor(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#hasMajor', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Electrical_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Electrical_EngineeringClass').
+officeNumber(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#officeNumber', ?Z9, ?Z10, ?Z11), @I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+SportsFan(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#SportsFan').
+Theatre_and_DanceClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#Theatre_and_DanceClass').
+GeosciencesClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://uob.iodt.ibm.com/univ-bench-lite.owl#GeosciencesClass').
+
+/// Total SBox Axioms: 157 ///

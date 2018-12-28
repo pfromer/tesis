@@ -1,0 +1,405 @@
+/// Created by: OWL 2 Datalog +- Converter ///
+/// Author: Giorgio Orsi <orsi@elet.polimi.it> - Politecnico di Milano ///
+/// Created on: 2010/02/05 15:04:31 ///
+/// Include Storage Axioms: false///
+
+/// Converted TBOX ///
+publisherAdministeredBy(?X, ?Y) :- Publisher(?X).
+contentNodeAdministeredBy(?X, ?Y) :- ItemContentNode(?X).
+!quizHasEndDate(?X, ?Y) :- quizHasStartDate(?X, ?Y).
+!isInShop(?Y, ?X) :- shopAdministeredBy(?X, ?Y).
+reviewHasShop(?X, ?Y) :- Review(?X).
+basketItemHasBook(?X, ?Y) :- BasketItem(?X).
+Role(?Y) :- hasRole(?X, ?Y).
+Book(?X) :- hasSeries(?X, ?Y).
+Date(?Y) :- micrositeNewsHasStartDate(?X, ?Y).
+userAdministeredBy(?X, ?Y) :- GeneralStaffUser(?X).
+!hasShopEventType(?X, ?Y) :- hasShopEventCategory(?X, ?Y).
+!quizHasEndDate(?X, ?Y) :- hasQuizQuestion(?X, ?Y).
+OrderItem(?X) :- orderItemHasQty(?X, ?Y).
+orderItemHasBook(?X, ?Y) :- OrderItem(?X).
+hasClassification(?X, ?Y) :- Book(?X).
+PublisherUser(?X) :- isPublisher(?X, ?Y).
+contentNodeAdministeredBy(?X, ?Y) :- ContentNode(?X).
+quizAdministeredBy(?X, ?Y) :- Quiz(?X).
+!hasOrderStatus(?X, ?Y) :- basketItemHasQty(?X, ?Y).
+!hasBookDataPublisher(?X, ?Y) :- imprintAdministeredBy(?X, ?Y).
+User(?X) :- DocumentationManagerUser(?X).
+Distributor(?Y) :- publisherHasDistributor(?X, ?Y).
+!basketAdministeredBy(?X, ?Y) :- hasDate(?X, ?Y).
+AdministratorUser(?Y) :- shopAdministeredBy(?X, ?Y).
+introductionAdministeredBy(?X, ?Y) :- MicrositeIntroduction(?X).
+glossaryItemAdministeredBy(?X, ?Y) :- GlossaryItem(?X).
+!basketHasShop(?Y, ?X) :- hasShopSize(?X, ?Y).
+isInMicrosite(?X, ?Y) :- ShopEvent(?X).
+ShopEventType(?Y) :- hasShopEventType(?X, ?Y).
+!associatedWithShop(?Y, ?X) :- hasShopClass(?X, ?Y).
+!imprintHasPublisher(?X, ?Y) :- imprintHasDistributor(?X, ?Y).
+reviewHasBook(?X, ?Y) :- Review(?X).
+User(?X) :- MicrositeEditorUser(?X).
+!hasShopEventType(?X, ?Y) :- shopEventAdministeredBy(?X, ?Y).
+!pubRepHasPublisher(?Y, ?X) :- publisherHasDistributor(?X, ?Y).
+OrderStatus(?X) :- OStatusNoOrder(?X).
+ContentNode(?Y) :- highlightContainsContentNode(?X, ?Y).
+!orderItemHasQty(?X, ?Y) :- orderItemHasShop(?X, ?Y).
+!hasShopEventType(?X, ?Y) :- isInMicrosite(?X, ?Y).
+QuizCategory(?Y) :- hasQuizCategory(?X, ?Y).
+Shop(?Y) :- isInShop(?X, ?Y).
+!shopEventAdministeredBy(?Y, ?X) :- userAdministeredBy(?X, ?Y).
+Date(?Y) :- quizHasStartDate(?X, ?Y).
+!trendspottingHasBookItem(?X, ?Y) :- trendspottingItemAdministeredBy(?X, ?Y).
+Role(?X) :- NewTitlesStoreUserRole(?X).
+!bookItemAdministeredBy(?Y, ?X) :- userAdministeredBy(?X, ?Y).
+!quizHasStartDate(?X, ?Y) :- quizHasEndDate(?X, ?Y).
+!userAdministeredBy(?X, ?Y) :- hasRole(?X, ?Y).
+Microsite(?Y) :- isInMicrosite(?X, ?Y).
+GlossaryItem(?X) :- glossaryItemAdministeredBy(?X, ?Y).
+!highlightContainsContentNode(?Y, ?X) :- contentNodeAdministeredBy(?X, ?Y).
+!quizAdministeredBy(?X, ?Y) :- hasQuizQuestion(?X, ?Y).
+User(?Y) :- imprintAdministeredBy(?X, ?Y).
+!isInShop(?Y, ?X) :- hasShopClass(?X, ?Y).
+Microsite(?X) :- Health(?X).
+!isInShop(?X, ?Y) :- hasShopEventCategory(?X, ?Y).
+Microsite(?X) :- SFAndFantasy(?X).
+!hasBookDataPublisher(?X, ?Y) :- imprintHasDistributor(?X, ?Y).
+!hasBookDataPublisher(?X, ?Y) :- imprintHasPublisher(?X, ?Y).
+userAdministeredBy(?X, ?Y) :- User(?X).
+!micrositeNewsHasEndDate(?X, ?Y) :- micrositeNewsHasStartDate(?X, ?Y).
+hasShopEventType(?X, ?Y) :- ShopEvent(?X).
+!hasRRP(?X, ?Y) :- hasRecommendation(?X, ?Y).
+AdministratorUser(?Y) :- basketAdministeredBy(?X, ?Y).
+highlightAdministeredBy(?X, ?Y) :- Highlight(?X).
+Role(?X) :- MicrositeEditorRole(?X).
+!hasShopSize(?X, ?Y) :- shopAdministeredBy(?X, ?Y).
+quizHasEndDate(?X, ?Y) :- Quiz(?X).
+!shopAdministeredBy(?X, ?Y) :- hasShopSize(?X, ?Y).
+ContentNode(?X) :- CategoryContentNode(?X).
+Publisher(?Y) :- isPublisher(?X, ?Y).
+QuizQuestion(?Y) :- hasQuizQuestion(?X, ?Y).
+Microsite(?X) :- Computing(?X).
+Microsite(?X) :- Travel(?X).
+Role(?X) :- GeneralStaffRole(?X).
+!bookItemAdministeredBy(?X, ?Y) :- bookItemHasBook(?X, ?Y).
+!micrositeNewsHasStartDate(?X, ?Y) :- micrositeNewsHasEndDate(?X, ?Y).
+!orderItemHasQty(?X, ?Y) :- orderItemHasBook(?X, ?Y).
+newsItemAdministeredBy(?X, ?Y) :- IndefiniteMicrositeNews(?X).
+!bookItemHasBook(?X, ?Y) :- bookItemAdministeredBy(?X, ?Y).
+!orderItemHasShop(?Y, ?X) :- hasShopSize(?X, ?Y).
+!imprintAdministeredBy(?X, ?Y) :- imprintHasPublisher(?X, ?Y).
+!associatedWithShop(?Y, ?X) :- hasShopSize(?X, ?Y).
+!micrositeNewsHasEndDate(?X, ?Y) :- newsItemAdministeredBy(?X, ?Y).
+Role(?X) :- BookdataRole(?X).
+!orderItemHasBook(?Y, ?X) :- hasClassification(?X, ?Y).
+!basketItemHasBook(?Y, ?X) :- hasRRP(?X, ?Y).
+User(?X) :- GeneralStaffUser(?X).
+OrderStatus(?X) :- OStatusOrder(?X).
+User(?X) :- isPublisher(?X, ?Y).
+!quizHasStartDate(?X, ?Y) :- hasQuizQuestion(?X, ?Y).
+!hasActionCode(?X, ?Y) :- orderItemHasQty(?X, ?Y).
+Highlight(?X) :- highlightContainsContentNode(?X, ?Y).
+!basketHasShop(?Y, ?X) :- hasShopClass(?X, ?Y).
+!hasShopEventCategory(?X, ?Y) :- hasShopEventType(?X, ?Y).
+Microsite(?X) :- History(?X).
+!hasRRP(?X, ?Y) :- hasClassification(?X, ?Y).
+Publisher(?Y) :- pubRepHasPublisher(?X, ?Y).
+!contentNodeAdministeredBy(?Y, ?X) :- userAdministeredBy(?X, ?Y).
+Microsite(?X) :- MindBodyAndSpirit(?X).
+!shopAdministeredBy(?X, ?Y) :- hasShopClass(?X, ?Y).
+!hasShopEventCategory(?X, ?Y) :- isInShop(?X, ?Y).
+!basketAdministeredBy(?X, ?Y) :- basketHasShop(?X, ?Y).
+basketItemHasQty(?X, ?Y) :- BasketItem(?X).
+!imprintHasPublisher(?Y, ?X) :- publisherAdministeredBy(?X, ?Y).
+userAdministeredBy(?X, ?Y) :- BookdataUser(?X).
+!orderItemHasQty(?X, ?Y) :- hasActionCode(?X, ?Y).
+!administeredBy(?Y, ?X) :- userAdministeredBy(?X, ?Y).
+Review(?X) :- reviewHasShop(?X, ?Y).
+hasShopEventCategory(?X, ?Y) :- ShopEvent(?X).
+contentNodeAdministeredBy(?X, ?Y) :- CategoryContentNode(?X).
+Date(?Y) :- micrositeNewsHasEndDate(?X, ?Y).
+!reviewHasShop(?X, ?Y) :- reviewHasBook(?X, ?Y).
+!highlightContainsContentNode(?X, ?Y) :- highlightAdministeredBy(?X, ?Y).
+OrderItem(?X) :- orderItemHasBook(?X, ?Y).
+!hasShopClass(?Y, ?X) :- shopClassAdministeredBy(?X, ?Y).
+!hasQuizQuestion(?X, ?Y) :- quizHasStartDate(?X, ?Y).
+ShopEvent(?X) :- isInShop(?X, ?Y).
+!bestsellerAdministeredBy(?X, ?Y) :- micrositeBestsellerHasBook(?X, ?Y).
+!hasActionCode(?X, ?Y) :- orderItemHasShop(?X, ?Y).
+!micrositeBestsellerHasBook(?X, ?Y) :- bestsellerAdministeredBy(?X, ?Y).
+!orderItemHasShop(?X, ?Y) :- hasActionCode(?X, ?Y).
+imprintHasPublisher(?X, ?Y) :- Imprint(?X).
+Recommendation(?X) :- RecDoNotBuy(?X).
+Imprint(?X) :- imprintHasDistributor(?X, ?Y).
+Microsite(?X) :- SpokenWord(?X).
+User(?Y) :- trendspottingItemAdministeredBy(?X, ?Y).
+Book(?Y) :- orderItemHasBook(?X, ?Y).
+Recommendation(?X) :- RecRecommended(?X).
+!reviewHasBook(?X, ?Y) :- reviewHasShop(?X, ?Y).
+!publisherAdministeredBy(?X, ?Y) :- publisherHasDistributor(?X, ?Y).
+!introductionAdministeredBy(?Y, ?X) :- userAdministeredBy(?X, ?Y).
+Review(?X) :- reviewAdministeredBy(?X, ?Y).
+orderItemHasShop(?X, ?Y) :- OrderItem(?X).
+!reviewHasShop(?Y, ?X) :- hasShopClass(?X, ?Y).
+MicrositeIntroduction(?X) :- introductionAdministeredBy(?X, ?Y).
+Imprint(?X) :- imprintAdministeredBy(?X, ?Y).
+trendspottingItemAdministeredBy(?X, ?Y) :- TrendspottingItem(?X).
+Quantity(?Y) :- orderItemHasQty(?X, ?Y).
+!hasSeries(?X, ?Y) :- hasClassification(?X, ?Y).
+bookItemAdministeredBy(?X, ?Y) :- RangeTipItem(?X).
+!trendspottingHasBookItem(?Y, ?X) :- bookItemAdministeredBy(?X, ?Y).
+Quiz(?X) :- quizHasEndDate(?X, ?Y).
+!shopEventAdministeredBy(?X, ?Y) :- isInMicrosite(?X, ?Y).
+userAdministeredBy(?X, ?Y) :- NewTitlesContentManagerUser(?X).
+OrderItem(?X) :- orderItemHasShop(?X, ?Y).
+Role(?X) :- PublisherRole(?X).
+ShopEventCategory(?Y) :- hasShopEventCategory(?X, ?Y).
+Series(?Y) :- hasSeries(?X, ?Y).
+!hasShopEventType(?X, ?Y) :- isInShop(?X, ?Y).
+shopEventAdministeredBy(?X, ?Y) :- ShopEvent(?X).
+Shop(?Y) :- reviewHasShop(?X, ?Y).
+!orderItemHasShop(?X, ?Y) :- orderItemHasQty(?X, ?Y).
+bookItemHasBook(?X, ?Y) :- RangeTipItem(?X).
+BookDataPublisher(?Y) :- hasBookDataPublisher(?X, ?Y).
+!isInShop(?X, ?Y) :- shopEventAdministeredBy(?X, ?Y).
+Book(?Y) :- reviewHasBook(?X, ?Y).
+TrendspottingItem(?X) :- trendspottingHasBookItem(?X, ?Y).
+!hasShopClass(?X, ?Y) :- hasShopSize(?X, ?Y).
+!reviewHasBook(?Y, ?X) :- hasRecommendation(?X, ?Y).
+!trendspottingHasBookItem(?Y, ?X) :- bookItemHasBook(?X, ?Y).
+associatedWithShop(?X, ?Y) :- NewTitlesStoreUser(?X).
+!basketHasShop(?X, ?Y) :- basketAdministeredBy(?X, ?Y).
+!imprintAdministeredBy(?Y, ?X) :- userAdministeredBy(?X, ?Y).
+hasRole(?X, ?Y) :- User(?X).
+hasDate(?X, ?Y) :- Order(?X).
+!isInMicrosite(?X, ?Y) :- isInShop(?X, ?Y).
+ShopClass(?Y) :- hasShopClass(?X, ?Y).
+ShopEvent(?X) :- hasShopEventType(?X, ?Y).
+OrderStatus(?X) :- OStatusNoAction(?X).
+orderItemHasQty(?X, ?Y) :- OrderItem(?X).
+!reviewHasBook(?Y, ?X) :- hasClassification(?X, ?Y).
+hasQuizCategory(?X, ?Y) :- QuizQuestion(?X).
+MicrositeBestseller(?X) :- micrositeBestsellerHasBook(?X, ?Y).
+!basketItemHasBook(?Y, ?X) :- hasRecommendation(?X, ?Y).
+Order(?X) :- orderHasDistributor(?X, ?Y).
+hasShopClass(?X, ?Y) :- Shop(?X).
+AdministratorUser(?Y) :- userAdministeredBy(?X, ?Y).
+!imprintHasDistributor(?X, ?Y) :- imprintHasPublisher(?X, ?Y).
+!quizAdministeredBy(?Y, ?X) :- userAdministeredBy(?X, ?Y).
+User(?Y) :- bookItemAdministeredBy(?X, ?Y).
+!reviewAdministeredBy(?X, ?Y) :- reviewHasShop(?X, ?Y).
+Date(?Y) :- hasDate(?X, ?Y).
+!hasShopSize(?X, ?Y) :- hasShopClass(?X, ?Y).
+Basket(?X) :- basketHasShop(?X, ?Y).
+hasShopSize(?X, ?Y) :- Shop(?X).
+hasRRP(?X, ?Y) :- Book(?X).
+ContentNode(?X) :- ItemContentNode(?X).
+Highlight(?X) :- highlightAdministeredBy(?X, ?Y).
+!hasQuizQuestion(?X, ?Y) :- quizHasEndDate(?X, ?Y).
+bestsellerAdministeredBy(?X, ?Y) :- MicrositeBestseller(?X).
+Quiz(?X) :- hasQuizQuestion(?X, ?Y).
+!highlightAdministeredBy(?X, ?Y) :- highlightContainsContentNode(?X, ?Y).
+!isInShop(?X, ?Y) :- hasShopEventType(?X, ?Y).
+Book(?X) :- hasClassification(?X, ?Y).
+User(?Y) :- highlightAdministeredBy(?X, ?Y).
+Shop(?X) :- shopAdministeredBy(?X, ?Y).
+!bookItemHasBook(?Y, ?X) :- hasRRP(?X, ?Y).
+PublisherRepresentative(?X) :- pubRepHasPublisher(?X, ?Y).
+!trendspottingItemAdministeredBy(?X, ?Y) :- trendspottingHasBookItem(?X, ?Y).
+Shop(?Y) :- basketHasShop(?X, ?Y).
+orderHasDistributor(?X, ?Y) :- Order(?X).
+bookItemHasBook(?X, ?Y) :- NewTitleItem(?X).
+!isInMicrosite(?X, ?Y) :- shopEventAdministeredBy(?X, ?Y).
+User(?Y) :- introductionAdministeredBy(?X, ?Y).
+!hasQuizQuestion(?X, ?Y) :- quizAdministeredBy(?X, ?Y).
+ShopClass(?X) :- shopClassAdministeredBy(?X, ?Y).
+!micrositeNewsHasStartDate(?X, ?Y) :- newsItemAdministeredBy(?X, ?Y).
+!micrositeBestsellerHasBook(?Y, ?X) :- hasClassification(?X, ?Y).
+BasketItem(?X) :- basketItemHasQty(?X, ?Y).
+!reviewHasShop(?X, ?Y) :- reviewAdministeredBy(?X, ?Y).
+Role(?X) :- DocumentationManagerRole(?X).
+!imprintHasPublisher(?Y, ?X) :- publisherHasDistributor(?X, ?Y).
+ContentNode(?X) :- contentNodeAdministeredBy(?X, ?Y).
+hasActionCode(?X, ?Y) :- OrderItem(?X).
+Review(?X) :- reviewHasBook(?X, ?Y).
+userAdministeredBy(?X, ?Y) :- AdministratorUser(?X).
+!reviewAdministeredBy(?X, ?Y) :- reviewHasBook(?X, ?Y).
+userAdministeredBy(?X, ?Y) :- PublisherUser(?X).
+Quantity(?Y) :- basketItemHasQty(?X, ?Y).
+!publisherHasDistributor(?X, ?Y) :- publisherAdministeredBy(?X, ?Y).
+Book(?Y) :- micrositeBestsellerHasBook(?X, ?Y).
+ActionCode(?Y) :- hasActionCode(?X, ?Y).
+!pubRepHasPublisher(?Y, ?X) :- publisherAdministeredBy(?X, ?Y).
+OrderStatus(?Y) :- hasOrderStatus(?X, ?Y).
+ShopEvent(?X) :- shopEventAdministeredBy(?X, ?Y).
+!hasOrderStatus(?X, ?Y) :- basketItemHasBook(?X, ?Y).
+User(?Y) :- quizAdministeredBy(?X, ?Y).
+Classification(?Y) :- hasClassification(?X, ?Y).
+!orderItemHasShop(?X, ?Y) :- orderItemHasBook(?X, ?Y).
+!orderItemHasShop(?Y, ?X) :- hasShopClass(?X, ?Y).
+BookItem(?X) :- bookItemHasBook(?X, ?Y).
+ShopSize(?Y) :- hasShopSize(?X, ?Y).
+ShopEvent(?X) :- isInMicrosite(?X, ?Y).
+BookItem(?X) :- NewTitleItem(?X).
+Date(?Y) :- quizHasEndDate(?X, ?Y).
+Publisher(?X) :- publisherAdministeredBy(?X, ?Y).
+!orderItemHasBook(?Y, ?X) :- hasRecommendation(?X, ?Y).
+TrendspottingItem(?X) :- trendspottingItemAdministeredBy(?X, ?Y).
+!hasSeries(?X, ?Y) :- hasRRP(?X, ?Y).
+!reviewHasBook(?Y, ?X) :- hasRRP(?X, ?Y).
+userAdministeredBy(?X, ?Y) :- MicrositeEditorUser(?X).
+AdministratorUser(?Y) :- shopClassAdministeredBy(?X, ?Y).
+Role(?X) :- AdministratorRole(?X).
+!basketItemHasBook(?X, ?Y) :- hasOrderStatus(?X, ?Y).
+User(?Y) :- publisherAdministeredBy(?X, ?Y).
+Money(?Y) :- hasRRP(?X, ?Y).
+quizHasStartDate(?X, ?Y) :- Quiz(?X).
+Book(?X) :- hasRRP(?X, ?Y).
+!basketItemHasQty(?X, ?Y) :- hasOrderStatus(?X, ?Y).
+Shop(?Y) :- orderItemHasShop(?X, ?Y).
+!basketItemHasBook(?Y, ?X) :- hasClassification(?X, ?Y).
+!imprintAdministeredBy(?X, ?Y) :- imprintHasDistributor(?X, ?Y).
+Microsite(?X) :- Crime(?X).
+hasOrderStatus(?X, ?Y) :- BasketItem(?X).
+BasketItem(?X) :- basketItemHasBook(?X, ?Y).
+User(?Y) :- administeredBy(?X, ?Y).
+pubRepHasPublisher(?X, ?Y) :- PublisherRepresentative(?X).
+Publisher(?Y) :- imprintHasPublisher(?X, ?Y).
+Shop(?Y) :- associatedWithShop(?X, ?Y).
+trendspottingHasBookItem(?X, ?Y) :- TrendspottingItem(?X).
+MicrositeNews(?X) :- micrositeNewsHasStartDate(?X, ?Y).
+ShopEvent(?X) :- hasShopEventCategory(?X, ?Y).
+!associatedWithShop(?Y, ?X) :- shopAdministeredBy(?X, ?Y).
+User(?X) :- userAdministeredBy(?X, ?Y).
+MicrositeBestseller(?X) :- bestsellerAdministeredBy(?X, ?Y).
+Shop(?X) :- hasShopClass(?X, ?Y).
+!quizAdministeredBy(?X, ?Y) :- quizHasEndDate(?X, ?Y).
+!orderItemHasBook(?X, ?Y) :- orderItemHasQty(?X, ?Y).
+isInShop(?X, ?Y) :- ShopEvent(?X).
+User(?X) :- NewTitlesContentManagerUser(?X).
+!shopEventAdministeredBy(?X, ?Y) :- isInShop(?X, ?Y).
+!imprintHasPublisher(?X, ?Y) :- imprintAdministeredBy(?X, ?Y).
+!orderItemHasBook(?X, ?Y) :- hasActionCode(?X, ?Y).
+!hasRecommendation(?X, ?Y) :- hasClassification(?X, ?Y).
+!micrositeBestsellerHasBook(?Y, ?X) :- hasRRP(?X, ?Y).
+hasDate(?X, ?Y) :- Basket(?X).
+!highlightAdministeredBy(?Y, ?X) :- userAdministeredBy(?X, ?Y).
+Microsite(?X) :- Fiction(?X).
+User(?X) :- NewTitlesStoreUser(?X).
+!reviewHasShop(?Y, ?X) :- shopAdministeredBy(?X, ?Y).
+!hasShopEventCategory(?X, ?Y) :- shopEventAdministeredBy(?X, ?Y).
+!orderItemHasBook(?X, ?Y) :- orderItemHasShop(?X, ?Y).
+!basketHasShop(?X, ?Y) :- hasDate(?X, ?Y).
+!hasActionCode(?X, ?Y) :- orderItemHasBook(?X, ?Y).
+!basketItemHasBook(?X, ?Y) :- basketItemHasQty(?X, ?Y).
+MicrositeNews(?X) :- micrositeNewsHasEndDate(?X, ?Y).
+Distributor(?Y) :- imprintHasDistributor(?X, ?Y).
+hasRecommendation(?X, ?Y) :- Book(?X).
+!publisherAdministeredBy(?Y, ?X) :- userAdministeredBy(?X, ?Y).
+BookItem(?X) :- bookItemAdministeredBy(?X, ?Y).
+!isPublisher(?Y, ?X) :- publisherAdministeredBy(?X, ?Y).
+!isInMicrosite(?X, ?Y) :- hasShopEventType(?X, ?Y).
+User(?X) :- BookdataUser(?X).
+User(?Y) :- glossaryItemAdministeredBy(?X, ?Y).
+Imprint(?X) :- imprintHasPublisher(?X, ?Y).
+Quiz(?X) :- quizAdministeredBy(?X, ?Y).
+User(?Y) :- newsItemAdministeredBy(?X, ?Y).
+Recommendation(?X) :- RecKey(?X).
+shopClassAdministeredBy(?X, ?Y) :- ShopClass(?X).
+MicrositeNews(?X) :- IndefiniteMicrositeNews(?X).
+Recommendation(?Y) :- hasRecommendation(?X, ?Y).
+BasketItem(?X) :- hasOrderStatus(?X, ?Y).
+isPublisher(?X, ?Y) :- PublisherUser(?X).
+!quizHasStartDate(?X, ?Y) :- quizAdministeredBy(?X, ?Y).
+OrderItem(?X) :- hasActionCode(?X, ?Y).
+!reviewHasBook(?X, ?Y) :- reviewAdministeredBy(?X, ?Y).
+!hasClassification(?X, ?Y) :- hasRecommendation(?X, ?Y).
+!isInShop(?X, ?Y) :- isInMicrosite(?X, ?Y).
+Book(?Y) :- basketItemHasBook(?X, ?Y).
+BookItem(?X) :- RangeTipItem(?X).
+!reviewHasShop(?Y, ?X) :- hasShopSize(?X, ?Y).
+userAdministeredBy(?X, ?Y) :- NewTitlesStoreUser(?X).
+MicrositeNews(?X) :- newsItemAdministeredBy(?X, ?Y).
+User(?X) :- PublisherUser(?X).
+micrositeBestsellerHasBook(?X, ?Y) :- MicrositeBestseller(?X).
+!isPublisher(?X, ?Y) :- userAdministeredBy(?X, ?Y).
+newsItemAdministeredBy(?X, ?Y) :- MicrositeNews(?X).
+shopAdministeredBy(?X, ?Y) :- Shop(?X).
+Distributor(?Y) :- orderHasDistributor(?X, ?Y).
+!orderHasDistributor(?X, ?Y) :- hasDate(?X, ?Y).
+Publisher(?X) :- publisherHasDistributor(?X, ?Y).
+!glossaryItemAdministeredBy(?Y, ?X) :- userAdministeredBy(?X, ?Y).
+!hasQuizQuestion(?Y, ?X) :- hasQuizCategory(?X, ?Y).
+!isInMicrosite(?X, ?Y) :- hasShopEventCategory(?X, ?Y).
+basketAdministeredBy(?X, ?Y) :- Basket(?X).
+Imprint(?X) :- hasBookDataPublisher(?X, ?Y).
+!quizHasEndDate(?X, ?Y) :- quizAdministeredBy(?X, ?Y).
+Basket(?X) :- basketAdministeredBy(?X, ?Y).
+userAdministeredBy(?X, ?Y) :- DocumentationManagerUser(?X).
+publisherHasDistributor(?X, ?Y) :- Publisher(?X).
+Role(?X) :- WholesalerRole(?X).
+!hasSeries(?X, ?Y) :- hasRecommendation(?X, ?Y).
+!orderItemHasBook(?Y, ?X) :- hasRRP(?X, ?Y).
+Role(?X) :- NewTitlesContentManagerRole(?X).
+!isInShop(?Y, ?X) :- hasShopSize(?X, ?Y).
+Shop(?X) :- hasShopSize(?X, ?Y).
+hasQuizQuestion(?X, ?Y) :- Quiz(?X).
+imprintHasDistributor(?X, ?Y) :- Imprint(?X).
+!shopEventAdministeredBy(?X, ?Y) :- hasShopEventCategory(?X, ?Y).
+!hasShopEventCategory(?X, ?Y) :- isInMicrosite(?X, ?Y).
+User(?Y) :- bestsellerAdministeredBy(?X, ?Y).
+!hasShopClass(?X, ?Y) :- shopAdministeredBy(?X, ?Y).
+userAdministeredBy(?X, ?Y) :- WholesalerUser(?X).
+bookItemAdministeredBy(?X, ?Y) :- NewTitleItem(?X).
+reviewAdministeredBy(?X, ?Y) :- Review(?X).
+bookItemHasBook(?X, ?Y) :- BookItem(?X).
+User(?Y) :- contentNodeAdministeredBy(?X, ?Y).
+User(?X) :- AdministratorUser(?X).
+!quizAdministeredBy(?X, ?Y) :- quizHasStartDate(?X, ?Y).
+!micrositeBestsellerHasBook(?Y, ?X) :- hasRecommendation(?X, ?Y).
+!bookItemHasBook(?Y, ?X) :- hasRecommendation(?X, ?Y).
+!imprintHasDistributor(?X, ?Y) :- imprintAdministeredBy(?X, ?Y).
+!basketHasShop(?Y, ?X) :- shopAdministeredBy(?X, ?Y).
+!trendspottingItemAdministeredBy(?Y, ?X) :- userAdministeredBy(?X, ?Y).
+User(?Y) :- shopEventAdministeredBy(?X, ?Y).
+!basketItemHasQty(?X, ?Y) :- basketItemHasBook(?X, ?Y).
+!shopEventAdministeredBy(?X, ?Y) :- hasShopEventType(?X, ?Y).
+Microsite(?X) :- ChristmasSpecials(?X).
+User(?X) :- WholesalerUser(?X).
+Microsite(?X) :- Sport(?X).
+Book(?Y) :- bookItemHasBook(?X, ?Y).
+Quiz(?X) :- quizHasStartDate(?X, ?Y).
+User(?Y) :- reviewAdministeredBy(?X, ?Y).
+!bestsellerAdministeredBy(?Y, ?X) :- userAdministeredBy(?X, ?Y).
+basketHasShop(?X, ?Y) :- Basket(?X).
+Microsite(?X) :- Cookery(?X).
+!orderItemHasShop(?Y, ?X) :- shopAdministeredBy(?X, ?Y).
+!reviewAdministeredBy(?Y, ?X) :- userAdministeredBy(?X, ?Y).
+Microsite(?X) :- Kids(?X).
+!hasClassification(?X, ?Y) :- hasRRP(?X, ?Y).
+!bookItemHasBook(?Y, ?X) :- hasClassification(?X, ?Y).
+BookItem(?Y) :- trendspottingHasBookItem(?X, ?Y).
+!newsItemAdministeredBy(?Y, ?X) :- userAdministeredBy(?X, ?Y).
+!isPublisher(?Y, ?X) :- publisherHasDistributor(?X, ?Y).
+imprintAdministeredBy(?X, ?Y) :- Imprint(?X).
+!hasRecommendation(?X, ?Y) :- hasRRP(?X, ?Y).
+highlightContainsContentNode(?X, ?Y) :- Highlight(?X).
+Book(?X) :- hasRecommendation(?X, ?Y).
+QuizQuestion(?X) :- hasQuizCategory(?X, ?Y).
+bookItemAdministeredBy(?X, ?Y) :- BookItem(?X).
+
+
+Q_0(?A) :- userAdministeredBy(?A,?B), hasShopClass(?A,?C).
+Q_1(?A) :- bookItemHasBook(?A,?B), User(?A), hasShopClass(?A,?C).
+Q_2(?A) :- ShopEvent(?A), User(?B), hasRole(?A,?B).
+Q_3(?A) :- ShopEvent(?A), User(?B), hasRole(?A,?B), hasRole(?A,?C), Sport(?C).
+
+
+?- Q_0(?A).
+?- Q_1(?A).
+?- Q_2(?A).
+?- Q_3(?A).
+
+/// Total TBox Axioms: 381 ///
+
+/// Converted ABOX ///
+
+/// Total ABox Axioms: 0 ///

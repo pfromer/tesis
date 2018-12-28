@@ -1,0 +1,14 @@
+employee(?m) :- manager(?m).
+directs(?m, ?p) :- manager(?m).
+manager(?e) :- employee(?e), directs(?e, ?p).
+supervises(?e, ?e2) :- manager(?e), employee(?e), directs(?e, ?p).
+works_in(?e2, ?p)  :- supervises(?e,?e2), manager(?e), employee(?e), directs(?e, ?p).
+manager(?e) :- employee(?e), supervises(?e,?e2), manager(?e2).
+
+manager('jo').
+directs('jo', 'finance').
+supervises('jo', 'ada').
+employee('ada').
+
+?- employee(?X).
+?-works_in(?X,?Y).

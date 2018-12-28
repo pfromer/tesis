@@ -1,0 +1,22 @@
+==================SUMMARY==================
+Ontology file:             ux.owl
+Query:                     Q(X0,X1,X2)  <-  Course(X2) ^ FacultyStaff(X1) ^ Student(X0) ^ advisor(X0,X1) ^ takesCourse(X0,X2) ^ teacherOf(X1,X2)
+Number of assertions:      137
+Number of concept symbols: 35
+Number of role symbols:    31
+Running time:              2093 milliseconds 
+Size of the rewriting (queries):     12
+Size of the rewriting (symbols):     1452
+0: Q(X0,X1,X2)  <-  AUX3(X3,X2) ^ AUX3(X0,X2) ^ ResearchAssistant(X0) ^ advisor(X0,X1) ^ advisor(X4,X1) ^ teacherOf(X1,X2)
+1: Q(X0,X1,X2)  <-  AUX3(X3,X2) ^ AUX3(X0,X2) ^ Student(X0) ^ advisor(X0,X1) ^ advisor(X4,X1) ^ teacherOf(X1,X2)
+2: Q(X0,X1,X2)  <-  AUX3(X3,X2) ^ AUX3(X0,X2) ^ UndergraduateStudent(X0) ^ advisor(X0,X1) ^ advisor(X4,X1) ^ teacherOf(X1,X2)
+3: Q(X0,X1,X2)  <-  AUX3(X3,X2) ^ AUX3(X0,X2) ^ advisor(X0,X1) ^ advisor(X4,X1) ^ hasExamRecord(X0,X5) ^ teacherOf(X1,X2)
+4: Q(X0,X1,X2)  <-  AUX4(X3,X2) ^ AUX4(X0,X2) ^ ResearchAssistant(X0) ^ advisor(X0,X1) ^ advisor(X4,X1) ^ teacherOf(X1,X2)
+5: Q(X0,X1,X2)  <-  AUX4(X3,X2) ^ AUX4(X0,X2) ^ Student(X0) ^ advisor(X0,X1) ^ advisor(X4,X1) ^ teacherOf(X1,X2)
+6: Q(X0,X1,X2)  <-  AUX4(X3,X2) ^ AUX4(X0,X2) ^ UndergraduateStudent(X0) ^ advisor(X0,X1) ^ advisor(X4,X1) ^ teacherOf(X1,X2)
+7: Q(X0,X1,X2)  <-  AUX4(X3,X2) ^ AUX4(X0,X2) ^ advisor(X0,X1) ^ advisor(X4,X1) ^ hasExamRecord(X0,X5) ^ teacherOf(X1,X2)
+8: Q(X0,X1,X2)  <-  ResearchAssistant(X0) ^ advisor(X0,X1) ^ advisor(X3,X1) ^ takesCourse(X0,X2) ^ teacherOf(X1,X2) ^ teacherOf(X4,X2)
+9: Q(X0,X1,X2)  <-  Student(X0) ^ advisor(X0,X1) ^ advisor(X3,X1) ^ takesCourse(X0,X2) ^ teacherOf(X1,X2) ^ teacherOf(X4,X2)
+10: Q(X0,X1,X2)  <-  UndergraduateStudent(X0) ^ advisor(X0,X1) ^ advisor(X3,X1) ^ takesCourse(X0,X2) ^ teacherOf(X1,X2) ^ teacherOf(X4,X2)
+11: Q(X0,X1,X2)  <-  advisor(X0,X1) ^ advisor(X3,X1) ^ hasExamRecord(X0,X4) ^ takesCourse(X0,X2) ^ teacherOf(X1,X2) ^ teacherOf(X5,X2)
+==================SUMMARY==================

@@ -1,0 +1,46 @@
+/// Output for QueryRewritingTest class ///
+/// Created on: 2010/02/19 ///
+/// Queries in the program: 4///
+/// Rules in the program: 6 ///
+/// TGDs in the program: 2 ///
+/// Constraints in the program: 0 ///
+
+/// QUERIES: ///
+
+/// Input Query: Q_0(?A) :- t(?A, ?B), s(?B). ///
+/// Size of the rewriting [# of queries]:3 ///
+/// Size of the rewriting [# of symbols]:10 ///
+/// Rewriting Time: 4.079512[ms] ///
+/// Rewritten Program ///
+Q_0(?A0) :- t(?A0, ?A1).
+Q_0(?A0) :- p(?A0).
+Q_0(?A0) :- s(?A1), t(?A0, ?A1).
+
+/// Input Query: Q_1(?A) :- t(?A, ?B). ///
+/// Size of the rewriting [# of queries]:2 ///
+/// Size of the rewriting [# of symbols]:5 ///
+/// Rewriting Time: 0.595834[ms] ///
+/// Rewritten Program ///
+Q_1(?A0) :- t(?A0, ?A1).
+Q_1(?A0) :- p(?A0).
+
+/// Input Query: Q_2(?A) :- p(?A). ///
+/// Size of the rewriting [# of queries]:1 ///
+/// Size of the rewriting [# of symbols]:2 ///
+/// Rewriting Time: 0.269024[ms] ///
+/// Rewritten Program ///
+Q_2(?A0) :- p(?A0).
+
+/// Input Query: Q_3(?A) :- s(?A). ///
+/// Size of the rewriting [# of queries]:2 ///
+/// Size of the rewriting [# of symbols]:5 ///
+/// Rewriting Time: 0.917544[ms] ///
+/// Rewritten Program ///
+Q_3(?A0) :- s(?A0).
+Q_3(?A0) :- t(?A1, ?A0).
+
+
+?- Q_0(?A0).
+?- Q_1(?A0).
+?- Q_2(?A0).
+?- Q_3(?A0).

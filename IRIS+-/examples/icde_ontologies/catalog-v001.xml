@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog id="XML Catalog File (see http://www.oasis-open.org/committees/entity/spec-2001-08-06.html) - Created By Protégé 4" prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <group id="Folder Repository, directory=/home/jd/development/workspace/IRIS+-/examples/icde_ontologies, Auto-Update=true" prefer="public" xml:base="">
+        <uri id="Automatically generated entry, Timestamp=1277112321614" name="http://www.lehigh.edu/~zhp2/2004/0401/univ-bench.owl" uri="lubm.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1277112321614" name="http://purl.uniprot.org/core/" uri="uniprot.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1277112321614" name="http://www.systemone.at/2006/03/wikipedia" uri="wikipedia.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1277112321614" name="http://semantics.crl.ibm.com/univ-bench-dl.owl" uri="uobm.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1277112321614" name="http://lsdis.cs.uga.edu/proj/semdis/testbed/#" uri="sweto.owl"/>
+    </group>
+</catalog>

@@ -1,0 +1,20 @@
+==================SUMMARY==================
+Ontology file:             path5.owl
+Query:                     Q(X0)  <-  edge(X0,X1) ^ edge(X1,X2)
+Number of assertions:      10
+Number of concept symbols: 6
+Number of role symbols:    1
+Running time:              31 milliseconds 
+Size of the rewriting (queries):     10
+Size of the rewriting (symbols):     286
+0: Q(X0)  <-  Path1(X1) ^ edge(X0,X1)
+1: Q(X0)  <-  Path2(X0)
+2: Q(X0)  <-  Path2(X1) ^ edge(X0,X1)
+3: Q(X0)  <-  Path3(X0)
+4: Q(X0)  <-  Path3(X1) ^ edge(X0,X1)
+5: Q(X0)  <-  Path4(X0)
+6: Q(X0)  <-  Path4(X1) ^ edge(X0,X1)
+7: Q(X0)  <-  Path5(X0)
+8: Q(X0)  <-  Path5(X1) ^ edge(X0,X1)
+9: Q(X0)  <-  edge(X0,X1) ^ edge(X1,X2)
+==================SUMMARY==================

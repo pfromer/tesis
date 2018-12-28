@@ -1,0 +1,25 @@
+==================SUMMARY==================
+Ontology file:             vicodi.owl
+Query:                     Q(X0)  <-  Location(X0)
+Number of assertions:      222
+Number of concept symbols: 194
+Number of role symbols:    10
+Running time:              1 milliseconds 
+Size of the rewriting (queries):     15
+Size of the rewriting (symbols):     454
+0: Q(X0)  <-  City(X0)
+1: Q(X0)  <-  Country(X0)
+2: Q(X0)  <-  Geographical-Feature(X0)
+3: Q(X0)  <-  Geographical-Region(X0)
+4: Q(X0)  <-  Intra-State-Group(X0)
+5: Q(X0)  <-  Landmark(X0)
+6: Q(X0)  <-  Location(X0)
+7: Q(X0)  <-  Political-Region(X0)
+8: Q(X0)  <-  Settlement(X0)
+9: Q(X0)  <-  Village(X0)
+10: Q(X0)  <-  Water(X0)
+11: Q(X0)  <-  hasLocationContainerMember(X1,X0)
+12: Q(X0)  <-  hasLocationPartMember(X1,X0)
+13: Q(X0)  <-  isLocationContainerMemberOf(X0,X1)
+14: Q(X0)  <-  isLocationPartMemberOf(X0,X1)
+==================SUMMARY==================

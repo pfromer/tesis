@@ -1,0 +1,36 @@
+/// Created by: OWL 2 Datalog +- Converter ///
+/// Author: Giorgio Orsi <orsi@elet.polimi.it> - Politecnico di Milano ///
+/// Created on: 2010/01/27 18:17:05 ///
+/// Include Storage Axioms: false///
+
+/// Converted TBOX ///
+edge(?X, ?Y) :- Path1(?X).
+
+Path1(?Y) :- edge(?X, ?Y), Path2(?X),.
+edge(?X, ?Y) :- Path2(?X).
+
+Path2(?X) :- edge(?X, ?Y), Path3(?X).
+edge(?X, ?Y) :- Path3(?X).
+
+Path3(?X) :- edge(?X, ?Y), Path4(?X).
+edge(?X, ?Y) :- Path4(?X).
+
+Path4(?X) :- edge(?X, ?Y), Path5(?X).
+edge(?X, ?Y) :- Path5(?X).
+
+
+/// Total TBox Axioms: 18 ///
+
+/// Converted ABOX ///
+Q_0(?A) :- edge(?A,?B).
+Q_1(?A) :- edge(?A,?B), edge(?B,?C).
+Q_2(?A) :- edge(?A,?B), edge(?B,?C), edge(?C,?D).
+Q_3(?A) :- edge(?A,?B), edge(?B,?C), edge(?C,?D), edge(?D,?E).
+Q_4(?A) :- edge(?A,?B), edge(?B,?C), edge(?C,?D), edge(?D,?E), edge(?E,?F).
+
+?- Q_0(?A).
+?- Q_1(?A). 
+?- Q_2(?A). 
+?- Q_3(?A). 
+?- Q_4(?A). 
+/// Total ABox Axioms: 0 ///

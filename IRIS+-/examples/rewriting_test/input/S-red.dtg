@@ -1,0 +1,40 @@
+% Sigma
+Company(?X,?V,?W) :- stockPorfolio(?X,?Y,?Z).
+Stock(?Y,?V,?W) :- stockPortfolio(?X,?Y,?Z).
+hasStock(?Y,?X) :- stockPortfolio(?X,?Y,?Z).
+stockPortfolio(?Y,?X,?Z) :- hasStock(?X,?Y).
+stockPortfolio(?V,?X,?W) :- Stock(?X,?Y,?Z).
+LegalPerson(?X) :- Company(?X,?Y,?Z).
+StockExchangeList(?Y,?Z,?V,?W) :- listComposition(?X,?Y).
+Stock(?X,?Z,?W) :- listComposition(?X,?Y).
+FinantialInstrument(?X) :- Stock(?X,?Y,?Z).
+
+
+%Boolean Conjunctive Queries
+
+%Q_2() :- FinantialInstrument(?A), stockPortfolio(?B,?A,?D), Company(?B,?E,?F), listComposition(?A,?C), StockExchangeList(?C,?G,?H,?I).
+%Q_2() :- FinantialInstrument(?A), stockPortfolio(?B,?A,?D), Company(?B,?E,?F), listComposition(?A,?C).
+%Q_2() :- stockPortfolio(?B,?A,?D), Company(?B,?E,?F), listComposition(?A,?C).
+%Q_2() :- stockPortfolio(?B,?A,?D), listComposition(?A,?C).
+%Q_2() :- listComposition(?A,?C).
+%in alternative
+%Q_2() :- stockPortfolio(?B,?A,?D).
+
+%Q2(?A,?B,?C) :- FinantialInstrument(?A), stockPortfolio(?B,?A,?D), Company(?B,?E,?F), listComposition(?A,?C), StockExchangeList(?C,?G,?H,?I).
+%Q2(?A,?B,?C) :- FinantialInstrument(?A), stockPortfolio(?B,?A,?D), Company(?B,?E,?F), listComposition(?A,?C), StockExchangeList(?C,?G,?H,?I).
+%Q2(?A,?B,?C) :- belongsToCompany(?A,?B), Company(?B), hasStock(?B,?C).
+%Q2(?A,?B,?C) :- belongsToCompany(?A,?B), hasStock(?B,?C).
+
+%Rewriting CQ (Query Elimination):  Q2(?A0, ?A1, ?A2) :- listComposition(?A0, ?A2), stockPortfolio(?A1, ?A0, ?A3).
+%		                    Q2(?A0, ?A1, ?A2) :- hasStock(?A0, ?A1), listComposition(?A0, ?A2).
+
+%Rewriting BCQ (Query Elimination): Q1() :- listComposition(?A0, ?A1).
+
+% Query
+Q2(?A,?B,?C) :- FinantialInstrument(?A), stockPortfolio(?B,?A,?D), Company(?B,?E,?F), listComposition(?A,?C), StockExchangeList(?C,?G,?H,?I).
+Q2() :- FinantialInstrument(?A), stockPortfolio(?B,?A,?D), Company(?B,?E,?F), listComposition(?A,?C), StockExchangeList(?C,?G,?H,?I).
+
+?- Q2().
+?- Q2(?A,?B,?C).
+
+

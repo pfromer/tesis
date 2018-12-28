@@ -1,0 +1,400 @@
+/// Query///
+
+Q3(?X) :- Student(?X), isMemberOf(?X,'http://www.Department0.University0.edu#Department0').
+?- Q3(?X).
+
+/// Converted TBox ///
+Person(?X) :- hasDegreeFrom(?X, ?Y).
+Publication(?Y) :- orgPublication(?X, ?Y).
+aux_0(?X,?Y) :- SwimmingFan(?X).
+Faculty(?X) :- teacherOf(?X, ?Y).
+Person(?X) :- hasSameHomeTownWith(?X, ?Y).
+Publication(?X) :- Article(?X).
+Professor(?X) :- AssociateProfessor(?X).
+Organization(?X) :- Program(?X).
+FineArts(?X) :- Theatre_and_DanceClass(?X).
+Person(?Y) :- isFriendOf(?X, ?Y).
+Engineering(?X) :- Electrical_EngineeringClass(?X).
+Department(?Y) :- enrollIn(?X, ?Y).
+Organization(?X) :- isAffiliatedOrganizationOf(?X, ?Y).
+Science(?X) :- Marine_ScienceClass(?X).
+Sports(?X) :- TennisClass(?X).
+aux_1(?X,?Y) :- Student(?X).
+FineArts(?X) :- Modern_ArtsClass(?X).
+aux_2(?X,?Y) :- Director(?X).
+aux_3(?X,?Y) :- SportsLover(?X).
+Person(?X) :- emailAddress(?X, ?Y).
+Schedule(?X) :- listedCourse(?X, ?Y).
+Article(?X) :- TechnicalReport(?X).
+Person(?X) :- title(?X, ?Y).
+University(?Y) :- hasUndergraduateDegreeFrom(?X, ?Y).
+Person(?X) :- hasDoctoralDegreeFrom(?X, ?Y).
+Faculty(?X) :- PostDoc(?X).
+aux_4(?X,?Y) :- TeachingAssistant(?X).
+aux_5(?X,?Y) :- BaseballFan(?X).
+Person(?X) :- TeachingAssistant(?X).
+aux_6(?X,?Y) :- BaseballLover(?X).
+HumanitiesAndSocial(?X) :- EconomicsClass(?X).
+SupportingStaff(?X) :- ClericalStaff(?X).
+Professor(?X) :- AssistantProfessor(?X).
+Person(?X) :- isAdvisedBy(?X, ?Y).
+Research(?Y) :- publicationResearch(?X, ?Y).
+hasMember(?X, ?Y) :- hasStudent(?X, ?Y).
+Science(?X) :- ChemistryClass(?X).
+Faculty(?X) :- Professor(?X).
+Person(?X) :- Student(?X).
+Person(?X) :- telephone(?X, ?Y).
+HumanitiesAndSocial(?X) :- ReligionsClass(?X).
+Person(?X) :- BasketBallLover(?X).
+Publication(?X) :- publicationAuthor(?X, ?Y).
+Course(?X) :- GraduateCourse(?X).
+Science(?X) :- Materials_ScienceClass(?X).
+Science(?X) :- StatisticsClass(?X).
+Person(?X) :- BasketBallFan(?X).
+Publication(?Y) :- softwareDocumentation(?X, ?Y).
+Person(?X) :- hasUndergraduateDegreeFrom(?X, ?Y).
+Organization(?X) :- College(?X).
+Organization(?Y) :- isAffiliatedOrganizationOf(?X, ?Y).
+Course(?Y) :- teachingAssistantOf(?X, ?Y).
+FineArts(?X) :- Media_Arts_And_ciencesClass(?X).
+Person(?Y) :- isAffiliateOf(?X, ?Y).
+!Man(?X) :- Woman(?X).
+Student(?X) :- UndergraduateStudent(?X).
+HumanitiesAndSocial(?X) :- PhilosophyClass(?X).
+Science(?X) :- PhysicsClass(?X).
+hasAlumnus(?X, ?Y) :- hasDegreeFrom(?Y, ?X).
+hasDegreeFrom(?Y, ?X) :- hasAlumnus(?X, ?Y).
+FineArts(?X) :- Performing_ArtsClass(?X).
+Publication(?X) :- Book(?X).
+Person(?X) :- BaseballLover(?X).
+Course(?X) :- isTaughtBy(?X, ?Y).
+Engineering(?X) :- Petroleuml_EngineeringClass(?X).
+HumanitiesAndSocial(?X) :- LinguisticsClass(?X).
+Person(?X) :- lastName(?X, ?Y).
+aux_7(?X,?Y) :- Employee(?X).
+SupportingStaff(?X) :- SystemsStaff(?X).
+Student(?Y) :- hasStudent(?X, ?Y).
+!NonScienceStudent(?X) :- ScienceStudent(?X).
+Person(?X) :- SportsLover(?X).
+Publication(?X) :- UnofficialPublication(?X).
+isFriendOf(?X, ?Y) :- isFriendOf(?Y, ?X).
+Software(?X) :- softwareDocumentation(?X, ?Y).
+Organization(?X) :- University(?X).
+like(?X, ?Y) :- love(?X, ?Y).
+worksFor(?X, ?Y) :- isHeadOf(?X, ?Y).
+Student(?X) :- ScienceStudent(?X).
+Person(?Y) :- hasSameHomeTownWith(?X, ?Y).
+FineArts(?X) :- Asian_ArtsClass(?X).
+Engineering(?X) :- Computer_EngineeringClass(?X).
+hasDegreeFrom(?X, ?Y) :- hasMasterDegreeFrom(?X, ?Y).
+ResearchGroup(?X) :- researchProject(?X, ?Y).
+aux_8(?X,?Y) :- BasketBallLover(?X).
+HumanitiesAndSocial(?X) :- HistoryClass(?X).
+Faculty(?X) :- Lecturer(?X).
+isStudentOf(?X, ?Y) :- enrollIn(?X, ?Y).
+Person(?X) :- BaseballFan(?X).
+Professor(?X) :- Chair(?X).
+FineArts(?X) :- DramaClass(?X).
+like(?X, ?Y) :- isCrazyAbout(?X, ?Y).
+hasStudent(?X, ?Y) :- isStudentOf(?Y, ?X).
+isStudentOf(?Y, ?X) :- hasStudent(?X, ?Y).
+HumanitiesAndSocial(?X) :- Modern_LanguagesClass(?X).
+Insterest(?X) :- Music(?X).
+HumanitiesAndSocial(?X) :- EnglishClass(?X).
+Professor(?Y) :- isAdvisedBy(?X, ?Y).
+Engineering(?X) :- Mechanical_EngineeringClass(?X).
+Organization(?Y) :- isStudentOf(?X, ?Y).
+Publication(?X) :- Specification(?X).
+isTaughtBy(?X, ?Y) :- teacherOf(?Y, ?X).
+teacherOf(?Y, ?X) :- isTaughtBy(?X, ?Y).
+Faculty(?Y) :- isTaughtBy(?X, ?Y).
+Person(?Y) :- hasMember(?X, ?Y).
+hasSameHomeTownWith(?X, ?Y) :- hasSameHomeTownWith(?Y, ?X).
+aux_9(?X,?Y) :- GraduateStudent(?X).
+Person(?X) :- firstName(?X, ?Y).
+Sports(?X) :- BasketBallClass(?X).
+Person(?X) :- ResearchAssistant(?X).
+Sports(?X) :- BaseballClass(?X).
+Insterest(?X) :- Sports(?X).
+Course(?Y) :- listedCourse(?X, ?Y).
+Engineering(?X) :- Biomedical_EngineeringClass(?X).
+Person(?X) :- SwimmingFan(?X).
+Publication(?X) :- publicationDate(?X, ?Y).
+Engineering(?X) :- Chemical_EngineeringClass(?X).
+FineArts(?X) :- Latin_ArtsClass(?X).
+Organization(?X) :- hasStudent(?X, ?Y).
+Article(?X) :- JournalArticle(?X).
+HumanitiesAndSocial(?X) :- HumanitiesClass(?X).
+Employee(?X) :- SupportingStaff(?X).
+Student(?X) :- isStudentOf(?X, ?Y).
+isMemberOf(?X, ?Y) :- worksFor(?X, ?Y).
+Person(?X) :- SportsFan(?X).
+University(?X) :- hasAlumnus(?X, ?Y).
+FineArts(?X) :- MusicsClass(?X).
+Engineering(?X) :- Aeronautical_EngineeringClass(?X).
+University(?Y) :- hasMasterDegreeFrom(?X, ?Y).
+AcademicSubject(?X) :- Engineering(?X).
+AcademicSubject(?X) :- HumanitiesAndSocial(?X).
+Science(?X) :- Computer_ScienceClass(?X).
+Organization(?X) :- Department(?X).
+AcademicSubject(?X) :- Science(?X).
+aux_10(?X,?Y) :- Chair(?X).
+FineArts(?X) :- Medieval_ArtsClass(?X).
+Engineering(?X) :- Civil_EngineeringClass(?X).
+AcademicSubject(?X) :- FineArts(?X).
+aux_11(?X,?Y) :- SwimmingLover(?X).
+aux_12(?X,?Y) :- TennisFan(?X).
+Engineering(?X) :- Industry_EngineeringClass(?X).
+hasDegreeFrom(?X, ?Y) :- hasDoctoralDegreeFrom(?X, ?Y).
+Engineering(?X) :- Materical_Science_EngineeringClass(?X).
+Science(?X) :- MathematicsClass(?X).
+University(?Y) :- hasDoctoralDegreeFrom(?X, ?Y).
+Article(?X) :- ConferencePaper(?X).
+Employee(?X) :- Faculty(?X).
+Course(?Y) :- takesCourse(?X, ?Y).
+Organization(?X) :- hasMember(?X, ?Y).
+Person(?X) :- Director(?X).
+Professor(?X) :- VisitingProfessor(?X).
+Person(?X) :- Chair(?X).
+hasDegreeFrom(?X, ?Y) :- hasUndergraduateDegreeFrom(?X, ?Y).
+Science(?X) :- BiologyClass(?X).
+Professor(?X) :- FullProfessor(?X).
+Person(?X) :- Employee(?X).
+HumanitiesAndSocial(?X) :- PsychologyClass(?X).
+Person(?X) :- SwimmingLover(?X).
+Person(?Y) :- publicationAuthor(?X, ?Y).
+Professor(?X) :- Dean(?X).
+Person(?X) :- PeopleWithHobby(?X).
+TeachingAssistant(?X) :- teachingAssistantOf(?X, ?Y).
+Person(?Y) :- hasAlumnus(?X, ?Y).
+Person(?X) :- age(?X, ?Y).
+Research(?Y) :- researchProject(?X, ?Y).
+Work(?X) :- Course(?X).
+Science(?X) :- AstronomyClass(?X).
+aux_13(?X,?Y) :- Dean(?X).
+Publication(?X) :- Software(?X).
+Person(?X) :- TennisFan(?X).
+Science(?X) :- GeosciencesClass(?X).
+isMemberOf(?X, ?Y) :- isStudentOf(?X, ?Y).
+Organization(?X) :- ResearchGroup(?X).
+Organization(?X) :- Institute(?X).
+aux_14(?X,?Y) :- SportsFan(?X).
+Person(?X) :- isFriendOf(?X, ?Y).
+Software(?X) :- softwareVersion(?X, ?Y).
+College(?X) :- WomanCollege(?X).
+FineArts(?X) :- ArchitectureClass(?X).
+love(?X, ?Y) :- like(?X, ?Y).
+Organization(?Y) :- subOrganizationOf(?X, ?Y).
+Person(?X) :- hasMasterDegreeFrom(?X, ?Y).
+Professor(?X) :- tenured(?X, ?Y).
+aux_15(?X,?Y) :- ScienceStudent(?X).
+Publication(?X) :- Manual(?X).
+hasMember(?X, ?Y) :- isMemberOf(?Y, ?X).
+isMemberOf(?Y, ?X) :- hasMember(?X, ?Y).
+Publication(?X) :- publicationResearch(?X, ?Y).
+Organization(?X) :- isAffiliateOf(?X, ?Y).
+Organization(?X) :- subOrganizationOf(?X, ?Y).
+Work(?X) :- Research(?X).
+HumanitiesAndSocial(?X) :- AnthropologyClass(?X).
+Sports(?X) :- SwimmingClass(?X).
+Course(?Y) :- teacherOf(?X, ?Y).
+AcademicSubject(?Y) :- hasMajor(?X, ?Y).
+aux_16(?X,?Y) :- BasketBallFan(?X).
+University(?Y) :- hasDegreeFrom(?X, ?Y).
+Organization(?X) :- orgPublication(?X, ?Y).
+aux_17(?X,?Y) :- ResearchAssistant(?X).
+Student(?X) :- takesCourse(?X, ?Y).
+like(?X, ?Y) :- PeopleWithHobby(?X).
+like(?X,?Y) :- aux_11(?X,?Y).
+SwimmingClass(?Y) :- aux_11(?X,?Y).
+isHeadOf(?X,?Y) :- aux_10(?X,?Y).
+Department(?Y) :- aux_10(?X,?Y).
+isHeadOf(?X,?Y) :- aux_13(?X,?Y).
+College(?Y) :- aux_13(?X,?Y).
+isCrazyAbout(?X,?Y) :- aux_12(?X,?Y).
+TennisClass(?Y) :- aux_12(?X,?Y).
+hasMajor(?X,?Y) :- aux_15(?X,?Y).
+Science(?Y) :- aux_15(?X,?Y).
+isCrazyAbout(?X,?Y) :- aux_14(?X,?Y).
+Sports(?Y) :- aux_14(?X,?Y).
+isStudentOf(?X,?Y) :- aux_1(?X,?Y).
+Organization(?Y) :- aux_1(?X,?Y).
+isHeadOf(?X,?Y) :- aux_2(?X,?Y).
+Program(?Y) :- aux_2(?X,?Y).
+worksFor(?X,?Y) :- aux_17(?X,?Y).
+ResearchGroup(?Y) :- aux_17(?X,?Y).
+isCrazyAbout(?X,?Y) :- aux_16(?X,?Y).
+BasketBallClass(?Y) :- aux_16(?X,?Y).
+isCrazyAbout(?X,?Y) :- aux_0(?X,?Y).
+SwimmingClass(?Y) :- aux_0(?X,?Y).
+isCrazyAbout(?X,?Y) :- aux_5(?X,?Y).
+BaseballClass(?Y) :- aux_5(?X,?Y).
+like(?X,?Y) :- aux_6(?X,?Y).
+BaseballClass(?Y) :- aux_6(?X,?Y).
+like(?X,?Y) :- aux_3(?X,?Y).
+Sports(?Y) :- aux_3(?X,?Y).
+teachingAssistantOf(?X,?Y) :- aux_4(?X,?Y).
+Course(?Y) :- aux_4(?X,?Y).
+takesCourse(?X,?Y) :- aux_9(?X,?Y).
+GraduateCourse(?Y) :- aux_9(?X,?Y).
+worksFor(?X,?Y) :- aux_7(?X,?Y).
+Organization(?Y) :- aux_7(?X,?Y).
+like(?X,?Y) :- aux_8(?X,?Y).
+BasketBallClass(?Y) :- aux_8(?X,?Y).
+
+/// Total TBox Axioms: 199 ///
+
+/// Converted SBox ///
+Person(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Person').
+hasDegreeFrom(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#hasDegreeFrom', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+orgPublication(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#orgPublication', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+SwimmingFan(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#SwimmingFan').
+Faculty(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Faculty').
+teacherOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#teacherOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+hasSameHomeTownWith(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#hasSameHomeTownWith', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Publication(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Publication').
+Article(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Article').
+Professor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Professor').
+AssociateProfessor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#AssociateProfessor').
+Organization(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Organization').
+Program(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Program').
+FineArts(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#FineArts').
+Theatre_and_DanceClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Theatre_and_DanceClass').
+isFriendOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#isFriendOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Engineering(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Engineering').
+Electrical_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Electrical_EngineeringClass').
+enrollIn(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#enrollIn', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+isAffiliatedOrganizationOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#isAffiliatedOrganizationOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Science(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Science').
+Marine_ScienceClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Marine_ScienceClass').
+Sports(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Sports').
+TennisClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#TennisClass').
+Student(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Student').
+Modern_ArtsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Modern_ArtsClass').
+Director(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Director').
+SportsLover(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#SportsLover').
+emailAddress(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#emailAddress', ?Z9, ?Z10, ?Z11), I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Schedule(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Schedule').
+listedCourse(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#listedCourse', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+TechnicalReport(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#TechnicalReport').
+title(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#title', ?Z9, ?Z10, ?Z11), I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+hasUndergraduateDegreeFrom(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#hasUndergraduateDegreeFrom', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+hasDoctoralDegreeFrom(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#hasDoctoralDegreeFrom', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+PostDoc(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#PostDoc').
+TeachingAssistant(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#TeachingAssistant').
+BaseballFan(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#BaseballFan').
+BaseballLover(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#BaseballLover').
+HumanitiesAndSocial(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#HumanitiesAndSocial').
+EconomicsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#EconomicsClass').
+SupportingStaff(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#SupportingStaff').
+ClericalStaff(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#ClericalStaff').
+AssistantProfessor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#AssistantProfessor').
+isAdvisedBy(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#isAdvisedBy', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+publicationResearch(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#publicationResearch', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+hasMember(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#hasMember', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+hasStudent(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#hasStudent', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+ChemistryClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#ChemistryClass').
+telephone(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#telephone', ?Z9, ?Z10, ?Z11), I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+ReligionsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#ReligionsClass').
+BasketBallLover(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#BasketBallLover').
+publicationAuthor(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#publicationAuthor', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Course(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Course').
+GraduateCourse(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#GraduateCourse').
+Materials_ScienceClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Materials_ScienceClass').
+StatisticsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#StatisticsClass').
+BasketBallFan(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#BasketBallFan').
+softwareDocumentation(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#softwareDocumentation', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+College(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#College').
+teachingAssistantOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#teachingAssistantOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Media_Arts_And_ciencesClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Media_Arts_And_ciencesClass').
+isAffiliateOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#isAffiliateOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Man(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Man').
+Woman(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Woman').
+UndergraduateStudent(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#UndergraduateStudent').
+PhilosophyClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#PhilosophyClass').
+PhysicsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#PhysicsClass').
+Performing_ArtsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Performing_ArtsClass').
+Book(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Book').
+isTaughtBy(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#isTaughtBy', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Petroleuml_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Petroleuml_EngineeringClass').
+LinguisticsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#LinguisticsClass').
+lastName(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#lastName', ?Z9, ?Z10, ?Z11), I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Employee(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Employee').
+SystemsStaff(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#SystemsStaff').
+NonScienceStudent(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#NonScienceStudent').
+ScienceStudent(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#ScienceStudent').
+UnofficialPublication(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#UnofficialPublication').
+Software(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Software').
+University(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#University').
+like(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#like', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+love(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#love', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+worksFor(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#worksFor', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+isHeadOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#isHeadOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Asian_ArtsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Asian_ArtsClass').
+Computer_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Computer_EngineeringClass').
+hasMasterDegreeFrom(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#hasMasterDegreeFrom', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+ResearchGroup(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#ResearchGroup').
+researchProject(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#researchProject', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+HistoryClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#HistoryClass').
+Lecturer(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Lecturer').
+isStudentOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#isStudentOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Chair(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Chair').
+DramaClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#DramaClass').
+isCrazyAbout(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#isCrazyAbout', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Modern_LanguagesClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Modern_LanguagesClass').
+Insterest(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Insterest').
+Music(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Music').
+EnglishClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#EnglishClass').
+Mechanical_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Mechanical_EngineeringClass').
+Specification(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Specification').
+GraduateStudent(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#GraduateStudent').
+firstName(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#firstName', ?Z9, ?Z10, ?Z11), I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+BasketBallClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#BasketBallClass').
+ResearchAssistant(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#ResearchAssistant').
+BaseballClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#BaseballClass').
+Biomedical_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Biomedical_EngineeringClass').
+publicationDate(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#publicationDate', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Chemical_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Chemical_EngineeringClass').
+Latin_ArtsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Latin_ArtsClass').
+JournalArticle(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#JournalArticle').
+HumanitiesClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#HumanitiesClass').
+isMemberOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#isMemberOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+SportsFan(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#SportsFan').
+hasAlumnus(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#hasAlumnus', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+MusicsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#MusicsClass').
+Aeronautical_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Aeronautical_EngineeringClass').
+AcademicSubject(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#AcademicSubject').
+Computer_ScienceClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Computer_ScienceClass').
+Department(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Department').
+Medieval_ArtsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Medieval_ArtsClass').
+Civil_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Civil_EngineeringClass').
+SwimmingLover(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#SwimmingLover').
+TennisFan(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#TennisFan').
+Industry_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Industry_EngineeringClass').
+Materical_Science_EngineeringClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Materical_Science_EngineeringClass').
+MathematicsClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#MathematicsClass').
+ConferencePaper(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#ConferencePaper').
+takesCourse(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#takesCourse', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+VisitingProfessor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#VisitingProfessor').
+BiologyClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#BiologyClass').
+FullProfessor(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#FullProfessor').
+PsychologyClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#PsychologyClass').
+Dean(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Dean').
+PeopleWithHobby(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#PeopleWithHobby').
+age(?X, ?Y) :- @I_DATAPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Y), @DATAPROPERTY(?Z3, ?Z4, ?Z5, ?Z6, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#age', ?Z9, ?Z10, ?Z11), I_CLASS(?Z2, ?Z7, ?Z8, ?X).
+Work(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Work').
+AstronomyClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#AstronomyClass').
+GeosciencesClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#GeosciencesClass').
+Institute(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Institute').
+softwareVersion(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#softwareVersion', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+WomanCollege(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#WomanCollege').
+ArchitectureClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#ArchitectureClass').
+subOrganizationOf(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#subOrganizationOf', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+tenured(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#tenured', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+Manual(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Manual').
+Research(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#Research').
+AnthropologyClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#AnthropologyClass').
+SwimmingClass(?X) :- @I_CLASS(?Z0, ?Z1, ?Z2, ?X), @CLASS(?Z2, ?Z3, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#SwimmingClass').
+hasMajor(?X, ?Y) :- @I_OBJECTPROPERTY(?Z0, ?Z1, ?Z2, ?Z3, ?Z4), @OBJECTPROPERTY(?Z4, ?Z5, ?Z6, ?Z7, 'http://semantics.crl.ibm.com/univ-bench-dl.owl#hasMajor', ?Z12), @I_CLASS(?Z2, ?Z8, ?Z9, ?X), @I_CLASS(?Z3, ?Z10, ?Z11, ?Y).
+
+/// Total SBox Axioms: 151 ///
