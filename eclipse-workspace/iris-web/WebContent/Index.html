@@ -21,7 +21,23 @@
 
 <script>
 
-function execute(){
+var program ="r1(?z, ?x) :- r1(?x, ?y), r2(?y).\nr2(?x) :- r1(?x, ?y).\n\nr1('a', 'b').\nr2('b').\n\n?- r1(?x, ?y).\n?- r2(?x).";
+
+var lines = program.split('\n');
+for(var i = 0;i < lines.length;i++){
+    //code here using lines[i] which will give you each line
+}
+
+
+var tgdProto = {  }
+
+
+goal, tgd, fact
+
+
+
+
+function execute(){	
 	$.ajax({		
 		 type: "get",
 		  url: "http://localhost:8080/iris/test",
