@@ -6,7 +6,7 @@ function removeFirstAndLastCharacter(regEx){
 
 function repeatAndSeparateByComma(regEx){
 
-	return new RegExp("(" + regEx.source + ",\s*)*"+ regEx.source) 
+	return new RegExp("(" + regEx.source + ",\\s*)*"+ regEx.source) 
 }
 var variableOrStringReEx = /(\?[a-z]|'\w+')/
 var commaSeparatedVariableOrStringRegEx = repeatAndSeparateByComma(variableOrStringReEx);
@@ -15,7 +15,7 @@ var predicateRegEx = new RegExp('^' + '(\\w+)\\(' + commaSeparatedVariableOrStri
 var withinPredicateRegEx = removeFirstAndLastCharacter(predicateRegEx);
 
 var tgdRegEx = new RegExp('^' + withinPredicateRegEx.source + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "$")
-
+tgdRegEx.test("r1(?z,  ?x) :- r1(?x, ?y), r2(?y)")
 
 
 
