@@ -1,0 +1,12 @@
+bajarse el node version manager desde https://github.com/nullivex/nodist/releases
+
+en la carpeta WebContent
+npm init
+
+(crea al package.json)
+
+
+
+https://frontendlabs.io/1669--gulp-js-en-espanol-tutorial-basico-primeros-pasos-y-ejemplos
+
+https://flaviocopes.com/jest/

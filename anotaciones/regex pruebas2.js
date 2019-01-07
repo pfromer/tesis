@@ -14,8 +14,27 @@ var predicateRegEx = new RegExp('^' + '(\\w+)\\(' + commaSeparatedVariableOrStri
 
 var withinPredicateRegEx = removeFirstAndLastCharacter(predicateRegEx);
 
-var tgdRegEx = new RegExp('^' + withinPredicateRegEx.source + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "$")
-tgdRegEx.test("r1(?z,  ?x) :- r1(?x, ?y), r2(?y)")
+var tgdRegEx = new RegExp('^' + withinPredicateRegEx.source + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$")
+tgdRegEx.test("r1(?z,  ?x) :- r1(?x, ?y), r2(?y).")
+
+
+
+var s = "r1(?z,  ?x) :- r1(?x, ?y), r2(?y)"
+var match;
+
+withinPredicateRegEx = new RegExp(withinPredicateRegEx.source, 'g');
+
+do {
+    match = withinPredicateRegEx.exec(s);
+    if (match) {
+        console.log(match[0]);
+    }
+	
+} while (match);
+
+
+
+
 
 
 

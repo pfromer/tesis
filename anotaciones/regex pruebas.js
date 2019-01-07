@@ -41,13 +41,20 @@ function repeatAndSeparateByComma(regEx){
 
 	return new RegExp("^(" + regEx.source + ",\s*)*"+ regEx.source + "$") 
 }
-
-
-var variableOrStringReEx = /^\?[a-z]|'\w+'$/
-
+var variableOrStringReEx = /^\?[a-z]$|^'\w+'$/
 var commaSeparatedVariableOrStringRegEx = repeatAndSeparateByComma(variableOrStringReEx);
+var predicateRegEx = new RegExp('^' + '(\\w+)\\(' + commaSeparatedVariableOrStringRegEx.source  + '\\)$')
 
-var predicateRegEx = new RegExp('^' + '(\w+)\(' + commaSeparatedVariableOrStringRegEx.source  + '\)$')
+---------
+tiene que quedar asi la RegEx de predicados:
+var predicateRegEx3 = /^(\w+)\(((\?[a-z]|'\w+'),\s*)*(\?[a-z]|'\w+')\)$/
+-----------
+
+
+
+/^(\w+)\(((\?[a-z]|'\w+'),\s*)*(\?[a-z]|'\w+')\)$/
+
+^(\w+)\(^(^\?[a-z]$|^'\w+'$,s*)*^\?[a-z]$|^'\w+'$$\)$
 
 
 
