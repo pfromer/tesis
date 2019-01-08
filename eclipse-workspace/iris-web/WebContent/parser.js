@@ -43,8 +43,7 @@ const parser = function(program){
 	
 	
 	this.buildTgdBody = function(bodyText){
-		
-		var predicates = this.arrayOfMatches(this.withinPredicateRegEx, bodyText);	
+		var predicates = this.arrayOfMatches(this.withinPredicateRegEx, bodyText);
 		var predicatesAsObjects = [];
 		for (var i = 0; i < predicates.length; i++) {
 			predicatesAsObjects.push(this.buildPredicate(predicates[i]));
@@ -93,7 +92,7 @@ const parser = function(program){
 	}
 	
 	this.arrayOfMatches = function(regEx, _text){
-		regEx = new RegExp(this.variableOrStringReEx.source, 'g');
+		regEx = new RegExp(regEx.source, 'g');
 		var result = []
 		do {
 			match = regEx.exec(_text);
@@ -110,16 +109,6 @@ const parser = function(program){
 	for(var i = 0;i < lines.length;i++){
 		if(this.tgdRegEx.test(lines[i])) this.tgds.push(this.buildTgd(lines[i]));
 	}
-
-	
-
-
-		
-
-	
-
-	
-
 }
 
-module.exports = parser;
+//module.exports = parser;
