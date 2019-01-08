@@ -1,3 +1,17 @@
+function arrayOfMatches(regEx, word){
+	regEx = new RegExp(variableOrStringReEx.source, 'g');
+	var result = []
+	do {
+		match = regEx.exec(pred);
+		if (match) {
+			result.push(match[0]);
+		}
+		
+	} while (match);
+	return result;
+}
+
+
 function removeFirstAndLastCharacter(regEx){
 	
 	return new RegExp(regEx.source.slice(0,-1).substring(1));
@@ -8,6 +22,8 @@ function repeatAndSeparateByComma(regEx){
 
 	return new RegExp("(" + regEx.source + ",\\s*)*"+ regEx.source) 
 }
+
+
 var variableOrStringReEx = /(\?[a-z]|'\w+')/
 var commaSeparatedVariableOrStringRegEx = repeatAndSeparateByComma(variableOrStringReEx);
 var predicateRegEx = new RegExp('^' + '(\\w+)\\(' + commaSeparatedVariableOrStringRegEx.source  + '\\)$')
@@ -32,6 +48,17 @@ do {
 	
 } while (match);
 
+variableOrStringReEx = new RegExp(variableOrStringReEx.source, 'g');
+
+var pred = "r1(?a,?b,?c,'dsfdsf')";
+
+do {
+    match = variableOrStringReEx.exec(pred);
+    if (match) {
+        console.log(match[0]);
+    }
+	
+} while (match);
 
 
 
