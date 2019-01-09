@@ -1,5 +1,5 @@
 function regExService(){
-
+	
 	var variableOrStringReEx = /(\?[a-z]|'\w+')/;
 	function removeFirstAndLastCharacter(regEx){return new RegExp(regEx.source.slice(0,-1).substring(1))};
 	function repeatAndSeparateByComma (regEx){ return new RegExp("(" + regEx.source + ",\\s*)*"+ regEx.source) };
@@ -7,7 +7,6 @@ function regExService(){
 	var withinPredicateRegEx = removeFirstAndLastCharacter(predicateRegEx);
 	
 	return{
-	
 		variableOrStringReEx : variableOrStringReEx,
 		commaSeparatedVariableOrStringRegEx : repeatAndSeparateByComma(variableOrStringReEx),
 		predicateRegEx : predicateRegEx,
