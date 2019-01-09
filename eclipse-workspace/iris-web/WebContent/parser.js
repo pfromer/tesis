@@ -1,27 +1,11 @@
-const parser = function(program){
+const parse = function(program){
 	
 	this.tgds = [];
 	this.queries = [];
-	this.facts = [];
+	this.facts = [];	
 	
-	this.removeFirstAndLastCharacter = function(regEx){
-	
-		return new RegExp(regEx.source.slice(0,-1).substring(1));	
-	}
-	
-	this.repeatAndSeparateByComma = function(regEx){
-
-		return new RegExp("(" + regEx.source + ",\\s*)*"+ regEx.source) 
-	}
-	
-	this.variableOrStringReEx = /(\?[a-z]|'\w+')/
-	this.commaSeparatedVariableOrStringRegEx = this.repeatAndSeparateByComma(this.variableOrStringReEx);
-	this.predicateRegEx = new RegExp('^' + '(\\w+)\\(' + this.commaSeparatedVariableOrStringRegEx.source  + '\\)$')
-	this.withinPredicateRegEx = this.removeFirstAndLastCharacter(this.predicateRegEx);
-	this.tgdRegEx = new RegExp('^' + this.withinPredicateRegEx.source + "\\s*:-\\s*" + this.repeatAndSeparateByComma(this.withinPredicateRegEx).source + "\\.$")
-
 	this.buildPredicate = function(predicateText){
-		var parameters = this.arrayOfMatches(this.variableOrStringReEx, predicateText);	
+		var parameters = this.arrayOfMatches(regExService().variableOrStringReEx, predicateText);	
 		var parametersAsObjets = [];		
 		var type;
 		for (var i = 0; i < parameters.length; i++) {
@@ -43,17 +27,16 @@ const parser = function(program){
 	
 	
 	this.buildTgdBody = function(bodyText){
-		var predicates = this.arrayOfMatches(this.withinPredicateRegEx, bodyText);
+		var predicates = this.arrayOfMatches(regExService().withinPredicateRegEx, bodyText);
 		var predicatesAsObjects = [];
 		for (var i = 0; i < predicates.length; i++) {
 			predicatesAsObjects.push(this.buildPredicate(predicates[i]));
-		}
-		
+		}		
 		return { predicates: predicatesAsObjects, hasVariable : function(v){ return this.predicates.some(p => p.hasVariable(v))} };		
 	}	
 	
 	this.buildTgdHeadPredicate = function(predicateText, tgdBody){		
-		var parameters = this.arrayOfMatches(this.variableOrStringReEx, predicateText);	
+		var parameters = this.arrayOfMatches(regExService().variableOrStringReEx, predicateText);	
 		var parametersAsObjets = [];		
 		var type;
 		for (var i = 0; i < parameters.length; i++) {
@@ -98,8 +81,7 @@ const parser = function(program){
 			match = regEx.exec(_text);
 			if (match) {
 				result.push(match[0]);
-			}
-			
+			}			
 		} while (match);
 		return result;
 	}	
@@ -107,8 +89,12 @@ const parser = function(program){
 	var lines = program.split('\n');
 
 	for(var i = 0;i < lines.length;i++){
-		if(this.tgdRegEx.test(lines[i])) this.tgds.push(this.buildTgd(lines[i]));
+		if(regExService().tgdRegEx.test(lines[i])) this.tgds.push(this.buildTgd(lines[i]));
 	}
+	
+	
+	return { tgds: this.tgds, queries : this.queries, facts: this.facts };	
+	
 }
 
 //module.exports = parser;
