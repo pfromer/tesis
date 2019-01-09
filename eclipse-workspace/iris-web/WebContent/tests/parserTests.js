@@ -16,6 +16,7 @@ var tests = [
 	testObject("program.tgds[0].body.predicates[1].name","'r2'"),
 	testObject("program.tgds[0].body.predicates[1].parameters.length","1"),
 	testObject("program.tgds[0].body.predicates[1].parameters[0].name","'y'"),
+	testObject("program.tgds[0].isGuarded","true"),
 	testObject("program.queries.length","0"),	  
 	testObject("program.facts.length","0")
 ]

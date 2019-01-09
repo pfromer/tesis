@@ -12,14 +12,20 @@ function predicateBuilder(tgdText){
 			if (parameters[i].startsWith("'")){
 				parametersAsObjets.push({type: 'constant', value : parameters[i], index : i});
 			}
-		}
+		};
+		
+	    var hasVariable = function(v) {return parametersAsObjets.some(p => p.name == v)};
 		
 		return {
 			name : predicateText.split("(")[0],
 			parameters: parametersAsObjets,
-			hasVariable: function(v) {return parametersAsObjets.some(p => p.name == v)}
+			hasVariable: hasVariable,
+			allVariables: parametersAsObjets.filter(p => p.type == 'variable').map(p => p.name),
+			hasAllVariables: function(variables){
+				return variables.every(v => hasVariable(v));
+			}
 		}
-	}
+	}		
 	
 	return {
 		build : build

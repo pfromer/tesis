@@ -28,8 +28,8 @@ function tgdBuilder(tgdText){
 	}
 	
 	buildTgdHead = function(headText, tgdBody){
-		return {predicate: buildTgdHeadPredicate(headText, tgdBody)};		
-	}
+		return {predicate: buildTgdHeadPredicate(headText, tgdBody)};
+	};
 	
 	return {		
 			buildTgd : function(line){
@@ -37,6 +37,13 @@ function tgdBuilder(tgdText){
 				var split = line.split(":-");		
 				result.body = buildTgdBody(split[1]);			
 				result.head = buildTgdHead(split[0], result.body);
+				var allVariables = [];
+				result.body.predicates.forEach(function (predicate){
+					predicate.allVariables.forEach(function(variable){
+						allVariables.push(variable);
+					});
+				});
+				result.isGuarded = result.body.predicates.some(p => p.hasAllVariables(allVariables));
 				return result;
 		}
 	}
