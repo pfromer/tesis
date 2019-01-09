@@ -5,7 +5,7 @@ const parse = function(program){
 	this.facts = [];	
 	
 	this.buildPredicate = function(predicateText){
-		var parameters = this.arrayOfMatches(regExService().variableOrStringReEx, predicateText);	
+		var parameters = regExService().arrayOfMatches(regExService().variableOrStringReEx, predicateText);	
 		var parametersAsObjets = [];		
 		var type;
 		for (var i = 0; i < parameters.length; i++) {
@@ -23,11 +23,10 @@ const parse = function(program){
 			parameters: parametersAsObjets,
 			hasVariable: function(v) {return this.parameters.some(p => p.name == v)}
 		}
-	}
-	
+	}	
 	
 	this.buildTgdBody = function(bodyText){
-		var predicates = this.arrayOfMatches(regExService().withinPredicateRegEx, bodyText);
+		var predicates = regExService().arrayOfMatches(regExService().withinPredicateRegEx, bodyText);
 		var predicatesAsObjects = [];
 		for (var i = 0; i < predicates.length; i++) {
 			predicatesAsObjects.push(this.buildPredicate(predicates[i]));
@@ -36,7 +35,7 @@ const parse = function(program){
 	}	
 	
 	this.buildTgdHeadPredicate = function(predicateText, tgdBody){		
-		var parameters = this.arrayOfMatches(regExService().variableOrStringReEx, predicateText);	
+		var parameters = regExService().arrayOfMatches(regExService().variableOrStringReEx, predicateText);	
 		var parametersAsObjets = [];		
 		var type;
 		for (var i = 0; i < parameters.length; i++) {
@@ -73,18 +72,6 @@ const parse = function(program){
 		result.head = this.buildTgdHead(split[0], result.body);
 		return result;
 	}
-	
-	this.arrayOfMatches = function(regEx, _text){
-		regEx = new RegExp(regEx.source, 'g');
-		var result = []
-		do {
-			match = regEx.exec(_text);
-			if (match) {
-				result.push(match[0]);
-			}			
-		} while (match);
-		return result;
-	}	
 	
 	var lines = program.split('\n');
 

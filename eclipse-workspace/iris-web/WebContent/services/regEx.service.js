@@ -12,6 +12,17 @@ function regExService(){
 		commaSeparatedVariableOrStringRegEx : repeatAndSeparateByComma(variableOrStringReEx),
 		predicateRegEx : predicateRegEx,
 		withinPredicateRegEx : withinPredicateRegEx,
-		tgdRegEx : new RegExp('^' + withinPredicateRegEx.source + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$")
+		tgdRegEx : new RegExp('^' + withinPredicateRegEx.source + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$"),
+		arrayOfMatches : function(regEx, _text){
+			regEx = new RegExp(regEx.source, 'g');
+			var result = []
+			do {
+				match = regEx.exec(_text);
+				if (match) {
+					result.push(match[0]);
+				}			
+			} while (match);
+			return result;
+		}	
 	}
 }
