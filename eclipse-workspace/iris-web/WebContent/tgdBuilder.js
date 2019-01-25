@@ -22,8 +22,7 @@ function tgdBuilder(tgdText){
 		
 		return {
 			name : predicate.name,
-			parameters : predicate.parameters,
-			nulls: predicate.parameters.filter(p => p.type == 'null')			
+			parameters : predicate.parameters		
 		}
 	}
 	

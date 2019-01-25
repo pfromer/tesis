@@ -7,7 +7,7 @@ const parse = function(program){
 	var lines = program.split('\n');
 
 	for(var i = 0;i < lines.length;i++){
-		if(regExService().tgdRegEx.test(lines[i])) this.tgds.push(tgdBuilder().buildTgd(lines[i]));
+		if(regExService().tgdRegEx.test(lines[i].trim())) this.tgds.push(tgdBuilder().buildTgd(lines[i]));
 	}
 	
 	return { tgds: this.tgds, queries : this.queries, facts: this.facts };	
