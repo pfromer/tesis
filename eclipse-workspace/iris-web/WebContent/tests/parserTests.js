@@ -38,7 +38,8 @@ var tests2 = [
 	testObject("program2.tgds[1].body.predicates[0].parameters[0].value","'a'"),
 	testObject("program2.tgds[1].body.predicates[0].parameters[0].type","'constant'"),
 	testObject("program2.tgds[1].body.predicates[0].parameters[1].name","'x'"),
-	testObject("program2.tgds[1].body.predicates[0].parameters[1].type","'variable'"),	
+	testObject("program2.tgds[1].body.predicates[0].parameters[1].type","'variable'"),
+	testObject("program2.isGuarded","true"),	
 ]
 
 

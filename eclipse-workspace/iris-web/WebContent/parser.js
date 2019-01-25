@@ -10,7 +10,7 @@ const parse = function(program){
 		if(regExService().tgdRegEx.test(lines[i].trim())) this.tgds.push(tgdBuilder().buildTgd(lines[i]));
 	}
 	
-	return { tgds: this.tgds, queries : this.queries, facts: this.facts };	
+	return { tgds: this.tgds, queries : this.queries, facts: this.facts, isGuarded : this.tgds.every(t => t.isGuarded) };	
 	
 }
 
