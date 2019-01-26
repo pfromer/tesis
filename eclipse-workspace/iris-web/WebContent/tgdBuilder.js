@@ -1,14 +1,5 @@
 function tgdBuilder(tgdText){
 	
-	buildTgdBody = function(bodyText){
-		var predicates = regExService().arrayOfMatches(regExService().withinPredicateRegEx, bodyText);
-		var predicatesAsObjects = [];
-		for (var i = 0; i < predicates.length; i++) {
-			predicatesAsObjects.push(predicateBuilder().build(predicates[i]));
-		}		
-		return { predicates: predicatesAsObjects, hasVariable : function(v){ return predicatesAsObjects.some(p => p.hasVariable(v))} };		
-	}
-	
 	buildTgdHeadPredicate = function(predicateText, tgdBody){
 		var predicate = predicateBuilder().build(predicateText);
 		var parameters = predicate.parameters.filter(p => p.type == 'variable');
@@ -34,7 +25,7 @@ function tgdBuilder(tgdText){
 			buildTgd : function(line){
 				var result = {};
 				var split = line.split(":-");		
-				result.body = buildTgdBody(split[1]);			
+				result.body = bodyBuilder().build(split[1]);			
 				result.head = buildTgdHead(split[0], result.body);
 				var allVariables = [];
 				result.body.predicates.forEach(function (predicate){

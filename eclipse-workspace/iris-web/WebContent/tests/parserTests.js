@@ -24,7 +24,8 @@ var tests = [
 	testObject("program.facts.length","0")
 ]
 
-var program2 = parse("r2(?z, ?x) :- r1(?x, ?y).\n r3('b') :-r2('a', ?x).");
+var program2 = parse("r2(?z, ?x) :- r1(?x, ?y)." + "\n"
+				+    "r3('b') :-r2('a', ?x).");
 var tests2 = [
 	testObject("program2.tgds.length", "2"),
 	testObject("program2.tgds[0].head.predicate.name", "'r2'"),
@@ -41,6 +42,16 @@ var tests2 = [
 	testObject("program2.tgds[1].body.predicates[0].parameters[1].type","'variable'"),
 	testObject("program2.isGuarded","true"),	
 ]
+
+
+var program3 = parse("bottom :- r1(?x, ?y).");
+var tests3 = [
+	testObject("program3.tgds.length", "0"),
+	testObject("program3.ncs.length", "1"),
+	testObject("program3.ncs[0].body.predicates.length", "1"),
+	testObject("program3.ncs[0].body.predicates[0].name", "'r1'")
+]
+
 
 
 
@@ -69,3 +80,4 @@ function runTests(tests, testName){
 
 runTests(tests, "parsing: r1(?z, ?x) :- r1(?x, ?y), r2(?y).");
 runTests(tests2, "parsing: r2(?z, ?x) :- r1(?x, ?y).\nr3('b') :-r2('a', ?x).");
+runTests(tests3, "parsing: bottom :- r1(?x, ?y).");
