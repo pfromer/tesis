@@ -10,7 +10,6 @@ const parse = function(program){
 
 	for(var i = 0;i < lines.length;i++){
 		if(regExService().tgdRegEx.test(lines[i].trim())) this.tgds.push(tgdBuilder().buildTgd(lines[i]));
-		debugger
 		if(regExService().ncRegEx.test(lines[i].trim())) this.ncs.push(ncBuilder().buildNc(lines[i]));
 		if(regExService().egdRegEx.test(lines[i].trim())) this.egds.push(egdBuilder().buildEgd(lines[i]));
 	}

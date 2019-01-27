@@ -1,7 +1,7 @@
 function predicateBuilder(tgdText){
 	
 	var build = function(predicateText){
-		var parameters = regExService().arrayOfMatches(regExService().variableOrStringReEx, predicateText);	
+		var parameters = regExService().arrayOfMatches(regExService().variableOrConstantRegEx, predicateText);
 		var parametersAsObjets = [];		
 		var type;
 		for (var i = 0; i < parameters.length; i++) {
