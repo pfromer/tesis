@@ -1,0 +1,18 @@
+r1(?z, ?x) :- r1(?x, ?y), r2(?y).
+r2(?x) :- r1(?x, ?y).
+
+r1('a', 'b').
+r2('b').
+
+?- r2(?y), r2(?x), r2(?z), NOT_EQUAL(?z, ?y).
+
+
+----
+
+ ('b', 'b', 'a')
+ ('b', 'a', 'a')
+ ('a', 'b', 'b')
+ ('a', 'a', 'b')
+ 
+ 
+ en cada fila, aparece por orden de aparicion en la query de izquierda a derecha el resultado de cada variable.

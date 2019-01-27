@@ -1,0 +1,9 @@
+Egd:
+
+?z = ?z1 :- p(?x, ?z), p(?x, ?z1).
+
+
+Re escribir como negative constraint:
+
+bottom :- p(?x, ?z), p(?x, ?z1), ?z!=?z1.	
+
