@@ -5,13 +5,7 @@ function predicateBuilder(tgdText){
 		var parametersAsObjets = [];		
 		var type;
 		for (var i = 0; i < parameters.length; i++) {
-			if (parameters[i].startsWith("?")){
-				var name = parameters[i].substring(1);				
-				parametersAsObjets.push({type: 'variable', name : name, index : i})
-			}
-			if (parameters[i].startsWith("'")){
-				parametersAsObjets.push({type: 'constant', value : parameters[i].slice(0,-1).substring(1), index : i});
-			}
+			parametersAsObjets.push(parameterBuilder().build(parameters[i]));
 		};
 		
 	    var hasVariable = function(v) {return parametersAsObjets.some(p => p.name == v)};

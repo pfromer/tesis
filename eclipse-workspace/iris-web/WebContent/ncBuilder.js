@@ -1,4 +1,4 @@
-function ncBuilder(tgdText){
+function ncBuilder(){
 	
 	return {		
 			buildNc : function(line){

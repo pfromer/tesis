@@ -53,6 +53,18 @@ var tests3 = [
 ]
 
 
+var egdProgram = parse("?z = ?z1 :- p(?x, ?z), p(?x, ?z1).");
+var testsEgd = [
+	testObject("egdProgram.tgds.length", "0"),
+	testObject("egdProgram.ncs.length", "0"),
+	testObject("egdProgram.egds.length", "1"),
+	testObject("egdProgram.egds[0].head.left.type", "'variable'"),
+	testObject("egdProgram.egds[0].head.left.name", "'z'"),
+	testObject("egdProgram.egds[0].head.right.type", "'variable'"),
+	testObject("egdProgram.egds[0].head.right.name", "'z1'"),
+	testObject("egdProgram.egds[0].body.predicates.length", "2")
+]
+
 
 
 
@@ -81,3 +93,4 @@ function runTests(tests, testName){
 runTests(tests, "parsing: r1(?z, ?x) :- r1(?x, ?y), r2(?y).");
 runTests(tests2, "parsing: r2(?z, ?x) :- r1(?x, ?y).\nr3('b') :-r2('a', ?x).");
 runTests(tests3, "parsing: bottom :- r1(?x, ?y).");
+runTests(testsEgd, "parsing: ?z = ?y :- p(?x, ?z), p(?x, ?y).");
