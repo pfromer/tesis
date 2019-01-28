@@ -1,7 +1,7 @@
 function tgdBuilder(tgdText){
 	
 	buildTgdHeadPredicate = function(predicateText, tgdBody){
-		var predicate = predicateBuilder().build(predicateText);
+		var predicate = servicesAndBuilders.predicateBuilder.build(predicateText);
 		var parameters = predicate.parameters.filter(p => p.type == 'variable');
 		
 		//check if variable is actually a null (not present in tgd's body)
@@ -25,7 +25,7 @@ function tgdBuilder(tgdText){
 			buildTgd : function(line){
 				var result = {};
 				var split = line.split(":-");		
-				result.body = bodyBuilder().build(split[1]);			
+				result.body = servicesAndBuilders.bodyBuilder.build(split[1]);			
 				result.head = buildTgdHead(split[0], result.body);
 				var allVariables = [];
 				result.body.predicates.forEach(function (predicate){

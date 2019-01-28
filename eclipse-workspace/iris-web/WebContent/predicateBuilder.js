@@ -1,11 +1,11 @@
 function predicateBuilder(tgdText){
 	
 	var build = function(predicateText){
-		var parameters = regExService().arrayOfMatches(regExService().variableOrConstantRegEx, predicateText);
+		var parameters = servicesAndBuilders.regExService.arrayOfMatches(servicesAndBuilders.regExService.variableOrConstantRegEx, predicateText);
 		var parametersAsObjets = [];		
 		var type;
 		for (var i = 0; i < parameters.length; i++) {
-			parametersAsObjets.push(parameterBuilder().build(parameters[i]));
+			parametersAsObjets.push(servicesAndBuilders.parameterBuilder.build(parameters[i]));
 		};
 		
 	    var hasVariable = function(v) {return parametersAsObjets.some(p => p.name == v)};
