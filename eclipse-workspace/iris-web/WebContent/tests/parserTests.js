@@ -79,7 +79,16 @@ var testsFact = [
 	testObject("factProgram.facts[0].parameters[1].type", "'constant'"),
 ]
 
-
+var queryProgram = parse("?- r1(?x, ?y), r2(?z, ?z).");
+var testsQuery = [
+	testObject("queryProgram.tgds.length", "0"),
+	testObject("queryProgram.ncs.length", "0"),
+	testObject("queryProgram.egds.length", "0"),
+	testObject("queryProgram.facts.length", "0"),
+	testObject("queryProgram.queries.length", "1"),
+	testObject("queryProgram.queries[0].predicates.length", "2"),
+	testObject("queryProgram.queries[0].predicates[1].parameters[0].name", "'z'")
+]
 
 
 
@@ -109,3 +118,4 @@ runTests(tests2, "parsing: r2(?z, ?x) :- r1(?x, ?y).\nr3('b') :-r2('a', ?x).");
 runTests(tests3, "parsing: bottom :- r1(?x, ?y).");
 runTests(testsEgd, "parsing: ?z = ?y :- p(?x, ?z), p(?x, ?y).");
 runTests(testsFact, "parsing: p('a', 'b').");
+runTests(testsQuery, "parsing: ?- r1(?x, ?y), r2(?z, ?z).");

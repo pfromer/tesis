@@ -13,6 +13,7 @@ const parse = function(program){
 		if(servicesAndBuilders.regExService.ncRegEx.test(lines[i].trim())) this.ncs.push(ncBuilder().buildNc(lines[i]));
 		if(servicesAndBuilders.regExService.egdRegEx.test(lines[i].trim())) this.egds.push(egdBuilder().buildEgd(lines[i]));
 		if(servicesAndBuilders.regExService.factRegEx.test(lines[i].trim())) this.facts.push(factBuilder().build(lines[i]));
+		if(servicesAndBuilders.regExService.queryRegEx.test(lines[i].trim())) this.queries.push(queryBuilder().build(lines[i]));
 	}
 	
 	return  { 	

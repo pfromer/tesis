@@ -8,8 +8,9 @@ function regExService(){
 	function repeatAndSeparateByComma (regEx){ return new RegExp("(" + regEx.source + ",\\s*)*"+ regEx.source) };
 	var predicateRegEx = new RegExp('^' + '(\\w+)\\(' + repeatAndSeparateByComma(variableOrConstantRegEx).source  + '\\)$');
 	var factRegEx = new RegExp('^' + '(\\w+)\\(' + repeatAndSeparateByComma(constantRegEx).source  + '\\).$');
-	
 	var withinPredicateRegEx = removeFirstAndLastCharacter(predicateRegEx);
+	var queryRegEx = new RegExp('^' + "\\?-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$");
+	
 	
 	return{
 		variableOrConstantRegEx : variableOrConstantRegEx,
@@ -20,6 +21,7 @@ function regExService(){
 		ncRegEx : new RegExp('^' + bottomRegEx.source + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$"),
 		egdRegEx : new RegExp('^' + variableOrConstantRegEx.source + "\\s*=\\s*" + variableOrConstantRegEx.source  + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$"),
 		factRegEx : factRegEx,
+		queryRegEx : queryRegEx,
 		arrayOfMatches : function(regEx, _text){
 			regEx = new RegExp(regEx.source, 'g');
 			var result = []
