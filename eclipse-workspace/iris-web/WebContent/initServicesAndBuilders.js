@@ -7,6 +7,7 @@ function initServicesAndBuilders(){
 	var _tgdBuilder = tgdBuilder();
 	var _ncBuilder = ncBuilder();
 	var _egdBuilder = egdBuilder();
+	var _factBuilder = factBuilder();
 	
 	return {
 		regExService : _regExService,
@@ -15,7 +16,8 @@ function initServicesAndBuilders(){
 		bodyBuilder : _bodyBuilder,
 		tgdBuilder : _tgdBuilder,
 		ncBuilder : _ncBuilder,
-		egdBuilder : _egdBuilder
+		egdBuilder : _egdBuilder,
+		factBuilder : _factBuilder
 	}
 }
 

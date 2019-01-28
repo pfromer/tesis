@@ -65,6 +65,20 @@ var testsEgd = [
 	testObject("egdProgram.egds[0].body.predicates.length", "2")
 ]
 
+var factProgram = parse("p('a', 'b').");
+var testsFact = [
+	testObject("factProgram.tgds.length", "0"),
+	testObject("factProgram.ncs.length", "0"),
+	testObject("factProgram.egds.length", "0"),
+	testObject("factProgram.facts.length", "1"),
+	testObject("factProgram.facts[0].name", "'p'"),
+	testObject("factProgram.facts[0].parameters.length", "2"),
+	testObject("factProgram.facts[0].parameters[0].value", "'a'"),
+	testObject("factProgram.facts[0].parameters[1].value", "'b'"),
+	testObject("factProgram.facts[0].parameters[0].type", "'constant'"),
+	testObject("factProgram.facts[0].parameters[1].type", "'constant'"),
+]
+
 
 
 
@@ -94,3 +108,4 @@ runTests(tests, "parsing: r1(?z, ?x) :- r1(?x, ?y), r2(?y).");
 runTests(tests2, "parsing: r2(?z, ?x) :- r1(?x, ?y).\nr3('b') :-r2('a', ?x).");
 runTests(tests3, "parsing: bottom :- r1(?x, ?y).");
 runTests(testsEgd, "parsing: ?z = ?y :- p(?x, ?z), p(?x, ?y).");
+runTests(testsFact, "parsing: p('a', 'b').");
