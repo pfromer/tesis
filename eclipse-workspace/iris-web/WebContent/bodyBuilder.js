@@ -6,7 +6,13 @@ function bodyBuilder(bodyText){
 		for (var i = 0; i < predicates.length; i++) {
 			predicatesAsObjects.push(servicesAndBuilders.predicateBuilder.build(predicates[i]));
 		}		
-		return { predicates: predicatesAsObjects, hasVariable : function(v){ return predicatesAsObjects.some(p => p.hasVariable(v))} };		
+		return { 
+			predicates: predicatesAsObjects, 
+			hasVariable : function(v){ return predicatesAsObjects.some(p => p.hasVariable(v))},
+			toString : function(){
+				return predicates.map(p => p.toString()).join(", ");
+			}
+		};		
 	}
 	
 	return {

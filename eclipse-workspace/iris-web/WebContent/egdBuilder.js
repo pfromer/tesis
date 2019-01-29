@@ -8,7 +8,18 @@ function egdBuilder(){
 				var headRight = servicesAndBuilders.parameterBuilder.build(head[1].trim());	
 				return {
 					body : servicesAndBuilders.bodyBuilder.build(split[1]),
-					head : { left : headLeft, right : headRight  }
+					head : { left : headLeft, right : headRight  },
+					toString : function(){
+						var arrayOfSubstrings = [];
+						return [
+								this.head.left.toString(), 
+								" = ", 
+								this.head.right.toString(), 
+								" :- ",
+								this.body.toString(),
+								"."
+								].join("");		
+					}
 				}
 			}
 		}

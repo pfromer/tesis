@@ -21,7 +21,8 @@ var tests = [
 	testObject("program.tgds[0].body.predicates[1].parameters[0].type","'variable'"),
 	testObject("program.tgds[0].isGuarded","true"),
 	testObject("program.queries.length","0"),	  
-	testObject("program.facts.length","0")
+	testObject("program.facts.length","0"),
+	testObject("program.toString()","'r1(?z, ?x) :- r1(?x, ?y), r2(?y).'")	
 ]
 
 var program2 = parse("r2(?z, ?x) :- r1(?x, ?y)." + "\n"
@@ -40,7 +41,8 @@ var tests2 = [
 	testObject("program2.tgds[1].body.predicates[0].parameters[0].type","'constant'"),
 	testObject("program2.tgds[1].body.predicates[0].parameters[1].name","'x'"),
 	testObject("program2.tgds[1].body.predicates[0].parameters[1].type","'variable'"),
-	testObject("program2.isGuarded","true"),	
+	testObject("program2.isGuarded","true"),
+	testObject("program2.toString()","'r2(?z, ?x) :- r1(?x, ?y).\\nr3(\\'b\\') :- r2(\\'a\\', ?x).'")	
 ]
 
 
@@ -49,7 +51,8 @@ var tests3 = [
 	testObject("program3.tgds.length", "0"),
 	testObject("program3.ncs.length", "1"),
 	testObject("program3.ncs[0].body.predicates.length", "1"),
-	testObject("program3.ncs[0].body.predicates[0].name", "'r1'")
+	testObject("program3.ncs[0].body.predicates[0].name", "'r1'"),
+	testObject("program3.toString()","'⊥ :- r1(?x, ?y).'")
 ]
 
 
@@ -62,7 +65,8 @@ var testsEgd = [
 	testObject("egdProgram.egds[0].head.left.name", "'z'"),
 	testObject("egdProgram.egds[0].head.right.type", "'variable'"),
 	testObject("egdProgram.egds[0].head.right.name", "'z1'"),
-	testObject("egdProgram.egds[0].body.predicates.length", "2")
+	testObject("egdProgram.egds[0].body.predicates.length", "2"),
+	testObject("egdProgram.toString()","'?z = ?z1 :- p(?x, ?z), p(?x, ?z1).'")
 ]
 
 var factProgram = parse("p('a', 'b').");
@@ -77,6 +81,7 @@ var testsFact = [
 	testObject("factProgram.facts[0].parameters[1].value", "'b'"),
 	testObject("factProgram.facts[0].parameters[0].type", "'constant'"),
 	testObject("factProgram.facts[0].parameters[1].type", "'constant'"),
+	testObject("factProgram.toString()","'p(\\'a\\', \\'b\\').'")
 ]
 
 var queryProgram = parse("?- r1(?x, ?y), r2(?z, ?z).");
@@ -87,7 +92,8 @@ var testsQuery = [
 	testObject("queryProgram.facts.length", "0"),
 	testObject("queryProgram.queries.length", "1"),
 	testObject("queryProgram.queries[0].predicates.length", "2"),
-	testObject("queryProgram.queries[0].predicates[1].parameters[0].name", "'z'")
+	testObject("queryProgram.queries[0].predicates[1].parameters[0].name", "'z'"),
+	testObject("queryProgram.toString()","'?- r1(?x, ?y), r2(?z, ?z).'")
 ]
 
 
@@ -116,6 +122,6 @@ function runTests(tests, testName){
 runTests(tests, "parsing: r1(?z, ?x) :- r1(?x, ?y), r2(?y).");
 runTests(tests2, "parsing: r2(?z, ?x) :- r1(?x, ?y).\nr3('b') :-r2('a', ?x).");
 runTests(tests3, "parsing: bottom :- r1(?x, ?y).");
-runTests(testsEgd, "parsing: ?z = ?y :- p(?x, ?z), p(?x, ?y).");
+runTests(testsEgd, "parsing: ?z = ?z1 :- p(?x, ?z), p(?x, ?z1).");
 runTests(testsFact, "parsing: p('a', 'b').");
 runTests(testsQuery, "parsing: ?- r1(?x, ?y), r2(?z, ?z).");

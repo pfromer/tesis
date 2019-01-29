@@ -22,6 +22,10 @@ const parse = function(program){
 				egds: this.egds,
 				queries : this.queries, 
 				facts: this.facts, 
-				isGuarded : this.tgds.every(t => t.isGuarded)
+				isGuarded : this.tgds.every(t => t.isGuarded),
+				toString : function(){
+					return this.ncs.concat(this.egds).concat(this.tgds).concat(this.facts).concat(this.queries).join("\n");
+					
+				}
 			};
 }
