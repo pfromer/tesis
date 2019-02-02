@@ -1,0 +1,22 @@
+z1 = ?z2 :- h(?x,?z1), h(?x,?z2).
+h(?x, ?z) :- p(?x).
+
+p('homero').
+h('homero', '1').
+h('homero', '2').
+
+?- h(?x, ?z).
+
+
+esta query devuele los resultados por mas que no se cumple la egd
+
+
+
+?z1 = ?z2 :- h(?x,?z1), h(?x,?z2).
+h(?x, ?z) :- p(?x).
+
+p('homero').
+h('homero', '1').
+h('homero', '2').
+
+?- h(?x, ?z1), h(?x, ?z2), ?z1 != ?z2.

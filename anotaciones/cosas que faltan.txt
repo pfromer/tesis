@@ -1,0 +1,4 @@
+egds nos conflicting, generan conocimiento? las puedo tratar como negative constraints?
+negacion de atomos
+entender porque la query que se cuelga
+equalities en las queries
