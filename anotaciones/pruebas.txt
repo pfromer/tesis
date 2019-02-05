@@ -7,7 +7,7 @@ run as->run configurations->arguments
 En el box de "Program arguments" escribir:
 
 program-file=C:\Git\tesis\IRIS+-\examples\guardedExample.dtg guarded-rules
-program-file=C:\Git\tesis\IRIS+-\examples\guardedSeCuelga.dtg guarded-rules
+program-file=C:\Git\tesis\IRIS+-\examples\ejemploSeCuelga.dtg guarded-rules
 
 
 program-file=-++-guardedExample.dtg guarded-rules

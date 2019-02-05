@@ -3,6 +3,8 @@ package test;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,12 +15,15 @@ import org.deri.iris.Configuration;
 import org.deri.iris.KnowledgeBaseFactory;
 import org.deri.iris.demo.Demo;
 import org.deri.iris.demo.ProgramExecutor;
+import org.deri.iris.demo.QueryResult;
 import org.deri.iris.evaluation.forewriting.SQLRewritingEvaluationStrategyFactory;
 import org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategyFactory;
 import org.deri.iris.evaluation.stratifiedbottomup.guardednaive.GuardedNaiveEvaluatorFactory;
 import org.deri.iris.rules.safety.GuardedRuleSafetyProcessor;
 import org.deri.iris.rules.safety.LinearReducibleRuleSafetyProcessor;
 import org.json.*;
+import com.google.gson.*;
+
 /**
  * Servlet implementation class Test
  */
@@ -55,7 +60,13 @@ public class Test extends HttpServlet {
 			
 			configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
 			ProgramExecutor executor = new ProgramExecutor(program, configuration);
-			response.getWriter().append(executor.getOutput());
+			//response.getWriter().append(executor.getOutput());
+			
+			ArrayList<QueryResult> output = executor.getResults();
+			
+			Gson gson = new Gson();
+			String jsonOutput = gson.toJson(output);
+			response.getWriter().append(jsonOutput);
 
 		} catch (Exception e) {
 			response.getWriter().append(e.toString());

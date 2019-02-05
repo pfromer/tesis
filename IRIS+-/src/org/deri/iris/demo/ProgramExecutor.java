@@ -113,7 +113,7 @@ public class ProgramExecutor {
 
       final List<IVariable> variableBindings = new ArrayList<IVariable>();
 
-      for (final IQuery query : queries) {
+     /* for (final IQuery query : queries) {
         // Execute the query
         duration = -System.nanoTime();
         final IRelation results = knowledgeBase.execute(query, variableBindings);
@@ -149,6 +149,27 @@ public class ProgramExecutor {
         // }
 
         formatResults(output, results);
+      }*/
+      
+      
+      for (final IQuery query : queries) {
+    	  final IRelation results = knowledgeBase.execute(query, variableBindings);
+    	  QueryResult qResult = new QueryResult();
+    	  qResult.Query = query.toString();
+    	  qResult.VariableBindings = new ArrayList<String>();
+    	  for (IVariable variable : variableBindings) {
+    		  qResult.VariableBindings.add(variable.toString());    		  
+    	  }
+    	  
+    	  qResult.Results = new ArrayList<ArrayList<String>>();
+    	  for (int i = 0; i < results.size(); i++) {    		  
+    		  ArrayList<String> resultList = new ArrayList<String>();
+    		  for(int j = 0; j < results.get(i).size(); j++) {
+    			  resultList.add(results.get(i).get(j).toString());
+    		  }
+    		  qResult.Results.add(resultList);
+    	  }    	  
+    	  queryResults.add(qResult); 
       }
 
       mOutput = output.toString();
@@ -181,4 +202,11 @@ public class ProgramExecutor {
 
   /** The output (or error) from the program execution. */
   private String mOutput;
+  
+  private ArrayList<QueryResult> queryResults = new ArrayList<QueryResult>();
+  
+  public ArrayList<QueryResult> getResults() {
+	    return queryResults;
+	  }
+  
 }

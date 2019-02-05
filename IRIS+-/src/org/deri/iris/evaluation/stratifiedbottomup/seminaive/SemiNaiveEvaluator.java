@@ -59,7 +59,12 @@ public class SemiNaiveEvaluator implements IRuleEvaluator {
 
     // Now do iterative evaluation (semi-naive)
     boolean newTuples;
-    for (;;) {
+
+	
+    int i = 0;
+    System.out.println("holaassa");
+    /*for (;;) {
+    	
       newTuples = false;
 
       final IFacts previousDeltas = deltas;
@@ -83,13 +88,14 @@ public class SemiNaiveEvaluator implements IRuleEvaluator {
         }
       }
 
-      if (!newTuples) {
+      i++;
+      if (!newTuples || i == 10) {
         break;
       }
 
       // Iterate new tuples in dP[i] and add to program
       addAll(facts, deltas);
-    }
+    }*/
   }
 
   /**

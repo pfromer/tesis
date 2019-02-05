@@ -1,0 +1,8 @@
+para actualizar cambios en el codigo de IRIS:
+
+en el proyecto de IRIS click derecho, export, JAVA, jar file.
+
+el archivo jar, que se tiene que llamar iris.jar copy pastearlo en 
+
+C:\Git\tesis\eclipse-workspace\iris-web\WebContent\WEB-INF\lib
+

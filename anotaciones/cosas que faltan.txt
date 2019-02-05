@@ -2,3 +2,5 @@ egds nos conflicting, generan conocimiento? las puedo tratar como negative const
 negacion de atomos
 entender porque la query que se cuelga
 equalities en las queries
+
+queries como en las diapos: consulta conjuntiva, consulta conjuntiva booleana
