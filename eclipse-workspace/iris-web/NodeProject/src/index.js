@@ -83,38 +83,42 @@ class ContainerComponent extends React.Component {
 
   handleSubmit(event) {
     var program = parse(this.state.programText);
+	console.log("Parsed Program:");
     console.log(program);
 
     this.setState({isGuarded : program.isGuarded(), isLinear : program.isLinear(), errors : program.errors });
 
-    var consistencyPromise = program.consistencyPromise();
-
-    consistencyPromise.then(res => {
-      debugger							
-    });
+		
+	//todo sacar este if distribuyendo en coponentes y que se maneje todo por estado
+	if(program.errors.length == 0){
+		program.consistencyPromise().then(res => {
+			console.log("Parsed Program without ncs and egds:");
+			console.log(program.toStringWithoutNcsAndEgds);		
+		
+			axios
+				.get("http://localhost:8080/iris/test", {
+				  params: {
+					test: JSON.stringify({ program: program.toStringWithoutNcsAndEgds() })
+				  }
+				})
+				.then(res => {
+					console.log("Query results:");
+					console.log(res.data);
+					this.setState({ results: res.data });
+				});
+		});
+	}
+	else{
+		this.setState({ results: [] });
+	}							
     
-    if(program.errors.length == 0){
-      axios
-        .get("http://localhost:8080/iris/test", {
-          params: {
-            test: JSON.stringify({ program: this.state.program })
-          }
-        })
-        .then(res => {
-          console.log(res.data);
-          this.setState({ results: res.data });
-        });
-    }
-    else{
-      this.setState({ results: [] });
-    }
-
 
     event.preventDefault();
   }
 
   render() {
     var buttonStyle = { width: "100%" };
+	var textAreaStyle = {resize: "vertical"};
     return (
       <>
         <Container>
@@ -125,8 +129,9 @@ class ContainerComponent extends React.Component {
                   <Form.Label>Datalog Program</Form.Label>
                   <Form.Control
                     as="textarea"
-                    rows="18"
+                    rows="10"
                     onChange={this.handleChange}
+					style={textAreaStyle}
                   />
                 </Form.Group>
                 <Form.Group>

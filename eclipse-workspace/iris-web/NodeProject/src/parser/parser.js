@@ -57,6 +57,9 @@ export function parse (program){
 				toString : function(){
 					return this.ncs.concat(this.egds).concat(this.tgds).concat(this.facts).concat(this.queries).join("\n");					
 				},
+				toStringWithoutNcsAndEgds : function(){
+					return this.tgds.concat(this.facts).concat(this.queries).join("\n");
+				},
 				errors: errors,
 				consistencyPromise: function(){
 
