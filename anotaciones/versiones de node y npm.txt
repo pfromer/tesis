@@ -1,0 +1,8 @@
+
+Pablo@DESKTOP-4L7ANMS MINGW64 /c/git/tesis (master)
+$ npm -v
+6.4.1
+
+Pablo@DESKTOP-4L7ANMS MINGW64 /c/git/tesis (master)
+$ node -v
+v8.12.0
