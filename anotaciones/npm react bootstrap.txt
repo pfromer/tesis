@@ -1,0 +1,83 @@
+npx create react app
+npm install react-bootstrap bootstrap
+
+en index.html agregar link:
+
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+  crossorigin="anonymous"
+/>
+
+
+en index.js:
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import { Button } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
+import * as serviceWorker from './serviceWorker';
+
+
+
+class AlertDismissable extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { show: true };
+  }
+
+  render() {
+    const handleHide = () => this.setState({ show: false });
+    const handleShow = () => this.setState({ show: true });
+    return (
+      <>
+        <Alert show={this.state.show} variant="success">
+          <Alert.Heading>How's it going?!</Alert.Heading>
+          <p>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
+            eget lacinia odio sem nec elit. Cras mattis consectetur purus sit
+            amet fermentum.
+          </p>
+          <hr />
+          <div className="d-flex justify-content-end">
+            <Button onClick={handleHide} variant="outline-success">
+              Close me ya'll!
+            </Button>
+          </div>
+        </Alert>
+
+        {!this.state.show && <Button onClick={handleShow}>Show Alert</Button>}
+      </>
+    );
+  }
+}
+
+//render(<AlertDismissable />);
+
+
+ReactDOM.render(<AlertDismissable />, document.getElementById('root'));
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: http://bit.ly/CRA-PWA
+serviceWorker.unregister();
+
+----------------
+
+en packaage.json agregar:
+
+  "homepage": "C:\\Projects\\my-app\\build"
+  
+-------
+para buidlear
+
+npm run build
+
+-----
+para desarrollar:
+
+npm start

@@ -21,35 +21,40 @@
 
 <script>
 
-/*var program ="r1(?z, ?x) :- r1(?x, ?y), r2(?y).\nr2(?x) :- r1(?x, ?y).\n\nr1('a', 'b').\nr2('b').\n\n?- r1(?x, ?y).\n?- r2(?x).";
+function execute() {
+    $.ajax({
+        type: "get",
+        url: "http://localhost:8080/iris/test",
+        data: {
+            test: JSON.stringify({
+                "program": $("#program").val()
+            })
+        },
+        contentType: "application/json; charset=utf-8",
+        success: function(response) {
+            var jsonResponse = JSON.parse(response);
+            console.log(jsonResponse);
 
-var lines = program.split('\n');
-for(var i = 0;i < lines.length;i++){
-    //code here using lines[i] which will give you each line
-}
+			var stringResult = [];
+
+			jsonResponse.forEach(queryResult => {
+				
+				stringResult.push(queryResult.Query);
+				var variableBindings = [];
+				queryResult.VariableBindings.forEach(variable =>{
+					variableBindings.push(variable);
+				})
+				
+				stringResult.push(variableBindings.join(", "));
 
 
-var tgdProto = {  }
+
+			});
 
 
-goal, tgd, fact*/
-
-
-
-
-function execute(){	
-	$.ajax({		
-		 type: "get",
-		  url: "http://localhost:8080/iris/test",
-		  data: { 
-			     loadProds: 1, 
-			     test: JSON.stringify({ "program": $("#program").val(), "query" : $("#query").val() }) // look here! 
-			    }, 
-		  contentType: "application/json; charset=utf-8",
-          success:function(response) {
-  		$("#results").text(response);
-  		}
-		})
+            $("#results").text(stringResult.join("\n"));
+        }
+    })
 }
 </script>
 </html>
