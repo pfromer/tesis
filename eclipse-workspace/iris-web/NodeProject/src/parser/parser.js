@@ -36,7 +36,7 @@ export function parse (program){
 		});
 		if(!matched){
 			if(!regExModule.service.whiteSpacesRegEx.test(lines[i])) {
-				this.errors.push({line : i, type : 'Invalid Line', text: lines[i]})
+				errors.push({line : i, type : 'Invalid Line', text: lines[i]})
 			}
 		}
 	}

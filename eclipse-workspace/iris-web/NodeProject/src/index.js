@@ -58,7 +58,7 @@ class QueryResult extends React.Component{
 function Results(props) {
   return (
     <ul>
-      {props.data.map((queryResult,index) => (
+      {props.visible && props.data.map((queryResult,index) => (
         <QueryResult key={queryResult.Query} value={queryResult} open={index==0} />
       ))}
     </ul>
@@ -78,10 +78,12 @@ class ContainerComponent extends React.Component {
   }
 
   renderResults() {
-    return <Results data={this.state.results} />;
+    return <Results data={this.state.results} visible={this.state.errors == 0}/>;
   }
 
   handleSubmit(event) {
+	  debugger
+    event.preventDefault();
     var program = parse(this.state.programText);
 	console.log("Parsed Program:");
     console.log(program);
@@ -114,7 +116,6 @@ class ContainerComponent extends React.Component {
     
 
 
-    event.preventDefault();
   }
 
   render() {
