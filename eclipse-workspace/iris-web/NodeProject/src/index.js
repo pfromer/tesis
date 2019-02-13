@@ -87,17 +87,17 @@ class ContainerComponent extends React.Component {
 
     this.setState({isGuarded : program.isGuarded(), isLinear : program.isLinear(), errors : program.errors });
 
-    var consistencyPromise = program.consistencyPromise();
+   /* var consistencyPromise = program.consistencyPromise();
 
     consistencyPromise.then(res => {
       debugger							
-    });
+    });*/
     
     if(program.errors.length == 0){
       axios
         .get("http://localhost:8080/iris/test", {
           params: {
-            test: JSON.stringify({ program: this.state.program })
+            test: JSON.stringify({ program: this.state.programText })
           }
         })
         .then(res => {
