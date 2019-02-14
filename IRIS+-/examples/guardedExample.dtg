@@ -56,4 +56,4 @@ r2('b').
 ?- r1(?x, ?y).
 ?- r2(?x).
 
-bottomm :- r1(?x, ?y).
+bottommm :- r1(?x, ?y).
