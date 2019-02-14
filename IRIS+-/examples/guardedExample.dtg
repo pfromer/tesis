@@ -42,3 +42,18 @@ SADFASDF
 ?- r2(?x).
 
 
+----------
+Con un solo error
+bottom :- r2(?x).
+bottom :- r1(?x, ?y), r2(?x).
+
+r1(?z, ?x) :- r1(?x, ?y), r2(?y).
+r2(?x) :- r1(?x, ?y).
+
+r1('a', 'b').
+r2('b').
+
+?- r1(?x, ?y).
+?- r2(?x).
+
+bottomm :- r1(?x, ?y).

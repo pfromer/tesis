@@ -5,106 +5,27 @@ import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import { Table } from "react-bootstrap";
-import { Collapse } from "react-bootstrap";
-import { Alert } from "react-bootstrap";
 import * as serviceWorker from "./serviceWorker";
 import axios from "axios";
 import { parse } from "./parser/parser";
+import { AlertDismissable } from "./AlertDissmisable";
+import { Results } from "./QueryResult";
 
-
-function AlertDismissable(props){
-
-	if(!props.visible) return null;
-	const lines = props.programText.split("\n");
-	const errorLineNumbers = parse(props.programText).errors.map(a => a.lineNumber);	
-	var errorStyle = {color: "red"};
-	
-	var htmlLines = [];
-	
-	const appendLines = () => {
-		for(var i = 0; i < lines.length; i++){
-			if(errorLineNumbers.includes(i)){
-				 htmlLines.push(<div style={errorStyle}>{lines[i]}</div>);        
-			}
-			else {
-				htmlLines.push(<div>{lines[i]}</div>); 
-			}
-			if((/^ *$/).test(lines[i])){
-				htmlLines.push(<br></br>); 
-			}
-		}
-		return htmlLines;
-	};	
-	  
-	return(
-		<Alert dismissible variant="danger">
-		  <Alert.Heading>Please correct the lines marked in red:</Alert.Heading>
-		  {appendLines()}
-		</Alert>
-	)
-}
-
-
-
-class QueryResult extends React.Component{
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      open: props.open,
-    };
-  }
-
-  render() {
-    const { open } = this.state;
-    return(
-      <Container>
-        <h4 onClick={() => this.setState({ open: !open })}>
-          {this.props.value.Query}
-        </h4>
-        <Collapse in={this.state.open}>
-          <div>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                {this.props.value.VariableBindings.map(variable => (
-                  <th key={variable}>{variable.substring(1)}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {this.props.value.Results.map(result => (
-                <tr>
-                  {result.map(constant => (
-                    <td>{constant.slice(0, -1).substring(1)}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-          </div>
-        </Collapse>
-      </Container>
-    )
-  };
-}
-
-function Results(props) {
-  return (
-    <ul>
-      {props.visible && props.data.map((queryResult,index) => (
-        <QueryResult key={queryResult.Query} value={queryResult} open={index==0} />
-      ))}
-    </ul>
-  );
-}
+//Alert
+//Query results
+//Results
+//Container
 
 class ContainerComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { program: "", results: [], isGuarded : false, isLinear : false, errors: [] };
+
+    this.state = {
+      programText: "",
+      results: [],
+      program: undefined
+    };
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -114,51 +35,56 @@ class ContainerComponent extends React.Component {
   }
 
   renderResults() {
-    return <Results data={this.state.results} visible={this.state.errors == 0}/>;
+    return (
+      <Results data={this.state.results} visible={this.state.program && this.state.program.errors == 0} />
+    );
   }
 
   handleSubmit(event) {
     event.preventDefault();
     var program = parse(this.state.programText);
-	console.log("Parsed Program:");
+    console.log("Parsed Program:");
     console.log(program);
 
-    this.setState({isGuarded : program.isGuarded(), isLinear : program.isLinear(), errors : program.errors });
+    this.setState({
+      program: program
+    });
 
-		
-	//todo sacar este if distribuyendo en coponentes y que se maneje todo por estado
-	if(program.errors.length == 0){
-		program.consistencyPromise().then(res => {
-			console.log("Parsed Program without ncs and egds:");
-			console.log(program.toStringWithoutNcsAndEgds);		
-		
-			axios
-				.get("http://localhost:8080/iris/test", {
-				  params: {
-					test: JSON.stringify({ program: program.toStringWithoutNcsAndEgds() })
-				  }
-				})
-				.then(res => {
-					console.log("Query results:");
-					console.log(res.data);
-					this.setState({ results: res.data });
-				});
-		});
-	}
-	else{
-		this.setState({ results: [] });
-	}							
-    
+    //todo sacar este if distribuyendo en coponentes y que se maneje todo por estado
+    if (program.errors.length == 0) {
+      program.consistencyPromise().then(res => {
+        console.log("Parsed Program without ncs and egds:");
+        console.log(program.toStringWithoutNcsAndEgds);
 
-
+        axios
+          .get("http://localhost:8080/iris/test", {
+            params: {
+              test: JSON.stringify({
+                program: program.toStringWithoutNcsAndEgds()
+              })
+            }
+          })
+          .then(res => {
+            console.log("Query results:");
+            console.log(res.data);
+            this.setState({ results: res.data });
+          });
+      });
+    } else {
+      this.setState({ results: [] });
+    }
   }
 
   render() {
     var buttonStyle = { width: "100%" };
-	var textAreaStyle = {resize: "vertical"};
+    var textAreaStyle = { resize: "vertical" };
     return (
       <>
-	<AlertDismissable programText={this.state.programText} errors={this.state.errors} visible={this.state.errors.length > 0}/>
+        <AlertDismissable
+          programText={this.state.programText}
+          errors={this.program ? this.state.program.errors : []}
+          visible={this.state.program && this.state.program.errors.length > 0}
+        />
         <Container>
           <Row>
             <Col>
@@ -169,7 +95,7 @@ class ContainerComponent extends React.Component {
                     as="textarea"
                     rows="10"
                     onChange={this.handleChange}
-					style={textAreaStyle}
+                    style={textAreaStyle}
                   />
                 </Form.Group>
                 <Form.Group>
@@ -188,8 +114,6 @@ class ContainerComponent extends React.Component {
     );
   }
 }
-
-//render(<AlertDismissable />);
 
 ReactDOM.render(<ContainerComponent />, document.getElementById("root"));
 
