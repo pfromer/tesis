@@ -7,9 +7,45 @@ import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
 import { Collapse } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 import * as serviceWorker from "./serviceWorker";
 import axios from "axios";
 import { parse } from "./parser/parser";
+
+
+function AlertDismissable(props){
+
+	if(!props.visible) return null;
+	const lines = props.programText.split("\n");
+	const errorLineNumbers = parse(props.programText).errors.map(a => a.lineNumber);	
+	var errorStyle = {color: "red"};
+	
+	var htmlLines = [];
+	
+	const appendLines = () => {
+		for(var i = 0; i < lines.length; i++){
+			if(errorLineNumbers.includes(i)){
+				 htmlLines.push(<div style={errorStyle}>{lines[i]}</div>);        
+			}
+			else {
+				htmlLines.push(<div>{lines[i]}</div>); 
+			}
+			if((/^ *$/).test(lines[i])){
+				htmlLines.push(<br></br>); 
+			}
+		}
+		return htmlLines;
+	};	
+	  
+	return(
+		<Alert dismissible variant="danger">
+		  <Alert.Heading>Please correct the lines marked in red:</Alert.Heading>
+		  {appendLines()}
+		</Alert>
+	)
+}
+
+
 
 class QueryResult extends React.Component{
 
@@ -82,7 +118,6 @@ class ContainerComponent extends React.Component {
   }
 
   handleSubmit(event) {
-	  debugger
     event.preventDefault();
     var program = parse(this.state.programText);
 	console.log("Parsed Program:");
@@ -123,6 +158,7 @@ class ContainerComponent extends React.Component {
 	var textAreaStyle = {resize: "vertical"};
     return (
       <>
+	<AlertDismissable programText={this.state.programText} errors={this.state.errors} visible={this.state.errors.length > 0}/>
         <Container>
           <Row>
             <Col>

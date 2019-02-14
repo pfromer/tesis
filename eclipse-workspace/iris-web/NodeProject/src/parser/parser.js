@@ -15,8 +15,9 @@ export function parse (program){
 	var egds = [];		
 	var queries = [];
 	var errors = [];
-
+	
 	var lines = program.split('\n');
+	debugger
 
 	var regexAndBuilders = [
 		{regEx: regExModule.service.tgdRegEx, builder: tgdModule.builder, properties: tgds },
@@ -36,7 +37,7 @@ export function parse (program){
 		});
 		if(!matched){
 			if(!regExModule.service.whiteSpacesRegEx.test(lines[i])) {
-				errors.push({line : i, type : 'Invalid Line', text: lines[i]})
+				errors.push({lineNumber : i, type : 'Invalid Line', text: lines[i]})
 			}
 		}
 	}
