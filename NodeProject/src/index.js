@@ -10,6 +10,7 @@ import { parse } from "./parser/parser";
 import { ErrorSyntaxAlert } from "./ErrorSyntaxAlert";
 import { Results } from "./QueryResult";
 import { executeQuery } from "./IrisCaller";
+import { InconsistencyAlert } from "./InconsitencyAlert";
 
 class ContainerComponent extends React.Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class ContainerComponent extends React.Component {
     this.state = {
       programText: "",
       results: [],
-      program: undefined
+      program: undefined,
+      inconsistencies: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,23 +41,27 @@ class ContainerComponent extends React.Component {
       program: program
     });
 
-    //todo sacar este if distribuyendo en coponentes y que se maneje todo por estado
+
     if (program.errors.length == 0) {
       program.consistencyPromise().then(inconsistencies => {
 
         console.log("inconsistency");
         console.log(inconsistencies);
+        this.setState({ inconsistencies: inconsistencies ? inconsistencies : [] });
+
 
 
         console.log("Parsed Program without ncs and egds:");
         console.log(program.toStringWithoutNcsAndEgds);
 
-        executeQuery(program.toStringWithoutNcsAndEgds())
+        if(!inconsistencies){
+          executeQuery(program.toStringWithoutNcsAndEgds())
           .then(res => {
             console.log("Query results:");
             console.log(res.data);
             this.setState({ results: res.data });
           });
+        }
       });
     }
   }
@@ -65,6 +71,10 @@ class ContainerComponent extends React.Component {
     var textAreaStyle = { resize: "vertical" };
     return (
       <>
+
+        <InconsistencyAlert
+          inconsistencies={this.state.inconsistencies}
+        />
         <ErrorSyntaxAlert
           programText={this.state.programText}
           errors={this.program ? this.state.program.errors : []}
@@ -95,7 +105,7 @@ class ContainerComponent extends React.Component {
             <Col>
             <Results 
               data={this.state.program && this.state.program.errors.length == 0 && this.state.results} 
-              visible={this.state.program && this.state.program.errors == 0} />
+              visible={this.state.program && this.state.program.errors == 0 && this.state.inconsistencies.length == 0} />
           </Col>
           </Row>
         </Container>

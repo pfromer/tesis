@@ -6,7 +6,6 @@ import { Container } from "react-bootstrap";
 class QueryResult extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       open: props.open
     };
