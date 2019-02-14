@@ -6,15 +6,10 @@ import { Col } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import * as serviceWorker from "./serviceWorker";
-import axios from "axios";
 import { parse } from "./parser/parser";
-import { AlertDismissable } from "./AlertDissmisable";
+import { ErrorSyntaxAlert } from "./ErrorSyntaxAlert";
 import { Results } from "./QueryResult";
-
-//Alert
-//Query results
-//Results
-//Container
+import { executeQuery } from "./IrisCaller";
 
 class ContainerComponent extends React.Component {
   constructor(props) {
@@ -34,12 +29,6 @@ class ContainerComponent extends React.Component {
     this.setState({ programText: event.target.value });
   }
 
-  renderResults() {
-    return (
-      <Results data={this.state.results} visible={this.state.program && this.state.program.errors == 0} />
-    );
-  }
-
   handleSubmit(event) {
     event.preventDefault();
     var program = parse(this.state.programText);
@@ -52,26 +41,22 @@ class ContainerComponent extends React.Component {
 
     //todo sacar este if distribuyendo en coponentes y que se maneje todo por estado
     if (program.errors.length == 0) {
-      program.consistencyPromise().then(res => {
+      program.consistencyPromise().then(inconsistencies => {
+
+        console.log("inconsistency");
+        console.log(inconsistencies);
+
+
         console.log("Parsed Program without ncs and egds:");
         console.log(program.toStringWithoutNcsAndEgds);
 
-        axios
-          .get("http://localhost:8080/iris/test", {
-            params: {
-              test: JSON.stringify({
-                program: program.toStringWithoutNcsAndEgds()
-              })
-            }
-          })
+        executeQuery(program.toStringWithoutNcsAndEgds())
           .then(res => {
             console.log("Query results:");
             console.log(res.data);
             this.setState({ results: res.data });
           });
       });
-    } else {
-      this.setState({ results: [] });
     }
   }
 
@@ -80,7 +65,7 @@ class ContainerComponent extends React.Component {
     var textAreaStyle = { resize: "vertical" };
     return (
       <>
-        <AlertDismissable
+        <ErrorSyntaxAlert
           programText={this.state.programText}
           errors={this.program ? this.state.program.errors : []}
           visible={this.state.program && this.state.program.errors.length > 0}
@@ -107,7 +92,11 @@ class ContainerComponent extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col>{this.renderResults()}</Col>
+            <Col>
+            <Results 
+              data={this.state.program && this.state.program.errors.length == 0 && this.state.results} 
+              visible={this.state.program && this.state.program.errors == 0} />
+          </Col>
           </Row>
         </Container>
       </>

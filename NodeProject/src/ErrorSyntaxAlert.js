@@ -2,7 +2,7 @@ import React from "react";
 import { parse } from "./parser/parser";
 import { Alert } from "react-bootstrap";
 
-export function AlertDismissable(props) {
+export function ErrorSyntaxAlert(props) {
   if (!props.visible) return null;
   const lines = props.programText.split("\n");
   const errorLineNumbers = parse(props.programText).errors.map(
@@ -27,7 +27,7 @@ export function AlertDismissable(props) {
   };
 
   return (
-    <Alert dismissible variant="danger">
+    <Alert variant="danger">
       <Alert.Heading>Please correct the lines marked in red:</Alert.Heading>
       {appendLines()}
     </Alert>

@@ -4,7 +4,7 @@ import * as ncModule from "./ncBuilder";
 import * as egdModule from "./egdBuilder";
 import * as factModule from "./factBuilder";
 import * as queryModule from "./queryBuilder";
-import axios from "axios";
+import { executeQuery } from "../IrisCaller";
 
 
 export function parse (program){
@@ -17,7 +17,6 @@ export function parse (program){
 	var errors = [];
 	
 	var lines = program.split('\n');
-	debugger
 
 	var regexAndBuilders = [
 		{regEx: regExModule.service.tgdRegEx, builder: tgdModule.builder, properties: tgds },
@@ -69,12 +68,7 @@ export function parse (program){
 					var currentProgram = this;
 					var getProm = function(nc) {
 						return new Promise(resolve => {
-							axios
-							.get("http://localhost:8080/iris/test", {
-							  params: {
-								test: JSON.stringify({ program: toStringForNc(currentProgram, nc) })
-							  }
-							})
+							executeQuery(toStringForNc(currentProgram, nc))
 							.then(res => {
 								result.push({nc: nc, result: res.data })
 								resolve(result);								
