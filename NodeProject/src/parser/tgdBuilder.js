@@ -48,7 +48,8 @@ function _builder() {
 				isGuarded: isGuarded,
 				toString: function () {
 					return [this.head.predicate.toString(), " :- ", this.body.toString(), "."].join("");
-				}
+				},
+				type : isGuarded ? "GUARDED_TGD" : "UNAGARDED_TGD" 
 			}
 		}
 	}

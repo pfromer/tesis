@@ -13,7 +13,8 @@ function _builder(){
 					},
 					toStringAsQuery : function(){
 						return queryModule.builder.build("?-" + this.body.toString()).toString();
-					}
+					},
+					type : "NC"
 					
 				}
 		}

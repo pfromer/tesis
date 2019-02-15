@@ -4,27 +4,24 @@ import { Alert } from "react-bootstrap";
 
 export function ErrorSyntaxAlert(props) {
   if (!props.visible) return null;
-  const lines = props.programText.split("\n");
-  const errorLineNumbers = parse(props.programText).errors.map(
-    a => a.lineNumber
-  );
-  var errorStyle = { color: "red" };
 
-  var htmlLines = [];
+
+  var program =  parse(props.programText);
+
+  const errorColors = { "SYNTAX_ERROR" : "red", "UNAGARDED_TGD" : "blue"};
+
+  const getColorByLineType = function(lineType){
+    var color = errorColors[lineType];
+    return color ? color : "black";
+  }
 
   const appendLines = () => {
-    for (var i = 0; i < lines.length; i++) {
-      if (errorLineNumbers.includes(i)) {
-        htmlLines.push(<div style={errorStyle}>{lines[i]}</div>);
-      } else {
-        htmlLines.push(<div>{lines[i]}</div>);
-      }
-      if (/^ *$/.test(lines[i])) {
-        htmlLines.push(<br />);
-      }
+    var htmlLines = [];
+    for (var i = 0; i < program.programStructure.length; i++) {
+        htmlLines.push(<div style={({color : getColorByLineType(program.programStructure[i].type)})}>{program.programStructure[i].text}</div>);
+      } 
+      return htmlLines;
     }
-    return htmlLines;
-  };
 
   return (
     <Alert variant="danger">
@@ -32,4 +29,5 @@ export function ErrorSyntaxAlert(props) {
       {appendLines()}
     </Alert>
   );
+  
 }

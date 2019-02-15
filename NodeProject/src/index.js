@@ -42,7 +42,7 @@ class ContainerComponent extends React.Component {
     });
 
 
-    if (program.errors.length == 0) {
+    if (program.errors.length == 0 && program.isGuarded) {
       program.consistencyPromise().then(inconsistencies => {
 
         console.log("inconsistency");
@@ -78,7 +78,7 @@ class ContainerComponent extends React.Component {
         <ErrorSyntaxAlert
           programText={this.state.programText}
           errors={this.program ? this.state.program.errors : []}
-          visible={this.state.program && this.state.program.errors.length > 0}
+          visible={this.state.program && (this.state.program.errors.length > 0 || this.state.program.ungardedTgds().length != 0)}
         />
         <Container>
           <Row>

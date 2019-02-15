@@ -18,25 +18,33 @@ export function parse (program){
 	
 	var lines = program.split('\n');
 
+	var programStructure = []
+
 	var regexAndBuilders = [
-		{regEx: regExModule.service.tgdRegEx, builder: tgdModule.builder, properties: tgds },
-		{regEx: regExModule.service.ncRegEx, builder: ncModule.builder, properties: ncs  },
-		{regEx: regExModule.service.egdRegEx, builder: egdModule.builder, properties: egds },
-		{regEx: regExModule.service.factRegEx, builder: factModule.builder, properties: facts },
-		{regEx: regExModule.service.queryRegEx, builder: queryModule.builder, properties: queries }
+		{regEx: regExModule.service.tgdRegEx, builder: tgdModule.builder, collection: tgds },
+		{regEx: regExModule.service.ncRegEx, builder: ncModule.builder, collection: ncs  },
+		{regEx: regExModule.service.egdRegEx, builder: egdModule.builder, collection: egds },
+		{regEx: regExModule.service.factRegEx, builder: factModule.builder, collection: facts },
+		{regEx: regExModule.service.queryRegEx, builder: queryModule.builder, collection: queries }
 	]
 
 	for(var i = 0;i < lines.length;i++){
 		var matched = false;
-		regexAndBuilders.forEach(function (regexAndBuilders) {			
-			if(regexAndBuilders.regEx.test(lines[i].trim())) {
-				regexAndBuilders.properties.push(regexAndBuilders.builder.build(lines[i]));
-				matched = true;			
+		regexAndBuilders.forEach(function (regexAndBuilder) {			
+			if(regexAndBuilder.regEx.test(lines[i].trim())) {
+				var lineAsObject = Object.assign({lineNumber : i}, regexAndBuilder.builder.build(lines[i]));
+				regexAndBuilder.collection.push(lineAsObject);
+				matched = true;
+				programStructure.push({text: lines[i], type: lineAsObject.type})			
 			}
 		});
 		if(!matched){
 			if(!regExModule.service.whiteSpacesRegEx.test(lines[i])) {
-				errors.push({lineNumber : i, type : 'Invalid Line', text: lines[i]})
+				errors.push({lineNumber : i, text: lines[i]})
+				programStructure.push({text: lines[i], type: "SYNTAX_ERROR"})
+			}
+			else{
+				programStructure.push({text: " ", type: "EMPTY_LINE"})
 			}
 		}
 	}
@@ -51,7 +59,9 @@ export function parse (program){
 				ncs : ncs,
 				egds: egds,
 				queries : queries, 
-				facts: facts, 
+				facts: facts,
+				programStructure : programStructure,
+				ungardedTgds : function() { return this.tgds.filter(t => !t.isGuarded)}, 
 				isGuarded : function() { return this.tgds.every(t => t.isGuarded)},
 				isLinear : function() { return this.tgds.every(t => t.body.predicates.length == 1)}, 
 				toString : function(){

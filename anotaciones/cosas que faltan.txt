@@ -4,3 +4,5 @@ entender porque la query que se cuelga
 equalities en las queries
 
 queries como en las diapos: consulta conjuntiva, consulta conjuntiva booleana
+
+las NC y EGDS tienen que ser guarded, checkear

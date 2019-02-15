@@ -21,7 +21,8 @@ function _builder(){
 								this.body.toString(),
 								"."
 								].join("");		
-					}
+					},
+					type : "EGD"
 				}
 			}
 		}

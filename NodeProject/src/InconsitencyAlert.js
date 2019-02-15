@@ -9,9 +9,11 @@ export function InconsistencyAlert(props) {
 
   return (
     <Alert variant="danger">
-      <Alert.Heading>The following negative constraints are not fulfilled by your program.</Alert.Heading>
+      <Alert.Heading>
+        The following negative constraints are not fulfilled by your program.
+      </Alert.Heading>
       {props.inconsistencies.map(inconsistency => (
-          <OverlayTrigger
+        <OverlayTrigger
           trigger="hover"
           placement="right"
           key={inconsistency.nc.toString()}
@@ -20,28 +22,10 @@ export function InconsistencyAlert(props) {
               <Results visible={true} data={inconsistency.result} />
             </Popover>
           }
-          >
+        >
           <div>{inconsistency.nc.toString()}</div>
-          </OverlayTrigger>
-                      
-                    ))}
+        </OverlayTrigger>
+      ))}
     </Alert>
   );
 }
-
-/*
-<OverlayTrigger
-trigger="hover"
-key={inconsistency.nc.toString()}
-overlay={
-  <Popover>
-    <strong>Holy guacamole!</strong> Check this info.
-  </Popover>
-}
->
-<div>{inconsistency.nc.toString()}</div>
-</OverlayTrigger>
-
-*/
-
-//<div>{inconsistency.nc.toString()}</div>

@@ -9,7 +9,8 @@ function _builder(){
 			return {		
 				name : predicate.name,
 				parameters : predicate.parameters,
-				toString : function(){ return [predicate.toString(), "."].join("") }
+				toString : function(){ return [predicate.toString(), "."].join("") },
+				type : "FACT"
 			}
 		}
 	}
