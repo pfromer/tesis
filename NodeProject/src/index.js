@@ -53,8 +53,9 @@ class ContainerComponent extends React.Component {
 
         console.log("Parsed Program without ncs and egds:");
         console.log(program.toStringWithoutNcsAndEgds);
+        debugger
 
-        if(!inconsistencies){
+        if(!inconsistencies || !inconsistencies.some(i => i.result.some(r => r.Results.length>0))){
           executeQuery(program.toStringWithoutNcsAndEgds())
           .then(res => {
             console.log("Query results:");
@@ -73,7 +74,7 @@ class ContainerComponent extends React.Component {
       <>
 
         <InconsistencyAlert
-          inconsistencies={this.state.inconsistencies}
+          inconsistencies={this.state.inconsistencies.filter(i => i.result.some(r => r.Results.length>0))}
         />
         <ErrorSyntaxAlert
           programText={this.state.programText}
@@ -105,7 +106,7 @@ class ContainerComponent extends React.Component {
             <Col>
             <Results 
               data={this.state.program && this.state.program.errors.length == 0 && this.state.results} 
-              visible={this.state.program && this.state.program.errors == 0 && this.state.inconsistencies.length == 0} />
+              visible={this.state.program && this.state.program.errors == 0 && (this.state.inconsistencies.length == 0 || !this.state.inconsistencies.some(i => i.result.some(r => r.Results.length>0)))} />
           </Col>
           </Row>
         </Container>

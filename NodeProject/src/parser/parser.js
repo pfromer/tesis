@@ -80,7 +80,6 @@ export function parse (program){
 						return new Promise(resolve => {
 							executeQuery(toStringForNc(currentProgram, nc))
 							.then(res => {
-								debugger
 								result.push({nc: nc, result: res.data })
 								resolve(result);								
 							});
