@@ -1,4 +1,6 @@
-egds nos conflicting, generan conocimiento? las puedo tratar como negative constraints?
+egds nos conflicting, generan conocimiento? las puedo tratar como negative constraints? (mirar pagina 22 del paper de datalog)
+del paper de datalog no entiendo el teorema 11, porque dice "or" y "some"?
+
 negacion de atomos
 entender porque la query que se cuelga
 equalities en las queries
@@ -6,3 +8,20 @@ equalities en las queries
 queries como en las diapos: consulta conjuntiva, consulta conjuntiva booleana
 
 las NC y EGDS tienen que ser guarded, checkear
+
+que onda los atributos de dl lite a?
+tengo que considerar esos posibles valores en mi parser?
+fijarse los buil in predicates
+
+puedo hacer egds que tengna en el body diferentes predicados?
+
+si dl lite a es estrictamente menor que guarded data log pero el paper de inconsistencia habla sobre dl lite a, como me puedo
+asegurar que sirve para datalog?
+
+
+como se traduce el hecho de la insconsistencia en una NC a las 5 posibles formas de que haya una inconsistencia
+descriptas en el paper de inconsistencia?
+
+como se traduce una NG a dl lite a?
+las NC son expresables en dl lite a?
+
