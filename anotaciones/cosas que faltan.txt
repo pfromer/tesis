@@ -25,3 +25,6 @@ descriptas en el paper de inconsistencia?
 como se traduce una NG a dl lite a?
 las NC son expresables en dl lite a?
 
+entender pagina 28 del paper de datalog y como traducir de dl lite. 
+el parrafo que empieza con Every knowledge base KB in DL-LiteS
+
