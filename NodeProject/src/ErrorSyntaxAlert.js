@@ -5,8 +5,14 @@ import { Alert } from "react-bootstrap";
 export function ErrorSyntaxAlert(props) {
   if (!props.visible) return null;
 
-
   var program =  parse(props.programText);
+
+  var thereAreSyntaxErrors = program.programStructure.some(l => l.type == "SYNTAX_ERROR");
+  var thereAreUngardedTgds = program.programStructure.some(l => l.type == "UNAGARDED_TGD");
+  var somethingIsWrong = thereAreSyntaxErrors || thereAreUngardedTgds;
+
+  if(!somethingIsWrong) return null;
+
 
   const errorColors = { "SYNTAX_ERROR" : "red", "UNAGARDED_TGD" : "blue"};
 
@@ -22,10 +28,22 @@ export function ErrorSyntaxAlert(props) {
       } 
       return htmlLines;
     }
+   
+
 
   return (
+
     <Alert variant="danger">
-      <Alert.Heading>Please correct the lines marked in red:</Alert.Heading>
+      { thereAreSyntaxErrors &&
+          <Alert.Heading >
+            Please correct the syntax errors marked in red:
+          </Alert.Heading>
+      }
+      { thereAreUngardedTgds &&
+          <Alert.Heading >
+            Please correct the ungarded TGDS marked in blue:
+          </Alert.Heading>
+      }     
       {appendLines()}
     </Alert>
   );

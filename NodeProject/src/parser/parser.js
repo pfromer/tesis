@@ -27,7 +27,7 @@ export function parse (program){
 		{regEx: regExModule.service.factRegEx, builder: factModule.builder, collection: facts },
 		{regEx: regExModule.service.queryRegEx, builder: queryModule.builder, collection: queries }
 	]
-
+	debugger;
 	for(var i = 0;i < lines.length;i++){
 		var matched = false;
 		regexAndBuilders.forEach(function (regexAndBuilder) {			
