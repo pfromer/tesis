@@ -12,6 +12,12 @@ import { Results } from "./QueryResult";
 import { executeQuery } from "./IrisCaller";
 import { InconsistencyAlert } from "./InconsitencyAlert";
 import { LoadProgramButton } from "./LoadProgramButton";
+import {UnControlled as CodeMirror} from 'react-codemirror2'
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/material.css';
+require('codemirror/mode/xml/xml');
+require('codemirror/mode/javascript/javascript');
+
 
 class ContainerComponent extends React.Component {
   constructor(props) {
@@ -78,6 +84,17 @@ class ContainerComponent extends React.Component {
     var textAreaStyle = { resize: "vertical" };
     return (
       <>
+
+      <CodeMirror
+        value='<h1>I ♥ react-codemirror2</h1>'
+        options={{
+          mode: 'xml',
+          theme: 'material',
+          lineNumbers: true
+        }}
+        onChange={(editor, data, value) => {
+        }}
+      />
 
         <InconsistencyAlert
           inconsistencies={this.state.inconsistencies.filter(i => i.result.some(r => r.Results.length>0))}
