@@ -6,6 +6,7 @@ export function ErrorSyntaxAlert(props) {
   if (!props.visible) return null;
 
   var program =  parse(props.programText);
+  debugger
 
   var thereAreSyntaxErrors = program.programStructure.some(l => l.type == "SYNTAX_ERROR");
   var thereAreUngardedTgds = program.programStructure.some(l => l.type == "UNAGARDED_TGD");

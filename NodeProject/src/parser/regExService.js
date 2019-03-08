@@ -21,7 +21,7 @@ function _service(){
 		withinPredicateRegEx : withinPredicateRegEx,
 		tgdRegEx : new RegExp('^' + withinPredicateRegEx.source + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$"),
 		ncRegEx : new RegExp('^' + bottomRegEx.source + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$"),
-		egdRegEx : new RegExp('^' + repeatAndSeparateByComma(new RegExp(variableOrConstantRegEx.source + "\\s*=\\s*" + variableOrConstantRegEx.source)).source  + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$"),
+		egdRegEx : new RegExp('^' + repeatAndSeparateByComma(new RegExp(variableRegEx.source + "\\s*=\\s*" + variableRegEx.source)).source  + "\\s*:-\\s*" + withinPredicateRegEx.source + "\\s*,\\s*" +  withinPredicateRegEx.source + "\\.$"),
 		factRegEx : factRegEx,
 		queryRegEx : queryRegEx,
 		arrayOfMatches : function(regEx, _text){

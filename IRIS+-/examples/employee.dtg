@@ -1,4 +1,5 @@
 employee(?m) :- manager(?m).
+sdfsadf
 directs(?m, ?p) :- manager(?m).
 manager(?e) :- employee(?e), directs(?e, ?p).
 supervises(?e, ?e2) :- manager(?e), employee(?e), directs(?e, ?p).
@@ -11,4 +12,4 @@ supervises('jo', 'ada').
 employee('ada').
 works_in('ada', 'finance').
 
-?- employee(?X).
+?- employee(?x).

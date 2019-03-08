@@ -11,6 +11,7 @@ import { ErrorSyntaxAlert } from "./ErrorSyntaxAlert";
 import { Results } from "./QueryResult";
 import { executeQuery } from "./IrisCaller";
 import { InconsistencyAlert } from "./InconsitencyAlert";
+import { LoadProgramButton } from "./LoadProgramButton";
 
 class ContainerComponent extends React.Component {
   constructor(props) {
@@ -25,11 +26,17 @@ class ContainerComponent extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.onFileLoaded = this.onFileLoaded.bind(this);
+  }
+
+
+  onFileLoaded(content){
+    this.setState({program: parse(content), programText: content})
   }
 
   handleChange(event) {
     this.setState({ programText: event.target.value });
-  }
+  } 
 
   handleSubmit(event) {
     event.preventDefault();
@@ -53,7 +60,6 @@ class ContainerComponent extends React.Component {
 
         console.log("Parsed Program without ncs and egds:");
         console.log(program.toStringWithoutNcsAndEgds);
-        debugger
 
         if(!inconsistencies || !inconsistencies.some(i => i.result.some(r => r.Results.length>0))){
           executeQuery(program.toStringWithoutNcsAndEgds())
@@ -82,33 +88,82 @@ class ContainerComponent extends React.Component {
           visible={this.state.program && (this.state.program.errors.length > 0 || this.state.program.ungardedTgds().length != 0)}
         />
         <Container>
-          <Row>
-            <Col>
-              <Form onSubmit={this.handleSubmit}>
+        <Row>
+          <Col>
+          <Form onSubmit={this.handleSubmit}>
+              <Form.Row>
+                <Col>
                 <Form.Group controlId="exampleForm.ControlTextarea">
-                  <Form.Label>Datalog Program</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows="10"
-                    onChange={this.handleChange}
-                    style={textAreaStyle}
-                  />
+                    <Form.Label>Datalog Program</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows="10"
+                      onChange={this.handleChange}
+                      style={textAreaStyle}
+                      />
                 </Form.Group>
-                <Form.Group>
-                  <Button type="submit" variant="info" style={buttonStyle}>
-                    Execute
-                  </Button>
-                </Form.Group>
-              </Form>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
+                <Form.Row>
+                    <Col>
+                    <LoadProgramButton onFileLoaded={this.onFileLoaded}/>
+                      <Form.Group>
+                        <Button type="submit" variant="info" style={buttonStyle}>
+                        Check Syntax
+                        </Button>
+                      </Form.Group>
+                    </Col> 
+                </Form.Row>
+                <Form.Row>
+                    <Col>
+                    <Form.Group>
+                      <Button type="submit" variant="info" style={buttonStyle}>
+                      Check Constraints
+                      </Button>
+                    </Form.Group>
+                    </Col>
+                    <Col>
+                    <Form.Group>
+                      <Button type="submit" variant="info" style={buttonStyle}>
+                      Check Datalog fragment
+                      </Button>
+                    </Form.Group>
+                    </Col>     
+                </Form.Row>
+                </Col>                
+                <Col>
+                <Form.Row>
+                  <Col>
+                    <Form.Group controlId="exampleForm.ControlTextarea2">
+                        <Form.Label>Queries</Form.Label>
+                        <Form.Control
+                          as="textarea"
+                          rows="10"
+                          style={textAreaStyle}
+                          />
+                    </Form.Group>
+                  </Col>
+                </Form.Row>
+                <Form.Row>
+                  <Col>
+                  <Form.Group>
+                    <Button type="submit" variant="info" style={buttonStyle}>
+                    Execute Queries
+                    </Button>
+                  </Form.Group>
+                  </Col>
+                </Form.Row>                
+                </Col>
+              </Form.Row>             
+          </Form>
+          </Col>            
+        </Row>
+        <Row>
+          <Col>
             <Results 
               data={this.state.program && this.state.program.errors.length == 0 && this.state.results} 
-              visible={this.state.program && this.state.program.errors == 0 && (this.state.inconsistencies.length == 0 || !this.state.inconsistencies.some(i => i.result.some(r => r.Results.length>0)))} />
+              visible={this.state.program && this.state.program.errors == 0 && (this.state.inconsistencies.length == 0 || !this.state.inconsistencies.some(i => i.result.some(r => r.Results.length>0)))} 
+            />
           </Col>
-          </Row>
+        </Row>
         </Container>
       </>
     );
