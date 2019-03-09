@@ -4,8 +4,12 @@ import { OverlayTrigger } from "react-bootstrap";
 import { Popover } from "react-bootstrap";
 import { Results } from "./QueryResult";
 
+
+
+
 export function InconsistencyAlert(props) {
-  if (props.inconsistencies.length == 0) return null;
+  // if (props.inconsistencies.length == 0) 
+  return null;
 
   return (
     <Alert variant="danger">

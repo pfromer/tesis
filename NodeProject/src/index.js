@@ -7,17 +7,13 @@ import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import * as serviceWorker from "./serviceWorker";
 import { parse } from "./parser/parser";
-import { ErrorSyntaxAlert } from "./ErrorSyntaxAlert";
 import { Results } from "./QueryResult";
 import { executeQuery } from "./IrisCaller";
 import { InconsistencyAlert } from "./InconsitencyAlert";
 import { LoadProgramButton } from "./LoadProgramButton";
-import {UnControlled as CodeMirror} from 'react-codemirror2'
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/material.css';
-require('codemirror/mode/xml/xml');
-require('codemirror/mode/javascript/javascript');
-
+import { Editor } from "./Editor";
+import * as regExModule from "./parser/regExService";
+import * as tgdModule from "./parser/tgdBuilder";
 
 class ContainerComponent extends React.Component {
   constructor(props) {
@@ -27,14 +23,44 @@ class ContainerComponent extends React.Component {
       programText: "",
       results: [],
       program: undefined,
-      inconsistencies: []
+      inconsistencies: [],
+      programEditorInstance: undefined
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.onFileLoaded = this.onFileLoaded.bind(this);
+    this.setProgramEditorInstace = this.setProgramEditorInstace.bind(this);
+    this.checkDatalogFragment = this.checkDatalogFragment.bind(this);
+    this.updateUngardedClass = this.updateUngardedClass.bind(this);
   }
 
+  setProgramEditorInstace(editor){
+    this.setState({programEditorInstance: editor})
+  }
+
+  checkDatalogFragment(editor){
+    var lineNumber = 0;
+    var lineInfo = this.state.programEditorInstance.lineInfo(lineNumber);
+    while(lineInfo){
+        this.updateUngardedClass(lineInfo.text, lineNumber);
+        lineNumber ++;
+        lineInfo = this.state.programEditorInstance.lineInfo(lineNumber);
+    }
+  }
+
+  updateUngardedClass(text, lineNumber){
+    if(regExModule.service.tgdRegEx.test(text))
+    {
+      var tgd = tgdModule.builder.build(text);
+      if(!tgd.isGuarded){
+        this.state.programEditorInstance.addLineClass(lineNumber, "gutter", "ungarded-tgd");
+      }
+      else{
+        this.state.programEditorInstance.removeLineClass(lineNumber, "gutter", "ungarded-tgd");
+      }
+    }
+  }
 
   onFileLoaded(content){
     this.setState({program: parse(content), programText: content})
@@ -62,8 +88,6 @@ class ContainerComponent extends React.Component {
         console.log(inconsistencies);
         this.setState({ inconsistencies: inconsistencies ? inconsistencies : [] });
 
-
-
         console.log("Parsed Program without ncs and egds:");
         console.log(program.toStringWithoutNcsAndEgds);
 
@@ -84,25 +108,8 @@ class ContainerComponent extends React.Component {
     var textAreaStyle = { resize: "vertical" };
     return (
       <>
-
-      <CodeMirror
-        value='<h1>I ♥ react-codemirror2</h1>'
-        options={{
-          mode: 'xml',
-          theme: 'material',
-          lineNumbers: true
-        }}
-        onChange={(editor, data, value) => {
-        }}
-      />
-
         <InconsistencyAlert
           inconsistencies={this.state.inconsistencies.filter(i => i.result.some(r => r.Results.length>0))}
-        />
-        <ErrorSyntaxAlert
-          programText={this.state.programText}
-          errors={this.program ? this.state.program.errors : []}
-          visible={this.state.program && (this.state.program.errors.length > 0 || this.state.program.ungardedTgds().length != 0)}
         />
         <Container>
         <Row>
@@ -112,34 +119,27 @@ class ContainerComponent extends React.Component {
                 <Col>
                 <Form.Group controlId="exampleForm.ControlTextarea">
                     <Form.Label>Datalog Program</Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      rows="10"
-                      onChange={this.handleChange}
-                      style={textAreaStyle}
-                      />
-                </Form.Group>
+                      <Editor
+                          text={this.state.programText}
+                          setInstance={this.setProgramEditorInstace}
+                        />             
+                </Form.Group>                
                 <Form.Row>
                     <Col>
-                    <LoadProgramButton onFileLoaded={this.onFileLoaded}/>
-                      <Form.Group>
-                        <Button type="submit" variant="info" style={buttonStyle}>
-                        Check Syntax
-                        </Button>
-                      </Form.Group>
+                    <LoadProgramButton onFileLoaded={this.onFileLoaded}/>                      
                     </Col> 
                 </Form.Row>
                 <Form.Row>
                     <Col>
                     <Form.Group>
-                      <Button type="submit" variant="info" style={buttonStyle}>
+                      <Button  type="button" variant="info" style={buttonStyle}>
                       Check Constraints
                       </Button>
                     </Form.Group>
                     </Col>
                     <Col>
                     <Form.Group>
-                      <Button type="submit" variant="info" style={buttonStyle}>
+                      <Button onClick={this.checkDatalogFragment} type="button" variant="info" style={buttonStyle}>
                       Check Datalog fragment
                       </Button>
                     </Form.Group>

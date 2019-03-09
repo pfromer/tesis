@@ -31,3 +31,17 @@
     transform: rotate(360deg);
   }
 }
+
+.syntax-error{
+	background-color : red !important;	
+}
+
+.ungarded-tgd{
+	background-color : blue !important;	
+}
+
+.inconsistent-constraint{
+	background-color : green !important;	
+}
+
+
