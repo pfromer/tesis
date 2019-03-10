@@ -1,19 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Container } from "react-bootstrap";
-import { Row } from "react-bootstrap";
-import { Col } from "react-bootstrap";
-import { Form } from "react-bootstrap";
-import { Button } from "react-bootstrap";
 import * as serviceWorker from "./serviceWorker";
 import { parse } from "./parser/parser";
-import { Results } from "./QueryResult";
 import { executeQuery } from "./IrisCaller";
-import { InconsistencyAlert } from "./InconsitencyAlert";
-import { LoadProgramButton } from "./LoadProgramButton";
-import { Editor } from "./Editor";
 import * as regExModule from "./parser/regExService";
 import * as tgdModule from "./parser/tgdBuilder";
+import { MainComponent } from "./MainComponent";
 
 class ContainerComponent extends React.Component {
   constructor(props) {
@@ -113,86 +105,19 @@ class ContainerComponent extends React.Component {
   }
 
   render() {
-    var buttonStyle = { width: "100%" };
-    var textAreaStyle = { resize: "vertical" };
     return (
-      <>
-        <InconsistencyAlert
-          inconsistencies={this.state.inconsistencies.filter(i => i.result.some(r => r.Results.length>0))}
-        />
-        <Container>
-        <Row>
-          <Col>
-          <Form onSubmit={this.handleSubmit}>
-              <Form.Row>
-                <Col>
-                <Form.Group>
-                    <Form.Label>Datalog Program</Form.Label>
-                      <Editor
-                          text={this.state.programText}
-                          setInstance={this.setProgramEditorInstace}
-                          allRegex = {[regExModule.service.tgdRegEx, regExModule.service.ncRegEx, regExModule.service.factRegEx, regExModule.service.whiteSpacesRegEx]}
-                        />             
-                </Form.Group>                
-                <Form.Row>
-                    <Col>
-                    <LoadProgramButton onFileLoaded={this.onFileLoaded}/>                      
-                    </Col> 
-                </Form.Row>
-                <Form.Row>
-                    <Col>
-                    <Form.Group>
-                      <Button  type="button" variant="info" style={buttonStyle}>
-                      Check Constraints
-                      </Button>
-                    </Form.Group>
-                    </Col>
-                    <Col>
-                    <Form.Group>
-                      <Button onClick={this.checkDatalogFragment} type="button" variant="info" style={buttonStyle}>
-                      Check Datalog fragment
-                      </Button>
-                    </Form.Group>
-                    </Col>     
-                </Form.Row>
-                </Col>                
-                <Col>
-                <Form.Row>
-                  <Col>
-                    <Form.Group>
-                        <Form.Label>Queries</Form.Label>
-                        <Editor
-                          text={this.state.queriesText}
-                          setInstance={this.setQueriesEditorInstace}
-                          allRegex = {[regExModule.service.queryRegEx, regExModule.service.whiteSpacesRegEx]}
-                        />  
-                    </Form.Group>
-                  </Col>
-                </Form.Row>
-                <Form.Row>
-                  <Col>
-                  <Form.Group>
-                    <Button type="submit" variant="info" style={buttonStyle}>
-                    Execute Queries
-                    </Button>
-                  </Form.Group>
-                  </Col>
-                </Form.Row>                
-                </Col>
-              </Form.Row>             
-          </Form>
-          </Col>            
-        </Row>
-        <Row>
-          <Col>
-            <Results 
-              data={this.state.program && this.state.program.errors.length == 0 && this.state.results} 
-              visible={this.state.program && this.state.program.errors == 0 && (this.state.inconsistencies.length == 0 || !this.state.inconsistencies.some(i => i.result.some(r => r.Results.length>0)))} 
-            />
-          </Col>
-        </Row>
-        </Container>
-      </>
+    <MainComponent
+      handleSubmit={this.handleSubmit}
+      inconsistencies={this.state.inconsistencies}
+      programText={this.state.programText} 
+      setProgramEditorInstace={this.setProgramEditorInstace} 
+      onFileLoaded={this.onFileLoaded} 
+      checkDatalogFragment={this.checkDatalogFragment} 
+      queriesText={this.state.queriesText} 
+      setQueriesEditorInstace={this.setQueriesEditorInstace} 
+      program={this.state.program} 
+      results={this.state.results} 
+    />
     );
   }
 }
