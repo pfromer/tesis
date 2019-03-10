@@ -32,6 +32,8 @@ class ContainerComponent extends React.Component {
     this.updateUngardedClass = this.updateUngardedClass.bind(this);
     this.onHandleAlertClose = this.onHandleAlertClose.bind(this);
     this.checkConstraints = this.checkConstraints.bind(this); 
+    this.setAlert = this.setAlert.bind(this); 
+    this.markUngardedTgds = this.markUngardedTgds.bind(this); 
   }
 
   onHandleAlertClose(){
@@ -84,50 +86,50 @@ class ContainerComponent extends React.Component {
           lines: []      
         }})
       }
-
     }) 
   }
+  
+  setAlert(program){
+    var alertSettings = 
+      [
+        { 
+          condition:  program.errors.length > 0,
+          heading: '', 
+          lines: ["Please correct the syntax errors in your program first."]
+        },
+        { 
+          condition:  program.isLinear(),
+          heading: '', 
+          lines: ["Your program is in the Linear Fragment."]
+        },
+        { 
+          condition:  program.isGuarded(),
+          heading: '', 
+          lines: ["Your program is in the Guarded Fragment."]
+        },
+        { 
+          condition:  !program.isGuarded(),
+          heading: "Out of the Guarded Fragment.", 
+          lines: ["The lines marked in blue are ungarded TGDs"],
+          callback: this.markUngardedTgds
+        }
+      ];
 
-  checkDatalogFragment(editor){
-    var program = parse(this.state.programEditorInstance.getValue());
-    this.setState({program: program});
-    if(program.errors.length > 0){
+    var setting = alertSettings.find(s => s.condition);
+
+    if(setting){
       this.setState({alert: {
-        lines: ["Please correct the syntax errors in your program first."],
+        lines: setting.lines,
         opened: true,
-        onHandleClick : this.onHandleAlertClose      
+        onHandleClick : this.onHandleAlertClose,
+        heading: setting.condition
       }})
-      return
+
+      if(setting.callback) setting.callback();
     }
+  }
 
-    if(program.isLinear()){
-      this.setState({alert: {
-        lines: ["Your program is in the Linear Fragment."],
-        opened: true,
-        onHandleClick : this.onHandleAlertClose      
-      }})
-      return
-    } 
-
-    if(program.isGuarded()){
-      this.setState({alert: {
-        lines: ["Your program is in the Guarded Fragment."],
-        opened: true,
-        onHandleClick : this.onHandleAlertClose      
-      }})
-      return
-    }
-
-    if(!program.isGuarded()){
-      this.setState({alert: {
-        heading: "Out of the Guarded Fragment.", 
-        lines: ["The lines marked in blue are ungarded TGDs"],
-        opened: true,
-        onHandleClick : this.onHandleAlertClose      
-      }})
-    }
-
-
+  markUngardedTgds(){
     var lineNumber = 0;
     var lineInfo = this.state.programEditorInstance.lineInfo(lineNumber);
     while(lineInfo){
@@ -135,6 +137,12 @@ class ContainerComponent extends React.Component {
         lineNumber ++;
         lineInfo = this.state.programEditorInstance.lineInfo(lineNumber);
     }
+  }
+
+  checkDatalogFragment(editor){
+    var program = parse(this.state.programEditorInstance.getValue());
+    this.setState({program: program});
+    this.setAlert(program);
   }
 
   updateUngardedClass(text, lineNumber){
