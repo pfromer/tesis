@@ -52,7 +52,6 @@ export function parse (program){
 	function toStringForNc(program, nc){
 		return program.tgds.concat(program.facts).concat(nc.toStringAsQuery()).join("\n");
 	}
-	
 
 	return  { 	
 				tgds: tgds, 
@@ -72,9 +71,7 @@ export function parse (program){
 				},
 				errors: errors,
 				consistencyPromise: function(){
-
 					var result = [];
-
 					var currentProgram = this;
 					var getProm = function(nc) {
 						return new Promise(resolve => {
@@ -82,19 +79,23 @@ export function parse (program){
 							.then(res => {
 								result.push({nc: nc, result: res.data })
 								resolve(result);								
-							});
-							
+							});							
 						})
-					}					
-				
+					}
 					let chain = Promise.resolve();
-
 					this.ncs.forEach((nc) => {
 						chain = chain.then(()=>getProm(nc))
-					});	
-				
+					});
 					return chain;
+				},
+				programToString: function(){
+					return this.programStructure.filter(i => i.type != "QUERY").map(i=> i.text).join("\n");
 
+				},
+				queriesToString: function(){
+					return this.queries.filter(i => i.type == "QUERY").map(i=> i.toString()).join("\n");
 				}
+
+
 			};
 }

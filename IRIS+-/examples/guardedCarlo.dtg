@@ -1,7 +1,7 @@
 DIP(?y, ?z) :- IMP(?x, ?y).
 IMP(?y, ?w) :- DIP(?x, ?y).
 
-Q1(?x) :- DIP (?x, ?y).
+Q1(?x) :- DIP(?x, ?y).
 
 DIP('a', 'b').
 

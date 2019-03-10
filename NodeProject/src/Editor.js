@@ -1,7 +1,5 @@
 import React from "react";
 import {UnControlled as CodeMirror} from 'react-codemirror2'
-import * as regExModule from "./parser/regExService";
-import * as tgdModule from "./parser/tgdBuilder";
 import './App.css';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
@@ -12,7 +10,7 @@ export class Editor extends React.Component {
     constructor(props) {
         super(props);
         this.instance = null;
-        this.allRegex = [regExModule.service.tgdRegEx, regExModule.service.ncRegEx, regExModule.service.factRegEx, regExModule.service.whiteSpacesRegEx ];
+        this.allRegex = props.allRegex;         
         this.updateClass = this.updateClass.bind(this);
       }
 

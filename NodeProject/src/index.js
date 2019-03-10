@@ -21,22 +21,29 @@ class ContainerComponent extends React.Component {
 
     this.state = {
       programText: "",
+      queriesText: "",
       results: [],
       program: undefined,
       inconsistencies: [],
-      programEditorInstance: undefined
+      programEditorInstance: undefined,
+      queriesEditorInstace: undefined
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.onFileLoaded = this.onFileLoaded.bind(this);
     this.setProgramEditorInstace = this.setProgramEditorInstace.bind(this);
+    this.setQueriesEditorInstace = this.setQueriesEditorInstace.bind(this);    
     this.checkDatalogFragment = this.checkDatalogFragment.bind(this);
     this.updateUngardedClass = this.updateUngardedClass.bind(this);
   }
 
   setProgramEditorInstace(editor){
     this.setState({programEditorInstance: editor})
+  }
+
+  setQueriesEditorInstace(editor){
+    this.setState({queriesEditorInstace: editor})
   }
 
   checkDatalogFragment(editor){
@@ -63,7 +70,8 @@ class ContainerComponent extends React.Component {
   }
 
   onFileLoaded(content){
-    this.setState({program: parse(content), programText: content})
+    var program = parse(content);
+    this.setState({programText: program.programToString(), queriesText: program.queriesToString()})
   }
 
   handleChange(event) {
@@ -72,7 +80,8 @@ class ContainerComponent extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    var program = parse(this.state.programText);
+    var program = parse(this.state.programEditorInstance.getValue() + "\n" + this.state.queriesEditorInstace.getValue());
+    debugger
     console.log("Parsed Program:");
     console.log(program);
 
@@ -117,11 +126,12 @@ class ContainerComponent extends React.Component {
           <Form onSubmit={this.handleSubmit}>
               <Form.Row>
                 <Col>
-                <Form.Group controlId="exampleForm.ControlTextarea">
+                <Form.Group>
                     <Form.Label>Datalog Program</Form.Label>
                       <Editor
                           text={this.state.programText}
                           setInstance={this.setProgramEditorInstace}
+                          allRegex = {[regExModule.service.tgdRegEx, regExModule.service.ncRegEx, regExModule.service.factRegEx, regExModule.service.whiteSpacesRegEx]}
                         />             
                 </Form.Group>                
                 <Form.Row>
@@ -149,13 +159,13 @@ class ContainerComponent extends React.Component {
                 <Col>
                 <Form.Row>
                   <Col>
-                    <Form.Group controlId="exampleForm.ControlTextarea2">
+                    <Form.Group>
                         <Form.Label>Queries</Form.Label>
-                        <Form.Control
-                          as="textarea"
-                          rows="10"
-                          style={textAreaStyle}
-                          />
+                        <Editor
+                          text={this.state.queriesText}
+                          setInstance={this.setQueriesEditorInstace}
+                          allRegex = {[regExModule.service.queryRegEx, regExModule.service.whiteSpacesRegEx]}
+                        />  
                     </Form.Group>
                   </Col>
                 </Form.Row>
