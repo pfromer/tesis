@@ -17,10 +17,10 @@ export class Editor extends React.Component {
       updateClass(text, lineNumber){
         if(!this.allRegex.some(r => r.test(text)))
         {
-            this.instance.addLineClass(lineNumber, "gutter", "syntax-error")
+            this.instance.addLineClass(lineNumber, "text", "syntax-error")
         }
         else{
-            this.instance.removeLineClass(lineNumber, "gutter", "syntax-error")
+            this.instance.removeLineClass(lineNumber, "text", "syntax-error")
         }
       }
 

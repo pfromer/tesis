@@ -35,16 +35,16 @@ export function parse (program){
 				var lineAsObject = Object.assign({lineNumber : i}, regexAndBuilder.builder.build(lines[i]));
 				regexAndBuilder.collection.push(lineAsObject);
 				matched = true;
-				programStructure.push({text: lines[i], type: lineAsObject.type})			
+				programStructure.push({text: lines[i], type: lineAsObject.type, index: i})			
 			}
 		});
 		if(!matched){
 			if(!regExModule.service.whiteSpacesRegEx.test(lines[i])) {
 				errors.push({lineNumber : i, text: lines[i]})
-				programStructure.push({text: lines[i], type: "SYNTAX_ERROR"})
+				programStructure.push({text: lines[i], type: "SYNTAX_ERROR", index : i})
 			}
 			else{
-				programStructure.push({text: " ", type: "EMPTY_LINE"})
+				programStructure.push({text: " ", type: "EMPTY_LINE", index : i})
 			}
 		}
 	}

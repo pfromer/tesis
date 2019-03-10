@@ -5,6 +5,7 @@ import { parse } from "./parser/parser";
 import { submit } from "./querySubmitter";
 import * as regExModule from "./parser/regExService";
 import * as tgdModule from "./parser/tgdBuilder";
+import * as ncModule from "./parser/ncBuilder";
 import { MainComponent } from "./MainComponent";
 
 class ContainerComponent extends React.Component {
@@ -30,7 +31,7 @@ class ContainerComponent extends React.Component {
     this.checkDatalogFragment = this.checkDatalogFragment.bind(this);
     this.updateUngardedClass = this.updateUngardedClass.bind(this);
     this.onHandleAlertClose = this.onHandleAlertClose.bind(this);
-    
+    this.checkConstraints = this.checkConstraints.bind(this); 
   }
 
   onHandleAlertClose(){
@@ -45,12 +46,54 @@ class ContainerComponent extends React.Component {
     this.setState({queriesEditorInstace: editor})
   }
 
+  checkConstraints(){
+    var currentState = this.state;
+    var program = parse(this.state.programEditorInstance.getValue());
+    var showInconsitencyAlert;
+    program.consistencyPromise().then(inconsistencies => {
+      var lines = program.programStructure.filter(textLine => textLine.type === "NC");
+      if(inconsistencies){
+      inconsistencies.forEach(inconsitency => {
+          if(inconsitency.result.some(r => r.Results.length>0))
+          {
+            lines.forEach(line => {            
+              if(ncModule.builder.build(line.text).toString() === inconsitency.nc.toString())
+              {
+                showInconsitencyAlert = true;
+                currentState.programEditorInstance.addLineClass(line.index, "text", "inconsistent-constraint");
+              }
+            }  
+            );
+          }    
+        });
+      } 
+      if(showInconsitencyAlert){
+        this.setState({alert: {
+          heading: "Not consistent.", 
+          lines: ["The lines marked in green are not fulfilled by your program.", 
+          "You may execute a query under IAR semantics."],
+          opened: true,
+          onHandleClick : this.onHandleAlertClose      
+        }})
+      }
+      else{
+        this.setState({alert: {
+          heading: "Your program is consistent.", 
+          opened: true,
+          onHandleClick : this.onHandleAlertClose,
+          lines: []      
+        }})
+      }
+
+    }) 
+  }
+
   checkDatalogFragment(editor){
     var program = parse(this.state.programEditorInstance.getValue());
     this.setState({program: program});
     if(program.errors.length > 0){
       this.setState({alert: {
-        text: "Please correct the syntax errors in your program first.",
+        lines: ["Please correct the syntax errors in your program first."],
         opened: true,
         onHandleClick : this.onHandleAlertClose      
       }})
@@ -59,7 +102,7 @@ class ContainerComponent extends React.Component {
 
     if(program.isLinear()){
       this.setState({alert: {
-        text: "Your program is in the Linear Fragment.", 
+        lines: ["Your program is in the Linear Fragment."],
         opened: true,
         onHandleClick : this.onHandleAlertClose      
       }})
@@ -68,7 +111,7 @@ class ContainerComponent extends React.Component {
 
     if(program.isGuarded()){
       this.setState({alert: {
-        text: "Your program is in the Guarded Fragment.", 
+        lines: ["Your program is in the Guarded Fragment."],
         opened: true,
         onHandleClick : this.onHandleAlertClose      
       }})
@@ -78,7 +121,7 @@ class ContainerComponent extends React.Component {
     if(!program.isGuarded()){
       this.setState({alert: {
         heading: "Out of the Guarded Fragment.", 
-        text: "The lines marked in blue are ungarded TGDs", 
+        lines: ["The lines marked in blue are ungarded TGDs"],
         opened: true,
         onHandleClick : this.onHandleAlertClose      
       }})
@@ -99,17 +142,13 @@ class ContainerComponent extends React.Component {
     {
       var tgd = tgdModule.builder.build(text);
       if(!tgd.isGuarded){
-        this.state.programEditorInstance.addLineClass(lineNumber, "gutter", "ungarded-tgd");
+        this.state.programEditorInstance.addLineClass(lineNumber, "text", "ungarded-tgd");
       }
       else{
-        this.state.programEditorInstance.removeLineClass(lineNumber, "gutter", "ungarded-tgd");
+        this.state.programEditorInstance.removeLineClass(lineNumber, "text", "ungarded-tgd");
       }
     }
   }
-
-
-
-
 
   onFileLoaded(content){
     var program = parse(content);
@@ -145,6 +184,7 @@ class ContainerComponent extends React.Component {
       program={this.state.program} 
       results={this.state.results}
       alert={this.state.alert}
+      checkConstraints={this.checkConstraints}
     />
     );
   }

@@ -33,15 +33,15 @@
 }
 
 .syntax-error{
-	background-color : red !important;	
+	color : rgb(247, 129, 129) !important;	
 }
 
 .ungarded-tgd{
-	background-color : blue !important;	
+	color : rgb(171, 171, 241) !important;	
 }
 
 .inconsistent-constraint{
-	background-color : green !important;	
+	color : rgb(134, 240, 134) !important;	
 }
 
 

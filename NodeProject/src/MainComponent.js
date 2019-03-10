@@ -5,7 +5,6 @@ import { Button } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { Results } from "./QueryResult";
-import { InconsistencyAlert } from "./InconsitencyAlert";
 import { LoadProgramButton } from "./LoadProgramButton";
 import { Editor } from "./Editor";
 import { AlertDismissable } from "./AlertDismissable";
@@ -20,12 +19,9 @@ export class MainComponent extends React.Component {
     var buttonStyle = { width: "100%" };
     return (
         <>
-        <InconsistencyAlert
-          inconsistencies={this.props.inconsistencies.filter(i => i.result.some(r => r.Results.length>0))}
-        />
         <AlertDismissable
           opened={this.props.alert.opened}
-          text={this.props.alert.text}
+          lines={this.props.alert.lines}
           heading={this.props.alert.heading}
           onHandleClick={this.props.alert.onHandleClick}
         />
@@ -51,7 +47,7 @@ export class MainComponent extends React.Component {
                 <Form.Row>
                     <Col>
                     <Form.Group>
-                      <Button  type="button" variant="info" style={buttonStyle}>
+                      <Button  onClick={this.props.checkConstraints} type="button" variant="info" style={buttonStyle}>
                       Check Constraints
                       </Button>
                     </Form.Group>
