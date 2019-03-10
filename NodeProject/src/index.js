@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import { parse } from "./parser/parser";
-import { executeQuery } from "./IrisCaller";
+import { submit } from "./querySubmitter";
 import * as regExModule from "./parser/regExService";
 import * as tgdModule from "./parser/tgdBuilder";
 import { MainComponent } from "./MainComponent";
@@ -73,35 +73,12 @@ class ContainerComponent extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     var program = parse(this.state.programEditorInstance.getValue() + "\n" + this.state.queriesEditorInstace.getValue());
-    debugger
     console.log("Parsed Program:");
     console.log(program);
-
     this.setState({
       program: program
     });
-
-
-    if (program.errors.length == 0 && program.isGuarded) {
-      program.consistencyPromise().then(inconsistencies => {
-
-        console.log("inconsistency");
-        console.log(inconsistencies);
-        this.setState({ inconsistencies: inconsistencies ? inconsistencies : [] });
-
-        console.log("Parsed Program without ncs and egds:");
-        console.log(program.toStringWithoutNcsAndEgds);
-
-        if(!inconsistencies || !inconsistencies.some(i => i.result.some(r => r.Results.length>0))){
-          executeQuery(program.toStringWithoutNcsAndEgds())
-          .then(res => {
-            console.log("Query results:");
-            console.log(res.data);
-            this.setState({ results: res.data });
-          });
-        }
-      });
-    }
+    submit(program, this);
   }
 
   render() {
