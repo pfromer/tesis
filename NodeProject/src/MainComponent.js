@@ -8,6 +8,7 @@ import { Results } from "./QueryResult";
 import { InconsistencyAlert } from "./InconsitencyAlert";
 import { LoadProgramButton } from "./LoadProgramButton";
 import { Editor } from "./Editor";
+import { AlertDismissable } from "./AlertDismissable";
 import * as regExModule from "./parser/regExService";
 
 export class MainComponent extends React.Component {
@@ -21,6 +22,12 @@ export class MainComponent extends React.Component {
         <>
         <InconsistencyAlert
           inconsistencies={this.props.inconsistencies.filter(i => i.result.some(r => r.Results.length>0))}
+        />
+        <AlertDismissable
+          opened={this.props.alert.opened}
+          text={this.props.alert.text}
+          heading={this.props.alert.heading}
+          onHandleClick={this.props.alert.onHandleClick}
         />
         <Container>
         <Row>

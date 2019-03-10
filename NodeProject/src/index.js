@@ -18,7 +18,8 @@ class ContainerComponent extends React.Component {
       program: undefined,
       inconsistencies: [],
       programEditorInstance: undefined,
-      queriesEditorInstace: undefined
+      queriesEditorInstace: undefined,
+      alert: {opened: false}
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,7 +29,13 @@ class ContainerComponent extends React.Component {
     this.setQueriesEditorInstace = this.setQueriesEditorInstace.bind(this);    
     this.checkDatalogFragment = this.checkDatalogFragment.bind(this);
     this.updateUngardedClass = this.updateUngardedClass.bind(this);
+    this.onHandleAlertClose = this.onHandleAlertClose.bind(this);
+    
   }
+
+  onHandleAlertClose(){
+    this.setState({alert: {opened: false}})
+  } 
 
   setProgramEditorInstace(editor){
     this.setState({programEditorInstance: editor})
@@ -39,6 +46,45 @@ class ContainerComponent extends React.Component {
   }
 
   checkDatalogFragment(editor){
+    var program = parse(this.state.programEditorInstance.getValue());
+    this.setState({program: program});
+    if(program.errors.length > 0){
+      this.setState({alert: {
+        text: "Please correct the syntax errors in your program first.",
+        opened: true,
+        onHandleClick : this.onHandleAlertClose      
+      }})
+      return
+    }
+
+    if(program.isLinear()){
+      this.setState({alert: {
+        text: "Your program is in the Linear Fragment.", 
+        opened: true,
+        onHandleClick : this.onHandleAlertClose      
+      }})
+      return
+    } 
+
+    if(program.isGuarded()){
+      this.setState({alert: {
+        text: "Your program is in the Guarded Fragment.", 
+        opened: true,
+        onHandleClick : this.onHandleAlertClose      
+      }})
+      return
+    }
+
+    if(!program.isGuarded()){
+      this.setState({alert: {
+        heading: "Out of the Guarded Fragment.", 
+        text: "The lines marked in blue are ungarded TGDs", 
+        opened: true,
+        onHandleClick : this.onHandleAlertClose      
+      }})
+    }
+
+
     var lineNumber = 0;
     var lineInfo = this.state.programEditorInstance.lineInfo(lineNumber);
     while(lineInfo){
@@ -60,6 +106,10 @@ class ContainerComponent extends React.Component {
       }
     }
   }
+
+
+
+
 
   onFileLoaded(content){
     var program = parse(content);
@@ -93,7 +143,8 @@ class ContainerComponent extends React.Component {
       queriesText={this.state.queriesText} 
       setQueriesEditorInstace={this.setQueriesEditorInstace} 
       program={this.state.program} 
-      results={this.state.results} 
+      results={this.state.results}
+      alert={this.state.alert}
     />
     );
   }
