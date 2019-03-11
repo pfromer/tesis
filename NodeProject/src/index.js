@@ -3,11 +3,8 @@ import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import { parse } from "./parser/parser";
 import { setDatalogFragmentAlert } from "./alertService";
-import { setConstraintsAlert } from "./alertService";
+import { checkConstraints } from "./constraintsService";
 import { submit } from "./querySubmitter";
-import * as regExModule from "./parser/regExService";
-import * as tgdModule from "./parser/tgdBuilder";
-import * as ncModule from "./parser/ncBuilder";
 import { MainComponent } from "./MainComponent";
 
 class ContainerComponent extends React.Component {
@@ -58,23 +55,7 @@ class ContainerComponent extends React.Component {
   }
 
   checkConstraints() {
-    var program = parse(this.state.programEditorInstance.getValue());
-    program.consistencyPromise().then(inconsistencies => {
-      if (inconsistencies) {
-        inconsistencies.forEach(inconsitency => {
-          this.state.programEditorInstance.addLineClass(inconsitency.nc.lineNumber, "text", "inconsistent-constraint");
-        });
-      }    
-
-      this.setState({
-          inconsistencies: inconsistencies,
-          program: program
-        },
-        function () {
-          setConstraintsAlert(this);
-        }
-      );  
-    })
+    checkConstraints(this);
   }
 
   checkDatalogFragment() {
