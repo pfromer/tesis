@@ -14,7 +14,10 @@ function _builder(){
 					toStringAsQuery : function(){
 						return queryModule.builder.build("?-" + this.body.toString()).toString();
 					},
-					type : "NC"
+					type : "NC",
+					equals : function(nc){
+						return nc.toString() === this.toString();
+					}
 					
 				}
 		}

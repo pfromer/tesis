@@ -22,110 +22,123 @@ class ContainerComponent extends React.Component {
       inconsistencies: [],
       programEditorInstance: undefined,
       queriesEditorInstace: undefined,
-      alert: {opened: false}
+      alert: {
+        opened: false
+      }
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.onFileLoaded = this.onFileLoaded.bind(this);
     this.setProgramEditorInstace = this.setProgramEditorInstace.bind(this);
-    this.setQueriesEditorInstace = this.setQueriesEditorInstace.bind(this);    
+    this.setQueriesEditorInstace = this.setQueriesEditorInstace.bind(this);
     this.checkDatalogFragment = this.checkDatalogFragment.bind(this);
     this.updateUngardedClass = this.updateUngardedClass.bind(this);
     this.onHandleAlertClose = this.onHandleAlertClose.bind(this);
-    this.checkConstraints = this.checkConstraints.bind(this); 
-    this.markUngardedTgds = this.markUngardedTgds.bind(this); 
+    this.checkConstraints = this.checkConstraints.bind(this);
+    this.markUngardedTgds = this.markUngardedTgds.bind(this);
   }
 
-  onHandleAlertClose(){
-    this.setState({alert: {opened: false}})
-  } 
-
-  setProgramEditorInstace(editor){
-    this.setState({programEditorInstance: editor})
+  onHandleAlertClose() {
+    this.setState({
+      alert: {
+        opened: false
+      }
+    })
   }
 
-  setQueriesEditorInstace(editor){
-    this.setState({queriesEditorInstace: editor})
+  setProgramEditorInstace(editor) {
+    this.setState({
+      programEditorInstance: editor
+    })
   }
 
-  checkConstraints(){
+  setQueriesEditorInstace(editor) {
+    this.setState({
+      queriesEditorInstace: editor
+    })
+  }
+
+  checkConstraints() {
     var program = parse(this.state.programEditorInstance.getValue());
     program.consistencyPromise().then(inconsistencies => {
       var lines = program.programStructure.filter(textLine => textLine.type === "NC");
-      if(inconsistencies){
+        
+      if (inconsistencies) {
         inconsistencies.forEach(inconsitency => {
-          if(inconsitency.result.some(r => r.Results.length>0))
-          {
-            lines.forEach(line => {            
-              if(ncModule.builder.build(line.text).toString() === inconsitency.nc.toString())
-              {
+            lines.forEach(line => {
+              if(ncModule.builder.build(line.text).equals(inconsitency.nc.toString())) {
                 this.state.programEditorInstance.addLineClass(line.index, "text", "inconsistent-constraint");
               }
-            }  
-            );
-          }    
+            });
         });
-        this.setState({inconsistencies: inconsistencies, program: program}, 
-          function(){setDatalogFragmentAlert(this);}  
+
+        this.setState({
+            inconsistencies: inconsistencies,
+            program: program
+          },
+          function () {
+            setConstraintsAlert(this);
+          }
         );
-      }       
-      setConstraintsAlert(this);
-    }) 
+      }      
+    })
   }
 
-
-
-  markUngardedTgds(){
+  markUngardedTgds() {
     var lineNumber = 0;
     var lineInfo = this.state.programEditorInstance.lineInfo(lineNumber);
-    while(lineInfo){
-        this.updateUngardedClass(lineInfo.text, lineNumber);
-        lineNumber ++;
-        lineInfo = this.state.programEditorInstance.lineInfo(lineNumber);
+    while (lineInfo) {
+      this.updateUngardedClass(lineInfo.text, lineNumber);
+      lineNumber++;
+      lineInfo = this.state.programEditorInstance.lineInfo(lineNumber);
     }
   }
 
-  checkDatalogFragment(){
+  checkDatalogFragment() {
     var program = parse(this.state.programEditorInstance.getValue());
-    this.setState({program: program}, 
-      function(){setDatalogFragmentAlert(this);}  
+    this.setState({
+        program: program
+      },
+      function () {
+        setDatalogFragmentAlert(this);
+      }
     );
   }
 
-  updateUngardedClass(text, lineNumber){
-    if(regExModule.service.tgdRegEx.test(text))
-    {
+  updateUngardedClass(text, lineNumber) {
+    if (regExModule.service.tgdRegEx.test(text)) {
       var tgd = tgdModule.builder.build(text);
-      if(!tgd.isGuarded){
+      if (!tgd.isGuarded) {
         this.state.programEditorInstance.addLineClass(lineNumber, "text", "ungarded-tgd");
-      }
-      else{
+      } else {
         this.state.programEditorInstance.removeLineClass(lineNumber, "text", "ungarded-tgd");
       }
     }
   }
 
-  onFileLoaded(content){
+  onFileLoaded(content) {
     var program = parse(content);
-    this.setState({programText: program.programToString(), queriesText: program.queriesToString()})
+    this.setState({
+      programText: program.programToString(),
+      queriesText: program.queriesToString()
+    })
   }
 
   handleChange(event) {
-    this.setState({ programText: event.target.value });
-  } 
+    this.setState({
+      programText: event.target.value
+    });
+  }
 
   handleSubmit(event) {
     event.preventDefault();
     var program = parse(this.state.programEditorInstance.getValue() + "\n" + this.state.queriesEditorInstace.getValue());
-    console.log("Parsed Program:");
-    console.log(program);
     this.setState({
       program: program
     });
     submit(program, this);
   }
-
   render() {
     return (
     <MainComponent

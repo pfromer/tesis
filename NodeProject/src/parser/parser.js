@@ -77,8 +77,10 @@ export function parse (program){
 						return new Promise(resolve => {
 							executeQuery(toStringForNc(currentProgram, nc))
 							.then(res => {
-								result.push({nc: nc, result: res.data })
-								resolve(result);								
+								if(res.data[0].Results.length >0){
+									result.push({nc: nc, result: res.data })
+								}
+								resolve(result);						
 							});							
 						})
 					}
