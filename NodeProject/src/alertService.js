@@ -26,6 +26,11 @@ function getSettings(){
       ],
     checkConstraintsSettings:[
           { 
+            condition: function(component){return component.state.program.errors.length > 0 },
+            heading: '', 
+            lines: ["Please correct the syntax errors in your program first."]
+          },
+          { 
             condition: function(component){return hasInconsistencies(component)},
             heading: "Not consistent.", 
             lines: ["The lines marked in green are not fulfilled by your program.", 

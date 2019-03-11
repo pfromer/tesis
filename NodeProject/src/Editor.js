@@ -12,6 +12,18 @@ export class Editor extends React.Component {
         this.instance = null;
         this.allRegex = props.allRegex;         
         this.updateClass = this.updateClass.bind(this);
+        this.refresh = this.refresh.bind(this);
+      }
+
+      refresh(){
+        var lineNumber = 0;
+        var lineInfo = this.instance.lineInfo(lineNumber);
+        while(lineInfo){
+            this.instance.removeLineClass(lineNumber, "text", "ungarded-tgd");
+            this.instance.removeLineClass(lineNumber, "text", "inconsistent-constraint");
+            lineNumber ++;
+            lineInfo = this.instance.lineInfo(lineNumber);
+        }
       }
 
       updateClass(text, lineNumber){
@@ -36,6 +48,8 @@ export class Editor extends React.Component {
                 lineNumbers: true
             }}
             onChange={(editor, data, value) => {
+
+                this.refresh();
 
                 if(!data.origin || ["undo", "redo"].some(o => o == data.origin))
                 {
