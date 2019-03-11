@@ -1,0 +1,8 @@
+man('homer').
+woman('marge').
+hasSon('homer', 'bart').
+isMale(?x) :- man(?x).
+isFemale(?x) :- woman(?x).
+isMale(?y) :- hasSon(?x,?y).
+
+?- isMale(?x).

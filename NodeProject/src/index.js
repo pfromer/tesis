@@ -33,10 +33,8 @@ class ContainerComponent extends React.Component {
     this.setProgramEditorInstace = this.setProgramEditorInstace.bind(this);
     this.setQueriesEditorInstace = this.setQueriesEditorInstace.bind(this);
     this.checkDatalogFragment = this.checkDatalogFragment.bind(this);
-    this.updateUngardedClass = this.updateUngardedClass.bind(this);
     this.onHandleAlertClose = this.onHandleAlertClose.bind(this);
     this.checkConstraints = this.checkConstraints.bind(this);
-    this.markUngardedTgds = this.markUngardedTgds.bind(this);
   }
 
   onHandleAlertClose() {
@@ -62,15 +60,9 @@ class ContainerComponent extends React.Component {
   checkConstraints() {
     var program = parse(this.state.programEditorInstance.getValue());
     program.consistencyPromise().then(inconsistencies => {
-      var lines = program.programStructure.filter(textLine => textLine.type === "NC");
-        
       if (inconsistencies) {
         inconsistencies.forEach(inconsitency => {
-            lines.forEach(line => {
-              if(ncModule.builder.build(line.text).equals(inconsitency.nc.toString())) {
-                this.state.programEditorInstance.addLineClass(line.index, "text", "inconsistent-constraint");
-              }
-            });
+          this.state.programEditorInstance.addLineClass(inconsitency.nc.lineNumber, "text", "inconsistent-constraint");
         });
       }    
 
@@ -85,16 +77,6 @@ class ContainerComponent extends React.Component {
     })
   }
 
-  markUngardedTgds() {
-    var lineNumber = 0;
-    var lineInfo = this.state.programEditorInstance.lineInfo(lineNumber);
-    while (lineInfo) {
-      this.updateUngardedClass(lineInfo.text, lineNumber);
-      lineNumber++;
-      lineInfo = this.state.programEditorInstance.lineInfo(lineNumber);
-    }
-  }
-
   checkDatalogFragment() {
     var program = parse(this.state.programEditorInstance.getValue());
     this.setState({
@@ -104,17 +86,6 @@ class ContainerComponent extends React.Component {
         setDatalogFragmentAlert(this);
       }
     );
-  }
-
-  updateUngardedClass(text, lineNumber) {
-    if (regExModule.service.tgdRegEx.test(text)) {
-      var tgd = tgdModule.builder.build(text);
-      if (!tgd.isGuarded) {
-        this.state.programEditorInstance.addLineClass(lineNumber, "text", "ungarded-tgd");
-      } else {
-        this.state.programEditorInstance.removeLineClass(lineNumber, "text", "ungarded-tgd");
-      }
-    }
   }
 
   onFileLoaded(content) {

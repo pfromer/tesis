@@ -1,3 +1,6 @@
+import * as regExModule from "./parser/regExService";
+import * as tgdModule from "./parser/tgdBuilder";
+
 function getSettings(){
 
     return{
@@ -21,7 +24,7 @@ function getSettings(){
             condition: function(component){return !component.state.program.isGuarded()},
             heading: "Out of the Guarded Fragment.", 
             lines: ["The lines marked in blue are ungarded TGDs"],
-            callback: function(component){return component.markUngardedTgds },
+            callback: function(component){return markUngardedTgds(component) },
           }
       ],
     checkConstraintsSettings:[
@@ -61,10 +64,30 @@ function setAlert(component, settingsType){
         heading: setting.heading
       }})
 
-      if(setting.callback) setting.callback(component)();
+      if(setting.callback) setting.callback(component);
     }
 }
 
+function markUngardedTgds(component) {
+  var lineNumber = 0;
+  var lineInfo = component.state.programEditorInstance.lineInfo(lineNumber);
+  while (lineInfo) {
+    updateUngardedClass(lineInfo.text, lineNumber, component);
+    lineNumber++;
+    lineInfo = component.state.programEditorInstance.lineInfo(lineNumber);
+  }
+}
+
+function updateUngardedClass(text, lineNumber, component) {
+  if (regExModule.service.tgdRegEx.test(text)) {
+    var tgd = tgdModule.builder.build(text);
+    if (!tgd.isGuarded) {
+      component.state.programEditorInstance.addLineClass(lineNumber, "text", "ungarded-tgd");
+    } else {
+      component.state.programEditorInstance.removeLineClass(lineNumber, "text", "ungarded-tgd");
+    }
+  }
+}
 
 export function setDatalogFragmentAlert(component){
     setAlert(component, 'datalogFragmentSettings');
