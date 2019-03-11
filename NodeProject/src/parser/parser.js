@@ -72,10 +72,11 @@ export function parse (program){
 				errors: errors,
 				consistencyPromise: function(){
 					var result = [];
-					var currentProgram = this;
+					var currentProgram = this;					
 					var getProm = function(nc) {
+						
 						return new Promise(resolve => {
-							executeQuery(toStringForNc(currentProgram, nc))
+							executeQuery(toStringForNc(currentProgram, nc), currentProgram.isGuarded())
 							.then(res => {
 								if(res.data[0].Results.length >0){
 									result.push({nc: nc, result: res.data })

@@ -8,48 +8,55 @@ function getSettings(){
         { 
             condition: function(component){return component.state.program.errors.length > 0 },
             heading: '', 
-            lines: ["Please correct the syntax errors in your program first."]
+            lines: ["Please correct the syntax errors in your program first."],
+            proceedToExecute: false
           },
           { 
             condition: function(component){return component.state.program.isLinear()},
             heading: '', 
-            lines: ["Your program is in the Linear Fragment."]
+            lines: ["Your program is in the Linear Fragment."],
+            proceedToExecute: true
           },
           { 
             condition: function(component){return component.state.program.isGuarded()}, 
             heading: '', 
-            lines: ["Your program is in the Guarded Fragment."]
+            lines: ["Your program is in the Guarded Fragment."],
+            proceedToExecute: true
           },
           { 
             condition: function(component){return !component.state.program.isGuarded()},
-            heading: "Out of the Guarded Fragment.", 
+            heading: "Out of the Guarded Fragment. Query answering is not guaranteed.", 
             lines: ["The lines marked in blue are ungarded TGDs"],
             callback: function(component){return markUngardedTgds(component) },
+            proceedToExecute: true
           }
       ],
     checkConstraintsSettings:[
           { 
             condition: function(component){return component.state.program.errors.length > 0 },
             heading: '', 
-            lines: ["Please correct the syntax errors in your program first."]
+            lines: ["Please correct the syntax errors in your program first."],
+            proceedToExecute: false
           },
           { 
             condition: function(component){return hasInconsistencies(component)},
             heading: "Not consistent.", 
             lines: ["The lines marked in green are not fulfilled by your program.", 
                     "You may execute a query under IAR semantics."],
+            proceedToExecute: false
           },
           { 
             condition: function(component){return !hasInconsistencies(component)},
             heading: "Your program is consistent.", 
-            lines: []
+            lines: [],
+            proceedToExecute: true
           }
     ]
     }
 }
 
 function hasInconsistencies(component){
-    return component.state.inconsistencies && component.state.inconsistencies.some(i => i.result.some(r => r.Results.length>0));
+    return component.state.inconsistencies && component.state.inconsistencies.length > 0;
 }
 
 function setAlert(component, settingsType){
@@ -89,11 +96,32 @@ function updateUngardedClass(text, lineNumber, component) {
   }
 }
 
+export function validateBeforeSubmit(component){
+  var settings = getSettings();
+  var allSettings = [settings['datalogFragmentSettings'],settings['checkConstraintsSettings']];
+
+  allSettings.forEach(s => {
+    var setting = s.find(s => s.condition(component));
+    if(setting && !setting.proceedToExecute){
+        component.setState(
+          {alert: {
+            lines: setting.lines,
+            opened: true,
+            onHandleClick : component.onHandleAlertClose,
+            heading: setting.heading
+            }
+          })
+      if(setting.callback) setting.callback(component);
+      return false;
+      }
+    })
+    return true;
+}
+
 export function setDatalogFragmentAlert(component){
     setAlert(component, 'datalogFragmentSettings');
 }
 
 export function setConstraintsAlert(component){
-    debugger
     setAlert(component, 'checkConstraintsSettings');
 }

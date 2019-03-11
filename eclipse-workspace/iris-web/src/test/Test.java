@@ -19,6 +19,7 @@ import org.deri.iris.demo.QueryResult;
 import org.deri.iris.evaluation.forewriting.SQLRewritingEvaluationStrategyFactory;
 import org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategyFactory;
 import org.deri.iris.evaluation.stratifiedbottomup.guardednaive.GuardedNaiveEvaluatorFactory;
+import org.deri.iris.evaluation.stratifiedbottomup.naive.NaiveEvaluatorFactory;
 import org.deri.iris.rules.safety.GuardedRuleSafetyProcessor;
 import org.deri.iris.rules.safety.LinearReducibleRuleSafetyProcessor;
 import org.json.*;
@@ -39,28 +40,26 @@ public class Test extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			// Demo.main(new String[] {
-			// "program-file=C:\\Git\\nyaya\\IRIS+-\\examples\\guardedExample.dtg",
-			// "guarded-rules"
-			// });
-			// response.getWriter().append("Served at x:
-			// ").append(request.getContextPath());
+			
 			final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();
 
 			String json = request.getParameter("test"); 
 			
 			JSONObject obj = new JSONObject(json);
 			String program = obj.getString("program");
+			Boolean isGuarded = obj.getBoolean("isGuarded");
 			
 			
-			//String program = loadFile("C:\\Git\\nyaya\\IRIS+-\\examples\\guardedExample.dtg");
-			//configuration.ruleSafetyProcessor = new SQLRewritingEvaluationStrategyFactory ();
-			//configuration.evaluationStrategyFactory = new SQLRewritingEvaluationStrategyFactory();
-			//configuration.ruleSafetyProcessor = new LinearReducibleRuleSafetyProcessor();
+			if(isGuarded) {
+				configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
+				System.out.println("guarded program");
+			}
+			else {
+		        configuration.evaluationStrategyFactory = new StratifiedBottomUpEvaluationStrategyFactory(new NaiveEvaluatorFactory());
+		        System.out.println("not guarded program");
+		    }
 			
-			configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
 			ProgramExecutor executor = new ProgramExecutor(program, configuration);
-			//response.getWriter().append(executor.getOutput());
 			
 			ArrayList<QueryResult> output = executor.getResults();
 			

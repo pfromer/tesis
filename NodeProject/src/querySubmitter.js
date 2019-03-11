@@ -1,17 +1,24 @@
 
 import { executeQuery } from "./IrisCaller";
+import { validateBeforeSubmit } from "./alertService";
+import { parse } from "./parser/parser";
+import { checkConstraints } from "./constraintsService";
 
-export function submit(program, component) {
-    if (program.errors.length == 0 && program.isGuarded) {
-      program.consistencyPromise().then(inconsistencies => {
-        component.setState({ inconsistencies: inconsistencies ? inconsistencies : [] });
-
-        if(!inconsistencies || !inconsistencies.some(i => i.result.some(r => r.Results.length>0))){
-          executeQuery(program.toStringWithoutNcsAndEgds())
-          .then(res => {
-            component.setState({ results: res.data });
-          });
-        }
-      });
+export function submit(component) {
+  checkConstraints(component).then(res =>{
+    component.setState({
+      inconsistencies: res.inconsistencies,
+      program: parse(component.state.programEditorInstance.getValue() + "\n" + component.state.queriesEditorInstace.getValue())
+    },
+    function () {
+      if(validateBeforeSubmit(component)){
+        executeQuery(component.state.program.toStringWithoutNcsAndEgds(), component.state.program.isGuarded())
+        .then(res => {
+          component.setState({ results: res.data });
+        });
+      }
     }
-  }
+  );
+  })
+}
+

@@ -6,6 +6,7 @@ import { setDatalogFragmentAlert } from "./alertService";
 import { checkConstraints } from "./constraintsService";
 import { submit } from "./querySubmitter";
 import { MainComponent } from "./MainComponent";
+import { setConstraintsAlert } from "./alertService";
 
 class ContainerComponent extends React.Component {
   constructor(props) {
@@ -55,7 +56,16 @@ class ContainerComponent extends React.Component {
   }
 
   checkConstraints() {
-    checkConstraints(this);
+    checkConstraints(this).then(res =>{
+      this.setState({
+        inconsistencies: res.inconsistencies,
+        program: res.program
+      },
+      function () {
+        setConstraintsAlert(this);
+      }
+    );
+    })
   }
 
   checkDatalogFragment() {
@@ -87,10 +97,13 @@ class ContainerComponent extends React.Component {
     event.preventDefault();
     var program = parse(this.state.programEditorInstance.getValue() + "\n" + this.state.queriesEditorInstace.getValue());
     this.setState({
-      program: program
-    });
-    submit(program, this);
-  }
+        program: program
+        }, 
+        function(){      
+          submit(this);
+        }
+      );
+    }
   render() {
     return (
     <MainComponent
