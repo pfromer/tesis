@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import { parse } from "./parser/parser";
+import { setDatalogFragmentAlert } from "./alertService";
+import { setConstraintsAlert } from "./alertService";
 import { submit } from "./querySubmitter";
 import * as regExModule from "./parser/regExService";
 import * as tgdModule from "./parser/tgdBuilder";
@@ -32,7 +34,6 @@ class ContainerComponent extends React.Component {
     this.updateUngardedClass = this.updateUngardedClass.bind(this);
     this.onHandleAlertClose = this.onHandleAlertClose.bind(this);
     this.checkConstraints = this.checkConstraints.bind(this); 
-    this.setAlert = this.setAlert.bind(this); 
     this.markUngardedTgds = this.markUngardedTgds.bind(this); 
   }
 
@@ -49,85 +50,31 @@ class ContainerComponent extends React.Component {
   }
 
   checkConstraints(){
-    var currentState = this.state;
     var program = parse(this.state.programEditorInstance.getValue());
-    var showInconsitencyAlert;
     program.consistencyPromise().then(inconsistencies => {
       var lines = program.programStructure.filter(textLine => textLine.type === "NC");
       if(inconsistencies){
-      inconsistencies.forEach(inconsitency => {
+        inconsistencies.forEach(inconsitency => {
           if(inconsitency.result.some(r => r.Results.length>0))
           {
             lines.forEach(line => {            
               if(ncModule.builder.build(line.text).toString() === inconsitency.nc.toString())
               {
-                showInconsitencyAlert = true;
-                currentState.programEditorInstance.addLineClass(line.index, "text", "inconsistent-constraint");
+                this.state.programEditorInstance.addLineClass(line.index, "text", "inconsistent-constraint");
               }
             }  
             );
           }    
         });
-      } 
-      if(showInconsitencyAlert){
-        this.setState({alert: {
-          heading: "Not consistent.", 
-          lines: ["The lines marked in green are not fulfilled by your program.", 
-          "You may execute a query under IAR semantics."],
-          opened: true,
-          onHandleClick : this.onHandleAlertClose      
-        }})
-      }
-      else{
-        this.setState({alert: {
-          heading: "Your program is consistent.", 
-          opened: true,
-          onHandleClick : this.onHandleAlertClose,
-          lines: []      
-        }})
-      }
+        this.setState({inconsistencies: inconsistencies, program: program}, 
+          function(){setDatalogFragmentAlert(this);}  
+        );
+      }       
+      setConstraintsAlert(this);
     }) 
   }
-  
-  setAlert(program){
-    var alertSettings = 
-      [
-        { 
-          condition:  program.errors.length > 0,
-          heading: '', 
-          lines: ["Please correct the syntax errors in your program first."]
-        },
-        { 
-          condition:  program.isLinear(),
-          heading: '', 
-          lines: ["Your program is in the Linear Fragment."]
-        },
-        { 
-          condition:  program.isGuarded(),
-          heading: '', 
-          lines: ["Your program is in the Guarded Fragment."]
-        },
-        { 
-          condition:  !program.isGuarded(),
-          heading: "Out of the Guarded Fragment.", 
-          lines: ["The lines marked in blue are ungarded TGDs"],
-          callback: this.markUngardedTgds
-        }
-      ];
 
-    var setting = alertSettings.find(s => s.condition);
 
-    if(setting){
-      this.setState({alert: {
-        lines: setting.lines,
-        opened: true,
-        onHandleClick : this.onHandleAlertClose,
-        heading: setting.condition
-      }})
-
-      if(setting.callback) setting.callback();
-    }
-  }
 
   markUngardedTgds(){
     var lineNumber = 0;
@@ -139,10 +86,11 @@ class ContainerComponent extends React.Component {
     }
   }
 
-  checkDatalogFragment(editor){
+  checkDatalogFragment(){
     var program = parse(this.state.programEditorInstance.getValue());
-    this.setState({program: program});
-    this.setAlert(program);
+    this.setState({program: program}, 
+      function(){setDatalogFragmentAlert(this);}  
+    );
   }
 
   updateUngardedClass(text, lineNumber){
