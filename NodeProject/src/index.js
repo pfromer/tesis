@@ -72,16 +72,16 @@ class ContainerComponent extends React.Component {
               }
             });
         });
+      }    
 
-        this.setState({
-            inconsistencies: inconsistencies,
-            program: program
-          },
-          function () {
-            setConstraintsAlert(this);
-          }
-        );
-      }      
+      this.setState({
+          inconsistencies: inconsistencies,
+          program: program
+        },
+        function () {
+          setConstraintsAlert(this);
+        }
+      );  
     })
   }
 
