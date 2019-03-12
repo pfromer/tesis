@@ -49,6 +49,8 @@ export class Editor extends React.Component {
             }}
             onChange={(editor, data, value) => {
 
+                if(this.props.onEditorChange) this.props.onEditorChange();
+
                 this.refresh();
 
                 if(!data.origin || ["undo", "redo"].some(o => o == data.origin))

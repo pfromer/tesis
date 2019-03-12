@@ -17,6 +17,7 @@ export class MainComponent extends React.Component {
 
   render() {      
     var buttonStyle = { width: "100%" };
+    var buttonIARStyle = Object.assign({},buttonStyle, {'background-color': 'indigo', 'border-color': 'indigo' }); 
     return (
         <>
         <AlertDismissable
@@ -36,6 +37,7 @@ export class MainComponent extends React.Component {
                       <Editor
                           text={this.props.programText}
                           setInstance={this.props.setProgramEditorInstace}
+                          onEditorChange={this.props.setAsConsistent}
                           allRegex = {[regExModule.service.tgdRegEx, regExModule.service.ncRegEx, regExModule.service.factRegEx, regExModule.service.whiteSpacesRegEx]}
                         />             
                 </Form.Group>                
@@ -77,8 +79,8 @@ export class MainComponent extends React.Component {
                 <Form.Row>
                   <Col>
                   <Form.Group>
-                    <Button type="submit" variant="info" style={buttonStyle}>
-                    Execute Queries
+                    <Button type="submit" variant='info' style={this.props.showIAR? buttonIARStyle : buttonStyle } >
+                    Execute Queries {this.props.showIAR ? '- IAR SEMANTICS' : ''}
                     </Button>
                   </Form.Group>
                   </Col>

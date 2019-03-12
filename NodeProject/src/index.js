@@ -22,7 +22,8 @@ class ContainerComponent extends React.Component {
       queriesEditorInstace: undefined,
       alert: {
         opened: false
-      }
+      },
+      inconsitent: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,6 +34,13 @@ class ContainerComponent extends React.Component {
     this.checkDatalogFragment = this.checkDatalogFragment.bind(this);
     this.onHandleAlertClose = this.onHandleAlertClose.bind(this);
     this.checkConstraints = this.checkConstraints.bind(this);
+    this.setAsConsistent = this.setAsConsistent.bind(this);
+  }
+
+  setAsConsistent(){
+    this.setState({
+      inconsitent : false
+    })
   }
 
   onHandleAlertClose() {
@@ -110,7 +118,8 @@ class ContainerComponent extends React.Component {
       handleSubmit={this.handleSubmit}
       inconsistencies={this.state.inconsistencies}
       programText={this.state.programText} 
-      setProgramEditorInstace={this.setProgramEditorInstace} 
+      setProgramEditorInstace={this.setProgramEditorInstace}
+      setAsConsistent={this.setAsConsistent} 
       onFileLoaded={this.onFileLoaded} 
       checkDatalogFragment={this.checkDatalogFragment} 
       queriesText={this.state.queriesText} 
@@ -119,6 +128,7 @@ class ContainerComponent extends React.Component {
       results={this.state.results}
       alert={this.state.alert}
       checkConstraints={this.checkConstraints}
+      showIAR={this.state.inconsitent}
     />
     );
   }
