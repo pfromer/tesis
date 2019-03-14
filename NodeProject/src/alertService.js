@@ -25,7 +25,7 @@ function getSettings(){
           },
           { 
             condition: function(component){return !component.state.program.isGuarded()},
-            heading: "Out of the Guarded Fragment. Query answering is not guaranteed.", 
+            heading: "Out of the Guarded Fragment. Optimizations on the query answering process are not guaranteed.", 
             lines: ["The lines marked in blue are ungarded TGDs"],
             callback: function(component){return markUngardedTgds(component) },
             proceedToExecute: true

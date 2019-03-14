@@ -1,0 +1,7 @@
+titulo datalog +/-
+transparentar el cartel de errores
+check constraints -> check consistency
+no agregamos boton para chequear non conflicting key
+dinamicamente chequear la no copnflictividad, agregar un cartelito de error
+
+fix del bug iar semantics
