@@ -6,7 +6,7 @@ export function checkConstraints(component) {
 
     return new Promise(resolve => {
         program.consistencyPromise().then(inconsistencies => {
-            if (inconsistencies) {
+            if (inconsistencies && inconsistencies.length > 0) {
               inconsistencies.forEach(inconsitency => {
                   component.state.programEditorInstance.addLineClass(inconsitency.nc.lineNumber, "text", "inconsistent-constraint");
               });

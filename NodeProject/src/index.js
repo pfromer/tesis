@@ -46,11 +46,11 @@ class ContainerComponent extends React.Component {
   }
 
   onQueryEditorChange(){
-    this.setAsConsistent();
     this.onHandleAlertClose();
   }
 
   onProgramEditorChange(){
+    this.setAsConsistent();
     this.onHandleAlertClose();
   }
 
