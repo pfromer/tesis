@@ -35,12 +35,23 @@ class ContainerComponent extends React.Component {
     this.onHandleAlertClose = this.onHandleAlertClose.bind(this);
     this.checkConstraints = this.checkConstraints.bind(this);
     this.setAsConsistent = this.setAsConsistent.bind(this);
+    this.onQueryEditorChange = this.onQueryEditorChange.bind(this);
+    this.onProgramEditorChange = this.onProgramEditorChange.bind(this);
   }
 
   setAsConsistent(){
     this.setState({
       inconsitent : false
     })
+  }
+
+  onQueryEditorChange(){
+    this.setAsConsistent();
+    this.onHandleAlertClose();
+  }
+
+  onProgramEditorChange(){
+    this.onHandleAlertClose();
   }
 
   onHandleAlertClose() {
@@ -119,7 +130,8 @@ class ContainerComponent extends React.Component {
       inconsistencies={this.state.inconsistencies}
       programText={this.state.programText} 
       setProgramEditorInstace={this.setProgramEditorInstace}
-      setAsConsistent={this.setAsConsistent} 
+      onProgramEditorChange={this.onProgramEditorChange} 
+      onQueryEditorChange={this.onQueryEditorChange} 
       onFileLoaded={this.onFileLoaded} 
       checkDatalogFragment={this.checkDatalogFragment} 
       queriesText={this.state.queriesText} 

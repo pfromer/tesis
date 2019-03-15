@@ -7,7 +7,7 @@ import { Row } from "react-bootstrap";
 import { Results } from "./QueryResult";
 import { LoadProgramButton } from "./LoadProgramButton";
 import { Editor } from "./Editor";
-import { AlertDismissable } from "./AlertDismissable";
+import { AlertDismissable  } from "./AlertDismissable";
 import * as regExModule from "./parser/regExService";
 
 export class MainComponent extends React.Component {
@@ -20,12 +20,6 @@ export class MainComponent extends React.Component {
     var buttonIARStyle = Object.assign({},buttonStyle, {'background-color': 'indigo', 'border-color': 'indigo' }); 
     return (
         <>
-        <AlertDismissable
-          opened={this.props.alert.opened}
-          lines={this.props.alert.lines}
-          heading={this.props.alert.heading}
-          onHandleClick={this.props.alert.onHandleClick}
-        />
         <Container>
         <Row>
           <Col>
@@ -33,11 +27,11 @@ export class MainComponent extends React.Component {
               <Form.Row>
                 <Col>
                 <Form.Group>
-                    <Form.Label>Datalog Program</Form.Label>
+                    <Form.Label>Datalog +/- program</Form.Label>
                       <Editor
                           text={this.props.programText}
                           setInstance={this.props.setProgramEditorInstace}
-                          onEditorChange={this.props.setAsConsistent}
+                          onEditorChange={this.props.onProgramEditorChange}
                           allRegex = {[regExModule.service.tgdRegEx, regExModule.service.ncRegEx, regExModule.service.factRegEx, regExModule.service.whiteSpacesRegEx]}
                         />             
                 </Form.Group>                
@@ -50,7 +44,7 @@ export class MainComponent extends React.Component {
                     <Col>
                     <Form.Group>
                       <Button  onClick={this.props.checkConstraints} type="button" variant="info" style={buttonStyle}>
-                      Check Constraints
+                      Check Consistency
                       </Button>
                     </Form.Group>
                     </Col>
@@ -72,6 +66,7 @@ export class MainComponent extends React.Component {
                           text={this.props.queriesText}
                           setInstance={this.props.setQueriesEditorInstace}
                           allRegex = {[regExModule.service.queryRegEx, regExModule.service.whiteSpacesRegEx]}
+                          onEditorChange={this.props.onQueryEditorChange}
                         />  
                     </Form.Group>
                   </Col>
@@ -92,6 +87,12 @@ export class MainComponent extends React.Component {
         </Row>
         <Row>
           <Col>
+          <AlertDismissable 
+          opened={this.props.alert.opened}
+          lines={this.props.alert.lines}
+          heading={this.props.alert.heading}
+          onHandleClick={this.props.alert.onHandleClick}
+        />
             <Results 
               data={this.props.program && this.props.program.errors.length == 0 && this.props.results} 
               visible={this.props.program && this.props.program.errors == 0 && (!this.props.inconsistencies || this.props.inconsistencies.length == 0 )} 

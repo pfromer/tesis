@@ -15,7 +15,7 @@ export class Editor extends React.Component {
         this.refresh = this.refresh.bind(this);
       }
 
-      refresh(){
+      refresh(){        
         var lineNumber = 0;
         var lineInfo = this.instance.lineInfo(lineNumber);
         while(lineInfo){
@@ -49,7 +49,7 @@ export class Editor extends React.Component {
             }}
             onChange={(editor, data, value) => {
 
-                if(this.props.onEditorChange) this.props.onEditorChange();
+                this.props.onEditorChange();
 
                 this.refresh();
 
