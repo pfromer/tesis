@@ -18,6 +18,7 @@ function _service(){
 		whiteSpacesRegEx : whiteSpacesRegEx,
 		commaSeparatedVariableOrStringRegEx : repeatAndSeparateByComma(variableOrConstantRegEx),
 		predicateRegEx : predicateRegEx,
+		keyRegEx : new RegExp('^' + "key\\(\\w+,\\[" + repeatAndSeparateByComma(new RegExp("[0-9]")).source + "]\\)\\.$"),
 		withinPredicateRegEx : withinPredicateRegEx,
 		tgdRegEx : new RegExp('^' + withinPredicateRegEx.source + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$"),
 		ncRegEx : new RegExp('^' + bottomRegEx.source + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$"),

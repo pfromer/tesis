@@ -32,7 +32,7 @@ export class MainComponent extends React.Component {
                           text={this.props.programText}
                           setInstance={this.props.setProgramEditorInstace}
                           onEditorChange={this.props.onProgramEditorChange}
-                          allRegex = {[regExModule.service.tgdRegEx, regExModule.service.ncRegEx, regExModule.service.factRegEx, regExModule.service.whiteSpacesRegEx]}
+                          allRegex = {[regExModule.service.tgdRegEx, regExModule.service.ncRegEx, regExModule.service.factRegEx, regExModule.service.whiteSpacesRegEx, regExModule.service.keyRegEx]}
                         />             
                 </Form.Group>                
                 <Form.Row>

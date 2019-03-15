@@ -2,6 +2,7 @@ import * as regExModule from "./regExService";
 import * as tgdModule from "./tgdBuilder";
 import * as ncModule from "./ncBuilder";
 import * as egdModule from "./egdBuilder";
+import * as keyModule from "./keyBuilder";
 import * as factModule from "./factBuilder";
 import * as queryModule from "./queryBuilder";
 import { executeQuery } from "../IrisCaller";
@@ -12,7 +13,8 @@ export function parse (program){
 	var tgds = [];
 	var facts = [];
 	var ncs = [];
-	var egds = [];		
+	var egds = [];
+	var keys = [];		
 	var queries = [];
 	var errors = [];
 	
@@ -24,9 +26,11 @@ export function parse (program){
 		{regEx: regExModule.service.tgdRegEx, builder: tgdModule.builder, collection: tgds },
 		{regEx: regExModule.service.ncRegEx, builder: ncModule.builder, collection: ncs  },
 		{regEx: regExModule.service.egdRegEx, builder: egdModule.builder, collection: egds },
+		{regEx: regExModule.service.keyRegEx, builder: keyModule.builder, collection: keys },
 		{regEx: regExModule.service.factRegEx, builder: factModule.builder, collection: facts },
 		{regEx: regExModule.service.queryRegEx, builder: queryModule.builder, collection: queries }
 	]
+	debugger
 	
 	for(var i = 0;i < lines.length;i++){
 		var matched = false;
@@ -57,6 +61,7 @@ export function parse (program){
 				tgds: tgds, 
 				ncs : ncs,
 				egds: egds,
+				keys: keys,
 				queries : queries, 
 				facts: facts,
 				programStructure : programStructure,
