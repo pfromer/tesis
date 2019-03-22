@@ -4,9 +4,8 @@ function _builder(){
 			build : function(line){				
 				return {
                     parameters : JSON.parse(line.substring(line.indexOf('['),line.indexOf(']') + 1)),
-                    predicate : line.substring(line.indexOf('(') + 1,line.indexOf(','))
-					
-				}
+					predicate : line.substring(line.indexOf('(') + 1,line.indexOf(','))
+			}
 		}
 	}
 }

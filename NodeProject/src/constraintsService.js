@@ -10,7 +10,6 @@ export function checkConstraints(component) {
               inconsistencies.forEach(inconsitency => {
                   component.state.programEditorInstance.addLineClass(inconsitency.nc.lineNumber, "text", "inconsistent-constraint");
               });
-              debugger
               component.setState({inconsitent: true})              
             }      
             resolve({program: program, inconsistencies: inconsistencies});

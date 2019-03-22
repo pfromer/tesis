@@ -8,7 +8,6 @@ function _builder(tgdText) {
 		build: function (predicateText) {
 			var parameters = regExModule.service.arrayOfMatches(regExModule.service.variableOrConstantRegEx, predicateText);
 			var parametersAsObjets = [];
-			var type;
 			for (var i = 0; i < parameters.length; i++) {
 				parametersAsObjets.push(parameterModule.builder.build(parameters[i]));
 			};

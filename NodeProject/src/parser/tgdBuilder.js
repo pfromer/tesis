@@ -49,7 +49,17 @@ function _builder() {
 				toString: function () {
 					return [this.head.predicate.toString(), " :- ", this.body.toString(), "."].join("");
 				},
-				type : isGuarded ? "GUARDED_TGD" : "UNAGARDED_TGD" 
+				type : isGuarded ? "GUARDED_TGD" : "UNAGARDED_TGD",
+				arities : function(){
+					var result = this.body.arities();
+					if(this.head.predicate.name in result){
+						result[this.head.predicate.name].push(this.head.predicate.parameters.length);						
+					}
+					else{
+						result[this.head.predicate.name] = [this.head.predicate.parameters.length];
+					}
+					return result;
+				} 
 			}
 		}
 	}

@@ -6,6 +6,7 @@ import * as keyModule from "./keyBuilder";
 import * as factModule from "./factBuilder";
 import * as queryModule from "./queryBuilder";
 import { executeQuery } from "../IrisCaller";
+import {ArityDictionary} from "./ArityDictionary";
 
 
 export function parse (program){
@@ -13,24 +14,24 @@ export function parse (program){
 	var tgds = [];
 	var facts = [];
 	var ncs = [];
-	var egds = [];
 	var keys = [];		
 	var queries = [];
 	var errors = [];
 	
 	var lines = program.split('\n');
 
+	var arityDictionary = new ArityDictionary();
+
 	var programStructure = []
 
 	var regexAndBuilders = [
 		{regEx: regExModule.service.tgdRegEx, builder: tgdModule.builder, collection: tgds },
 		{regEx: regExModule.service.ncRegEx, builder: ncModule.builder, collection: ncs  },
-		{regEx: regExModule.service.egdRegEx, builder: egdModule.builder, collection: egds },
 		{regEx: regExModule.service.keyRegEx, builder: keyModule.builder, collection: keys },
 		{regEx: regExModule.service.factRegEx, builder: factModule.builder, collection: facts },
 		{regEx: regExModule.service.queryRegEx, builder: queryModule.builder, collection: queries }
 	]
-	debugger
+
 	
 	for(var i = 0;i < lines.length;i++){
 		var matched = false;
@@ -39,7 +40,10 @@ export function parse (program){
 				var lineAsObject = Object.assign({lineNumber : i}, regexAndBuilder.builder.build(lines[i]));
 				regexAndBuilder.collection.push(lineAsObject);
 				matched = true;
-				programStructure.push({text: lines[i], type: lineAsObject.type, index: i})			
+				programStructure.push({text: lines[i], type: lineAsObject.type, index: i});
+				if(lineAsObject.arities){
+					arityDictionary.addArities(lineAsObject.arities(), i);
+				}
 			}
 		});
 		if(!matched){
@@ -60,16 +64,16 @@ export function parse (program){
 	return  { 	
 				tgds: tgds, 
 				ncs : ncs,
-				egds: egds,
 				keys: keys,
 				queries : queries, 
 				facts: facts,
 				programStructure : programStructure,
+				arityDictionary : arityDictionary,
 				ungardedTgds : function() { return this.tgds.filter(t => !t.isGuarded)}, 
 				isGuarded : function() { return this.tgds.every(t => t.isGuarded)},
 				isLinear : function() { return this.tgds.every(t => t.body.predicates.length == 1)}, 
 				toString : function(){
-					return this.ncs.concat(this.egds).concat(this.tgds).concat(this.facts).concat(this.queries).join("\n");					
+					return this.ncs.concat(this.tgds).concat(this.facts).concat(this.queries).join("\n");					
 				},
 				toStringWithoutNcsAndEgds : function(){
 					return this.tgds.concat(this.facts).concat(this.queries).join("\n");
@@ -103,7 +107,5 @@ export function parse (program){
 				queriesToString: function(){
 					return this.queries.filter(i => i.type == "QUERY").map(i=> i.toString()).join("\n");
 				}
-
-
 			};
 }

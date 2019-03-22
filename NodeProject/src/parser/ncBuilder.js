@@ -17,6 +17,9 @@ function _builder(){
 					type : "NC",
 					equals : function(nc){
 						return nc.toString() === this.toString();
+					},
+					arities : function(){
+						return this.body.arities();
 					}
 					
 				}

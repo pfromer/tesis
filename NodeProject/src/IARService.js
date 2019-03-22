@@ -1,33 +1,17 @@
-{a,b,c}
 
-{{},{a},{b},{c},{b,a},{c,a},{c,b},{c,a,b}
+input := todos los facts de la ABox
+maximalesConsistentes := vacio
+actuales := todos los subsets de la ABOx que se pueden formar sacando un elemento
+mientras actuales no es vacio:
+   noAgregar := vacio
+   consistentes := todos los actuales que son consistentes
+   inconsistentes := todos los actuales que no son consistentes
+   actuales := vacio
+   por cada s en consistentes:
+      pongo en noAgregar todos los subset de s que se pueden formar sacando un elemento
+      agrego s a maximalesConsistentes  
+   por cada s en inconsistentes
+      agrego a actuales todos los subconjuntos que se pueden formar sacar un elemento de s, sin repetidos y que no esten en noAgregar 
+retorno interseccion de todos los maximalesConsistentes
 
-
-000
-001
-010
-011
-100
-101
-110
-111
-
-
-00000000 0
-00000001 1
-00000010 2
-00000011 3
-00000100 4
-00000101 5
-00000110 6
-00000111 7
-00001000 8
-00001001 9
-00001010 10
-00001011 11
-00001100 12
-00001101 13
-00001110 14
-00001111 15
-00010000 16
 

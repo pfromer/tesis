@@ -10,7 +10,12 @@ function _builder(){
 				name : predicate.name,
 				parameters : predicate.parameters,
 				toString : function(){ return [predicate.toString(), "."].join("") },
-				type : "FACT"
+				type : "FACT",
+				arities : function() {
+					var result = {};
+					result[this.name] = [this.parameters.length];
+					return result;
+				} 
 			}
 		}
 	}

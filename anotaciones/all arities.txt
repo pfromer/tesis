@@ -1,0 +1,29 @@
+agregar un nuevo objeto que sepa responder el mensaje addAlArities(lineNumber, arities)
+en caso de que arities sea un objeto vacio no hace nada
+
+este objeto tiene un diccionario interno donde para cada nombre de parametro tiene un diccionario de linea a lista de aridades.
+
+ejemplo:
+{
+	'r1' : { 
+			1 : [1,2],
+			2 : [3]		
+			
+			},
+	'r2' : { 
+			2 : [4]		
+			
+			}
+}
+
+
+cada objectAsLine implementa de su manera allArities. algunos devuelven {}, otros devuelven un diccionario donde para cada predicado hay una lista de todas las aridades que aparecen en 
+de ese predicado en ese objectAsLine
+
+ejemplo
+
+{
+	r1 : [1,2],
+	r2 : [4]
+
+}

@@ -5,28 +5,35 @@ function getSettings(){
 
     return{
     datalogFragmentSettings:[
-        { 
+
+          { 
             condition: function(component){return component.state.program.errors.length > 0 },
             heading: '', 
-            lines: ["Please correct the syntax errors in your program first."],
+            lines: function(component) {return ["Please correct the syntax errors in your program first."]},
+            proceedToExecute: false
+          },
+          { 
+            condition: function(component){return component.state.program.arityDictionary.aritiesAreConsistent().result == false },
+            heading: 'The following predicates do not show the same arity in your program', 
+            lines: function(component) {return component.state.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent},
             proceedToExecute: false
           },
           { 
             condition: function(component){return component.state.program.isLinear()},
             heading: '', 
-            lines: ["Your program is in the Linear Fragment."],
+            lines: function(component) {return ["Your program is in the Linear Fragment."]},
             proceedToExecute: true
           },
           { 
             condition: function(component){return component.state.program.isGuarded()}, 
             heading: '', 
-            lines: ["Your program is in the Guarded Fragment."],
+            lines: function(component) {return ["Your program is in the Guarded Fragment."]},
             proceedToExecute: true
           },
           { 
             condition: function(component){return !component.state.program.isGuarded()},
             heading: "Out of the Guarded Fragment. Optimizations on the query answering process are not guaranteed.", 
-            lines: ["The lines marked in blue are ungarded TGDs"],
+            lines: function(component) {return ["The lines marked in blue are ungarded TGDs"]},
             callback: function(component){return markUngardedTgds(component) },
             proceedToExecute: true
           }
@@ -35,20 +42,26 @@ function getSettings(){
           { 
             condition: function(component){return component.state.program.errors.length > 0 },
             heading: '', 
-            lines: ["Please correct the syntax errors in your program first."],
+            lines: function(component) {return ["Please correct the syntax errors in your program first."]},
+            proceedToExecute: false
+          },
+          { 
+            condition: function(component){return component.state.program.arityDictionary.aritiesAreConsistent().result == false },
+            heading: 'The following predicates do not show the same arity in your program', 
+            lines: function(component) {return component.state.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent},
             proceedToExecute: false
           },
           { 
             condition: function(component){return hasInconsistencies(component)},
             heading: "Not consistent.", 
-            lines: ["The lines marked in green are not fulfilled by your program.", 
-                    "You may execute a query under IAR semantics."],
+            lines: function(component) {return ["The lines marked in green are not fulfilled by your program.", 
+                    "You may execute a query under IAR semantics."]},
             proceedToExecute: false
           },
           { 
             condition: function(component){return !hasInconsistencies(component)},
             heading: "Your program is consistent.", 
-            lines: [],
+            lines: function(component) {return []},
             proceedToExecute: true
           }
     ]
@@ -65,7 +78,7 @@ function setAlert(component, settingsType){
 
     if(setting){
         component.setState({alert: {
-        lines: setting.lines,
+        lines: setting.lines(component),
         opened: true,
         onHandleClick : component.onHandleAlertClose,
         heading: setting.heading
@@ -105,7 +118,7 @@ export function validateBeforeSubmit(component){
     if(setting && !setting.proceedToExecute){
         component.setState(
           {alert: {
-            lines: setting.lines,
+            lines: setting.lines(component),
             opened: true,
             onHandleClick : component.onHandleAlertClose,
             heading: setting.heading

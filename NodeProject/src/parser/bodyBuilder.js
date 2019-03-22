@@ -15,6 +15,18 @@ function _builder(bodyText){
 			hasVariable : function(v){ return predicatesAsObjects.some(p => p.hasVariable(v))},
 			toString : function(){
 				return predicates.map(p => p.toString()).join(", ");
+			},
+			arities : function(){
+				var result = {};
+				this.predicates.forEach(predicate => {
+					if(predicate.name in result){
+						result[predicate.name].push(predicate.parameters.length);
+					}
+					else{
+						result[predicate.name] = [predicate.parameters.length];
+					}
+				});
+				return result;
 			}
 		};		
 	}
