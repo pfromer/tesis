@@ -4,7 +4,7 @@ export function ArityDictionary(){
         return this.filter(function (value, index, self) { 
           return self.indexOf(value) === index;
         });
-      }
+    }
 
     this.dictionary = {};
 

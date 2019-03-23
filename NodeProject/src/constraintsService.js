@@ -3,8 +3,11 @@ import { parse } from "./parser/parser";
 
 export function checkConstraints(component) {
     var program = parse(component.state.programEditorInstance.getValue());
+    
+    debugger
 
-    return new Promise(resolve => {
+    if (program.canBeSubmitted()){
+      return new Promise(resolve => {
         program.consistencyPromise().then(inconsistencies => {
             if (inconsistencies && inconsistencies.length > 0) {
               inconsistencies.forEach(inconsitency => {
@@ -14,5 +17,12 @@ export function checkConstraints(component) {
             }      
             resolve({program: program, inconsistencies: inconsistencies});
           })
-    })
+      })
+    }
+    else{
+      return new Promise(resolve => {
+        resolve({program: program, inconsistencies: []});
+      })
+
+    }
   }

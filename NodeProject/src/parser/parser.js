@@ -1,7 +1,6 @@
 import * as regExModule from "./regExService";
 import * as tgdModule from "./tgdBuilder";
 import * as ncModule from "./ncBuilder";
-import * as egdModule from "./egdBuilder";
 import * as keyModule from "./keyBuilder";
 import * as factModule from "./factBuilder";
 import * as queryModule from "./queryBuilder";
@@ -106,6 +105,9 @@ export function parse (program){
 				},
 				queriesToString: function(){
 					return this.queries.filter(i => i.type == "QUERY").map(i=> i.toString()).join("\n");
+				},
+				canBeSubmitted: function(){
+					return this.errors.length == 0 && this.arityDictionary.aritiesAreConsistent().result == true;
 				}
 			};
 }

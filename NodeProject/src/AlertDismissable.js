@@ -1,7 +1,6 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import { Modal } from "react-bootstrap";
 
 export class AlertDismissable  extends React.Component {
     constructor(props) {

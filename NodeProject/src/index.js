@@ -75,28 +75,16 @@ class ContainerComponent extends React.Component {
   }
 
   checkConstraints() {
-    debugger
-    var program = parse(this.state.programEditorInstance.getValue());
-    if(program.errors.length > 0) {
+    checkConstraints(this).then(res =>{
       this.setState({
-        program: program
+        inconsistencies: res.inconsistencies,
+        program: res.program
       },
       function () {
         setConstraintsAlert(this);
       }
-      )}
-    else{
-      checkConstraints(this).then(res =>{
-        this.setState({
-          inconsistencies: res.inconsistencies,
-          program: res.program
-        },
-        function () {
-          setConstraintsAlert(this);
-        }
-      );
-      })
-    }
+    );
+    })
   }
 
   checkDatalogFragment() {
@@ -111,7 +99,6 @@ class ContainerComponent extends React.Component {
   }
 
   onFileLoaded(content) {
-    debugger
     var program = parse(content);
     this.setState({
       programText: program.programToString(),

@@ -3,69 +3,68 @@ import * as tgdModule from "./parser/tgdBuilder";
 
 function getSettings(){
 
+    var errorSyntaxSettings = { 
+      condition: function(component){return component.state.program.errors.length > 0 },
+      heading: '', 
+      lines: function(component) {return ["Please correct the syntax errors in your program first."]},
+      proceedToExecute: false
+    }
+
+    var arityErrorSettings =       { 
+      condition: function(component){return component.state.program.arityDictionary.aritiesAreConsistent().result == false },
+      heading: 'The arguments length of the folowing predicates is not consistent through your program:', 
+      lines: function(component) {return component.state.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent},
+      proceedToExecute: false
+    };
+
     return{
     datalogFragmentSettings:[
-
-          { 
-            condition: function(component){return component.state.program.errors.length > 0 },
-            heading: '', 
-            lines: function(component) {return ["Please correct the syntax errors in your program first."]},
-            proceedToExecute: false
-          },
-          { 
-            condition: function(component){return component.state.program.arityDictionary.aritiesAreConsistent().result == false },
-            heading: 'The following predicates do not show the same arity in your program', 
-            lines: function(component) {return component.state.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent},
-            proceedToExecute: false
-          },
-          { 
-            condition: function(component){return component.state.program.isLinear()},
-            heading: '', 
-            lines: function(component) {return ["Your program is in the Linear Fragment."]},
-            proceedToExecute: true
-          },
-          { 
-            condition: function(component){return component.state.program.isGuarded()}, 
-            heading: '', 
-            lines: function(component) {return ["Your program is in the Guarded Fragment."]},
-            proceedToExecute: true
-          },
-          { 
-            condition: function(component){return !component.state.program.isGuarded()},
-            heading: "Out of the Guarded Fragment. Optimizations on the query answering process are not guaranteed.", 
-            lines: function(component) {return ["The lines marked in blue are ungarded TGDs"]},
-            callback: function(component){return markUngardedTgds(component) },
-            proceedToExecute: true
-          }
-      ],
+      errorSyntaxSettings,
+      arityErrorSettings,
+      { 
+        condition: function(component){return component.state.program.isLinear()},
+        heading: '', 
+        lines: function(component) {return ["Your program is in the Linear Fragment."]},
+        proceedToExecute: true
+      },
+      { 
+        condition: function(component){return component.state.program.isGuarded()}, 
+        heading: '', 
+        lines: function(component) {return ["Your program is in the Guarded Fragment."]},
+        proceedToExecute: true
+      },
+      { 
+        condition: function(component){return !component.state.program.isGuarded()},
+        heading: "Out of the Guarded Fragment. Optimizations on the query answering process are not guaranteed.", 
+        lines: function(component) {return ["The lines marked in blue are ungarded TGDs"]},
+        callback: function(component){return markUngardedTgds(component) },
+        proceedToExecute: true
+      }
+    ],
     checkConstraintsSettings:[
-          { 
-            condition: function(component){return component.state.program.errors.length > 0 },
-            heading: '', 
-            lines: function(component) {return ["Please correct the syntax errors in your program first."]},
-            proceedToExecute: false
-          },
-          { 
-            condition: function(component){return component.state.program.arityDictionary.aritiesAreConsistent().result == false },
-            heading: 'The following predicates do not show the same arity in your program', 
-            lines: function(component) {return component.state.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent},
-            proceedToExecute: false
-          },
-          { 
-            condition: function(component){return hasInconsistencies(component)},
-            heading: "Not consistent.", 
-            lines: function(component) {return ["The lines marked in green are not fulfilled by your program.", 
-                    "You may execute a query under IAR semantics."]},
-            proceedToExecute: false
-          },
-          { 
-            condition: function(component){return !hasInconsistencies(component)},
-            heading: "Your program is consistent.", 
-            lines: function(component) {return []},
-            proceedToExecute: true
-          }
+      errorSyntaxSettings,
+      arityErrorSettings,
+      { 
+        condition: function(component){return component.state.program.arityDictionary.aritiesAreConsistent().result == false },
+        heading: 'The arguments length of the folowing predicates is not consistent through your program', 
+        lines: function(component) {return component.state.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent},
+        proceedToExecute: false
+      },
+      { 
+        condition: function(component){return hasInconsistencies(component)},
+        heading: "Not consistent.", 
+        lines: function(component) {return ["The lines marked in green are not fulfilled by your program.", 
+                "You may execute a query under IAR semantics."]},
+        proceedToExecute: false
+      },
+      { 
+        condition: function(component){return !hasInconsistencies(component)},
+        heading: "Your program is consistent.", 
+        lines: function(component) {return []},
+        proceedToExecute: true
+      }
     ]
-    }
+  }
 }
 
 function hasInconsistencies(component){
@@ -110,25 +109,26 @@ function updateUngardedClass(text, lineNumber, component) {
 }
 
 export function validateBeforeSubmit(component){
-  var settings = getSettings();
-  var allSettings = [settings['datalogFragmentSettings'],settings['checkConstraintsSettings']];
-
-  allSettings.forEach(s => {
-    var setting = s.find(s => s.condition(component));
+  debugger
+  var settings = getSettings()['checkConstraintsSettings'];
+    var setting = settings.find(s => s.condition(component));
     if(setting && !setting.proceedToExecute){
-        component.setState(
-          {alert: {
-            lines: setting.lines(component),
-            opened: true,
-            onHandleClick : component.onHandleAlertClose,
-            heading: setting.heading
-            }
-          })
-      if(setting.callback) setting.callback(component);
+      component.setState(
+        {alert: {
+          lines: setting.lines(component),
+          opened: true,
+          onHandleClick : component.onHandleAlertClose,
+          heading: setting.heading
+          }
+        })
+      if(setting.callback){
+        setting.callback(component);
+      } 
       return false;
-      }
-    })
-    return true;
+    }
+    else{
+      return true;
+    }
 }
 
 export function setDatalogFragmentAlert(component){
