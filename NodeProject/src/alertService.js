@@ -14,7 +14,8 @@ function getSettings(){
       condition: function(component){return component.state.program.arityDictionary.aritiesAreConsistent().result == false },
       heading: 'The arguments length of the folowing predicates is not consistent through your program:', 
       lines: function(component) {return component.state.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent},
-      proceedToExecute: false
+      proceedToExecute: false,
+      callback: function(component){return markArityIssues(component) },
     };
 
     return{
@@ -108,8 +109,11 @@ function updateUngardedClass(text, lineNumber, component) {
   }
 }
 
+function markArityIssues(component){
+  component.state.programEditorInstance.markText({line :0, ch: 3}, {line :1, ch : 8}, {className : 'ungarded-tgd'})
+}
+
 export function validateBeforeSubmit(component){
-  debugger
   var settings = getSettings()['checkConstraintsSettings'];
     var setting = settings.find(s => s.condition(component));
     if(setting && !setting.proceedToExecute){

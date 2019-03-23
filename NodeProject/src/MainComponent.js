@@ -94,7 +94,7 @@ export class MainComponent extends React.Component {
           onHandleClick={this.props.alert.onHandleClick}
         />
             <Results 
-              data={this.props.program && this.props.program.canBeSubmitted() && this.props.results} 
+              data={this.props.program && this.props.program.errors.length == 0 && this.props.results} 
               visible={this.props.program && this.props.program.errors == 0 && (!this.props.inconsistencies || this.props.inconsistencies.length == 0 )} 
             />
           </Col>
