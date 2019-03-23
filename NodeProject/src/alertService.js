@@ -110,7 +110,28 @@ function updateUngardedClass(text, lineNumber, component) {
 }
 
 function markArityIssues(component){
-  component.state.programEditorInstance.markText({line :0, ch: 3}, {line :1, ch : 8}, {className : 'ungarded-tgd'})
+  var notConsistentArityPredicates = component.state.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent;
+
+  
+  var markers = [];
+  notConsistentArityPredicates.forEach(predicateName => {
+    var lessCommonAritiesByLine = component.state.program.arityDictionary.getLessCommonArityLinesForPredicate(predicateName);
+             
+    lessCommonAritiesByLine.forEach(arityLine => {
+      var lineText = component.state.programEditorInstance.getLine(arityLine.lineNumber);
+      var regEx = regExModule.service.predicateRegExByNameAndArity(predicateName, arityLine.arity);
+      var indexes = regExModule.service.arrayOfIndexes(regEx, lineText); 
+      indexes.forEach(i => {
+        markers.push(component.state.programEditorInstance.markText(
+          {line :arityLine.lineNumber, ch: i.start}, 
+          {line :arityLine.lineNumber, ch : i.end}, 
+          {className : 'arity-error'}))
+        
+
+        })
+    })
+    })
+  component.setState({markers : markers})
 }
 
 export function validateBeforeSubmit(component){

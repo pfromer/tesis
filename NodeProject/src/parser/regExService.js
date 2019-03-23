@@ -11,8 +11,32 @@ function _service(){
 	var factRegEx = new RegExp('^' + '(\\w+)\\(' + repeatAndSeparateByComma(constantRegEx).source  + '\\).$');
 	var withinPredicateRegEx = removeFirstAndLastCharacter(predicateRegEx);
 	var queryRegEx = new RegExp('^' + "\\?-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$");
+	function repeatAndSeparateNElementsByComma (regEx, n){ 		
+		var arr = [];
+		var i = n;
+		while(i > 0){
+			arr.push(regEx.source);
+			i--;
+		}
+
+		return new RegExp(arr.join(",\\s*"));
+	};
 	
-	
+	function arrayOfMatchesTemplate(regEx, _text, f){
+		regEx = new RegExp(regEx.source, 'g');
+		var result = []
+		do {
+			var match = regEx.exec(_text);
+			if (match) {
+				result.push(f(match));
+			}			
+		} while (match);
+		return result;
+
+	}
+
+
+
 	return{
 		variableOrConstantRegEx : variableOrConstantRegEx,
 		whiteSpacesRegEx : whiteSpacesRegEx,
@@ -26,16 +50,16 @@ function _service(){
 		factRegEx : factRegEx,
 		queryRegEx : queryRegEx,
 		arrayOfMatches : function(regEx, _text){
-			regEx = new RegExp(regEx.source, 'g');
-			var result = []
-			do {
-				var match = regEx.exec(_text);
-				if (match) {
-					result.push(match[0]);
-				}			
-			} while (match);
-			return result;
-		}	
+			var f = match => { return match[0]};
+			return arrayOfMatchesTemplate(regEx, _text, f);
+		},
+		predicateRegExByNameAndArity : function(predicateName, arity){
+			return new RegExp(predicateName + '\\(' + repeatAndSeparateNElementsByComma(variableOrConstantRegEx, arity).source  + '\\)');
+		},
+		arrayOfIndexes : function(regEx, _text){
+			var f = match => { return {start: match.index, end : match.index + match[0].length } };
+			return arrayOfMatchesTemplate(regEx, _text, f);
+		}
 	}
 }
 

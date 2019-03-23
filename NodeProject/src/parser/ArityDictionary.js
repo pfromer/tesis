@@ -1,3 +1,5 @@
+import { all } from "q";
+
 export function ArityDictionary(){
 
     Array.prototype.unique = function() {
@@ -40,12 +42,52 @@ export function ArityDictionary(){
             return {result : false, predicatesNotArityConsistent : predicatesNotArityConsistent }
         }
     }
+
+    this.getLessCommonArityLinesForPredicate = function(predicateName){
+
+        var aritiesByLine = this.dictionary[predicateName];
+        var aritiesCounts = {};
+        for (const lineNumber in aritiesByLine){
+            aritiesByLine[lineNumber].forEach(arity => {
+                if(aritiesCounts[arity]){
+                    aritiesCounts[arity]++
+                }
+                else{
+                    aritiesCounts[arity] = 1
+                }
+            })     
+        }
+
+        var mostCommon = Math.max.apply(null, Object.values(aritiesCounts));
+        var mostCommonArity = Object.keys(aritiesCounts).find(k => aritiesCounts[k] == mostCommon );
+        var lessCommonArities = Object.keys(aritiesCounts).filter(k => k != mostCommonArity);
+
+        var result = [];
+
+        lessCommonArities.forEach( a => 
+            {
+                for (const lineNumber in aritiesByLine){
+                    if (aritiesByLine[lineNumber].some(arity => arity == a)){
+                       result.push({lineNumber : lineNumber, arity : a}) 
+                    }
+                }     
+            }
+        )
+        return result;
+    }
 } 
 
 
 
 
 /*
+
+
+necesito: una funcion que dado un nombre de predicado y una aridad me arme una expresion regular
+necesito: marcar en rojo solo los menos comunes. si hay empate marco todos.
+necesito: una funcion que dado un nombre de predicado me diga en que lineas estan los menos comunes 
+          y la aridad  de cada uno
+necesito: buscar esas lineas y encontrar la posicion donde arranca y donde termina
 
                 for(const arity in allAritiesByLine[lineNumber]){
 

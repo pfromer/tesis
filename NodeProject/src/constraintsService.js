@@ -3,8 +3,6 @@ import { parse } from "./parser/parser";
 
 export function checkConstraints(component) {
     var program = parse(component.state.programEditorInstance.getValue());
-    
-    debugger
 
     if (program.canBeSubmitted()){
       return new Promise(resolve => {

@@ -23,7 +23,8 @@ class ContainerComponent extends React.Component {
       alert: {
         opened: false
       },
-      inconsitent: false
+      inconsitent: false,
+      markers: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -52,6 +53,9 @@ class ContainerComponent extends React.Component {
   onProgramEditorChange(){
     this.setAsConsistent();
     this.onHandleAlertClose();
+    this.state.markers.forEach(marker => marker.clear());
+    this.setState({markers : []})
+
   }
 
   onHandleAlertClose() {
