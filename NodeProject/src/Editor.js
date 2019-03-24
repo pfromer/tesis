@@ -11,29 +11,51 @@ export class Editor extends React.Component {
         super(props);
         this.instance = null;
         this.allRegex = props.allRegex;         
-        this.updateClass = this.updateClass.bind(this);
+        this.updateErrorColors = this.updateErrorColors.bind(this);
         this.refresh = this.refresh.bind(this);
+        this.markError = this.markError.bind(this);
+        this.removeError = this.removeError.bind(this);
+        this.removeClass = this.removeClass.bind(this);
+        this.iterateAllLines = this.iterateAllLines.bind(this);
       }
 
-      refresh(){        
+      refresh(){          
+        this.iterateAllLines(lineInfo => {
+            this.removeClass(lineInfo.line, "ungarded-tgd");
+            this.removeClass(lineInfo.line, "inconsistent-constraint");
+        })
+      }
+
+      iterateAllLines(f){
         var lineNumber = 0;
         var lineInfo = this.instance.lineInfo(lineNumber);
         while(lineInfo){
-            this.instance.removeLineClass(lineNumber, "text", "ungarded-tgd");
-            this.instance.removeLineClass(lineNumber, "text", "inconsistent-constraint");
+            f(lineInfo);
             lineNumber ++;
             lineInfo = this.instance.lineInfo(lineNumber);
         }
       }
 
-      updateClass(text, lineNumber){
+      updateErrorColors(text, lineNumber){
         if(!this.allRegex.some(r => r.test(text)))
         {
-            this.instance.addLineClass(lineNumber, "text", "syntax-error")
+            this.markError(lineNumber);
         }
         else{
-            this.instance.removeLineClass(lineNumber, "text", "syntax-error")
+            this.removeError(lineNumber);
         }
+      }
+
+      markError(lineNumber){
+        this.instance.addLineClass(lineNumber, "text", "syntax-error")
+      }
+
+      removeError(lineNumber){
+        this.instance.removeLineClass(lineNumber, "text", "syntax-error")
+      } 
+
+      removeClass(lineNumber, className){
+        this.instance.removeLineClass(lineNumber, "text", className)
       }
 
       
@@ -50,31 +72,26 @@ export class Editor extends React.Component {
             onChange={(editor, data, value) => {
 
                 this.props.onEditorChange();
-
                 this.refresh();
 
                 if(!data.origin || ["undo", "redo"].some(o => o == data.origin))
                 {
-                    var lineNumber = 0;
-                    var lineInfo = this.instance.lineInfo(lineNumber);
-                    while(lineInfo){
-                        this.updateClass(lineInfo.text, lineNumber);
-                        lineNumber ++;
-                        lineInfo = this.instance.lineInfo(lineNumber);
-                    }
+                    this.iterateAllLines(lineInfo => {
+                        this.updateErrorColors(lineInfo.text, lineInfo.line);
+                    })
                 }
 
                 else if(data.origin === "paste"){
                     var lineNumber = data.from.line;
                     data.text.forEach( (text, i) => {
-                        this.updateClass(text, lineNumber + i);
+                        this.updateErrorColors(text, lineNumber + i);
                     });
                 }
 
                 else{
                     var lineNumber = data.from.line;
                     var lineInfo = this.instance.lineInfo(lineNumber);
-                    this.updateClass(lineInfo.text, lineNumber);
+                    this.updateErrorColors(lineInfo.text, lineNumber);
                 }
             }}
           /> ) 
