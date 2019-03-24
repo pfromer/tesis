@@ -121,13 +121,20 @@ function markArityIssues(component){
       var lineText = component.state.programEditorInstance.getLine(arityLine.lineNumber);
       var regEx = regExModule.service.predicateRegExByNameAndArity(predicateName, arityLine.arity);
       var indexes = regExModule.service.arrayOfIndexes(regEx, lineText); 
-      indexes.forEach(i => {
+      /*markers.push(component.state.programEditorInstance.markText(
+         {line :"4", ch: 26}, 
+        {line :"4", ch : 32}, 
+        {className : 'arity-error'}))
         markers.push(component.state.programEditorInstance.markText(
-          {line :arityLine.lineNumber, ch: i.start}, 
-          {line :arityLine.lineNumber, ch : i.end}, 
+          {line :"5", ch: 0}, 
+          {line :"5", ch : 6}, 
+          {className : 'arity-error'}))*/
+      indexes.forEach(i => {
+        debugger
+        markers.push(component.state.programEditorInstance.markText(
+          {line :parseInt(arityLine.lineNumber), ch: i.start}, 
+          {line :parseInt(arityLine.lineNumber), ch : i.end}, 
           {className : 'arity-error'}))
-        
-
         })
     })
     })
