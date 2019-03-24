@@ -18,6 +18,14 @@ function getSettings(){
       callback: function(component){return markArityIssues(component) },
     };
 
+    var conflictingKeyErrorSettings =       { 
+      condition: function(component){return component.state.program.conflictingKeys.length > 0},
+      heading: 'Some of the keys in your program are conflicting with the TGDs.', 
+      lines: function(component) {return component.state.program.conflictingKeys.map(k => k.toString())},
+      proceedToExecute: false,
+      callback: function(component){return markConflictingKeys(component) },
+    };
+
     return{
     datalogFragmentSettings:[
       errorSyntaxSettings,
@@ -45,6 +53,7 @@ function getSettings(){
     checkConstraintsSettings:[
       errorSyntaxSettings,
       arityErrorSettings,
+      conflictingKeyErrorSettings,
       { 
         condition: function(component){return component.state.program.arityDictionary.aritiesAreConsistent().result == false },
         heading: 'The arguments length of the folowing predicates is not consistent through your program', 
@@ -88,6 +97,12 @@ function setAlert(component, settingsType){
     }
 }
 
+function markConflictingKeys(component){
+  component.state.program.conflictingKeys.forEach(key => {
+    component.state.programEditorInstance.addLineClass(key.lineNumber, "text", "ungarded-tgd");
+  })
+}
+
 function markUngardedTgds(component) {
   var lineNumber = 0;
   var lineInfo = component.state.programEditorInstance.lineInfo(lineNumber);
@@ -121,16 +136,7 @@ function markArityIssues(component){
       var lineText = component.state.programEditorInstance.getLine(arityLine.lineNumber);
       var regEx = regExModule.service.predicateRegExByNameAndArity(predicateName, arityLine.arity);
       var indexes = regExModule.service.arrayOfIndexes(regEx, lineText); 
-      /*markers.push(component.state.programEditorInstance.markText(
-         {line :"4", ch: 26}, 
-        {line :"4", ch : 32}, 
-        {className : 'arity-error'}))
-        markers.push(component.state.programEditorInstance.markText(
-          {line :"5", ch: 0}, 
-          {line :"5", ch : 6}, 
-          {className : 'arity-error'}))*/
       indexes.forEach(i => {
-        debugger
         markers.push(component.state.programEditorInstance.markText(
           {line :parseInt(arityLine.lineNumber), ch: i.start}, 
           {line :parseInt(arityLine.lineNumber), ch : i.end}, 
@@ -142,6 +148,7 @@ function markArityIssues(component){
 }
 
 export function validateBeforeSubmit(component){
+  component.state.program.fillConflictingKeys();
   var settings = getSettings()['checkConstraintsSettings'];
     var setting = settings.find(s => s.condition(component));
     if(setting && !setting.proceedToExecute){

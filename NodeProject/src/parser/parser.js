@@ -7,9 +7,8 @@ import * as queryModule from "./queryBuilder";
 import { executeQuery } from "../IrisCaller";
 import {ArityDictionary} from "./ArityDictionary";
 
-
 export function parse (program){
-	
+
 	var tgds = [];
 	var facts = [];
 	var ncs = [];
@@ -68,6 +67,7 @@ export function parse (program){
 				facts: facts,
 				programStructure : programStructure,
 				arityDictionary : arityDictionary,
+				conflictingKeys: [],
 				ungardedTgds : function() { return this.tgds.filter(t => !t.isGuarded)}, 
 				isGuarded : function() { return this.tgds.every(t => t.isGuarded)},
 				isLinear : function() { return this.tgds.every(t => t.body.predicates.length == 1)}, 
@@ -107,7 +107,19 @@ export function parse (program){
 					return this.queries.filter(i => i.type == "QUERY").map(i=> i.toString()).join("\n");
 				},
 				canBeSubmitted: function(){
-					return this.errors.length == 0 && this.arityDictionary.aritiesAreConsistent().result == true;
+					this.conflictingKeys = [];
+					this.fillConflictingKeys();					
+					return this.errors.length == 0 && this.arityDictionary.aritiesAreConsistent().result == true && this.conflictingKeys.length == 0;
+				},
+				fillConflictingKeys: function(){
+					this.keys.forEach(key => {
+						if(!this.isNonConflicting(key)){
+							this.conflictingKeys.push(key);
+						}
+					});
+				},
+				isNonConflicting(key){
+					return this.tgds.every(tgd => key.isNonConflicting(tgd));
 				}
 			};
 }

@@ -9,10 +9,12 @@ import { LoadProgramButton } from "./LoadProgramButton";
 import { Editor } from "./Editor";
 import { AlertDismissable  } from "./AlertDismissable";
 import * as regExModule from "./parser/regExService";
+import {UpdateArrayPrototype} from "./parser/ArrayUtils";
 
 export class MainComponent extends React.Component {
   constructor(props) {
     super(props); 
+    UpdateArrayPrototype();
   }
 
   render() {      

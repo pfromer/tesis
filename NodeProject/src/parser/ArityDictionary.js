@@ -2,12 +2,6 @@ import { all } from "q";
 
 export function ArityDictionary(){
 
-    Array.prototype.unique = function() {
-        return this.filter(function (value, index, self) { 
-          return self.indexOf(value) === index;
-        });
-    }
-
     this.dictionary = {};
 
     this.addArities = function(arities, lineNumber){

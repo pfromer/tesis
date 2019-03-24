@@ -59,7 +59,20 @@ function _builder() {
 						result[this.head.predicate.name] = [this.head.predicate.parameters.length];
 					}
 					return result;
-				} 
+				},
+				xPositionsInHead : function(){
+					var result = [];
+					this.head.predicate.parameters.forEach((parameter,index)=>{
+						if(parameter.type === "variable"){
+							result.push(index +1);
+						}
+					})
+					return result;
+				},
+				allNullsAppearOnlyOnceInTheHead : function(){
+					var allNullNames = this.head.predicate.parameters.filter(p => p.type == 'null').map(p => p.name);
+					return allNullNames.unique().length == allNullNames.length;
+				}
 			}
 		}
 	}
