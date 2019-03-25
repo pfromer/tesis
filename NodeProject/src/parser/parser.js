@@ -73,6 +73,19 @@ export function parse (program){
 				toStringWithoutNcsAndEgds : function(){
 					return this.tgds.concat(this.facts).concat(this.queries).join("\n");
 				},
+				conflictingKeys2: undefined,
+				get getConflictingKeys() {
+					debugger
+					if(this.conflictingKeys2 == undefined){
+						this.conflictingKeys2 = []
+						this.keys.forEach(key => {
+							if(!this.isNonConflicting(key)){
+								this.conflictingKeys2.push(key);
+							}
+						});
+					}
+					return this.conflictingKeys2; 
+				},
 				errors: errors,
 				consistencyPromise: function(){
 					var result = [];

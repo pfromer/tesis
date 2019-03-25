@@ -19,9 +19,9 @@ function getSettings(){
     };
 
     var conflictingKeyErrorSettings =       { 
-      condition: function(component){return component.state.program.conflictingKeys.length > 0},
+      condition: function(component){return component.state.program.getConflictingKeys.length > 0},
       heading: 'Some of the keys in your program are conflicting with the TGDs.', 
-      lines: function(component) {return component.state.program.conflictingKeys.map(k => k.toString())},
+      lines: function(component) {return component.state.program.getConflictingKeys.map(k => k.toString())},
       proceedToExecute: false,
       callback: function(component){return markConflictingKeys(component) },
     };
@@ -98,8 +98,7 @@ function setAlert(component, settingsType){
 }
 
 function markConflictingKeys(component){
-  debugger
-  component.state.program.conflictingKeys.forEach(key => {
+  component.state.program.getConflictingKeys.forEach(key => {
     component.state.programEditorInstance.addLineClass(key.lineNumber, "text", "ungarded-tgd");
   })
 }
@@ -149,7 +148,6 @@ function markArityIssues(component){
 }
 
 export function validateBeforeSubmit(component){
-  component.state.program.fillConflictingKeys();
   var settings = getSettings()['checkConstraintsSettings'];
     var setting = settings.find(s => s.condition(component));
     if(setting && !setting.proceedToExecute){

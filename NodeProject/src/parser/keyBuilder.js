@@ -52,7 +52,6 @@ function _builder(){
 						var arity = program.arityDictionary.dictionary[this.predicate][lineNumber][0];
 						return program.facts.concat(this.toQueryString(arity)).join("\n");
 					}
-
 			}
 		}
 	}
