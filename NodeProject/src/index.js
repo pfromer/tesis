@@ -131,7 +131,6 @@ class ContainerComponent extends React.Component {
     return (
     <MainComponent
       handleSubmit={this.handleSubmit}
-      inconsistencies={this.state.inconsistencies}
       programText={this.state.programText} 
       setProgramEditorInstace={this.setProgramEditorInstace}
       onProgramEditorChange={this.onProgramEditorChange} 

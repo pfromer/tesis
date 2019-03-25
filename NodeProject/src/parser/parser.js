@@ -74,7 +74,6 @@ export function parse (program){
 				},
 				conflictingKeys: undefined,
 				get getConflictingKeys() {
-					debugger
 					if(this.conflictingKeys2 == undefined){
 						this.conflictingKeys2 = []
 						this.keys.forEach(key => {

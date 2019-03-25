@@ -97,7 +97,7 @@ export class MainComponent extends React.Component {
         />
             <Results 
               data={this.props.program && this.props.program.errors.length == 0 && this.props.results} 
-              visible={this.props.program && this.props.program.errors == 0 && (!this.props.inconsistencies || this.props.inconsistencies.length == 0 )} 
+              visible={this.props.program && this.props.program.errors == 0} 
             />
           </Col>
         </Row>
