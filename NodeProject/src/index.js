@@ -22,8 +22,7 @@ class ContainerComponent extends React.Component {
         opened: false
       },
       inconsitent: false,
-      markers: [],
-      showIAR: false
+      markers: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -52,7 +51,7 @@ class ContainerComponent extends React.Component {
     this.setAsConsistent();
     this.onHandleAlertClose();
     this.state.markers.forEach(marker => marker.clear());
-    this.setState({markers : [], results : [], showIAR : false, program : undefined})
+    this.setState({markers : [], results : [],  program : undefined})
 
   }
 
@@ -119,7 +118,7 @@ class ContainerComponent extends React.Component {
     event.preventDefault();
     submit(this);
   }
-  
+
   render() {
     return (
     <MainComponent

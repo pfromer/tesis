@@ -117,10 +117,7 @@ function markUngardedTgds(component) {
 function markInconsistencies(component){
   component.state.program.processedInconsistencies.forEach(inconsitency => {
     component.state.programEditorInstance.addLineClass(inconsitency.nc.lineNumber, "text", "inconsistent-constraint");
-});
-  component.setState({
-    showIAR : true
-  })
+  });
 }
 
 function updateUngardedClass(text, lineNumber, component) {
