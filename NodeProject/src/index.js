@@ -27,7 +27,6 @@ class ContainerComponent extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.onFileLoaded = this.onFileLoaded.bind(this);
     this.setProgramEditorInstace = this.setProgramEditorInstace.bind(this);
     this.setQueriesEditorInstace = this.setQueriesEditorInstace.bind(this);
@@ -53,7 +52,7 @@ class ContainerComponent extends React.Component {
     this.setAsConsistent();
     this.onHandleAlertClose();
     this.state.markers.forEach(marker => marker.clear());
-    this.setState({markers : [], results : [], showIAR : false})
+    this.setState({markers : [], results : [], showIAR : false, program : undefined})
 
   }
 
@@ -90,7 +89,14 @@ class ContainerComponent extends React.Component {
   }
 
   checkDatalogFragment() {
-    var program = parse(this.state.programEditorInstance.getValue());
+    if (!this.state.program)
+    {
+      var program = parse(this.state.programEditorInstance.getValue());
+    }
+    else{
+      var program = this.state.program;
+    }
+        
     this.setState({
         program: program
       },
@@ -108,23 +114,12 @@ class ContainerComponent extends React.Component {
     })
   }
 
-  handleChange(event) {
-    this.setState({
-      programText: event.target.value
-    });
-  }
 
   handleSubmit(event) {
     event.preventDefault();
-    var program = parse(this.state.programEditorInstance.getValue() + "\n" + this.state.queriesEditorInstace.getValue());
-    this.setState({
-        program: program
-        }, 
-        function(){      
-          submit(this);
-        }
-      );
-    }
+    submit(this);
+  }
+  
   render() {
     return (
     <MainComponent
@@ -141,7 +136,7 @@ class ContainerComponent extends React.Component {
       results={this.state.results}
       alert={this.state.alert}
       checkConstraints={this.checkConstraints}
-      showIAR={this.state.showIAR && this.state.program && this.state.program.getProcessedInconsistencies && this.state.program.getProcessedInconsistencies.length > 0}
+      showIAR={this.state.program && this.state.program.getProcessedInconsistencies && this.state.program.getProcessedInconsistencies.length > 0}
     />
     );
   }

@@ -4,7 +4,6 @@ import { validateBeforeSubmit } from "./alertService";
 import { parse } from "./parser/parser";
 
 export function submit(component) {
-  component.state.program.getInconsistencies.then(res =>{
     component.setState({
       program: parse(component.state.programEditorInstance.getValue() + "\n" + component.state.queriesEditorInstace.getValue())
     },
@@ -20,6 +19,5 @@ export function submit(component) {
       )
     }
   );
-  })
 }
 
