@@ -4,6 +4,9 @@ export function ArityDictionary(){
 
     this.dictionary = {};
 
+    var self = this;
+    var consistentResult = undefined;
+
     this.addArities = function(arities, lineNumber){
         if(arities){
             for (const predicateName in arities){
@@ -17,24 +20,33 @@ export function ArityDictionary(){
     }
 
     this.aritiesAreConsistent = function(){
-        var predicatesNotArityConsistent = [];
-        for (const predicateName in this.dictionary) {
-            var allAritiesByLine = this.dictionary[predicateName];
-            var allArities = [];
-            for (const lineNumber in allAritiesByLine){
-                allArities = allArities.concat(allAritiesByLine[lineNumber]);              
+        debugger
+        if(!self.consistentResult)
+        {
+            var predicatesNotArityConsistent = [];
+            for (const predicateName in this.dictionary) {
+                var allAritiesByLine = this.dictionary[predicateName];
+                var allArities = [];
+                for (const lineNumber in allAritiesByLine){
+                    allArities = allArities.concat(allAritiesByLine[lineNumber]);              
+                }
+                if(allArities.unique().length > 1){
+                    predicatesNotArityConsistent.push(predicateName);
+                }
             }
-            if(allArities.unique().length > 1){
-                predicatesNotArityConsistent.push(predicateName);
-            }
-          }
 
-        if(predicatesNotArityConsistent.length == 0){
-            return {result : true}
+            if(predicatesNotArityConsistent.length == 0){
+                self.consistentResult = {result : true}
+            }
+            else{
+                self.consistentResult = {result : false, predicatesNotArityConsistent : predicatesNotArityConsistent }
+            }
+
         }
-        else{
-            return {result : false, predicatesNotArityConsistent : predicatesNotArityConsistent }
-        }
+        return self.consistentResult;
+
+
+        
     }
 
     this.getLessCommonArityLinesForPredicate = function(predicateName){

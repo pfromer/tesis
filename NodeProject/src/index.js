@@ -21,7 +21,6 @@ class ContainerComponent extends React.Component {
       alert: {
         opened: false
       },
-      inconsitent: false,
       markers: []
     };
 
@@ -32,23 +31,17 @@ class ContainerComponent extends React.Component {
     this.checkDatalogFragment = this.checkDatalogFragment.bind(this);
     this.onHandleAlertClose = this.onHandleAlertClose.bind(this);
     this.checkConstraints = this.checkConstraints.bind(this);
-    this.setAsConsistent = this.setAsConsistent.bind(this);
     this.onQueryEditorChange = this.onQueryEditorChange.bind(this);
     this.onProgramEditorChange = this.onProgramEditorChange.bind(this);
   }
 
-  setAsConsistent(){
-    this.setState({
-      inconsitent : false
-    })
-  }
+ 
 
   onQueryEditorChange(){
     this.onHandleAlertClose();
   }
 
   onProgramEditorChange(){
-    this.setAsConsistent();
     this.onHandleAlertClose();
     this.state.markers.forEach(marker => marker.clear());
     this.setState({markers : [], results : [],  program : undefined})
