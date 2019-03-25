@@ -1,0 +1,3 @@
+puede haber != en cualqeuir body? tgd, nc, query?
+
+sobre la condicion de non conflicting, porque tienen que no repetirse las variables nulas en la cabeza?

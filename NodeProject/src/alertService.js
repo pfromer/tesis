@@ -98,6 +98,7 @@ function setAlert(component, settingsType){
 }
 
 function markConflictingKeys(component){
+  debugger
   component.state.program.conflictingKeys.forEach(key => {
     component.state.programEditorInstance.addLineClass(key.lineNumber, "text", "ungarded-tgd");
   })

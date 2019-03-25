@@ -55,10 +55,6 @@ export function parse (program){
 		}
 	}
 
-	function toStringForNc(program, nc){
-		return program.tgds.concat(program.facts).concat(nc.toStringAsQuery()).join("\n");
-	}
-
 	return  { 	
 				tgds: tgds, 
 				ncs : ncs,
@@ -84,7 +80,7 @@ export function parse (program){
 					var getProm = function(nc) {
 						
 						return new Promise(resolve => {
-							executeQuery(toStringForNc(currentProgram, nc), currentProgram.isGuarded())
+							executeQuery(nc.getQueryForProgram(currentProgram), currentProgram.isGuarded())
 							.then(res => {
 								if(res.data[0].Results.length >0){
 									result.push({nc: nc, result: res.data })

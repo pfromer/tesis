@@ -20,6 +20,9 @@ function _builder(){
 					},
 					arities : function(){
 						return this.body.arities();
+					}, 
+					getQueryForProgram : function(program){
+						return program.tgds.concat(program.facts).concat(this.toStringAsQuery()).join("\n");
 					}
 					
 				}
