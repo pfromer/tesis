@@ -2,6 +2,7 @@
 import axios from "axios";
 
 export function executeQuery(programText, isGuarded){
+    debugger
     return(
         axios
         .get("http://localhost:8080/iris/test", {

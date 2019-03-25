@@ -24,7 +24,6 @@ function _builder(){
 					getQueryForProgram : function(program){
 						return program.tgds.concat(program.facts).concat(this.toStringAsQuery()).join("\n");
 					}
-					
 				}
 		}
 	}

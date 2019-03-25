@@ -90,7 +90,7 @@ export function parse (program){
 						})
 					}
 					let chain = Promise.resolve();
-					this.ncs.forEach((nc) => {
+					this.ncs.concat(this.keys).forEach((nc) => {
 						chain = chain.then(()=>getProm(nc))
 					});
 					return chain;
