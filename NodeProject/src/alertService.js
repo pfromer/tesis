@@ -65,7 +65,8 @@ function getSettings(){
         heading: "Not consistent.", 
         lines: function(component) {return ["The lines marked in green are not fulfilled by your program.", 
                 "You may execute a query under IAR semantics."]},
-        proceedToExecute: false
+        proceedToExecute: false,
+        callback: function(component){return markInconsistencies(component)}
       },
       { 
         condition: function(component){return !hasInconsistencies(component)},
@@ -78,7 +79,7 @@ function getSettings(){
 }
 
 function hasInconsistencies(component){
-    return component.state.inconsistencies && component.state.inconsistencies.length > 0;
+    return component.state.program.getProcessedInconsistencies.length > 0;
 }
 
 function setAlert(component, settingsType){
@@ -111,6 +112,15 @@ function markUngardedTgds(component) {
     lineNumber++;
     lineInfo = component.state.programEditorInstance.lineInfo(lineNumber);
   }
+}
+
+function markInconsistencies(component){
+  component.state.program.processedInconsistencies.forEach(inconsitency => {
+    component.state.programEditorInstance.addLineClass(inconsitency.nc.lineNumber, "text", "inconsistent-constraint");
+});
+  component.setState({
+    showIAR : true
+  })
 }
 
 function updateUngardedClass(text, lineNumber, component) {

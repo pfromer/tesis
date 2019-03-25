@@ -74,15 +74,44 @@ export function parse (program){
 				},
 				conflictingKeys: undefined,
 				get getConflictingKeys() {
-					if(this.conflictingKeys2 == undefined){
-						this.conflictingKeys2 = []
+					if(this.conflictingKeys == undefined){
+						this.conflictingKeys = []
 						this.keys.forEach(key => {
 							if(!this.isNonConflicting(key)){
-								this.conflictingKeys2.push(key);
+								this.conflictingKeys.push(key);
 							}
 						});
 					}
-					return this.conflictingKeys2; 
+					return this.conflictingKeys; 
+				},
+				inconsistencies: undefined,
+				get getInconsistencies() {
+					if(this.inconsistencies == undefined && this.canBeSubmitted()){
+						return new Promise(resolve => {
+							this.consistencyPromise().then(inconsistencies => {
+								if (inconsistencies && inconsistencies.length > 0) {
+									this.inconsistencies = inconsistencies;								     
+								}      
+								else{
+									this.inconsistencies = [];
+								}
+								resolve({inconsistencies: this.inconsistencies});
+							  })
+						  })
+					}
+					else{
+						return new Promise(resolve => {
+							resolve({inconsistencies: this.inconsistencies});
+						})
+					} 
+				},
+				processedInconsistencies: undefined,
+				get getProcessedInconsistencies(){
+					if(this.processedInconsistencies == undefined)
+					{
+						this.processedInconsistencies = this.inconsistencies;
+					}
+					return this.processedInconsistencies;
 				},
 				errors: errors,
 				consistencyPromise: function(){

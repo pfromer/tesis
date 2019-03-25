@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import { parse } from "./parser/parser";
 import { setDatalogFragmentAlert } from "./alertService";
-import { checkConstraints } from "./constraintsService";
 import { submit } from "./querySubmitter";
 import { MainComponent } from "./MainComponent";
 import { setConstraintsAlert } from "./alertService";
@@ -17,14 +16,14 @@ class ContainerComponent extends React.Component {
       queriesText: "",
       results: [],
       program: undefined,
-      inconsistencies: [],
       programEditorInstance: undefined,
       queriesEditorInstace: undefined,
       alert: {
         opened: false
       },
       inconsitent: false,
-      markers: []
+      markers: [],
+      showIAR: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -54,7 +53,7 @@ class ContainerComponent extends React.Component {
     this.setAsConsistent();
     this.onHandleAlertClose();
     this.state.markers.forEach(marker => marker.clear());
-    this.setState({markers : [], results : []})
+    this.setState({markers : [], results : [], showIAR : false})
 
   }
 
@@ -79,16 +78,15 @@ class ContainerComponent extends React.Component {
   }
 
   checkConstraints() {
-    checkConstraints(this).then(res =>{
-      this.setState({
-        inconsistencies: res.inconsistencies,
-        program: res.program
-      },
-      function () {
-        setConstraintsAlert(this);
+    this.setState({
+      program: parse(this.state.programEditorInstance.getValue())
+    },
+      function(){
+        this.state.program.getInconsistencies.then(res => {
+          setConstraintsAlert(this);
+        })
       }
-    );
-    })
+    )
   }
 
   checkDatalogFragment() {
@@ -143,7 +141,7 @@ class ContainerComponent extends React.Component {
       results={this.state.results}
       alert={this.state.alert}
       checkConstraints={this.checkConstraints}
-      showIAR={this.state.inconsitent}
+      showIAR={this.state.showIAR && this.state.program && this.state.program.getProcessedInconsistencies && this.state.program.getProcessedInconsistencies.length > 0}
     />
     );
   }
