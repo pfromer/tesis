@@ -54,7 +54,7 @@ class ContainerComponent extends React.Component {
     this.setAsConsistent();
     this.onHandleAlertClose();
     this.state.markers.forEach(marker => marker.clear());
-    this.setState({markers : []})
+    this.setState({markers : [], results : []})
 
   }
 
