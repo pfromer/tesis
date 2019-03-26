@@ -2,36 +2,135 @@ export async function intersectionRepairs(program){
    var aBox = program.facts;
    var repairs = [];
    var bigSubSets = allSubSetsWithOneLess(aBox);
-   var smallSubSets = listOfList(aBox);
-   var doNotAdd;
-   var bigSubSetsConsistentAndUnconsitent;
-   var smallSubsetsConsistentAndAndUnconsistent;
+   var smallSubSets = oneArrayByElement(aBox);
+   var doNotAdd = [];
+   var bigPromiseResult;
+   var smallPromiseResult;
    while(bigSubSets.length != 0){
       doNotAdd = [];
-      [bigSubSetsConsistentAndUnconsitent, smallSubsetsConsistentAndAndUnconsistent] = 
-         await Promise.all([separateOntoConsitentAndUnconsistent(bigSubSets), separateOntoConsitentAndUnconsistent(smallSubSets)]);
-         bigSubSets = [];
-         bigSubSetsConsistentAndUnconsitent.consistents.forEach(s =>{
-            allSubSetsWithOneLess(s).forEach(x =>{
-               doNotAdd.push(x);
-               repairs.push(x);
-            })
+      const [bigPromise, smallPromise] = 
+         await Promise.all([separateOntoConsitentAndUnconsistent(bigSubSets, program), 
+            separateOntoConsitentAndUnconsistent(smallSubSets, program)]);
+      bigSubSets = [];
+      debugger
+      
+
+      bigPromise.consistents.forEach(s =>{
+         repairs.push(s);
+         allSubSetsWithOneLess(s).forEach(x =>{
+            doNotAdd.push(x);
          })
-         bigSubSetsConsistentAndUnconsitent.inconsistents.forEach(s =>{
-            allSubSetsWithOneLess(s).forEach(x =>{
-               if(!doNotAdd.includes(x)){
-                  var substracted = x.substractAllFrom(smallSubsetsConsistentAndAndUnconsistent.inconsistents);
-                  if (substracted.length > 0){
-                     bigSubSets.push(x.substractAllFrom(smallSubsetsConsistentAndAndUnconsistent.inconsistents)) //agregar esto al prototype               
-                  }
-                  bigSubSets = bigSubSets.unique();
+      })
+
+      doNotAdd = doNotAdd.unique();
+      repairs = repairs.unique();
+
+      bigPromise.inconsistents.forEach(s =>{
+         allSubSetsWithOneLess(s).forEach(x =>{
+            if(!doNotAdd.includes(x)){
+               var substracted = substractAllFrom(x, smallPromise.inconsistents);
+               if (substracted.length > 0){
+                  bigSubSets.push(substracted) //agregar esto al prototype               
                }
-            })
+               bigSubSets = bigSubSets.unique();
+            }
          })
-         smallSubSets = addOneToEach(smallSubsetsConsistentAndAndUnconsistent.inconsistents, aBox);
-      }
-      return intersection(repairs); 
+      })
+      smallSubSets = addOneToEach(smallPromise.inconsistents, aBox);
+   }
+   return intersection(repairs); 
 }
+
+function addOneToEach(setOfSets, anotherSet){
+   var result = [];
+   setOfSets.forEach(s => {
+      anotherSet.forEach(v =>{
+         if(!s.includes(v)){
+            var a = [...s];
+            a.push(v);
+            result.push(a);
+         }
+      })    
+   })
+   return result.unique();
+}
+
+function intersection(setOfSets){
+   var result = [];
+
+   setOfSets.forEach(s => {
+      s.forEach(v => {
+         if(setOfSets.all(set => set.includes(v))){
+            result.add(v);
+         }
+      })
+   })
+   return result.unique();
+}
+
+function substractAllFrom(x, setOfSets){
+   setOfSets.forEach(s => {
+      x = x.filter(v => !s.includes(v));
+   })
+   return x;
+}
+
+function allSubSetsWithOneLess(set){
+   var result = [];
+   for(var i = 0; i<set.length; i++){
+      result.push(allBut(set, i)); 
+   }
+   return result;
+}
+
+function allBut(set, i){
+   return set.filter((val, index)=> index != i);
+}
+
+function oneArrayByElement(set){
+   return set.map(v => [v]);
+}
+
+async function separateOntoConsitentAndUnconsistent(bigSubSets, program){
+   var result = {};
+   var promises = [];
+   bigSubSets.forEach(s => {
+      var subProgram = Object.assign({}, program);
+      subProgram.facts = s;
+      promises.push(subProgram.getInconsistencies);
+   })
+   await Promise.all(promises).then(inconsistencies => {
+      result.consistents = bigSubSets.filter((value, index) => inconsistencies[index].inconsistencies.length == 0);
+      result.inconsistents = bigSubSets.filter((value, index) => inconsistencies[index].inconsistencies.length > 0);    
+   })
+
+   return result;
+}
+
+/*
+var p1 = Promise.resolve(3);
+var p2 = 1337;
+var p3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, "foo");
+}); 
+
+Promise.all([p1, p2, p3]).then(values => { 
+  console.log(values); // [3, 1337, "foo"] 
+});*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 input := todos los facts de la ABox

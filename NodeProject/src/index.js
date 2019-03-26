@@ -33,9 +33,7 @@ class ContainerComponent extends React.Component {
     this.checkConstraints = this.checkConstraints.bind(this);
     this.onQueryEditorChange = this.onQueryEditorChange.bind(this);
     this.onProgramEditorChange = this.onProgramEditorChange.bind(this);
-  }
-
- 
+  } 
 
   onQueryEditorChange(){
     this.onHandleAlertClose();
