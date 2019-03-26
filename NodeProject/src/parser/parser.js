@@ -117,8 +117,7 @@ export function parse (program){
 				consistencyPromise: function(){
 					var result = [];
 					var currentProgram = this;					
-					var getProm = function(nc) {
-						
+					var getProm = function(nc) {						
 						return new Promise(resolve => {
 							executeQuery(nc.getQueryForProgram(currentProgram), currentProgram.isGuarded())
 							.then(res => {
