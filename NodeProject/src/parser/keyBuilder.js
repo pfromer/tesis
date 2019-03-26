@@ -43,9 +43,14 @@ function _builder(){
 							}
 							i++;
 						}
+						
+						var queries = [];
 
-						var body = [p1, p2, inequalities.join(", ")].join(", ");
-						return "?- " + body + ".";
+						inequalities.forEach( ineq => {
+							queries.push("?- " + [p1, p2, ineq].join(", ") + ".");
+						})
+
+						return queries.join("\n");
 					}, 
 					getQueryForProgram : function(program){
 						var lineNumber = Object.keys(program.arityDictionary.dictionary[this.predicate])[0];

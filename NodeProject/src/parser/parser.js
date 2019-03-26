@@ -122,7 +122,7 @@ export function parse (program){
 						return new Promise(resolve => {
 							executeQuery(nc.getQueryForProgram(currentProgram), currentProgram.isGuarded())
 							.then(res => {
-								if(res.data[0].Results.length >0){
+								if(res.data.some(r => r.Results.length >0)){
 									result.push({nc: nc, result: res.data })
 								}
 								resolve(result);						

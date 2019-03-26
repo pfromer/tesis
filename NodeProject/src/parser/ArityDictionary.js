@@ -1,5 +1,3 @@
-import { all } from "q";
-
 export function ArityDictionary(){
 
     this.dictionary = {};
@@ -20,7 +18,6 @@ export function ArityDictionary(){
     }
 
     this.aritiesAreConsistent = function(){
-        debugger
         if(!self.consistentResult)
         {
             var predicatesNotArityConsistent = [];
@@ -41,12 +38,8 @@ export function ArityDictionary(){
             else{
                 self.consistentResult = {result : false, predicatesNotArityConsistent : predicatesNotArityConsistent }
             }
-
         }
         return self.consistentResult;
-
-
-        
     }
 
     this.getLessCommonArityLinesForPredicate = function(predicateName){
