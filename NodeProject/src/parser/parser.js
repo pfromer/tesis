@@ -61,6 +61,11 @@ export function parse (program){
 				keys: keys,
 				queries : queries, 
 				facts: facts,
+				set setFacts(newFacts){
+					this.inconsistencies = undefined;
+					this.processedInconsistencies = undefined;
+					this.facts = newFacts;
+				},
 				programStructure : programStructure,
 				arityDictionary : arityDictionary,
 				ungardedTgds : function() { return this.tgds.filter(t => !t.isGuarded)}, 

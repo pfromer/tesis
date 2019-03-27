@@ -4,26 +4,23 @@ export async function intersectionRepairs(program){
    var bigSubSets = allSubSetsWithOneLess(aBox);
    var smallSubSets = oneArrayByElement(aBox);
    var doNotAdd = [];
-   var bigPromiseResult;
-   var smallPromiseResult;
    while(bigSubSets.length != 0){
       doNotAdd = [];
       const [bigPromise, smallPromise] = 
          await Promise.all([separateOntoConsitentAndUnconsistent(bigSubSets, program), 
             separateOntoConsitentAndUnconsistent(smallSubSets, program)]);
       bigSubSets = [];
-      debugger
       
 
       bigPromise.consistents.forEach(s =>{
-         repairs.push(s);
+         repairs = addRepair(repairs, s);
          allSubSetsWithOneLess(s).forEach(x =>{
             doNotAdd.push(x);
          })
       })
 
       doNotAdd = doNotAdd.unique();
-      repairs = repairs.unique();
+      repairs = uniqueForArrayOfArrays(repairs);
 
       bigPromise.inconsistents.forEach(s =>{
          allSubSetsWithOneLess(s).forEach(x =>{
@@ -32,12 +29,13 @@ export async function intersectionRepairs(program){
                if (substracted.length > 0){
                   bigSubSets.push(substracted) //agregar esto al prototype               
                }
-               bigSubSets = bigSubSets.unique();
+               bigSubSets = uniqueForArrayOfArrays(bigSubSets);
             }
          })
       })
       smallSubSets = addOneToEach(smallPromise.inconsistents, aBox);
    }
+   
    return intersection(repairs); 
 }
 
@@ -52,7 +50,7 @@ function addOneToEach(setOfSets, anotherSet){
          }
       })    
    })
-   return result.unique();
+   return uniqueForArrayOfArrays(result);
 }
 
 function intersection(setOfSets){
@@ -60,8 +58,8 @@ function intersection(setOfSets){
 
    setOfSets.forEach(s => {
       s.forEach(v => {
-         if(setOfSets.all(set => set.includes(v))){
-            result.add(v);
+         if(setOfSets.every(set => set.includes(v))){
+            result.push(v);
          }
       })
    })
@@ -91,12 +89,24 @@ function oneArrayByElement(set){
    return set.map(v => [v]);
 }
 
+function addRepair(repairs, r){
+   repairs = repairs.filter(x => !isProperSubSetOf(x,r));
+   if(!repairs.some(x => isProperSubSetOf(r,x))){
+      repairs.push(r);
+   }
+   return repairs;
+}
+
 async function separateOntoConsitentAndUnconsistent(bigSubSets, program){
    var result = {};
    var promises = [];
    bigSubSets.forEach(s => {
-      var subProgram = Object.assign({}, program);
-      subProgram.facts = s;
+      //var subProgram = Object.assign({}, program);
+      var subProgram = Object.create(
+         Object.getPrototypeOf(program), 
+         Object.getOwnPropertyDescriptors(program) 
+     );
+      subProgram.setFacts = s;
       promises.push(subProgram.getInconsistencies);
    })
    await Promise.all(promises).then(inconsistencies => {
@@ -105,6 +115,23 @@ async function separateOntoConsitentAndUnconsistent(bigSubSets, program){
    })
 
    return result;
+}
+
+function uniqueForArrayOfArrays(arrayOfArrays){
+   return arrayOfArrays.filter((a, index) => !includedIn(arrayOfArrays.filter((a2,index2) => index2 > index),a));
+}
+
+function includedIn(arrayOfArrays,arr){
+   return arrayOfArrays.some(a => areTheSame(a,arr));
+}
+
+//asuming they have no repated elements
+function areTheSame(a1, a2){
+   return a1.length == a2.length && a1.every(a => a2.includes(a));
+}
+
+function isProperSubSetOf(a1, a2){
+   return a1.length < a2.length && a1.every(a => a2.includes(a));
 }
 
 /*
