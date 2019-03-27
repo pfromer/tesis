@@ -21,7 +21,8 @@ class ContainerComponent extends React.Component {
       alert: {
         opened: false
       },
-      markers: []
+      markers: [],
+      intersectionRepairs: undefined
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,7 +43,7 @@ class ContainerComponent extends React.Component {
   onProgramEditorChange(){
     this.onHandleAlertClose();
     this.state.markers.forEach(marker => marker.clear());
-    this.setState({markers : [], results : [],  program : undefined})
+    this.setState({markers : [], results : [],  program : undefined, intersectionRepairs : undefined})
 
   }
 

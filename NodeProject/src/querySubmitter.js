@@ -6,12 +6,17 @@ import { intersectionRepairs } from "./IARService";
 export async function submit(component) {
   if(component.state.program && component.state.program.getProcessedInconsistencies && 
     component.state.program.getProcessedInconsistencies.length > 0){
-      var program = parse(component.state.programEditorInstance.getValue() + "\n" + component.state.queriesEditorInstace.getValue())
-      var intersection = await intersectionRepairs(program);
+      var program = parse(component.state.programEditorInstance.getValue() + "\n" + component.state.queriesEditorInstace.getValue())      
+      if(component.state.intersectionRepairs){
+        var intersection = component.state.intersectionRepairs
+      }
+      else{
+        var intersection = await intersectionRepairs(program);
+      }
       program.facts = intersection;
+      component.setState({ intersectionRepairs: intersection });
       executeQuery(program.toStringWithoutNcsAndEgds(), program.isGuarded())
       .then(res => {
-        debugger
         component.setState({ results: res.data });
       });
   }

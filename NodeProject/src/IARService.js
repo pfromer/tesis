@@ -36,6 +36,7 @@ export async function intersectionRepairs(program){
       smallSubSets = addOneToEach(smallPromise.inconsistents, aBox);
    }
    
+   debugger
    return intersection(repairs); 
 }
 
