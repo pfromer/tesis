@@ -1,0 +1,41 @@
+input: program
+
+var top = todosLosSubSetDeUnoMenos(program.Abox);
+var bottom = todosLosSetDeUnElemento(program.Abox);
+var minimalesIncosistentes = vacio;
+var repairsChicos = vacio;
+var repairsGrandes = vacio;
+var topMenos1 = vacio;
+var bottomMasUno = vacio;
+
+while(top != vacio and bottom != vacio and top.first.length != bottom.first.length){
+
+	para cada set s en top:
+		si s es superCojunto de un minimalInconsistente:
+			s.consistentStatus = inconsistent:
+		si s es subConjunto de un repairGrande
+			s.consistentStatus = consistent;
+	para cada s en top con consistentStatus en undefined: 
+		fijarse si s es consistente o no.
+		si es consistente: 
+			s.consistentStatus = consistent.
+			agregar s a repairsGrandes, chequeando que no sea sub conjunto de algun repair existente
+		si no
+			s.consistenteStatus = unconsistent.
+	
+	topMenos1 := todos los subSet de la aBox de tamaño top.first - 1 
+	
+	armarGrafo(top, topMenos1)	
+	
+	top = todos los que estan en top-1 que no sean hijos de alguno que este en top y sea consistente
+	
+	
+	
+	
+	
+	
+	
+
+
+}
+ 

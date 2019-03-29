@@ -1,0 +1,27 @@
+pasar el mensaje de warning de conflicting keys solo cuando se aprieta en execute query
+
+cuando clickea en check consistency se fija si son consistentes independiependientemene de que sean conflicitivas 
+
+The arguments length of the folowing predicates is not consistent through your program:
+
+The arity of the following predicates is ambigous
+
+mejoras para el algoritmo:
+si hay algun predicado que no aparece ni en una NC ni en una TGD
+
+ese no lo 
+
+
+se pueden dividir los preduicados del programa entre positivos y negativos
+
+positivos:
+si aparecen en la cabeza de una tgd
+
+negativos
+cuando aparecen en NC o en el cuerpo de una TGD
+
+
+si el predicado es siemrpe positivo no lo consideor de algo de IAR y lo meto en al interseccion al final
+al fiunal de todo hago una query de ese predicado con todo variables y la respueta entra en el IAR
+
+ 
