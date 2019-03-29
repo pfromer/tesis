@@ -15,6 +15,8 @@ while(top != vacio and bottom != vacio and top.first.length != bottom.first.leng
 			s.consistentStatus = inconsistent:
 		si s es subConjunto de un repairGrande
 			s.consistentStatus = consistent;
+		si s es superConjunto de un repairChico:
+			s.consistentStatus = inconsistent
 	para cada s en top con consistentStatus en undefined: 
 		fijarse si s es consistente o no.
 		si es consistente: 
