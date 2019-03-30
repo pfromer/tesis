@@ -1,6 +1,5 @@
-package test;
+package api;
 
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,23 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.deri.iris.Configuration;
 import org.deri.iris.KnowledgeBaseFactory;
-import org.deri.iris.demo.Demo;
 import org.deri.iris.demo.ProgramExecutor;
 import org.deri.iris.demo.QueryResult;
-import org.deri.iris.evaluation.forewriting.SQLRewritingEvaluationStrategyFactory;
 import org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategyFactory;
-import org.deri.iris.evaluation.stratifiedbottomup.guardednaive.GuardedNaiveEvaluatorFactory;
 import org.deri.iris.evaluation.stratifiedbottomup.naive.NaiveEvaluatorFactory;
 import org.deri.iris.rules.safety.GuardedRuleSafetyProcessor;
-import org.deri.iris.rules.safety.LinearReducibleRuleSafetyProcessor;
 import org.json.*;
 import com.google.gson.*;
 
-/**
- * Servlet implementation class Test
- */
-@WebServlet(name = "test", urlPatterns = { "/test" })
-public class Test extends HttpServlet {
+
+@WebServlet(name = "iar", urlPatterns = { "/iar" })
+public class IARExecutionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -59,6 +52,8 @@ public class Test extends HttpServlet {
 		        System.out.println("not guarded program");
 		    }
 			
+			System.out.println("jajaja");
+			
 			ProgramExecutor executor = new ProgramExecutor(program, configuration);
 			
 			ArrayList<QueryResult> output = executor.getResults();
@@ -87,3 +82,4 @@ public class Test extends HttpServlet {
 	}
 
 }
+
