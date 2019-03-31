@@ -1,4 +1,36 @@
+import { getIarRepairs } from "./IrisCaller";
+
 export async function intersectionRepairs(program){
+
+   var facts = program.facts.map(f => f.toString());
+   var tgds = program.tgds.map(t => t.toString());
+   var ncs = program.ncs.map(nc => nc.toStringAsQuery()).concat(program.keys.map(k => k.toQueryString()));
+
+   var intersection = [];
+
+   await getIarRepairs(facts,tgds, ncs, program.isGuarded())
+   .then(res => {
+      intersection = res.data;
+   });
+
+   return intersection
+}
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    var aBox = program.facts;
    var repairs = [];
    var bigSubSets = allSubSetsWithOneLess(aBox);

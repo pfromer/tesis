@@ -36,11 +36,12 @@ public class IARExecutionServlet extends HttpServlet {
 			
 			final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();
 
-			String json = request.getParameter("test"); 
+			String facts = request.getParameter("facts");
+			String tgds = request.getParameter("tgds"); 
+			String ncsAsQueries = request.getParameter("ncsAsQueries"); 
+			String isGuarded = request.getParameter("isGuarded"); 
 			
-			JSONObject obj = new JSONObject(json);
-			String program = obj.getString("program");
-			Boolean isGuarded = obj.getBoolean("isGuarded");
+		
 			
 			
 			if(isGuarded) {
@@ -54,9 +55,19 @@ public class IARExecutionServlet extends HttpServlet {
 			
 			System.out.println("jajaja");
 			
-			ProgramExecutor executor = new ProgramExecutor(program, configuration);
 			
-			ArrayList<QueryResult> output = executor.getResults();
+			ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
+			
+			
+			ArrayList<String> array1 = new ArrayList<String>();
+			array1.add("r1('a').");
+			array1.add("r1('b').");
+			
+			ArrayList<String> array2 = new ArrayList<String>();
+			array1.add("r1('c').");
+			
+			output.add(array1);
+			output.add(array2);
 			
 			Gson gson = new Gson();
 			String jsonOutput = gson.toJson(output);
