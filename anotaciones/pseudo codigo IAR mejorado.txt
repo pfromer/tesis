@@ -16,11 +16,12 @@ para cada s en bottom marcado en consistentStatus en undefined
 	si no:
 		s.consistentSatus = consistent
 
-para cada set s en top:
-	si s es superCojunto de un minimalInconsistente:
-		s.consistentStatus = inconsistent
 
 while(top != vacio and bottom != vacio and top.first.length != bottom.first.length){
+			
+	para cada set s en top:
+	si s es superCojunto de un minimalInconsistente:
+		s.consistentStatus = inconsistent		
 			
 	para cada s en top con consistentStatus en undefined: 
 		fijarse si s es consistente (tirando las queries).
@@ -29,33 +30,33 @@ while(top != vacio and bottom != vacio and top.first.length != bottom.first.leng
 			agregar s a repairsGrandes// no hace falta mirar que no sea subconjutno de algun repair existente, pues eso lo filtro cuando elijo los hijos de topMenos1
 		si no
 			s.consistenteStatus = inconsistent.
+			agregar s a minimalesInconsistentes
 	
 	topMenos1 := todos los subSet que puedo generar sacando un elemento a 
 				los set de top inconsistentes, siempre y cuando no sean sub conjunto de un repair grande
-	
-	para cada set s en topMenos1:
-		si s es superCojunto de un minimalInconsistente:
-			s.consistentStatus = inconsistent:		
-		/*si s es superConjunto de un repairChico: //esto en realidad no hace falta verlo porque ya hubiera caido en el caso de superCojunto de minimal inconsistnte
-			s.consistentStatus = inconsistent*/
 	
 	top = topMenos1
 	
 	
 	bottomMasUno = todos los subset de la ABox que se pueden formar agregnado un elemento 
-				de la ABox a los consistentes de bottom siempre y cuando no sean superConjunto de un minimal inconsistente. ir armando el grafo (hijo-padre)
+				de la ABox a los consistentes de bottom siempre y cuando no sean superConjunto de un minimal inconsistente. 
 				
-	//el grafo se arma usando el objeto AboxSubSet, donde cada uno tiene una lista de hijos y de padres
+	//ir armando el grafo (hijo-padre). // el objeto AboxSubSet, donde cada uno tiene una lista de hijos y de padres
 
 	
 	para cada s en bottomMasUno:
 		si s es subConbj de un maxRepair
 			s.consistentStatus = consistent
 		si no:
-			tirar query y fijarse si es consistente o no y marcarlo
-			si es inconsistene agregarlo a minimalesIncosistentes
+			tirar query y fijarse si es consistnete
+			si s es consistente:
+				s.consistentSatus = consistente
+			si no
+				s.consistentSatus = inconsistent
+				agregar s a minimales inconsistentes
 	
-	para todos los s del grafo de bottom consistentes cuyos padres son todos inconsistentes
+		
+	para todos los s en bottom consistentes cuyos padres son todos inconsistentes //esto lo miro rapido gracias al grafo
 		agregar s a repairsChicos
 	
 	bottom = bottomMasUno que sean consistentes
