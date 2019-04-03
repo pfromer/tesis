@@ -8,11 +8,11 @@ var repairsGrandes = vacio;
 var topMenos1 = vacio;
 var bottomMasUno = vacio;
 
-para cada s en bottom marcado en consistentStatus en undefined
-	fijarase si es consistente o no (lanzando la query)
-	si s es inconsistent:
+para cada s en bottom:
+	fijarase si es consistente o no
+	si s es inconsistente:
 		s.consistentStatus = inconsistent
-		si s no es superConj de un minimalInconsistente agregar s a minimalesIncosistentes
+		agregar s a minimalesInconsistentes
 	si no:
 		s.consistentSatus = consistent
 
@@ -29,13 +29,10 @@ while(top != vacio and bottom != vacio and top.first.length != bottom.first.leng
 			s.consistentStatus = consistent.
 			agregar s a repairsGrandes// no hace falta mirar que no sea subconjutno de algun repair existente, pues eso lo filtro cuando elijo los hijos de topMenos1
 		si no
-			s.consistenteStatus = inconsistent.
-			agregar s a minimalesInconsistentes
+			s.consistenteStatus = inconsistent. //no necesariamente es inconsistente minimal.
 	
-	topMenos1 := todos los subSet que puedo generar sacando un elemento a 
-				los set de top inconsistentes, siempre y cuando no sean sub conjunto de un repair grande
-	
-	top = topMenos1
+	top := todos los subSet que puedo generar sacando un elemento a 
+				los set de top inconsistentes, siempre y cuando no sean sub conjunto de un repair grande.
 	
 	
 	bottomMasUno = todos los subset de la ABox que se pueden formar agregnado un elemento 
@@ -45,7 +42,7 @@ while(top != vacio and bottom != vacio and top.first.length != bottom.first.leng
 
 	
 	para cada s en bottomMasUno:
-		si s es subConbj de un maxRepair
+		si s es subConbj de un repairGrande
 			s.consistentStatus = consistent
 		si no:
 			tirar query y fijarse si es consistnete
@@ -61,4 +58,5 @@ while(top != vacio and bottom != vacio and top.first.length != bottom.first.leng
 	
 	bottom = bottomMasUno que sean consistentes
 }
- 
+
+return {repairs: repairsChicos U repairsGrandes, intersection : intersection(this.repairs) }
