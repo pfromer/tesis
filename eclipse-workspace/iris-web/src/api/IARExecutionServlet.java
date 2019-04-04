@@ -37,43 +37,21 @@ public class IARExecutionServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		try {
 			
-			 BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
-		        String json = "";
-		        if(br != null){
-		            json = br.readLine();
-		        }
-		        
-		        
-		        
-		        Gson gson = new Gson();
+			BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+	        String json = "";
+	        if(br != null){
+	            json = br.readLine();
+	        }
+	        
+	        Gson gson = new Gson();
 
-				// JSON to Map
-				IARRequestBody bodyObject = gson.fromJson(json, IARRequestBody.class);
-		        
-		        
-		        
-		        
-		        
-		        
+			Program program = gson.fromJson(json, Program.class);
 			
+			IARResolver solver = new IARResolver(program);
 			
-			System.out.println("jajaja");
+			ArrayList<ArrayList<String>> repairs = solver.getRepairs();			
 			
-			
-			ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
-			
-			
-			ArrayList<String> array1 = new ArrayList<String>();
-			array1.add("r1('a').");
-			array1.add("r1('b').");
-			
-			ArrayList<String> array2 = new ArrayList<String>();
-			array1.add("r1('c').");
-			
-			output.add(array1);
-			output.add(array2);
-			
-			String jsonOutput = gson.toJson(output);
+			String jsonOutput = gson.toJson(repairs);
 			response.getWriter().append(jsonOutput);
 
 		} catch (Exception e) {

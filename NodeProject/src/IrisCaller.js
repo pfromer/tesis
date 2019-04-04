@@ -18,29 +18,13 @@ export function executeQuery(programText, isGuarded){
 export async function getIarRepairs(facts, tgds, ncsAsQueries, isGuarded){
 
     var params = {
-        "facts": ["p(?x,?y)","p2('a',?y)"],
-        "tgds": ["p(?x,?y)","p2('a',?y)"],
-        "ncsAsQueries":  ["p(?x,?y)","p2('a',?y)"],
-        "isGuarded":true }
+        "facts": facts,
+        "tgds": tgds,
+        "ncsAsQueries":  ncsAsQueries,
+        "isGuarded": isGuarded  
+    }
 
-    
-   
-
-    var result = [];
-
-    /*var url = new URL("http://localhost:8080/iris/iar");
-
-    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-    
-    await fetch(url).then(
-        response => {
-        }
-    )*/
-
-    /*var formData = new FormData();
-
-    formData.append('facts', ["p(?x,?y)","p2('a',?y)"]);
-    formData.append('tgds', 'sdaf');*/
+    var result = [];   
 
 
     fetch('http://localhost:8080/iris/iar', {
@@ -51,19 +35,6 @@ export async function getIarRepairs(facts, tgds, ncsAsQueries, isGuarded){
       });
 
     return result;
-
-
-
-
-
-
-
-
-
-
-
-    
-
 
 
 
