@@ -8,11 +8,8 @@ export async function intersectionRepairs(program){
 
    var intersection = [];
 
-   await getIarRepairs(facts,tgds, ncs, program.isGuarded())
-   .then(res => {
-      intersection = res.data;
-   });
-
+   var intersection = await getIarRepairs(facts,tgds, ncs, program.isGuarded());
+   
    return intersection
 }
 /*

@@ -1,7 +1,9 @@
 package api;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -18,6 +20,7 @@ import org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationS
 import org.deri.iris.evaluation.stratifiedbottomup.naive.NaiveEvaluatorFactory;
 import org.deri.iris.rules.safety.GuardedRuleSafetyProcessor;
 import org.json.*;
+
 import com.google.gson.*;
 
 
@@ -29,29 +32,30 @@ public class IARExecutionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
 			
-			final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();
+			 BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+		        String json = "";
+		        if(br != null){
+		            json = br.readLine();
+		        }
+		        
+		        
+		        
+		        Gson gson = new Gson();
 
-			String facts = request.getParameter("facts");
-			String tgds = request.getParameter("tgds"); 
-			String ncsAsQueries = request.getParameter("ncsAsQueries"); 
-			String isGuarded = request.getParameter("isGuarded"); 
+				// JSON to Map
+				IARRequestBody bodyObject = gson.fromJson(json, IARRequestBody.class);
+		        
+		        
+		        
+		        
+		        
+		        
 			
-		
-			
-			
-			if(isGuarded) {
-				configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
-				System.out.println("guarded program");
-			}
-			else {
-		        configuration.evaluationStrategyFactory = new StratifiedBottomUpEvaluationStrategyFactory(new NaiveEvaluatorFactory());
-		        System.out.println("not guarded program");
-		    }
 			
 			System.out.println("jajaja");
 			
@@ -69,7 +73,6 @@ public class IARExecutionServlet extends HttpServlet {
 			output.add(array1);
 			output.add(array2);
 			
-			Gson gson = new Gson();
 			String jsonOutput = gson.toJson(output);
 			response.getWriter().append(jsonOutput);
 
@@ -78,19 +81,5 @@ public class IARExecutionServlet extends HttpServlet {
 
 		}
 	}
-
-	private static final String loadFile(final String filename) throws IOException {
-		final FileReader r = new FileReader(filename);
-
-		final StringBuilder builder = new StringBuilder();
-
-		int ch = -1;
-		while ((ch = r.read()) >= 0) {
-			builder.append((char) ch);
-		}
-		r.close();
-		return builder.toString();
-	}
-
 }
 
