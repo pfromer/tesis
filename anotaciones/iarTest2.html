@@ -1,0 +1,33 @@
+    <html>
+	<head>
+		<script type="text/javascript">
+            function isUnique(){
+			
+			//["r1('1').", "r1('2').", "r1('3').","r1('4').","r1('5').","r2('a').", "r2('b')."]
+			var facts = ["r1('1').", "r1('2').", "r1('3').","r1('4').","r1('5').","r2('a').", "r2('b')."]
+			var ncsAsQueries = ["?- r1(?x), r2('b').", "?- r2('a'), r2('b')."]
+			
+			
+			
+			var params = {facts: facts,
+						  isGuarded: true,
+						  ncsAsQueries: ncsAsQueries,
+						  tgds: []}
+			
+			
+					fetch('http://localhost:8080/iris/iar', {
+						method: 'post',
+						body: JSON.stringify(params) 
+						}).then(function(response) {
+						return response.json();
+					  });
+            }         
+		</script>
+	
+	</head>
+	<body>
+		<input type="text" id="word"/>
+	    <input type="button" onclick="isUnique()" value="is unique" />
+	</body>
+</html>
+	

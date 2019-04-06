@@ -62,7 +62,6 @@ public class SemiNaiveEvaluator implements IRuleEvaluator {
 
 	
     int i = 0;
-    System.out.println("holaassa");
     /*for (;;) {
     	
       newTuples = false;

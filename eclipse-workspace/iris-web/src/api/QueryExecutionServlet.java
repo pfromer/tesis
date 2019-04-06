@@ -45,14 +45,11 @@ public class QueryExecutionServlet extends HttpServlet {
 			
 			if(isGuarded) {
 				configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
-				System.out.println("guarded program");
 			}
 			else {
 		        configuration.evaluationStrategyFactory = new StratifiedBottomUpEvaluationStrategyFactory(new NaiveEvaluatorFactory());
-		        System.out.println("not guarded program");
 		    }
 			
-			System.out.println("jajaja");
 			
 			ProgramExecutor executor = new ProgramExecutor(program, configuration);
 			

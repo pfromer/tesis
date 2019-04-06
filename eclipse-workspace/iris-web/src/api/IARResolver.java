@@ -1,8 +1,10 @@
 package api;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.deri.iris.Configuration;
 import org.deri.iris.KnowledgeBaseFactory;
@@ -12,19 +14,23 @@ import org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationS
 import org.deri.iris.evaluation.stratifiedbottomup.naive.NaiveEvaluatorFactory;
 import org.deri.iris.rules.safety.GuardedRuleSafetyProcessor;
 
+import com.sun.glass.ui.Size;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class IARResolver {
 	
-	private List<Fact> ABox;
+	private AboxSubSet ABox;
 	private List<String> Tgds;
 	private List<String> ncsAsQueries;
 	private Boolean isGuarded;
+	private ArrayList<AboxSubSet> bigRepairs;
+	private ArrayList<AboxSubSet> minimalInconsistents; 
 	
 	public IARResolver(Program program) {
 		
 		AtomicInteger index = new AtomicInteger();		
-		this.ABox = program.facts.stream().map( f -> new Fact(f,index.getAndIncrement())).collect(Collectors.toList());
+		this.ABox = new AboxSubSet(program.facts.stream().map(f -> new Fact(f,index.getAndIncrement())).collect(Collectors.toList()));
 		this.Tgds = program.tgds;
 		this.ncsAsQueries = program.ncsAsQueries;
 		this.isGuarded = program.isGuarded;
@@ -32,13 +38,11 @@ public class IARResolver {
 	}
 
 	public ArrayList<AboxSubSet> getRepairs() {
-		List<AboxSubSet> top = allSubSetsWithOneLess();
-		List<AboxSubSet> bottom = allSubSetsWithOneElement();
-		ArrayList<AboxSubSet> minimalInconsistents = new ArrayList<AboxSubSet>();
+		List<AboxSubSet> top = this.ABox.allSubSetsWithOneLess();
+		List<AboxSubSet> bottom = this.ABox.allSubSetsWithOneElement();
+		this.minimalInconsistents = new ArrayList<AboxSubSet>();
 		ArrayList<AboxSubSet> smallRepairs = new ArrayList<AboxSubSet>();
-		ArrayList<AboxSubSet> bigRepairs = new ArrayList<AboxSubSet>();
-		ArrayList<AboxSubSet> topLessOne = new ArrayList<AboxSubSet>();
-		ArrayList<AboxSubSet> bottomPlusOne = new ArrayList<AboxSubSet>();
+		this.bigRepairs = new ArrayList<AboxSubSet>();
 		
 		bottom.forEach(a -> {
 			a.ConsistentStatus = IsConsistent(a);
@@ -46,42 +50,134 @@ public class IARResolver {
 				minimalInconsistents.add(a);			
 		});
 		
-		while(top.size() != 0 && bottom.size() != 0 && top.get(0).Facts.size() != bottom.get(0).Facts.size()) {
+		bottom = bottom.stream().filter(s -> s.ConsistentStatus).collect(Collectors.toList());
+		
+		//si algun top es superconjuntop de un minimal inconsistente entonces es inconsistente
+		
+		
+		int i = 0;
+		
+		while(top.size() != 0 && bottom.size() != 0 && top.get(0).size() > bottom.get(0).size()) {	
+			int a = top.get(0).size();
+			SetTopConsistentStatus(top);
 			
-			top.forEach(s -> {
-				minimalInconsistents.forEach(inc -> {
-					if(inc.isSubSetOf(s))
-					{
-						s.ConsistentStatus = false;
+			final ArrayList<AboxSubSet> topMinusOne = topMinusOne(top);
+			
+			final ArrayList<AboxSubSet> bottomPlusOne =  new ArrayList<AboxSubSet>(this.ABox.allPossibleSubSetsWithOneMore(bottom).stream().
+					filter(s ->  !s.isSuperSetOfAny(minimalInconsistents)).collect(Collectors.toList()));
+					
+			bottomPlusOne.forEach(s -> {
+				if(bigRepairs.stream().anyMatch(r -> s.isSubSetOf(r))) {
+					s.ConsistentStatus = true;
+				}
+				else {
+					s.ConsistentStatus = IsConsistent(s);
+					if(!s.ConsistentStatus && !s.isSuperSetOfAny(minimalInconsistents)) {
+						minimalInconsistents.add(s);
 					}
-				});
+				}
+				
 			});
 			
+			bottom.forEach(s -> {
+				if(bottomPlusOne.stream().filter(s2 -> s2.isSuperSetOf(s)).allMatch(s2 -> s2.ConsistentStatus == false)) {
+					smallRepairs.add(s);
+				}
+			});
 			
+			bottom = new ArrayList<AboxSubSet>(bottomPlusOne.stream().filter(s-> s.ConsistentStatus).collect(Collectors.toList()));
+			
+			
+			/*System.out.println(i);
+			System.out.println("top:");
+			System.out.println(top);
+			System.out.println("bottom:");
+			System.out.println(bottom);
+			System.out.println("bottomPlusOne:");
+			System.out.println(bottomPlusOne);
+			System.out.println("bigRepairs:");
+			System.out.println(bigRepairs);
+			System.out.println("smallRepairs:");
+			System.out.println(smallRepairs);*/
+			
+			int topFirstSize = top.get(0).size();
+			int bottomFirstSize = bottom.get(0).size();
+			int bottomPlusOneFirstSize = bottomPlusOne.get(0).size();
+			
+			/*System.out.println("top first size :");
+			System.out.println(topFirstSize);
+			System.out.println("bottom first size:");
+			System.out.println(bottomFirstSize);
+			System.out.println("bottomPlusOne first size:");
+			System.out.println(bottomPlusOneFirstSize);*/
+			
+			boolean allTopAreSameSize = top.stream().anyMatch(s -> s.size() != topFirstSize);
+			boolean bottomFirstSizeAreSame = bottom.stream().anyMatch(s -> s.size() != bottomFirstSize);
+			boolean bottomPlusOneFirstSizeAreSame = bottomPlusOne.stream().anyMatch(s -> s.size() != bottomPlusOneFirstSize);
+			
+
+			
+			top = topMinusOne;
+		
 		}
+				
+		if(ABox.Facts.size() % 2 == 0) {
+			SetTopConsistentStatus(top);
+		}		
 		
+		bottom.forEach(s -> {
+			if(!s.isSubSetOfAny(bigRepairs)) {
+				bigRepairs.add(s);
+			}
+		});
 		
-		
-		
-		return null;
+		smallRepairs.addAll(bigRepairs);
+		return smallRepairs;
 	}
 	
-	private List<AboxSubSet> allSubSetsWithOneLess(){
-		return this.ABox.stream().map(f -> allFactsBut(f.Id)).collect(Collectors.toList());		
+	
+	private void SetTopConsistentStatus(List<AboxSubSet> top) {
+		top.forEach(s -> {
+			
+			if (minimalInconsistents.stream().anyMatch(inc -> inc.isSubSetOf(s))) {
+				s.ConsistentStatus = false;
+			}
+			else {
+				s.ConsistentStatus = IsConsistent(s);
+				if(s.ConsistentStatus && !s.isSubSetOfAny(bigRepairs)) {
+					bigRepairs.add(s);
+				}
+			}
+		});
 	}
 	
-	private AboxSubSet allFactsBut(int i){
-		return new AboxSubSet(this.ABox.stream().filter(f -> f.Id != i).collect(Collectors.toList()));
-	}
+
 	
-	private List<AboxSubSet> allSubSetsWithOneElement(){
-		return this.ABox.stream().map(f -> listWithOneElement(f)).collect(Collectors.toList());
-	}
 	
-	private AboxSubSet listWithOneElement(Fact fact){
-		List<Fact> result = new ArrayList<Fact>();
-		result.add(fact);
-		return new AboxSubSet(result.stream().collect(Collectors.toList()));
+	//todos los subSet que puedo generar sacando un elemento a 
+	//los set de top inconsistentes, siempre y cuando no sean sub conjunto de un repair grande.
+	private ArrayList<AboxSubSet> topMinusOne(List<AboxSubSet> top){
+		ArrayList<AboxSubSet> result = new ArrayList<AboxSubSet>();
+		
+		
+		top.forEach(s -> {			
+			if(!s.ConsistentStatus && !s.isSubSetOfAny(this.bigRepairs)) {
+				s.allSubSetsWithOneLess().forEach(x -> {
+					if(!result.stream().anyMatch(x2 -> x2.equals(x))) {
+						result.add(x);
+					}
+				});
+			}
+		});
+		
+		/*top.stream().filter(s -> !s.ConsistentStatus && 
+				!this.bigRepairs.stream().anyMatch(r -> s.isSubSetOf(r))).
+					forEach(s -> {
+						System.out.println("antes de allSubSetsWithOneLess");
+						result.addAll(allSubSetsWithOneLess(s));
+						System.out.println("despues de allSubSetsWithOneLess");
+		});*/
+		return result;
 	}
 	
 	private Boolean IsConsistent(AboxSubSet subset){
@@ -94,11 +190,15 @@ public class IARResolver {
 	        configuration.evaluationStrategyFactory = new StratifiedBottomUpEvaluationStrategyFactory(new NaiveEvaluatorFactory());
 	    }
 		
+		if(subset.Facts.size() == 0) return true;
+		
 		String program = GenerateProgram(subset);
 		ProgramExecutor executor = new ProgramExecutor(program, configuration);
 		ArrayList<QueryResult> output = executor.getResults();
 		
-		return output.stream().anyMatch(q -> hasResult(q));
+		boolean result = !output.stream().anyMatch(q -> hasResult(q));
+		
+		return result;
 		
 	}
 
@@ -114,11 +214,52 @@ public class IARResolver {
 		
 		return tgds + "\n" + facts + "\n" + queries;
 	}
+	
+	public String toString(ArrayList<AboxSubSet> s) {
+		return toString(s.stream());
+	}
+	
+	public String toString(List<AboxSubSet> s) {
+		return toString(s.stream());
+	}
+	
+	public String toString(Stream<AboxSubSet> s) {
+		return "[" + s.map(f -> f.toString()).collect(Collectors.joining(",")) + "]";
+	}
 }
 
 
 
 /*
+ * 
+ 
+ 
+ []
+ 1
+ 
+ n = 1 -> l = 2
+ ---------------
+ 1 2
+ 1 2
+ 
+ 
+ n = 2 -> l = 2
+ ------------------
+ 		12 13 23        
+		
+		1 2 3
+
+n = 3 -> l = 2
+
+------------
+234 134 124 123
+
+12 13 14 23 24 34
+
+1 2 3 4
+
+n = 4 -> l = 3
+
 input: program
 
 var top = todosLosSubSetDeUnoMenos(program.Abox);
@@ -137,8 +278,7 @@ para cada s en bottom:
 	si no:
 		s.consistentSatus = consistent
 
-
-while(top != vacio and bottom != vacio and top.first.length != bottom.first.length){
+while(top != vacio and bottom != vacio and (top.get(0).Facts.size() > bottom.get(0).Facts.size() )  ){
 			
 	para cada set s en top:
 	si s es superCojunto de un minimalInconsistente:
@@ -152,10 +292,11 @@ while(top != vacio and bottom != vacio and top.first.length != bottom.first.leng
 		si no
 			s.consistenteStatus = inconsistent. //no necesariamente es inconsistente minimal.
 	
-	top := todos los subSet que puedo generar sacando un elemento a 
+	topMenosUno := todos los subSet que puedo generar sacando un elemento a 
 				los set de top inconsistentes, siempre y cuando no sean sub conjunto de un repair grande.
 	
-	
+	top = topMenosUno
+
 	bottomMasUno = todos los subset de la ABox que se pueden formar agregnado un elemento 
 				de la ABox a los consistentes de bottom siempre y cuando no sean superConjunto de un minimal inconsistente. 
 				
@@ -172,12 +313,18 @@ while(top != vacio and bottom != vacio and top.first.length != bottom.first.leng
 			si no
 				s.consistentSatus = inconsistent
 				agregar s a minimales inconsistentes
-	
-		
+				
 	para todos los s en bottom consistentes cuyos padres son todos inconsistentes //esto lo miro rapido gracias al grafo
 		agregar s a repairsChicos
 	
 	bottom = bottomMasUno que sean consistentes
 }
+
+if (n es par) para cada s en topMenosUno: si es superconj de minimal  consistente: nada
+	si no tirar query, si da consistente, agregarlo a maximal consistente
+
+
+
+
 
 return {repairs: repairsChicos U repairsGrandes, intersection : intersection(this.repairs) }*/

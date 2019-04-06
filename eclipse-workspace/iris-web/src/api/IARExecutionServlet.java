@@ -49,7 +49,7 @@ public class IARExecutionServlet extends HttpServlet {
 			
 			IARResolver solver = new IARResolver(program);
 			
-			ArrayList<ArrayList<String>> repairs = solver.getRepairs();			
+			ArrayList<AboxSubSet> repairs = solver.getRepairs();			
 			
 			String jsonOutput = gson.toJson(repairs);
 			response.getWriter().append(jsonOutput);
