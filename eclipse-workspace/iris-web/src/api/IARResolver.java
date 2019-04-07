@@ -52,13 +52,7 @@ public class IARResolver {
 		
 		bottom = bottom.stream().filter(s -> s.ConsistentStatus).collect(Collectors.toList());
 		
-		//si algun top es superconjuntop de un minimal inconsistente entonces es inconsistente
-		
-		
-		int i = 0;
-		
 		while(top.size() != 0 && bottom.size() != 0 && top.get(0).size() > bottom.get(0).size()) {	
-			int a = top.get(0).size();
 			SetTopConsistentStatus(top);
 			
 			final ArrayList<AboxSubSet> topMinusOne = topMinusOne(top);
@@ -76,7 +70,6 @@ public class IARResolver {
 						minimalInconsistents.add(s);
 					}
 				}
-				
 			});
 			
 			bottom.forEach(s -> {
@@ -87,49 +80,12 @@ public class IARResolver {
 			
 			bottom = new ArrayList<AboxSubSet>(bottomPlusOne.stream().filter(s-> s.ConsistentStatus).collect(Collectors.toList()));
 			
-			
-			/*System.out.println(i);
-			System.out.println("top:");
-			System.out.println(top);
-			System.out.println("bottom:");
-			System.out.println(bottom);
-			System.out.println("bottomPlusOne:");
-			System.out.println(bottomPlusOne);
-			System.out.println("bigRepairs:");
-			System.out.println(bigRepairs);
-			System.out.println("smallRepairs:");
-			System.out.println(smallRepairs);*/
-			
-			int topFirstSize = top.get(0).size();
-			int bottomFirstSize = bottom.get(0).size();
-			int bottomPlusOneFirstSize = bottomPlusOne.get(0).size();
-			
-			/*System.out.println("top first size :");
-			System.out.println(topFirstSize);
-			System.out.println("bottom first size:");
-			System.out.println(bottomFirstSize);
-			System.out.println("bottomPlusOne first size:");
-			System.out.println(bottomPlusOneFirstSize);*/
-			
-			boolean allTopAreSameSize = top.stream().anyMatch(s -> s.size() != topFirstSize);
-			boolean bottomFirstSizeAreSame = bottom.stream().anyMatch(s -> s.size() != bottomFirstSize);
-			boolean bottomPlusOneFirstSizeAreSame = bottomPlusOne.stream().anyMatch(s -> s.size() != bottomPlusOneFirstSize);
-			
-
-			
 			top = topMinusOne;
-		
 		}
 				
 		if(ABox.Facts.size() % 2 == 0) {
 			SetTopConsistentStatus(top);
-		}		
-		
-		bottom.forEach(s -> {
-			if(!s.isSubSetOfAny(bigRepairs)) {
-				bigRepairs.add(s);
-			}
-		});
+		}
 		
 		smallRepairs.addAll(bigRepairs);
 		return smallRepairs;
