@@ -17,24 +17,21 @@ import org.deri.iris.rules.safety.GuardedRuleSafetyProcessor;
 import com.sun.glass.ui.Size;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 
 public class IARResolver {
 	
 	private AboxSubSet ABox;
-	private List<String> Tgds;
-	private List<String> ncsAsQueries;
-	private Boolean isGuarded;
 	private ArrayList<AboxSubSet> bigRepairs;
 	private ArrayList<AboxSubSet> minimalInconsistents; 
+	private Function<AboxSubSet, Boolean> IsConsistentFunction;
 	
-	public IARResolver(Program program) {
+	public IARResolver(Function<AboxSubSet, Boolean> isConsistentFunction, AboxSubSet aBox) {
 		
-		AtomicInteger index = new AtomicInteger();		
-		this.ABox = new AboxSubSet(program.facts.stream().map(f -> new Fact(f,index.getAndIncrement())).collect(Collectors.toList()));
-		this.Tgds = program.tgds;
-		this.ncsAsQueries = program.ncsAsQueries;
-		this.isGuarded = program.isGuarded;
-		
+		//AtomicInteger index = new AtomicInteger();		
+		this.IsConsistentFunction = isConsistentFunction;
+		this.ABox = aBox; 
+				//new AboxSubSet(program.facts.stream().map(f -> new Fact(f,index.getAndIncrement())).collect(Collectors.toList()));
 	}
 
 	public ArrayList<AboxSubSet> getRepairs() {
@@ -45,7 +42,7 @@ public class IARResolver {
 		this.bigRepairs = new ArrayList<AboxSubSet>();
 		
 		bottom.forEach(a -> {
-			a.ConsistentStatus = IsConsistent(a);
+			a.ConsistentStatus = IsConsistentFunction.apply(a);
 			if(!a.ConsistentStatus)
 				minimalInconsistents.add(a);			
 		});
@@ -65,7 +62,7 @@ public class IARResolver {
 					s.ConsistentStatus = true;
 				}
 				else {
-					s.ConsistentStatus = IsConsistent(s);
+					s.ConsistentStatus = IsConsistentFunction.apply(s);
 					if(!s.ConsistentStatus && !s.isSuperSetOfAny(minimalInconsistents)) {
 						minimalInconsistents.add(s);
 					}
@@ -99,7 +96,7 @@ public class IARResolver {
 				s.ConsistentStatus = false;
 			}
 			else {
-				s.ConsistentStatus = IsConsistent(s);
+				s.ConsistentStatus = IsConsistentFunction.apply(s);
 				if(s.ConsistentStatus && !s.isSubSetOfAny(bigRepairs)) {
 					bigRepairs.add(s);
 				}
@@ -134,41 +131,6 @@ public class IARResolver {
 						System.out.println("despues de allSubSetsWithOneLess");
 		});*/
 		return result;
-	}
-	
-	private Boolean IsConsistent(AboxSubSet subset){
-		final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();		
-		
-		if(this.isGuarded) {			
-			configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
-		}
-		else {
-	        configuration.evaluationStrategyFactory = new StratifiedBottomUpEvaluationStrategyFactory(new NaiveEvaluatorFactory());
-	    }
-		
-		if(subset.Facts.size() == 0) return true;
-		
-		String program = GenerateProgram(subset);
-		ProgramExecutor executor = new ProgramExecutor(program, configuration);
-		ArrayList<QueryResult> output = executor.getResults();
-		
-		boolean result = !output.stream().anyMatch(q -> hasResult(q));
-		
-		return result;
-		
-	}
-
-	private Boolean hasResult(QueryResult q) {
-		return q.Results.size() > 0;
-	}
-
-	private String GenerateProgram(AboxSubSet subset) {
-		
-		String tgds =  this.Tgds.stream().collect(Collectors.joining("\n"));
-		String facts = subset.Facts.stream().map(f -> f.Text).collect(Collectors.joining("\n"));
-		String queries = this.ncsAsQueries.stream().collect(Collectors.joining("\n"));
-		
-		return tgds + "\n" + facts + "\n" + queries;
 	}
 	
 	public String toString(ArrayList<AboxSubSet> s) {

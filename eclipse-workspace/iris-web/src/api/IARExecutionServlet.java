@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +30,7 @@ import com.google.gson.*;
 public class IARExecutionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private Program program;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -45,9 +48,11 @@ public class IARExecutionServlet extends HttpServlet {
 	        
 	        Gson gson = new Gson();
 
-			Program program = gson.fromJson(json, Program.class);
+			this.program = gson.fromJson(json, Program.class);
+			AtomicInteger index = new AtomicInteger();
+			AboxSubSet aBox =  new AboxSubSet(program.facts.stream().map(f -> new Fact(f,index.getAndIncrement())).collect(Collectors.toList()));
 			
-			IARResolver solver = new IARResolver(program);
+			IARResolver solver = new IARResolver(this::IsConsistent,aBox);
 			
 			ArrayList<AboxSubSet> repairs = solver.getRepairs();			
 			
@@ -58,6 +63,41 @@ public class IARExecutionServlet extends HttpServlet {
 			response.getWriter().append(e.toString());
 
 		}
+	}
+	
+	
+	private Boolean IsConsistent(AboxSubSet subset){
+		final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();		
+		
+		if(this.program.isGuarded) {			
+			configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
+		}
+		else {
+	        configuration.evaluationStrategyFactory = new StratifiedBottomUpEvaluationStrategyFactory(new NaiveEvaluatorFactory());
+	    }
+		
+		if(subset.Facts.size() == 0) return true;
+		
+		String program = GenerateProgram(subset);
+		ProgramExecutor executor = new ProgramExecutor(program, configuration);
+		ArrayList<QueryResult> output = executor.getResults();
+		
+		boolean result = !output.stream().anyMatch(q -> hasResult(q));
+		
+		return result;
+	}
+
+	private Boolean hasResult(QueryResult q) {
+		return q.Results.size() > 0;
+	}
+
+	private String GenerateProgram(AboxSubSet subset) {
+		
+		String tgds =  this.program.tgds.stream().collect(Collectors.joining("\n"));
+		String facts = subset.Facts.stream().map(f -> f.Text).collect(Collectors.joining("\n"));
+		String queries = this.program.ncsAsQueries.stream().collect(Collectors.joining("\n"));
+		
+		return tgds + "\n" + facts + "\n" + queries;
 	}
 }
 
