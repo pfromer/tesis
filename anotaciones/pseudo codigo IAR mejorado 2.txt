@@ -1,0 +1,68 @@
+input: program
+
+var top = todosLosSubSetDeUnoMenos(program.Abox);
+var bottom = todosLosSetDeUnElemento(program.Abox);
+var minimalesIncosistentes = vacio;
+var repairsChicos = vacio;
+var repairsGrandes = vacio;
+var topMenos1 = vacio;
+var bottomMasUno = vacio;
+
+para cada s en bottom:
+	fijarase si es consistente o no
+	si s es inconsistente:
+		s.consistentStatus = inconsistent
+		agregar s a minimalesInconsistentes
+	si no:
+		s.consistentSatus = consistent
+
+while(top != vacio and bottom != vacio and (top.get(0).Facts.size() > bottom.get(0).Facts.size() )  ){
+			
+	para cada set s en top:
+	si s es superCojunto de un minimalInconsistente:
+		s.consistentStatus = inconsistent		
+			
+	para cada s en top con consistentStatus en undefined: 
+		fijarse si s es consistente (tirando las queries).
+		si s es consistente: 
+			s.consistentStatus = consistent.
+			agregar s a repairsGrandes// no hace falta mirar que no sea subconjutno de algun repair existente, pues eso lo filtro cuando elijo los hijos de topMenos1
+		si no
+			s.consistenteStatus = inconsistent. //no necesariamente es inconsistente minimal.
+	
+	topMenosUno := todos los subSet que puedo generar sacando un elemento a 
+				los set de top inconsistentes, siempre y cuando no sean sub conjunto de un repair grande.
+	
+	top = topMenosUno
+
+	bottomMasUno = todos los subset de la ABox que se pueden formar agregnado un elemento 
+				de la ABox a los consistentes de bottom siempre y cuando no sean superConjunto de un minimal inconsistente. 
+				
+	//ir armando el grafo (hijo-padre). // el objeto AboxSubSet, donde cada uno tiene una lista de hijos y de padres
+
+	
+	para cada s en bottomMasUno:
+		si s es subConbj de un repairGrande
+			s.consistentStatus = consistent
+		si no:
+			tirar query y fijarse si es consistnete
+			si s es consistente:
+				s.consistentSatus = consistente
+			si no
+				s.consistentSatus = inconsistent
+				agregar s a minimales inconsistentes
+				
+	para todos los s en bottom consistentes cuyos padres son todos inconsistentes //esto lo miro rapido gracias al grafo
+		agregar s a repairsChicos
+	
+	bottom = bottomMasUno que sean consistentes
+}
+
+if (n es par) para cada s en topMenosUno: si es superconj de minimal  consistente: nada
+	si no tirar query, si da consistente, agregarlo a maximal consistente
+
+
+
+
+
+return {repairs: repairsChicos U repairsGrandes, intersection : intersection(this.repairs) }*/
