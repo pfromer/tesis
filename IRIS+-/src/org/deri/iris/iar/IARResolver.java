@@ -17,9 +17,9 @@ public class IARResolver {
 	private List<AboxSubSet> bottom;
 	private List<AboxSubSet> bottomPlusOne;
 	
-	public IARResolver(Function<AboxSubSet, Boolean> isConsistentFunction, AboxSubSet aBox) {
-		this.IsConsistentFunction = isConsistentFunction;
-		this.ABox = aBox;
+	public IARResolver(Program program) {
+		this.IsConsistentFunction = program::IsConsistent;
+		this.ABox = program.ABox();
 		this.top = this.ABox.allSubSetsWithOneLess();
 		this.bottom = this.ABox.allSubSetsWithOneElement();
 		this.minimalInconsistents = new ArrayList<AboxSubSet>();

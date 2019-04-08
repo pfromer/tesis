@@ -7,10 +7,24 @@
 		
 		
 			function repairsAre(data, expectedRepairs){
+				
+				var result = {
+						expectedRepairs : expectedRepairs,
+						actualRepairs : data.map(r => r.Facts.map(r => r.Text))
+					}
+
 				if(data.length != expectedRepairs.length){
-					return false;
+					result.success = false;
+					return result;
 				}
-				return expectedRepairs.every(r => includedIn(r, data));
+
+				if (expectedRepairs.every(r => includedIn(r, data))){
+					result.success = true;
+				}
+				else{
+					result.success = false;
+				}
+				return result;
 			}			
 				
 			function includedIn(repair, data){
@@ -26,37 +40,63 @@
 			}
 		
 			function testIar(params){
-				
-						fetch('http://localhost:8080/iris/iar', {
-							method: 'post',
-							body: JSON.stringify(params.program) 
-							}).then(function(response) {response.json().then(function(data) {
-								  console.log(repairsAre(data, params.expectedRepairs));
-							});
-						  });
+				fetch('http://localhost:8080/iris/iar', {
+					method: 'post',
+					body: JSON.stringify(params.program) 
+					}).then(function(response) {response.json().then(function(data) {
+						var result = repairsAre(data, params.expectedRepairs);
+						if(result.success){
+							console.log(result);
+						}	
+						else{
+							console.warn(result);
+						}
+
+					});
+					});
 			}
 
-				var params = {
-								program:{
-									facts: 
-										["r1('1').", 
-										"r1('2').", 
-										"r1('3').",
-										"r1('4').",
-										"r1('5').",
-										"r1('6').",
-										"r1('7').",
-										"r2('a').", 
-										"r2('b')."],
-									isGuarded: true,
-									ncsAsQueries: ["?- r1(?x), r2('b')."],
-									tgds: []
-								},
-								expectedRepairs :[["r2('a').","r2('b')."], ["r1('1').","r1('2').","r1('3').","r1('4').","r1('5').","r1('6').","r1('7').","r2('a')."]]
-							}
+				var allTestsParams = [
+					{
+						program:{
+							facts: ["r1('1').","r1('2').","r1('3').","r1('4').","r1('5').","r1('6').","r1('7').","r2('a').","r2('b')."],
+							isGuarded: true,
+							ncsAsQueries: ["?- r1(?x), r2('b')."],
+							tgds: []
+						},
+						expectedRepairs :[
+								["r2('a').","r2('b')."], 
+								["r1('1').","r1('2').","r1('3').","r1('4').","r1('5').","r1('6').","r1('7').","r2('a')."]
+							]
+					},
+					{
+						program:{
+							facts: 	["r1('1').", "r1('2').", "r1('3').","r1('4').","r1('5').","r1('6').","r1('7').","r1('8').","r1('9').","r2('a').", "r2('b')."],
+							isGuarded: true,
+							ncsAsQueries: ["?- r1(?x), r2('b').", "?- r2('a'), r2('b')."], 
+							tgds: []
+						},
+						expectedRepairs :[
+								["r1('1').", "r1('2').", "r1('3').","r1('4').","r1('5').","r1('6').","r1('7').","r1('8').","r1('9').","r2('a')."],
+								["r2('b')."]
+							]
+					},
+					{
+						program:{
+							facts:	["r1('a', 'b').","r1('c', 'b').","r1('d', 'b').","r1('e', 'b').","r1('f', 'b').","r1('g', 'b').","r1('h', 'b').","r1('1', '2').","r1('3', '4').","r2('a').","r2('b').",
+											"r1('d', 'd').","r1('c', 'c').","r1('a', 'a')."], 
+							isGuarded: true,
+							ncsAsQueries: ["?- r1(?x, ?x).", "?- r2('a').", "?- r1('1','2'), r1('3','4')."], 
+							tgds: []
+						},
+						expectedRepairs :[
+						["r1('a', 'b').", "r1('c', 'b').", "r1('d', 'b').", "r1('e', 'b').", "r1('f', 'b').", "r1('g', 'b').", "r1('h', 'b').", "r1('3', '4').", "r2('b')."], 
+						["r1('a', 'b').", "r1('c', 'b').", "r1('d', 'b').", "r1('e', 'b').", "r1('f', 'b').", "r1('g', 'b').", "r1('h', 'b').", "r1('1', '2').", "r2('b')."]
+							]
+					}
+				]
 				
-				testIar(params);
-			
+				allTestsParams.forEach(p => testIar(p));
 		</script>
 	</body>
 </html>
