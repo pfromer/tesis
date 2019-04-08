@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.deri.iris.iar.AboxSubSet;
+import org.deri.iris.iar.IARResolver;
+import org.deri.iris.iar.Program;
 import org.deri.iris.Configuration;
 import org.deri.iris.KnowledgeBaseFactory;
 import org.deri.iris.demo.ProgramExecutor;
@@ -49,10 +52,7 @@ public class IARExecutionServlet extends HttpServlet {
 	        Gson gson = new Gson();
 
 			this.program = gson.fromJson(json, Program.class);
-			AtomicInteger index = new AtomicInteger();
-			AboxSubSet aBox =  new AboxSubSet(program.facts.stream().map(f -> new Fact(f,index.getAndIncrement())).collect(Collectors.toList()));
-			
-			IARResolver solver = new IARResolver(this::IsConsistent,aBox);
+			IARResolver solver = new IARResolver(this::IsConsistent, this.program.ABox());
 			
 			ArrayList<AboxSubSet> repairs = solver.getRepairs();			
 			
@@ -65,39 +65,9 @@ public class IARExecutionServlet extends HttpServlet {
 		}
 	}
 	
+	private Boolean IsConsistent (AboxSubSet subSet) {
+		return this.program.IsConsistent(subSet);
+	}
 	
-	private Boolean IsConsistent(AboxSubSet subset){
-		final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();		
-		
-		if(this.program.isGuarded) {			
-			configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
-		}
-		else {
-	        configuration.evaluationStrategyFactory = new StratifiedBottomUpEvaluationStrategyFactory(new NaiveEvaluatorFactory());
-	    }
-		
-		if(subset.Facts.size() == 0) return true;
-		
-		String program = GenerateProgram(subset);
-		ProgramExecutor executor = new ProgramExecutor(program, configuration);
-		ArrayList<QueryResult> output = executor.getResults();
-		
-		boolean result = !output.stream().anyMatch(q -> hasResult(q));
-		
-		return result;
-	}
-
-	private Boolean hasResult(QueryResult q) {
-		return q.Results.size() > 0;
-	}
-
-	private String GenerateProgram(AboxSubSet subset) {
-		
-		String tgds =  this.program.tgds.stream().collect(Collectors.joining("\n"));
-		String facts = subset.Facts.stream().map(f -> f.Text).collect(Collectors.joining("\n"));
-		String queries = this.program.ncsAsQueries.stream().collect(Collectors.joining("\n"));
-		
-		return tgds + "\n" + facts + "\n" + queries;
-	}
 }
 

@@ -1,22 +1,9 @@
-package api;
+package org.deri.iris.iar;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import org.deri.iris.Configuration;
-import org.deri.iris.KnowledgeBaseFactory;
-import org.deri.iris.demo.ProgramExecutor;
-import org.deri.iris.demo.QueryResult;
-import org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategyFactory;
-import org.deri.iris.evaluation.stratifiedbottomup.naive.NaiveEvaluatorFactory;
-import org.deri.iris.rules.safety.GuardedRuleSafetyProcessor;
-
-import com.sun.glass.ui.Size;
-
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
 public class IARResolver {

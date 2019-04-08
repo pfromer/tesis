@@ -1,4 +1,4 @@
-package api;
+package org.deri.iris.iar;
 
 public class Fact {
 	
