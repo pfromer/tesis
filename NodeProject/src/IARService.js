@@ -6,86 +6,17 @@ export async function intersectionRepairs(program){
    var tgds = program.tgds.map(t => t.toString());
    var ncs = program.ncs.map(nc => nc.toStringAsQuery()).concat(program.keys.map(k => k.toQueryString()));
 
-   var intersection = [];
-
-   var intersection = await getIarRepairs(facts,tgds, ncs, program.isGuarded());
-   
-   return intersection
-}
-/*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   var aBox = program.facts;
    var repairs = [];
-   var bigSubSets = allSubSetsWithOneLess(aBox);
-   var smallSubSets = oneArrayByElement(aBox);
-   var doNotAdd = [];
-   while(bigSubSets.length != 0){
-      doNotAdd = [];
-      const [bigPromise, smallPromise] = 
-         await Promise.all([separateOntoConsitentAndUnconsistent(bigSubSets, program), 
-            separateOntoConsitentAndUnconsistent(smallSubSets, program)]);
-      bigSubSets = [];
-      
 
-      bigPromise.consistents.forEach(s =>{
-         repairs = addRepair(repairs, s);
-         allSubSetsWithOneLess(s).forEach(x =>{
-            doNotAdd.push(x);
-         })
-      })
-
-      doNotAdd = doNotAdd.unique();
-      repairs = uniqueForArrayOfArrays(repairs);
-
-      bigPromise.inconsistents.forEach(s =>{
-         allSubSetsWithOneLess(s).forEach(x =>{
-            if(!doNotAdd.includes(x)){
-               var substracted = substractAllFrom(x, smallPromise.inconsistents);
-               if (substracted.length > 0){
-                  bigSubSets.push(substracted) //agregar esto al prototype               
-               }
-               bigSubSets = uniqueForArrayOfArrays(bigSubSets);
-            }
-         })
-      })
-      smallSubSets = addOneToEach(smallPromise.inconsistents, aBox);
-   }
+   var repairs = await getIarRepairs(facts,tgds, ncs, program.isGuarded());
    
-   debugger
-   return intersection(repairs); 
-}
+   var intersection = getIntersection(repairs);
 
-function addOneToEach(setOfSets, anotherSet){
+   return {intersection : intersection, repairs : repairs};
+};
+
+function getIntersection(setOfSets){
    var result = [];
-   setOfSets.forEach(s => {
-      anotherSet.forEach(v =>{
-         if(!s.includes(v)){
-            var a = [...s];
-            a.push(v);
-            result.push(a);
-         }
-      })    
-   })
-   return uniqueForArrayOfArrays(result);
-}
-
-function intersection(setOfSets){
-   var result = [];
-
    setOfSets.forEach(s => {
       s.forEach(v => {
          if(setOfSets.every(set => set.includes(v))){
@@ -95,123 +26,3 @@ function intersection(setOfSets){
    })
    return result.unique();
 }
-
-function substractAllFrom(x, setOfSets){
-   setOfSets.forEach(s => {
-      x = x.filter(v => !s.includes(v));
-   })
-   return x;
-}
-
-function allSubSetsWithOneLess(set){
-   var result = [];
-   for(var i = 0; i<set.length; i++){
-      result.push(allBut(set, i)); 
-   }
-   return result;
-}
-
-function allBut(set, i){
-   return set.filter((val, index)=> index != i);
-}
-
-function oneArrayByElement(set){
-   return set.map(v => [v]);
-}
-
-function addRepair(repairs, r){
-   repairs = repairs.filter(x => !isProperSubSetOf(x,r));
-   if(!repairs.some(x => isProperSubSetOf(r,x))){
-      repairs.push(r);
-   }
-   return repairs;
-}
-
-async function separateOntoConsitentAndUnconsistent(bigSubSets, program){
-   var result = {};
-   var promises = [];
-   bigSubSets.forEach(s => {
-      //var subProgram = Object.assign({}, program);
-      var subProgram = Object.create(
-         Object.getPrototypeOf(program), 
-         Object.getOwnPropertyDescriptors(program) 
-     );
-      subProgram.setFacts = s;
-      promises.push(subProgram.getInconsistencies);
-   })
-   await Promise.all(promises).then(inconsistencies => {
-      result.consistents = bigSubSets.filter((value, index) => inconsistencies[index].inconsistencies.length == 0);
-      result.inconsistents = bigSubSets.filter((value, index) => inconsistencies[index].inconsistencies.length > 0);    
-   })
-
-   return result;
-}
-
-function uniqueForArrayOfArrays(arrayOfArrays){
-   return arrayOfArrays.filter((a, index) => !includedIn(arrayOfArrays.filter((a2,index2) => index2 > index),a));
-}
-
-function includedIn(arrayOfArrays,arr){
-   return arrayOfArrays.some(a => areTheSame(a,arr));
-}
-
-//asuming they have no repated elements
-function areTheSame(a1, a2){
-   return a1.length == a2.length && a1.every(a => a2.includes(a));
-}
-
-function isProperSubSetOf(a1, a2){
-   return a1.length < a2.length && a1.every(a => a2.includes(a));
-}
-
-/*
-var p1 = Promise.resolve(3);
-var p2 = 1337;
-var p3 = new Promise((resolve, reject) => {
-  setTimeout(resolve, 100, "foo");
-}); 
-
-Promise.all([p1, p2, p3]).then(values => { 
-  console.log(values); // [3, 1337, "foo"] 
-});*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-input := todos los facts de la ABox
-maximalesConsistentes := vacio
-actualesGrandes := todos los subsets de la ABOx que se pueden formar sacando un elemento
-actualesChicos := todos los subsets de la ABox de un solo elemento
-mientras actualesGrandes no es vacio:
-   noAgregar := vacio
-   consistentesGrandes := todos los actualesGrandes que son consistentes
-   inconsistentesGrandes := todos los actualesGrandes que no son consistentes
-   actualesGrandes := vacio
-   actualesChicosConsistentes := actualesChicos que no sean consistentes
-   actualesChicosInConsistentes := actualesChicos que no son consistentes
-
-   por cada s en consistentesGrandes:
-      pongo en noAgregar todos los subset de s que se pueden formar sacando un elemento
-      agrego s a maximalesConsistentes  
-   por cada s en inconsistentesGrandes
-      para cada subconjunto x que se puede formar sacndo un elemento de s, y que no este en noAgregar, le aplico la resta 
-      de todos los actualesChicosIncosistentes y despues lo agrego a actualesGrandes
-   
-   actualesChicos := todos los conjuntos que se pueden generar agregando un elemento diferente de la ABox a cada conjunto
-                  de actaulesChicosConsistentes 
-
-
-retorno interseccion de todos los maximalesConsistentes
-*/

@@ -22,7 +22,8 @@ class ContainerComponent extends React.Component {
         opened: false
       },
       markers: [],
-      intersectionRepairs: undefined
+      intersectionRepairs: undefined,
+      repairs : undefined
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
