@@ -1,36 +1,63 @@
     <html>
 	<head>
-		<script type="text/javascript">
-            function isUnique(){
-			
-			var params = {facts: 
-			["r1('1').", 
-			"r1('2').", 
-			/*"r1('3').",*/
-			"r1('4').",
-			"r1('5').",
-			"r1('6').",
-			"r1('7').",
-			"r2('a').", 
-			"r2('b')."],
-							isGuarded: true,
-							ncsAsQueries: ["?- r1(?x), r2('b')."],
-							tgds: []}
-			
-			
-					fetch('http://localhost:8080/iris/iar', {
-						method: 'post',
-						body: JSON.stringify(params) 
-						}).then(function(response) {
-						return response.json();
-					  });
-            }         
-		</script>
 	
 	</head>
 	<body>
-		<input type="text" id="word"/>
-	    <input type="button" onclick="isUnique()" value="is unique" />
+			<script type="text/javascript">
+		
+		
+			function repairsAre(data, expectedRepairs){
+				if(data.length != expectedRepairs.length){
+					return false;
+				}
+				return expectedRepairs.every(r => includedIn(r, data));
+			}			
+				
+			function includedIn(repair, data){
+				return data.filter(r => equals(repair, r)).length == 1;
+			}
+			
+			function equals(expectedRepair, repairFromResponse){			
+				if(expectedRepair.length != repairFromResponse.Facts.length)
+						return false;
+						
+				var parsedRepair = repairFromResponse.Facts.map(r => r.Text);				
+				return expectedRepair.every(f => parsedRepair.filter(f2 => f2 == f).length == 1);
+			}
+		
+			function testIar(params){
+				
+						fetch('http://localhost:8080/iris/iar', {
+							method: 'post',
+							body: JSON.stringify(params.program) 
+							}).then(function(response) {response.json().then(function(data) {
+								  console.log(repairsAre(data, params.expectedRepairs));
+							});
+						  });
+			}
+
+				var params = {
+								program:{
+									facts: 
+										["r1('1').", 
+										"r1('2').", 
+										"r1('3').",
+										"r1('4').",
+										"r1('5').",
+										"r1('6').",
+										"r1('7').",
+										"r2('a').", 
+										"r2('b')."],
+									isGuarded: true,
+									ncsAsQueries: ["?- r1(?x), r2('b')."],
+									tgds: []
+								},
+								expectedRepairs :[["r2('a').","r2('b')."], ["r1('1').","r1('2').","r1('3').","r1('4').","r1('5').","r1('6').","r1('7').","r2('a')."]]
+							}
+				
+				testIar(params);
+			
+		</script>
 	</body>
 </html>
 	
