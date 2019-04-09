@@ -1,0 +1,3 @@
+ver este codigo si se cuelga o algo no funciona
+
+https://github.com/pfromer/tesis/commit/47a8c6a4f5c9d140b1486190fa9e220f04e85c7b

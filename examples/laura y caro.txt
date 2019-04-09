@@ -1,0 +1,12 @@
+lesbiana(?x) :- esMujer(?y), esMujer(?x), sonPareja(?x, ?y).
+sonPareja(?x, ?y) :- sonPareja(?y, ?x).
+hetero(?x) :- esHombre(?y), esMujer(?x), sonPareja(?x, ?y).
+bisexual(?x) :- lesbiana(?x), hetero(?x).
+
+esMujer('laura').
+esMujer('carolina').
+sonPareja('laura', 'carolina').
+esHombre('pedro').
+sonPareja('pedro', 'carina').
+sonPareja('pedro', 'carolina').
+esMujer('carina').
