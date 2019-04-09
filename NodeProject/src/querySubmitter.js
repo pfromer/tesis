@@ -8,12 +8,10 @@ export async function submit(component) {
     component.state.program.getProcessedInconsistencies.length > 0){
       var program = parse(component.state.programEditorInstance.getValue() + "\n" + component.state.queriesEditorInstace.getValue())      
       var intersection;
-      debugger
       if(component.state.intersectionRepairs){
         intersection = component.state.intersectionRepairs
       }
       else{
-        debugger
         var iarResult = await intersectionRepairs(program);
         component.setState({ intersectionRepairs: iarResult.intersection, repairs : iarResult.repairs });
         intersection = iarResult.intersection;

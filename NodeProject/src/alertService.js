@@ -12,19 +12,45 @@ function getSettings(){
 
     var arityErrorSettings =       { 
       condition: function(component){return component.state.program.arityDictionary.aritiesAreConsistent().result == false },
-      heading: 'The arguments length of the folowing predicates is not consistent through your program:', 
+      heading: 'Before we validate consistency please make sure there are no predicates with ambigous arity.', 
       lines: function(component) {return component.state.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent},
       proceedToExecute: false,
       callback: function(component){return markArityIssues(component) },
     };
 
+    var arityErrorSettingsForQueryExecutionValidation = copySetting(arityErrorSettings); 
+    arityErrorSettingsForQueryExecutionValidation.heading = "Before executing your query plase make sure there are no predicates with ambigous arity.";
+
+
     var conflictingKeyErrorSettings =       { 
       condition: function(component){return component.state.program.getConflictingKeys.length > 0},
-      heading: 'Some of the keys in your program are conflicting with the TGDs.', 
+      heading: 'Before we validate consistency plase make sure all of the keys are non conflicting with the TGDs.', 
       lines: function(component) {return component.state.program.getConflictingKeys.map(k => k.toString())},
       proceedToExecute: false,
       callback: function(component){return markConflictingKeys(component) },
     };
+
+    var conflictingKeyErrorSettingsForQueryExecutionValidation = copySetting(conflictingKeyErrorSettings); 
+    conflictingKeyErrorSettingsForQueryExecutionValidation.heading = "Before executing your query plase make sure all of the keys are non conflicting with the TGDs.";
+
+
+    var nonConsistentProgramSettings = { 
+      condition: function(component){return hasInconsistencies(component)},
+      heading: "Not consistent.", 
+      lines: function(component) {return ["The lines marked in green are not fulfilled by your program.", 
+              "You may execute a query under IAR semantics."]},
+      proceedToExecute: false,
+      callback: function(component){return markInconsistencies(component)}
+    };
+
+    var consistentProgramSettings = { 
+      condition: function(component){return !hasInconsistencies(component)},
+      heading: "Your program is consistent.", 
+      lines: function(component) {return []},
+      proceedToExecute: true
+    };
+
+
 
     return{
     datalogFragmentSettings:[
@@ -53,29 +79,23 @@ function getSettings(){
     checkConstraintsSettings:[
       errorSyntaxSettings,
       arityErrorSettings,
-      conflictingKeyErrorSettings,
-      { 
-        condition: function(component){return component.state.program.arityDictionary.aritiesAreConsistent().result == false },
-        heading: 'The arguments length of the folowing predicates is not consistent through your program', 
-        lines: function(component) {return component.state.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent},
-        proceedToExecute: false
-      },
-      { 
-        condition: function(component){return hasInconsistencies(component)},
-        heading: "Not consistent.", 
-        lines: function(component) {return ["The lines marked in green are not fulfilled by your program.", 
-                "You may execute a query under IAR semantics."]},
-        proceedToExecute: false,
-        callback: function(component){return markInconsistencies(component)}
-      },
-      { 
-        condition: function(component){return !hasInconsistencies(component)},
-        heading: "Your program is consistent.", 
-        lines: function(component) {return []},
-        proceedToExecute: true
-      }
+      conflictingKeyErrorSettings,     
+      nonConsistentProgramSettings,
+      consistentProgramSettings
+    ],
+    checkBeforeExecutionSettings:[
+      errorSyntaxSettings,
+      arityErrorSettingsForQueryExecutionValidation,
+      conflictingKeyErrorSettingsForQueryExecutionValidation,     
+      nonConsistentProgramSettings
     ]
+
   }
+}
+
+function copySetting(setting){
+  return Object.assign({}, setting);
+  //return result;
 }
 
 function hasInconsistencies(component){
@@ -155,7 +175,7 @@ function markArityIssues(component){
 }
 
 export function validateBeforeSubmit(component){
-  var settings = getSettings()['checkConstraintsSettings'];
+  var settings = getSettings()['checkBeforeExecutionSettings'];
     var setting = settings.find(s => s.condition(component));
     if(setting && !setting.proceedToExecute){
       component.setState(

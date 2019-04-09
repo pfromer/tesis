@@ -31,9 +31,13 @@ function _builder(){
 					toString: function(){
 						return "key(" + this.predicate + "," + "[" + this.parameters.join(",") + "]).";
 					},
-					toQueryString: function(arity){			
+					toQueryString: function(program){
+						
+						var lineNumber = Object.keys(program.arityDictionary.dictionary[this.predicate])[0];
+						var arity = program.arityDictionary.dictionary[this.predicate][lineNumber][0];
 						var p1 = buildPredicate(this.predicate, this.parameters, arity, "1");
 						var p2 = buildPredicate(this.predicate, this.parameters, arity, "2");
+
 
 						var inequalities = [];
 						var i = 1;
@@ -53,9 +57,7 @@ function _builder(){
 						return queries.join("\n");
 					}, 
 					getQueryForProgram : function(program){
-						var lineNumber = Object.keys(program.arityDictionary.dictionary[this.predicate])[0];
-						var arity = program.arityDictionary.dictionary[this.predicate][lineNumber][0];
-						return program.facts.concat(this.toQueryString(arity)).join("\n");
+						return program.facts.concat(this.toQueryString(program)).join("\n");
 					}
 			}
 		}

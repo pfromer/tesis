@@ -4,8 +4,7 @@ export async function intersectionRepairs(program){
 
    var facts = program.facts.map(f => f.toString());
    var tgds = program.tgds.map(t => t.toString());
-   var ncs = program.ncs.map(nc => nc.toStringAsQuery()).concat(program.keys.map(k => k.toQueryString()));
-
+   var ncs = program.ncs.map(nc => nc.toStringAsQuery()).concat(program.keys.map(k => k.toQueryString(program)));
    var repairs = [];
 
    var repairs = await getIarRepairs(facts,tgds, ncs, program.isGuarded());

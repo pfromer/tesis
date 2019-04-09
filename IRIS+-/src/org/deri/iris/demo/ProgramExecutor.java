@@ -113,44 +113,6 @@ public class ProgramExecutor {
 
       final List<IVariable> variableBindings = new ArrayList<IVariable>();
 
-     /* for (final IQuery query : queries) {
-        // Execute the query
-        duration = -System.nanoTime();
-        final IRelation results = knowledgeBase.execute(query, variableBindings);
-        duration = ((duration + System.nanoTime()) / 1000000);
-
-        output.append(BAR).append(NEW_LINE);
-        output.append("Query:      ").append(query);
-        if (SHOW_ROW_COUNT) {
-          output.append(" ==>> ").append(results.size());
-          if (results.size() == 1) {
-            output.append(" row");
-          } else {
-            output.append(" rows");
-          }
-        }
-        if (SHOW_QUERY_TIME) {
-          output.append(" in ").append(duration).append("ms");
-        }
-
-        output.append(NEW_LINE);
-
-        // if (SHOW_VARIABLE_BINDINGS) {
-        // output.append("Variables: ");
-        // boolean first = true;
-        // for (IVariable variable : variableBindings) {
-        // if (first)
-        // first = false;
-        // else
-        // output.append(", ");
-        // output.append(variable);
-        // }
-        // output.append(NEW_LINE);
-        // }
-
-        formatResults(output, results);
-      }*/
-      
       
       for (final IQuery query : queries) {
     	  final IRelation results = knowledgeBase.execute(query, variableBindings);
