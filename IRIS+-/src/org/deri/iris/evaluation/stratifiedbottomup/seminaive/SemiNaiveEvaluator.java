@@ -62,7 +62,7 @@ public class SemiNaiveEvaluator implements IRuleEvaluator {
 
 	
     int i = 0;
-    /*for (;;) {
+    for (;;) {
     	
       newTuples = false;
 
@@ -94,7 +94,7 @@ public class SemiNaiveEvaluator implements IRuleEvaluator {
 
       // Iterate new tuples in dP[i] and add to program
       addAll(facts, deltas);
-    }*/
+    }
   }
 
   /**
