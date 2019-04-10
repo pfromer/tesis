@@ -1,0 +1,11 @@
+poliamoroso(?x) :- enParejaCon(?x, ?y), enParejaCon(?x, ?z), ?y != ?z.
+
+
+
+enParejaCon('andre', 'pablo').
+enParejaCon('andre', 'pedro').
+
+enParejaCon('lau', 'caro').
+
+?- poliamoroso(?x).
+?- romantico(?x).
