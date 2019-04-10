@@ -1,0 +1,23 @@
+Exists{x}[p(x)]
+?- p(x). Si devuele vacio false, sino true.
+--------------------------------------------
+p(x), Exists{z}[q(x,z)].
+p(x), q(x,z). Solo muestro los resultados para la columna x, sin repetidos.
+----------------------------------------------
+q(x,y), Exists{z}[r(x,z), Exists{h}[p(h,z)]]
+q(x,y), r(x,z), p(h,z) => solo muestro los resultados para las columnas x,y (sin repetidos).
+---------------------------------------------------------------------------------------------------
+q(x,y), Exists{z}[r(x,z)], Exists{z}[p(x,z)].
+q(x,y), r(x,z), p(x,z2). => solo muestro las columnas x,y..
+---------------------------------------------------------------------------
+Exists{x,y}[p(x), Exists{z}[q(x,z)], r(x,y)]
+p(x), q(x,z), r(x,y). => si da vacio false, sino true.
+----------------------------------------------------------------------
+Exists{x}[p(x), Exists{y}[q(x,y), Exists{z}[r(x,y,z), p(h)]]]
+p(x), q(x,y), r(x,y,z), p(h). => si da vacio true, sino false
+---------------------------------------------------------------------
+
+p(x),  Exists{y}[Exists{z}[q(y,z), y!=z]] 
+
+p(x), q(y,z), y!=z. => solo muestro los resultaods para x, solo muestro los resultados para x sin repetidos.
+
