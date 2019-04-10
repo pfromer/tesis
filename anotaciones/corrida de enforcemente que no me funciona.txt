@@ -1,0 +1,171 @@
+nc1:
+bottom :- p('1'), q(z).
+nc2:
+bottom :- p('2'), q(z).
+nc3:
+bottom :- p('1'), r(z).
+
+D = [
+	p('1'),p('2'),p('3'),p('4'),
+	q('1'),q('2'),q('3'),
+	r('1'),r('2'),r('3')
+	]
+	
+repair1:[p('3'),p('4'),r('1'),r('2'),r('3'),q('1'),q('2'),q('3')] 
+repair2:[p('1'),p('2'),p('3'),p('4')]
+repair3:[p('2'),p('3'),p('4'),r('1'),r('2'),r('3').]
+
+Intersección IAR = [p('3'),p('4')]
+
+Considero las siguientes queries:
+
+Q1: 
+Exists{x}[p(x)]
+Es true, pues matchea con x=3, x=4.
+
+
+Q2: 
+Exists{x,y}[p(x),q(y)].
+False.
+
+Q3: 
+Exists{x}[p('1'), p(x)]
+Falso.
+
+Q4: 
+Exists{x,y}[p(x),p(y), x!=y, x!='1', y!='1',x!='2', y!='2'].
+Da true, pues matchea con x=3, y=4.
+
+Q5: 
+Exists{x}[p('3'),p(x)].
+Da true, pues matchea con x=3, x=4.
+---------------------------------------
+
+Algoritmo enforcement para Q1. (Exists{x}[p(x)])
+
+Clases de equivalencia para Nc1 (tengo en cuenta los argumentos de Nc1 y las constantes de Q1 y SigmaNc)
+Los argumentos de Nc1 son ['1',z].
+Las constantes de Q1 y SigmaNC son ['1','2'].
+
+Considero entonces las clases de equivalencia en ['1',z,'2'].
+
+Clases de equivalencia posibles son 
+c1
+{{z,1},{2}}, 
+c2
+{{z},{1},{2}}, 
+c3
+{{z,2},{1}}
+
+
+Normalizo ahora las NC con respecto a todas las clases de equivalencia.
+
+Nc1 (bottom :- p('1'), q(z).):
+
+con respecto a c1:
+bottom :- p('1'), q('1').
+
+con respecto a c2:
+bottom :- p('1'), q(z), 1 != z, 2 != z.
+
+con respecto a c3:
+bottom :- p('1'), q('2').
+
+-------------------
+Nc2 (bottom :- p('2'), q(z).):
+
+con respecto a c1:
+bottom :- p('2'), q('1').
+
+con respecto a c2:
+bottom :- p('2'), q(z), 1 != z, 2 != z.
+
+con respecto a c3:
+bottom :- p('2'), q('2').
+
+------------------nc3:
+Nc3 (bottom :- p('1'), r(z)).
+
+con respecto a c1:
+bottom :- p('1'), r('1').
+
+con respecto a c2:
+bottom :- p('1'), r(z), 1 != z, 2 != z.
+
+con respecto a c3:
+bottom :- p('1'), r('2').
+-----------------------------------------
+
+Cuales tienen que ser enforced?
+Segun el ejemplo son:
+bottom :- p('1'), q(z), 1 != z, 2 != z.
+bottom :- p('2'), q(z), 1 != z, 2 != z.
+bottom :- p('1'), r(z), 1 != z, 2 != z.
+
+(ver definicion de cuales deberian ser enforced porque creo que no matchea con el ejemplo)
+--------------------------------------------------------------------------------------
+
+ahora calculo el algoritmo para la Q1: (Exists{x}[p(x)]) junto con las ncs que tienen que ser enforced. 
+Recordar que debe dar true pues matchea con x=3 y con x=4.
+
+
+Corriendo el algoritmo el resultado seria:
+
+tengo en cuenta que p(x) unifica con p('1'), tambien con p('2').
+considero el mgu{x->1} y el mgu{x->2}
+
+
+(Exists{x}[p(x)]) and not(Exists{z}[ x=1 and (p('1'), q(z), 1 != z, 2 != z)]) and not(Exists{z}[ x=2 and (p('2'), q(z), 1 != z, 2 != z)])
+and not(Exists{z}[ x=1 and (p('1'), r(z), 1 != z, 2 != z)])
+
+Creo que esto me da falso, 
+dado que not(Exists{z}[ x=1 and (p('1'), q(z), 1 != z, 2 != z)]) es falso,  pues Exists{z}[ x=1 and (p('1'), q(z), 1 != z, 2 != z)] es true, consideranro z=3.
+
+dado que not(Exists{z}[ x=2 and (p('2'), q(z), 1 != z, 2 != z)]) es falso, pues Exists{z}[ x=2 and (p('2'), q(z), 1 != z, 2 != z)] es true, consideranro z=3.
+
+dado que not(Exists{z}[ x=1 and (p('1'), r(z), 1 != z, 2 != z)]) es falso, pues Exists{z}[ x=1 and (p('1'), r(z), 1 != z, 2 != z)] es true, consideranro z=3.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
