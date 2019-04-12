@@ -1,4 +1,5 @@
 import * as bodyModule from "./bodyBuilder";
+import { executeQuery } from "./../IrisCaller";
 
 function _builder(){
 
@@ -8,10 +9,22 @@ function _builder(){
 			return {		
 				predicates : body.predicates,
 				toString : function(){ return ["?- ", body.toString(), "."].join("") },
-				type : "QUERY"
+				type : "QUERY",
+				execute : function(program){
+					var programWithQuery = program.toStringWithoutNcsAndEgdsAndQueries() + "\n" + this.toString();
+					return new Promise(resolve => {
+						executeQuery(programWithQuery, program.isGuarded())
+						.then(res => {							
+							resolve(res);						
+						});							
+					})
+				}
+
+
 			}
 		}
 	}
 }
 
 export const builder = _builder();
+

@@ -1,4 +1,3 @@
-import { executeQuery } from "./IrisCaller";
 import { validateBeforeSubmit } from "./alertService";
 import { parse } from "./parser/parser";
 import { intersectionRepairs } from "./IARService";
@@ -17,22 +16,29 @@ export async function submit(component) {
         intersection = iarResult.intersection;
       }
       program.facts = intersection;
-      executeQuery(program.toStringWithoutNcsAndEgds(), program.isGuarded())
-      .then(res => {
-        component.setState({ results: res.data });
-      });
+
+      var executionCalls = program.queries.map(q => q.execute(program));
+      var allResults = Promise.all(executionCalls);
+      allResults.then(res =>
+        {
+          component.setState({ results: res.map(r => r.data[0]) });
+        })
   }
   else{
     component.setState({
-      program: parse(component.state.programEditorInstance.getValue() + "\n" + component.state.queriesEditorInstace.getValue())
+      program: parse(component.state.programEditorInstance.getValue() + "\n" + component.state.queriesEditorInstace.getValue()),
+      results: []
     },
     function () {
       component.state.program.getInconsistencies.then( res =>{
         if(validateBeforeSubmit(component)){
-          executeQuery(component.state.program.toStringWithoutNcsAndEgds(), component.state.program.isGuarded())
-          .then(res => {
-            component.setState({ results: res.data });
-          });
+          var executionCalls = component.state.program.queries.map(q => q.execute(component.state.program));
+          var allResults = Promise.all(executionCalls);
+          allResults.then(res =>
+            {
+              component.setState({ results: res.map(r => r.data[0]) });
+            }
+            )
         }
       }
       )
@@ -40,4 +46,3 @@ export async function submit(component) {
   );
   }
 }
-

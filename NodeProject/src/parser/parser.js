@@ -77,6 +77,9 @@ export function parse (program){
 				toStringWithoutNcsAndEgds : function(){
 					return this.tgds.concat(this.facts).concat(this.queries).join("\n");
 				},
+				toStringWithoutNcsAndEgdsAndQueries : function(){
+					return this.tgds.concat(this.facts).join("\n");
+				},
 				conflictingKeys: undefined,
 				get getConflictingKeys() {
 					if(this.conflictingKeys == undefined){
