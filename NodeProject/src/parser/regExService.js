@@ -8,7 +8,9 @@ function _service(){
 	var notEqualRegex = new RegExp(variableOrConstantRegEx.source + "\\s*!=\\s*" +  variableOrConstantRegEx.source);
 	var predicateRegEx = new RegExp('^' + '(\\w+)\\(' + repeatAndSeparateByComma(variableOrConstantRegEx).source  + '\\)$');
 	var withinPredicateRegEx = removeFirstAndLastCharacter(predicateRegEx);
-	var equalOrNotEqualOrPredicateRegEx = new RegExp("((" + equalRegex.source + "|" + notEqualRegex.source + ")|" + withinPredicateRegEx.source + ")");
+	var negatedPredicateRegEx = new RegExp("!\\s*" + withinPredicateRegEx.source);
+	var queryPredicateRegEx = new RegExp("(((" + equalRegex.source + "|" + notEqualRegex.source + ")|" + withinPredicateRegEx.source + ")|" + negatedPredicateRegEx.source +")");
+
 
 
 
@@ -18,7 +20,7 @@ function _service(){
 	
 	var factRegEx = new RegExp('^' + '(\\w+)\\(' + repeatAndSeparateByComma(constantRegEx).source  + '\\).$');
 	
-	var queryRegEx = new RegExp('^' + "\\?-\\s*" + repeatAndSeparateByComma(equalOrNotEqualOrPredicateRegEx).source + "\\.$");
+	var queryRegEx = new RegExp('^' + "\\?-\\s*" + repeatAndSeparateByComma(queryPredicateRegEx).source + "\\.$");
 	var tgdRegEx = new RegExp('^' + withinPredicateRegEx.source + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$");
 	var ncRegEx = new RegExp('^' + bottomRegEx.source + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$");
 	function repeatAndSeparateNElementsByComma (regEx, n){ 		
@@ -51,12 +53,13 @@ function _service(){
 		equalRegex: equalRegex,
 		notEqualRegex: notEqualRegex,
 		variableOrConstantRegEx : variableOrConstantRegEx,
+		negatedPredicateRegEx: negatedPredicateRegEx,
 		whiteSpacesRegEx : whiteSpacesRegEx,
 		commaSeparatedVariableOrStringRegEx : repeatAndSeparateByComma(variableOrConstantRegEx),
 		predicateRegEx : predicateRegEx,
 		keyRegEx : new RegExp('^' + "key\\(\\w+,\\[" + repeatAndSeparateByComma(new RegExp("[0-9]")).source + "]\\)\\.$"),
 		withinPredicateRegEx : withinPredicateRegEx,
-		equalOrNotEqualOrPredicateRegEx: equalOrNotEqualOrPredicateRegEx,
+		queryPredicateRegEx: queryPredicateRegEx,
 		tgdRegEx : tgdRegEx,
 		ncRegEx : ncRegEx,
 		factRegEx : factRegEx,

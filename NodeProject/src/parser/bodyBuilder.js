@@ -5,7 +5,7 @@ import * as regExModule from "./regExService";
 function _builder(){
 	
 	var build = function(bodyText){
-		var predicates = regExModule.service.arrayOfMatches(regExModule.service.equalOrNotEqualOrPredicateRegEx, bodyText);
+		var predicates = regExModule.service.arrayOfMatches(regExModule.service.queryPredicateRegEx, bodyText);
 		var predicatesAsObjects = [];
 		for (var i = 0; i < predicates.length; i++) {
 			predicatesAsObjects.push(predicateModule.builder.build(predicates[i]));
