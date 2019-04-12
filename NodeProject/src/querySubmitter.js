@@ -3,8 +3,8 @@ import { parse } from "./parser/parser";
 import { intersectionRepairs } from "./IARService";
 
 export async function submit(component) {
-  if(component.state.program && component.state.program.getProcessedInconsistencies && 
-    component.state.program.getProcessedInconsistencies.length > 0){
+  if(component.program && component.program.getProcessedInconsistencies && 
+    component.program.getProcessedInconsistencies.length > 0){
       var program = parse(component.state.programEditorInstance.getValue() + "\n" + component.state.queriesEditorInstace.getValue())      
       var intersection;
       if(component.state.intersectionRepairs){
@@ -25,14 +25,14 @@ export async function submit(component) {
         })
   }
   else{
+    component.program = parse(component.state.programEditorInstance.getValue() + "\n" + component.state.queriesEditorInstace.getValue());
     component.setState({
-      program: parse(component.state.programEditorInstance.getValue() + "\n" + component.state.queriesEditorInstace.getValue()),
       results: []
     },
     function () {
-      component.state.program.getInconsistencies.then( res =>{
+      component.program.getInconsistencies.then( res =>{
         if(validateBeforeSubmit(component)){
-          var executionCalls = component.state.program.queries.map(q => q.execute(component.state.program));
+          var executionCalls = component.program.queries.map(q => q.execute(component.program));
           var allResults = Promise.all(executionCalls);
           allResults.then(res =>
             {

@@ -15,7 +15,6 @@ class ContainerComponent extends React.Component {
       programText: "",
       queriesText: "",
       results: [],
-      program: undefined,
       programEditorInstance: undefined,
       queriesEditorInstace: undefined,
       alert: {
@@ -35,6 +34,10 @@ class ContainerComponent extends React.Component {
     this.checkConstraints = this.checkConstraints.bind(this);
     this.onQueryEditorChange = this.onQueryEditorChange.bind(this);
     this.onProgramEditorChange = this.onProgramEditorChange.bind(this);
+    this.program = undefined;
+
+
+
   } 
 
   onQueryEditorChange(){
@@ -44,7 +47,8 @@ class ContainerComponent extends React.Component {
   onProgramEditorChange(){
     this.onHandleAlertClose();
     this.state.markers.forEach(marker => marker.clear());
-    this.setState({markers : [], results : [],  program : undefined, intersectionRepairs : undefined})
+    this.setState({markers : [], results : [], intersectionRepairs : undefined})
+    this.program = undefined;
 
   }
 
@@ -69,33 +73,18 @@ class ContainerComponent extends React.Component {
   }
 
   checkConstraints() {
-    this.setState({
-      program: parse(this.state.programEditorInstance.getValue())
-    },
-      function(){
-        this.state.program.getInconsistencies.then(res => {
-          setConstraintsAlert(this);
-        })
-      }
-    )
+    this.program = parse(this.state.programEditorInstance.getValue());
+    this.program.getInconsistencies.then(res => {
+      setConstraintsAlert(this);
+    })
   }
 
   checkDatalogFragment() {
-    if (!this.state.program)
+    if (!this.program)
     {
-      var program = parse(this.state.programEditorInstance.getValue());
+      this.program = parse(this.state.programEditorInstance.getValue());
     }
-    else{
-      var program = this.state.program;
-    }
-        
-    this.setState({
-        program: program
-      },
-      function () {
-        setDatalogFragmentAlert(this);
-      }
-    );
+    setDatalogFragmentAlert(this);
   }
 
   onFileLoaded(content) {
@@ -124,11 +113,11 @@ class ContainerComponent extends React.Component {
       checkDatalogFragment={this.checkDatalogFragment} 
       queriesText={this.state.queriesText} 
       setQueriesEditorInstace={this.setQueriesEditorInstace} 
-      program={this.state.program} 
+      program={this.program} 
       results={this.state.results}
       alert={this.state.alert}
       checkConstraints={this.checkConstraints}
-      showIAR={this.state.program && this.state.program.getProcessedInconsistencies && this.state.program.getProcessedInconsistencies.length > 0}
+      showIAR={this.program && this.program.getProcessedInconsistencies && this.program.getProcessedInconsistencies.length > 0}
     />
     );
   }

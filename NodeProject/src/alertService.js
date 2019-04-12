@@ -4,16 +4,16 @@ import * as tgdModule from "./parser/tgdBuilder";
 function getSettings(){
 
     var errorSyntaxSettings = { 
-      condition: function(component){return component.state.program.errors.length > 0 },
+      condition: function(component){return component.program.errors.length > 0 },
       heading: '', 
       lines: function(component) {return ["Please correct the syntax errors in your program first."]},
       proceedToExecute: false
     }
 
     var arityErrorSettings =       { 
-      condition: function(component){return component.state.program.arityDictionary.aritiesAreConsistent().result == false },
+      condition: function(component){return component.program.arityDictionary.aritiesAreConsistent().result == false },
       heading: 'Before we validate consistency please make sure there are no predicates with ambigous arity.', 
-      lines: function(component) {return component.state.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent},
+      lines: function(component) {return component.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent},
       proceedToExecute: false,
       callback: function(component){return markArityIssues(component) },
     };
@@ -23,9 +23,9 @@ function getSettings(){
 
 
     var conflictingKeyErrorSettings =       { 
-      condition: function(component){return component.state.program.getConflictingKeys.length > 0},
+      condition: function(component){return component.program.getConflictingKeys.length > 0},
       heading: 'Before we validate consistency plase make sure all of the keys are non conflicting with the TGDs.', 
-      lines: function(component) {return component.state.program.getConflictingKeys.map(k => k.toString())},
+      lines: function(component) {return component.program.getConflictingKeys.map(k => k.toString())},
       proceedToExecute: false,
       callback: function(component){return markConflictingKeys(component) },
     };
@@ -57,19 +57,19 @@ function getSettings(){
       errorSyntaxSettings,
       arityErrorSettings,
       { 
-        condition: function(component){return component.state.program.isLinear()},
+        condition: function(component){return component.program.isLinear()},
         heading: '', 
         lines: function(component) {return ["Your program is in the Linear Fragment."]},
         proceedToExecute: true
       },
       { 
-        condition: function(component){return component.state.program.isGuarded()}, 
+        condition: function(component){return component.program.isGuarded()}, 
         heading: '', 
         lines: function(component) {return ["Your program is in the Guarded Fragment."]},
         proceedToExecute: true
       },
       { 
-        condition: function(component){return !component.state.program.isGuarded()},
+        condition: function(component){return !component.program.isGuarded()},
         heading: "Out of the Guarded Fragment. Optimizations on the query answering process are not guaranteed.", 
         lines: function(component) {return ["The lines marked in blue are ungarded TGDs"]},
         callback: function(component){return markUngardedTgds(component) },
@@ -99,7 +99,7 @@ function copySetting(setting){
 }
 
 function hasInconsistencies(component){
-    return component.state.program.getProcessedInconsistencies.length > 0;
+    return component.program.getProcessedInconsistencies.length > 0;
 }
 
 function setAlert(component, settingsType){
@@ -119,7 +119,7 @@ function setAlert(component, settingsType){
 }
 
 function markConflictingKeys(component){
-  component.state.program.getConflictingKeys.forEach(key => {
+  component.program.getConflictingKeys.forEach(key => {
     component.state.programEditorInstance.addLineClass(key.lineNumber, "text", "ungarded-tgd");
   })
 }
@@ -135,7 +135,7 @@ function markUngardedTgds(component) {
 }
 
 function markInconsistencies(component){
-  component.state.program.processedInconsistencies.forEach(inconsitency => {
+  component.program.processedInconsistencies.forEach(inconsitency => {
     component.state.programEditorInstance.addLineClass(inconsitency.nc.lineNumber, "text", "inconsistent-constraint");
   });
 }
@@ -152,12 +152,12 @@ function updateUngardedClass(text, lineNumber, component) {
 }
 
 function markArityIssues(component){
-  var notConsistentArityPredicates = component.state.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent;
+  var notConsistentArityPredicates = component.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent;
 
   
   var markers = [];
   notConsistentArityPredicates.forEach(predicateName => {
-    var lessCommonAritiesByLine = component.state.program.arityDictionary.getLessCommonArityLinesForPredicate(predicateName);
+    var lessCommonAritiesByLine = component.program.arityDictionary.getLessCommonArityLinesForPredicate(predicateName);
              
     lessCommonAritiesByLine.forEach(arityLine => {
       var lineText = component.state.programEditorInstance.getLine(arityLine.lineNumber);
