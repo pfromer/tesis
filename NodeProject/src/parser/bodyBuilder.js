@@ -2,10 +2,10 @@ import * as predicateModule  from "./predicateBuilder";
 import * as regExModule from "./regExService";
 
 
-function _builder(bodyText){
+function _builder(){
 	
 	var build = function(bodyText){
-		var predicates = regExModule.service.arrayOfMatches(regExModule.service.withinPredicateRegEx, bodyText);
+		var predicates = regExModule.service.arrayOfMatches(regExModule.service.equalOrNotEqualOrPredicateRegEx, bodyText);
 		var predicatesAsObjects = [];
 		for (var i = 0; i < predicates.length; i++) {
 			predicatesAsObjects.push(predicateModule.builder.build(predicates[i]));

@@ -16,8 +16,22 @@ function _builder(tgdText) {
 				return parametersAsObjets.some(p => p.name == v)
 			};
 
+
+			var getName = function(){
+				if (regExModule.service.equalRegex.test(predicateText)){
+					return "equals";
+				}
+				if(regExModule.service.notEqualRegex.test(predicateText)){
+					return "not_Equals";
+				}
+				if(regExModule.service.withinPredicateRegEx.test(predicateText)){
+					return predicateText.split("(")[0].trim();
+				}
+
+			}
+
 			return {
-				name: predicateText.split("(")[0].trim(),
+				name: getName(),
 				parameters: parametersAsObjets,
 				hasVariable: hasVariable,
 				allVariables: parametersAsObjets.filter(p => p.type == 'variable').map(p => p.name),
