@@ -1,0 +1,8 @@
+mirar la clase LinearRewriter
+
+mirar que devuelve la linea 186     
+return ImmutableSet.copyOf(partialRewritings.getRules());
+
+probar con program-file=C:\Git\tesis\examples\linearExampleConNulls.txt linear-rules fo-rewriting
+
+creo que traduce a un programa de datalog mas chico

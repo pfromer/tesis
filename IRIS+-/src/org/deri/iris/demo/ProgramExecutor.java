@@ -25,6 +25,7 @@ package org.deri.iris.demo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.deri.iris.Configuration;
 import org.deri.iris.KnowledgeBaseFactory;
@@ -114,27 +115,43 @@ public class ProgramExecutor {
       final List<IVariable> variableBindings = new ArrayList<IVariable>();
 
       
-      for (final IQuery query : queries) {
-    	  final IRelation results = knowledgeBase.execute(query, variableBindings);
-    	  QueryResult qResult = new QueryResult();
-    	  qResult.Query = query.toString();
-    	  qResult.VariableBindings = new ArrayList<String>();
-    	  for (IVariable variable : variableBindings) {
-    		  qResult.VariableBindings.add(variable.toString());    		  
-    	  }
-    	  
-    	  qResult.Results = new ArrayList<ArrayList<String>>();
-    	  for (int i = 0; i < results.size(); i++) {    		  
-    		  ArrayList<String> resultList = new ArrayList<String>();
-    		  for(int j = 0; j < results.get(i).size(); j++) {
-    			  resultList.add(results.get(i).get(j).toString());
-    		  }
-    		  qResult.Results.add(resultList);
-    	  }    	  
-    	  queryResults.add(qResult); 
+      if(configuration.showAsJson) {
+          for (final IQuery query : queries) {
+        	  final IRelation results = knowledgeBase.execute(query, variableBindings);
+        	  List<String> variableNamesToAdd = variableBindings.stream().map(v -> v.toString()).collect(Collectors.toList());
+        	  QueryResult qResult = new QueryResult(results, variableBindings,variableNamesToAdd, query.toString());
+        	  
+        	  queryResults.add(qResult); 
+          }
+      }      
+      else {	      
+	      for (final IQuery query : queries) {
+	          // Execute the query
+	          duration = -System.nanoTime();
+	          final IRelation results = knowledgeBase.execute(query, variableBindings);
+	          duration = ((duration + System.nanoTime()) / 1000000);
+	
+	          output.append(BAR).append(NEW_LINE);
+	          output.append("Query:      ").append(query);
+	          if (SHOW_ROW_COUNT) {
+	            output.append(" ==>> ").append(results.size());
+	            if (results.size() == 1) {
+	              output.append(" row");
+	            } else {
+	              output.append(" rows");
+	            }
+	          }
+	          if (SHOW_QUERY_TIME) {
+	            output.append(" in ").append(duration).append("ms");
+	          }
+	
+	          output.append(NEW_LINE);
+	
+	          formatResults(output, results);
+	        }
+	      mOutput = output.toString();
       }
 
-      mOutput = output.toString();
     } catch (final Exception e) {
       e.printStackTrace();
       mOutput = e.toString();

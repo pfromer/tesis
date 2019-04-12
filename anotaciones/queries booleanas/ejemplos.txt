@@ -21,3 +21,10 @@ p(x),  Exists{y}[Exists{z}[q(y,z), y!=z]]
 
 p(x), q(y,z), y!=z. => solo muestro los resultaods para x, solo muestro los resultados para x sin repetidos.
 
+
+
+
+
+
+
+

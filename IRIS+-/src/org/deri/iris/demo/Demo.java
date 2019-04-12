@@ -146,6 +146,8 @@ public class Demo {
     String program = null;
 
     final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();
+    
+    configuration.showAsJson = false;
 
     // Load the logging configuration
     PropertyConfigurator.configure("config/logging.properties");

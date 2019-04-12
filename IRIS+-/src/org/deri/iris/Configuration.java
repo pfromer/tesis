@@ -118,6 +118,8 @@ public class Configuration {
     public IRuleSafetyProcessor ruleSafetyProcessor = new StandardRuleSafetyProcessor();
     
     public StorageManager storageManager = StorageManager.getInstance();
+    
+    public Boolean showAsJson = true;
 
     /**
      * Constructor.
