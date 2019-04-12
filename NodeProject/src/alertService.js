@@ -120,23 +120,23 @@ function setAlert(component, settingsType){
 
 function markConflictingKeys(component){
   component.program.getConflictingKeys.forEach(key => {
-    component.state.programEditorInstance.addLineClass(key.lineNumber, "text", "ungarded-tgd");
+    component.programEditorInstance.addLineClass(key.lineNumber, "text", "ungarded-tgd");
   })
 }
 
 function markUngardedTgds(component) {
   var lineNumber = 0;
-  var lineInfo = component.state.programEditorInstance.lineInfo(lineNumber);
+  var lineInfo = component.programEditorInstance.lineInfo(lineNumber);
   while (lineInfo) {
     updateUngardedClass(lineInfo.text, lineNumber, component);
     lineNumber++;
-    lineInfo = component.state.programEditorInstance.lineInfo(lineNumber);
+    lineInfo = component.programEditorInstance.lineInfo(lineNumber);
   }
 }
 
 function markInconsistencies(component){
   component.program.processedInconsistencies.forEach(inconsitency => {
-    component.state.programEditorInstance.addLineClass(inconsitency.nc.lineNumber, "text", "inconsistent-constraint");
+    component.programEditorInstance.addLineClass(inconsitency.nc.lineNumber, "text", "inconsistent-constraint");
   });
 }
 
@@ -144,9 +144,9 @@ function updateUngardedClass(text, lineNumber, component) {
   if (regExModule.service.tgdRegEx.test(text)) {
     var tgd = tgdModule.builder.build(text);
     if (!tgd.isGuarded) {
-      component.state.programEditorInstance.addLineClass(lineNumber, "text", "ungarded-tgd");
+      component.programEditorInstance.addLineClass(lineNumber, "text", "ungarded-tgd");
     } else {
-      component.state.programEditorInstance.removeLineClass(lineNumber, "text", "ungarded-tgd");
+      component.programEditorInstance.removeLineClass(lineNumber, "text", "ungarded-tgd");
     }
   }
 }
@@ -160,18 +160,18 @@ function markArityIssues(component){
     var lessCommonAritiesByLine = component.program.arityDictionary.getLessCommonArityLinesForPredicate(predicateName);
              
     lessCommonAritiesByLine.forEach(arityLine => {
-      var lineText = component.state.programEditorInstance.getLine(arityLine.lineNumber);
+      var lineText = component.programEditorInstance.getLine(arityLine.lineNumber);
       var regEx = regExModule.service.predicateRegExByNameAndArity(predicateName, arityLine.arity);
       var indexes = regExModule.service.arrayOfIndexes(regEx, lineText); 
       indexes.forEach(i => {
-        markers.push(component.state.programEditorInstance.markText(
+        markers.push(component.programEditorInstance.markText(
           {line :parseInt(arityLine.lineNumber), ch: i.start}, 
           {line :parseInt(arityLine.lineNumber), ch : i.end}, 
           {className : 'arity-error'}))
         })
     })
     })
-  component.setState({markers : markers})
+  component.markers = markers;
 }
 
 export function validateBeforeSubmit(component){

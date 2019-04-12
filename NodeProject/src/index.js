@@ -15,14 +15,9 @@ class ContainerComponent extends React.Component {
       programText: "",
       queriesText: "",
       results: [],
-      programEditorInstance: undefined,
-      queriesEditorInstace: undefined,
       alert: {
         opened: false
-      },
-      markers: [],
-      intersectionRepairs: undefined,
-      repairs : undefined
+      }
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,9 +30,11 @@ class ContainerComponent extends React.Component {
     this.onQueryEditorChange = this.onQueryEditorChange.bind(this);
     this.onProgramEditorChange = this.onProgramEditorChange.bind(this);
     this.program = undefined;
-
-
-
+    this.programEditorInstance = undefined;
+    this.queriesEditorInstace = undefined;
+    this.markers = [];
+    this.intersectionRepairs = undefined;
+    this.repairs = undefined;
   } 
 
   onQueryEditorChange(){
@@ -46,8 +43,11 @@ class ContainerComponent extends React.Component {
 
   onProgramEditorChange(){
     this.onHandleAlertClose();
-    this.state.markers.forEach(marker => marker.clear());
-    this.setState({markers : [], results : [], intersectionRepairs : undefined})
+    this.markers.forEach(marker => marker.clear());
+    this.markers = [];
+    this.intersectionRepairs = undefined;
+    this.repairs = undefined;
+    this.setState({results : [], alert: {opened: false}})
     this.program = undefined;
 
   }
@@ -61,19 +61,15 @@ class ContainerComponent extends React.Component {
   }
 
   setProgramEditorInstace(editor) {
-    this.setState({
-      programEditorInstance: editor
-    })
+    this.programEditorInstance = editor;    
   }
 
   setQueriesEditorInstace(editor) {
-    this.setState({
-      queriesEditorInstace: editor
-    })
+    this.queriesEditorInstace = editor;
   }
 
   checkConstraints() {
-    this.program = parse(this.state.programEditorInstance.getValue());
+    this.program = parse(this.programEditorInstance.getValue());
     this.program.getInconsistencies.then(res => {
       setConstraintsAlert(this);
     })
@@ -82,7 +78,7 @@ class ContainerComponent extends React.Component {
   checkDatalogFragment() {
     if (!this.program)
     {
-      this.program = parse(this.state.programEditorInstance.getValue());
+      this.program = parse(this.programEditorInstance.getValue());
     }
     setDatalogFragmentAlert(this);
   }
