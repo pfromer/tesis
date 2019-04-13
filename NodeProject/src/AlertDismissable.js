@@ -9,7 +9,7 @@ export class AlertDismissable  extends React.Component {
   
     render() {
       if(!this.props.opened) return null;
-      
+      debugger
       const handleHide = () => this.props.onHandleClick();
       return (
         <>

@@ -35,7 +35,41 @@ class ContainerComponent extends React.Component {
     this.markers = [];
     this.intersectionRepairs = undefined;
     this.repairs = undefined;
+    //this.submit = this.nothingValidatedSubmit.bind(this); 
+
   } 
+
+
+  /*async nothingValidatedSubmit(){
+
+    var status = this.program.getStatus
+
+
+
+    this.program.getInconsistencies.then(res =>{
+      if(validateBeforeSubmit(this)){
+        var executionCalls = this.program.queries.map(q => q.execute(this.program));
+        var allResults = Promise.all(executionCalls);
+        allResults.then(res =>
+          {
+            this.setState({ results: res.map(r => r.data[0]) });
+            this.submit = this.validatedSubmitNotIar.bind(this); 
+          })
+      }
+    })
+  }
+
+  validatedSubmitNotIar(){
+    var executionCalls = this.program.queries.map(q => q.execute(this.program));
+    var allResults = Promise.all(executionCalls);
+    allResults.then(res =>
+      {
+        this.setState({ results: res.map(r => r.data[0]) });
+        this.submit = this.validatedSubmitNotIar.bind(this); 
+      })
+  }*/
+
+
 
   onQueryEditorChange(){
     this.onHandleAlertClose();
@@ -49,7 +83,7 @@ class ContainerComponent extends React.Component {
     this.repairs = undefined;
     this.setState({results : [], alert: {opened: false}})
     this.program = undefined;
-
+    //this.submit = this.nothingValidatedSubmit.bind(this); 
   }
 
   onHandleAlertClose() {
@@ -92,9 +126,12 @@ class ContainerComponent extends React.Component {
   }
 
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
-    submit(this);
+    var program = parse(this.programEditorInstance.getValue() + "\n" + this.queriesEditorInstace.getValue());
+    var status = await program.getStatus();
+    debugger
+    //submit(this);
   }
 
   render() {

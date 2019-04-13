@@ -94,7 +94,7 @@ export function parse (program){
 				},
 				inconsistencies: undefined,
 				get getInconsistencies() {
-					if(this.inconsistencies == undefined && this.canBeSubmitted()){
+					if(this.inconsistencies == undefined){
 						return new Promise(resolve => {
 							this.consistencyPromise().then(inconsistencies => {
 								if (inconsistencies && inconsistencies.length > 0) {
@@ -154,6 +154,36 @@ export function parse (program){
 				},
 				isNonConflicting(key){
 					return this.tgds.every(tgd => key.isNonConflicting(tgd));
+				},
+				getStatus: async function(){
+					if(this.errors.length > 0){
+						return{
+							status: "SYNTAX ERROR"
+						}
+					}
+					if(!this.arityDictionary.aritiesAreConsistent().result){						
+						return{
+							status: "ARITIES ISSUES",
+							nonConsistentArityPredicates: this.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent
+						}
+					}
+					if(this.getConflictingKeys.length > 0){						
+						return{
+							status: "CONFLICTING KEYS",
+							conflictingKeys: this.getConflictingKeys.map(k => k.toString())
+						}
+					}
+					await this.getInconsistencies;					
+					if(this.getProcessedInconsistencies.length > 0){
+						return{
+							status: "INCONSISTENT",
+							processedInconsistencies: this.processedInconsistencies
+						}
+					}
+
+					return{
+						status: "OK"
+					}
 				}
 			};
 }

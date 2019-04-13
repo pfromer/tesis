@@ -2,7 +2,7 @@ function _service(){
 	
 	var variableRegEx = /\?[a-z][0-9]*/;
 	var constantRegEx = /'\w+'/;
-	var whiteSpacesRegEx = /^ *$/;
+	var whiteSpacesRegEx = /^\s*$/;
 	var variableOrConstantRegEx = new RegExp('(' + variableRegEx.source + '|' + constantRegEx.source + ')');
 	var equalRegex = new RegExp(variableOrConstantRegEx.source + "\\s*=\\s*" +  variableOrConstantRegEx.source);
 	var notEqualRegex = new RegExp(variableOrConstantRegEx.source + "\\s*!=\\s*" +  variableOrConstantRegEx.source);
