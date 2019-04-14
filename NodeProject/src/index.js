@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import { parse } from "./parser/parser";
 import { setDatalogFragmentAlert } from "./alertService";
-import { submit } from "./querySubmitter";
 import { MainComponent } from "./MainComponent";
 import { setConstraintsAlert } from "./alertService";
 import { nonValidatedStatus } from "./StatusObjects";

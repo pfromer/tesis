@@ -1,5 +1,3 @@
-
-
 export function setErrorSyntaxAlert(component){
     setAlert(component,
         {                
