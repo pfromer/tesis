@@ -184,6 +184,12 @@ export function parse (program){
 					return{
 						status: "OK"
 					}
+				},
+
+				execute: async function(){
+					var executionCalls = this.queries.map(q => q.execute(this));
+					var allResults = await Promise.all(executionCalls);
+					return allResults.map(r => r.data[0])
 				}
 			};
 }

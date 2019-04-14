@@ -1,3 +1,5 @@
+import * as regExModule from "./parser/regExService";
+
 export function markArityIssues(component){
     var notConsistentArityPredicates = component.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent;
     var markers = [];
@@ -30,3 +32,4 @@ export function markInconsistencies(component){
       component.programEditorInstance.addLineClass(inconsitency.nc.lineNumber, "text", "inconsistent-constraint");
     });
 }
+

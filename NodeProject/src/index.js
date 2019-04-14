@@ -6,6 +6,10 @@ import { setDatalogFragmentAlert } from "./alertService";
 import { submit } from "./querySubmitter";
 import { MainComponent } from "./MainComponent";
 import { setConstraintsAlert } from "./alertService";
+import { nonValidatedStatus } from "./StatusObjects";
+import { validatedStatus } from "./StatusObjects";
+import { iarStatus } from "./StatusObjects";
+import { repairsSetStatus } from "./StatusObjects";
 
 class ContainerComponent extends React.Component {
   constructor(props) {
@@ -35,42 +39,12 @@ class ContainerComponent extends React.Component {
     this.markers = [];
     this.intersectionRepairs = undefined;
     this.repairs = undefined;
-    //this.submit = this.nothingValidatedSubmit.bind(this); 
-
+    this.nonValidatedStatus = nonValidatedStatus();
+    this.validatedStatus = validatedStatus();
+    this.iarStatus = iarStatus();
+    this.repairsSetStatus = repairsSetStatus();    
+    this.statusObject = this.nonValidatedStatus;
   } 
-
-
-  /*async nothingValidatedSubmit(){
-
-    var status = this.program.getStatus
-
-
-
-    this.program.getInconsistencies.then(res =>{
-      if(validateBeforeSubmit(this)){
-        var executionCalls = this.program.queries.map(q => q.execute(this.program));
-        var allResults = Promise.all(executionCalls);
-        allResults.then(res =>
-          {
-            this.setState({ results: res.map(r => r.data[0]) });
-            this.submit = this.validatedSubmitNotIar.bind(this); 
-          })
-      }
-    })
-  }
-
-  validatedSubmitNotIar(){
-    var executionCalls = this.program.queries.map(q => q.execute(this.program));
-    var allResults = Promise.all(executionCalls);
-    allResults.then(res =>
-      {
-        this.setState({ results: res.map(r => r.data[0]) });
-        this.submit = this.validatedSubmitNotIar.bind(this); 
-      })
-  }*/
-
-
-
   onQueryEditorChange(){
     this.onHandleAlertClose();
   }
@@ -83,7 +57,7 @@ class ContainerComponent extends React.Component {
     this.repairs = undefined;
     this.setState({results : [], alert: {opened: false}})
     this.program = undefined;
-    //this.submit = this.nothingValidatedSubmit.bind(this); 
+    this.statusObject = this.nonValidatedStatus;
   }
 
   onHandleAlertClose() {
@@ -128,10 +102,8 @@ class ContainerComponent extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    var program = parse(this.programEditorInstance.getValue() + "\n" + this.queriesEditorInstace.getValue());
-    var status = await program.getStatus();
-    debugger
-    //submit(this);
+    this.program = parse(this.programEditorInstance.getValue() + "\n" + this.queriesEditorInstace.getValue());
+    this.statusObject.submit(this);
   }
 
   render() {
