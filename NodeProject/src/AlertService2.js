@@ -21,10 +21,44 @@ export function setConflictingKeysAlert(component){
 export function setInconsistentAlert(component){
     setAlert(component,{
         heading: "Not consistent.",
-        lines: [["The lines marked in green are not fulfilled by your program.", 
-        "You may execute a query under IAR semantics."]]
+        lines: ["The lines marked in green are not fulfilled by your program.", 
+        "You may execute a query under IAR semantics."]
     })
 };
+
+export function setConsistentAlert(component){
+    setAlert(component,{
+        heading: "Your program is consistent.",
+        lines: []
+    })
+};
+
+export function setLinearFragmentAlert(component){
+    setAlert(component,{
+        lines: ["Your program is in the Linear Fragment."]
+    })
+};
+export function setGuardedFragmentAlert(component){
+    setAlert(component,{
+        lines: ["Your program is in the Guarded Fragment."]
+    })
+};
+export function setOutOfGuardedFragmentAlert(component){
+    setAlert(component,{
+        heading: "Out of the Guarded Fragment. Optimizations on the query answering process are not guaranteed.", 
+        lines: ["The lines marked in blue are ungarded TGDs"],
+    })
+};
+
+
+
+
+
+
+
+
+
+
 
 
 function setAlert(component, params){       

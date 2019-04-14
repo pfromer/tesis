@@ -1,4 +1,4 @@
-import * as regExModule from "./parser/regExService";
+/*import * as regExModule from "./parser/regExService";
 import * as tgdModule from "./parser/tgdBuilder";
 
 function getSettings(){
@@ -202,4 +202,4 @@ export function setDatalogFragmentAlert(component){
 
 export function setConstraintsAlert(component){
     setAlert(component, 'checkConstraintsSettings');
-}
+}*/

@@ -1,4 +1,4 @@
-import { validateBeforeSubmit } from "./alertService";
+/*import { validateBeforeSubmit } from "./alertService";
 import { parse } from "./parser/parser";
 import { intersectionRepairs } from "./IARService";
 
@@ -46,4 +46,4 @@ export async function submit(component) {
     }
   );
   }
-}
+}*/

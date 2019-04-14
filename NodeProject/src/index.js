@@ -4,7 +4,6 @@ import * as serviceWorker from "./serviceWorker";
 import { parse } from "./parser/parser";
 import { setDatalogFragmentAlert } from "./alertService";
 import { MainComponent } from "./MainComponent";
-import { setConstraintsAlert } from "./alertService";
 import { nonValidatedStatus } from "./StatusObjects";
 import { validatedStatus } from "./StatusObjects";
 import { iarStatus } from "./StatusObjects";
@@ -38,10 +37,10 @@ class ContainerComponent extends React.Component {
     this.markers = [];
     this.intersectionRepairs = undefined;
     this.repairs = undefined;
-    this.nonValidatedStatus = nonValidatedStatus();
-    this.validatedStatus = validatedStatus();
-    this.iarStatus = iarStatus();
-    this.repairsSetStatus = repairsSetStatus();    
+    this.nonValidatedStatus = nonValidatedStatus;
+    this.validatedStatus = validatedStatus;
+    this.iarStatus = iarStatus;
+    this.repairsSetStatus = repairsSetStatus;    
     this.statusObject = this.nonValidatedStatus;
   } 
   onQueryEditorChange(){
@@ -76,10 +75,11 @@ class ContainerComponent extends React.Component {
   }
 
   checkConstraints() {
-    this.program = parse(this.programEditorInstance.getValue());
-    this.program.getInconsistencies.then(res => {
-      setConstraintsAlert(this);
-    })
+    if (!this.program)
+    {
+      this.program = parse(this.programEditorInstance.getValue());
+    }
+    this.statusObject.checkConstraints(this);
   }
 
   checkDatalogFragment() {
@@ -87,7 +87,7 @@ class ContainerComponent extends React.Component {
     {
       this.program = parse(this.programEditorInstance.getValue());
     }
-    setDatalogFragmentAlert(this);
+    this.statusObject.checkDatalogFragment(this);
   }
 
   onFileLoaded(content) {

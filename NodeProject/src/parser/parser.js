@@ -156,36 +156,39 @@ export function parse (program){
 					return this.tgds.every(tgd => key.isNonConflicting(tgd));
 				},
 				getStatus: async function(){
+					debugger
+					if(this.cachedStatus) return this.cachedStatus;
+					var result = {};
 					if(this.errors.length > 0){
-						return{
+						result = {
 							status: "SYNTAX ERROR"
 						}
 					}
-					if(!this.arityDictionary.aritiesAreConsistent().result){						
-						return{
-							status: "ARITIES ISSUES",
-							nonConsistentArityPredicates: this.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent
+					else if(!this.arityDictionary.aritiesAreConsistent().result){						
+						result = {
+							status: "ARITIES ISSUES"
 						}
 					}
-					if(this.getConflictingKeys.length > 0){						
-						return{
-							status: "CONFLICTING KEYS",
-							conflictingKeys: this.getConflictingKeys.map(k => k.toString())
+					else if(this.getConflictingKeys.length > 0){						
+						result = {
+							status: "CONFLICTING KEYS"
 						}
-					}
-					await this.getInconsistencies;					
-					if(this.getProcessedInconsistencies.length > 0){
-						return{
-							status: "INCONSISTENT",
-							processedInconsistencies: this.processedInconsistencies
+					}				
+					else {
+						await this.getInconsistencies;
+						if(this.getProcessedInconsistencies.length > 0){
+							result = {
+								status: "INCONSISTENT"
+							}
 						}
+						else result = {
+							status: "OK"
+						}	
 					}
-
-					return{
-						status: "OK"
-					}
+					this.cachedStatus = result;
+					return result;
 				},
-
+				cachedStatus: undefined,
 				execute: async function(){
 					var executionCalls = this.queries.map(q => q.execute(this));
 					var allResults = await Promise.all(executionCalls);
