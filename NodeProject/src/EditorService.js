@@ -1,10 +1,10 @@
 import * as regExModule from "./parser/regExService";
 
 export function markArityIssues(component){
-    var notConsistentArityPredicates = component.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent;
+    var notConsistentArityPredicates = component.programWithNoQueries.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent;
     var markers = [];
     notConsistentArityPredicates.forEach(predicateName => {
-    var lessCommonAritiesByLine = component.program.arityDictionary.getLessCommonArityLinesForPredicate(predicateName);
+    var lessCommonAritiesByLine = component.programWithNoQueries.arityDictionary.getLessCommonArityLinesForPredicate(predicateName);
             
     lessCommonAritiesByLine.forEach(arityLine => {
         var lineText = component.programEditorInstance.getLine(arityLine.lineNumber);
@@ -22,13 +22,13 @@ export function markArityIssues(component){
 }
 
 export function markConflictingKeys(component){
-    component.program.getConflictingKeys.forEach(key => {
+    component.programWithNoQueries.getConflictingKeys.forEach(key => {
       component.programEditorInstance.addLineClass(key.lineNumber, "text", "ungarded-tgd");
     })
   }
 
 export function markInconsistencies(component){
-    component.program.processedInconsistencies.forEach(inconsitency => {
+    component.programWithNoQueries.inconsistencies.forEach(inconsitency => {
       component.programEditorInstance.addLineClass(inconsitency.nc.lineNumber, "text", "inconsistent-constraint");
     });
 }

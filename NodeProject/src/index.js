@@ -2,12 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import { parse } from "./parser/parser";
-import { setDatalogFragmentAlert } from "./alertService";
 import { MainComponent } from "./MainComponent";
 import { nonValidatedStatus } from "./StatusObjects";
-import { validatedStatus } from "./StatusObjects";
 import { iarStatus } from "./StatusObjects";
 import { repairsSetStatus } from "./StatusObjects";
+import { datalogFragmentService } from "./DatalogFragmentService";
+import { datalogFragmentConext } from "./ContextObjects";
+import { querySubmitConext } from "./ContextObjects";
+import { checkConstraintsConext } from "./ContextObjects";
 
 class ContainerComponent extends React.Component {
   constructor(props) {
@@ -32,16 +34,18 @@ class ContainerComponent extends React.Component {
     this.onQueryEditorChange = this.onQueryEditorChange.bind(this);
     this.onProgramEditorChange = this.onProgramEditorChange.bind(this);
     this.program = undefined;
+    this.programWithNoQueries = undefined;
     this.programEditorInstance = undefined;
     this.queriesEditorInstace = undefined;
     this.markers = [];
     this.intersectionRepairs = undefined;
     this.repairs = undefined;
     this.nonValidatedStatus = nonValidatedStatus;
-    this.validatedStatus = validatedStatus;
     this.iarStatus = iarStatus;
     this.repairsSetStatus = repairsSetStatus;    
     this.statusObject = this.nonValidatedStatus;
+    this.datalogFragmentService = datalogFragmentService;
+    this.context = undefined;
   } 
   onQueryEditorChange(){
     this.onHandleAlertClose();
@@ -55,6 +59,7 @@ class ContainerComponent extends React.Component {
     this.repairs = undefined;
     this.setState({results : [], alert: {opened: false}})
     this.program = undefined;
+    this.programWithNoQueries = undefined;
     this.statusObject = this.nonValidatedStatus;
   }
 
@@ -75,19 +80,21 @@ class ContainerComponent extends React.Component {
   }
 
   checkConstraints() {
-    if (!this.program)
+    this.context = checkConstraintsConext;
+    if (!this.programWithNoQueries)
     {
-      this.program = parse(this.programEditorInstance.getValue());
+      this.programWithNoQueries = parse(this.programEditorInstance.getValue());
     }
     this.statusObject.checkConstraints(this);
   }
 
   checkDatalogFragment() {
-    if (!this.program)
+    this.context = datalogFragmentConext;
+    if (!this.programWithNoQueries)
     {
-      this.program = parse(this.programEditorInstance.getValue());
+      this.programWithNoQueries = parse(this.programEditorInstance.getValue());
     }
-    this.statusObject.checkDatalogFragment(this);
+    this.datalogFragmentService.checkDatalogFragment(this);
   }
 
   onFileLoaded(content) {
@@ -101,7 +108,12 @@ class ContainerComponent extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    this.program = parse(this.programEditorInstance.getValue() + "\n" + this.queriesEditorInstace.getValue());
+    this.context = querySubmitConext;
+    if(!this.programWithNoQueries){
+      this.programWithNoQueries = parse(this.programEditorInstance.getValue());
+    }
+    this.program = parse(this.programEditorInstance.getValue() + this.queriesEditorInstace.getValue());
+    this.program.getCachedThingsFrom(this.programWithNoQueries);
     this.statusObject.submit(this);
   }
 

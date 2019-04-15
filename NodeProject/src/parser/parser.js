@@ -156,7 +156,6 @@ export function parse (program){
 					return this.tgds.every(tgd => key.isNonConflicting(tgd));
 				},
 				getStatus: async function(){
-					debugger
 					if(this.cachedStatus) return this.cachedStatus;
 					var result = {};
 					if(this.errors.length > 0){
@@ -193,6 +192,16 @@ export function parse (program){
 					var executionCalls = this.queries.map(q => q.execute(this));
 					var allResults = await Promise.all(executionCalls);
 					return allResults.map(r => r.data[0])
+				},
+				getCachedThingsFrom(anotherProgram){
+					if(anotherProgram){
+						if(anotherProgram.inconsistencies) this.inconsistencies = anotherProgram.inconsistencies;
+						if(anotherProgram.arityDictionary) this.arityDictionary = anotherProgram.arityDictionary;
+						if(anotherProgram.conflictingKeys) this.conflictingKeys = anotherProgram.conflictingKeys;
+						if(this.inconsistencies) anotherProgram.inconsistencies = this.inconsistencies;
+						if(this.arityDictionary) anotherProgram.arityDictionary = this.arityDictionary;
+						if(this.conflictingKeys) anotherProgram.conflictingKeys = this.conflictingKeys;
+					}
 				}
 			};
 }

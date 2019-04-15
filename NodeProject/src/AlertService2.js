@@ -7,15 +7,15 @@ export function setErrorSyntaxAlert(component){
 };
 export function setArityIssuesAlert(component){
     setAlert(component,{
-        heading: "Before executing your query plase make sure there are no predicates with ambigous arity.",
-        lines: component.program.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent
+        heading: component.context.arityIssueAlertHeading,
+        lines: component.programWithNoQueries.arityDictionary.aritiesAreConsistent().predicatesNotArityConsistent
     })
 
 };
 export function setConflictingKeysAlert(component){
     setAlert(component,{
-        heading: "Before executing your query plase make sure all of the keys are non conflicting with the TGDs.",
-        lines: component.program.getConflictingKeys.map(k => k.toString())
+        heading: component.context.conflictingKeysHeading,
+        lines: component.programWithNoQueries.getConflictingKeys.map(k => k.toString())
     })
 };
 export function setInconsistentAlert(component){
@@ -49,17 +49,6 @@ export function setOutOfGuardedFragmentAlert(component){
         lines: ["The lines marked in blue are ungarded TGDs"],
     })
 };
-
-
-
-
-
-
-
-
-
-
-
 
 function setAlert(component, params){       
     component.setState(
