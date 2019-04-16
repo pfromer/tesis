@@ -1,0 +1,11 @@
+tio(?x,?y) :- hermano(?x,?z), padre(?z, ?y).
+hermano(?x,?z) :- hermano(?z,?x).
+
+hermano('dario', 'pablo').
+hermano('dario', 'fede').
+hermano('pablo', 'fede').
+
+padre('fede', 'manu').
+padre('fede', 'julia').
+padre('dario', 'franco').
+padre('dario', 'guille').
