@@ -112,7 +112,7 @@ class ContainerComponent extends React.Component {
     if(!this.programWithNoQueries){
       this.programWithNoQueries = parse(this.programEditorInstance.getValue());
     }
-    this.program = parse(this.programEditorInstance.getValue() + this.queriesEditorInstace.getValue());
+    this.program = parse(this.programEditorInstance.getValue() + "\n"  + this.queriesEditorInstace.getValue());
     this.program.getCachedThingsFrom(this.programWithNoQueries);
     this.statusObject.submit(this);
   }
