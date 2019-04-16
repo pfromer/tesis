@@ -19,7 +19,11 @@ class QueryResult extends React.Component {
           {this.props.value.Query}
         </h4>
         <Collapse in={this.state.open}>
-          <div>
+        { this.props.value.IsBoolean ?
+          (<div>
+            {this.props.value.BooleanResult ? 'True' : 'False'}
+          </div>) : 
+          (<div>
             <Table striped bordered hover>
               <thead>
                 <tr>
@@ -38,7 +42,8 @@ class QueryResult extends React.Component {
                 ))}
               </tbody>
             </Table>
-          </div>
+          </div>)
+          }
         </Collapse>
       </Container>
     );

@@ -21,18 +21,25 @@ function _builder(){
 				variablesInHead : variablesInHead,	
                 predicates : body.predicates,
                 body: body,
-                isBoolean: variablesInHead.length > 0,
+                isBoolean: function() {return this.variablesInHead.length == 0},
 				toString : function(){
-                    return ["(" + variablesInHead.map(v => v.toString()).join(", ") + ")", " :- ", body.toString(), "."].join("")
+                    return [isNegated ? "!" : "","(" + variablesInHead.map(v => v.toString()).join(", ") + ")", " :- ", body.toString(), "."].join("")
                  },
                 toNonExistencialQueryString: function(){ return ["?- ", body.toString(), "."].join("") },
 				type : "EXISTENCIAL QUERY",
 				execute : function(program){
 					var programWithQuery = program.toStringWithoutNcsAndEgdsAndQueries() + "\n" + this.toNonExistencialQueryString();
+					var queryString = this.toString();
+					var isBoolean = this.isBoolean();
+					var isNegated = this.isNegated;
 					return new Promise(resolve => {
                         var variablesToShowByQuery = variablesInHead.map(v => v.toString());
 						executeQuery(programWithQuery, program.isGuarded(), variablesToShowByQuery)
-						.then(res => {							
+						.then(res => {
+							res.data[0].Query = queryString;
+							if(isNegated){
+								res.data[0].BooleanResult = !res.data[0].BooleanResult;
+							}
 							resolve(res);						
 						});							
 					})
