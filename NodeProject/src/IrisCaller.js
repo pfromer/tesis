@@ -1,15 +1,22 @@
 
 import axios from "axios";
 
-export function executeQuery(programText, isGuarded){
+export function executeQuery(programText, isGuarded, variablesToShowByQuery){
+
+    var internalParams = {
+        program: programText,
+        isGuarded: isGuarded
+    };
+    
+    if(variablesToShowByQuery){
+        internalParams.variablesToShowByQuery = variablesToShowByQuery.join(",")
+    }
+
     return(
         axios
         .get("http://localhost:8080/iris/query", {
         params: {
-            test: JSON.stringify({
-                program: programText,
-                isGuarded: isGuarded
-            })
+            test: JSON.stringify(internalParams)
         }
         })
     )

@@ -118,7 +118,14 @@ public class ProgramExecutor {
       if(configuration.showAsJson) {
           for (final IQuery query : queries) {
         	  final IRelation results = knowledgeBase.execute(query, variableBindings);
-        	  List<String> variableNamesToAdd = variableBindings.stream().map(v -> v.toString()).collect(Collectors.toList());
+        	  List<String> variableNamesToAdd;
+        	  if(configuration.variablesToShow != null) {
+            	  variableNamesToAdd = configuration.variablesToShow;
+        	  }
+        	  else {
+            	  variableNamesToAdd = variableBindings.stream().map(v -> v.toString()).collect(Collectors.toList());
+        	  }
+        	  
         	  QueryResult qResult = new QueryResult(results, variableBindings,variableNamesToAdd, query.toString());
         	  
         	  queryResults.add(qResult); 

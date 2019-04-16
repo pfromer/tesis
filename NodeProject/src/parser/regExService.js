@@ -10,19 +10,15 @@ function _service(){
 	var withinPredicateRegEx = removeFirstAndLastCharacter(predicateRegEx);
 	var negatedPredicateRegEx = new RegExp("!\\s*" + withinPredicateRegEx.source);
 	var queryPredicateRegEx = new RegExp("(((" + equalRegex.source + "|" + notEqualRegex.source + ")|" + withinPredicateRegEx.source + ")|" + negatedPredicateRegEx.source +")");
-
-
-
-
 	var bottomRegEx = /(⊥|bottom)/;
-	function removeFirstAndLastCharacter(regEx){return new RegExp(regEx.source.slice(0,-1).substring(1))};
+	function removeFirstAndLastCharacter(regEx){ return new RegExp(regEx.source.slice(0,-1).substring(1)) };
 	function repeatAndSeparateByComma (regEx){ return new RegExp("(" + regEx.source + ",\\s*)*"+ regEx.source) };
-	
 	var factRegEx = new RegExp('^' + '(\\w+)\\(' + repeatAndSeparateByComma(constantRegEx).source  + '\\).$');
-	
 	var queryRegEx = new RegExp('^' + "\\?-\\s*" + repeatAndSeparateByComma(queryPredicateRegEx).source + "\\.$");
 	var tgdRegEx = new RegExp('^' + withinPredicateRegEx.source + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$");
 	var ncRegEx = new RegExp('^' + bottomRegEx.source + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$");
+	var existencialQueryRegEx = new RegExp('^!?(\\(\\)|\\(' + repeatAndSeparateByComma(variableRegEx).source  + '\\))' +  "\\s*:-\\s*" +repeatAndSeparateByComma(queryPredicateRegEx).source + "\\.$");
+
 	function repeatAndSeparateNElementsByComma (regEx, n){ 		
 		var arr = [];
 		var i = n;
@@ -30,7 +26,6 @@ function _service(){
 			arr.push(regEx.source);
 			i--;
 		}
-
 		return new RegExp(arr.join(",\\s*"));
 	};
 	
@@ -44,10 +39,7 @@ function _service(){
 			}			
 		} while (match);
 		return result;
-
 	}
-
-
 
 	return{
 		equalRegex: equalRegex,
@@ -64,6 +56,7 @@ function _service(){
 		ncRegEx : ncRegEx,
 		factRegEx : factRegEx,
 		queryRegEx : queryRegEx,
+		existencialQueryRegEx: existencialQueryRegEx,
 		arrayOfMatches : function(regEx, _text){
 			var f = match => { return match[0]};
 			return arrayOfMatchesTemplate(regEx, _text, f);

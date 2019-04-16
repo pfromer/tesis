@@ -120,6 +120,8 @@ public class Configuration {
     public StorageManager storageManager = StorageManager.getInstance();
     
     public Boolean showAsJson = true;
+    
+    public List<String> variablesToShow;
 
     /**
      * Constructor.

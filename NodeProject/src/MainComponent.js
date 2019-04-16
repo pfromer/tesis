@@ -67,7 +67,7 @@ export class MainComponent extends React.Component {
                         <Editor
                           text={this.props.queriesText}
                           setInstance={this.props.setQueriesEditorInstace}
-                          allRegex = {[regExModule.service.queryRegEx, regExModule.service.whiteSpacesRegEx]}
+                          allRegex = {[regExModule.service.queryRegEx, regExModule.service.whiteSpacesRegEx, regExModule.service.existencialQueryRegEx ]}
                           onEditorChange={this.props.onQueryEditorChange}
                         />  
                     </Form.Group>

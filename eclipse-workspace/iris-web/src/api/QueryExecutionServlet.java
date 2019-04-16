@@ -3,6 +3,8 @@ package api;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,6 +43,11 @@ public class QueryExecutionServlet extends HttpServlet {
 			JSONObject obj = new JSONObject(json);
 			String program = obj.getString("program");
 			Boolean isGuarded = obj.getBoolean("isGuarded");
+			String variablesToShowByQuery;
+			if(obj.has("variablesToShowByQuery")){
+				variablesToShowByQuery = obj.getString("variablesToShowByQuery");
+				configuration.variablesToShow = Arrays.asList(variablesToShowByQuery.split("\\s*,\\s*"));
+			}
 			
 			
 			if(isGuarded) {

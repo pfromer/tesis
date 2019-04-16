@@ -67,7 +67,7 @@ public class QueryResult {
 		}
 		
 		for(int i = 0; i < l1.size(); i++) {
-			if(!l1.get(0).equals(l2.get(0))){
+			if(!l1.get(i).equals(l2.get(i))){
 				return false;
 			}
 		}

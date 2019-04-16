@@ -5,6 +5,7 @@ import * as keyModule from "./keyBuilder";
 import * as factModule from "./factBuilder";
 import * as queryModule from "./queryBuilder";
 import { executeQuery } from "../IrisCaller";
+import * as existencialQueryModule from "./existencialQueryBuilder";
 import {ArityDictionary} from "./ArityDictionary";
 
 export function parse (program){
@@ -27,7 +28,8 @@ export function parse (program){
 		{regEx: regExModule.service.ncRegEx, builder: ncModule.builder, collection: ncs  },
 		{regEx: regExModule.service.keyRegEx, builder: keyModule.builder, collection: keys },
 		{regEx: regExModule.service.factRegEx, builder: factModule.builder, collection: facts },
-		{regEx: regExModule.service.queryRegEx, builder: queryModule.builder, collection: queries }
+		{regEx: regExModule.service.queryRegEx, builder: queryModule.builder, collection: queries },
+		{regEx: regExModule.service.existencialQueryRegEx, builder: existencialQueryModule.builder, collection: queries }
 	]
 
 	
@@ -143,11 +145,11 @@ export function parse (program){
 					return chain;
 				},
 				programToString: function(){
-					return this.programStructure.filter(i => i.type != "QUERY").map(i=> i.text).join("\n");
+					return this.programStructure.filter(i => i.type != "QUERY" && i.type != "EXISTENCIAL QUERY").map(i=> i.text).join("\n");
 
 				},
 				queriesToString: function(){
-					return this.queries.filter(i => i.type == "QUERY").map(i=> i.toString()).join("\n");
+					return this.queries.filter(i => i.type == "QUERY" || i.type == "EXISTENCIAL QUERY").map(i=> i.toString()).join("\n");
 				},
 				canBeSubmitted: function(){				
 					return this.errors.length == 0 && this.arityDictionary.aritiesAreConsistent().result == true && this.getConflictingKeys.length == 0;
