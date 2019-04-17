@@ -21,7 +21,8 @@ class ContainerComponent extends React.Component {
       results: [],
       alert: {
         opened: false
-      }
+      },
+      showIAR: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,7 +35,8 @@ class ContainerComponent extends React.Component {
     this.checkConstraints = this.checkConstraints.bind(this);
     this.onQueryEditorChange = this.onQueryEditorChange.bind(this);
     this.onProgramEditorChange = this.onProgramEditorChange.bind(this);
-    this.program = undefined;
+    this.getFullProgram = this.getFullProgram.bind(this);
+    this.queriesProgram = undefined;
     this.programWithNoQueries = undefined;
     this.programEditorInstance = undefined;
     this.queriesEditorInstace = undefined;
@@ -47,9 +49,20 @@ class ContainerComponent extends React.Component {
     this.statusObject = this.nonValidatedStatus;
     this.datalogFragmentService = datalogFragmentService;
     this.context = undefined;
-  } 
+  }
+  
+  
+  getFullProgram(){
+    var result = Object.assign({}, this.programWithNoQueries);
+    result.queries = this.queriesProgram.queries;
+    result.errors = result.errors.concat(this.queriesProgram.errors);
+    return result;
+  }
+
+
   onQueryEditorChange(){
     this.onHandleAlertClose();
+    this.queriesProgram = undefined;
   }
 
   onProgramEditorChange(){
@@ -58,8 +71,7 @@ class ContainerComponent extends React.Component {
     this.markers = [];
     this.intersectionRepairs = undefined;
     this.repairs = undefined;
-    this.setState({results : [], alert: {opened: false}})
-    this.program = undefined;
+    this.setState({results : [], alert: {opened: false}, showIAR: false})
     this.programWithNoQueries = undefined;
     this.statusObject = this.nonValidatedStatus;
   }
@@ -99,10 +111,10 @@ class ContainerComponent extends React.Component {
   }
 
   onFileLoaded(content) {
-    var program = parse(content);
+    var parsedContent = parse(content);
     this.setState({
-      programText: program.programToString(),
-      queriesText: program.queriesToString()
+      programText: parsedContent.programToString(),
+      queriesText: parsedContent.queriesToString()
     })
   }
 
@@ -117,8 +129,7 @@ class ContainerComponent extends React.Component {
     if(!this.programWithNoQueries){
       this.programWithNoQueries = parse(this.programEditorInstance.getValue());
     }
-    this.program = parse(this.programEditorInstance.getValue() + "\n"  + this.queriesEditorInstace.getValue());
-    this.program.getCachedThingsFrom(this.programWithNoQueries);
+    this.queriesProgram = parse(this.queriesEditorInstace.getValue());
     this.statusObject.submit(this);
   }
 
@@ -134,12 +145,11 @@ class ContainerComponent extends React.Component {
       checkDatalogFragment={this.checkDatalogFragment} 
       showRepairs={this.showRepairs} 
       queriesText={this.state.queriesText} 
-      setQueriesEditorInstace={this.setQueriesEditorInstace} 
-      program={this.program} 
+      setQueriesEditorInstace={this.setQueriesEditorInstace}
       results={this.state.results}
       alert={this.state.alert}
       checkConstraints={this.checkConstraints}
-      showIAR={this.program && this.program.getProcessedInconsistencies && this.program.getProcessedInconsistencies.length > 0}
+      showIAR={this.state.showIAR}
     />
     );
   }

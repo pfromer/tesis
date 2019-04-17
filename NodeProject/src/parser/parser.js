@@ -176,8 +176,8 @@ export function parse (program){
 						}
 					}				
 					else {
-						await this.getInconsistencies;
-						if(this.getProcessedInconsistencies.length > 0){
+						var incResult = await this.getInconsistencies;
+						if(incResult.inconsistencies.length > 0){
 							result = {
 								status: "INCONSISTENT"
 							}

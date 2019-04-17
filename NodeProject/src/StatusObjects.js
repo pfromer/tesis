@@ -18,12 +18,18 @@ export var iarStatus = {
     },
     checkConstraints: nonValidatedStatus.checkConstraints,
     showRepairs: async function(component){
-        var iarResult = await intersectionRepairs(component.program);
+        var iarResult = await intersectionRepairs(component.programWithNoQueries);
         component.intersectionRepairs = iarResult.intersection;
         component.repairs = iarResult.repairs;
         component.statusObject = component.repairsSetStatus;
-        debugger
         alertService.showRepairs(component);
+    },
+    getIntersectionRepairs: async function(component){
+        var iarResult = await intersectionRepairs(component.programWithNoQueries);
+        component.intersectionRepairs = iarResult.intersection;
+        component.repairs = iarResult.repairs;
+        component.statusObject = component.repairsSetStatus;
+        return iarResult.intersection;
     }
 }
 
@@ -36,14 +42,15 @@ export var repairsSetStatus = {
         component.statusObject = component.repairsSetStatus;
     },
     showRepairs: async function(component){
-        debugger
         alertService.showRepairs(component);
+    },
+    getIntersectionRepairs: async function(component){
+        return component.intersectionRepairs;
     }
 }
 
 async function onAction(actionName, component){
     var statusObject = await actionSettingsDictionary[actionName].program(component).getStatus();
-    syncPrograms(component);
     switch(statusObject.status){
         case("SYNTAX ERROR"):
             alertService.setErrorSyntaxAlert(component);
@@ -60,6 +67,7 @@ async function onAction(actionName, component){
             alertService.setInconsistentAlert(component);
             editorService.markInconsistencies(component);
             component.statusObject = component.iarStatus;
+            component.setState({showIAR : true});
             break;
         case("OK"):
             actionSettingsDictionary[actionName].okFunction(component);
@@ -68,33 +76,18 @@ async function onAction(actionName, component){
 }
 
 async function iarSubmit(statusName, component){
-    var statusObject = await component.program.getStatus();
-    syncPrograms(component);
+    var fullProgram = component.getFullProgram();
+    var statusObject = await fullProgram.getStatus();
     switch(statusObject.status){
         case("SYNTAX ERROR"):
             alertService.setErrorSyntaxAlert(component);
             break;
         case("INCONSISTENT"):
-            var factStrings = await getIntersectionDictionary[statusName](component);
-            component.program.facts = factStrings.map(f => factModule.builder.build(f))
-            debugger
-            //component.program.facts.filter(f => factStrings.some(f2 => f2.toString() == f));
-            var results = await component.program.execute();
+            var factStrings = await component.statusObject.getIntersectionRepairs(component);
+            fullProgram.facts = factStrings.map(f => factModule.builder.build(f));
+            var results = await fullProgram.execute();
             component.setState({ results: results});
-            component.statusObject = component.repairsSetStatus;
             break;
-    }
-}
-
-var getIntersectionDictionary = {
-    "iarStatus" : async function(component){
-        var iarResult = await intersectionRepairs(component.program);
-        component.intersectionRepairs = iarResult.intersection;
-        component.repairs = iarResult.repairs;
-        return iarResult.intersection;
-    },
-    "repairsSetStatus" : async function(component){
-        return component.intersectionRepairs;
     }
 }
 
@@ -110,18 +103,11 @@ var actionSettingsDictionary = {
     },
     "submit":{
         okFunction: async function(component){
-            var results = await component.program.execute();
+            var results = await component.getFullProgram().execute();
             component.setState({ results: results});
         },
         program: function(component){
-            return component.program;
+            return component.getFullProgram();
         }
-    }
-}
-
-function syncPrograms(component){
-    if(component.program && component.programWithNoQueries){
-        component.program.getCachedThingsFrom(component.programWithNoQueries);
-        component.programWithNoQueries.getCachedThingsFrom(component.program);
     }
 }
