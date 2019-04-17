@@ -1,5 +1,6 @@
 import * as alertService from "./AlertService2";
 import * as editorService from "./EditorService";
+import * as factModule from "./parser/factBuilder";
 import { intersectionRepairs } from "./IARService";
 
 export var nonValidatedStatus = {
@@ -15,7 +16,15 @@ export var iarStatus = {
     submit: async function(component){
         iarSubmit("iarStatus", component)
     },
-    checkConstraints: nonValidatedStatus.checkConstraints
+    checkConstraints: nonValidatedStatus.checkConstraints,
+    showRepairs: async function(component){
+        var iarResult = await intersectionRepairs(component.program);
+        component.intersectionRepairs = iarResult.intersection;
+        component.repairs = iarResult.repairs;
+        component.statusObject = component.repairsSetStatus;
+        debugger
+        alertService.showRepairs(component);
+    }
 }
 
 export var repairsSetStatus = {
@@ -25,6 +34,10 @@ export var repairsSetStatus = {
     checkConstraints: async function(component){
         nonValidatedStatus.checkConstraints(component);
         component.statusObject = component.repairsSetStatus;
+    },
+    showRepairs: async function(component){
+        debugger
+        alertService.showRepairs(component);
     }
 }
 
@@ -62,7 +75,10 @@ async function iarSubmit(statusName, component){
             alertService.setErrorSyntaxAlert(component);
             break;
         case("INCONSISTENT"):
-            component.program.facts = await getIntersectionDictionary[statusName](component);
+            var factStrings = await getIntersectionDictionary[statusName](component);
+            component.program.facts = factStrings.map(f => factModule.builder.build(f))
+            debugger
+            //component.program.facts.filter(f => factStrings.some(f2 => f2.toString() == f));
             var results = await component.program.execute();
             component.setState({ results: results});
             component.statusObject = component.repairsSetStatus;

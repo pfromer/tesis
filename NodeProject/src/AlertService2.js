@@ -50,6 +50,15 @@ export function setOutOfGuardedFragmentAlert(component){
     })
 };
 
+export function showRepairs(component){
+    setAlert(component,{
+        heading: "Repairs:", 
+        lines: component.repairs,
+    })
+};
+
+
+
 function setAlert(component, params){       
     component.setState(
         {alert: {

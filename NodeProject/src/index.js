@@ -29,6 +29,7 @@ class ContainerComponent extends React.Component {
     this.setProgramEditorInstace = this.setProgramEditorInstace.bind(this);
     this.setQueriesEditorInstace = this.setQueriesEditorInstace.bind(this);
     this.checkDatalogFragment = this.checkDatalogFragment.bind(this);
+    this.showRepairs = this.showRepairs.bind(this);
     this.onHandleAlertClose = this.onHandleAlertClose.bind(this);
     this.checkConstraints = this.checkConstraints.bind(this);
     this.onQueryEditorChange = this.onQueryEditorChange.bind(this);
@@ -105,6 +106,10 @@ class ContainerComponent extends React.Component {
     })
   }
 
+  showRepairs(){
+    this.statusObject.showRepairs(this);
+  }
+
 
   async handleSubmit(event) {
     event.preventDefault();
@@ -127,6 +132,7 @@ class ContainerComponent extends React.Component {
       onQueryEditorChange={this.onQueryEditorChange} 
       onFileLoaded={this.onFileLoaded} 
       checkDatalogFragment={this.checkDatalogFragment} 
+      showRepairs={this.showRepairs} 
       queriesText={this.state.queriesText} 
       setQueriesEditorInstace={this.setQueriesEditorInstace} 
       program={this.program} 

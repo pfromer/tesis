@@ -81,7 +81,16 @@ export class MainComponent extends React.Component {
                     </Button>
                   </Form.Group>
                   </Col>
-                </Form.Row>                
+                </Form.Row>
+                <Form.Row>
+                  <Col>
+                  <Form.Group>
+                    <Button onClick={this.props.showRepairs} type="button" variant='warning' style={{width: "100%", display: this.props.showIAR? 'block': 'none'  }}>
+                     Show Repairs
+                    </Button>
+                  </Form.Group>
+                  </Col>
+                </Form.Row>                  
                 </Col>
               </Form.Row>             
           </Form>
