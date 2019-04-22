@@ -16,6 +16,8 @@ class ContainerComponent extends React.Component {
     super(props);
 
     this.state = {
+      /*programText: "bottom :- r1(?x, ?y).\nbottom :- r2('s').\nbottom :- r1(?x, ?y), r2(?x).\nr1(?z, ?x) :- r1(?x, ?y), r2(?y).\nr2(?x) :- r1(?x, ?y).\n \nr1('a', 'b').\nr2('b').\nr2('a').\nr2('s').\n ",
+      queriesText: "?- r1(?x, ?y).\n?- r2(?x).",*/
       programText: "",
       queriesText: "",
       results: [],

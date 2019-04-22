@@ -14,7 +14,7 @@ export var nonValidatedStatus = {
 
 export var iarStatus = {
     submit: async function(component){
-        iarSubmit("iarStatus", component)
+        iarSubmit(component)
     },
     checkConstraints: nonValidatedStatus.checkConstraints,
     showRepairs: async function(component){
@@ -35,7 +35,7 @@ export var iarStatus = {
 
 export var repairsSetStatus = {
     submit: async function(component){
-        iarSubmit("repairsSetStatus", component)
+        iarSubmit(component)
     },
     checkConstraints: async function(component){
         nonValidatedStatus.checkConstraints(component);
@@ -75,7 +75,7 @@ async function onAction(actionName, component){
     }
 }
 
-async function iarSubmit(statusName, component){
+async function iarSubmit(component){
     var fullProgram = component.getFullProgram();
     var statusObject = await fullProgram.getStatus();
     switch(statusObject.status){
@@ -83,6 +83,7 @@ async function iarSubmit(statusName, component){
             alertService.setErrorSyntaxAlert(component);
             break;
         case("INCONSISTENT"):
+            console.log("iar submit before facts")
             var factStrings = await component.statusObject.getIntersectionRepairs(component);
             fullProgram.facts = factStrings.map(f => factModule.builder.build(f));
             var results = await fullProgram.execute();

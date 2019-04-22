@@ -31,17 +31,13 @@ export async function getIarRepairs(facts, tgds, ncsAsQueries, isGuarded){
         "isGuarded": isGuarded  
     }
 
-    var result = [];   
+    var result = []; 
 
-
-    await fetch('http://localhost:8080/iris/iar', {
+    const response = await fetch('http://localhost:8080/iris/iar', {
         method: 'post',
         body: JSON.stringify(params)
-      }).then(function(response) {
-            response.json().then(function(data) {
-            result = data.map(r => r.Facts.map(r => r.Text));
-        });
-      });
-
+      })
+    const json = await response.json();
+    result = json.map(r => r.Facts.map(r => r.Text));
     return result;
 }
