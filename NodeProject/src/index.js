@@ -24,7 +24,9 @@ class ContainerComponent extends React.Component {
       alert: {
         opened: false
       },
-      showIAR: false
+      showIAR: false,
+      resultsLoading: false,
+      repairsLoading: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -152,6 +154,8 @@ class ContainerComponent extends React.Component {
       alert={this.state.alert}
       checkConstraints={this.checkConstraints}
       showIAR={this.state.showIAR}
+      resultsLoading={this.state.resultsLoading}
+      repairsLoading={this.state.repairsLoading}
     />
     );
   }

@@ -18,14 +18,18 @@ export var iarStatus = {
     },
     checkConstraints: nonValidatedStatus.checkConstraints,
     showRepairs: async function(component){
+        component.setState({ repairsLoading: true}); 
         var iarResult = await intersectionRepairs(component.programWithNoQueries);
+        component.setState({ repairsLoading: false}); 
         component.intersectionRepairs = iarResult.intersection;
         component.repairs = iarResult.repairs;
         component.statusObject = component.repairsSetStatus;
         alertService.showRepairs(component);
     },
     getIntersectionRepairs: async function(component){
+        component.setState({ resultsLoading: true}); 
         var iarResult = await intersectionRepairs(component.programWithNoQueries);
+        component.setState({ resultsLoading: false}); 
         component.intersectionRepairs = iarResult.intersection;
         component.repairs = iarResult.repairs;
         component.statusObject = component.repairsSetStatus;
@@ -83,7 +87,6 @@ async function iarSubmit(component){
             alertService.setErrorSyntaxAlert(component);
             break;
         case("INCONSISTENT"):
-            console.log("iar submit before facts")
             var factStrings = await component.statusObject.getIntersectionRepairs(component);
             fullProgram.facts = factStrings.map(f => factModule.builder.build(f));
             var results = await fullProgram.execute();
@@ -104,8 +107,9 @@ var actionSettingsDictionary = {
     },
     "submit":{
         okFunction: async function(component){
+            component.setState({ resultsLoading: true}); 
             var results = await component.getFullProgram().execute();
-            component.setState({ results: results});
+            component.setState({ results: results, resultsLoading: false});
         },
         program: function(component){
             return component.getFullProgram();

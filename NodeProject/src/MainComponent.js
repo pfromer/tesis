@@ -1,4 +1,5 @@
 import React from "react";
+import { Spinner } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
@@ -8,6 +9,7 @@ import { Results } from "./QueryResult";
 import { LoadProgramButton } from "./LoadProgramButton";
 import { Editor } from "./Editor";
 import { AlertDismissable  } from "./AlertDismissable";
+import { LoadingSymbol  } from "./LoadingSymbol";
 import * as regExModule from "./parser/regExService";
 import {UpdateArrayPrototype} from "./parser/ArrayUtils";
 
@@ -78,6 +80,9 @@ export class MainComponent extends React.Component {
                   <Form.Group>
                     <Button type="submit" variant='info' style={this.props.showIAR? buttonIARStyle : buttonStyle } >
                     Execute Queries {this.props.showIAR ? '- IAR SEMANTICS' : ''}
+                    <LoadingSymbol
+                      show={this.props.resultsLoading}
+                    />
                     </Button>
                   </Form.Group>
                   </Col>
@@ -87,6 +92,9 @@ export class MainComponent extends React.Component {
                   <Form.Group>
                     <Button onClick={this.props.showRepairs} type="button" variant='warning' style={{width: "100%", display: this.props.showIAR? 'block': 'none'  }}>
                      Show Repairs
+                     <LoadingSymbol
+                      show={this.props.repairsLoading}
+                    />
                     </Button>
                   </Form.Group>
                   </Col>
