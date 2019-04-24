@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/preset-react": "^7.0.0",
     "axios": "^0.18.0",
+    "babelify": "^10.0.0",
     "bootstrap": "^4.3.1",
+    "chai": "^4.2.0",
     "codemirror": "^5.46.0",
+    "mocha": "^6.1.4",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",
     "react-codemirror2": "^5.1.0",
@@ -15,7 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "mocha",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -27,5 +31,19 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "homepage": "C:\\Projects\\my-app\\build"
+  "homepage": "C:\\Projects\\my-app\\build",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+           "presets": ["@babel/preset-env","@babel/preset-react"]
+        }
+      ]
+    ]
+  }
 }
