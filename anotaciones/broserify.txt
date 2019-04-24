@@ -1,0 +1,4 @@
+
+
+browserify -t [ babelify ] test2/original.js -o test/test.js
+npm run test
