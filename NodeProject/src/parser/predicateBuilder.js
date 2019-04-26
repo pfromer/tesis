@@ -44,7 +44,11 @@ function _builder(tgdText) {
 				isNegated : isNegated,
 				toString: function () {
 					return [this.isNegated ? "!" : "", this.name, "(", this.parameters.map(p => p.toString()).join(", "), ")"].join("");
-				}
+				},
+				type : "predicate",
+				isPredicate : true,
+				isVariable: false,
+				isConstant: false
 			}
 		}
 	}
