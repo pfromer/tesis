@@ -40,4 +40,18 @@ describe('#getMguFor()', function() {
         assert.equal(result.mgu(atom1.parameters[0]).toString(), atom2.parameters[0].toString());
     })
 
+    it('should not unify p(?x, ?x) with p(b, a)', function() {
+        var atom1 = predicateModule.builder.build("p(?x, ?x)");
+        var atom2 = predicateModule.builder.build("p('b', 'a')");
+        var result = getMguFor([atom1, atom2]);
+        assert.equal(result.unifies, false);
+    })
+
+    it('should not unify p(b, ?x) with p(?x, a)', function() {
+        var atom1 = predicateModule.builder.build("p('b', ?x)");
+        var atom2 = predicateModule.builder.build("p(?x, 'a')");
+        var result = getMguFor([atom1, atom2]);
+        assert.equal(result.unifies, false);
+    })
+
 })

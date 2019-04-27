@@ -1,19 +1,11 @@
 export function getMguFor(arrayOfAtoms){
+    var result = undefined;
     var equations = allAgainstAll(arrayOfAtoms);    
     var goOn = true;
     var deleted;
     var eliminated;
-    var descomposed;
-    var conflict;
-    var swap;
-    var check;
-
-
     var doesNotUnifyResult = {unifies: false};
-
-
     var atomEquations = equations.filter(e => e.left.isPredicate && e.right.isPredicate);
-    
     if(atomEquations.some(e => e.left.name != e.right.name)){
         return doesNotUnifyResult;
     }
@@ -23,28 +15,20 @@ export function getMguFor(arrayOfAtoms){
             equations.splice( index, 1 );
 
             if(e.right.parameters.length != e.left.parameters.length){
-                return doesNotUnifyResult;
+                result = doesNotUnifyResult;
             }
             
             for(var i = 0; i < e.left.parameters.length; i++){
                 var leftParameter = e.left.parameters[i];
                 var rightParameter = e.right.parameters[i];
-                if(leftParameter.isConstant && rightParameter.isConstant 
-                    && leftParameter.value != rightParameter.value ){
-                    return doesNotUnifyResult;
+                if(leftParameter.isConstant && rightParameter.isConstant && leftParameter.value != rightParameter.value ){
+                    result = doesNotUnifyResult;
                 }else{
                     equations.push(new variableConstantEquation(leftParameter, rightParameter));
                 }
             }
         })
     }
-
-
-
-
-
-
-
 
     while(goOn){
         deleted = false;
@@ -81,21 +65,23 @@ export function getMguFor(arrayOfAtoms){
         }
 
         if(equations.some(e => e.doesNotUnify())){
-            return doesNotUnifyResult;
+            result = doesNotUnifyResult;
         }
 
-        goOn = deleted || eliminated;
+        goOn = (deleted || eliminated)  && result == undefined;
     }
 
     
 
-    var mguFunction = function(a){
-        return a.applyMgu(this.equations);
-    }
+   if(result){
+       return result;
+   }
 
 
 
-    return {unifies: true, mgu : function(a){return a}}
+    return {unifies: true, mgu : function(a){
+        return a.applyMgu(equations);
+    }}
 }
 
 function allAgainstAll(arrayOfAtoms){
@@ -152,11 +138,15 @@ function variableConstantEquation(left, right){
     }
 
     this.oneIsVariable = function(){
-        return this.left.isVariable || this.left.isVariable;
+        return this.left.isVariable || this.right.isVariable;
     }
 
     this.oneIsConstant = function(){
-        return this.left.isConstant || this.left.isConstant;
+        return this.left.isConstant || this.right.isConstant;
+    }
+
+    this.oneIsVariableAndOneIsConstant = function(){
+        return this.oneIsConstant() && this.oneIsVariable();
     }
 
     this.getVariable = function(){
@@ -190,7 +180,7 @@ function variableConstantEquation(left, right){
         if(this.areBothVariables()){
             return this.lastLexicographically();
         }
-        if(this.oneIsVariable() && this.oneIsConstant()){
+        if(this.oneIsVariableAndOneIsConstant()){
             return this.getVariable();
         }
     }
@@ -203,12 +193,12 @@ function variableConstantEquation(left, right){
         return this.left.toString() == this.right.toString();
     }
 
-    this.leftIsEqualToVariable(variable){
-        this.left.isVariable && this.left.value == variable.value
+    this.leftIsEqualToVariable = function(variable){
+        return this.left.isVariable && this.left.name == variable.name
     }
 
-    this.rightIsEqualToVariable(variable){
-        this.right.isVariable && this.right.value == variable.value
+    this.rightIsEqualToVariable = function(variable){
+        return this.right.isVariable && this.right.name == variable.name
     }
 
 }

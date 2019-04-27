@@ -48,7 +48,12 @@ function _builder(tgdText) {
 				type : "predicate",
 				isPredicate : true,
 				isVariable: false,
-				isConstant: false
+				isConstant: false,
+				applyMgu: function(equations){
+					var result = Object.assign({}, this);
+					result.parameters = this.parameters.map(p => p.applyMgu(equations));
+					return result;
+				}
 			}
 		}
 	}

@@ -39,6 +39,18 @@ describe('#getMguFor()', function () {
     assert.equal(result.unifies, true);
     assert.equal(result.mgu(atom1.parameters[0]).toString(), atom2.parameters[0].toString());
   });
+  it('should not unify p(?x, ?x) with p(b, a)', function () {
+    var atom1 = predicateModule.builder.build("p(?x, ?x)");
+    var atom2 = predicateModule.builder.build("p('b', 'a')");
+    var result = (0, _mguBuilder.getMguFor)([atom1, atom2]);
+    assert.equal(result.unifies, false);
+  });
+  it('should not unify p(b, ?x) with p(?x, a)', function () {
+    var atom1 = predicateModule.builder.build("p('b', ?x)");
+    var atom2 = predicateModule.builder.build("p(?x, 'a')");
+    var result = (0, _mguBuilder.getMguFor)([atom1, atom2]);
+    assert.equal(result.unifies, false);
+  });
 });
 
 },{"../src/parser/predicateBuilder":41,"../src/rewrite/mguBuilder":43,"chai":3}],2:[function(require,module,exports){
@@ -10904,27 +10916,74 @@ Object.defineProperty(exports, "__esModule", {
 exports.builder = void 0;
 
 function _builder() {
+  var variableProto = {
+    type: 'variable',
+    isPredicate: false,
+    isVariable: true,
+    isConstant: false,
+    toString: function toString() {
+      return "?" + this.name;
+    }
+  };
   return {
     build: function build(parameter) {
       if (parameter.startsWith("?")) {
+        var result = {};
+        result.type = 'variable';
+        result.isPredicate = false;
+        result.isVariable = true;
+        result.isConstant = false;
+
+        result.toString = function () {
+          return "'" + this.value + "'";
+        };
+
         var name = parameter.substring(1);
-        return {
-          type: 'variable',
-          name: name,
-          toString: function toString() {
-            return "?" + this.name;
+        result.name = name;
+
+        result.applyMgu = function (equations) {
+          var _this = this;
+
+          var mathchesByConstant = equations.filter(function (e) {
+            return e.oneIsVariableAndOneIsConstant && e.getVariable().name == _this.name;
+          });
+
+          if (mathchesByConstant.length == 1) {
+            return mathchesByConstant[0].getConstant();
+          } else {
+            var matchesByVariable = equations.filter(function (e) {
+              return e.areBothVariables() && e.lastLexicographically().name == _this.name;
+            });
+
+            if (matchesByVariable.length == 1) {
+              return matchesByVariable[0].firstLexicographically();
+            } else {
+              return this;
+            }
           }
         };
+
+        return result;
       }
 
       if (parameter.startsWith("'")) {
-        return {
-          type: 'constant',
-          value: parameter.slice(0, -1).substring(1),
-          toString: function toString() {
-            return "'" + this.value + "'";
-          }
+        var result = {};
+        result.type = 'constant';
+        result.isPredicate = false;
+        result.isVariable = false;
+        result.isConstant = true;
+
+        result.toString = function () {
+          return "?" + this.name;
         };
+
+        result.value = parameter.slice(0, -1).substring(1);
+
+        result.applyMgu = function (equations) {
+          return this;
+        };
+
+        return result;
       }
     }
   };
@@ -11002,6 +11061,17 @@ function _builder(tgdText) {
           return [this.isNegated ? "!" : "", this.name, "(", this.parameters.map(function (p) {
             return p.toString();
           }).join(", "), ")"].join("");
+        },
+        type: "predicate",
+        isPredicate: true,
+        isVariable: false,
+        isConstant: false,
+        applyMgu: function applyMgu(equations) {
+          var result = Object.assign({}, this);
+          result.parameters = this.parameters.map(function (p) {
+            return p.applyMgu(equations);
+          });
+          return result;
         }
       };
     }
@@ -11131,17 +11201,224 @@ Object.defineProperty(exports, "__esModule", {
 exports.getMguFor = getMguFor;
 
 function getMguFor(arrayOfAtoms) {
-  if (arrayOfAtoms.length > 1) {
-    return {
-      unifies: false
-    };
+  var result = undefined;
+  var equations = allAgainstAll(arrayOfAtoms);
+  var goOn = true;
+  var deleted;
+  var eliminated;
+  var doesNotUnifyResult = {
+    unifies: false
+  };
+  var atomEquations = equations.filter(function (e) {
+    return e.left.isPredicate && e.right.isPredicate;
+  });
+
+  if (atomEquations.some(function (e) {
+    return e.left.name != e.right.name;
+  })) {
+    return doesNotUnifyResult;
+  } else {
+    //elimiante all atom equations and transform to variable/variable or variable/constant equations
+    atomEquations.forEach(function (e) {
+      var index = equations.indexOf(e);
+      equations.splice(index, 1);
+
+      if (e.right.parameters.length != e.left.parameters.length) {
+        result = doesNotUnifyResult;
+      }
+
+      for (var i = 0; i < e.left.parameters.length; i++) {
+        var leftParameter = e.left.parameters[i];
+        var rightParameter = e.right.parameters[i];
+
+        if (leftParameter.isConstant && rightParameter.isConstant && leftParameter.value != rightParameter.value) {
+          result = doesNotUnifyResult;
+        } else {
+          equations.push(new variableConstantEquation(leftParameter, rightParameter));
+        }
+      }
+    });
+  }
+
+  while (goOn) {
+    deleted = false;
+    eliminated = false;
+    var l1 = equations.length;
+    equations = equations.filter(function (e) {
+      return !e.isTrivial();
+    });
+    var l2 = equations.length;
+
+    if (l1 != l2) {
+      deleted = true;
+    }
+
+    for (var i = 0; i < equations.length; i++) {
+      var eq = equations[i];
+      var stays = eq.stays();
+      var leaves = eq.leaves();
+
+      if (stays && leaves) {
+        for (var j = 0; j < equations.length; j++) {
+          if (j != i) {
+            var eq2 = equations[j];
+
+            if (eq2.leftIsEqualToVariable(leaves)) {
+              eliminated = true;
+              eq2.left = stays;
+            }
+
+            if (eq2.rightIsEqualToVariable(leaves)) {
+              eliminated = true;
+              eq2.right = stays;
+            }
+          }
+        }
+      }
+    }
+
+    if (equations.some(function (e) {
+      return e.doesNotUnify();
+    })) {
+      result = doesNotUnifyResult;
+    }
+
+    goOn = (deleted || eliminated) && result == undefined;
+  }
+
+  if (result) {
+    return result;
   }
 
   return {
     unifies: true,
     mgu: function mgu(a) {
-      return a;
+      return a.applyMgu(equations);
     }
+  };
+}
+
+function allAgainstAll(arrayOfAtoms) {
+  var result = [];
+
+  for (var i = 0; i < arrayOfAtoms.length - 1; i++) {
+    for (var j = i + 1; j < arrayOfAtoms.length; j++) {
+      result.push({
+        left: arrayOfAtoms[i],
+        right: arrayOfAtoms[j]
+      });
+    }
+  }
+
+  return result;
+}
+
+function variableConstantEquation(left, right) {
+  this.left = left;
+  this.right = right;
+
+  this.unify = function () {
+    if (left.isVariable || right.isVariable) {
+      return true;
+    }
+
+    if (left.isConstant) {
+      return right.value == left.value;
+    }
+  };
+
+  this.areBothVariables = function () {
+    return left.isVariable && right.isVariable;
+  }; //should only be invoked when both are variables
+
+
+  this.firstLexicographically = function () {
+    var compare = this.left.name.localeCompare(this.right.name);
+
+    if (compare == 0 || compare == -1) {
+      return this.left;
+    } else {
+      return this.right;
+    }
+  }; //should only be invoked when both are variables
+
+
+  this.lastLexicographically = function () {
+    var compare = this.right.name.localeCompare(this.left.name);
+
+    if (compare == 0 || compare == -1) {
+      return this.left;
+    } else {
+      return this.right;
+    }
+  };
+
+  this.oneIsVariable = function () {
+    return this.left.isVariable || this.right.isVariable;
+  };
+
+  this.oneIsConstant = function () {
+    return this.left.isConstant || this.right.isConstant;
+  };
+
+  this.oneIsVariableAndOneIsConstant = function () {
+    return this.oneIsConstant() && this.oneIsVariable();
+  };
+
+  this.getVariable = function () {
+    if (this.left.isVariable) {
+      return this.left;
+    }
+
+    if (this.right.isVariable) {
+      return this.right;
+    }
+  };
+
+  this.getConstant = function () {
+    if (this.left.isConstant) {
+      return this.left;
+    }
+
+    if (this.right.isConstant) {
+      return this.right;
+    }
+  };
+
+  this.stays = function () {
+    if (this.areBothVariables()) {
+      return this.firstLexicographically();
+    }
+
+    if (this.oneIsVariable() && this.oneIsConstant()) {
+      return this.getConstant();
+    }
+  };
+
+  this.leaves = function () {
+    if (this.areBothVariables()) {
+      return this.lastLexicographically();
+    }
+
+    if (this.oneIsVariableAndOneIsConstant()) {
+      return this.getVariable();
+    }
+  };
+
+  this.doesNotUnify = function () {
+    return this.left.isConstant && this.right.isConstant && this.left.value != this.right.value;
+  };
+
+  this.isTrivial = function () {
+    return this.left.toString() == this.right.toString();
+  };
+
+  this.leftIsEqualToVariable = function (variable) {
+    return this.left.isVariable && this.left.name == variable.name;
+  };
+
+  this.rightIsEqualToVariable = function (variable) {
+    return this.right.isVariable && this.right.name == variable.name;
   };
 }
 
