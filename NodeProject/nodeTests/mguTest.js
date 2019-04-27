@@ -54,4 +54,32 @@ describe('#getMguFor()', function() {
         assert.equal(result.unifies, false);
     })
 
+    it('should unify p(b, ?x) with p(?x, ?x) to p(b, b)', function() {
+        var atom1 = predicateModule.builder.build("p('b', ?x)");
+        var atom2 = predicateModule.builder.build("p(?x, ?x)");
+        var result = getMguFor([atom1, atom2]);
+        assert.equal(result.unifies, true);
+        assert.equal(result.mgu(atom1).toString(), predicateModule.builder.build("p('b', 'b')").toString());
+        assert.equal(result.mgu(atom1).toString(), result.mgu(atom2).toString());
+        assert.equal(result.mgu(atom2.parameters[0]).toString(), atom1.parameters[0].toString());
+        assert.equal(result.unifies, true);
+    })
+
+    it('should not unify p(b, ?x, ?x) with p(?x, ?x, ?x) and p(?x, a, ?x)', function() {
+        var atom1 = predicateModule.builder.build("p('b', ?x, ?x)");
+        var atom2 = predicateModule.builder.build("p(?x, ?x, ?x)");
+        var atom3 = predicateModule.builder.build("p(?x, 'a', ?x)");
+        var result = getMguFor([atom1, atom2, atom3]);
+        assert.equal(result.unifies, false);
+    })
+
+    it('should unify p(?x, ?y) with p(?z, ?z) to p(?x, ?x)', function() {
+        var atom1 = predicateModule.builder.build("p(?x, ?y)");
+        var atom2 = predicateModule.builder.build("p(?z, ?z)");
+        var result = getMguFor([atom1, atom2]);
+        assert.equal(result.mgu(atom1).toString(), predicateModule.builder.build("p(?x, ?x)").toString());
+        assert.equal(result.mgu(atom2).toString(), predicateModule.builder.build("p(?x, ?x)").toString());
+        assert.equal(result.unifies, true);
+    })
+
 })
