@@ -51,7 +51,7 @@ describe('#getMguFor()', function () {
     var result = (0, _mguBuilder.getMguFor)([atom1, atom2]);
     assert.equal(result.unifies, false);
   });
-  it('should unify p(b, ?x) with p(?x, ?x)', function () {
+  it('should unify p(b, ?x) with p(?x, ?x) to p(b, b)', function () {
     var atom1 = predicateModule.builder.build("p('b', ?x)");
     var atom2 = predicateModule.builder.build("p(?x, ?x)");
     var result = (0, _mguBuilder.getMguFor)([atom1, atom2]);
@@ -11234,33 +11234,21 @@ function getMguFor(arrayOfAtoms) {
   var doesNotUnifyResult = {
     unifies: false
   };
-  var atomEquations = equations.filter(function (e) {
-    return e.left.isPredicate && e.right.isPredicate;
-  });
+  var atomEquations = equations.slice(0); //this makes a copy of an array
 
   if (atomEquations.some(function (e) {
-    return e.left.name != e.right.name;
+    return !e.haveSameArity() || !e.predicatesAreTheSame();
   })) {
     return doesNotUnifyResult;
   } else {
     //elimiante all atom equations and transform to variable/variable or variable/constant equations
     atomEquations.forEach(function (e) {
-      var index = equations.indexOf(e);
-      equations.splice(index, 1);
+      removeElement(equations, e);
 
-      if (e.right.parameters.length != e.left.parameters.length) {
+      if (!e.parametersMightUnify()) {
         result = doesNotUnifyResult;
-      }
-
-      for (var i = 0; i < e.left.parameters.length; i++) {
-        var leftParameter = e.left.parameters[i];
-        var rightParameter = e.right.parameters[i];
-
-        if (leftParameter.isConstant && rightParameter.isConstant && leftParameter.value != rightParameter.value) {
-          result = doesNotUnifyResult;
-        } else {
-          equations.push(new variableConstantEquation(leftParameter, rightParameter));
-        }
+      } else {
+        Array.prototype.push.apply(equations, e.getAllVariableConstantEquations());
       }
     });
   }
@@ -11323,19 +11311,52 @@ function getMguFor(arrayOfAtoms) {
   };
 }
 
+function removeElement(equations, e) {
+  var index = equations.indexOf(e);
+  equations.splice(index, 1);
+}
+
 function allAgainstAll(arrayOfAtoms) {
   var result = [];
 
   for (var i = 0; i < arrayOfAtoms.length - 1; i++) {
     for (var j = i + 1; j < arrayOfAtoms.length; j++) {
-      result.push({
-        left: arrayOfAtoms[i],
-        right: arrayOfAtoms[j]
-      });
+      result.push(new atomEquation(arrayOfAtoms[i], arrayOfAtoms[j]));
     }
   }
 
   return result;
+}
+
+function atomEquation(left, right) {
+  this.right = right;
+  this.left = left;
+
+  this.haveSameArity = function () {
+    return this.right.parameters.length == this.left.parameters.length;
+  };
+
+  this.predicatesAreTheSame = function () {
+    return this.right.name == this.left.name;
+  };
+
+  this.parametersMightUnify = function () {
+    var _this = this;
+
+    if (!this.haveSameArity()) return false;
+    if (!this.predicatesAreTheSame()) return false;
+    return !Array.from(Array(this.left.parameters.length).keys()).some(function (i) {
+      return _this.left.parameters[i].isConstant && _this.right.parameters[i].isConstant && _this.left.parameters[i].value != _this.right.parameters[i].value;
+    });
+  };
+
+  this.getAllVariableConstantEquations = function () {
+    var _this2 = this;
+
+    return Array.from(Array(this.left.parameters.length).keys()).map(function (i) {
+      return new variableConstantEquation(_this2.left.parameters[i], _this2.right.parameters[i]);
+    });
+  };
 }
 
 function variableConstantEquation(left, right) {
