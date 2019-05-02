@@ -61,7 +61,7 @@ export function getMguFor(arrayOfAtoms){
         goOn = (deleted || eliminated)  && result == undefined;
     }
     if(result){
-        return result;
+        return result;//comentario de prueba para commit
     }
     return {unifies: true, mgu : function(a){
         return a.applyMgu(equations);
