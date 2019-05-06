@@ -1,3 +1,9 @@
+export function getMguForTgdHeadWithAtoms(arrayOfAtoms, tgdHead){
+    arrayOfAtoms.push(tgdHead.renameVariablesAndNulls(arrayOfAtoms));
+    return getMeguFor(arrayOfAtoms);
+}
+
+
 export function getMguFor(arrayOfAtoms){
     var result = undefined;
     var equations = allAgainstAll(arrayOfAtoms);    

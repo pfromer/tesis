@@ -53,6 +53,9 @@ function _builder(tgdText) {
 					var result = Object.assign({}, this);
 					result.parameters = this.parameters.map(p => p.applyMgu(equations));
 					return result;
+				},
+				countFor: function(variable){
+					return this.parameters.filter(p=> p.isEqualTo(variable)).length;
 				}
 			}
 		}

@@ -1,14 +1,5 @@
 function _builder(){
 
-
-	var variableProto = {
-		type: 'variable',
-		isPredicate : false,
-		isVariable: true,
-		isConstant: false,
-		toString : function() { return "?" + this.name },
-	}
-
 		
 	return {		
 			build : function(parameter){
@@ -18,9 +9,12 @@ function _builder(){
 					result.isPredicate = false;
 					result.isVariable = true;
 					result.isConstant = false;
-					result.toString = function() { return "'" + this.value + "'"};
+					result.toString = function() { return "?" + this.name }
 					var name = parameter.substring(1);
 					result.name = name;
+					result.isEqualTo = function(variable){
+						return this.name == variable.name;
+					}
 					result.applyMgu = function(equations){
 
 						var mathchesByConstant = equations.filter(e => e.oneIsVariableAndOneIsConstant && e.getVariable().name == this.name);
@@ -45,8 +39,11 @@ function _builder(){
 					result.isPredicate = false;
 					result.isVariable = false;
 					result.isConstant = true;
-					result.toString = function() { return "?" + this.name };
+					result.toString = function() { return "'" + this.value + "'"};
 					result.value = parameter.slice(0,-1).substring(1);
+					result.isEqualTo = function(variable){
+						return false;
+					}
 					result.applyMgu = function(equations){
 						return this;
 					}

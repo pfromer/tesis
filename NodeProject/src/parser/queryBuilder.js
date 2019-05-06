@@ -10,6 +10,9 @@ function _builder(){
 				predicates : body.predicates,
 				toString : function(){ return ["?- ", body.toString(), "."].join("") },
 				type : "QUERY",
+				getAtmos : function(indexes){
+					return indexes.map(i => this.predicates[i]);
+				},
 				execute : function(program){
 					var programWithQuery = program.toStringWithoutNcsAndEgdsAndQueries() + "\n" + this.toString();
 					return new Promise(resolve => {
@@ -18,6 +21,17 @@ function _builder(){
 							resolve(res);						
 						});							
 					})
+				},
+				isSharedVariable : function(parameter){
+					if(parameter.type == 'constant'){
+						return false;
+					}
+					else{
+						return this.predicates.map(p => p.countFor(parameter)).reduce(function(a,b){return a + b}, 0)
+						< 2;
+					}
+						
+
 				}
 
 
