@@ -1,4 +1,6 @@
 
 
 browserify -t [ babelify ] nodeTests/mguTest.js -o test/mguTest.js
+browserify -t [ babelify ] nodeTests/applicabilityTest.js -o test/applicabilityTestBrowser.js
+
 npm run test

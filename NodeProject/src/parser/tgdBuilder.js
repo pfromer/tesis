@@ -1,4 +1,5 @@
 import * as predicateModule  from "./predicateBuilder";
+import * as parameterModule  from "./parameterBuilder";
 import * as bodyModule from "./bodyBuilder";
 import { getMguFor } from "../rewrite/mguBuilder";
 
@@ -22,10 +23,10 @@ function _builder() {
 			toString : predicate.toString,
 			renameVariablesAndNulls : function(setOfAtoms){			
 				var renamedParameters = [];
-				forEach(p => {
+				this.parameters.forEach(p => {
 					if(p.type == 'null' || p.type == 'variable'){
 						if(setOfAtoms.some(a => a.hasVariable(p.name))){
-							var renamedP = parameterBuilder('?' + '_renamed_' + p.name);
+							var renamedP = parameterModule.builder.build('?' + '_renamed_' + p.name);
 							renamedP.type = renamedP.type;
 							renamedParameters.push(renamedP);
 						}

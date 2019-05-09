@@ -28,7 +28,7 @@ function _builder(){
 					}
 					else{
 						return this.predicates.map(p => p.countFor(parameter)).reduce(function(a,b){return a + b}, 0)
-						< 2;
+						> 1;
 					}
 						
 
