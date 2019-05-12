@@ -64,4 +64,36 @@ describe('#applicabilityTests()', function() {
     })
 
 
+    it('tgd should return correct null position', function() {       
+        var tgd = tgdModule.builder.build("p(?x, ?y) :- r(?x)");
+        var tgd2 = tgdModule.builder.build("p(?x) :- r(?x)");
+        var tgd3 = tgdModule.builder.build("p(?x, ?y, ?z) :- r(?x, ?y)");
+        
+        assert.equal(tgd.nullPosition(), 1);
+        assert.equal(tgd2.nullPosition(), undefined);
+        assert.equal(tgd3.nullPosition(), 2);
+    })
+
+
+    it("tgd should be applicable in the correct cases", function() {
+        var tgd = tgdModule.builder.build("p(?x, ?y, ?z) :- r(?x, ?y)");
+        var query = queryModule.builder.build("?- p(?x, ?y, 'a'), p(?x, 'b', ?w), p(?v1, ?v2, ?x), p(?x3, ?x4, ?x5)");
+        assert.equal(tgd.isApplicableTo(query, [0]), false); //false because 'a' is in the null position
+        assert.equal(tgd.isApplicableTo(query, [1]), true); //true because ?w is not a constant and is not a shared variable
+        assert.equal(tgd.isApplicableTo(query, [2]), false); //false because ?x is a shared variable
+        assert.equal(tgd.isApplicableTo(query, [3]), true); //true because ?x5 is not a constant and is not a shared variable
+        assert.equal(tgd.isApplicableTo(query, [0,1]), false); //false because query.predicates[0] does not unify
+        assert.equal(tgd.isApplicableTo(query, [1,3]), true); //true because query.predicates[1] and [3] both unify
+    })
+
+    it("tgd should be applicable if tgd unifies and there is not null position", function() {
+        var tgd = tgdModule.builder.build("p(?x, ?y, ?x) :- r(?x, ?y)");
+        var query = queryModule.builder.build("?- p(?x, ?y, 'a'), p(?x, 'b', ?w), p(?v1, ?v2, ?x)");
+        assert.equal(tgd.isApplicableTo(query, [0]), true); 
+        assert.equal(tgd.isApplicableTo(query, [1]), true);
+        assert.equal(tgd.isApplicableTo(query, [2]), true);
+        assert.equal(tgd.isApplicableTo(query, [0,1]), true); 
+    })
+
+
 })

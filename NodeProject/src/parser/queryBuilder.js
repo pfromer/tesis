@@ -10,8 +10,11 @@ function _builder(){
 				predicates : body.predicates,
 				toString : function(){ return ["?- ", body.toString(), "."].join("") },
 				type : "QUERY",
-				getAtmos : function(indexes){
+				getAtoms : function(indexes){
 					return indexes.map(i => this.predicates[i]);
+				},
+				getOtherAtoms : function(indexes){
+					return Array.from(Array(this.predicates.length).keys()).filter(i => !indexes.some(i2 => i2 == i)).map(i => this.predicates[i]);
 				},
 				execute : function(program){
 					var programWithQuery = program.toStringWithoutNcsAndEgdsAndQueries() + "\n" + this.toString();
@@ -30,11 +33,7 @@ function _builder(){
 						return this.predicates.map(p => p.countFor(parameter)).reduce(function(a,b){return a + b}, 0)
 						> 1;
 					}
-						
-
 				}
-
-
 			}
 		}
 	}

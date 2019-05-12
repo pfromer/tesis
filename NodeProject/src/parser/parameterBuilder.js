@@ -17,7 +17,7 @@ function _builder(){
 					}
 					result.applyMgu = function(equations){
 
-						var mathchesByConstant = equations.filter(e => e.oneIsVariableAndOneIsConstant && e.getVariable().name == this.name);
+						var mathchesByConstant = equations.filter(e => e.oneIsVariableAndOneIsConstant() && e.getVariable().name == this.name);
 						if(mathchesByConstant.length == 1){
 							return mathchesByConstant[0].getConstant();
 						}

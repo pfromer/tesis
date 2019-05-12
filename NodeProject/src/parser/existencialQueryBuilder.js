@@ -27,6 +27,12 @@ function _builder(){
                  },
                 toNonExistencialQueryString: function(){ return ["?- ", body.toString(), "."].join("") },
 				type : "EXISTENCIAL QUERY",
+				getAtoms : function(indexes){
+					return indexes.map(i => this.predicates[i]);
+				},
+				getOtherAtoms : function(indexes){
+					return Array.from(Array(this.predicates.length).keys()).filter(i => !indexes.some(i2 => i2 == i)).map(i => this.predicates[i]);
+				},
 				execute : function(program){
 					var programWithQuery = program.toStringWithoutNcsAndEgdsAndQueries() + "\n" + this.toNonExistencialQueryString();
 					var queryString = this.toString();
@@ -43,6 +49,15 @@ function _builder(){
 							resolve(res);						
 						});							
 					})
+				},
+				isSharedVariable : function(parameter){
+					if(parameter.type == 'constant'){
+						return false;
+					}
+					else{
+						return this.predicates.map(p => p.countFor(parameter)).reduce(function(a,b){return a + b}, 0) + variablesInHead.filter(v => v.isEqualTo(parameter)).length
+						> 1;
+					}
 				}
 			}
 		}

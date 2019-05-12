@@ -102,16 +102,31 @@ function _builder() {
 				isApplicableTo : function(query, indexes){
 					var atoms = query.getAtoms(indexes);
 					var _nullPosition = this.nullPosition();
-					return getMguFor(atoms, this.head).unfies && _nullPosition != -1 && query.getAtoms(indexes).all(
+					var unifies = getMguFor(atoms, this).unifies;
+					if(!unifies) return false;
+					return _nullPosition == undefined || (atoms.every(
 						a =>  a.parameters[_nullPosition].type != 'constant' && 
-						!query.isSharedVariable(a.parameters[_nullPosition])
-					)
+						!query.isSharedVariable(a.parameters[_nullPosition])))
+					
+				},
+				isFactorizableFor : function(query, indexes){
+					var atoms = query.getAtoms(indexes);
+					var unifies = getMguFor(atoms, this).unifies;
+					if(!unifies) return false;
+					var _nullPosition = this.nullPosition();
+					if(_nullPosition == undefined) return true;
+					var variableAtNullPosition = atoms[0].parameters[_nullPosition];
+					return atoms.every(
+						a =>  a.parameters[_nullPosition].isEqualTo(variableAtNullPosition) && this.notNullPositionIndexes().every(i =>
+							a.parameters[i].isConstant || !a.parameters[i].isEqualTo(variableAtNullPosition))
+						) && query.getOtherAtoms(indexes).every(a => !a.hasVariable(variableAtNullPosition.name))
+
 				},
 				nullPosition : function(){
 					var found = false;
 					var i = 0;
-					while(!found && i<this.head.parameters.length){
-						if(this.head.parameters[i].type == 'null')
+					while(!found && i<this.head.predicate.parameters.length){
+						if(this.head.predicate.parameters[i].type == 'null')
 						{
 							found = true;							
 						}
@@ -121,8 +136,13 @@ function _builder() {
 						return i-1;
 					}
 					else{
-						return -1;
+						return undefined;
 					}
+				},
+				notNullPositionIndexes : function(){
+					var _nullPosition = this.nullPosition();
+					//https://stackoverflow.com/questions/39924644/es6-generate-an-array-of-numbers
+					return Array.from(Array(this.head.predicate.parameters.length).keys()).filter(i => i != _nullPosition);
 				}
 			}
 		}
