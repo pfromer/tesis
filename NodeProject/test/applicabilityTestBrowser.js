@@ -9,6 +9,8 @@ var parameterModule = _interopRequireWildcard(require("../src/parser/parameterBu
 
 var queryModule = _interopRequireWildcard(require("../src/parser/queryBuilder"));
 
+var _mguBuilder = require("../src/rewrite/mguBuilder");
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 var chai = require('chai');
@@ -44,15 +46,26 @@ describe('#applicabilityTests()', function () {
     assert.equal(query.isSharedVariable(constant), false);
   });
   it('tgd should rename its variables correctly', function () {
-    var atom1 = predicateModule.builder.build("? p(?x, ?y)");
-    var atom2 = predicateModule.builder.build("? p(?x, ?z)");
+    var atom1 = predicateModule.builder.build("p(?x, ?y)");
+    var atom2 = predicateModule.builder.build("p(?x, ?z)");
     var tgd = tgdModule.builder.build("q(?x, ?y) :- r('a', ?x, ?w)");
+    var manuallyRenamedTgd = tgdModule.builder.build("q(?_renamed_x, ?_renamed_y) :- r('a', ?_renamed_x, ?w)");
     var atoms = [atom1, atom2];
-    assert.equal(tgd.head.predicate.renameVariablesAndNulls(atoms).toString(), tgdModule.builder.build("q(?_renamed_x, ?_renamed_y) :- r('a', ?_renamed_x, ?w)").head.predicate.toString());
+    assert.equal(tgd.head.predicate.renameVariablesAndNulls(atoms).toString(), manuallyRenamedTgd.head.predicate.toString());
+  });
+  it('mgu should rename and then unify', function () {
+    var atom1 = predicateModule.builder.build("p('a', 'b')");
+    var atom2 = predicateModule.builder.build("p(?y, ?x)");
+    var atom3_tgdHead = predicateModule.builder.build("p(?x, ?y)");
+    var tgd = tgdModule.builder.build("p(?x, ?y) :- r('a', ?x, ?w)");
+    var result = (0, _mguBuilder.getMguFor)([atom1, atom2], tgd);
+    var resultNotRenamed = (0, _mguBuilder.getMguFor)([atom1, atom2, atom3_tgdHead]);
+    assert.equal(result.unifies, true);
+    assert.equal(resultNotRenamed.unifies, false);
   });
 });
 
-},{"../src/parser/parameterBuilder":68,"../src/parser/predicateBuilder":69,"../src/parser/queryBuilder":70,"../src/parser/tgdBuilder":72,"chai":29}],2:[function(require,module,exports){
+},{"../src/parser/parameterBuilder":68,"../src/parser/predicateBuilder":69,"../src/parser/queryBuilder":70,"../src/parser/tgdBuilder":72,"../src/rewrite/mguBuilder":73,"chai":29}],2:[function(require,module,exports){
 /*!
  * assertion-error
  * Copyright(c) 2013 Jake Luer <jake@qualiancy.com>
@@ -12740,7 +12753,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.service = void 0;
 
 function _service() {
-  var variableRegEx = /\?[a-z][0-9]*/;
+  var variableRegEx = /\?(_renamed_)*[a-z][0-9]*/;
   var constantRegEx = /'\w+'/;
   var whiteSpacesRegEx = /^\s*$/;
   var variableOrConstantRegEx = new RegExp('(' + variableRegEx.source + '|' + constantRegEx.source + ')');
@@ -13006,8 +13019,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.getMguForTgdHeadWithAtoms = getMguForTgdHeadWithAtoms;
 exports.getMguFor = getMguFor;
 
-function getMguForTgdHeadWithAtoms(arrayOfAtoms, tgdHead) {
-  arrayOfAtoms.push(tgdHead.renameVariablesAndNulls(arrayOfAtoms));
+function getMguForTgdHeadWithAtoms(arrayOfAtoms, tgd) {
+  arrayOfAtoms.push(tgd.head.predicate.renameVariablesAndNulls(arrayOfAtoms));
   return getMeguFor(arrayOfAtoms);
 }
 
@@ -13070,6 +13083,10 @@ function getMguFor(arrayOfAtoms) {
             if (eq2.rightIsEqualToVariable(leaves)) {
               eliminated = true;
               eq2.right = stays;
+            }
+
+            if (eq2.doesNotUnify()) {
+              return doesNotUnifyResult;
             }
           }
         }
@@ -13150,17 +13167,17 @@ function variableConstantEquation(left, right) {
   this.right = right;
 
   this.unify = function () {
-    if (left.isVariable || right.isVariable) {
+    if (this.left.isVariable || this.right.isVariable) {
       return true;
     }
 
-    if (left.isConstant) {
-      return right.value == left.value;
+    if (this.left.isConstant) {
+      return this.right.value == this.left.value;
     }
   };
 
   this.areBothVariables = function () {
-    return left.isVariable && right.isVariable;
+    return this.left.isVariable && this.right.isVariable;
   }; //should only be invoked when both are variables
 
 

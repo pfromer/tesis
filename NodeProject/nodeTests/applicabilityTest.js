@@ -2,6 +2,7 @@ import * as tgdModule from "../src/parser/tgdBuilder";
 import * as predicateModule from "../src/parser/predicateBuilder";
 import * as parameterModule from "../src/parser/parameterBuilder";
 import * as queryModule from "../src/parser/queryBuilder";
+import {getMguFor}  from "../src/rewrite/mguBuilder";
 
 var chai = require('chai');
 
@@ -43,13 +44,23 @@ describe('#applicabilityTests()', function() {
     })
 
     it('tgd should rename its variables correctly', function() {
-        var atom1 = predicateModule.builder.build("? p(?x, ?y)");
-        var atom2 = predicateModule.builder.build("? p(?x, ?z)");
+        var atom1 = predicateModule.builder.build("p(?x, ?y)");
+        var atom2 = predicateModule.builder.build("p(?x, ?z)");
         var tgd = tgdModule.builder.build("q(?x, ?y) :- r('a', ?x, ?w)");
+        var manuallyRenamedTgd = tgdModule.builder.build("q(?_renamed_x, ?_renamed_y) :- r('a', ?_renamed_x, ?w)");
         var atoms = [atom1, atom2];
-        assert.equal(tgd.head.predicate.renameVariablesAndNulls(atoms).toString(), tgdModule.builder.build("q(?_renamed_x, ?_renamed_y) :- r('a', ?_renamed_x, ?w)").head.predicate.toString());
-        //entender porque esto no funciona//tgdModule.builder.build("q(?_renamed_x, ?_renamed_y) :- r('a', ?_renamed_x, ?w)")
-        //SIN EMBARGO ESTO ESTA BIEN: tgd.head.predicate.renameVariablesAndNulls(atoms).toString() "q(?_renamed_x, ?_renamed_y)"
+        assert.equal(tgd.head.predicate.renameVariablesAndNulls(atoms).toString(), manuallyRenamedTgd.head.predicate.toString());
+    })
+
+    it('mgu should rename and then unify', function() {
+        var atom1 = predicateModule.builder.build("p('a', 'b')");
+        var atom2 = predicateModule.builder.build("p(?y, ?x)");
+        var atom3_tgdHead = predicateModule.builder.build("p(?x, ?y)");
+        var tgd = tgdModule.builder.build("p(?x, ?y) :- r('a', ?x, ?w)");        
+        var result = getMguFor([atom1, atom2], tgd);
+        var resultNotRenamed = getMguFor([atom1, atom2, atom3_tgdHead])
+        assert.equal(result.unifies, true);
+        assert.equal(resultNotRenamed.unifies, false);
     })
 
 

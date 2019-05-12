@@ -1,5 +1,5 @@
-export function getMguForTgdHeadWithAtoms(arrayOfAtoms, tgdHead){
-    arrayOfAtoms.push(tgdHead.renameVariablesAndNulls(arrayOfAtoms));
+export function getMguForTgdHeadWithAtoms(arrayOfAtoms, tgd){
+    arrayOfAtoms.push(tgd.head.predicate.renameVariablesAndNulls(arrayOfAtoms));
     return getMeguFor(arrayOfAtoms);
 }
 
@@ -50,10 +50,13 @@ export function getMguFor(arrayOfAtoms){
                         if(eq2.leftIsEqualToVariable(leaves)){
                             eliminated = true;
                             eq2.left = stays;
-                        }
+                        }                        
                         if(eq2.rightIsEqualToVariable(leaves)){
                             eliminated = true;
                             eq2.right = stays;
+                        }
+                        if(eq2.doesNotUnify()){
+                            return doesNotUnifyResult;
                         }
                     }
                 }
@@ -124,17 +127,17 @@ function variableConstantEquation(left, right){
 
     this.unify = function(){
 
-        if(left.isVariable || right.isVariable){
+        if(this.left.isVariable || this.right.isVariable){
             return true;
         }
 
-        if(left.isConstant){
-            return right.value == left.value;
+        if(this.left.isConstant){
+            return this.right.value == this.left.value;
         }
     }
 
     this.areBothVariables = function(){
-        return left.isVariable && right.isVariable;
+        return this.left.isVariable && this.right.isVariable;
     }
 
     //should only be invoked when both are variables

@@ -1,6 +1,6 @@
 function _service(){
 	
-	var variableRegEx = /\?[a-z][0-9]*/;
+	var variableRegEx = /\?(_renamed_)*[a-z][0-9]*/;
 	var constantRegEx = /'\w+'/;
 	var whiteSpacesRegEx = /^\s*$/;
 	var variableOrConstantRegEx = new RegExp('(' + variableRegEx.source + '|' + constantRegEx.source + ')');
