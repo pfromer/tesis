@@ -2,6 +2,7 @@ import * as tgdModule from "../src/parser/tgdBuilder";
 import * as predicateModule from "../src/parser/predicateBuilder";
 import * as parameterModule from "../src/parser/parameterBuilder";
 import * as queryModule from "../src/parser/queryBuilder";
+import * as existencialQueryModule from "../src/parser/existencialQueryBuilder";
 import {getMguFor}  from "../src/rewrite/mguBuilder";
 
 var chai = require('chai');
@@ -26,11 +27,21 @@ describe('#applicabilityTests()', function() {
         var variableX = parameterModule.builder.build('?x');
         var variableY = parameterModule.builder.build('?y');
         assert.equal(query.isSharedVariable(variableX), true);
-        assert.equal(query.isSharedVariable(variableY), false);
+        assert.equal(query.isSharedVariable(variableY), true); // it is also shares because it is transformed to (?x, ?y) :- p('a', ?x, ?x, ?y)
+        //which means variable Y is is also in the head
+    })
+
+    it('should query respond variable is shared if one atom has that variabele more than once - boolean query', function() {
+        var query = existencialQueryModule.builder.build("() :- p('a', ?x, ?x, ?y)");
+        var variableX = parameterModule.builder.build('?x');
+        var variableY = parameterModule.builder.build('?y');
+        assert.equal(query.isSharedVariable(variableX), true);
+        assert.equal(query.isSharedVariable(variableY), false); // it is also shares because it is transformed to (?x, ?y) :- p('a', ?x, ?x, ?y)
+        //which means variable Y is is also in the head
     })
 
     it('should query respond variable is shared if two atoms have the same variabele in the same query', function() {
-        var query = queryModule.builder.build("?- p('a', ?x), r(?x, ?y)");
+        var query = existencialQueryModule.builder.build("() :- p('a', ?x), r(?x, ?y)");
         var variableX = parameterModule.builder.build('?x');
         var variableY = parameterModule.builder.build('?y');
         assert.equal(query.isSharedVariable(variableX), true);
@@ -77,7 +88,7 @@ describe('#applicabilityTests()', function() {
 
     it("tgd should be applicable in the correct cases", function() {
         var tgd = tgdModule.builder.build("p(?x, ?y, ?z) :- r(?x, ?y)");
-        var query = queryModule.builder.build("?- p(?x, ?y, 'a'), p(?x, 'b', ?w), p(?v1, ?v2, ?x), p(?x3, ?x4, ?x5)");
+        var query = existencialQueryModule.builder.build("() :- p(?x, ?y, 'a'), p(?x, 'b', ?w), p(?v1, ?v2, ?x), p(?x3, ?x4, ?x5)");
         assert.equal(tgd.isApplicableTo(query, [0]), false); //false because 'a' is in the null position
         assert.equal(tgd.isApplicableTo(query, [1]), true); //true because ?w is not a constant and is not a shared variable
         assert.equal(tgd.isApplicableTo(query, [2]), false); //false because ?x is a shared variable

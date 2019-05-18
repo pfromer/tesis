@@ -1,9 +1,3 @@
-export function getMguForTgdHeadWithAtoms(arrayOfAtoms, tgd){
-    arrayOfAtoms.push(tgd.head.predicate.renameVariablesAndNulls(arrayOfAtoms));
-    return getMeguFor(arrayOfAtoms);
-}
-
-
 export function getMguFor(arrayOfAtoms){
     var result = undefined;
     var equations = allAgainstAll(arrayOfAtoms);    
@@ -226,4 +220,9 @@ function variableConstantEquation(left, right){
         return this.right.isVariable && this.right.name == variable.name
     }
 
+}
+
+export function getMguForTgdHeadWithAtoms(arrayOfAtoms, tgd){
+    arrayOfAtoms.push(tgd.head.predicate.renameVariablesAndNulls(arrayOfAtoms));
+    return getMeguFor(arrayOfAtoms);
 }
