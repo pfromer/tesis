@@ -8,6 +8,7 @@ function _builder(){
 	return {	
 		build : function(queryText){
 
+			UpdateArrayPrototype();
 			var queryText = queryText.trim();
 			var isNegated = queryText[0] == '!';
 			var subStringIndex = isNegated? 2 : 1;
@@ -50,7 +51,6 @@ function _builder(){
 					})
 				},
 				bodyPermutations: function() {
-						UpdateArrayPrototype();
 						return this.body.predicates.permutations();
 				},
 				isSharedVariable : function(parameter){
@@ -61,6 +61,9 @@ function _builder(){
 						return this.predicates.map(p => p.countFor(parameter)).reduce(function(a,b){return a + b}, 0) + variablesInHead.filter(v => v.isEqualTo(parameter)).length
 						> 1;
 					}
+				},
+				allBodySubsets : function(){
+					return this.body.predicates.allSubSets();
 				},
 				isEqualtTo: function(aQuery){
 					if(aQuery.type != "EXISTENCIAL QUERY" || aQuery.predicates.length != this.predicates.length) return false;
