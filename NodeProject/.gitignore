@@ -4,6 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
+/.nyc_output
+/.vscode
+/test
 
 # testing
 /coverage
