@@ -1,9 +1,12 @@
+import {UpdateArrayPrototype} from "../parser/ArrayUtils";
+
 export function rewrite(query, tgds){
+    UpdateArrayPrototype();
     var qRew = [{query : query, include : 1}];
     var keepGrowing = true;
     while(keepGrowing){
         keepGrowing = false;
-        var qTemp = qRew;//CLONE
+        var qTemp = [...qRew];
         qTemp.forEach(tuple => {
             tgds.forEach(tgd => {
                 var q = factorize(tuple.query, tgd);
@@ -12,9 +15,9 @@ export function rewrite(query, tgds){
                     keepGrowing = true;
                 }
             })
-            query.allSubsets.forEach(A => {
+            query.predicates.length.createArrayOfNElements().allSubsets.forEach(A => {
                if(tgd.isApplicable(query, A)){
-                   var mgu = getMguForTgdHeadWithAtoms(A, tgd);
+                   var mgu = getMguForTgdHeadWithAtoms(query.getAtoms(A), tgd);
                    var q = mgu(query.replace(A, tgd.body));
                    if(notExists(q, qRew, [1])){
                        qRew.push({query : q, include : 1});

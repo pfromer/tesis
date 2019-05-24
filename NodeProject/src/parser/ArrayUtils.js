@@ -35,4 +35,8 @@ export function UpdateArrayPrototype(){
     );
   }
 
+  Number.prototype.createArrayOfNElements = function() {
+    return  Array.from(Array(this.valueOf()).keys()) 
+  };
+
 }

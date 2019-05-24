@@ -21,18 +21,21 @@ function _builder(){
         isNegated : isNegated,
 				variablesInHead : variablesInHead,	
         predicates : body.predicates,
-        body: body,
         isBoolean: function() {return this.variablesInHead.length == 0},
 				toString : function(){
-                    return [isNegated ? "!" : "","(" + variablesInHead.map(v => v.toString()).join(", ") + ")", " :- ", body.toString(), "."].join("")
+										var bodyString = this.predicates.map(p => p.toString()).join(', ');
+                    return [isNegated ? "!" : "","(" + variablesInHead.map(v => v.toString()).join(", ") + ")", " :- ", bodyString, "."].join("")
                  },
-        toNonExistencialQueryString: function(){ return ["?- ", body.toString(), "."].join("") },
+        toNonExistencialQueryString: function(){ 
+					var bodyString = this.predicates.map(p => p.toString()).join(', ');
+					return ["?- ", bodyString, "."].join("") }
+					,
 				type : "EXISTENCIAL QUERY",
 				getAtoms : function(indexes){
 					return indexes.map(i => this.predicates[i]);
 				},
 				getOtherAtoms : function(indexes){
-					return Array.from(Array(this.predicates.length).keys()).filter(i => !indexes.some(i2 => i2 == i)).map(i => this.predicates[i]);
+					return this.predicates.length.createArrayOfNElements().filter(i => !indexes.some(i2 => i2 == i)).map(i => this.predicates[i]);
 				},
 				execute : function(program){
 					var programWithQuery = program.toStringWithoutNcsAndEgdsAndQueries() + "\n" + this.toNonExistencialQueryString();
@@ -51,7 +54,7 @@ function _builder(){
 					})
 				},
 				bodyPermutations: function() {
-						return this.body.predicates.permutations();
+						return this.predicates.permutations();
 				},
 				isSharedVariable : function(parameter){
 					if(parameter.type == 'constant'){
@@ -63,12 +66,18 @@ function _builder(){
 					}
 				},
 				allBodySubsets : function(){
-					return this.body.predicates.allSubSets();
+					return this.predicates.allSubSets();
 				},
-				isEqualtTo: function(aQuery){
+				applyMgu(equations){
+					var result = Object.assign({}, this);
+					result.variablesInHead = result.variablesInHead.map(v => v.applyMgu(equations));
+					result.predicates = result.predicates.map(p => p.applyMgu(equations));
+					return result;
+				},
+				isEqualTo: function(aQuery){
 					if(aQuery.type != "EXISTENCIAL QUERY" || aQuery.predicates.length != this.predicates.length) return false;
 					var otherQueryPermutations = aQuery.bodyPermutations();
-					var allQueryParameters = this.variablesInHead.concat(this.body.predicates.map(p => p.parameters).reduce(function(previous, current){
+					var allQueryParameters = this.variablesInHead.concat(this.predicates.map(p => p.parameters).reduce(function(previous, current){
 						return previous.concat(current);
 					}, []) );
 
@@ -78,7 +87,7 @@ function _builder(){
 					while(!isEqual && i < otherQueryPermutations.length){
 						var variablesAlreadyChecked = [];
 						var permutation = otherQueryPermutations[i];
-						var mightBeEqual = Array.from(Array(permutation.length).keys()).every(i => permutation[i].name == this.body.predicates[i].name && permutation[i].isNegated == this.body.predicates[i].isNegated);						
+						var mightBeEqual =  permutation.length.createArrayOfNElements().every(i => permutation[i].name == this.predicates[i].name && permutation[i].isNegated == this.predicates[i].isNegated);						
 						if(mightBeEqual){
 							var allOtherQueryParams = aQuery.variablesInHead.concat(permutation.map(p => p.parameters).reduce(function(previous, current){
 								return previous.concat(current);

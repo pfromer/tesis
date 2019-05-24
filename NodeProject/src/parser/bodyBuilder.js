@@ -27,6 +27,11 @@ function _builder(){
 					}
 				});
 				return result;
+			},
+			applyMgu(equations){
+				var result = Object.assign({}, this);
+				result.predicates = result.predicates.map(p => p.applyMgu(equations));
+				return result;
 			}
 		};		
 	}

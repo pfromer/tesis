@@ -1,3 +1,5 @@
+import {UpdateArrayPrototype} from "../parser/ArrayUtils";
+
 export function getMguFor(arrayOfAtoms){
     var result = undefined;
     var equations = allAgainstAll(arrayOfAtoms);    
@@ -6,6 +8,7 @@ export function getMguFor(arrayOfAtoms){
     var eliminated;
     var doesNotUnifyResult = {unifies: false};
     var atomEquations = equations.slice(0);//this makes a copy of an array
+    UpdateArrayPrototype();
     if(atomEquations.some(e => !e.haveSameArity() || !e.predicatesAreTheSame())){
         return doesNotUnifyResult;
     }
@@ -104,14 +107,14 @@ function atomEquation(left, right){
         if(!this.haveSameArity()) return false;
         if(!this.predicatesAreTheSame()) return false;
 
-        return !Array.from(Array(this.left.parameters.length).keys()).some(i =>{
+        return !this.left.parameters.length.createArrayOfNElements().some(i =>{
             return this.left.parameters[i].isConstant && this.right.parameters[i].isConstant && this.left.parameters[i].value != this.right.parameters[i].value;
             }
         )
     }
 
     this.getAllVariableConstantEquations = function(){
-        return Array.from(Array(this.left.parameters.length).keys()).map(i => new variableConstantEquation(this.left.parameters[i], this.right.parameters[i]));
+        return this.left.parameters.length.createArrayOfNElements().map(i => new variableConstantEquation(this.left.parameters[i], this.right.parameters[i]));
     }
 }
 

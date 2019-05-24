@@ -2,6 +2,7 @@ import * as predicateModule  from "./predicateBuilder";
 import * as parameterModule  from "./parameterBuilder";
 import * as bodyModule from "./bodyBuilder";
 import { getMguFor } from "../rewrite/mguBuilder";
+import { format } from "url";
 
 
 function _builder() {
@@ -121,6 +122,27 @@ function _builder() {
 							a.parameters[i].isConstant || !a.parameters[i].isEqualTo(variableAtNullPosition))
 						) && query.getOtherAtoms(indexes).every(a => !a.hasVariable(variableAtNullPosition.name))
 
+				},
+				factorize(query){
+					var allBodySubsetsIndxes = query.predicates.length.createArrayOfNElements().allSubSets();
+					var i = 0;
+					while(i < allBodySubsetsIndxes.length){
+						if(allBodySubsetsIndxes[i].length > 1 && this.isFactorizableFor(query, allBodySubsetsIndxes[i])){
+							var result = getMguFor(query.getAtoms(allBodySubsetsIndxes[i]));
+							var newQuery =  result.mgu(query);
+							var predicates = [];
+							//remove duplicates
+							newQuery.predicates.forEach(p => {
+								if(!predicates.some(p2 => p2.isEqualTo(p))){
+									predicates.push(p);
+								}
+							});
+							newQuery.predicates = predicates;
+							return newQuery;
+						}
+						i++;
+					}
+					return query;
 				},
 				nullPosition : function(){
 					var found = false;

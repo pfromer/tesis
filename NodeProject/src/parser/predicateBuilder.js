@@ -56,6 +56,13 @@ function _builder(tgdText) {
 				},
 				countFor: function(variable){
 					return this.parameters.filter(p=> p.isEqualTo(variable)).length;
+				},
+				isEqualTo(anotherPredicate){
+					if(anotherPredicate.type != this.type) return false;
+					if(anotherPredicate.isNegated != this.isNegated) return false;
+					if(anotherPredicate.name != this.name) return false;
+					if(anotherPredicate.parameters.length != this.parameters.length) return false;
+					return anotherPredicate.parameters.length.createArrayOfNElements().every(i => anotherPredicate.parameters[i].isEqualTo(this.parameters[i]));
 				}
 			}
 		}

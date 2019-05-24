@@ -28,4 +28,25 @@ describe('#factorizableTests()', function() {
         var query = existencialQueryModule.builder.build("() :- t(?a,?b,?c), t(?a,?c,?c)");
         assert.equal(tgd.isFactorizableFor(query, [0,1]), false);
     })
+
+    it('tgd should be factorizable in correct cases exmaple 3', function() {
+        var tgd = tgdModule.builder.build("t(?x, ?y, ?z) :- r(?x, ?y), s(?x)");
+        var query = existencialQueryModule.builder.build("() :- t(?a,?b,?c), t(?a,?c,?c)");
+        assert.equal(tgd.isFactorizableFor(query, [0,1]), false);
+    })
+
+    it('factorize function test 1', function() {
+        var tgd = tgdModule.builder.build("t(?x, ?y, ?z) :- r(?x, ?y), s(?x)");
+        var factorizedQuery = tgd.factorize(existencialQueryModule.builder.build("() :- t(?a,?b,?c), t(?a,?e,?c)"));
+        var query2 = existencialQueryModule.builder.build("() :- t(?a,?b,?c)")
+        assert.equal(factorizedQuery.isEqualTo(query2) , true);
+    })
+
+    it('factorize function test 2, factorize function should return same query when not factorizable', function() {
+        var tgd = tgdModule.builder.build("t(?x, ?y, ?z) :- r(?x, ?y), s(?x)");
+        var factorizedQuery = tgd.factorize(existencialQueryModule.builder.build("() :- s(?c), t(?a,?b,?c), t(?a,?e,?c)"));
+        var query2 = existencialQueryModule.builder.build("() :- s(?c), t(?a,?b,?c), t(?a,?e,?c)");
+        assert.equal(factorizedQuery.isEqualTo(query2) , true);
+    })
+
 })

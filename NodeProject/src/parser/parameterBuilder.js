@@ -13,7 +13,7 @@ function _builder(){
 					var name = parameter.substring(1);
 					result.name = name;
 					result.isEqualTo = function(variable){
-						return this.name == variable.name;
+						return this.type == variable.type && this.name == variable.name;
 					}
 					result.applyMgu = function(equations){
 
@@ -41,8 +41,8 @@ function _builder(){
 					result.isConstant = true;
 					result.toString = function() { return "'" + this.value + "'"};
 					result.value = parameter.slice(0,-1).substring(1);
-					result.isEqualTo = function(variable){
-						return false;
+					result.isEqualTo = function(anotherConstant){
+						return this.type == anotherConstant.type && this.value == anotherConstant.value;
 					}
 					result.applyMgu = function(equations){
 						return this;
