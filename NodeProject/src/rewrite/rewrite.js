@@ -9,16 +9,16 @@ export function rewrite(query, tgds){
         var qTemp = [...qRew];
         qTemp.forEach(tuple => {
             tgds.forEach(tgd => {
-                var q = factorize(tuple.query, tgd);
+                var q = tgd.factorize(tuple.query);
                 if (notExists(q, qRew, [0,1])){
                     qRew.push({query : q, include : 0});
                     keepGrowing = true;
                 }
             })
-            query.predicates.length.createArrayOfNElements().allSubsets.forEach(A => {
-               if(tgd.isApplicable(query, A)){
+            query.predicates.length.createArrayOfNElements().allSubsets().forEach(A => {
+               if(tgd.isApplicableTo(query, A)){
                    var mgu = getMguForTgdHeadWithAtoms(query.getAtoms(A), tgd);
-                   var q = mgu(query.replace(A, tgd.body));
+                   var q = mgu(query.replace(A, tgd.body.predicates));
                    if(notExists(q, qRew, [1])){
                        qRew.push({query : q, include : 1});
                        keepGrowing = true;
@@ -28,4 +28,8 @@ export function rewrite(query, tgds){
         })
     }
     return qRew.filter(tuple => tuple.include == 1).map(tuple => tuple.query);
+}
+
+function notExists(query, qRew, flags){
+    return !qRew.some(tuple => tuple.query.isEqualTo(query) && flags.some(f => f == tuple.include));
 }

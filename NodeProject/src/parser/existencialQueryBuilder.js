@@ -74,6 +74,9 @@ function _builder(){
 					result.predicates = result.predicates.map(p => p.applyMgu(equations));
 					return result;
 				},
+				replace: function(indexes, predicates){
+
+				},
 				isEqualTo: function(aQuery){
 					if(aQuery.type != "EXISTENCIAL QUERY" || aQuery.predicates.length != this.predicates.length) return false;
 					var otherQueryPermutations = aQuery.bodyPermutations();
