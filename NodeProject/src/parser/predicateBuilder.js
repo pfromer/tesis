@@ -63,6 +63,19 @@ function _builder(tgdText) {
 					if(anotherPredicate.name != this.name) return false;
 					if(anotherPredicate.parameters.length != this.parameters.length) return false;
 					return anotherPredicate.parameters.length.createArrayOfNElements().every(i => anotherPredicate.parameters[i].isEqualTo(this.parameters[i]));
+				},
+				renameVariables(equations){
+					var result = Object.assign({}, this);
+					result.parameters = this.parameters.map(p => {
+						var match = equations.find(x => x.original == p.name);
+						if(p.isVariable && match){
+								var renamedVariable = Object.assign({}, p);
+								renamedVariable.name = match.renameTo;
+								return renamedVariable;		
+						}
+						return p;
+					});					
+					return result;
 				}
 			}
 		}

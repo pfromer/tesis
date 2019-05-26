@@ -27,9 +27,33 @@ export function rewrite(query, tgds){
             })
         })
     }
-    return qRew.filter(tuple => tuple.include == 1).map(tuple => tuple.query);
+    var queriesToInclude = qRew.filter(tuple => tuple.include == 1).map(tuple => tuple.query);
+    var queriesWithVariablesRenamed = renameNonOriginalVariables(queriesToInclude, query);
+    var result = Object.assign({}, query);
+    result.predicates = queriesWithVariablesRenamed.reduce(
+        (allPredicates, value) => allPredicates.concat(value.predicates),
+        []
+    )
+    return result;
 }
 
 function notExists(query, qRew, flags){
     return !qRew.some(tuple => tuple.query.isEqualTo(query) && flags.some(f => f == tuple.include));
+}
+
+function renameNonOriginalVariables(qRew, originalQuery){
+    var originalVariableNames = originalQuery.allVariableNames();
+    var result = [];
+    var count = 0;
+    for(var i = 0; i <qRew.length; i++){
+        var variables = qRew[i].allVariableNames();
+        var newVariables = variables.filter(v => !originalVariableNames.some(v2 => v2 == v));
+        var equations = [];
+        for(var j = 0; j<newVariables.length; j++){
+            equations.push({ original : newVariables[j], renameTo : "newVar" + count.toString() })
+            count++;
+        }        
+        result.push().qRew[i].renameVariables(equations)();
+    }
+    return result;
 }

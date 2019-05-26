@@ -37,6 +37,12 @@ function _builder(){
 				getOtherAtoms : function(indexes){
 					return this.predicates.length.createArrayOfNElements().filter(i => !indexes.some(i2 => i2 == i)).map(i => this.predicates[i]);
 				},
+				allVariableNames : function(){
+					return this.predicates.map(p => p.allVariables()).reduce(
+						(flatenedArray, value) => flatenedArray.concat(value),
+						[]
+					).map(v => v.name).unique();
+				},
 				execute : function(program){
 					var programWithQuery = program.toStringWithoutNcsAndEgdsAndQueries() + "\n" + this.toNonExistencialQueryString();
 					var queryString = this.toString();
@@ -74,8 +80,17 @@ function _builder(){
 					result.predicates = result.predicates.map(p => p.applyMgu(equations));
 					return result;
 				},
-				replace: function(indexes, predicates){
-
+				replace: function(indexes, replacingPredicates){
+					var result = Object.assign({}, this);
+					var stayingPredicates = this.getOtherAtoms(indexes);
+					var renamedPredicates = replacingPredicates.map(p => p.renameVariablesAndNulls(stayingPredicates));
+					result.predicates = renamedPredicates.concat(stayingPredicates);
+					return result;
+				},				
+				renameVariables(equations){
+					var result = Object.assign({}, this);
+					result.predicates = this.predicates.map(p => p.renameVariables(equations));
+					return result;
 				},
 				isEqualTo: function(aQuery){
 					if(aQuery.type != "EXISTENCIAL QUERY" || aQuery.predicates.length != this.predicates.length) return false;
