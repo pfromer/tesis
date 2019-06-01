@@ -2,6 +2,7 @@ import * as predicateModule  from "./predicateBuilder";
 import * as parameterModule  from "./parameterBuilder";
 import * as bodyModule from "./bodyBuilder";
 import { getMguFor } from "../rewrite/mguBuilder";
+import { getMguForTgdHeadWithAtoms } from "../rewrite/mguBuilder";
 import { format } from "url";
 
 
@@ -19,11 +20,12 @@ function _builder() {
 		}
 
 		return {
+			predicate: predicate,
 			name: predicate.name,
 			parameters: predicate.parameters,
 			toString : predicate.toString,
 			renameVariablesAndNulls : function(setOfAtoms){			
-				var renamedParameters = [];
+				/*var renamedParameters = [];
 				this.parameters.forEach(p => {
 					if(p.type == 'null' || p.type == 'variable'){
 						if(setOfAtoms.some(a => a.hasVariable(p.name))){
@@ -35,14 +37,15 @@ function _builder() {
 							renamedParameters.push(p);
 						}
 					}
-				})
+				})*/
+
+				var predicate = this.predicate.renameVariablesAndNulls(setOfAtoms);
 
 				return {
-					name : this.name,
-					parameters : renamedParameters,
-					toString : function(){
-						return this.name + "(" + renamedParameters.map(p => p.toString()).join(", ") + ")";
-					},
+					predicate : predicate,
+					name : predicate.name,
+					parameters : predicate.parameters,
+					toString : predicate.toString,
 					renameVariablesAndNulls : this.renameVariablesAndNulls
 				}
 			}
@@ -103,20 +106,22 @@ function _builder() {
 				isApplicableTo : function(query, indexes){
 					var atoms = query.getAtoms(indexes);
 					var _nullPosition = this.nullPosition();
-					var unifies = getMguFor(atoms, this).unifies;
+					var unifies = getMguForTgdHeadWithAtoms(atoms, this).unifies;
 					if(!unifies) return false;
-					return _nullPosition == undefined || (atoms.every(
+					if(!_nullPosition) return true;
+					return atoms.every(
 						a =>  a.parameters[_nullPosition].type != 'constant' && 
-						!query.isSharedVariable(a.parameters[_nullPosition])))
+						!query.isSharedVariable(a.parameters[_nullPosition]))
 					
 				},
 				isFactorizableFor : function(query, indexes){
 					var atoms = query.getAtoms(indexes);
-					var unifies = getMguFor(atoms, this).unifies;
+					var unifies = getMguFor(atoms).unifies;
 					if(!unifies) return false;
 					var _nullPosition = this.nullPosition();
-					if(_nullPosition == undefined) return true;
+					if(!_nullPosition) return true;
 					var variableAtNullPosition = atoms[0].parameters[_nullPosition];
+					if(!atoms[0].parameters[_nullPosition]) return true;
 					return atoms.every(
 						a =>  a.parameters[_nullPosition].isEqualTo(variableAtNullPosition) && this.notNullPositionIndexes().every(i =>
 							a.parameters[i].isConstant || !a.parameters[i].isEqualTo(variableAtNullPosition))

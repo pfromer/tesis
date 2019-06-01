@@ -227,5 +227,5 @@ function variableConstantEquation(left, right){
 
 export function getMguForTgdHeadWithAtoms(arrayOfAtoms, tgd){
     arrayOfAtoms.push(tgd.head.predicate.renameVariablesAndNulls(arrayOfAtoms));
-    return getMeguFor(arrayOfAtoms);
+    return getMguFor(arrayOfAtoms);
 }

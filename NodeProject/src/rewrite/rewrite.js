@@ -1,4 +1,6 @@
 import {UpdateArrayPrototype} from "../parser/ArrayUtils";
+import {getMguForTgdHeadWithAtoms} from "./mguBuilder";
+import {getMguFor} from "./mguBuilder";
 
 export function rewrite(query, tgds){
     UpdateArrayPrototype();
@@ -15,15 +17,17 @@ export function rewrite(query, tgds){
                     keepGrowing = true;
                 }
             })
-            query.predicates.length.createArrayOfNElements().allSubsets().forEach(A => {
-               if(tgd.isApplicableTo(query, A)){
-                   var mgu = getMguForTgdHeadWithAtoms(query.getAtoms(A), tgd);
-                   var q = mgu(query.replace(A, tgd.body.predicates));
-                   if(notExists(q, qRew, [1])){
-                       qRew.push({query : q, include : 1});
-                       keepGrowing = true;
-                   }
-               } 
+            tuple.query.predicates.length.createArrayOfNElements().allSubSets().filter(s => s.length > 0) .forEach(A => {
+                tgds.forEach(tgd => {
+                    if(tgd.isApplicableTo(tuple.query, A)){
+                        var mguResult = getMguForTgdHeadWithAtoms(tuple.query.getAtoms(A), tgd);
+                        var q = mguResult.mgu(tuple.query.replace(A, tgd.body.predicates));
+                        if(notExists(q, qRew, [1])){
+                            qRew.push({query : q, include : 1});
+                            keepGrowing = true;
+                        }
+                    }
+                }) 
             })
         })
     }
@@ -53,7 +57,7 @@ function renameNonOriginalVariables(qRew, originalQuery){
             equations.push({ original : newVariables[j], renameTo : "newVar" + count.toString() })
             count++;
         }        
-        result.push().qRew[i].renameVariables(equations)();
+        result.push(qRew[i].renameVariables(equations));
     }
     return result;
 }

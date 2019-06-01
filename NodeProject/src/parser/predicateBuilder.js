@@ -64,6 +64,23 @@ function _builder(tgdText) {
 					if(anotherPredicate.parameters.length != this.parameters.length) return false;
 					return anotherPredicate.parameters.length.createArrayOfNElements().every(i => anotherPredicate.parameters[i].isEqualTo(this.parameters[i]));
 				},
+				renameVariablesAndNulls : function(setOfAtoms){
+					var result = Object.assign({}, this);
+					result.parameters =  result.parameters.map(p => {
+						if(p.type == 'null' || p.type == 'variable'){
+							if(setOfAtoms.some(a => a.hasVariable(p.name))){
+								var renamedP = parameterModule.builder.build('?' + '_renamed_' + p.name);
+								renamedP.type = renamedP.type;
+								return renamedP;
+							}
+							else{
+								return p;
+							}
+						}
+	
+					})
+					return result;
+				},
 				renameVariables(equations){
 					var result = Object.assign({}, this);
 					result.parameters = this.parameters.map(p => {
