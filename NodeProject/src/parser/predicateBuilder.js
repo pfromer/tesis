@@ -12,10 +12,6 @@ function _builder(tgdText) {
 				parametersAsObjets.push(parameterModule.builder.build(parameters[i]));
 			};
 
-			var hasVariable = function (v) {
-				return parametersAsObjets.some(p => p.name == v)
-			};
-
 			var getName = function(){
 				if (regExModule.service.equalRegex.test(predicateText)){
 					return "equals";
@@ -36,10 +32,10 @@ function _builder(tgdText) {
 			return {
 				name: getName(),
 				parameters: parametersAsObjets,
-				hasVariable: hasVariable,
-				allVariables: parametersAsObjets.filter(p => p.type == 'variable').map(p => p.name),
+				hasVariable: function(varName){return this.allVariables().some(v => varName == v)},
+				allVariables: function(){return this.parameters.filter(p => p.type == 'variable').map(p => p.name)},
 				hasAllVariables: function (variables) {
-					return variables.every(v => hasVariable(v));
+					return variables.every(v => this.hasVariable(v));
 				},
 				isNegated : isNegated,
 				toString: function () {

@@ -422,7 +422,7 @@ describe('#rewrite', function() {
         var tgd1 = tgdModule.builder.build("t(?x, ?x, ?z) :- s(?x)");
         var tgd2 = tgdModule.builder.build("r(?y, ?z) :- t(?x, ?y, ?z)");
         var rewritenQuery = rewrite(query, [tgd1, tgd2]);
-        var query2 = existencialQueryModule.builder.build("() :- t(?a, ?b, ?c), r(?b, ?c), t(?a, ?b, ?c), s(?a)");
+        var query2 = existencialQueryModule.builder.build("() :- t(?a, ?b, ?c), r(?b, ?c), t(?a, ?b, ?c), t(?v1, ?b, ?c),  s(?a).");
         assert.equal(query2.isEqualTo(rewritenQuery), true);
     })
 })

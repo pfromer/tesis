@@ -38,7 +38,7 @@ function _builder(){
 					return this.predicates.length.createArrayOfNElements().filter(i => !indexes.some(i2 => i2 == i)).map(i => this.predicates[i]);
 				},
 				allVariableNames : function(){
-					return this.predicates.map(p => p.allVariables).reduce(
+					return this.predicates.map(p => p.allVariables()).reduce(
 						(flatenedArray, value) => flatenedArray.concat(value),
 						[]
 					).unique();

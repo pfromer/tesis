@@ -65,7 +65,7 @@ function _builder() {
 			var head = buildTgdHead(split[0], body);
 			var allVariables = [];
 			body.predicates.forEach(function (predicate) {
-				predicate.allVariables.forEach(function (variable) {
+				predicate.allVariables().forEach(function (variable) {
 					allVariables.push(variable);
 				});
 			});
