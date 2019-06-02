@@ -14,7 +14,7 @@ function _builder(){
 			predicates: predicatesAsObjects, 
 			hasVariable : function(v){ return predicatesAsObjects.some(p => p.hasVariable(v))},
 			toString : function(){
-				return predicates.map(p => p.toString()).join(", ");
+				return this.predicates.map(p => p.toString()).join(", ");
 			},
 			arities : function(){
 				var result = {};
@@ -31,6 +31,11 @@ function _builder(){
 			applyMgu(equations){
 				var result = Object.assign({}, this);
 				result.predicates = result.predicates.map(p => p.applyMgu(equations));
+				return result;
+			},
+			prependPrefixToAllVariables : function(prefix){
+				var result = Object.assign({}, this);
+				result.predicates = result.predicates.map(p => p.prependPrefixToAllVariables(prefix));
 				return result;
 			}
 		};		

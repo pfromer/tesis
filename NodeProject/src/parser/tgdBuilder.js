@@ -3,7 +3,6 @@ import * as parameterModule  from "./parameterBuilder";
 import * as bodyModule from "./bodyBuilder";
 import { getMguFor } from "../rewrite/mguBuilder";
 import { getMguForTgdHeadWithAtoms } from "../rewrite/mguBuilder";
-import { format } from "url";
 
 
 function _builder() {
@@ -24,20 +23,7 @@ function _builder() {
 			name: predicate.name,
 			parameters: predicate.parameters,
 			toString : predicate.toString,
-			renameVariablesAndNulls : function(setOfAtoms){			
-				/*var renamedParameters = [];
-				this.parameters.forEach(p => {
-					if(p.type == 'null' || p.type == 'variable'){
-						if(setOfAtoms.some(a => a.hasVariable(p.name))){
-							var renamedP = parameterModule.builder.build('?' + '_renamed_' + p.name);
-							renamedP.type = renamedP.type;
-							renamedParameters.push(renamedP);
-						}
-						else{
-							renamedParameters.push(p);
-						}
-					}
-				})*/
+			renameVariablesAndNulls : function(setOfAtoms){	
 
 				var predicate = this.predicate.renameVariablesAndNulls(setOfAtoms);
 
@@ -46,7 +32,21 @@ function _builder() {
 					name : predicate.name,
 					parameters : predicate.parameters,
 					toString : predicate.toString,
-					renameVariablesAndNulls : this.renameVariablesAndNulls
+					renameVariablesAndNulls : this.renameVariablesAndNulls,
+					prependPrefixToAllVariables : this.prependPrefixToAllVariables
+				}
+			},
+			prependPrefixToAllVariables : function(prefix){	
+
+				var predicate = this.predicate.prependPrefixToAllVariables(prefix);
+
+				return {
+					predicate : predicate,
+					name : predicate.name,
+					parameters : predicate.parameters,
+					toString : predicate.toString,
+					renameVariablesAndNulls : this.renameVariablesAndNulls,
+					prependPrefixToAllVariables : this.prependPrefixToAllVariables
 				}
 			}
 		}
@@ -170,7 +170,13 @@ function _builder() {
 					var _nullPosition = this.nullPosition();
 					//https://stackoverflow.com/questions/39924644/es6-generate-an-array-of-numbers
 					return Array.from(Array(this.head.predicate.parameters.length).keys()).filter(i => i != _nullPosition);
-				}
+				},
+				prependPrefixToAllVariables : function(prefix){
+					var result = Object.assign({}, this);
+					result.body = result.body.prependPrefixToAllVariables(prefix);
+					result.head.predicate = result.head.predicate.prependPrefixToAllVariables(prefix);
+					return result;
+				}	
 			}
 		}
 	}

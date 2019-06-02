@@ -3,6 +3,8 @@ import {getMguForTgdHeadWithAtoms} from "./mguBuilder";
 import {getMguFor} from "./mguBuilder";
 
 export function rewrite(query, tgds){
+    query = query.prependPrefixToAllVariables("a");
+    tgds = tgds.map(tgd => tgd.prependPrefixToAllVariables("b"));
     UpdateArrayPrototype();
     var qRew = [{query : query, include : 1, checked : false}];
     var keepGrowing = true;

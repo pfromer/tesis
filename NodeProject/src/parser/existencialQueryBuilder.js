@@ -92,6 +92,11 @@ function _builder(){
 					result.predicates = this.predicates.map(p => p.renameVariables(equations));
 					return result;
 				},
+				prependPrefixToAllVariables : function(prefix){
+					var result = Object.assign({}, this);
+					result.predicates = result.predicates.map(p => p.prependPrefixToAllVariables(prefix));
+					return result;
+				},	
 				isEqualTo: function(aQuery){
 					if(aQuery.type != "EXISTENCIAL QUERY" || aQuery.predicates.length != this.predicates.length) return false;
 					var otherQueryPermutations = aQuery.bodyPermutations();

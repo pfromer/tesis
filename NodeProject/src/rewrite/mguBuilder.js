@@ -150,13 +150,7 @@ function variableConstantEquation(left, right){
 
     //should only be invoked when both are variables
     this.lastLexicographically = function(){
-        var compare = this.right.name.localeCompare(this.left.name);
-        if(compare == 0 || compare == -1){
-            return this.left;
-        }
-        else{
-            return this.right;
-        }
+        return (this.firstLexicographically() == this.left) ? this.right : this.left;
     }
 
     this.oneIsVariable = function(){

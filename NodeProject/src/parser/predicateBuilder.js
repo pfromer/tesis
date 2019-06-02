@@ -66,12 +66,24 @@ function _builder(tgdText) {
 						if(p.type == 'null' || p.type == 'variable'){
 							if(setOfAtoms.some(a => a.hasVariable(p.name))){
 								var renamedP = parameterModule.builder.build('?' + '_renamed_' + p.name);
-								renamedP.type = renamedP.type;
+								renamedP.type = p.type;
 								return renamedP;
 							}
 							else{
 								return p;
 							}
+						}
+	
+					})
+					return result;
+				},
+				prependPrefixToAllVariables : function(prefix){
+					var result = Object.assign({}, this);
+					result.parameters =  result.parameters.map(p => {
+						if(p.type == 'null' || p.type == 'variable'){
+							var renamedP = parameterModule.builder.build('?' + prefix + p.name);
+							renamedP.type = p.type;
+							return renamedP;
 						}
 	
 					})
