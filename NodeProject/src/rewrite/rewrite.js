@@ -4,26 +4,27 @@ import {getMguFor} from "./mguBuilder";
 
 export function rewrite(query, tgds){
     UpdateArrayPrototype();
-    var qRew = [{query : query, include : 1}];
+    var qRew = [{query : query, include : 1, checked : false}];
     var keepGrowing = true;
     while(keepGrowing){
         keepGrowing = false;
         var qTemp = [...qRew];
-        qTemp.forEach(tuple => {
+        qTemp.filter(t => !t.checked).forEach(tuple => {
+            tuple.checked = true;
             tgds.forEach(tgd => {
                 var q = tgd.factorize(tuple.query);
                 if (notExists(q, qRew, [0,1])){
-                    qRew.push({query : q, include : 0});
+                    qRew.push({query : q, include : 0, checked : false});
                     keepGrowing = true;
                 }
             })
-            tuple.query.predicates.length.createArrayOfNElements().allSubSets().filter(s => s.length > 0) .forEach(A => {
+            tuple.query.predicates.length.createArrayOfNElements().allSubSets().filter(s => s.length > 0).forEach(A => {
                 tgds.forEach(tgd => {
                     if(tgd.isApplicableTo(tuple.query, A)){
                         var mguResult = getMguForTgdHeadWithAtoms(tuple.query.getAtoms(A), tgd);
                         var q = mguResult.mgu(tuple.query.replace(A, tgd.body.predicates));
                         if(notExists(q, qRew, [1])){
-                            qRew.push({query : q, include : 1});
+                            qRew.push({query : q, include : 1, checked : false});
                             keepGrowing = true;
                         }
                     }

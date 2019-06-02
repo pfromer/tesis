@@ -426,3 +426,14 @@ describe('#rewrite', function() {
         assert.equal(query2.isEqualTo(rewritenQuery), true);
     })
 })
+
+describe('#rewrite', function() {
+    it('should rewrite correctly case 2', function() {
+        var query = existencialQueryModule.builder.build("() :- t(?x, ?y, ?z), r(?y, ?z)");
+        var tgd1 = tgdModule.builder.build("t(?a, ?a, ?c) :- s(?a)");
+        var tgd2 = tgdModule.builder.build("r(?b, ?c) :- t(?a, ?b, ?c)");
+        var rewritenQuery = rewrite(query, [tgd1, tgd2]);
+        var query2 = existencialQueryModule.builder.build("() :- t(?x, ?y, ?z), r(?y, ?z), t(?x, ?y, ?z), t(?v1, ?y, ?z),  s(?x).");
+        assert.equal(query2.isEqualTo(rewritenQuery), true);
+    })
+})
