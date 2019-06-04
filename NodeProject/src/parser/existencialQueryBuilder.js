@@ -83,18 +83,21 @@ function _builder(){
 				replace: function(indexes, replacingPredicates){
 					var result = Object.assign({}, this);
 					var stayingPredicates = this.getOtherAtoms(indexes);
-					var renamedPredicates = replacingPredicates.map(p => p.renameVariablesAndNulls(stayingPredicates));
+					var renamedPredicates = replacingPredicates.map(p => p.renameVariablesAndNulls(stayingPredicates));					
 					result.predicates = renamedPredicates.concat(stayingPredicates);
+					//no renombro variablesInHead porque la idea es que estas variables no cambien de nombre, solo las variables de los nuevos predicados
 					return result;
 				},				
 				renameVariables(equations){
 					var result = Object.assign({}, this);
 					result.predicates = this.predicates.map(p => p.renameVariables(equations));
+					result.variablesInHead = result.variablesInHead.map(v => v.renameFromEquations(equations));
 					return result;
 				},
 				prependPrefixToAllVariables : function(prefix){
 					var result = Object.assign({}, this);
 					result.predicates = result.predicates.map(p => p.prependPrefixToAllVariables(prefix));
+					result.variablesInHead = result.variablesInHead.map(v => v.preprendPrefix(prefix));
 					return result;
 				},	
 				isEqualTo: function(aQuery){

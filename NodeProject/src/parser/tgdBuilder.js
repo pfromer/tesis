@@ -1,8 +1,7 @@
 import * as predicateModule  from "./predicateBuilder";
 import * as parameterModule  from "./parameterBuilder";
 import * as bodyModule from "./bodyBuilder";
-import { getMguFor } from "../rewrite/mguBuilder";
-import { getMguForTgdHeadWithAtoms } from "../rewrite/mguBuilder";
+import mguModule from "../rewrite/mguBuilder";
 
 
 function _builder() {
@@ -106,7 +105,7 @@ function _builder() {
 				isApplicableTo : function(query, indexes){
 					var atoms = query.getAtoms(indexes);
 					var _nullPosition = this.nullPosition();
-					var unifies = getMguForTgdHeadWithAtoms(atoms, this).unifies;
+					var unifies = mguModule.getMguForTgdHeadWithAtoms(atoms, this).unifies;
 					if(!unifies) return false;
 					if(!_nullPosition) return true;
 					return atoms.every(
@@ -116,7 +115,7 @@ function _builder() {
 				},
 				isFactorizableFor : function(query, indexes){
 					var atoms = query.getAtoms(indexes);
-					var unifies = getMguFor(atoms).unifies;
+					var unifies = mguModule.getMguFor(atoms).unifies;
 					if(!unifies) return false;
 					var _nullPosition = this.nullPosition();
 					if(!_nullPosition) return true;
@@ -125,7 +124,7 @@ function _builder() {
 					return atoms.every(
 						a =>  a.parameters[_nullPosition].isEqualTo(variableAtNullPosition) && this.notNullPositionIndexes().every(i =>
 							a.parameters[i].isConstant || !a.parameters[i].isEqualTo(variableAtNullPosition))
-						) && query.getOtherAtoms(indexes).every(a => !a.hasVariable(variableAtNullPosition.name))
+						) && query.getOtherAtoms(indexes).every(a => !a.hasVariable(variableAtNullPosition.name)) && !query.variablesInHead.some(v => v.name == variableAtNullPosition.name);
 
 				},
 				factorize(query){
@@ -133,7 +132,7 @@ function _builder() {
 					var i = 0;
 					while(i < allBodySubsetsIndxes.length){
 						if(allBodySubsetsIndxes[i].length > 1 && this.isFactorizableFor(query, allBodySubsetsIndxes[i])){
-							var result = getMguFor(query.getAtoms(allBodySubsetsIndxes[i]));
+							var result = mguModule.getMguFor(query.getAtoms(allBodySubsetsIndxes[i]));
 							var newQuery =  result.mgu(query);
 							var predicates = [];
 							//remove duplicates

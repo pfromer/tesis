@@ -12,7 +12,7 @@ function _builder(){
 						return ["⊥ :- ", this.body.toString(), "."].join("");						
 					},
 					toStringAsQuery : function(){
-						return queryModule.builder.build("?-" + this.body.toString()).toString();
+						return queryModule.builder.build("?-" + this.body.toString()).toNonExistencialQueryString();
 					},
 					type : "NC",
 					equals : function(nc){

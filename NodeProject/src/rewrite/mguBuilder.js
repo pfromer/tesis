@@ -1,77 +1,83 @@
 import {UpdateArrayPrototype} from "../parser/ArrayUtils";
 
-export function getMguFor(arrayOfAtoms){
-    var result = undefined;
-    var equations = allAgainstAll(arrayOfAtoms);    
-    var goOn = true;
-    var deleted;
-    var eliminated;
-    var doesNotUnifyResult = {unifies: false};
-    var atomEquations = equations.slice(0);//this makes a copy of an array
-    UpdateArrayPrototype();
-    if(atomEquations.some(e => !e.haveSameArity() || !e.predicatesAreTheSame())){
-        return doesNotUnifyResult;
-    }
-    else{//elimiante all atom equations and transform to variable/variable or variable/constant equations
-        atomEquations.forEach(e => {
-            removeElement(equations, e);
-            if (!e.parametersMightUnify()){
-                result = doesNotUnifyResult;
-            }
-            else{
-                Array.prototype.push.apply(equations,e.getAllVariableConstantEquations());
-            }
-        })
-    }
-
-    while(goOn){
-        deleted = false;
-        eliminated = false;
-
-        var l1 = equations.length;
-        equations = equations.filter(e => !e.isTrivial());
-        var l2 = equations.length;
-        if(l1 != l2){
-            deleted = true;
+var mguModule = {
+    getMguFor : function getMguFor(arrayOfAtoms){
+        var result = undefined;
+        var equations = allAgainstAll(arrayOfAtoms);    
+        var goOn = true;
+        var deleted;
+        var eliminated;
+        var doesNotUnifyResult = {unifies: false};
+        var atomEquations = equations.slice(0);//this makes a copy of an array
+        UpdateArrayPrototype();
+        if(atomEquations.some(e => !e.haveSameArity() || !e.predicatesAreTheSame())){
+            return doesNotUnifyResult;
         }
-
-        for(var i = 0; i<equations.length; i++){            
-            var eq = equations[i];
-            var stays = eq.stays();
-            var leaves = eq.leaves();
-
-            if(stays && leaves){
-                for(var j = 0; j<equations.length; j++){                    
-                    if(j!=i){
-                        var eq2 = equations[j];
-                        if(eq2.leftIsEqualToVariable(leaves)){
-                            eliminated = true;
-                            eq2.left = stays;
-                        }                        
-                        if(eq2.rightIsEqualToVariable(leaves)){
-                            eliminated = true;
-                            eq2.right = stays;
-                        }
-                        if(eq2.doesNotUnify()){
-                            return doesNotUnifyResult;
+        else{//elimiante all atom equations and transform to variable/variable or variable/constant equations
+            atomEquations.forEach(e => {
+                removeElement(equations, e);
+                if (!e.parametersMightUnify()){
+                    result = doesNotUnifyResult;
+                }
+                else{
+                    Array.prototype.push.apply(equations,e.getAllVariableConstantEquations());
+                }
+            })
+        }
+    
+        while(goOn){
+            deleted = false;
+            eliminated = false;
+    
+            var l1 = equations.length;
+            equations = equations.filter(e => !e.isTrivial());
+            var l2 = equations.length;
+            if(l1 != l2){
+                deleted = true;
+            }
+    
+            for(var i = 0; i<equations.length; i++){            
+                var eq = equations[i];
+                var stays = eq.stays();
+                var leaves = eq.leaves();
+    
+                if(stays && leaves){
+                    for(var j = 0; j<equations.length; j++){                    
+                        if(j!=i){
+                            var eq2 = equations[j];
+                            if(eq2.leftIsEqualToVariable(leaves)){
+                                eliminated = true;
+                                eq2.left = stays;
+                            }                        
+                            if(eq2.rightIsEqualToVariable(leaves)){
+                                eliminated = true;
+                                eq2.right = stays;
+                            }
+                            if(eq2.doesNotUnify()){
+                                return doesNotUnifyResult;
+                            }
                         }
                     }
                 }
             }
+    
+            if(equations.some(e => e.doesNotUnify())){
+                result = doesNotUnifyResult;
+            }
+    
+            goOn = (deleted || eliminated)  && result == undefined;
         }
-
-        if(equations.some(e => e.doesNotUnify())){
-            result = doesNotUnifyResult;
+        if(result){
+            return result;//comentario de prueba para commit
         }
-
-        goOn = (deleted || eliminated)  && result == undefined;
+        return {unifies: true, mgu : function(a){
+            return a.applyMgu(equations);
+        }}
+    },
+    getMguForTgdHeadWithAtoms: function (arrayOfAtoms, tgd){
+        arrayOfAtoms.push(tgd.head.predicate.renameVariablesAndNulls(arrayOfAtoms));
+        return this.getMguFor(arrayOfAtoms);
     }
-    if(result){
-        return result;//comentario de prueba para commit
-    }
-    return {unifies: true, mgu : function(a){
-        return a.applyMgu(equations);
-    }}
 }
 
 function removeElement(equations, e){    
@@ -219,7 +225,4 @@ function variableConstantEquation(left, right){
 
 }
 
-export function getMguForTgdHeadWithAtoms(arrayOfAtoms, tgd){
-    arrayOfAtoms.push(tgd.head.predicate.renameVariablesAndNulls(arrayOfAtoms));
-    return getMguFor(arrayOfAtoms);
-}
+export default mguModule;

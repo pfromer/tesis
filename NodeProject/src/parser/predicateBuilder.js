@@ -62,44 +62,25 @@ function _builder(tgdText) {
 				},
 				renameVariablesAndNulls : function(setOfAtoms){
 					var result = Object.assign({}, this);
-					result.parameters =  result.parameters.map(p => {
-						if(p.type == 'null' || p.type == 'variable'){
-							if(setOfAtoms.some(a => a.hasVariable(p.name))){
-								var renamedP = parameterModule.builder.build('?' + '_renamed_' + p.name);
-								renamedP.type = p.type;
-								return renamedP;
-							}
-							else{
-								return p;
-							}
-						}
-	
+					result.parameters =  result.parameters.filter(p => p.type == 'null' || p.type == 'variable').map(p => {
+						var renamedP = p.renameIfPresentInAtoms(setOfAtoms);
+						renamedP.type = p.type;
+						return renamedP;
 					})
 					return result;
 				},
 				prependPrefixToAllVariables : function(prefix){
 					var result = Object.assign({}, this);
-					result.parameters =  result.parameters.map(p => {
-						if(p.type == 'null' || p.type == 'variable'){
-							var renamedP = parameterModule.builder.build('?' + prefix + p.name);
-							renamedP.type = p.type;
-							return renamedP;
-						}
-	
+					result.parameters =  result.parameters.filter(p => p.type == 'null' || p.type == 'variable').map(p => {
+						var renamedP = p.preprendPrefix(prefix);
+						renamedP.type = p.type;
+						return renamedP;
 					})
 					return result;
 				},
 				renameVariables(equations){
 					var result = Object.assign({}, this);
-					result.parameters = this.parameters.map(p => {
-						var match = equations.find(x => x.original == p.name);
-						if(p.isVariable && match){
-								var renamedVariable = Object.assign({}, p);
-								renamedVariable.name = match.renameTo;
-								return renamedVariable;		
-						}
-						return p;
-					});					
+					result.parameters = this.parameters.filter(p => p.isVariable).map(p => p.renameFromEquations(equations));					
 					return result;
 				}
 			}

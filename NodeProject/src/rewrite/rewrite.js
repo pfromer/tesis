@@ -1,6 +1,5 @@
 import {UpdateArrayPrototype} from "../parser/ArrayUtils";
-import {getMguForTgdHeadWithAtoms} from "./mguBuilder";
-import {getMguFor} from "./mguBuilder";
+import mguModule from "./mguBuilder";
 
 export function rewrite(query, tgds){
     query = query.prependPrefixToAllVariables("a");
@@ -23,7 +22,7 @@ export function rewrite(query, tgds){
             tuple.query.predicates.length.createArrayOfNElements().allSubSets().filter(s => s.length > 0).forEach(A => {
                 tgds.forEach(tgd => {
                     if(tgd.isApplicableTo(tuple.query, A)){
-                        var mguResult = getMguForTgdHeadWithAtoms(tuple.query.getAtoms(A), tgd);
+                        var mguResult = mguModule.getMguForTgdHeadWithAtoms(tuple.query.getAtoms(A), tgd);
                         var q = mguResult.mgu(tuple.query.replace(A, tgd.body.predicates));
                         if(notExists(q, qRew, [1])){
                             qRew.push({query : q, include : 1, checked : false});
