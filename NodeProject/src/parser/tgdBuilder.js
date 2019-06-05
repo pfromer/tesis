@@ -53,7 +53,12 @@ function _builder() {
 
 	var buildTgdHead = function (headText, tgdBody) {
 		return {
-			predicate: buildTgdHeadPredicate(headText, tgdBody)
+			predicate: buildTgdHeadPredicate(headText, tgdBody),
+			prependPrefixToAllVariables: function(prefix){
+				var result = Object.assign({}, this);
+				result.predicate = result.predicate.prependPrefixToAllVariables(prefix);
+				return result;
+			}
 		};
 	};
 
@@ -124,7 +129,7 @@ function _builder() {
 					return atoms.every(
 						a =>  a.parameters[_nullPosition].isEqualTo(variableAtNullPosition) && this.notNullPositionIndexes().every(i =>
 							a.parameters[i].isConstant || !a.parameters[i].isEqualTo(variableAtNullPosition))
-						) && query.getOtherAtoms(indexes).every(a => !a.hasVariable(variableAtNullPosition.name)) && !query.variablesInHead.some(v => v.name == variableAtNullPosition.name);
+						) && query.getOtherAtoms(indexes).every(a => !a.hasVariable(variableAtNullPosition.name)) && !query.variablesInHead.some(v => v.name == variableAtNullPosition.name)
 
 				},
 				factorize(query){
@@ -173,7 +178,7 @@ function _builder() {
 				prependPrefixToAllVariables : function(prefix){
 					var result = Object.assign({}, this);
 					result.body = result.body.prependPrefixToAllVariables(prefix);
-					result.head.predicate = result.head.predicate.prependPrefixToAllVariables(prefix);
+					result.head = result.head.prependPrefixToAllVariables(prefix);
 					return result;
 				}	
 			}

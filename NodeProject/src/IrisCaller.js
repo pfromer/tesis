@@ -2,7 +2,6 @@
 import axios from "axios";
 
 export function executeQuery(programText, isGuarded, variablesToShowByQuery){
-    debugger;
     var internalParams = {
         program: programText,
         isGuarded: isGuarded

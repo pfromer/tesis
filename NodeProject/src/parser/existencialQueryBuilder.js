@@ -24,7 +24,7 @@ function _builder(){
         isBoolean: function() {return this.variablesInHead.length == 0},
 				toString : function(){
 										var bodyString = this.predicates.map(p => p.toString()).join(', ');
-                    return [isNegated ? "!" : "","(" + variablesInHead.map(v => v.toString()).join(", ") + ")", " :- ", bodyString, "."].join("")
+                    return [isNegated ? "!" : "","(" + this.variablesInHead.map(v => v.toString()).join(", ") + ")", " :- ", bodyString, "."].join("")
                  },
         toNonExistencialQueryString: function(){ 
 					var bodyString = this.predicates.map(p => p.toString()).join(', ');
@@ -99,7 +99,13 @@ function _builder(){
 					result.predicates = result.predicates.map(p => p.prependPrefixToAllVariables(prefix));
 					result.variablesInHead = result.variablesInHead.map(v => v.preprendPrefix(prefix));
 					return result;
-				},	
+				},
+				removeFirstCharacterFromAllVars : function(){
+					var result = Object.assign({}, this);
+					result.predicates = result.predicates.map(p => p.removeFirstCharacterFromAllVars());
+					result.variablesInHead = result.variablesInHead.map(v => v.removeFirstCharacter());
+					return result;
+				},
 				isEqualTo: function(aQuery){
 					if(aQuery.type != "EXISTENCIAL QUERY" || aQuery.predicates.length != this.predicates.length) return false;
 					var otherQueryPermutations = aQuery.bodyPermutations();

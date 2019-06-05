@@ -85,6 +85,13 @@ export class MainComponent extends React.Component {
                     />
                     </Button>
                   </Form.Group>
+                    </Col>
+                    <Col>
+                  <Form.Group>
+                    <Button type="button" variant='info' style={buttonStyle} onClick={this.props.rewriteQueries}>
+                      Rewrite Queries
+                    </Button>
+                  </Form.Group>
                   </Col>
                 </Form.Row>
                 <Form.Row>

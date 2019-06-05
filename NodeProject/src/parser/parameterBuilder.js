@@ -33,7 +33,7 @@ function _builder(){
 					result.renameIfPresentInAtoms = function(setOfAtoms){
 						if(setOfAtoms.some(a => a.hasVariable(this.name))){
 							var renamedVar = Object.assign({}, this);
-							renamedVar.name = "_renamed_" + this.name;
+							renamedVar.name = "RENAMED" + this.name;
 							return renamedVar;
 						}
 						return this;
@@ -51,6 +51,12 @@ function _builder(){
 							return renamedVariable;		
 						}
 						return this;
+					}
+
+					result.removeFirstCharacter = function(){
+						var renamedVar = Object.assign({}, this);
+						renamedVar.name = this.name.slice(1);
+						return renamedVar;
 					}
 
 					return result;

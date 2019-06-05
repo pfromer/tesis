@@ -78,6 +78,16 @@ function _builder(tgdText) {
 					})
 					return result;
 				},
+				removeFirstCharacterFromAllVars: function(){
+					var result = Object.assign({}, this);
+					result.parameters =  result.parameters.filter(p => p.type == 'null' || p.type == 'variable').map(p => {
+						var renamedP = p.removeFirstCharacter();
+						renamedP.type = p.type;
+						return renamedP;
+					})
+					return result;
+
+				},
 				renameVariables(equations){
 					var result = Object.assign({}, this);
 					result.parameters = this.parameters.filter(p => p.isVariable).map(p => p.renameFromEquations(equations));					
