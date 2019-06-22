@@ -1,0 +1,45 @@
+SemiNaiveEvaluator
+
+      if (!newTuples || i == 10) {
+        break;
+      }
+
+      // Iterate new tuples in dP[i] and add to program
+      addAll(facts, deltas);}
+	 
+	 MIRAR LOS FACTS; AHI ESTA EL CHASE
+	 
+	 ProgramExecutor.java
+	 
+	       final IKnowledgeBase knowledgeBase = KnowledgeBaseFactory.createKnowledgeBase(facts, rules, queries,
+          configuration);
+      duration += System.currentTimeMillis();
+	  
+	  
+Mirar la knowledge base, en la property mFacts esta el chase.
+
+StratifiedBottomUpEvaluationStrategy:
+
+
+    if (outputVariables == null)
+      throw new IllegalArgumentException(
+          "StratifiedBottomUpEvaluationStrategy.evaluateQuery() - outputVariables must not be null.");
+
+    final RuleCompiler compiler = new RuleCompiler(mFacts, mConfiguration);
+
+    final ICompiledRule compiledQuery = compiler.compile(query);
+	
+	
+
+ACA SACA LOS NULLS:	
+  public IRelation getGroundFacts(final IRelation r) {
+    final IRelationFactory rf = new RelationFactory();
+    final IRelation res = rf.createRelation();
+
+    for (int i = 0; i < r.size(); i++)
+      if (r.get(i).getFreshTerms().size() == 0) {
+        res.add(r.get(i));
+      }
+
+    return (res);
+  }
