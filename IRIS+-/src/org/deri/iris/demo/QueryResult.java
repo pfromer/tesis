@@ -32,18 +32,21 @@ public class QueryResult {
 				(v -> variableBindings.indexOf(v)).collect(Collectors.toList());
   	  
   	  	this.Results = new ArrayList<ArrayList<String>>();
-  	  	for (int i = 0; i < results.size(); i++) {    		  
-  		  ArrayList<String> resultList = new ArrayList<String>();
-  		  for(int j = 0; j < results.get(i).size(); j++) {  			  
-  			  if(positionsToConsider.contains(j)) 
-  			  {  			  
-  				  resultList.add(results.get(i).get(j).toString());
-  			  }
-  		  }
-  		  
-  		  if(!Contains(resultList)) {
-  			this.Results.add(resultList);
-  		  }	
+  	  	for (int i = 0; i < results.size(); i++) {
+  	  		final int finalI = i;
+  	  		if(!positionsToConsider.stream().anyMatch(p -> results.get(finalI).get(p).getClass().getName() == "org.deri.iris.terms.Null")){  	  		
+	  		  ArrayList<String> resultList = new ArrayList<String>();
+	  		  for(int j = 0; j < results.get(i).size(); j++) {  			  
+	  			  if(positionsToConsider.contains(j)) 
+	  			  {  			  
+	  				  resultList.add(results.get(i).get(j).toString());
+	  			  }
+	  		  }
+	  		  
+	  		  if(!Contains(resultList)) {
+	  			this.Results.add(resultList);
+	  		  }
+  	  		}
   	  	} 
 	}
 	

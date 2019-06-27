@@ -31,7 +31,6 @@ StratifiedBottomUpEvaluationStrategy:
 	
 	
 
-ACA SACA LOS NULLS:	
   public IRelation getGroundFacts(final IRelation r) {
     final IRelationFactory rf = new RelationFactory();
     final IRelation res = rf.createRelation();

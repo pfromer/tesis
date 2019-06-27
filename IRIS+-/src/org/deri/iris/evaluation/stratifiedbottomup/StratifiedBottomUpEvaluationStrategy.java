@@ -136,7 +136,7 @@ public class StratifiedBottomUpEvaluationStrategy implements IEvaluationStrategy
     outputVariables.clear();
     outputVariables.addAll(compiledQuery.getVariablesBindings());
 
-    return result;
+    return evaluation;
   }
 
   public IRelation getGroundFacts(final IRelation r) {
