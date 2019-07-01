@@ -10,3 +10,6 @@ esHombre('pedro').
 sonPareja('pedro', 'carina').
 sonPareja('pedro', 'carolina').
 esMujer('carina').
+
+?- lesbiana(?x).
+?- sonPareja(?x, ?y).

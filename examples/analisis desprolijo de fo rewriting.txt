@@ -1,0 +1,56 @@
+program-file=C:\Git\tesis\examples\debugConVani.txt guarded-rules
+
+program-file=C:\Git\tesis\examples\employeeSeCuelga.dtg guarded-rules
+
+program-file=C:\Git\tesis\examples\guardedCarlo.dtg guarded-rules
+con well-founded no anda:Unbound variable in rule head: ?w
+naive idem
+semi-naive idem
+
+con fo-rewriting no se cuelga y devuelve bien. (ver que pasa con los nulls y como reescribe)
+sql-rewriting null pointer exception
+guarded-naive unbound variable
+safe-rules idem
+unsafe-rules idem
+linear rules se cuelga
+weakly-guarded-rules se cuelga 
+magic-sets unbound variable
+
+
+fo-rewriting:
+usa StratifiedBottomUpEvaluationStrategy
+
+mirar metodo evaluateQuery -> solo deja los groundFacts
+
+ver donde hace la re escritura:
+ParallelRewriter
+
+
+a tener en cuenta sobre el fo-rewriter:
+
+Cuando entra en 
+return new FORewritingEvaluationStrategy(facts, rules, queries, configuration);
+En cada objecto hay lo inicial:
+facts:DIP('a', 'b').
+rules: [DIP(?y, ?z) :- IMP(?x, ?y)., IMP(?y, ?w) :- DIP(?x, ?y)., Q1(?x) :- DIP(?x, ?y).]
+queries: [?- Q1(?x).]
+
+Esto chequea si es sticky:
+
+ParallelRewriter
+// choose the optimal expressivity
+final Expressivity expr = getPreferred(exprs);
+
+en RewritingUtils, reduceQuery
+retorna: Q1(?x) :- DIP(?x, ?y).
+
+
+
+
+Si lo reescribo no se cuelga:
+(?x) :- Q1(?x).
+(?RENAMEDx) :- DIP(?RENAMEDx, ?y).
+(?RENAMEDx) :- IMP(?x, ?y).
+(?RENAMEDx) :- DIP(?RENAMEDy, ?w).
+
+

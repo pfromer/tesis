@@ -42,3 +42,13 @@ StratifiedBottomUpEvaluationStrategy:
 
     return (res);
   }
+  
+  results.get(i).get(2).getClass().getName()
+  org.deriu.iris.terms.Null
+  
+  
+  
+  
+  
+  
+  (positionsToConsider.stream().anyMatch(p -> results.get(i).get(p).getClass().getName() == "org.deriu.iris.terms.Null"))

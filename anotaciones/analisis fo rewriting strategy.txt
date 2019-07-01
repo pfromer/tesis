@@ -1,0 +1,49 @@
+ProgramExecutor::
+	
+	final IKnowledgeBase knowledgeBase = KnowledgeBaseFactory.createKnowledgeBase(facts, rules, queries,
+          configuration);
+
+		KnowledgeBaseFactory::createKnowledgeBase
+
+			FORewritingEvaluationStrategy
+				
+				(crea el objeto FORewritingEvaluationStrategy)
+				
+				mTGDs = RewritingUtils.getTGDs(rules, queries);
+				//en mTGDs saco una TGD
+				
+				en bodies dejo la que saco 
+				
+				mFacts quedo igual que facts
+	
+	
+	knowledgeBase.execute
+	
+		mEvaluationStrategy.evaluateQuery  (es la FORewritingEvaluationStrategy)
+		
+			rewriter = new ParallelRewriter
+			
+			//no se para que se usa, tarda bastante
+			deps = DepGraphUtils.computePropagationGraph(mTGDs);
+			
+			//se gija si es linar o sticky (si es guarded no anda)
+			final Set<Expressivity> exprs = RewritingUtils.getExpressivity(mTGDs);
+
+			rewriting = ParallelRewriter.getRewriting
+			
+			    if (expr.equals(Expressivity.LINEAR)) {
+				  query = RewritingUtils.reduceQuery(query, deps);
+				}
+				
+					RewritingUtils.reduceQuery
+		
+			en rewriting queda:   [Q1(?U0) :- DIP(?U0, ?U1)., Q1(?U0) :- IMP(?U1, ?U0).]
+			
+			final IEvaluationStrategy es = esf.createEvaluator(mFacts, new ArrayList<IRule>(rewriting), mConfig);
+				
+				SemiNAiveEvaluator::evaluateRules
+				
+			
+			
+			
+    }	
