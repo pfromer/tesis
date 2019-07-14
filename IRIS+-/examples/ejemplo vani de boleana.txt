@@ -1,0 +1,8 @@
+padre(?y, ?x) :- persona(?x).
+hijo(?x) :- padre(?y, ?x).
+
+persona('a').
+
+
+() :- hijo('a').
+(?x) :- padre(?x, 'a').

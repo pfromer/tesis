@@ -111,7 +111,8 @@ public class IARResolver {
 	//los set de top inconsistentes, siempre y cuando no sean sub conjunto de un repair grande.
 	private void BuildNextTop(){
 		List<AboxSubSet> nextTop = new ArrayList<AboxSubSet>();
-		this.top.forEach(s -> {			
+		this.top.forEach(s -> {
+			//TODO AGREGAR UNA PROPIEDAD QUE SEA ES SUBSET DE UN REPAIR DE MANERA DE NO TENER QUE VOLVER A CALCULAR
 			if(!s.ConsistentStatus && !s.isSubSetOfAny(this.bigRepairs)) {
 				s.allSubSetsWithOneLess().forEach(x -> {
 					if(!nextTop.stream().anyMatch(x2 -> x2.equals(x))) {
