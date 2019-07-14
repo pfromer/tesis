@@ -128,7 +128,7 @@ class ContainerComponent extends React.Component {
     this.programWithNoQueries = parse(this.programEditorInstance.getValue());
     this.queriesProgram = parse(this.queriesEditorInstace.getValue());
     if(this.queriesProgram && this.queriesProgram.errors.length == 0 
-      && this.programWithNoQueries.isLinear() && this.programWithNoQueries.errors.length == 0){
+       && this.programWithNoQueries.errors.length == 0){
         var tgds =  [...this.programWithNoQueries.tgds];
         this.queriesProgram.queries.forEach(q => {
           console.log("original query:")
