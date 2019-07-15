@@ -44,6 +44,7 @@ import org.deri.iris.rules.safety.SafetyUtils;
 import org.deri.iris.storage.IRelation;
 import org.deri.iris.storage.IRelationFactory;
 import org.deri.iris.storage.RelationFactory;
+import org.deri.iris.utils.UniqueList;
 
 import com.google.common.collect.Lists;
 
@@ -71,47 +72,17 @@ public class StratifiedBottomUpEvaluationStrategy implements IEvaluationStrategy
     if (mConfiguration.ruleSafetyProcessor instanceof AugmentingRuleSafetyProcessor) {
       facts = new FiniteUniverseFacts(facts, rules);
     }
-
-    final List<IRule> tgds = RewritingUtils.getTGDs(rules, queries);
-    final List<IRule> queryRules = Lists.newArrayList(rules);
-    queryRules.removeAll(tgds);
-
-    // Rule safety processing
-    final List<IRule> safeRules = mUtils.applyRuleSafetyProcessor(tgds);
-
-    // Stratify the TGDs
-    final List<List<IRule>> stratifiedRules = mUtils.stratify(safeRules);
-
-    // Compile the TGDs
+    
     final RuleCompiler rc = new RuleCompiler(facts, mConfiguration);
-
-    for (final List<IRule> stratum : stratifiedRules) {
-      // Re-order stratum
-      final List<IRule> reorderedRules = mUtils.reOrderRules(stratum);
-
-      // Rule optimisation
-      final List<IRule> optimisedRules = mUtils.applyRuleOptimisers(reorderedRules);
-
-      // Compile
-      final List<ICompiledRule> compiledRules = new ArrayList<ICompiledRule>();
-
-      for (final IRule rule : optimisedRules) {
-        compiledRules.add(rc.compile(rule));
-      }
-
-      // Evaluate the tgds
-      final IRuleEvaluator eval = mRuleEvaluatorFactory.createEvaluator();
-      eval.evaluateRules(compiledRules, facts, RewritingUtils.getMaxQueryLength(queryRules), configuration);
-
-      // Evaluate the queries
-      final List<ICompiledRule> compiledQueries = new ArrayList<ICompiledRule>();
-      for (final IRule queryRule : queryRules) {
-        compiledQueries.add(rc.compile(queryRule));
-      }
-      final IRuleEvaluatorFactory factory = new SemiNaiveEvaluatorFactory();
-      factory.createEvaluator().evaluateRules(compiledQueries, facts, configuration);
+    final List<IRule> queryRules = Lists.newArrayList(rules);
+    final List<ICompiledRule> compiledQueries = new ArrayList<ICompiledRule>();
+    for (final IRule queryRule : queryRules) {
+      compiledQueries.add(rc.compile(queryRule));
     }
+    final IRuleEvaluatorFactory factory = new SemiNaiveEvaluatorFactory();
+    factory.createEvaluator().evaluateRules(compiledQueries, facts, configuration);
 
+  
   }
 
   @Override
