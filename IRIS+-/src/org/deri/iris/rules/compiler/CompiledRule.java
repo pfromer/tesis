@@ -69,9 +69,19 @@ public class CompiledRule implements ICompiledRule {
 		// The first literal receives the starting relation (which has one zero
 		// length tuple in it). */
 		IRelation output = mStartingRelation;
+		
+		boolean leftMostGuardFound = false;
 
 		for (final RuleElement element : mElements) {
+			
+			if(element == this.getLeftmostGuard(null)) {
+				leftMostGuardFound = true;			
+			}
+			
+			//output = element.process(output, isLeftMostGuard);
 			output = element.process(output);
+			
+
 
 			// Must always get some output relation, even if it is empty.
 			assert output != null;
@@ -82,8 +92,12 @@ public class CompiledRule implements ICompiledRule {
 			if (output.size() == 0) {
 				break;
 			}
+			
+			//si es leftMostGuard armo un array con la profundidad de cada tupla en el output
+			
 		}
 
+		//le apendeo a todos las tuplas del output la profundidad del leftmostGuard mas uno
 		return output;
 	}
 
