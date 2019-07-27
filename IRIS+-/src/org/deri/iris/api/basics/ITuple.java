@@ -95,4 +95,9 @@ public interface ITuple extends List<ITerm>, Comparable<ITuple> {
      */
     public List<ITerm> getFreshTerms();
     
+    public void SetDepth(int depth);
+    public int GetDepth();
+    public void SetOutputDepth(int depth);
+    public int GetOutputDepth();
+    
 }

@@ -93,7 +93,7 @@ public class HeadSubstituter extends RuleElement {
     }
 
     @Override
-    public IRelation process(IRelation inputRelation) {
+    public IRelation process(IRelation inputRelation, boolean isLeftMostGuard) {
 	assert inputRelation != null;
 
 	IRelation result = mConfiguration.relationFactory.createRelation();
@@ -104,7 +104,10 @@ public class HeadSubstituter extends RuleElement {
 	    ITuple outputTuple = TermMatchingAndSubstitution
 		    .substituteVariablesInToTuple(mHeadAtom, inputTuple,
 			    mIndices);
+	    
+	    outputTuple.SetDepth(inputTuple.GetOutputDepth());
 
+	    //outputTuple.GetDepth()
 	    result.add(outputTuple);
 	}
 

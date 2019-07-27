@@ -187,7 +187,7 @@ class Joiner extends BodyRuleElement {
     }
 
     @Override
-    public IRelation process(IRelation leftRelation) {
+    public IRelation process(IRelation leftRelation, boolean isLeftMostGuard) {
 	assert leftRelation != null;
 
 	IRelation result = mRelationFactory.createRelation();
@@ -200,10 +200,19 @@ class Joiner extends BodyRuleElement {
 
 	    for (ITuple matchingRightTuple : matchingRightTuples) {
 		// Must match because that's what the index does
-		result.add(concatenate(leftTuple, matchingRightTuple));
+	    ITuple newTuple = concatenate(leftTuple, matchingRightTuple); 
+	    
+	    if(isLeftMostGuard) {
+	    	newTuple.SetOutputDepth(matchingRightTuple.GetDepth() + 1);
+	    }
+	    else {
+	    	newTuple.SetOutputDepth(leftTuple.GetOutputDepth());
+	    }
+	    
+		result.add(newTuple);
 	    }
 	}
-
+	//result.get(0).GetDepth()
 	return result;
     }
 

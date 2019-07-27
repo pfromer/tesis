@@ -68,19 +68,12 @@ public class CompiledRule implements ICompiledRule {
 	public IRelation evaluate() throws EvaluationException {
 		// The first literal receives the starting relation (which has one zero
 		// length tuple in it). */
-		IRelation output = mStartingRelation;
-		
-		boolean leftMostGuardFound = false;
+		IRelation output = mStartingRelation;		
 
-		for (final RuleElement element : mElements) {
-			
-			if(element == this.getLeftmostGuard(null)) {
-				leftMostGuardFound = true;			
-			}
+		for (final RuleElement element : mElements) {			
 			
 			//output = element.process(output, isLeftMostGuard);
-			output = element.process(output);
-			
+			output = element.process(output, this.getLeftmostGuard(null) == element);		
 
 
 			// Must always get some output relation, even if it is empty.

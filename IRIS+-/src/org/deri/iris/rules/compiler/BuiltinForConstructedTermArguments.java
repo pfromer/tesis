@@ -144,7 +144,7 @@ public class BuiltinForConstructedTermArguments extends RuleElement {
     }
 
     @Override
-    public IRelation process(IRelation leftRelation) {
+    public IRelation process(IRelation leftRelation, boolean isLeftMostGuard) {
 	assert leftRelation != null;
 
 	IRelation result = mConfiguration.relationFactory.createRelation();

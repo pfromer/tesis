@@ -105,4 +105,7 @@ public class Facts implements IFacts {
     protected final Map<IPredicate, IRelation> mPredicateRelationMap = new HashMap<IPredicate, IRelation>();
 
     protected final IRelationFactory mRelationFactory;
+    
+
+    
 }

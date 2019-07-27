@@ -50,6 +50,7 @@ public class SemiNaiveEvaluator implements IRuleEvaluator {
 
       if ((delta != null) && (delta.size() > 0)) {
         final IPredicate predicate = rule.headPredicate();
+        //  delta.get(0).Depth
         deltas.get(predicate).addAll(delta);
       }
     }

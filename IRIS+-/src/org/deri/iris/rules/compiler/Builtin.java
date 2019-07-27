@@ -133,7 +133,7 @@ public class Builtin extends RuleElement {
     }
 
     @Override
-    public IRelation process(IRelation leftRelation) throws EvaluationException {
+    public IRelation process(IRelation leftRelation, boolean isLeftMostGuard) throws EvaluationException {
 	assert leftRelation != null;
 
 	IRelation result = mConfiguration.relationFactory.createRelation();

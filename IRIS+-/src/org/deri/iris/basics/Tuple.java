@@ -224,5 +224,24 @@ public class Tuple extends AbstractList<ITerm> implements ITuple {
     }
     return builder.toHashCode();
   }
-
+  
+  public void SetDepth(int depth) {
+  	this._depth = depth;
+  }
+  public int GetDepth() {
+  	return _depth;
+  }
+  
+  
+  public void SetOutputDepth(int depth) {
+	  	this._outputDepth = depth;	  
+  }
+  
+  public int GetOutputDepth() {
+	 return _outputDepth;
+  }
+  
+  private int _outputDepth = 0;
+  private int _depth = 0;
+  
 }

@@ -95,13 +95,21 @@ public class FirstSubgoal extends BodyRuleElement {
     }
 
     @Override
-    public IRelation process(IRelation leftRelation) {
-	assert leftRelation != null;
-	assert leftRelation.size() == 1; // i.e. there is no left relation, just
-					 // a starting point.
+    public IRelation  process(IRelation leftRelation, boolean isLeftMostGuard) {
+		assert leftRelation != null;
+		assert leftRelation.size() == 1; // i.e. there is no left relation, just
+						 // a starting point.
+		//mView.get(0).GetDepth()
+		
+		if(isLeftMostGuard) {
+			for(int i = 0; i<mView.size(); i++) {
+				mView.get(i).SetOutputDepth(mView.get(i).GetDepth() + 1 );
+			}			
+		}
+		
+		return mView;
+    }   
 
-	return mView;
-    }
 
     @Override
     public RuleElement getDeltaSubstitution(IFacts deltas) {

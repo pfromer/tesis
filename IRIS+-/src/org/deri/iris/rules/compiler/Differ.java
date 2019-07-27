@@ -95,7 +95,7 @@ public class Differ extends BodyRuleElement {
     }
 
     @Override
-    public IRelation process(IRelation leftRelation) {
+    public IRelation process(IRelation leftRelation, boolean isLeftMostGuard) {
 	assert leftRelation != null;
 
 	// TODO Create special performance test for this and measure how useful
