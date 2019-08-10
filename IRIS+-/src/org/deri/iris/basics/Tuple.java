@@ -120,6 +120,9 @@ public class Tuple extends AbstractList<ITerm> implements ITuple {
       buffer.append(t);
     }
     buffer.append(')');
+    buffer.append(" Depth: ");
+    buffer.append(this.GetDepth());
+    buffer.append('.');
     return buffer.toString();
   }
 

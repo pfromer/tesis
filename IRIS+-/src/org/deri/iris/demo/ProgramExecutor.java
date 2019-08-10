@@ -23,13 +23,17 @@
 package org.deri.iris.demo;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.deri.iris.Configuration;
 import org.deri.iris.KnowledgeBaseFactory;
 import org.deri.iris.api.IKnowledgeBase;
+import org.deri.iris.api.basics.ILiteral;
 import org.deri.iris.api.basics.IPredicate;
 import org.deri.iris.api.basics.IQuery;
 import org.deri.iris.api.basics.IRule;
@@ -81,12 +85,51 @@ public class ProgramExecutor {
       /*
        * Get the rules in the program: A rule has the form: head :- body.
        */
-      final List<IRule> rules = parser.getRules();
+      final List<IRule> rules = parser.getRules(); 
+      
+      List<String> atoms = new ArrayList<String>();
+      List<Integer> arities = new ArrayList<Integer>();
+      
+      rules.forEach(new Consumer<IRule>() {
+    	 public void accept(IRule rule) {
+    	      rule.getBody().forEach(new Consumer<ILiteral>(){
+    	    	  public void accept(ILiteral literal) {
+    	              atoms.add(literal.getAtom().getPredicate().getPredicateSymbol());
+    	              arities.add(literal.getAtom().getPredicate().getArity());
+    	          }
+    	      });
+    	      rule.getHead().forEach(new Consumer<ILiteral>(){
+    	    	  public void accept(ILiteral literal) {
+    	    		  atoms.add(literal.getAtom().getPredicate().getPredicateSymbol());
+    	    		  arities.add(literal.getAtom().getPredicate().getArity());
+    	          }
+    	      });    	      
+    	 }    	  
+      });
+      
+      facts.keySet().forEach(new Consumer<IPredicate>() {
+     	 public void accept(IPredicate predicate) {
+     		atoms.add(predicate.getPredicateSymbol());
+     		arities.add(predicate.getArity());
+         };    	  
+      });
+      
+      long R = atoms.stream().distinct().count();
+      Integer w = arities.stream().collect(Collectors.summarizingInt(Integer::intValue)).getMax();
+      
+      double lambda = Math.pow(2*w , w) * Math.pow(2, Math.pow(2*w,w*R ));
+      
+      configuration.lambdaFormulaForGuardedForest = lambda;
 
       /*
        * Get the queries in the program: A query has the form ?- body.
        */
       final List<IQuery> queries = parser.getQueries();
+      
+      
+      configuration.maxQueryLength =  
+    		  queries.stream().map(query -> query.getLiterals().size()).
+    		  collect(Collectors.summarizingInt(Integer::intValue)).getMax();
 
       /*
        * Get the directives in the program: A directive has the form #dirName().

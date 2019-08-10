@@ -123,6 +123,10 @@ public class Configuration {
     
     public List<String> variablesToShow;
 
+	public double lambdaFormulaForGuardedForest = 0;
+	
+	public int maxQueryLength;
+
     /**
      * Constructor.
      */

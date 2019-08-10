@@ -85,13 +85,7 @@ public class RuleCompiler {
     final HeadSubstituter substituter = new HeadSubstituter(variables, headAtom, mConfiguration);
     elements.add(substituter);
 
-    ICompiledRule _rule =  new CompiledRule(elements, rule.getHead().iterator().next().getAtom().getPredicate(), mConfiguration);
-    
-    for(int i = 0; i<elements.size(); i++) {
-    	elements.get(i).setRule(_rule);
-    }
-    
-    return _rule;
+    return new CompiledRule(elements, rule.getHead().iterator().next().getAtom().getPredicate(), mConfiguration);
   }
 
   /**
@@ -106,12 +100,7 @@ public class RuleCompiler {
   public ICompiledRule compile(final IQuery query) throws EvaluationException {
     final List<RuleElement> elements = compileBody(query.getLiterals());
     
-    ICompiledRule _rule =  new CompiledRule(elements, null, mConfiguration);
-    for(int i = 0; i<elements.size(); i++) {
-    	elements.get(i).setRule(_rule);
-    }
-    
-    return _rule;
+    return new CompiledRule(elements, null, mConfiguration);
   }
 
   /**

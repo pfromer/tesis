@@ -13,3 +13,4 @@ esMujer('carina').
 
 ?- lesbiana(?x).
 ?- sonPareja(?x, ?y).
+?- bisexual(?x).

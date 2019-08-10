@@ -73,16 +73,8 @@ public abstract class RuleElement {
     }
 
     /** The variable bindings for tuples output from this rule element. */
-    protected List<IVariable> mOutputVariables;
-        
-    public void setRule(ICompiledRule rule) {
-    	_rule = rule;
-    }
+    protected List<IVariable> mOutputVariables;       
+
     
-    protected ICompiledRule getRule(){
-    	return _rule;
-    }
-    
-    private ICompiledRule _rule;
 
 }
