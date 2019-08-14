@@ -21,18 +21,18 @@
 \input{caratula}
 
 %%%% ABSTRACTS, AGRADECIMIENTOS Y DEDICATORIA
-\frontmatter
-\pagestyle{empty}
-\input{abs_esp.tex}
+%\frontmatter
+%\pagestyle{empty}
+%\input{abs_esp.tex}
 
-\cleardoublepage
-\input{abs_en.tex} % OPCIONAL: comentar si no se quiere
+%\cleardoublepage
+%\input{abs_en.tex} % OPCIONAL: comentar si no se quiere
 
-\cleardoublepage
-\input{agradecimientos.tex} % OPCIONAL: comentar si no se quiere
+%\cleardoublepage
+%\input{agradecimientos.tex} % OPCIONAL: comentar si no se quiere
 
-\cleardoublepage
-\input{dedicatoria.tex}  % OPCIONAL: comentar si no se quiere
+%\cleardoublepage
+%\input{dedicatoria.tex}  % OPCIONAL: comentar si no se quiere
 
 \cleardoublepage
 \tableofcontents
@@ -45,9 +45,9 @@
 \chapter{Introducción}
 \section{Motivación Opcion 1}
 
-Los lenguajes ontológicos, los sistemas basados en reglas y sus integraciones han jugado un rol central en el desarrollo de la Web Semántica…  Antes del surgimiento de Datalog +/- no existía literatura que explique cómo generalizar reglas y dependencias de bases de datos de manera que puedan expresar axiomas ontológicos. De esta manera no estaba cubierto el interés en la comunidad de la Web Semántica por conseguir formalismos altamente escalables que pudieran hacer que la red se beneficie de las tecnologías ya implementadas en los motores de bases de datos.
+Los lenguajes ontológicos, los sistemas basados en reglas y sus integraciones han jugado un rol central en el desarrollo de la Web Semántica…  Antes del surgimiento de Datalog +/- no existía literatura que explique cómo generalizar reglas y dependencias de bases de datos de manera que puedan expresar axiomas ontológicos. De esta manera no estaba cubierto el interés en la comunidad de la Web Semántica por conseguir formalismos altamente escalables que pudieran hacer que la red se beneficie de las tecnologías y las optimizaciones ya implementadas en los motores de bases de datos.
 
-Datalog +/- es una serie de variantes del lenguaje Datalog que son particularmente adecuadas para responder consultas sobre ontologías de manera eficiente. Estas variantes extienden Datalog con la posibilidad de cuantificar existencialmente en las implicaciones de las reglas y otra serie de ventajas, mientras que al mismo tiempo restringen el lenguaje de manera sintáctica con el objetivo de asegurar tratabilidad.
+Datalog +/- es una serie de variantes del lenguaje Datalog que son particularmente adecuadas para responder consultas sobre ontologías de manera eficiente. Estas variantes extienden Datalog con la posibilidad de cuantificar existencialmente a las variables en las implicaciones de las reglas y otra serie de ventajas, mientras que al mismo tiempo restringen el lenguaje de manera sintáctica con el objetivo de asegurar tratabilidad.
 
 Por otro lado, tanto en el campo de las bases de datos como en el de la Web Semántica es ampliamente reconocido que la inconsistencia es un problema que no puede ser ignorado. Al momento de integrar información proveniente de diversas fuentes, ya sea para popular una ontología o para responder una consulta, las restricciones de integridad son muy propensas a ser violadas en la práctica. En este trabajo proponemos una implementación de la semántica IAR, la cual describe un método para tratar ....
 
@@ -58,7 +58,7 @@ Finalmente presentamos una herramienta que tiene el propósito de acercar a la c
 
 Con respecto a los ingredientes elementales, se asumen constantes, nulos y variables de la siuguiente manera; estos son los arguentos de las fórmulas atómicas en las bases de datos, consultas y dependencias.
 Se asume (i) un universo infinito de constantes  $\Delta$ (las cuáles forman el dominio de la base de  datos), (ii) un conjunto infinito de nulos etiquetados $\Delta_{N}$ (representando valores desconocidos), y (iii) un conjunto infinito de variables X (que se utilizan en las consultas y en las dependencias). Cada constante representa un valor diferente, mientras que nulos distintos podrían representar el mismo valor. 
-Se asume un orden lexicográfico en  $\Delta \cup \Delta_{N}$, donde los símbolos de $\Delta_{N}$ siguen a los de $\Delta$. Se denota por $X$ a una sequencia de variables $X_{1}$, ..., $X_{K}$ con k > 0.
+Se asume un orden lexicográfico en  $\Delta \cup \Delta_{N}$, donde los símbolos de $\Delta_{N}$ siguen a los de $\Delta$. Se denota por $X$ a una sequencia de variables $X_{1}$, ..., $X_{K}$ con $k > 0$.
 
 
 Se definen las fórmulas atómicas, que ocurren en bases de datos, consultas, y dependencias, y que se construyen en base a los nombres de las relaciones y los términos. Se asume un \textit{esquema relacional $R$}, el cual constituye un conjunto finito de \textit{nombres de relación}, o \textit{símbolos de predicado}. La posición \textit{P[i]} identifica al \textit{i}-esimo argumento de un predicado \textit{P}. Un \textit{término t} es una constante, un nulo o variable. Una \textit{fórmula atómica} (o \textit{átomo}) a tiene la forma \textit{P}($t_{1}$,...,$t_{n}$), donde \textit{P} es un predicado $n$-ario, y $t_{1}$,...,$t_{n}$ son términos. Se denotan por \textit{pred}(a) y \textit{dom}(a) su predicado y al conjunto de sus arguemntos, respectivamente. Esta notación se extiende de manera natural para conjuntos y conjunciones de átomos. 
@@ -67,7 +67,18 @@ Podemos definir ahora la noción de base de datos relativa a un esquema relacion
 
 \subsection{Dependencias generadoras de tuplas (TGDs)}
 Las dependencias generadoras de tuplas (TGDs) son restricciones sobre una base de datos en la forma general de las reglas de Datalog.....
-Dado un schema relacional $R$, una TGD $\sigma$ es una fórmula de primer orden de la forma $\forall X \forall Y \Phi (X, Y) \rightarrow \exists Z \Omega (X, Z)$, donde $ \Omega (X, Z)$ y $\Phi (X, Y)$ son conjunciones de átomos sobre $R$, llamadas el \textit{cuerpo} y la \textit{cabeza} de $\sigma$, denotadas $cuerpo(\sigma)$ y $cabeza(\sigma)$ respectivamente. Tal $\sigma$ es satisfecha en una base de datos $D$ para $R$ ssi, toda vez que exista un homomorfismo $h$ que mapea los atomos de $\Phi(X, Y)$ a atomos de $D$, existe una extensión $h´$ de $h$ que mapea los atomos de $\Omega (X, Z)$ a átomos de $D$. Todos los conjuntos de $TGDs$ son finitos.
+Dado un schema relacional $R$, una TGD $\sigma$ es una fórmula de primer orden de la forma $\forall X \forall Y \Phi (X, Y) \rightarrow \exists Z \Psi (X, Z)$, donde $ \Psi (X, Z)$ y $\Phi (X, Y)$ son conjunciones de átomos sobre $R$, llamadas el \textit{cuerpo} y la \textit{cabeza} de $\sigma$, denotadas $cuerpo(\sigma)$ y $cabeza(\sigma)$ respectivamente. Tal $\sigma$ es satisfecha en una base de datos $D$ para $R$ ssi, toda vez que exista un homomorfismo $h$ que mapea los atomos de $\Phi(X, Y)$ a atomos de $D$, existe una extensión $h\prime$ de $h$ que mapea los atomos de $\Psi (X, Z)$ a átomos de $D$. Todos los conjuntos de $TGDs$ son finitos.
+
+\subsection{Respondiendo consultas bajo TGDs}
+
+La evaluación de una consulta conjuntiva o una consulta conjuntiva booleana sobre una base de datos bajo un conjunto de TGDs se define como se describre a continuación. Dada una base de datos $D$ para $R$, y un conjunto de TGDs $\Sigma$ sobre $R$, el conjunto de modelos de $D$ y $\Sigma$, el cual denotamos por $mods(D,\Sigma)$, es el conjunto (posiblemente infinito) de todas las bases de datos $B$ tales que (i) $D \subseteq B$ y (ii) toda $\sigma \in \Sigma$ es satisfecha en $B$. El conjunto de todas las respuestas para una consulta conjuntiva $Q$, denotado por $ans(Q, D, \Sigma)$, es el conjunto de todas las tuplas \textbf{a} tales que \textbf{a} $\in Q(B)$ para todo $B \in mods(D, \Sigma)$. La respuesta para una consulta conjuntiva booleana $Q$ a $D$ es \textit{Sí}, denotada por $D \cup \Sigma \models Q$, si solo si, $ans(Q, D, \Sigma) \neq \emptyset$. Notar que responser consultas bajo TGDs para el caso general es indecidible \cite{beeri}, aún cuando el esquema y las TGDs son fijas \cite{cali}. (Agregar referencias a esto)
+
+\subsection{El chase}
+
+El \textit{chase} es un procedimiento para reparar una base de datos con respecto a un conjunto de dependencias, de manera tal que el resultado del chase satisfaga esas dependencias. Por \textit{chase} nos referimos tanto al procedimiento como a su resultado. El TGD chase trabaja sobre una base de datos a través de aplicar las TGDs como se explica a continuación. Considere una base de datos $D$ para un esquema relacional $R$, y una TGD $\sigma$ sobre $R$ de la forma $\Phi (X, Y) \rightarrow \exists Z \Psi (X, Z)$. Entonces, $\sigma$ es \textit{aplicable} a $D$ si existe un homomorfismo \textit{h} que mapee los átomos de $\Phi (X, Y)$ a átomos de  de $D$. Sea $\sigma$ aplicable a $D$, y sea $h_1$ un homomorfismo que extiende \textit{h} de la siguiente manera: para cada $X_i \in \textbf{X}, h_1(X_i) = h(X_i)$; para cada $Z_j \in \textbf{Z}, h_1(Z_j) = z_j$, siendo $z_j$ un nulo "fresco", es decir, $z_j \in \Delta_N, z_j$ no ocurre en $D$, y $z_j$ sigue lexicográficamente todos los otros nulos introducidos previamente. Al aplicar $\sigma$ a $D$, se agrega a $D$ el átomo $h_1(\Psi (X, Z))$, si no se encuntra en $D$ previamente.
+El algoritmo del chase para una base de datos $D$ y un conjunto de TGDs $\Sigma$ consiste en una aplicación exhaustiva de la regla anterior en anchura (como traduzco breadh-first fashion?), lo cual trae como resultado un chase (posiblemente infinito) para $D$ y $\Sigma$. Formalmente, el chase de nivel 0 para $D$ y $\Sigma$, denotado por $chase^0(D,\Sigma)$, se define como $D$, asignándole a cada átomo de $D$ el nivel de derivación 0. Paara cada $k \geq 1$, el chase de nivel $k$ de $D$ y $\Sigma$, denotado $chase^k(D, \Sigma)$, se construye de la siguiente manera: sean $I_1,...,I_n$ todas las posibles imágenes de los cuerpos de las TGDs en $\Sigma$ relativas a algún homomorfismo tal que (i) $I_1,...,I_n \subseteq chase^{k-1}(D,\Sigma)$ y (ii) el nivel más alto de todo átomo en cada $I_i$ es $k - 1$; entonces, se aplica cada posible TGD sobre $chase^{k-1}(D,\Sigma)$, escogiendo las TGDs y los homomorfismos en un orden lineal y lexicográfico respectivamente, y asignándole a cada átomo nuevo el nivel de derivación $k$. El chase de $D$ relativo a $\Sigma$, denotado $chase(D,\Sigma)$, se define entonces como el limite de $chase^k(D,\Sigma)$ para $K \rightarrow \infty$. 
+
+El chase (posiblemente infinito) es un modelo universal, es decir que existe un homomorfismo del $chase(D, \Sigma)$ a cada $B \in mods(D,\Sigma)$. Este resultado implica que las consultas conjuntivas boolenas sobre $D$ y $\Sigma$ pueden ser evaluadas en el chase para $D$ y $\Sigma$, es decir que $D \cup \Sigma \models Q$ es equivalente a $chase(D, \Sigma) \models Q$. 
 
 
 %% ...
@@ -76,6 +87,17 @@ Dado un schema relacional $R$, una TGD $\sigma$ es una fórmula de primer orden 
 
 %%%% BIBLIOGRAFIA
 \backmatter
-%\bibliography{tesis}
+\begin{thebibliography}{9}
+    \bibitem{beeri} 
+    C. Beeri y M. Y. Vardi.
+    \textit{The implication problem for data dependencies}. 
+    En \textit{Proc. ICALP-1981}, pp. 73–85, 1981.
+     
+    \bibitem{cali} 
+    A. Calı, G. Gottlob, y M. Kifer.
+    Taming the infinite chase: Query answering under expressive relational constraints.
+    En \textit{Proc. KR-2008, pp. 70–80, 2008}. 
+
+    \end{thebibliography}
 
 \end{document}
