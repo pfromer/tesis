@@ -6,6 +6,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage[left=3cm,right=3cm,bottom=3.5cm,top=3.5cm]{geometry}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{exmp}{Ejemplo}
 
 \begin{document}
 
@@ -54,11 +57,19 @@ Por otro lado, tanto en el campo de las bases de datos como en el de la Web Sem�
 Finalmente presentamos una herramienta que tiene el propósito de acercar a la comunidad una implementación de Datalog+/-, con el objetivo de poder acceder a este lenguaje de manera fácil, a través de Internet...
 
 \section{Datalog +/-}
-\subsection{Consultas y bases de datos}
 
 Con respecto a los ingredientes elementales, se asumen constantes, nulos y variables de la siuguiente manera; estos son los arguentos de las fórmulas atómicas en las bases de datos, consultas y dependencias.
 Se asume (i) un universo infinito de constantes  $\Delta$ (las cuáles forman el dominio de la base de  datos), (ii) un conjunto infinito de nulos etiquetados $\Delta_{N}$ (representando valores desconocidos), y (iii) un conjunto infinito de variables X (que se utilizan en las consultas y en las dependencias). Cada constante representa un valor diferente, mientras que nulos distintos podrían representar el mismo valor. 
 Se asume un orden lexicográfico en  $\Delta \cup \Delta_{N}$, donde los símbolos de $\Delta_{N}$ siguen a los de $\Delta$. Se denota por $X$ a una sequencia de variables $X_{1}$, ..., $X_{K}$ con $k > 0$.
+
+
+\begin{exmp}
+Consideremos una base de datos de películas, que guarda información acerca de actores, directores y películas. El esquema relacional $R$ consite en el predicado unario \textit{pelicula} y en los predicados binarios \textit{actuaEn} y \textit{dirigidaPor}. Una base de datos $D$ para el esquema  $R$ puede estar dada por: 
+
+D = \{\textit{pelicula(Esperando la carroza), pelicula(Volver al futuro), pelicula(Thelma y Louise), actuaEn(esperando la carroza, Antonio Gasalla), actuaEn(esperando la carroza, China Zorrilla), actuaEn(Volver al futuro, Michael J. Fox), actuaEn(Thelma y Louise, Susan Sarandon), actuaEn(Thelma y Louise, Brad Pitt)}\}
+
+
+\end{exmp}
 
 
 Se definen las fórmulas atómicas, que ocurren en bases de datos, consultas, y dependencias, y que se construyen en base a los nombres de las relaciones y los términos. Se asume un \textit{esquema relacional $R$}, el cual constituye un conjunto finito de \textit{nombres de relación}, o \textit{símbolos de predicado}. La posición \textit{P[i]} identifica al \textit{i}-esimo argumento de un predicado \textit{P}. Un \textit{término t} es una constante, un nulo o variable. Una \textit{fórmula atómica} (o \textit{átomo}) a tiene la forma \textit{P}($t_{1}$,...,$t_{n}$), donde \textit{P} es un predicado $n$-ario, y $t_{1}$,...,$t_{n}$ son términos. Se denotan por \textit{pred}(a) y \textit{dom}(a) su predicado y al conjunto de sus arguemntos, respectivamente. Esta notación se extiende de manera natural para conjuntos y conjunciones de átomos. 
@@ -79,6 +90,11 @@ El \textit{chase} es un procedimiento para reparar una base de datos con respect
 El algoritmo del chase para una base de datos $D$ y un conjunto de TGDs $\Sigma$ consiste en una aplicación exhaustiva de la regla anterior en anchura (como traduzco breadh-first fashion?), lo cual trae como resultado un chase (posiblemente infinito) para $D$ y $\Sigma$. Formalmente, el chase de nivel 0 para $D$ y $\Sigma$, denotado por $chase^0(D,\Sigma)$, se define como $D$, asignándole a cada átomo de $D$ el nivel de derivación 0. Paara cada $k \geq 1$, el chase de nivel $k$ de $D$ y $\Sigma$, denotado $chase^k(D, \Sigma)$, se construye de la siguiente manera: sean $I_1,...,I_n$ todas las posibles imágenes de los cuerpos de las TGDs en $\Sigma$ relativas a algún homomorfismo tal que (i) $I_1,...,I_n \subseteq chase^{k-1}(D,\Sigma)$ y (ii) el nivel más alto de todo átomo en cada $I_i$ es $k - 1$; entonces, se aplica cada posible TGD sobre $chase^{k-1}(D,\Sigma)$, escogiendo las TGDs y los homomorfismos en un orden lineal y lexicográfico respectivamente, y asignándole a cada átomo nuevo el nivel de derivación $k$. El chase de $D$ relativo a $\Sigma$, denotado $chase(D,\Sigma)$, se define entonces como el limite de $chase^k(D,\Sigma)$ para $K \rightarrow \infty$. 
 
 El chase (posiblemente infinito) es un modelo universal, es decir que existe un homomorfismo del $chase(D, \Sigma)$ a cada $B \in mods(D,\Sigma)$. Este resultado implica que las consultas conjuntivas boolenas sobre $D$ y $\Sigma$ pueden ser evaluadas en el chase para $D$ y $\Sigma$, es decir que $D \cup \Sigma \models Q$ es equivalente a $chase(D, \Sigma) \models Q$. 
+
+    
+\begin{exmp}
+This is my second example
+\end{exmp}
 
 
 %% ...
