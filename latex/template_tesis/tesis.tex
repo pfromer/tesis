@@ -7,7 +7,7 @@
 \usepackage[spanish]{babel}
 \usepackage[left=3cm,right=3cm,bottom=3.5cm,top=3.5cm]{geometry}
 \usepackage{amsthm}
-\theoremstyle{definition}
+\usepackage{amsmath}
 \newtheorem{exmp}{Ejemplo}
 
 \begin{document}
@@ -62,19 +62,28 @@ Con respecto a los ingredientes elementales, se asumen constantes, nulos y varia
 Se asume (i) un universo infinito de constantes  $\Delta$ (las cuáles forman el dominio de la base de  datos), (ii) un conjunto infinito de nulos etiquetados $\Delta_{N}$ (representando valores desconocidos), y (iii) un conjunto infinito de variables X (que se utilizan en las consultas y en las dependencias). Cada constante representa un valor diferente, mientras que nulos distintos podrían representar el mismo valor. 
 Se asume un orden lexicográfico en  $\Delta \cup \Delta_{N}$, donde los símbolos de $\Delta_{N}$ siguen a los de $\Delta$. Se denota por $X$ a una sequencia de variables $X_{1}$, ..., $X_{K}$ con $k > 0$.
 
+Se definen las fórmulas atómicas, que ocurren en bases de datos, consultas, y dependencias, y que se construyen en base a los nombres de las relaciones y los términos. Se asume un \textit{esquema relacional $R$}, el cual constituye un conjunto finito de \textit{nombres de relación}, o \textit{símbolos de predicado}. La posición \textit{P[i]} identifica al \textit{i}-esimo argumento de un predicado \textit{P}. Un \textit{término t} es una constante, un nulo o variable. Una \textit{fórmula atómica} (o \textit{átomo}) a tiene la forma \textit{P}($t_{1}$,...,$t_{n}$), donde \textit{P} es un predicado $n$-ario, y $t_{1}$,...,$t_{n}$ son términos. Se denotan por \textit{pred}(a) y \textit{dom}(a) su predicado y al conjunto de sus arguemntos, respectivamente. Esta notación se extiende de manera natural para conjuntos y conjunciones de átomos. 
+
+Podemos definir ahora la noción de base de datos relativa a un esquema relacional, junto con la sintaxis y la semántica de las consultas conjuntivas y las consultas conjuntivas booleanas a una base de datos. Una \textit{instancia de base de datos} $D$ para un esquema relacional $R$ es un conjunto de átomos (posiblemente infinito) con predicados de R y argumentos de $\Delta$. Una consulta conjuntiva sobre $R$ tiene la forma $Q(\textbf{X}) = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$, donde $\Phi(\textbf{X},\textbf{Y})$ es una conjunción de átomos con las variables \textbf{X} y \textbf{Y}, y eventualmente constantes, pero sin nulos. Una consulta conjuntiva \textit{Booleana} sobre $R$ es una consulta conjuntiva de la forma $Q() = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$, donde todas las variables están cuantificadas existencialmente. El conjunto de todas las respuestas a una consulta conjuntiva $Q(\textbf{X}) = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$ sobre una base de datos es el conjunto de todas las tuplas \textbf{t} sobre $\Delta$ para las cuales existe un homomorfismo $\mu: \textbf{X} \cup \textbf{X} \rightarrow \Delta \cup \Delta_{N}$ tales que $\mu(\Phi(\textbf{X},\textbf{Y})) \subseteq D$ y $\mu(\textbf{X}) = D$
 
 \begin{exmp}
 Consideremos una base de datos de películas, que guarda información acerca de actores, directores y películas. El esquema relacional $R$ consite en el predicado unario \textit{pelicula} y en los predicados binarios \textit{actuaEn} y \textit{dirigidaPor}. Una base de datos $D$ para el esquema  $R$ puede estar dada por: 
+    \begin{equation}
+        $$D = \{\textit{pelicula(Tom y Jerry),  pelicula(Esperando la carroza), actuaEn(Esperando la Carroza, Antonio Gasalla), actuaEn(Esperando la Carroza, China Zorrilla),
+        actor(Antonio Gasalla), dirigidaPor(Esperando la Carroza, Alejandro Doria)}\}$$
+    \end{equation}
 
-D = \{\textit{pelicula(Esperando la carroza), pelicula(Volver al futuro), pelicula(Thelma y Louise), actuaEn(esperando la carroza, Antonio Gasalla), actuaEn(esperando la carroza, China Zorrilla), actuaEn(Volver al futuro, Michael J. Fox), actuaEn(Thelma y Louise, Susan Sarandon), actuaEn(Thelma y Louise, Brad Pitt)}\}
-
+Una posible consulta conjuntiva para esta base de datos podría ser Q(X) = pelicula(X) $\land$ actuaEn(X, Y), que pregunta por todas las películas en las que alguien haya actuado, mientras que un ejemplo de consulta conjuntiva booleana es Q() =  actor(X) $\land$ actuaEn(Tom y Jerry, X), la cual pregunta si hay algún actor que haya actuado en Tom y Jerry, cuya respuesta en No.
 
 \end{exmp}
 
 
-Se definen las fórmulas atómicas, que ocurren en bases de datos, consultas, y dependencias, y que se construyen en base a los nombres de las relaciones y los términos. Se asume un \textit{esquema relacional $R$}, el cual constituye un conjunto finito de \textit{nombres de relación}, o \textit{símbolos de predicado}. La posición \textit{P[i]} identifica al \textit{i}-esimo argumento de un predicado \textit{P}. Un \textit{término t} es una constante, un nulo o variable. Una \textit{fórmula atómica} (o \textit{átomo}) a tiene la forma \textit{P}($t_{1}$,...,$t_{n}$), donde \textit{P} es un predicado $n$-ario, y $t_{1}$,...,$t_{n}$ son términos. Se denotan por \textit{pred}(a) y \textit{dom}(a) su predicado y al conjunto de sus arguemntos, respectivamente. Esta notación se extiende de manera natural para conjuntos y conjunciones de átomos. 
 
-Podemos definir ahora la noción de base de datos relativa a un esquema relacional, junto con la sintaxis y la semántica de las consultas conjuntivas y las consultas conjuntivas booleanas a una base de datos. Una \textit{instancia de base de datos} $D$ para un esquema relacional $R$ es un conjunto de átomos (posiblemente infinito) con predicados de R y argumentos de $\Delta$. Una consulta conjuntiva sobre $R$ tiene la forma $Q(\textbf{X}) = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$, donde $\Phi(\textbf{X},\textbf{Y})$ es una conjunción de átomos con las variables \textbf{X} y \textbf{Y}, y eventualmente constantes, pero sin nulos. Una consulta conjuntiva \textit{Booleana} sobre $R$ es una consulta conjuntiva de la forma $Q() = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$, donde todas las variables están cuantificadas existencialmente. El conjunto de todas las respuestas a una consulta conjuntiva $Q(\textbf{X}) = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$ sobre una base de datos es el conjunto de todas las tuplas \textbf{t} sobre $\Delta$ para las cuales existe un homomorfismo $\mu: \textbf{X} \cup \textbf{X} \rightarrow \Delta \cup \Delta_{N}$ tales que $\mu(\Phi(\textbf{X},\textbf{Y})) \subseteq D$ y $\mu(\textbf{X}) = D$
+\iffalse
+$$D = \{\textit{pelicula(Esperando la carroza), pelicula(Volver al Futuro), pelicula(Thelma y Louise), actuaEn(Esperando la Carroza, Antonio Gasalla), actuaEn(Esperando la Carroza, China Zorrilla), actuaEn(Volver al futuro, Michael J. Fox), actuaEn(Thelma y Louise, Susan Sarandon), actuaEn(Thelma y Louise, Brad Pitt), dirigidaPor(Volver al Futuro, Robert Zemeckis)}\}$$
+\fi
+
+
 
 \subsection{Dependencias generadoras de tuplas (TGDs)}
 Las dependencias generadoras de tuplas (TGDs) son restricciones sobre una base de datos en la forma general de las reglas de Datalog.....
