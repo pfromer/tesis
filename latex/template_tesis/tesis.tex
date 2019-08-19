@@ -7,8 +7,10 @@
 \usepackage[spanish]{babel}
 \usepackage[left=3cm,right=3cm,bottom=3.5cm,top=3.5cm]{geometry}
 \usepackage{amsthm}
-\usepackage{amsmath}
+\usepackage[T1]{fontenc}
 \newtheorem{exmp}{Ejemplo}
+
+
 
 \begin{document}
 
@@ -18,8 +20,8 @@
 \def\tituloTesis{Datalog +/-, \vspace{.2cm} \\ una interfaz tolerante a la inconsistencia }
 \def\runtitulo{Datalog +/-, una interfaz tolerante a la inconsistencia}
 \def\runtitle{Datalog +/-, una interfaz tolerante a la inconsistencia}
-\def\director{Vanina Martinez}
-\def\codirector{Ricardo Rodriguez}
+\def\director{María Vanina Martinez}
+\def\codirector{Ricardo Oscar Rodriguez}
 \def\lugar{Buenos Aires, 2019}
 \input{caratula}
 
@@ -62,18 +64,18 @@ Con respecto a los ingredientes elementales, se asumen constantes, nulos y varia
 Se asume (i) un universo infinito de constantes  $\Delta$ (las cuáles forman el dominio de la base de  datos), (ii) un conjunto infinito de nulos etiquetados $\Delta_{N}$ (representando valores desconocidos), y (iii) un conjunto infinito de variables X (que se utilizan en las consultas y en las dependencias). Cada constante representa un valor diferente, mientras que nulos distintos podrían representar el mismo valor. 
 Se asume un orden lexicográfico en  $\Delta \cup \Delta_{N}$, donde los símbolos de $\Delta_{N}$ siguen a los de $\Delta$. Se denota por $X$ a una sequencia de variables $X_{1}$, ..., $X_{K}$ con $k > 0$.
 
-Se definen las fórmulas atómicas, que ocurren en bases de datos, consultas, y dependencias, y que se construyen en base a los nombres de las relaciones y los términos. Se asume un \textit{esquema relacional $R$}, el cual constituye un conjunto finito de \textit{nombres de relación}, o \textit{símbolos de predicado}. La posición \textit{P[i]} identifica al \textit{i}-esimo argumento de un predicado \textit{P}. Un \textit{término t} es una constante, un nulo o variable. Una \textit{fórmula atómica} (o \textit{átomo}) a tiene la forma \textit{P}($t_{1}$,...,$t_{n}$), donde \textit{P} es un predicado $n$-ario, y $t_{1}$,...,$t_{n}$ son términos. Se denotan por \textit{pred}(a) y \textit{dom}(a) su predicado y al conjunto de sus arguemntos, respectivamente. Esta notación se extiende de manera natural para conjuntos y conjunciones de átomos. 
+Se definen las fórmulas atómicas, que ocurren en bases de datos, consultas, y dependencias, y que se construyen en base a los nombres de las relaciones y los términos. Se asume un \textit{esquema relacional $R$}, el cual constituye un conjunto finito de \textit{nombres de relación}, o \textit{símbolos de predicado}. La posición \textit{P[i]} identifica al \textit{i}-esimo argumento de un predicado \textit{P}. Un \textit{término t} es una constante, un nulo o variable. Una \textit{fórmula atómica} (o \textit{átomo}) a tiene la forma \textit{P}($t_{1}$,...,$t_{n}$), donde \textit{P} es un predicado $n$-ario, y $t_{1}$,...,$t_{n}$ son términos. Se denotan por \textit{pred}(a) y \textit{dom}(a) su predicado y al conjunto de sus argumentos, respectivamente. Esta notación se extiende de manera natural para conjuntos y conjunciones de átomos. 
 
 Podemos definir ahora la noción de base de datos relativa a un esquema relacional, junto con la sintaxis y la semántica de las consultas conjuntivas y las consultas conjuntivas booleanas a una base de datos. Una \textit{instancia de base de datos} $D$ para un esquema relacional $R$ es un conjunto de átomos (posiblemente infinito) con predicados de R y argumentos de $\Delta$. Una consulta conjuntiva sobre $R$ tiene la forma $Q(\textbf{X}) = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$, donde $\Phi(\textbf{X},\textbf{Y})$ es una conjunción de átomos con las variables \textbf{X} y \textbf{Y}, y eventualmente constantes, pero sin nulos. Una consulta conjuntiva \textit{Booleana} sobre $R$ es una consulta conjuntiva de la forma $Q() = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$, donde todas las variables están cuantificadas existencialmente. El conjunto de todas las respuestas a una consulta conjuntiva $Q(\textbf{X}) = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$ sobre una base de datos es el conjunto de todas las tuplas \textbf{t} sobre $\Delta$ para las cuales existe un homomorfismo $\mu: \textbf{X} \cup \textbf{X} \rightarrow \Delta \cup \Delta_{N}$ tales que $\mu(\Phi(\textbf{X},\textbf{Y})) \subseteq D$ y $\mu(\textbf{X}) = D$
 
 \begin{exmp}\label{ejemplo_base_d}
-Consideremos una base de datos de películas, que guarda información acerca de actores, directores y películas. El esquema relacional $R$ consite en el predicado unario \textit{pelicula} y en los predicados binarios \textit{actuaEn} y \textit{dirigidaPor}. Una base de datos $D$ para el esquema  $R$ puede estar dada por: 
+Consideremos una base de datos de películas, que guarda información acerca de actores, directores y películas. El esquema relacional $R$ consite en los predicado unarios \textit{pelicula}, \textit{actor}, \textit{director},  y en los predicados binarios \textit{actuaEn}, \textit{dirigidaPor} y \textit{trabajaronJuntos}.  Una base de datos $D$ para el esquema  $R$ puede estar dada por: 
     \begin{equation}
         $$D = \{\textit{pelicula(Volver al Futuro),  pelicula(Esperando la carroza), actuaEn(Esperando la Carroza, Antonio Gasalla), actuaEn(Esperando la Carroza, China Zorrilla),
         actor(Antonio Gasalla), dirigidaPor(Esperando la Carroza, Alejandro Doria)}\}$$
     \end{equation}
 
-Una posible consulta conjuntiva para esta base de datos podría ser Q(X) = pelicula(X) $\land$ actuaEn(X, Y), que pregunta por todas las películas en las que alguien haya actuado, mientras que un ejemplo de consulta conjuntiva booleana es Q() =  actor(X) $\land$ actuaEn(Volver al Futuro, X), la cual pregunta si hay algún actor que haya actuado en Volver al Futuro, cuya respuesta en No.
+Una posible consulta conjuntiva para esta base de datos podría ser Q(X) = pelicula(X) $\land$ actuaEn(X, Y), que pregunta por todas las películas en las que alguien haya actuado, cuya respuesta es el conjunto de una sola tupla $\{(Esperando la Carroza)\}$;  mientras que un ejemplo de consulta conjuntiva booleana es Q() =  actor(X) $\land$ actuaEn(Volver al Futuro, X), la cual pregunta si hay algún actor que haya actuado en Volver al Futuro, cuya respuesta en No.
 
 \end{exmp}
 
@@ -102,13 +104,13 @@ Dado un esquema relacional $R$, una TGD $\sigma$ es una fórmula de primer orden
     \item Toda película fue dirigida por un director:  $$pelicula(X) \rightarrow \exists Z dirigidaPor(X, Z)$$
     \item Si alguien dirigió una película entonces es un director: $$dirigidaPor(X, Y) \rightarrow director(Y)$$
     \item Si alguien actuó una película entonces es un actor: $$actuaEn(X, Y) \rightarrow actor(Y)$$
-    \item Si un actor actuó en una película que fue dirigida por un director, eso implica que el actor y el director trabajaron juntos: $$actuaEn(X, Y) \land dirigidaPor(X, W) \rightarrow trabajaronJuntos(Y, W) \}$$ 
+    \item Si un actor actuó en una película que fue dirigida por un director, eso implica que el actor y el director trabajaron juntos: $$actuaEn(X, Y) \land dirigidaPor(X, W) \rightarrow trabajaronJuntos(Y, W) $$ 
 \end{itemize}
 
 Es simple ver que ninguna de las TGDs anteriores es satisfecha en $D$. Para que esto suceda podemos considerar $D\prime$ que extiene a $D$ de la siguiente manera:
 
 \begin{equation}
-    $$D\prime = D \cup \{\textit{dirigidaPor(Volver al Futuro, Robert Zemeckis), director(Robert Zemeckis), actor(China Zorilla), director(Alejandro Doria), trabajaronJuntos(Antonio Gasalla, Alejandro Doria), trabajaronJuntos(China Zorilla, Alejandro Doria)}\}$$
+    $$ $D\prime$ = D $\cup$ \{\textit{dirigidaPor(Volver al Futuro, Robert Zemeckis), director(Robert Zemeckis), actor(China Zorilla), director(Alejandro Doria), trabajaronJuntos(Antonio Gasalla, Alejandro Doria), trabajaronJuntos(China Zorilla, Alejandro Doria)}\}$$
 \end{equation} 
 
 Ahora todas las TGDs están satisfechas en $D\prime$.
@@ -117,19 +119,21 @@ Ahora todas las TGDs están satisfechas en $D\prime$.
 
 \subsection{Respondiendo consultas bajo TGDs}
 
-La evaluación de una consulta conjuntiva o una consulta conjuntiva booleana sobre una base de datos bajo un conjunto de TGDs se define como se describre a continuación. Dada una base de datos $D$ para $R$, y un conjunto de TGDs $\Sigma$ sobre $R$, el conjunto de modelos de $D$ y $\Sigma$, el cual denotamos por $mods(D,\Sigma)$, es el conjunto (posiblemente infinito) de todas las bases de datos $B$ tales que (i) $D \subseteq B$ y (ii) toda $\sigma \in \Sigma$ es satisfecha en $B$. El conjunto de todas las respuestas para una consulta conjuntiva $Q$, denotado por $ans(Q, D, \Sigma)$, es el conjunto de todas las tuplas \textbf{a} tales que \textbf{a} $\in Q(B)$ para todo $B \in mods(D, \Sigma)$. La respuesta para una consulta conjuntiva booleana $Q$ a $D$ es \textit{Sí}, denotada por $D \cup \Sigma \models Q$, si solo si, $ans(Q, D, \Sigma) \neq \emptyset$. Notar que responser consultas bajo TGDs para el caso general es indecidible \cite{beeri}, aún cuando el esquema y las TGDs son fijas \cite{cali}. (Agregar referencias a esto)
+La evaluación de una consulta conjuntiva o una consulta conjuntiva booleana sobre una base de datos bajo un conjunto de TGDs se define como se describre a continuación. Dada una base de datos $D$ para $R$, y un conjunto de TGDs $\Sigma$ sobre $R$, el conjunto de modelos de $D$ y $\Sigma$, el cual denotamos por $mods(D,\Sigma)$, es el conjunto (posiblemente infinito) de todas las bases de datos $B$ tales que (i) $D \subseteq B$ y (ii) toda $\sigma \in \Sigma$ es satisfecha en $B$. El conjunto de todas las respuestas para una consulta conjuntiva $Q$, denotado por $ans(Q, D, \Sigma)$, es el conjunto de todas las tuplas \textbf{a} tales que \textbf{a} $\in Q(B)$ para todo $B \in mods(D, \Sigma)$. La respuesta para una consulta conjuntiva booleana $Q$ a $D$ es \textit{Sí}, denotada por $D \cup \Sigma \models Q$, si solo si, $ans(Q, D, \Sigma) \neq \emptyset$. Notar que responser consultas bajo TGDs para el caso general es indecidible \cite{beeri}, aún cuando el esquema y las TGDs son fijas \cite{cali}. 
 
 
 \begin{exmp} \label{ejemplo_responder_consultas_bajo_tgds}
-Si consideramos la base $D$ del ejemplo \ref{ejemplo_base_d} y las TGDs del ejemplo \ref{ejemplo_tgds} podemos ver que $D \notin mods(D, \Sigma)$ ya que como dijimos antes estas TGDs no se satisfacen en $D$. Por el contrario  $D\prime \in mods(D, \Sigma)$, es decir $D\prime$ es modelo de $D$ y $\Sigma)$. En particular las siguientes bases de datos son modelos de  $D$ y $\Sigma)$:   
+Si consideramos la base $D$ del ejemplo \ref{ejemplo_base_d} y las TGDs del ejemplo \ref{ejemplo_tgds} podemos ver que $D \notin mods(D, \Sigma)$ ya que como dijimos antes estas TGDs no se satisfacen en $D$. Por el contrario  $D\prime \in mods(D, \Sigma)$, es decir $D\prime$ es modelo de $D$ y $\Sigma$. En particular las siguientes bases de datos son modelos de  $D$ y $\Sigma$:   
 
 \begin{itemize}
-    \item $D\prime = D \cup \{\textit{dirigidaPor(Volver al Futuro, Steven Spielberg), director(Steven Spielberg), actor(China Zorilla), director(Alejandro Doria), trabajaronJuntos(Antonio Gasalla, Alejandro Doria), trabajaronJuntos(China Zorilla, Alejandro Doria)}\}$
-    
-    \item $D\prime = D \cup \{\textit{dirigidaPor(Volver al Futuro, Robert Zemeckis), director(Robert Zemeckis), actuaEn(Volver al Futuro, Michael J. Fox), actor(Michael J. Fox), trabajaronJuntos(Michael J. Fox, Robert Zemeckis),  actor(China Zorilla), director(Alejandro Doria), trabajaronJuntos(Antonio Gasalla, Alejandro Doria), trabajaronJuntos(China Zorilla, Alejandro Doria)}\}$
+    \item 
+      \(D_1\) = D \(\cup\) \{\textit{dirigidaPor(Volver al Futuro, Steven Spielberg), director(Steven Spielberg),
+    actor(China Zorilla), director(Alejandro Doria), trabajaronJuntos(Antonio Gasalla, Alejandro Doria), trabajaronJuntos(China Zorilla, Alejandro Doria)}\}
+    \item  \(D_2\) = D \(\cup\)  \{\textit{dirigidaPor(Volver al Futuro, Robert Zemeckis), director(Robert Zemeckis), actuaEn(Volver al Futuro, Michael J. Fox), actor(Michael J. Fox), trabajaronJuntos(Michael J. Fox, Robert Zemeckis),  actor(China Zorilla), director(Alejandro Doria), trabajaronJuntos(Antonio Gasalla, Alejandro Doria), trabajaronJuntos(China Zorilla, Alejandro Doria)}\}
+
 \end{itemize} 
 
-Notemos que el átomo \textit{película(Volver al Futuro)} está en todos los \textit{modelos} de $D$ y $\Sigma$, por lo tanto la consulta conjuntiva boleana $Q() = película(Volver al Futuro)$ evalúa a \textit{Sí} en $D$ y $\Sigma$, y lo mismo ocurre con $Q() = trabajaronJuntos(China Zorrilla, Alegandro Doria)$. Por el contrario, la consulta $Q() = dirigidaPor(Volver al Futuro, Robert Zemeckis)$ no es verdadera en todos los \textit{modelos} de $D$ y $\Sigma$, por lo tanto esta consulta evalúa a \textit{No}.
+Notemos que el átomo \textit{película(Volver al Futuro)} está en todos los \textit{modelos} de $D$ y $\Sigma$, por lo tanto la consulta conjuntiva boleana $Q()$ = película(Volver al Futuro) evalúa a \textit{Sí} en $D$ y $\Sigma$, y lo mismo ocurre con $Q() = trabajaronJuntos(China Zorrilla, Alegandro Doria)$. Por el contrario, la consulta $Q() = dirigidaPor(Volver al Futuro, Robert Zemeckis)$ no es verdadera en todos los \textit{modelos} de $D$ y $\Sigma$, por lo tanto esta consulta evalúa a \textit{No}.
 \end{exmp} 
 
 Recordamos que el problema de evaluar una consulta conjuntiva bajo TGDs es LOGSPACE-equivalente al problema de evaluar una consulta conjuntiva booleana [\cite{Chandra}, \cite{Deutsch}, \cite{Fagin}, \cite{Johnson}]. Por eso nos enfocamos aquí solo en el problema de responder consultas conjuntivas booleanas. Recordamos también que responder consultas bajo TGDs es equivalente a responder bajo TGDs que tienen un solo átomo en sus cabezas. Por lo tanto, asumimos sin pérdida de generalidad, que toda TGD tiene un solo átomo en su cabeza.
@@ -145,30 +149,67 @@ El chase (posiblemente infinito) es un modelo universal, es decir que existe un 
 
 \begin{exmp}\label{ejemplo_chase}
 
-    Consideremos otra vez la base de datos $D$ del ejemplo \ref{ejemplo_base_d} y las TGDs del ejemplo \ref{ejemplo_tgds}. Entonces, en la construcción del chase $(D, \Sigma)$
+    Consideremos otra vez la base de datos $D$ del ejemplo \ref{ejemplo_base_d} y las TGDs del ejemplo \ref{ejemplo_tgds}, agregando ahora la TGD $actor(X) \land actuaEn(X, Y) \rightarrow \exists Z interpretoA(X, Y, Z)$; significando que el actor X, en la película Y interpretó al actor Z. 
+    
+    Entonces, en la construcción del chase $(D, \Sigma)$, iteramos de la siguiente forma.
+    
+    \begin{itemize}
+        \item En la primera iteración obtenemos los siguientes átomos a través de las TGDs que se indican en cada paso.
+        \begin{itemize}
+            \item $pelicula(X) \rightarrow \exists Z dirigidaPor(X, Z)$:
+            \begin{itemize}
+                \item \textit{dirigidaPor(Volver al Futuro, $z_1$)}
+            \end{itemize}
+            \item $dirigidaPor(X, Y) \rightarrow director(Y)$:
+            \begin{itemize}
+                \item  \textit{director(Alejandro Doria)}
+            \end{itemize}
+            \item $actuaEn(X, Y) \rightarrow actor(Y)$:
+            \begin{itemize}
+                \item  \textit{actor(China Zorrilla)}
+            \end{itemize}
+            \item $actuaEn(X, Y) \land dirigidaPor(X, W) \rightarrow trabajaronJuntos(Y, W) $:
+            \begin{itemize}
+                \item  \textit{trabajaronJuntos(Antonio Gasalla, Alegandro Doria)}
+                \item  \textit{trabajaronJuntos(China Zorrilla, Alegandro Doria)}
+            \end{itemize}            
+            \item $actor(X) \land actuaEn(X, Y) \rightarrow \exists Z interpretoA(X, Y, Z)$:
+            \begin{itemize}
+                \item  \textit{interpretoA(Antonio Gasalla, Esperando la Carroza, $z_2$)}
+            \end{itemize}
+        \end{itemize}
 
-
+        \item En la segunda iteración agregamos primero todos los átomos que obtuvimos en la iteración anterior y aplicamos sobre los átomos iniciales más los nuevos las TGDs. En este caso solo dos una TGDs arrojan átomos nuevos:
+        \begin{itemize}
+            \item $dirigidaPor(X, Y) \rightarrow director(Y)$:
+            \begin{itemize}
+                \item \textit{director($z_1$)}
+            \end{itemize}  
+            \item $actor(X) \land actuaEn(X, Y) \rightarrow \exists Z interpretoA(X, Y, Z)$:
+            \begin{itemize}
+                \item \textit{interpretoA(China Zorilla, Esperando la Carroza, $z_3$)}
+            \end{itemize}            
+        \end{itemize}        
+    \end{itemize}
+    
+Dado que en la tercera iteración no generamos átomos nuevos, el algoritmo del chase termina y obtenemos finalmente que:    
+\begin{equation}
+    $$chase(D, $\Sigma$) = $D$ $\cup$ \{dirigidaPor(Volver al Futuro, $z_1$), director(Alejandro Doria), actor(China Zorilla), trabajaronJuntos(Antonio Gasalla, Alejandro Doria), trabajaronJuntos(China Zorilla, Alejandro Doria), interpretoA(Esperando la Carroza, Anotnio Gasalla, $z_2$), director($z_1$), interpretoA(Esperando la Carroza, China Zorrilla, $z_3$)\} $$
+\end{equation} 
 \end{exmp} 
 
+\subsection{Datalog+/-, fragmento Guarded}
 
+Esta fragmento consiste en una clase especial de TGDs que es tratable computacionalmente, siendo a la vez lo suficientemente expresiva como para modelar ontologías. Las consultas conjuntivas booleanas relativas a estas TGDs pueden ser evaluadas en una parte finita del chase, que es de tamaño constante cuando las consulta y las TGDs están fijas. En base a este resultado, la complejidad de datos de evaluar una consulta conjuntiva booleana relativa a TGDs dentro del fragmento \textit{guarded}, resulta polinomial en el caso general y lineal para consultas atómicas.
+Una TGD $\sigma$ está en el fragmento \textit{guarded} si solo si contiene un átomo en su cuerpo que contiene todas las variables cuantificadas universalmente en $\sigma$. El primer átomo más a la izquierda con estas característica se denomina la \textit{guarda} de  $\sigma$. Al resto de los átomos de $\sigma$ los llamamos \textit{átomos laterales} de $\sigma$.
 
-
-Example 6. Consider again the employee databaseD0 of Example 3 and the set of
-TGDs  of Example 4. Then, in the construction of chase(D0; ), we apply first
-the second TGD of Example 4 to manager(jo) (resp., manager(ada)), adding
-directs(jo; z1) (resp., directs(ada; z2)), where z1 and z2 are “fresh” nulls, and
-then the third TGD to employee(jo) and directs(jo; z1) (resp., employee(ada) and
-directs(ada; z2)), adding supervises(jo; z3) and works in(z3; z1) (resp., super-
-vises(ada; z4) and works in(z4; z2)), where z3 and z4 are “fresh” nulls. Hence,
-the construction yields a finite chase chase(D0; ), given as follows:
-chase(D0; )=D0 [ fdirects(jo; z1); directs(ada; z2);
-supervises(jo; z3); works in(z3; z1);
-supervises(ada; z4); works in(z4; z2)g :
-
-
-\begin{exmp}
-This is my second example
+\begin{exmp}\label{ejemplo_guarded}
+    La TGD $actor(X) \land actuaEn(X, Y) \rightarrow \exists Z interpretoA(X, Y, Z)$ está en el fragmento \textit{guarded}, siendo \textit{actuaEn(X, Y)} la guarda y \textit{actor(X)} el átomo lateral. Mientras que la TGD $actuaEn(X, Y) \land dirigidaPor(X, W) \rightarrow trabajaronJuntos(Y, W)$ no está en el fragmento, dado que ningún átomo del cuerpo todas las variables que existen en el cuerpo. 
 \end{exmp}
+Notar que esta clase de TGDs aseguran decibilidad. Como se muestra en \cite{cali}, agregar una sola TGD fuera del fragmento a un programa Datalog+/- puede quitar esta propiedad.
+Sea entonces $R$ un esquema relacional, $D$ una base de datos para $R$, y $\Sigma$ un conjunto de TGDs en el fragmento guarded. El \textit{chase graph} para $D$ y $\Sigma$ es un grafo dirigido que consite en los átomos de $chase(D,\Sigma)$ como el conjunto de nodos en los cuales habrá una flecha de \textbf{a} hacia \textbf{b} si solo si \textbf{b} es obtenido de \textbf{a} y posiblemente otros átomos por medio de una sola aplicación de alguna TGD $\sigma \in \Sigma$. Aquí marcamos a \textbf{a} como la guarda si solo si \textbf{a} es la guarda de $\sigma$. Consideramos ahora al \textit{guarded chase forest} como al subgrafo del \textit{chase graph} de $D$ y $\Sigma$ que consta de (i) todos los átomos del \textit{chase graph} como nodos y (ii) una flecha desde \textbf{a} hacia \textbf{b} si solo si \textbf{b} fue obtenido a partir de \textbf{a} y posiblemente otros átomos por medio de una sola aplicación de una TGD $\sigma \in \Sigma$ con \textbf{a} como guarda.
+
+
 
 
 %% ...
