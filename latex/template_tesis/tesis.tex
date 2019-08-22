@@ -3,6 +3,7 @@
 %\documentclass[11pt,a4paper]{tesis}
 
 \usepackage{graphicx}
+\graphicspath{ {images/} }
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage[left=3cm,right=3cm,bottom=3.5cm,top=3.5cm]{geometry}
@@ -56,10 +57,11 @@ Datalog +/- es una serie de variantes del lenguaje Datalog que son particularmen
 
 Por otro lado, tanto en el campo de las bases de datos como en el de la Web Semántica es ampliamente reconocido que la inconsistencia es un problema que no puede ser ignorado. Al momento de integrar información proveniente de diversas fuentes, ya sea para popular una ontología o para responder una consulta, las restricciones de integridad son muy propensas a ser violadas en la práctica. En este trabajo proponemos una implementación de la semántica IAR, la cual describe un método para tratar ....
 
-Finalmente presentamos una herramienta que tiene el propósito de acercar a la comunidad una implementación de Datalog+/-, con el objetivo de poder acceder a este lenguaje de manera fácil, a través de Internet...
+El objetivo de esta tesis es presentar una herramienta... una herramienta que tiene el propósito de acercar a la comunidad una implementación de Datalog+/-, con el objetivo de poder acceder a este lenguaje de manera fácil, a través de Internet...
 
 \section{Datalog +/-}
 
+En esta sección vamos a recordar los elementos principales del lenguaje Datalog (citar aca JWS).
 Con respecto a los ingredientes elementales, se asumen constantes, nulos y variables de la siuguiente manera; estos son los arguentos de las fórmulas atómicas en las bases de datos, consultas y dependencias.
 Se asume (i) un universo infinito de constantes  $\Delta$ (las cuáles forman el dominio de la base de  datos), (ii) un conjunto infinito de nulos etiquetados $\Delta_{N}$ (representando valores desconocidos), y (iii) un conjunto infinito de variables X (que se utilizan en las consultas y en las dependencias). Cada constante representa un valor diferente, mientras que nulos distintos podrían representar el mismo valor. 
 Se asume un orden lexicográfico en  $\Delta \cup \Delta_{N}$, donde los símbolos de $\Delta_{N}$ siguen a los de $\Delta$. Se denota por $X$ a una sequencia de variables $X_{1}$, ..., $X_{K}$ con $k > 0$.
@@ -209,7 +211,23 @@ Una TGD $\sigma$ está en el fragmento \textit{guarded} si solo si contiene un �
 Notar que esta clase de TGDs aseguran decibilidad. Como se muestra en \cite{cali}, agregar una sola TGD fuera del fragmento a un programa Datalog+/- puede quitar esta propiedad.
 Sea entonces $R$ un esquema relacional, $D$ una base de datos para $R$, y $\Sigma$ un conjunto de TGDs en el fragmento guarded. El \textit{chase graph} para $D$ y $\Sigma$ es un grafo dirigido que consiste en los átomos de $chase(D,\Sigma)$ como el conjunto de nodos en los cuales habrá una flecha de \textbf{a} hacia \textbf{b} si solo si \textbf{b} es obtenido de \textbf{a} y posiblemente otros átomos por medio de una sola aplicación de alguna TGD $\sigma \in \Sigma$. Aquí marcamos a \textbf{a} como la guarda si solo si \textbf{a} es la guarda de $\sigma$. Consideramos ahora al \textit{guarded chase forest} como al subgrafo del \textit{chase graph} de $D$ y $\Sigma$ que consta de (i) todos los átomos del \textit{chase graph} como nodos y (ii) una flecha desde \textbf{a} hacia \textbf{b} si solo si \textbf{b} fue obtenido a partir de \textbf{a} y posiblemente otros átomos por medio de una sola aplicación de una TGD $\sigma \in \Sigma$ con \textbf{a} como guarda.
 
+\begin{exmp}\label{ejemplo_chase_forest}
+    Sea $R$ un esquema relacional y sea $\Sigma$ un conjunto de TGDs para $R$ dado por:
+    \begin{itemize}
+        \item $\sigma_1 = r_1(X, Y) \land r_2(X) \rightarrow \exists Z r_3(Z, X, Y)$
+        \item $\sigma_2 = r_3(X, Y, W) \rightarrow r_2(Y)$
+        \item $\sigma_3 = r_2(Y) \land r_4(X, Y) \rightarrow r_1(Y, X)$
+    \end{itemize}
 
+Sea $D$ una base de datos para $R$ con $$D=\{r_4(a, b), r_1(a, b), r_2(a)\}$$
+La siguiente figura muestra el \textit{chase graph} para $D$ y $\Sigma$. Para cada nodo en el grafo se muesta su profundidad en el chase, es decir el número de iteración en el algoritmo del chase en el que cada nodo fue formando parte del grafo.  
+    
+\begin{figure}[ht]
+    \includegraphics[scale=0.5]{chase_graph}
+    \centering
+\end{figure}
+
+\end{exmp}
 
 
 %% ...

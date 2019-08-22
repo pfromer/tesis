@@ -1,7 +1,0 @@
-\select@language {spanish}
-\contentsline {chapter}{\numberline {1.}Introducci\IeC {\'o}n}{1}
-\contentsline {section}{\numberline {1.1}Motivaci\IeC {\'o}n Opcion 1}{1}
-\contentsline {section}{\numberline {1.2}Datalog +/-}{1}
-\contentsline {section}{\numberline {1.3}Consultas y bases de datos}{1}
-\contentsline {chapter}{\numberline {2.}Resultados Formales}{3}
-\contentsline {chapter}{\numberline {3.}Implementaci\IeC {\'o}n}{5}
