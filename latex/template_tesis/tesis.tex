@@ -61,8 +61,9 @@ El objetivo de esta tesis es presentar una herramienta... una herramienta que ti
 
 \section{Datalog +/-}
 
-En esta sección vamos a recordar los elementos principales del lenguaje Datalog (citar aca JWS).
-Con respecto a los ingredientes elementales, se asumen constantes, nulos y variables de la siuguiente manera; estos son los arguentos de las fórmulas atómicas en las bases de datos, consultas y dependencias.
+En esta sección vamos a recordar los elementos principales del lenguaje Datalog tal como se definen en el paper \textit{A General Datalog-Based Framework for
+Tractable Query Answering over Ontologies}\cite{JWS}.
+Con respecto a los ingredientes elementales, se asumen constantes, nulos y variables de la siguiente manera; estos son los argumentos de las fórmulas atómicas en las bases de datos, consultas y dependencias.
 Se asume (i) un universo infinito de constantes  $\Delta$ (las cuáles forman el dominio de la base de  datos), (ii) un conjunto infinito de nulos etiquetados $\Delta_{N}$ (representando valores desconocidos), y (iii) un conjunto infinito de variables X (que se utilizan en las consultas y en las dependencias). Cada constante representa un valor diferente, mientras que nulos distintos podrían representar el mismo valor. 
 Se asume un orden lexicográfico en  $\Delta \cup \Delta_{N}$, donde los símbolos de $\Delta_{N}$ siguen a los de $\Delta$. Se denota por $X$ a una sequencia de variables $X_{1}$, ..., $X_{K}$ con $k > 0$.
 
@@ -181,7 +182,7 @@ El chase (posiblemente infinito) es un modelo universal, es decir que existe un 
             \end{itemize}
         \end{itemize}
 
-        \item En la segunda iteración agregamos primero todos los átomos que obtuvimos en la iteración anterior y aplicamos sobre los átomos iniciales más los nuevos las TGDs. En este caso solo dos una TGDs arrojan átomos nuevos:
+        \item En la segunda iteración agregamos primero todos los átomos que obtuvimos en la iteración anterior y aplicamos sobre los átomos iniciales más los nuevos las TGDs. En este caso solo dos TGDs arrojan átomos nuevos:
         \begin{itemize}
             \item $dirigidaPor(X, Y) \rightarrow director(Y)$:
             \begin{itemize}
@@ -222,14 +223,14 @@ Definimos la profundidad \textit{guarded} de un átomo \textbf{a} en el \textit{
     \end{itemize}
 
 Sea $D$ una base de datos para $R$ con $$D=\{r_4(a, b), r_1(a, b), r_2(a)\}$$
-La siguiente figura muestra el \textit{chase graph} para $D$ y $\Sigma$. Para cada nodo en el grafo se muesta su profundidad en el chase, es decir el número de iteración en el algoritmo del chase en el que cada nodo fue formando parte del grafo.  
+La siguiente figura muestra el \textit{chase graph} para $D$ y $\Sigma$. Para cada nodo en el grafo se muestra su \textit{nivel de derivación} en el chase, es decir el número de iteración en el algoritmo del chase en el que cada nodo fue agregándose al grafo.  
     
 \begin{figure}[ht]
     \includegraphics[scale=0.5]{chase_graph}
     \centering
 \end{figure}
 
-Mostramos ahora, a modo de comparación el \textit{guarded chase forest}, para mismo $D$ y $\Sigma$. Notar que el mismo es un sub-grafo del anterior y que las profundidades de los nodos son ahora siempre menores o iguales que en el \textit{chase graph}. 
+Mostramos ahora, a modo de comparación el \textit{guarded chase forest}, para mismo $D$ y $\Sigma$. Notar que el mismo es un sub-grafo del anterior y que las profundidades de los nodos son ahora siempre menores o iguales que sus respectivos niveles de \textit{derivación} en el  \textit{chase graph}. 
 
 \begin{figure}[ht]
     \includegraphics[scale=0.5]{guarded_chase_forest}
@@ -238,9 +239,34 @@ Mostramos ahora, a modo de comparación el \textit{guarded chase forest}, para m
 
 \end{exmp}
 
-\subsection{Propiedad de la profundidad acotada para el fragmento Guarded}
+\subsubsection{Bounded guard-depth property para el fragmento Guarded}
 
-Sea $R$ un esquema relacional y $\Sigma$ un conjunto de TGDs para $R$. Decimos que $\Sigma$ tiene la propiedad de la profundidad acotada si solo si, para toda base de datos $D$ y para toda consulta conjuntiva booleana $Q$, para toda vez que exista un homomorfismo $\mu$ que mapea $Q$ en el $chase(D, \Sigma)$, entonces existe un homomorfiso $\delta(Q)$ tal que todos los ancestros de $\delta(Q)$ en el $chase graph$ para $D$ y $\Sigma$ están contenidos en el $g-chase^{\gamma_k}(D, \Sigma)$, donde $\gamma_k$ solo depende de de $Q$ y $R$.
+Sea $R$ un esquema relacional y $\Sigma$ un conjunto de TGDs para $R$. Decimos que $\Sigma$ tiene la propiedad \textit{Bounded guard-depth property} solo si, para toda base de datos $D$ y para toda consulta conjuntiva booleana $Q$, para toda vez que exista un homomorfismo $\mu$ que mapea $Q$ en el $chase(D, \Sigma)$, entonces existe un homomorfiso $\delta(Q)$ tal que todos los ancestros de $\delta(Q)$ en el $chase graph$ para $D$ y $\Sigma$ están contenidos en el $g-chase^{\gamma_k}(D, \Sigma)$, donde $\gamma_k$ solo depende de $Q$ y $R$.
+
+Tal como se muestra en \cite{JWS}, las TGDs del fragmento Guarded poseen la propiedad anterior. En resumen, todos los átomos que se encuentran en la respuesta a una consulta conjuntiva se encuentran dentro del $g-chase^{(n + 1)\cdot\delta}$, con $\delta = (2\cdot\omega)^\omega\cdot2^{(2\omega)^{\omega\cdot|R|}}$, siendo $\omega$ la máxima aridad de algún predicado en $R$ y $n$ la cantidad de átomos en la consulta.
+
+Esta profundidad en el \textit{guarded chase forest}, es independiente del tamaño de $D$, lo cual lleva a poder afirmar que responder consultas en el fragmento \textit{guarded} es $P-complete$ en la complejidad de datos.
+
+\subsection{Datalog+/-, fragmento Lineal}
+
+En el fragmento \textit{Lineal} de Datalog+/- las TGDs tienen un solo átomo en su cuerpo, es decir que tienen la forma $\forall X \forall  Y \Phi(X, Y) \rightarrow \exists Z \Psi(X,Z)$, siendo $\Phi(X,Y)$ un sólo átomo. Este fragmento esta estrictamente dentro del fragmento guarded, y aún perdiendo cierto poder expresivo con respecto al anterior, es lo suficientemente expresivo como para representar ontologías encodeadas en las \textit{Description Logics} de la familia \textit{Dl-Lite}. Adem'as, tiene la ventaja de ser \textit{FO-rewritable} en la complejidad de datos.
+
+\subsubsection{Bounded derivation-depth property}
+
+Definimos ahora la \textit{bounded derivation-depth property} para un conjunto de TGDs, la cual es estrictamente m'as fuerte que la \textit{ bounded guard-depth property}, dado que la primera implica la segunda, pero no al rev'es. Informalmente, la \textit{bounded derivation-depth property} dice que para responder a una consulta conjuntiva no es necesario ir m'as all'a de una profundidad $k$ en el \textit{chase graph} (y no en el \textit{guarded chase forest} como en el fragmento anterior), cuyo tamaño solo depende de $Q$ y $R$.
+
+\subsubsection{First-order rewritability}
+Una clase de TGDs $C$ es reescribible en primer orden o \textit{first-order rewritible} si solo si para todo conjunto de TGDs en $C$ y para toda consulta conjuntiva booleana $Q$, existe una consulta de primer orden $Q_\Sigma$ tal que, para toda base de datos $D$, sucede que $D \cup \Sigma \models Q$ si solo si $D \models Q_\Sigma$. Dado que responder consultas de primer orden es un problema en $AC_0$ en la complejidad de datos \cite{Vardi}, tambi'en se encuentra en esta clase de problemas responder consultas bajo TGDs que sean reescribibles en primer orden.
+
+\subsection{Negative Constraints}
+Una \textit{Negative Constraint} es una f'ormula de primer orden de la forma $\forall X \Phi (X) \rightarrow \bot$, donde $\Phi(X)$ es una conjunci'on de 'atomos. Estas \textit{constraints} son un ingrediente importante para poder representar ontolog'ias.
+
+\begin{exmp}
+Podemos expresar mediante una \textit{Negative Constraint} que ning'un elemento puede ser al mismo tiempo positivo y negativo de la siguiente forma: $$esPositivo(X) \land esNegativo(X) \rightarrow \bot$$
+En este caso estamos diciendo que los predicados esNegativo y esPositivo representan dos clases que no tienen instancias en com'un. De manera similar podemos decir que ning'un miembro de una clase pertenece a una relaci'on:$$soltero(X) \land casadoCon(X, Y) \rightarrow \bot $$ Podemos inclusive expresar que dos relaciones son disjuntas: $$mayor(X,Y) \land menor(X, Y) \rightarrow \bot$$
+
+
+\end{exmp}
 
 %% ...
 \chapter{Resultados Formales}
@@ -277,7 +303,17 @@ Sea $R$ un esquema relacional y $\Sigma$ un conjunto de TGDs para $R$. Decimos q
     \bibitem{Johnson} 
     D. S. Johnson and A. C. Klug.
     Testing containment of conjunctive queries under functional and inclusion dependencies.
-    En \textit{J. Comput. Syst. Sci., 28(1):167–189, 1984.}. 
+    En \textit{J. Comput. Syst. Sci., 28(1):167–189, 1984}. 
+
+    \bibitem{Vardi} 
+    M. Y. Vardi
+    On the complexity of bounded-variable queries.
+    En \textit{Proc. PODS-1995, pp. 266–176, 1995}. 
+    
+    \bibitem{JWS} 
+    Andrea Calì, Georg Gottlobc, Thomas Lukasiewicz.
+    A General Datalog-Based Framework for Tractable Query Answering over Ontologies
+    En \textit{QUE PONGO ACA}. 
 
     \end{thebibliography}
 
