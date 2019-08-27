@@ -299,6 +299,48 @@ Consideremos el siguiente conjunto de TGDs y EGDs $\Sigma = \{\sigma_1, \sigma_2
 Sea $D$ la base de datos $\{p(a), r(a), s(a, b)\}$. En el c'omputo de $chase(D, \Sigma)$, primero aplicamos $\sigma_1$ y agregamos el 'atomo $s(a, z_1)$, donde $z_1$ es un nulo. Entonces, al aplicar $\sigma_2$ sobre $r(a)$ y $s(a, z_1)$ transformamos $s(a, z_1)$ en $s(a, a)$. Ahora $\sigma_3$ resulta aplicable sobre $s(a, a)$ y $s(a, b)$, pero al intentar igualar $a = b$ el \textit{chase} falla, pues hay una violaci'on, dado que $a$ y $b$ son constantes distintas en $\Delta$.
 \end{exmp}
 
+\subsubsection{Separabilidad}
+Sea $R$ un esquema relacional, y sean $\Sigma_T$ y $\Sigma_E$ dos conjuntos de TGDs y EGDs sobre $R$, respectivamente. Entonces, $\Sigma_E$ es separable de $\Sigma_T$ si solo si para toda base de datos $D$ sobre $R$, se cumplen las siguientes condiciones: 
+\begin{itemize}
+    \item  Si hay una violación de una EGD $\sigma \in \Sigma_E$ en $chase(D, \Sigma_T \cup \Sigma_E)$, entonces hay también una violación de $sigma$ en $D$.
+    \item Si no hay violación de ninguna EGD $\sigma \in \Sigma_E$ entonces para toda connsulta $Q$, sucede que $chase(D, \Sigma_T \cup \Sigma_E) \models Q$ si solo si $chase(D, \Sigma_T) \models Q$.
+\end{itemize}
+
+Esto implica que agregar EGDs separables a un conjunto de TGDs no incrementa la complejiad de contestar consultas, tanto en el caso lineal como el el guarded. Esto es porque alcanza con evaluar si cada EGD se satisface en D, y si esto ocurre podemos entonces armar el chase con las TGDs solamente.
+
+\subsubsection{Claves}
+Dado un predicado relacional $p$ sobre un esquema relacional $R$ una clave $K$ sobre $p$ es un conjunto de posiciones para el cual sucede que para toda base de datos $D$ sobre $R$ no pueden existir dos \textit{hechos} en $D$ para $p$ tales que los dos hechos tengan los mismos valores en todas las posiciones de $K$ pero distintos valores en posiciones que no estén incluidas en $K$. 
+
+\begin{exmp}
+Sea $p$ el predicado binario \textit{padreDe} sobre un esquema relacional $R$, donde la primer posición indica el DNI de una persona y la segunda posición el DNI de su padre. Sea $k[1]$ una clave definida sobre \textit{padreDe}. Esto indica que no pueden existir dos átomos en $D$ con igual DNI en la primera posición y distinto DNI en la segunda posición, es decir que ninguna persona puede tener dos padres diferentes.
+\end{exmp}
+
+Podemos definir una clave a partir de un conjunto de EGDs.
+\begin{exmp}
+Sea $p$ un predicado ternario sobre un esquema relacional $R$. Sea $k[1]$ una clave para $p$. Podemos expresar esta clave por medio de dos EGDs:
+\begin{itemize}
+    \item $p(X, Y_1, Z_1) \land p(X, Y_2, Z_2) \rightarrow Y_1 = Y_2$.
+    \item $p(X, Y_1, Z_1) \land p(X, Y_2, Z_2) \rightarrow Z_1 = Z_2$.
+\end{itemize}
+\end{exmp}
+
+
+\subsubsection{Claves no conflictivas}
+Sea $K$ una clave, y sea $\sigma$ una TGD de la forma $\Phi(X, Y) \rightarrow \exists Z r(X, Z)$. Decimos que $K$ es no conflictiva (NC) con $\sigma$ si se cumple alguna de las siguientes condiciones:
+\begin{itemize}
+    \item El predicado relacional sobre el cual $K$ está definido es diferente de $r$.
+    \item Las posiciones de $K$ en $R$ no son un subconjunto propio de las posiciones de $X$ en $r$ en la cabeza de $\sigma$, y toda variable en $Z$ aparece una sola vez en la cabeza de $\sigma$. 
+\end{itemize}
+
+Decimos que $K$ es no conflictiva con un conjunto de TGDs $\Sigma_T$ si solo si $k$ es no conflictiva con toda $\sigma \in \Sigma_T$. Un conjunto de claves $\Sigma_K$ es no conflictivo con $\Sigma_T$ si solo si todas clave $k \in \Sigma_K$ es no conflictiva con $\Sigma_T$.
+
+
+
+
+
+
+
+
 
 %% ...
 \chapter{Resultados Formales}
