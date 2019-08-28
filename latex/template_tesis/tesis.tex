@@ -250,42 +250,42 @@ Esta profundidad en el \textit{guarded chase forest}, es independiente del tama�
 
 \subsection{Datalog+/-, fragmento Lineal}
 
-En el fragmento \textit{Lineal} de Datalog+/- las TGDs tienen un solo átomo en su cuerpo, es decir que tienen la forma $\forall X \forall  Y \Phi(X, Y) \rightarrow \exists Z \Psi(X,Z)$, siendo $\Phi(X,Y)$ un sólo átomo. Este fragmento esta estrictamente dentro del fragmento guarded, y aún perdiendo cierto poder expresivo con respecto al anterior, es lo suficientemente expresivo como para representar ontologías encodeadas en las \textit{Description Logics} de la familia \textit{Dl-Lite}. Adem'as, tiene la ventaja de ser \textit{FO-rewritable} en la complejidad de datos.
+En el fragmento \textit{Lineal} de Datalog+/- las TGDs tienen un solo átomo en su cuerpo, es decir que tienen la forma $\forall X \forall  Y \Phi(X, Y) \rightarrow \exists Z \Psi(X,Z)$, siendo $\Phi(X,Y)$ un sólo átomo. Este fragmento esta estrictamente dentro del fragmento guarded, y aún perdiendo cierto poder expresivo con respecto al anterior, es lo suficientemente expresivo como para representar ontologías encodeadas en las \textit{Description Logics} de la familia \textit{Dl-Lite}. Además, tiene la ventaja de ser \textit{FO-rewritable} en la complejidad de datos.
 
 \subsubsection{Bounded derivation-depth property}
 
-Definimos ahora la \textit{bounded derivation-depth property} para un conjunto de TGDs, la cual es estrictamente m'as fuerte que la \textit{ bounded guard-depth property}, dado que la primera implica la segunda, pero no al rev'es. Informalmente, la \textit{bounded derivation-depth property} dice que para responder a una consulta conjuntiva no es necesario ir m'as all'a de una profundidad $k$ en el \textit{chase graph} (y no en el \textit{guarded chase forest} como en el fragmento anterior), cuyo tamaño solo depende de $Q$ y $R$.
+Definimos ahora la \textit{bounded derivation-depth property} para un conjunto de TGDs, la cual es estrictamente más fuerte que la \textit{ bounded guard-depth property}, dado que la primera implica la segunda, pero no al revés. Informalmente, la \textit{bounded derivation-depth property} dice que para responder a una consulta conjuntiva no es necesario ir más allá de una profundidad $k$ en el \textit{chase graph} (y no en el \textit{guarded chase forest} como en el fragmento anterior), cuyo tamaño solo depende de $Q$ y $R$.
 
 \subsubsection{First-order rewritability}
-Una clase de TGDs $C$ es reescribible en primer orden o \textit{first-order rewritible} si solo si para todo conjunto de TGDs en $C$ y para toda consulta conjuntiva booleana $Q$, existe una consulta de primer orden $Q_\Sigma$ tal que, para toda base de datos $D$, sucede que $D \cup \Sigma \models Q$ si solo si $D \models Q_\Sigma$. Dado que responder consultas de primer orden es un problema en $AC_0$ en la complejidad de datos \cite{Vardi}, tambi'en se encuentra en esta clase de problemas responder consultas bajo TGDs que sean reescribibles en primer orden.
+Una clase de TGDs $C$ es reescribible en primer orden o \textit{first-order rewritible} si solo si para todo conjunto de TGDs en $C$ y para toda consulta conjuntiva booleana $Q$, existe una consulta de primer orden $Q_\Sigma$ tal que, para toda base de datos $D$, sucede que $D \cup \Sigma \models Q$ si solo si $D \models Q_\Sigma$. Dado que responder consultas de primer orden es un problema en $AC_0$ en la complejidad de datos \cite{Vardi}, también se encuentra en esta clase de problemas responder consultas bajo TGDs que sean reescribibles en primer orden.
 
 \subsection{Negative Constraints}
-Una \textit{Negative Constraint} es una f'ormula de primer orden de la forma $\forall X \Phi (X) \rightarrow \bot$, donde $\Phi(X)$ es una conjunci'on de 'atomos. Estas \textit{constraints} nos ayudan a expresar restricciones sobre las ontolog'ias.
+Una \textit{Negative Constraint} es una fórmula de primer orden de la forma $\forall X \Phi (X) \rightarrow \bot$, donde $\Phi(X)$ es una conjunción de átomos. Estas \textit{constraints} nos ayudan a expresar restricciones sobre las ontologías.
 
 \begin{exmp}
-Podemos decir que los predicados esNegativo y esPositivo representan dos clases que no tienen instancias en com'un de la siguiente forma: $$esPositivo(X) \land esNegativo(X) \rightarrow \bot$$
-De manera similar podemos decir que ning'un miembro de una clase pertenece a una relaci'on:$$soltero(X) \land casadoCon(X, Y) \rightarrow \bot $$ Podemos inclusive expresar que dos relaciones son disjuntas: $$mayor(X,Y) \land menor(X, Y) \rightarrow \bot$$
+Podemos decir que los predicados esNegativo y esPositivo representan dos clases que no tienen instancias en común de la siguiente forma: $$esPositivo(X) \land esNegativo(X) \rightarrow \bot$$
+De manera similar podemos decir que ningún miembro de una clase pertenece a una relación:$$soltero(X) \land casadoCon(X, Y) \rightarrow \bot $$ Podemos inclusive expresar que dos relaciones son disjuntas: $$mayor(X,Y) \land menor(X, Y) \rightarrow \bot$$
 \end{exmp}
 
-Responder consultas en una base de datos bajo un conjunto de TGDs $\Sigma_T$ y un conjunto de restricciones $\Sigma_C$ puede realizarse sin agregar complejidad de la siguiente manera: para cada \textit{negative constraint} $\sigma = \Phi(X,Y) \rightarrow \bot \in \Sigma_C$ verificamos que se satisface en $D$ y $\Sigma_T$, lo cual se puede hacer chequeando que la consulta conjuntiva booleana $Q_\sigma = \Phi(X)$ eval'ue a Falso en $D$ y $\Sigma_T$. Escribimos $D \cup \Sigma_T \models \Sigma_C$ si solo si toda $\sigma \in \Sigma_C$ es falsa en $D$ y $\Sigma_T$. Esto nos lleva inmediatamente al al siguiente resultado: decimos que una consulta conjuntiva booleana es verdadera en $D$, $\Sigma_T$ y $\Sigma_C$, y lo anotamos $D \cup \Sigma_T \cup  \Sigma_C \models Q$ si solo si (i) $D \cup \Sigma_T \models Q$ o (ii) $D \cup \Sigma_T \not\models \Sigma_C$.
+Responder consultas en una base de datos bajo un conjunto de TGDs $\Sigma_T$ y un conjunto de restricciones $\Sigma_C$ puede realizarse sin agregar complejidad de la siguiente manera: para cada \textit{negative constraint} $\sigma = \Phi(X,Y) \rightarrow \bot \in \Sigma_C$ verificamos que se satisface en $D$ y $\Sigma_T$, lo cual se puede hacer chequeando que la consulta conjuntiva booleana $Q_\sigma = \Phi(X)$ evalúe a Falso en $D$ y $\Sigma_T$. Escribimos $D \cup \Sigma_T \models \Sigma_C$ si solo si toda $\sigma \in \Sigma_C$ es falsa en $D$ y $\Sigma_T$. Esto nos lleva inmediatamente al al siguiente resultado: decimos que una consulta conjuntiva booleana es verdadera en $D$, $\Sigma_T$ y $\Sigma_C$, y lo anotamos $D \cup \Sigma_T \cup  \Sigma_C \models Q$ si solo si (i) $D \cup \Sigma_T \models Q$ o (ii) $D \cup \Sigma_T \not\models \Sigma_C$.
 
 \subsection{Equality-Generating Dependencies (EGDs) y Keys}
-Las dependencias generadoras de igualdad o \textit{Equality-Generating Dependencies} tambi'en son importantes a la hora de representar ontolog'ias. Estas son f'ormulas de primer orden que generalizas dependencias funcionales y en particular claves.
+Las dependencias generadoras de igualdad o \textit{Equality-Generating Dependencies} también son importantes a la hora de representar ontologías. Estas son fórmulas de primer orden que generalizas dependencias funcionales y en particular claves.
 
-Sin embargo, si bien es cierto que agregar negative constraints es sencillo desde el punto de vista computacional, no sucede lo mismo con las EGDs: la interacci'on entre las TGDs y las EGDs puede tornar indecidible el problema de responder consultas\cite{Johnson}. Se puede comprobar que que un conjunto fijo de EGDs y guarded TGDs pueden simular una maquina de Turing universal, con lo cual responder consultas es indecidible para tales dependencias. Por tal motivo, consideramos ahora una clase m'as restringida de EGDs, a las cuales llamamos \textit{claves no conflictivas}. Tal clase de EGDs muestra una interacci'on controlada con las TGDs (y NCs), de manera tal que no incrementan la complejidad de responder consultas, agregando al mismo tiempo suficiente poder expresivo para poder modelar ontolog'ias.
+Sin embargo, si bien es cierto que agregar negative constraints es sencillo desde el punto de vista computacional, no sucede lo mismo con las EGDs: la interacción entre las TGDs y las EGDs puede tornar indecidible el problema de responder consultas\cite{Johnson}. Se puede comprobar que que un conjunto fijo de EGDs y guarded TGDs pueden simular una maquina de Turing universal, con lo cual responder consultas es indecidible para tales dependencias. Por tal motivo, consideramos ahora una clase más restringida de EGDs, a las cuales llamamos \textit{claves no conflictivas}. Tal clase de EGDs muestra una interacción controlada con las TGDs (y NCs), de manera tal que no incrementan la complejidad de responder consultas, agregando al mismo tiempo suficiente poder expresivo para poder modelar ontologías.
 
-Una \textit{dependencia generadora de igualdad} (o EGD) es una f'ormula $\sigma$ de primer orden de la forma $\forall X \Phi(X) \rightarrow X_i = X_j$, donde $\Phi(X)$, el cual llamamos el cuerpo de $\sigma$, es una conjunci'on (no necesariamente guarded) de 'atomos, y $X_i$ y $X_j$ son variables en $X$. Llamamos a $X_i = X_j$ a la cabeza de $\sigma$. Tal $\sigma$ se satisface en una base de datos $D$ para $R$ si solo si, siempre que exista un homomorfismo $h$ tal que $h(\Phi(X) \subseteq D$, sucede que $h(X_i) = h(X_J)$. Se suelen omitir los cuantificadores universales en estas f'ormulas, y consideramos solo conjuntos finitos de EGDs.
+Una \textit{dependencia generadora de igualdad} (o EGD) es una fórmula $\sigma$ de primer orden de la forma $\forall X \Phi(X) \rightarrow X_i = X_j$, donde $\Phi(X)$, el cual llamamos el cuerpo de $\sigma$, es una conjunción (no necesariamente guarded) de átomos, y $X_i$ y $X_j$ son variables en $X$. Llamamos a $X_i = X_j$ a la cabeza de $\sigma$. Tal $\sigma$ se satisface en una base de datos $D$ para $R$ si solo si, siempre que exista un homomorfismo $h$ tal que $h(\Phi(X) \subseteq D$, sucede que $h(X_i) = h(X_J)$. Se suelen omitir los cuantificadores universales en estas fórmulas, y consideramos solo conjuntos finitos de EGDs.
 
 \begin{exmp}
-La siguiente f'ormula $\sigma$ es una EGD: $$r(X, Y_1) \land r(X,Y_2) \rightarrow Y_1 = Y_2.$$
+La siguiente fórmula $\sigma$ es una EGD: $$r(X, Y_1) \land r(X,Y_2) \rightarrow Y_1 = Y_2.$$
 
-La base de datos $D = \{r(a, b), r(c, d)\}$ satisface $\sigma$, dado que todo homomorfismo h que mapee el cuerpo de $\sigma$ a 'atomos de $D$ es tal que $h(Y_1) = h(Y_2)$. Por el contrario, la base de datos $D = \{r(a, b), r(a, d)\}$ no satisface $\sigma$.
+La base de datos $D = \{r(a, b), r(c, d)\}$ satisface $\sigma$, dado que todo homomorfismo h que mapee el cuerpo de $\sigma$ a átomos de $D$ es tal que $h(Y_1) = h(Y_2)$. Por el contrario, la base de datos $D = \{r(a, b), r(a, d)\}$ no satisface $\sigma$.
 
 \end{exmp}
 
-Una EGD $\sigma$ sobre $R$ de la forma $\Phi(X) \rightarrow X_i = X_j$ es \textit{aplicable} a una base de datos $D$ si solo si existe un homorfismo $\eta : \Phi(X) \rightarrow D$ tal que $\eta(X_i)$ y $\eta(X_j)$ son distintos y no son ambos constantes. Si $\eta(X_i)$ y $\eta(X_j)$ son constantes distintas en $\Delta$, entonces hay una violaci'on de $\sigma$, y el chase falla. Caso contrario, el resultado de aplicar $\sigma$ a $D$ es la base de datos $h(D)$ que se obtiene a partir de $D$ al reemplazar toda ocurrencia de alg'un elemento no constante $e \in \{\eta(X_i), \eta(X_j)\}$ en $D$ para el otro elemento $e\prime$ (si $e$ y $e\prime$ son los dos nulos, entonces $e$ precede a $e\prime$ en orden lexicogr'afico.)
+Una EGD $\sigma$ sobre $R$ de la forma $\Phi(X) \rightarrow X_i = X_j$ es \textit{aplicable} a una base de datos $D$ si solo si existe un homorfismo $\eta : \Phi(X) \rightarrow D$ tal que $\eta(X_i)$ y $\eta(X_j)$ son distintos y no son ambos constantes. Si $\eta(X_i)$ y $\eta(X_j)$ son constantes distintas en $\Delta$, entonces hay una violación de $\sigma$, y el chase falla. Caso contrario, el resultado de aplicar $\sigma$ a $D$ es la base de datos $h(D)$ que se obtiene a partir de $D$ al reemplazar toda ocurrencia de algún elemento no constante $e \in \{\eta(X_i), \eta(X_j)\}$ en $D$ para el otro elemento $e\prime$ (si $e$ y $e\prime$ son los dos nulos, entonces $e$ precede a $e\prime$ en orden lexicográfico.)
 
-El chase para una base de datos $D$ y un conjunto $\Sigma_T$ de TGDs m'as un conjunto $\Sigma_E$ de $EGDs$, el cual denotamos $chase(D, \Sigma_T \cup \Sigma_E)$, se computa de manera iterativa por medio de aplicar todas las EGDs que sean aplicables entre cada aplicaci'on de cada TGD como se describi'o previamente.
+El chase para una base de datos $D$ y un conjunto $\Sigma_T$ de TGDs más un conjunto $\Sigma_E$ de $EGDs$, el cual llamamos \textit{full chase} y denotamos $chase(D, \Sigma_T \cup \Sigma_E)$, se computa de manera iterativa por medio de aplicar todas las EGDs que sean aplicables entre cada aplicación de cada TGD como se describió previamente.
 
 \begin{exmp}
 Consideremos el siguiente conjunto de TGDs y EGDs $\Sigma = \{\sigma_1, \sigma_2, \sigma_3\}$:
@@ -296,7 +296,7 @@ Consideremos el siguiente conjunto de TGDs y EGDs $\Sigma = \{\sigma_1, \sigma_2
     \item [$\sigma_3:$] $s(X, Y), s(X, Z) \rightarrow Y = Z$
 \end{itemize}
 
-Sea $D$ la base de datos $\{p(a), r(a), s(a, b)\}$. En el c'omputo de $chase(D, \Sigma)$, primero aplicamos $\sigma_1$ y agregamos el 'atomo $s(a, z_1)$, donde $z_1$ es un nulo. Entonces, al aplicar $\sigma_2$ sobre $r(a)$ y $s(a, z_1)$ transformamos $s(a, z_1)$ en $s(a, a)$. Ahora $\sigma_3$ resulta aplicable sobre $s(a, a)$ y $s(a, b)$, pero al intentar igualar $a = b$ el \textit{chase} falla, pues hay una violaci'on, dado que $a$ y $b$ son constantes distintas en $\Delta$.
+Sea $D$ la base de datos $\{p(a), r(a), s(a, b)\}$. En el cómputo de $chase(D, \Sigma)$, primero aplicamos $\sigma_1$ y agregamos el átomo $s(a, z_1)$, donde $z_1$ es un nulo. Entonces, al aplicar $\sigma_2$ sobre $r(a)$ y $s(a, z_1)$ transformamos $s(a, z_1)$ en $s(a, a)$. Ahora $\sigma_3$ resulta aplicable sobre $s(a, a)$ y $s(a, b)$, pero al intentar igualar $a = b$ el \textit{chase} falla, pues hay una violación, dado que $a$ y $b$ son constantes distintas en $\Delta$.
 \end{exmp}
 
 \subsubsection{Separabilidad}
@@ -334,12 +334,13 @@ Sea $K$ una clave, y sea $\sigma$ una TGD de la forma $\Phi(X, Y) \rightarrow \e
 
 Decimos que $K$ es no conflictiva con un conjunto de TGDs $\Sigma_T$ si solo si $k$ es no conflictiva con toda $\sigma \in \Sigma_T$. Un conjunto de claves $\Sigma_K$ es no conflictivo con $\Sigma_T$ si solo si todas clave $k \in \Sigma_K$ es no conflictiva con $\Sigma_T$.
 
+\begin{exmp}
+Consideremos las siguientes claves $K_1, K_2, K_3, K_4$ definidas por los siguientes conjuntos de posiciones para el predicado $r$: $K_1=\{r[3]\}, K_2=\{r[2], r[3]\}, K_3=\{r[1]\},  K_4=\{r[1], r[2]\}$, y la TGD $\sigma = p(X, Y) \rightarrow \exists Z r(Z, X, Y)$. Teniendo en cuenta entonces que la cabeza de $\sigma$ es $r$, y el conjunto de posiciones en $r$ con variables cuantificada universalmente es $H = \{r[2], r[3]\}$, resulta que $K_1$ es la única clave definida por un conjunto de posiciones que es subconjunto propio de $H$. Por lo tanto salvo $K_1$, todas las claves son no conflictivas con $\sigma$.
+\end{exmp}
 
+Tal como se muestra en \cite{JWS}, la propiedad de no conflictivdad entre un conjunto de claves y un conjunto de TGDs, implica su separabilidad. La principal idea detrás de la prueba se describe a continuación. La condición de no conflictividad entre una clave $K$ y una TGD $\sigma$ asegura que o bien (a) la aplicación de $\sigma$ en el \textit{chase} genera un átomo con un nuevo nulo en una posición de $K$, y entonces este nuevo átomo no viola K; o bien (b) las posiciones cuantificadas universalmente en la cabeza de $\sigma$ coinciden con las posiciones de la clave $K$, con lo cual cualquier átomo nuevo generado a partir de $\sigma$ debe tener nulos frescos en todas las posiciones salvo las de la clave, no produciéndose una violación en este caso tampoco. Como todos los nuevos nulos son distintos entre sí, el \textit{chase} es homomórficamente equivalente al \textit{TGD full chase}.
 
-
-
-
-
+Concluímos entonces esta sección afirmando que en el caso NC, las claves no incrementan la complejidad-datos de contestar consultas bajo TGDs y constraints, tanto para el fragmento \textit{guarded} como para el \textit{lineal}.
 
 
 %% ...
