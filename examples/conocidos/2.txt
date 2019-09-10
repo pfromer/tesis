@@ -1,0 +1,19 @@
+bottom :- prop('h').
+
+prop(?Y) :- conocidos(?X, ?Y), prop(?X).
+conocidos(?Y, ?X) :- conocidos(?X, ?Y).
+
+
+conocidos('a', 'b').
+conocidos('b', 'e').
+conocidos('e', 'h').
+conocidos('a', 'c').
+conocidos('c', 'f').
+conocidos('f', 'h').
+conocidos('a', 'd').
+conocidos('d', 'g').
+conocidos('g', 'h').
+
+prop('a').
+
+(?X) :- prop(?X).
