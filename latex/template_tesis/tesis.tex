@@ -365,10 +365,32 @@ Mencionamos anteriormente que nuestro objetivo es obtener informaci'on consisten
 
 
 \begin{exmp}
-Consideremos las siguientes claves $K_1, K_2, K_3, K_4$ definidas por los siguientes conjuntos de posiciones para el predicado $r$: $K_1=\{r[3]\}, K_2=\{r[2], r[3]\}, K_3=\{r[1]\},  K_4=\{r[1], r[2]\}$, y la TGD $\sigma = p(X, Y) \rightarrow \exists Z r(Z, X, Y)$. Teniendo en cuenta entonces que la cabeza de $\sigma$ es $r$, y el conjunto de posiciones en $r$ con variables cuantificada universalmente es $H = \{r[2], r[3]\}$, resulta que $K_1$ es la única clave definida por un conjunto de posiciones que es subconjunto propio de $H$. Por lo tanto salvo $K_1$, todas las claves son no conflictivas con $\sigma$.
+Consideremos la siguiente base de datos $D$:
+    \begin{equation}
+        $$D = \{\textit{conocidos('Juan', 'Pedro'), conocidos('Pedro', 'Carlos'), tienePiojos('Juan'), adulto('Carlos')}\}$$
+    \end{equation}
+
+El conjunto de TGDs está dato por:
+\begin{itemize}
+    \item $conocidos(X, Y) \rightarrow persona(X)$
+    \item $conocidos(X, Y) \rightarrow persona(Y)$
+    \item $conocidos(X, Y) \land tienePiojos(X) \rightarrow tienePiojos(Y)$
+\end{itemize}
+
+Y las restricciones están dadas por:
+
+\begin{itemize}
+    \item $tienePiojos(X) \land adulto(X)  \rightarrow \bot$
+\end{itemize}
+
+
+    
 \end{exmp}
 
 
+persona(?y) :- conocidos(?x, ?y).
+tienePiojos(?y) :- conocidos(?x, ?y), tienePiojos(?x).
+bottom :- tienePiojos(?x), adulto(?x).
 
 
 
