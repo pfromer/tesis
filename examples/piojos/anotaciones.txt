@@ -1,0 +1,8 @@
+en AR -> persona(?a) da verdadero.
+en IAR -> persona(?a) da falso.
+
+Si agrego persona(?a) a la base en IAR da verdadero (lo cual se desprendia logicamente por las tgds).
+
+esto no deberia pasar en CAR.
+
+
