@@ -287,11 +287,7 @@ La base de datos $D = \{r(a, b), r(c, d)\}$ satisface $\sigma$, dado que todo ho
 
 \end{exmp}
 
-<<<<<<< HEAD
 Una EGD $\sigma$ sobre $R$ de la forma $\Phi(X) \rightarrow X_i = X_j$ es \textit{aplicable} a una base de datos $D$ si solo si existe un homorfismo $\eta : \Phi(X) \rightarrow D$ tal que $\eta(X_i)$ y $\eta(X_j)$ son distintos y no son ambos constantes. Si $\eta(X_i)$ y $\eta(X_j)$ son constantes distintas en $\Delta$, entonces hay una violación de $\sigma$, y el chase falla. Caso contrario, el resultado de aplicar $\sigma$ a $D$ es la base de datos $h(D)$ que se obtiene a partir de $D$ al reemplazar toda ocurrencia de algún elemento no constante $e https://www.overleaf.com/project/5d595ee258698f10f21f3b7a\in \{\eta(X_i), \eta(X_j)\}$ en $D$ para el otro elemento $e\prime$ (si $e$ y $e\prime$ son los dos nulos, entonces $e$ precede a $e\prime$ en orden lexicográfico.)
-=======
-Una EGD $\sigma$ sobre $R$ de la forma $\Phi(X) \rightarrow X_i = X_j$ es \textit{aplicable} a una base de datos $D$ si solo si existe un homorfismo $\eta : \Phi(X) \rightarrow D$ tal que $\eta(X_i)$ y $\eta(X_j)$ son distintos y no son ambos constantes. Si $\eta(X_i)$ y $\eta(X_j)$ son constantes distintas en $\Delta$, entonces hay una violación de $\sigma$, y el chase falla. Caso contrario, el resultado de aplicar $\sigma$ a $D$ es la base de datos $h(D)$ que se obtiene a partir de $D$ al reemplazar toda ocurrencia de algún elemento no constante $e \in \{\eta(X_i), \eta(X_j)\}$ en $D$ para el otro elemento $e\prime$ (si $e$ y $e\prime$ son los dos nulos, entonces $e$ precede a $e\prime$ en orden lexicográfico.)
->>>>>>> 87b16fff018204f0fda51225d86a258b6dae6bf6
 
 El chase para una base de datos $D$ y un conjunto $\Sigma_T$ de TGDs más un conjunto $\Sigma_E$ de $EGDs$, el cual llamamos \textit{full chase} y denotamos $chase(D, \Sigma_T \cup \Sigma_E)$, se computa de manera iterativa por medio de aplicar todas las EGDs que sean aplicables entre cada aplicación de cada TGD como se describió previamente.
 
@@ -330,7 +326,6 @@ Sea $p$ un predicado ternario sobre un esquema relacional $R$. Sea $k[1]$ una cl
     \item $p(X, Y_1, Z_1) \land p(X, Y_2, Z_2) \rightarrow Y_1 = Y_2$.
     \item $p(X, Y_1, Z_1) \land p(X, Y_2, Z_2) \rightarrow Z_1 = Z_2$.
 \end{itemize}
-<<<<<<< HEAD
 \end{exmp}
 
 
@@ -487,74 +482,6 @@ Notar que dado que el conjunto de \textit{CAR-repairs} es el mismo para ambas ba
 
 En general, decidir si $(D, \Sigma)\not\models_{AR} Q$ es \textit{coNP-completo} tanto para el fragmento \textit{lineal} como para el fragmento \textit{guarded} de Datalog+/-. Este resultado de complejidad lleva a  
 
-=======
-\end{exmp}
-
-
-\subsubsection{Claves no conflictivas}
-Sea $K$ una clave, y sea $\sigma$ una TGD de la forma $\Phi(X, Y) \rightarrow \exists Z r(X, Z)$. Decimos que $K$ es no conflictiva (NC) con $\sigma$ si se cumple alguna de las siguientes condiciones:
-\begin{itemize}
-    \item El predicado relacional sobre el cual $K$ está definido es diferente de $r$.
-    \item Las posiciones de $K$ en $R$ no son un subconjunto propio de las posiciones de $X$ en $r$ en la cabeza de $\sigma$, y toda variable en $Z$ aparece una sola vez en la cabeza de $\sigma$. 
-\end{itemize}
-
-Decimos que $K$ es no conflictiva con un conjunto de TGDs $\Sigma_T$ si solo si $k$ es no conflictiva con toda $\sigma \in \Sigma_T$. Un conjunto de claves $\Sigma_K$ es no conflictivo con $\Sigma_T$ si solo si todas clave $k \in \Sigma_K$ es no conflictiva con $\Sigma_T$.
-
-\begin{exmp}
-Consideremos las siguientes claves $K_1, K_2, K_3, K_4$ definidas por los siguientes conjuntos de posiciones para el predicado $r$: $K_1=\{r[3]\}, K_2=\{r[2], r[3]\}, K_3=\{r[1]\},  K_4=\{r[1], r[2]\}$, y la TGD $\sigma = p(X, Y) \rightarrow \exists Z r(Z, X, Y)$. Teniendo en cuenta entonces que la cabeza de $\sigma$ es $r$, y el conjunto de posiciones en $r$ con variables cuantificada universalmente es $H = \{r[2], r[3]\}$, resulta que $K_1$ es la única clave definida por un conjunto de posiciones que es subconjunto propio de $H$. Por lo tanto salvo $K_1$, todas las claves son no conflictivas con $\sigma$.
-\end{exmp}
-
-Tal como se muestra en \cite{JWS}, la propiedad de no conflictivdad entre un conjunto de claves y un conjunto de TGDs, implica su separabilidad. La principal idea detrás de la prueba se describe a continuación. La condición de no conflictividad entre una clave $K$ y una TGD $\sigma$ asegura que o bien (a) la aplicación de $\sigma$ en el \textit{chase} genera un átomo con un nuevo nulo en una posición de $K$, y entonces este nuevo átomo no viola K; o bien (b) las posiciones cuantificadas universalmente en la cabeza de $\sigma$ coinciden con las posiciones de la clave $K$, con lo cual cualquier átomo nuevo generado a partir de $\sigma$ debe tener nulos frescos en todas las posiciones salvo las de la clave, no produciéndose una violación en este caso tampoco. Como todos los nuevos nulos son distintos entre sí, el \textit{chase} es homomórficamente equivalente al \textit{TGD full chase}.
-
-Concluímos entonces esta sección afirmando que en el caso NC, las claves no incrementan la complejidad-datos de contestar consultas bajo TGDs y constraints, tanto para el fragmento \textit{guarded} como para el \textit{lineal}.
-
-\subsection{Manejo de inconsistencia}
-Durante mucho tiempo se ha estudiado el problema de manejar la inconsistencia en las bases de datos. En los últimos años, ha habido un creciente interés en este tema con el advenimiento de la \textit{Web Semántica}, que ha hecho que este asunto sea aún más relevante; teniendo en cuenta que en ambientes abiertos, con fuentes de información proveniente de diversas fuentes, es habitual que surjan contradicciones entre los datos.
-
-Por otro lado, es bien sabido que la inconsistencia también genera problemas en la lógica clásica. En particular, las teorías lógicas inconsistentes no tienen modelos, y por lo tanto implican todas las fórmulas; con lo cual, responder consultas en una base de conocimientos inconsistente carece de sentido. Esto llevó a que en el campo de la inteligencia artificial y de la teoría de base de datos, se haya mantenido tradicionalmente la postura de que las bases de conocimiento deberían ser totalmente libres de información inconsistente, y que esta debería ser erradicada inmediatamente. Sin embargo, en las últimas décadas, se ha reconocido que para muchas aplicaciones interesantes aquella postura es obsoleta. Se han propuesto desde entonces diferentes semánticas que ayudan a lidiar con la inconsistencia, basándose en la noción de \textit{data base repair}. El objetivo es, a través de las consultas, obtener siempre información consistente; intentando a la vez alcanzar un buen equilibrio entre el poder expresivo de las semánticas y la complejidad computacional que estas requieren. 
-
-\subsubsection{Inconsistencia en Datalog +/-}
-
-Asumiremos en este trabajo que las \textit{TGDs, NCs y Keys} son correctas; es decir, capturan correctamente la semántica del dominio. Esta suposición implica que el conjunto $\Sigma$  dado por $\Sigma_T \cup \Sigma_N \cup \Sigma_K$  es siempre satisfacible; es decir que la aplicación de las TGDs no generan inconsistencias. En este enfoque los conflictos se generan a partir de los datos: la instancia de base de datos es la parte que debe ser \textit{reparada} o \textit{modificada} para restaurar la consistencia pudiendo as'i cumplir con las restricciones que impone el conjunto dado por $\Sigma_N \cup \Sigma_K$ . Cabe mencionar que esta no es la 'unica opci'on. Muchos trabajos actuales se enfocan en otras posibilidades (\cite{Huang}, \cite{Hitzler}, \cite{Parsia}, \cite{Haasa}).
-
-\subsubsection{Database repairs}
-
-Mencionamos anteriormente que nuestro objetivo es obtener informaci'on consistente, a'un conviviendo en ambientes con datos inconsistentes. ¿Pero como podemos obtener informaci'on consistente a partir de una base de datos que no lo es?. La principal herramienta que utilizaremos para alcanzar este objetivo es la noci'on de \textit{data base repair.} Dada una base de datos $D$ que contradice un conjunto de restricciones de integridad y de claves obtendremos un subconjunto de $D$ que no contradice estas restricciones pero que difiere de $D$ \textit{minimalmente}. Formalmente decimos que un \textit{repair} para ($D$, $\Sigma$) es una base de datos $D\prime$ tal que:
-\begin{itemize}
-    \item $D\prime \subseteq D$
-    \item $mods(D\prime, \Sigma) \neq \varnothing $
-    \item $\neg \exists D\prime \prime$ t.q. $D\prime\prime \subseteq D \land mods(D\prime \prime, \Sigma) \neq \varnothing$
-\end{itemize}
-
-
-\begin{exmp}
-Consideremos la siguiente base de datos $D$:
-    \begin{equation}
-        $$D = \{\textit{conocidos('Juan', 'Pedro'), conocidos('Pedro', 'Carlos'), tienePiojos('Juan'), adulto('Carlos')}\}$$
-    \end{equation}
-
-El conjunto de TGDs está dato por:
-\begin{itemize}
-    \item $conocidos(X, Y) \rightarrow persona(X)$
-    \item $conocidos(X, Y) \rightarrow persona(Y)$
-    \item $conocidos(X, Y) \land tienePiojos(X) \rightarrow tienePiojos(Y)$
-\end{itemize}
-
-Y las restricciones están dadas por:
-
-\begin{itemize}
-    \item $tienePiojos(X) \land adulto(X)  \rightarrow \bot$
-\end{itemize}
-
-
-    
-\end{exmp}
-
-
-persona(?y) :- conocidos(?x, ?y).
-tienePiojos(?y) :- conocidos(?x, ?y), tienePiojos(?x).
-bottom :- tienePiojos(?x), adulto(?x).
->>>>>>> 87b16fff018204f0fda51225d86a258b6dae6bf6
 
 
 
@@ -621,7 +548,6 @@ bottom :- tienePiojos(?x), adulto(?x).
     En \textit{Proc. of WWW 2005, pages 633–640, 2005.} 
 
     \bibitem{Haasa} 
-<<<<<<< HEAD
     P. Haasa, F. van Harmelen, Z. Huang, H. Stuckenschmidt, y Y. Sure.
     A framework for handling inconsistency in changing ontologies.
     En \textit{Proc. of ISWC 2005, 2005.} 
@@ -630,16 +556,6 @@ bottom :- tienePiojos(?x), adulto(?x).
     D. Lembo and M. Ruzzi.
     Consistent query answering over description logic ontologies.
     En \textit{Proc. of RR 2007, 2007.} 
-=======
-    P. Haasa, F. van Harmelen, Z. Huang, H. Stuckenschmidt, and Y. Sure.
-    A framework for handling inconsistency in changing ontologies.
-    En \textit{In Proc. of ISWC 2005, 2005.} 
-
-
-
-
-
->>>>>>> 87b16fff018204f0fda51225d86a258b6dae6bf6
 
     \end{thebibliography}
 
