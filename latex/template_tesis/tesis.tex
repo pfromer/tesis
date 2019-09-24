@@ -8,13 +8,15 @@
 \usepackage[spanish]{babel}
 \usepackage[left=3cm,right=3cm,bottom=3.5cm,top=3.5cm]{geometry}
 \usepackage{amsthm}
+\usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage[T1]{fontenc}
 \newtheorem{exmp}{Ejemplo}
 
-
+\newcommand{\ch}{\textit{chase}}
 
 \begin{document}
+
 
 %%%% CARATULA
 
@@ -73,7 +75,7 @@ Se definen las fórmulas atómicas, que ocurren en bases de datos, consultas, y 
 Podemos definir ahora la noción de base de datos relativa a un esquema relacional, junto con la sintaxis y la semántica de las consultas conjuntivas y las consultas conjuntivas booleanas a una base de datos. Una \textit{instancia de base de datos} $D$ para un esquema relacional $R$ es un conjunto de átomos (posiblemente infinito) con predicados de R y argumentos de $\Delta$. Una consulta conjuntiva sobre $R$ tiene la forma $Q(\textbf{X}) = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$, donde $\Phi(\textbf{X},\textbf{Y})$ es una conjunción de átomos con las variables \textbf{X} y \textbf{Y}, y eventualmente constantes, pero sin nulos. Una consulta conjuntiva \textit{Booleana} sobre $R$ es una consulta conjuntiva de la forma $Q() = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$, donde todas las variables están cuantificadas existencialmente. El conjunto de todas las respuestas a una consulta conjuntiva $Q(\textbf{X}) = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$ sobre una base de datos es el conjunto de todas las tuplas \textbf{t} sobre $\Delta$ para las cuales existe un homomorfismo $\mu: \textbf{X} \cup \textbf{X} \rightarrow \Delta \cup \Delta_{N}$ tales que $\mu(\Phi(\textbf{X},\textbf{Y})) \subseteq D$ y $\mu(\textbf{X}) = D$
 
 \begin{exmp}\label{ejemplo_base_d}
-Consideremos una base de datos de películas, que guarda información acerca de actores, directores y películas. El esquema relacional $R$ consite en los predicado unarios \textit{pelicula}, \textit{actor}, \textit{director},  y en los predicados binarios \textit{actuaEn}, \textit{dirigidaPor} y \textit{trabajaronJuntos}.  Una base de datos $D$ para el esquema  $R$ puede estar dada por: 
+Consideremos una base de datos de películas, que guarda información acerca de actores, directores y películas. El esquema relacional $R$ consiste en los predicado unarios \textit{pelicula}, \textit{actor}, \textit{director},  y en los predicados binarios \textit{actuaEn}, \textit{dirigidaPor} y \textit{trabajaronJuntos}.  Una base de datos $D$ para el esquema  $R$ puede estar dada por: 
     \begin{equation}
         $$D = \{\textit{pelicula(Volver al Futuro),  pelicula(Esperando la carroza), actuaEn(Esperando la Carroza, Antonio Gasalla), actuaEn(Esperando la Carroza, China Zorrilla),
         actor(Antonio Gasalla), dirigidaPor(Esperando la Carroza, Alejandro Doria)}\}$$
@@ -96,8 +98,10 @@ Las dependencias generadoras de tuplas (TGDs) son restricciones sobre una base d
 Dado un esquema relacional $R$, una TGD $\sigma$ es una fórmula de primer orden de la forma $\forall X \forall Y \Phi (X, Y) \rightarrow \exists Z \Psi (X, Z)$, donde $ \Psi (X, Z)$ y $\Phi (X, Y)$ son conjunciones de átomos sobre $R$, llamadas el \textit{cuerpo} y la \textit{cabeza} de $\sigma$, denotadas $cuerpo(\sigma)$ y $cabeza(\sigma)$ respectivamente. Tal $\sigma$ es satisfecha en una base de datos $D$ para $R$ ssi, toda vez que exista un homomorfismo $h$ que mapea los atomos de $\Phi(X, Y)$ a atomos de $D$, existe una extensión $h\prime$ de $h$ que mapea los atomos de $\Psi (X, Z)$ a átomos de $D$. Todos los conjuntos de $TGDs$ son finitos. Usualmente omitimos los cuantificadores universales en las TGDs.
 \iffalse
 \begin{exmp}
+{\rb
     Tomando en cuenta el ejemplo anterior, un posible conjunto de TGDs parar $R$ puede estar dado por $\Sigma = \{\forall X pelicula(X) \rightarrow \exists Z dirigidaPor(X, Z), 
     \forall X \forall Y \forall W actuaEn(X, Y) \land dirigidaPor(X, W) \rightarrow \trabajaronJuntos(Y, W) \}$
+    }
 \end{exmp}   
 \fi
 
@@ -145,7 +149,7 @@ Recordamos que el problema de evaluar una consulta conjuntiva bajo TGDs es LOGSP
 
 \subsection{El chase}
 
-El \textit{chase} es un procedimiento para reparar una base de datos con respecto a un conjunto de dependencias, de manera tal que el resultado del chase satisfaga esas dependencias. Por \textit{chase} nos referimos tanto al procedimiento como a su resultado. El TGD chase trabaja sobre una base de datos a través de aplicar las TGDs como se explica a continuación. Considere una base de datos $D$ para un esquema relacional $R$, y una TGD $\sigma$ sobre $R$ de la forma $\Phi (X, Y) \rightarrow \exists Z \Psi (X, Z)$. Entonces, $\sigma$ es \textit{aplicable} a $D$ si existe un homomorfismo \textit{h} que mapee los átomos de $\Phi (X, Y)$ a átomos de  de $D$. Sea $\sigma$ aplicable a $D$, y sea $h_1$ un homomorfismo que extiende \textit{h} de la siguiente manera: para cada $X_i \in \textbf{X}, h_1(X_i) = h(X_i)$; para cada $Z_j \in \textbf{Z}, h_1(Z_j) = z_j$, siendo $z_j$ un nulo "fresco", es decir, $z_j \in \Delta_N, z_j$ no ocurre en $D$, y $z_j$ sigue lexicográficamente todos los otros nulos introducidos previamente. Al aplicar $\sigma$ a $D$, se agrega a $D$ el átomo $h_1(\Psi (X, Z))$, si no se encuntra en $D$ previamente.
+El \textit{chase} es un procedimiento para reparar una base de datos con respecto a un conjunto de dependencias, de manera tal que el resultado del chase satisfaga esas dependencias. Por \textit{chase} nos referimos tanto al procedimiento como a su resultado. El TGD chase trabaja sobre una base de datos a través de aplicar las TGDs como se explica a continuación. Considere una base de datos $D$ para un esquema relacional $R$, y una TGD $\sigma$ sobre $R$ de la forma $\Phi (X, Y) \rightarrow \exists Z \Psi (X, Z)$. Entonces, $\sigma$ es \textit{aplicable} a $D$ si existe un homomorfismo \textit{h} que mapee los átomos de $\Phi (X, Y)$ a átomos de $D$. Sea $\sigma$ aplicable a $D$, y sea $h_1$ un homomorfismo que extiende \textit{h} de la siguiente manera: para cada $X_i \in \textbf{X}, h_1(X_i) = h(X_i)$; para cada $Z_j \in \textbf{Z}, h_1(Z_j) = z_j$, siendo $z_j$ un nulo "fresco", es decir, $z_j \in \Delta_N, z_j$ no ocurre en $D$, y $z_j$ sigue lexicográficamente a todos los otros nulos introducidos previamente. Al aplicar $\sigma$ a $D$, se agrega a $D$ el átomo $h_1(\Psi (X, Z))$, si no se encuntra en $D$ previamente.
 El algoritmo del chase para una base de datos $D$ y un conjunto de TGDs $\Sigma$ consiste en una aplicación exhaustiva de la regla anterior en anchura (como traduzco breadh-first fashion?), lo cual trae como resultado un chase (posiblemente infinito) para $D$ y $\Sigma$. Formalmente, el chase de nivel 0 para $D$ y $\Sigma$, denotado por $chase^0(D,\Sigma)$, se define como $D$, asignándole a cada átomo de $D$ el nivel de derivación 0. Paara cada $k \geq 1$, el chase de nivel $k$ de $D$ y $\Sigma$, denotado $chase^k(D, \Sigma)$, se construye de la siguiente manera: sean $I_1,...,I_n$ todas las posibles imágenes de los cuerpos de las TGDs en $\Sigma$ relativas a algún homomorfismo tal que (i) $I_1,...,I_n \subseteq chase^{k-1}(D,\Sigma)$ y (ii) el nivel más alto de todo átomo en cada $I_i$ es $k - 1$; entonces, se aplica cada posible TGD sobre $chase^{k-1}(D,\Sigma)$, escogiendo las TGDs y los homomorfismos en un orden lineal y lexicográfico respectivamente, y asignándole a cada átomo nuevo el nivel de derivación $k$. El chase de $D$ relativo a $\Sigma$, denotado $chase(D,\Sigma)$, se define entonces como el limite de $chase^k(D,\Sigma)$ para $K \rightarrow \infty$. 
 
 El chase (posiblemente infinito) es un modelo universal, es decir que existe un homomorfismo del $chase(D, \Sigma)$ a cada $B \in mods(D,\Sigma)$. Este resultado implica que las consultas conjuntivas boolenas sobre $D$ y $\Sigma$ pueden ser evaluadas en el chase para $D$ y $\Sigma$, es decir que $D \cup \Sigma \models Q$ es equivalente a $chase(D, \Sigma) \models Q$. 
@@ -250,42 +254,42 @@ Esta profundidad en el \textit{guarded chase forest}, es independiente del tama�
 
 \subsection{Datalog+/-, fragmento Lineal}
 
-En el fragmento \textit{Lineal} de Datalog+/- las TGDs tienen un solo átomo en su cuerpo, es decir que tienen la forma $\forall X \forall  Y \Phi(X, Y) \rightarrow \exists Z \Psi(X,Z)$, siendo $\Phi(X,Y)$ un sólo átomo. Este fragmento esta estrictamente dentro del fragmento guarded, y aún perdiendo cierto poder expresivo con respecto al anterior, es lo suficientemente expresivo como para representar ontologías encodeadas en las \textit{Description Logics} de la familia \textit{Dl-Lite}. Adem'as, tiene la ventaja de ser \textit{FO-rewritable} en la complejidad de datos.
+En el fragmento \textit{Lineal} de Datalog+/- las TGDs tienen un solo átomo en su cuerpo, es decir que tienen la forma $\forall X \forall  Y \Phi(X, Y) \rightarrow \exists Z \Psi(X,Z)$, siendo $\Phi(X,Y)$ un sólo átomo. Este fragmento esta estrictamente dentro del fragmento guarded, y aún perdiendo cierto poder expresivo con respecto al anterior, es lo suficientemente expresivo como para representar ontologías encodeadas en las \textit{Description Logics} de la familia \textit{Dl-Lite}. Además, tiene la ventaja de ser \textit{FO-rewritable} en la complejidad de datos.
 
 \subsubsection{Bounded derivation-depth property}
 
-Definimos ahora la \textit{bounded derivation-depth property} para un conjunto de TGDs, la cual es estrictamente m'as fuerte que la \textit{ bounded guard-depth property}, dado que la primera implica la segunda, pero no al rev'es. Informalmente, la \textit{bounded derivation-depth property} dice que para responder a una consulta conjuntiva no es necesario ir m'as all'a de una profundidad $k$ en el \textit{chase graph} (y no en el \textit{guarded chase forest} como en el fragmento anterior), cuyo tamaño solo depende de $Q$ y $R$.
+Definimos ahora la \textit{bounded derivation-depth property} para un conjunto de TGDs, la cual es estrictamente más fuerte que la \textit{ bounded guard-depth property}, dado que la primera implica la segunda, pero no al revés. Informalmente, la \textit{bounded derivation-depth property} dice que para responder a una consulta conjuntiva no es necesario ir más allá de una profundidad $k$ en el \textit{chase graph} (y no en el \textit{guarded chase forest} como en el fragmento anterior), cuyo tamaño solo depende de $Q$ y $R$.
 
 \subsubsection{First-order rewritability}
-Una clase de TGDs $C$ es reescribible en primer orden o \textit{first-order rewritible} si solo si para todo conjunto de TGDs en $C$ y para toda consulta conjuntiva booleana $Q$, existe una consulta de primer orden $Q_\Sigma$ tal que, para toda base de datos $D$, sucede que $D \cup \Sigma \models Q$ si solo si $D \models Q_\Sigma$. Dado que responder consultas de primer orden es un problema en $AC_0$ en la complejidad de datos \cite{Vardi}, tambi'en se encuentra en esta clase de problemas responder consultas bajo TGDs que sean reescribibles en primer orden.
+Una clase de TGDs $C$ es reescribible en primer orden o \textit{first-order rewritible} si solo si para todo conjunto de TGDs en $C$ y para toda consulta conjuntiva booleana $Q$, existe una consulta de primer orden $Q_\Sigma$ tal que, para toda base de datos $D$, sucede que $D \cup \Sigma \models Q$ si solo si $D \models Q_\Sigma$. Dado que responder consultas de primer orden es un problema en $AC_0$ en la complejidad de datos \cite{Vardi}, también se encuentra en esta clase de problemas responder consultas bajo TGDs que sean reescribibles en primer orden.
 
 \subsection{Negative Constraints}
-Una \textit{Negative Constraint} es una f'ormula de primer orden de la forma $\forall X \Phi (X) \rightarrow \bot$, donde $\Phi(X)$ es una conjunci'on de 'atomos. Estas \textit{constraints} nos ayudan a expresar restricciones sobre las ontolog'ias.
+Una \textit{Negative Constraint} es una fórmula de primer orden de la forma $\forall X \Phi (X) \rightarrow \bot$, donde $\Phi(X)$ es una conjunción de átomos. Estas \textit{constraints} nos ayudan a expresar restricciones sobre las ontologías.
 
 \begin{exmp}
-Podemos decir que los predicados esNegativo y esPositivo representan dos clases que no tienen instancias en com'un de la siguiente forma: $$esPositivo(X) \land esNegativo(X) \rightarrow \bot$$
-De manera similar podemos decir que ning'un miembro de una clase pertenece a una relaci'on:$$soltero(X) \land casadoCon(X, Y) \rightarrow \bot $$ Podemos inclusive expresar que dos relaciones son disjuntas: $$mayor(X,Y) \land menor(X, Y) \rightarrow \bot$$
+Podemos decir que los predicados esNegativo y esPositivo representan dos clases que no tienen instancias en común de la siguiente forma: $$esPositivo(X) \land esNegativo(X) \rightarrow \bot$$
+De manera similar podemos decir que ningún miembro de una clase pertenece a una relación:$$soltero(X) \land casadoCon(X, Y) \rightarrow \bot $$ Podemos inclusive expresar que dos relaciones son disjuntas: $$mayor(X,Y) \land menor(X, Y) \rightarrow \bot$$
 \end{exmp}
 
-Responder consultas en una base de datos bajo un conjunto de TGDs $\Sigma_T$ y un conjunto de restricciones $\Sigma_C$ puede realizarse sin agregar complejidad de la siguiente manera: para cada \textit{negative constraint} $\sigma = \Phi(X,Y) \rightarrow \bot \in \Sigma_C$ verificamos que se satisface en $D$ y $\Sigma_T$, lo cual se puede hacer chequeando que la consulta conjuntiva booleana $Q_\sigma = \Phi(X)$ eval'ue a Falso en $D$ y $\Sigma_T$. Escribimos $D \cup \Sigma_T \models \Sigma_C$ si solo si toda $\sigma \in \Sigma_C$ es falsa en $D$ y $\Sigma_T$. Esto nos lleva inmediatamente al al siguiente resultado: decimos que una consulta conjuntiva booleana es verdadera en $D$, $\Sigma_T$ y $\Sigma_C$, y lo anotamos $D \cup \Sigma_T \cup  \Sigma_C \models Q$ si solo si (i) $D \cup \Sigma_T \models Q$ o (ii) $D \cup \Sigma_T \not\models \Sigma_C$.
+Responder consultas en una base de datos bajo un conjunto de TGDs $\Sigma_T$ y un conjunto de restricciones $\Sigma_C$ puede realizarse sin agregar complejidad de la siguiente manera: para cada \textit{negative constraint} $\sigma = \Phi(X,Y) \rightarrow \bot \in \Sigma_C$ verificamos que se satisface en $D$ y $\Sigma_T$, lo cual se puede hacer chequeando que la consulta conjuntiva booleana $Q_\sigma = \Phi(X)$ evalúe a Falso en $D$ y $\Sigma_T$. Escribimos $D \cup \Sigma_T \models \Sigma_C$ si solo si toda $\sigma \in \Sigma_C$ es falsa en $D$ y $\Sigma_T$. Esto nos lleva inmediatamente al al siguiente resultado: decimos que una consulta conjuntiva booleana es verdadera en $D$, $\Sigma_T$ y $\Sigma_C$, y lo anotamos $D \cup \Sigma_T \cup  \Sigma_C \models Q$ si solo si (i) $D \cup \Sigma_T \models Q$ o (ii) $D \cup \Sigma_T \not\models \Sigma_C$.
 
 \subsection{Equality-Generating Dependencies (EGDs) y Keys}
-Las dependencias generadoras de igualdad o \textit{Equality-Generating Dependencies} tambi'en son importantes a la hora de representar ontolog'ias. Estas son f'ormulas de primer orden que generalizas dependencias funcionales y en particular claves.
+Las dependencias generadoras de igualdad o \textit{Equality-Generating Dependencies} también son importantes a la hora de representar ontologías. Estas son fórmulas de primer orden que generalizas dependencias funcionales y en particular claves.
 
-Sin embargo, si bien es cierto que agregar negative constraints es sencillo desde el punto de vista computacional, no sucede lo mismo con las EGDs: la interacci'on entre las TGDs y las EGDs puede tornar indecidible el problema de responder consultas\cite{Johnson}. Se puede comprobar que que un conjunto fijo de EGDs y guarded TGDs pueden simular una maquina de Turing universal, con lo cual responder consultas es indecidible para tales dependencias. Por tal motivo, consideramos ahora una clase m'as restringida de EGDs, a las cuales llamamos \textit{claves no conflictivas}. Tal clase de EGDs muestra una interacci'on controlada con las TGDs (y NCs), de manera tal que no incrementan la complejidad de responder consultas, agregando al mismo tiempo suficiente poder expresivo para poder modelar ontolog'ias.
+Sin embargo, si bien es cierto que agregar negative constraints es sencillo desde el punto de vista computacional, no sucede lo mismo con las EGDs: la interacción entre las TGDs y las EGDs puede tornar indecidible el problema de responder consultas\cite{Johnson}. Se puede comprobar que un conjunto fijo de EGDs y guarded TGDs pueden simular una maquina de Turing universal, con lo cual responder consultas es indecidible para tales dependencias. Por tal motivo, consideramos ahora una clase más restringida de EGDs, a las cuales llamamos \textit{claves no conflictivas}. Tal clase de EGDs muestra una interacción controlada con las TGDs (y NCs), de manera tal que no incrementan la complejidad de responder consultas, agregando al mismo tiempo suficiente poder expresivo para poder modelar ontologías.
 
-Una \textit{dependencia generadora de igualdad} (o EGD) es una f'ormula $\sigma$ de primer orden de la forma $\forall X \Phi(X) \rightarrow X_i = X_j$, donde $\Phi(X)$, el cual llamamos el cuerpo de $\sigma$, es una conjunci'on (no necesariamente guarded) de 'atomos, y $X_i$ y $X_j$ son variables en $X$. Llamamos a $X_i = X_j$ a la cabeza de $\sigma$. Tal $\sigma$ se satisface en una base de datos $D$ para $R$ si solo si, siempre que exista un homomorfismo $h$ tal que $h(\Phi(X) \subseteq D$, sucede que $h(X_i) = h(X_J)$. Se suelen omitir los cuantificadores universales en estas f'ormulas, y consideramos solo conjuntos finitos de EGDs.
+Una \textit{dependencia generadora de igualdad} (o EGD) es una fórmula $\sigma$ de primer orden de la forma $\forall X \Phi(X) \rightarrow X_i = X_j$, donde $\Phi(X)$, el cual llamamos el cuerpo de $\sigma$, es una conjunción (no necesariamente guarded) de átomos, y $X_i$ y $X_j$ son variables en $X$. Llamamos a $X_i = X_j$ a la cabeza de $\sigma$. Tal $\sigma$ se satisface en una base de datos $D$ para $R$ si solo si, siempre que exista un homomorfismo $h$ tal que $h(\Phi(X) \subseteq D$, sucede que $h(X_i) = h(X_J)$. Se suelen omitir los cuantificadores universales en estas fórmulas, y consideramos solo conjuntos finitos de EGDs.
 
 \begin{exmp}
-La siguiente f'ormula $\sigma$ es una EGD: $$r(X, Y_1) \land r(X,Y_2) \rightarrow Y_1 = Y_2.$$
+La siguiente fórmula $\sigma$ es una EGD: $$r(X, Y_1) \land r(X,Y_2) \rightarrow Y_1 = Y_2.$$
 
-La base de datos $D = \{r(a, b), r(c, d)\}$ satisface $\sigma$, dado que todo homomorfismo h que mapee el cuerpo de $\sigma$ a 'atomos de $D$ es tal que $h(Y_1) = h(Y_2)$. Por el contrario, la base de datos $D = \{r(a, b), r(a, d)\}$ no satisface $\sigma$.
+La base de datos $D = \{r(a, b), r(c, d)\}$ satisface $\sigma$, dado que todo homomorfismo h que mapee el cuerpo de $\sigma$ a átomos de $D$ es tal que $h(Y_1) = h(Y_2)$. Por el contrario, la base de datos $D = \{r(a, b), r(a, d)\}$ no satisface $\sigma$.
 
 \end{exmp}
 
-Una EGD $\sigma$ sobre $R$ de la forma $\Phi(X) \rightarrow X_i = X_j$ es \textit{aplicable} a una base de datos $D$ si solo si existe un homorfismo $\eta : \Phi(X) \rightarrow D$ tal que $\eta(X_i)$ y $\eta(X_j)$ son distintos y no son ambos constantes. Si $\eta(X_i)$ y $\eta(X_j)$ son constantes distintas en $\Delta$, entonces hay una violaci'on de $\sigma$, y el chase falla. Caso contrario, el resultado de aplicar $\sigma$ a $D$ es la base de datos $h(D)$ que se obtiene a partir de $D$ al reemplazar toda ocurrencia de alg'un elemento no constante $e \in \{\eta(X_i), \eta(X_j)\}$ en $D$ para el otro elemento $e\prime$ (si $e$ y $e\prime$ son los dos nulos, entonces $e$ precede a $e\prime$ en orden lexicogr'afico.)
+Una EGD $\sigma$ sobre $R$ de la forma $\Phi(X) \rightarrow X_i = X_j$ es \textit{aplicable} a una base de datos $D$ si solo si existe un homorfismo $\eta : \Phi(X) \rightarrow D$ tal que $\eta(X_i)$ y $\eta(X_j)$ son distintos y no son ambos constantes. Si $\eta(X_i)$ y $\eta(X_j)$ son constantes distintas en $\Delta$, entonces hay una violación de $\sigma$, y el chase falla. Caso contrario, el resultado de aplicar $\sigma$ a $D$ es la base de datos $h(D)$ que se obtiene a partir de $D$ al reemplazar toda ocurrencia de algún elemento no constante $e https://www.overleaf.com/project/5d595ee258698f10f21f3b7a\in \{\eta(X_i), \eta(X_j)\}$ en $D$ para el otro elemento $e\prime$ (si $e$ y $e\prime$ son los dos nulos, entonces $e$ precede a $e\prime$ en orden lexicográfico.)
 
-El chase para una base de datos $D$ y un conjunto $\Sigma_T$ de TGDs m'as un conjunto $\Sigma_E$ de $EGDs$, el cual denotamos $chase(D, \Sigma_T \cup \Sigma_E)$, se computa de manera iterativa por medio de aplicar todas las EGDs que sean aplicables entre cada aplicaci'on de cada TGD como se describi'o previamente.
+El chase para una base de datos $D$ y un conjunto $\Sigma_T$ de TGDs más un conjunto $\Sigma_E$ de $EGDs$, el cual llamamos \textit{full chase} y denotamos $chase(D, \Sigma_T \cup \Sigma_E)$, se computa de manera iterativa por medio de aplicar todas las EGDs que sean aplicables entre cada aplicación de cada TGD como se describió previamente.
 
 \begin{exmp}
 Consideremos el siguiente conjunto de TGDs y EGDs $\Sigma = \{\sigma_1, \sigma_2, \sigma_3\}$:
@@ -296,8 +300,189 @@ Consideremos el siguiente conjunto de TGDs y EGDs $\Sigma = \{\sigma_1, \sigma_2
     \item [$\sigma_3:$] $s(X, Y), s(X, Z) \rightarrow Y = Z$
 \end{itemize}
 
-Sea $D$ la base de datos $\{p(a), r(a), s(a, b)\}$. En el c'omputo de $chase(D, \Sigma)$, primero aplicamos $\sigma_1$ y agregamos el 'atomo $s(a, z_1)$, donde $z_1$ es un nulo. Entonces, al aplicar $\sigma_2$ sobre $r(a)$ y $s(a, z_1)$ transformamos $s(a, z_1)$ en $s(a, a)$. Ahora $\sigma_3$ resulta aplicable sobre $s(a, a)$ y $s(a, b)$, pero al intentar igualar $a = b$ el \textit{chase} falla, pues hay una violaci'on, dado que $a$ y $b$ son constantes distintas en $\Delta$.
+Sea $D$ la base de datos $\{p(a), r(a), s(a, b)\}$. En el cómputo de $chase(D, \Sigma)$, primero aplicamos $\sigma_1$ y agregamos el átomo $s(a, z_1)$, donde $z_1$ es un nulo. Entonces, al aplicar $\sigma_2$ sobre $r(a)$ y $s(a, z_1)$ transformamos $s(a, z_1)$ en $s(a, a)$. Ahora $\sigma_3$ resulta aplicable sobre $s(a, a)$ y $s(a, b)$, pero al intentar igualar $a = b$ el \textit{chase} falla, pues hay una violación, dado que $a$ y $b$ son constantes distintas en $\Delta$.
 \end{exmp}
+
+\subsubsection{Separabilidad}
+Sea $R$ un esquema relacional, y sean $\Sigma_T$ y $\Sigma_E$ dos conjuntos de TGDs y EGDs sobre $R$, respectivamente. Entonces, $\Sigma_E$ es separable de $\Sigma_T$ si solo si para toda base de datos $D$ sobre $R$, se cumplen las siguientes condiciones: 
+\begin{itemize}
+    \item  Si hay una violación de una EGD $\sigma \in \Sigma_E$ en $chase(D, \Sigma_T \cup \Sigma_E)$, entonces hay también una violación de $sigma$ en $D$.
+    \item Si no hay violación de ninguna EGD $\sigma \in \Sigma_E$ entonces para toda connsulta $Q$, sucede que $chase(D, \Sigma_T \cup \Sigma_E) \models Q$ si solo si $chase(D, \Sigma_T) \models Q$.
+\end{itemize}
+
+Esto implica que agregar EGDs separables a un conjunto de TGDs no incrementa la complejiad de contestar consultas, tanto en el caso lineal como el el guarded. Esto es porque alcanza con evaluar si cada EGD se satisface en D, y si esto ocurre podemos entonces armar el chase con las TGDs solamente.
+
+\subsubsection{Claves}
+Dado un predicado relacional $p$ sobre un esquema relacional $R$ una clave $K$ sobre $p$ es un conjunto de posiciones para el cual sucede que para toda base de datos $D$ sobre $R$ no pueden existir dos \textit{hechos} en $D$ para $p$ tales que los dos hechos tengan los mismos valores en todas las posiciones de $K$ pero distintos valores en posiciones que no estén incluidas en $K$. 
+
+\begin{exmp}
+Sea $p$ el predicado binario \textit{padreDe} sobre un esquema relacional $R$, donde la primer posición indica el DNI de una persona y la segunda posición el DNI de su padre. Sea $k[1]$ una clave definida sobre \textit{padreDe}. Esto indica que no pueden existir dos átomos en $D$ con igual DNI en la primera posición y distinto DNI en la segunda posición, es decir que ninguna persona puede tener dos padres diferentes.
+\end{exmp}
+
+Podemos definir una clave a partir de un conjunto de EGDs.
+\begin{exmp}
+Sea $p$ un predicado ternario sobre un esquema relacional $R$. Sea $k[1]$ una clave para $p$. Podemos expresar esta clave por medio de dos EGDs:
+\begin{itemize}
+    \item $p(X, Y_1, Z_1) \land p(X, Y_2, Z_2) \rightarrow Y_1 = Y_2$.
+    \item $p(X, Y_1, Z_1) \land p(X, Y_2, Z_2) \rightarrow Z_1 = Z_2$.
+\end{itemize}
+\end{exmp}
+
+
+\subsubsection{Claves no conflictivas}
+Sea $K$ una clave, y sea $\sigma$ una TGD de la forma $\Phi(X, Y) \rightarrow \exists Z r(X, Z)$. Decimos que $K$ es no conflictiva (NC) con $\sigma$ si se cumple alguna de las siguientes condiciones:
+\begin{itemize}
+    \item El predicado relacional sobre el cual $K$ está definido es diferente de $r$.
+    \item Las posiciones de $K$ en $R$ no son un subconjunto propio de las posiciones de $X$ en $r$ en la cabeza de $\sigma$, y toda variable en $Z$ aparece una sola vez en la cabeza de $\sigma$. 
+\end{itemize}
+
+Decimos que $K$ es no conflictiva con un conjunto de TGDs $\Sigma_T$ si solo si $k$ es no conflictiva con toda $\sigma \in \Sigma_T$. Un conjunto de claves $\Sigma_K$ es no conflictivo con $\Sigma_T$ si solo si todas clave $k \in \Sigma_K$ es no conflictiva con $\Sigma_T$.
+
+\begin{exmp}
+Consideremos las siguientes claves $K_1, K_2, K_3, K_4$ definidas por los siguientes conjuntos de posiciones para el predicado $r$: $K_1=\{r[3]\}, K_2=\{r[2], r[3]\}, K_3=\{r[1]\},  K_4=\{r[1], r[2]\}$, y la TGD $\sigma = p(X, Y) \rightarrow \exists Z r(Z, X, Y)$. Teniendo en cuenta entonces que la cabeza de $\sigma$ es $r$, y el conjunto de posiciones en $r$ con variables cuantificada universalmente es $H = \{r[2], r[3]\}$, resulta que $K_1$ es la única clave definida por un conjunto de posiciones que es subconjunto propio de $H$. Por lo tanto salvo $K_1$, todas las claves son no conflictivas con $\sigma$.
+\end{exmp}
+
+Tal como se muestra en \cite{JWS}, la propiedad de no conflictivdad entre un conjunto de claves y un conjunto de TGDs, implica su separabilidad. La principal idea detrás de la prueba se describe a continuación. La condición de no conflictividad entre una clave $K$ y una TGD $\sigma$ asegura que o bien (a) la aplicación de $\sigma$ en el \textit{chase} genera un átomo con un nuevo nulo en una posición de $K$, y entonces este nuevo átomo no viola K; o bien (b) las posiciones cuantificadas universalmente en la cabeza de $\sigma$ coinciden con las posiciones de la clave $K$, con lo cual cualquier átomo nuevo generado a partir de $\sigma$ debe tener nulos frescos en todas las posiciones salvo las de la clave, no produciéndose una violación en este caso tampoco. Como todos los nuevos nulos son distintos entre sí, el \textit{chase} es homomórficamente equivalente al \textit{TGD full chase}.
+
+Concluímos entonces esta sección afirmando que en el caso NC, las claves no incrementan la complejidad-datos de contestar consultas bajo TGDs y constraints, tanto para el fragmento \textit{guarded} como para el \textit{lineal}.
+
+\subsection{Manejo de inconsistencia}
+Durante mucho tiempo se ha estudiado el problema de manejar la inconsistencia en las bases de datos. En los últimos años, ha habido un creciente interés en este tema con el advenimiento de la \textit{Web Semántica}, que ha hecho que este asunto sea aún más relevante; teniendo en cuenta que en ambientes abiertos, con fuentes de información proveniente de diversos ori'genes, es habitual que surjan contradicciones entre los datos.
+
+Por otro lado, es bien sabido que la inconsistencia también genera problemas en la lógica clásica. En particular, las teorías lógicas inconsistentes no tienen modelos, y por lo tanto implican todas las fórmulas; con lo cual, responder consultas en una base de conocimientos inconsistente carece de sentido. Esto llevó a que en el campo de la inteligencia artificial y de la teoría de base de datos, se haya mantenido tradicionalmente la postura de que las bases de conocimiento deberían ser totalmente libres de información inconsistente, y que esta debería ser erradicada inmediatamente. Sin embargo, en las últimas décadas, se ha reconocido que para muchas aplicaciones interesantes aquella postura es obsoleta. Se han propuesto desde entonces diferentes semánticas que ayudan a lidiar con la inconsistencia, basándose en la noción de \textit{data base repair}. El objetivo es, a través de las consultas, obtener siempre información consistente; intentando a la vez alcanzar un buen equilibrio entre el poder expresivo de las semánticas y la complejidad computacional que estas requieren. 
+
+\subsubsection{Inconsistencia en Datalog +/-}
+
+Asumiremos en este trabajo que las \textit{TGDs, NCs y Keys} son correctas; es decir, capturan correctamente la semántica del dominio. Esta suposición implica que el conjunto $\Sigma$  dado por $\Sigma_T \cup \Sigma_N \cup \Sigma_K$  es siempre satisfacible; es decir que la aplicación de las TGDs no generan inconsistencias. En este enfoque los conflictos se generan a partir de los datos: la instancia de base de datos es la parte que debe ser \textit{reparada} o \textit{modificada} para restaurar la consistencia pudiendo así cumplir con las restricciones que impone el conjunto dado por $\Sigma_N \cup \Sigma_K$ . Cabe mencionar que esta no es la única opción. Muchos trabajos actuales se enfocan en otras posibilidades (\cite{Huang}, \cite{Hitzler}, \cite{Parsia}, \cite{Haasa}).
+
+\subsubsection{Database repairs}
+
+Mencionamos anteriormente que nuestro objetivo es obtener información consistente, aún conviviendo en ambientes con datos inconsistentes. ¿Pero como podemos obtener información consistente a partir de una base de datos que no lo es?. La principal herramienta que utilizaremos para alcanzar este objetivo es la noción de \textit{data base repair.} Dada una base de datos $D$ que contradice un conjunto de restricciones de integridad y de claves obtendremos un subconjunto de $D$ que no contradice estas restricciones pero que difiere de $D$ \textit{minimalmente}. Formalmente decimos que un \textit{repair} para ($D$, $\Sigma$) es una base de datos $D\prime$ tal que:
+\begin{itemize}
+    \item $D\prime \subseteq D$
+    \item $mods(D\prime, \Sigma) \neq \varnothing $
+    \item $\neg \exists D\prime \prime$ t.q. $D\prime\prime \subset D\prime \land mods(D\prime \prime, \Sigma) \neq \varnothing$
+\end{itemize}
+
+\begin{exmp}\label{ejemplo_ar}
+Sea $R$ un esquema relacional y sea $\Sigma_T$ un conjunto de TGDs para $R$ dado por:
+    \begin{itemize}
+        \item $\sigma_1 = amigos(X, Y) \rightarrow tieneAmigos(X)$
+        \item $\sigma_2 = amigos(X, Y) \rightarrow tieneAmigos(Y)$
+        \item $\sigma_5 = amigos(X, Y) \land tienePiojos(X) \rightarrow tienePiojos(Y)$
+    \end{itemize}
+Sea $\Sigma_n$ el conjunto de restricciones dado por una única restricción
+    \begin{itemize}
+        \item $\sigma_n = pelado(X) \land tienePiojos(X) \rightarrow \bot$
+    \end{itemize}
+Sea $D$ una base de datos para $R$ dada por los siguiente hechos:
+    \begin{itemize}
+        \item tienePiojos('Federico')
+        \item amigos('Federico', 'Miguel')
+        \item amigos('Miguel', 'Pablo')
+        \item esPelado('Pablo')
+    \end{itemize}
+Al aplicar el algoritmo del \textit{chase} sobre $D$ y $\Sigma_T$ obtenemos que:
+\begin{gather*}
+    chase(D, \Sigma_T) = D \cup \{tieneAmigos('Federico'), tieneAmigos('Miguel'),\\ tieneAmigos('Pablo'), tienePiojos('Miguel'), tienePiojos('Pablo')\}
+\end{gather*}
+
+Vemos entonces que en $chase(D, \Sigma_T)$ hay una violación de $sigma_n$, pues resulta que este contiene simultáneamente los átomos $esPelado('Pablo')$ y $tienePiojos(Pablo)$.
+El conjunto de \textit{repairs} para $(D, \Sigma)$ esta dado entonces por 
+    \begin{itemize}
+        \item $r_1 = \{ tienePiojos('Federico'), amigos('Federico', 'Miguel'), amigos('Miguel', 'Pablo')\}$
+        \item $r_2 = \{ tienePiojos('Federico'), amigos('Federico', 'Miguel'), esPelado('Pablo')\}$
+        \item $r_3 = \{ tienePiojos('Federico'), amigos('Miguel', 'Pablo'), esPelado('Pablo')\}$
+        \item $r_4 = \{ amigos('Federico', 'Miguel'), amigos('Miguel', 'Pablo'), esPelado('Pablo')\}$
+    \end{itemize}
+    
+Notar que en este caso cada uno de los \textit{repairs} está dado por incluír en el \textit{repair} cualquier subconjunto de tres átomos de entre los cuatro átomos de $D$. Al decir que Federico es amigo de Miguel, y que Miguel es amigo de Julian, y al decir que los amigos se contagian los piojos, tiene que ser que Federico le contagio los piojos a Miguel y este se los contagió a Pablo. Pero esto no puede ser porque Pablo es pelado. Observar entonces que quitando cualquier átomo de $D$, obtenemos un subconjunto maximal consistente.
+    
+\end{exmp}
+
+\subsubsection{Semántica AR}
+La semántica AR, es la más aceptada para \textit{query answering} en ontologías potencialmente inconsistentes. Dada una base de conocimiento $(D, \Sigma)$ y una consulta conjuntiva $Q$, decimos que $(D, \Sigma) \models_{AR} Q$ si solo si $(R, \Sigma) \models Q$ para todo R \textit{repair} de $(D, \Sigma)$.
+
+En el ejemplo anterior, si tomamos $Q() = tieneAmigos('Miguel')$, resulta que $(D, \Sigma) \models_{AR} Q$. En cambio, si consideramos la consulta $Q() = tieneAmigos('Pablo')$ resulta que $(D, \Sigma)\not\models_{AR} Q$.
+
+La semántica AR definida arriba coincide con la semántica tolerante a la inconsistencia para Lógicas de Descripción presentada en \cite{Lembo}. Aunque esta semántica puede ser considerada en cierto sentido la elección natural para el objetivo semántico que estamos buscando, tiene la desventaja de ser dependiente de la forma sintáctica de la base de datos. Supongamos que la base de conocimiento $KB\prime = (D\prime, \Sigma)$ difiere de la base de conocimiento $KB = (D, \Sigma)$ simplemente porque $D\prime$ incluye átomos que se pueden inferir a partir de $\Sigma$ y un subconjunto consistente de $D$. En este caso $KB$ y $KB\prime$ son lógicamente equivalentes, y cabe esperar por lo tanto que sus \textit{repairs} coincidan y que las respuestas a toda consulta sobre $KB$ y $KB\prime$ coincidan bajo toda semántica. Sin embargo esto no sucede con la semántica \textit{AR}. 
+
+
+\begin{exmp}\label{ejemplo_ar_2}
+Considerando $D$ y $\Sigma$ del ejemplo anterior, definamos ahora la base de datos $D\prime$ dada por $D \cup \{tieneAmigos('Pablo')\}$. Es claro que el nuevo átomo introducido se puede inferir lógicamente de $D$ y $Sigma$, notar de hecho que el mismo se encuentra en el chase de aquel ejemplo. Si consideramos ahora los \textit{repairs} para $D\prime$ y $\Sigma$ obtenemos
+    \begin{itemize}
+        \item $r\prime_1 = r_1 \cup \{tieneAmigos('Pablo')\}$
+        \item $r\prime_2 = r_2 \cup \{tieneAmigos('Pablo')\}$
+        \item $r\prime_3 = r_3 \cup \{tieneAmigos('Pablo')\}$
+        \item $r\prime_4 = r_4 \cup \{tieneAmigos('Pablo')\}$
+    \end{itemize}
+
+Con lo cual resulta que $(D\prime, \Sigma)\models_{AR} tieneAmigos('Pablo')$, resultado opuesto para la $KB$ del ejemplo anterior.
+\end{exmp}
+
+Dependiendo del escenario particular en el que se quiera resolver este tipo de inconsistencias, el comportamiento anterior podría ser considerado incorrecto. Esto motivó la definición de una nueva semántica que no presenta esta característica. De acuerdo con esta semántica, llamada \textit{Closed ABox Repair}, los \textit{repairs} toman en cuenta no solo los hechos explícitamente incluídos en $D$, sino también aquellos hechos que se pueden inferir junto con $\Sigma$ y al menos un subconjunto de $D$ que sea consistente.
+Para formalizar la idea anterior, es necesario dar primero las siguientes definiciones. Dada una base de conocimiento $K = (D, \Sigma)$, denotamos por medio de $HB(K)$ a la \textit{Herbrand Base} de $K$, es decir el conjunto de hechos que se pueden construir sobre el alfabeto de de $\Gamma_K$. Definimos después las consecuencias lógicas de $K$ como el conjunto $clc(K) = \{\alpha | \alpha \in HB(K) \land \exists S \subseteq D$ tal que $Mods(S, \Sigma) \neq  \varnothing \land (S, \Sigma) \models \alpha \}$. Podemos ahora dar la siguiente definición de \textit{Closed ABox Repair}.
+
+Sea $K = (D, \Sigma)$ una base de conocimiento en Datalog+/-. Un \textit{Car Repair} de $K$ es un conjunto $D\prime$ de hechos tales que:
+    \begin{enumerate}
+        \item $D\prime \subseteq clc(K)$
+        \item $mods(D\prime, \Sigma) \neq \varnothing$
+        \item $\neg\exists D\prime\prime$ tal que $mods(D\prime\prime, \Sigma) \neq \varnothing$ y :
+        \begin{itemize}
+            \item $D\prime\prime \cap D \supset D\prime \cap D$ o,
+            \item $D\prime\prime \cap D = D\prime \cap D \land D\prime\prime \supset D\prime$   
+        \end{itemize}
+    \end{enumerate}
+
+Denotamos por medio de $CAR-Rep(D, \Sigma)$ al conjunto de todos los \textit{Car Repairs} para $K$.
+Intuitavemnte, un \textit{CAR-repair} es un subconjunto de \textit{clc(K)} consistente con $\Sigma$ que preserva máximamente al conjunto de hechos $D$. En particular, la condición 3 dice que preferimos a $D\prime$ por encima de cualquier otro $D_R \subseteq clc(K)$ consistente con $\Sigma$ tal que $D_R \cap D \subset D\prime \cap D$ (es decir que $D_R$ mantiene un subconjunto más pequeño de $D$ con respecto a $D\prime$). Entonces, entre todos aquellos subconjuntos $D_R$ que tengan la misma intersección con $D$, preferimos a aquellos que contengan la mayor cantidad de hechos en \textit{clc(K)} posibles.
+Dada $KB = (D, \Sigma)$ y una consulta conjuntiva $Q$, decimos que $KB \models_{CAR} Q$ si solo si $(R, \Sigma) \models Q$ para cada $R \in CAR-Rep(D, \Sigma)$.
+
+\begin{exmp}
+Consideremos las bases de conocimiento presentadas en \ref{ejemplo_ar} y en el \ref{ejemplo_ar_2} y veamos que en este caso el conjunto de \textit{CAR-repairs} es el mismo para las dos bases. Para eso constru'imos primero el conjunto \textit{clc(K)}. Es fácil ver que para ambos ejemplos este conjunto esta dado por clc(K) = \{amigos('Federico', 'Miguel'), amigos('Miguel', 'Pablo'), tieneAmigos('Federico'), tieneAmigos('Miguel'), tieneAmigos('Pablo'), tienePiojos('Federico'), tienePiojos('Miguel'), tienePiojos('Pablo'), esPelado('Pablo')\} y que en ambos casos el conjunto de \textit{CAR-repairs} está dado por:
+        \begin{itemize}
+            \item \{amigos('Federico', 'Miguel'), amigos('Miguel', 'Pablo'), tieneAmigos('Federico'), tieneAmigos('Miguel'), tieneAmigos('Pablo'), tienePiojos('Federico'), tienePiojos('Miguel'), tienePiojos('Pablo')\}
+            \item \{amigos('Federico', 'Miguel'), amigos('Miguel', 'Pablo'), tieneAmigos('Federico'), tieneAmigos('Miguel'), tieneAmigos('Pablo'),  esPelado('Pablo')\}
+            \item \{amigos('Federico', 'Miguel'), tieneAmigos('Federico'), tieneAmigos('Miguel'), tieneAmigos('Pablo'), tienePiojos('Federico'), tienePiojos('Miguel'),  esPelado('Pablo')\}
+           \item \{amigos('Miguel', 'Pablo'), tieneAmigos('Federico'), tieneAmigos('Miguel'), tieneAmigos('Pablo'), tienePiojos('Federico'), esPelado('Pablo')\}
+        \end{itemize}
+Notar que dado que el conjunto de \textit{CAR-repairs} es el mismo para ambas bases de conocimiento, las respuestas serán siempre las mismas para toda consulta $Q$ bajo esta semántica. En particular teniendo en cuenta $D$ y $\Sigma$ del ejemplo \ref{ejemplo_ar} tenemos que $$(D, \Sigma)\models_{CAR} tieneAmigos('Pablo'),$$ y lo mismo ocurre para $D\prime$ y $\Sigma$ del ejemplo \ref{ejemplo_ar_2}
+\end{exmp}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+En general, decidir si $(D, \Sigma)\not\models_{AR} Q$ es \textit{coNP-completo} tanto para el fragmento \textit{lineal} como para el fragmento \textit{guarded} de Datalog+/-. Este resultado de complejidad lleva a  
+
+
 
 
 %% ...
@@ -346,6 +531,31 @@ Sea $D$ la base de datos $\{p(a), r(a), s(a, b)\}$. En el c'omputo de $chase(D, 
     Andrea Calì, Georg Gottlobc, Thomas Lukasiewicz.
     A General Datalog-Based Framework for Tractable Query Answering over Ontologies
     En \textit{QUE PONGO ACA}. 
+    
+    \bibitem{Huang} 
+    Z. Huang, F. van Harmelen, and A. ten Teije.
+    Reasoning with inconsistent ontologies.
+    En \textit{Proc. of IJCAI 2005, pages 454–459, 2003}. 
+    
+    \bibitem{Hitzler} 
+    Y. Ma and P. Hitzler.
+    Paraconsistent reasoning for owl 2.
+    En \textit{Proc. of RR 2009, pages 197–211, 2009.} 
+    
+    \bibitem{Parsia} 
+    B. Parsia, E. Sirin, and A. Kalyanpur.
+    Debugging OWL ontologies.
+    En \textit{Proc. of WWW 2005, pages 633–640, 2005.} 
+
+    \bibitem{Haasa} 
+    P. Haasa, F. van Harmelen, Z. Huang, H. Stuckenschmidt, y Y. Sure.
+    A framework for handling inconsistency in changing ontologies.
+    En \textit{Proc. of ISWC 2005, 2005.} 
+
+    \bibitem{Lembo} 
+    D. Lembo and M. Ruzzi.
+    Consistent query answering over description logic ontologies.
+    En \textit{Proc. of RR 2007, 2007.} 
 
     \end{thebibliography}
 
