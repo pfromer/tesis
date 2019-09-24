@@ -1,0 +1,11 @@
+persona(?x) :- conocidos(?x, ?y).
+persona(?y) :- conocidos(?x, ?y).
+tienePiojos(?y) :- conocidos(?x, ?y), tienePiojos(?x).
+bottom :- tienePiojos(?x), adulto(?x).
+
+tienePiojos('a').
+conocidos('a', 'b').
+conocidos('b', 'c').
+adulto('c').
+
+(?x) :- persona(?x).

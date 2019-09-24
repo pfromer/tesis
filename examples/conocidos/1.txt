@@ -1,0 +1,4 @@
+conocidos(?Y, ?X) :- conocidos(?X, ?Y).
+conocidos('a', 'b').
+
+(?X, ?Y) :- conocidos(?X, ?Y).
