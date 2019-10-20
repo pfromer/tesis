@@ -96,7 +96,7 @@ public class IARResolver {
 			}
 			else {
 				s.ConsistentStatus = IsConsistentFunction.apply(s);
-				if(s.ConsistentStatus && !s.isSubSetOfAny(this.bigRepairs)) {
+				if(s.ConsistentStatus) { //ya sabemos que no es sub set de big repair porque asi lo construimos
 					this.bigRepairs.add(s);
 				}
 			}
@@ -113,7 +113,7 @@ public class IARResolver {
 		List<AboxSubSet> nextTop = new ArrayList<AboxSubSet>();
 		this.top.forEach(s -> {
 			//TODO AGREGAR UNA PROPIEDAD QUE SEA ES SUBSET DE UN REPAIR DE MANERA DE NO TENER QUE VOLVER A CALCULAR
-			if(!s.ConsistentStatus && !s.isSubSetOfAny(this.bigRepairs)) {
+			if(!s.ConsistentStatus) {
 				s.allSubSetsWithOneLess().forEach(x -> {
 					if(!nextTop.stream().anyMatch(x2 -> x2.equals(x))) {
 						nextTop.add(x);
@@ -121,7 +121,7 @@ public class IARResolver {
 				});
 			}
 		});
-		this.top = nextTop; 
+		this.top = nextTop.stream().filter(s ->  !s.isSubSetOfAny(this.bigRepairs)).collect(Collectors.toList()); 
 	}
 	
 	public String toString(ArrayList<AboxSubSet> s) {
