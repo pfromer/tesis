@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 
 public class AboxSubSet {
 	public List<Fact> Facts;
-	public Boolean ConsistentStatus;
+	public Boolean Consistent;
 	
 	public AboxSubSet(List<Fact> facts) {
 		this.Facts = facts;
-		this.ConsistentStatus = null;
+		this.Consistent = null;
 	}
 
 	public AboxSubSet() {
@@ -112,11 +112,11 @@ public class AboxSubSet {
 	
 	public String toString() {
 		String cons = "";
-		if (this.ConsistentStatus == null) {
+		if (this.Consistent == null) {
 			cons = "null";
 		}
 		else {
-			cons = this.ConsistentStatus? "consistent" : "inconsistent"; 
+			cons = this.Consistent? "consistent" : "inconsistent"; 
 		}
 		return "[" + this.Facts.stream().map(f -> f.Text).collect(Collectors.joining(",")) + "] - " + cons;
 	}

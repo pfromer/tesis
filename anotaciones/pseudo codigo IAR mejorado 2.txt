@@ -12,9 +12,9 @@ para cada s en bottom:
 	fijarase si es consistente o no
 	si s es inconsistente:
 		s.consistentStatus = inconsistent
-		agregar s a minimalesInconsistentes
+		agregar s a culprits
 	si no:
-		s.consistentSatus = consistent
+		s.consistent = true
 
 while(top != vacio and bottom != vacio and (top.get(0).Facts.size() > bottom.get(0).Facts.size() )  ){
 			
@@ -25,18 +25,22 @@ while(top != vacio and bottom != vacio and (top.get(0).Facts.size() > bottom.get
 	para cada s en top con consistentStatus en undefined: 
 		fijarse si s es consistente (tirando las queries).
 		si s es consistente: 
-			s.consistentStatus = consistent.
-			agregar s a repairsGrandes// no hace falta mirar que no sea subconjutno de algun repair existente, pues eso lo filtro cuando elijo los hijos de topMenos1
+			s.consistent = true.
+			agregar s a repairsGrandes// no hace falta mirar que no sea subconjutno de algun 
+									//	repair grande existente, 
+									//pues eso lo filtro cuando elijo los hijos de topMenos1
 		si no
-			s.consistenteStatus = inconsistent. //no necesariamente es inconsistente minimal.
+			s.consistente = false. //no necesariamente es inconsistente minimal.
 	
 	topMenosUno := todos los subSet que puedo generar sacando un elemento a 
-				los set de top inconsistentes, siempre y cuando no sean sub conjunto de un repair grande.
-	
+				los set de top inconsistentes. filtrar solo a los que no sean 
+				sub conjunto de un repair grande.
+	.
 	top = topMenosUno
 
 	bottomMasUno = todos los subset de la ABox que se pueden formar agregnado un elemento 
-				de la ABox a los consistentes de bottom siempre y cuando no sean superConjunto de un minimal inconsistente. 
+				de la ABox a los consistentes.
+				filtrar solo a los que no sean superConjunto de un minimal inconsistente. 
 				
 	//ir armando el grafo (hijo-padre). // el objeto AboxSubSet, donde cada uno tiene una lista de hijos y de padres
 
@@ -50,7 +54,9 @@ while(top != vacio and bottom != vacio and (top.get(0).Facts.size() > bottom.get
 				s.consistentSatus = consistente
 			si no
 				s.consistentSatus = inconsistent
-				agregar s a minimales inconsistentes
+				agregar s a culprit. (esto lo puiedo hacer porque todos sus sub conjuntos
+				son consistentes. por el absurdo: si alguno no lo fuera entonces 
+				ese sub conjunto o bien es un culprit o bien es super conjunto de un culprit).
 				
 	para todos los s en bottom consistentes cuyos padres son todos inconsistentes //esto lo miro rapido gracias al grafo
 		agregar s a repairsChicos
@@ -66,3 +72,38 @@ if (n es par) para cada s en topMenosUno: si es superconj de minimal  consistent
 
 
 return {repairs: repairsChicos U repairsGrandes, intersection : intersection(this.repairs) }*/
+
+
+
+
+
+
+
+
+INVARIANTE antes de arrancar el cuerpo de cada while:
+
+TOP: 
+	no se si son o no consistentes. 
+	no son subconjuntos de ningun big repair. -> significa que si fueran consistentes serian 
+	repairs, pues todos sus super conjuntos son inconsistentes. por el absurdo: su algun 
+	superconjunto fuera consistente entonces o bien es un repair o bien es hijo de un repair.
+	
+Bottom:
+	son consistentes.
+
+Small Repairs:
+	Todos los repairs de tamaño menor que los bottom ya fueron agregados a Small Repairs.
+
+Culprits: 
+	Todos los culprits de tamaño igual o menor que bottom ya fueron agregados a Culprits.
+
+Big Repairs:
+	Todos los repairs de mayor tamaño que top ya fueron agregados a Big Repairs.
+	
+
+	
+	
+
+
+
+
