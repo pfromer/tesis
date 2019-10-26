@@ -540,8 +540,9 @@ Tal como se muestra en el gráfico, \textit{IAR} es la semántica más restricti
 
 \chapter{Resultados Formales}
 \section{Algoritmo RepairFinder}
-Presentamos ahora un algoritmo que dada una base de conocimientos $(D, \Sigma)$, con $\Sigma = \Sigma_T \cup \Sigma_N$, retorna todos sus \textit{repairs}, es decir todos los subconjuntos de $D$ maximales consistentes con respecto a $\Sigma$. Nuestro objetivo es recortar el espacio de búsqueda y evitar a la vez la mayor cantidad de consultas a la base de conocimiento.
-Sea $n$ la cardinalidad del conjunto $D$, el algoritmo \textit{naive} consiste en armar los $2^n$ subconjuntos de $D$ y para cada uno de ellos evaluar cada una de las \textit{Negstive Constraints} en $\Sigma_N$. En caso de que alguna fuera violada, decimos que el subconjunto no es consistente. Como explicamos en la sección \ref{ncs}, para evaluar una $NC: \phi(x, y) \rightarrow \bot$, podemos evalular la consulta $Q(X, Y) = \phi(X, Y)$ sobre $(D, \Sigma_T)$ y si la respuesta es distinta al conjunto vacío entonces decimos que hay una violación de tal \textit{NC}. Pero como dijimos en el párrafo anterior, queremos evitar estas consultas todo lo que se pueda.
+Presentamos ahora un algoritmo que dada una base de conocimientos $(D, \Sigma)$, con $\Sigma = \Sigma_T \cup \Sigma_N$, retorna todos sus \textit{repairs}, es decir todos los subconjuntos de $D$ maximales consistentes con respecto a $\Sigma$. Nuestro objetivo es recortar el espacio de búsqueda y evitar a la vez la mayor cantidad de consultas a la base de conocimiento. Sea $n$ la cardinalidad del conjunto $D$, el algoritmo \textit{naive} consiste en armar los $2^n$ subconjuntos de $D$ y para cada uno de ellos evaluar cada una de las \textit{Negstive Constraints} en $\Sigma_N$. En caso de que alguna fuera violada, decimos que el subconjunto no es consistente.
+
+Tal como se detalló en la sección \ref{ncs}, para evaluar una $NC: \phi(x, y) \rightarrow \bot$, podemos evalular la consulta $Q(X, Y) = \phi(X, Y)$ sobre $(D, \Sigma_T)$ y si la respuesta es distinta al conjunto vacío entonces decimos que hay una violación de tal \textit{NC}. Pero como dijimos en el párrafo anterior, queremos evitar estas consultas todo lo que se pueda.
 
 El algoritmo \textit{RepairFinder} recorta el espacio de búsqueda con una estrategia BottomUp y TopDown en simultáneo, descartando todos los subconjuntos de $D$ que sean subconjunto de algún \textit{repair} ya encontrado o superconjunto de algún subconjunto minimal inconsistente, lo que llamaremos de ahora en más \textit{culprit}. 
 
@@ -559,12 +560,7 @@ $culprits \gets \emptyset$\;
 $repairsChicos \gets \emptyset$\;
 $repairsGrandes \gets \emptyset$\;
 
-\For{$s \in bottom$}{
-$s.consistente \gets chequearConsistencia(s, \Sigma)$\;
-\lIf{$\neg s.consitente$}{
-$culprits.agregar(s)$}
-}
-$bottom \gets bottom.filtrarPor(s \rightarrow s.consistente )$
+$InicializarBottom()$\;
 
 
  \While{top $\neq \emptyset$ {\bf and} bottom $\neq \emptyset$ {\bf and} nTop $>$ nBottom   }{
@@ -579,6 +575,20 @@ $AgregarConsistentesEnTopARepairs()$\;
  \caption{RepairFinder}
 \end{algorithm}
 
+\begin{algorithm}[H]
+\SetAlgoLined
+
+\For{$s \in bottom$}{
+$s.consistente \gets chequearConsistencia(s, \Sigma)$\;
+\lIf{$\neg s.consitente$}{
+$culprits.agregar(s)$}
+}
+$bottom \gets bottom.filtrarPor(s \rightarrow s.consistente )$
+
+ \caption{InicializarBottom}
+\end{algorithm}
+
+
 
 \begin{algorithm}[H]
 \SetAlgoLined
@@ -587,7 +597,7 @@ $topInconsistentes \gets top.filtrarPor(s \rightarrow s.consistente)$\;
 $unionInconsistentes \gets unirTodos(topInconsistentes)$\;
 $proximoTop \gets subConjuntosDeKElementos(unionInconsistentes, nTop - 1)$\;
 
-$top \gets proximoTop.filtrarPor(s \rightarrow topInconsistentes.algunoCumple(t \rightarrow s \subset t$  {\bf and} $repairsGrandes.ningunoCumple(r \rightarrow s \subset r) )) $
+$top \gets proximoTop.filtrarPor(s \rightarrow topInconsistentes.algunoCumple(t \rightarrow s \subset t$  {\bf and} $repairsGrandes.ningunoCumple(r \rightarrow s \subset r) )) $\;	
 $nTop--$\;		
 \caption{IterarTop}
  
@@ -649,10 +659,28 @@ Veremos además que de manera \textit{invariante}, al momento de comenzar cada i
     \item Los elementos en \textit{bottom} son consistentes.
     \item Todos los posibles \textit{repairs} de tamaño menor que \textit{nBottom} ya fueron agregados al conjunto \textit{Small Repairs}.
     \item todos los \textit{culprits} de tamaño igual o menor que bottom ya fueron agregados al conjunto \textit{culprits}
-    \item Todos los \textit{repairs} de tamaño mayor que \textit{nTop} ya fueron agregados al conjunto \textit{BigRepairs}
+    \item Todos los \textit{repairs} de tamaño mayor que \textit{nTop} ya fueron agregados al conjunto \textit{RepairsGrandes}
 \end{itemize}
 
+En la figura \ref{fig:iteracion_top} se muestra una iteración \textit{TopDown} en la que marcamos en azul todos los elementos en \textit{top} inconsistentes. Para validar consistencia primero miramos si son superconjuto de algún \textit{culprit}, y en caso afirmativo los marcamos como inconsistentes. Al resto de los elementos los validamos de la manera usual, es decir consultando la \textit{KB}. Los elementos consistentes los mostramos en rojo, y a todos ellos los agregamos al conjunto de \textit{BigRepairs}. Veremos más adelante que si se cumple el \textit{invariante} mencionado arriba, podemos asegurar que efectivamente estos elementos perteneces al conjunto de \textit{repairs}. Mostramos además en gris los elementos que en la próxima iteración no serán incluidos en \textit{top}, estos son todos los elementos que sean subconjuntos de algún elemento de \textit{top} consistente. Se muestran por otro lado en verde los elementos que pasarán a ser parte del próximo \textit{top}, estos son los elementos que no son subconjunto de ningún \textit{repair}.
 
+\begin{figure}[ht]
+    \includegraphics[scale=0.3]{IteracionTop.png}
+    \centering
+    \caption{Iteración Top}
+    \label{fig:iteracion_top}
+\end{figure}
+
+En la figura \ref{fig:iteracion_bottom} se muestra una iteración \textit{BottomUp}. Veremos más adelante que tal como dijimos anteriormente, todos los elementos en \textit{bottom} son consistentes por cumplirse el \textit{invariante} ya mencionado. Armamos entonces el conjunto \textit{ProximoBottom} como todos los subconjuntos posibles de $D$ de cardinalidad $nBottom + 1$. Para cada uno de ellos verificamos si son superconjunto de algún \textit{culprit}. En caso afirmativo lo eliminamos de \textit{ProximoBbottom} por ser inconsistentes. Para el resto de los elementos en \textit{ProximoBottom} verificamos consistencia de la manera usual. Para todos aquellos que sean inconsistentes los podemos agregar al conjunto de \textit{culprits}. En la figura se muestran griseados todos aquellos elementos que son inconsistentes, ya sea por ser superconjunto de algún \textit{culprit} o por ser un nuevo \textit{culprit} hayado en esta iteración.
+Por otro lado, todos los elementos de \textit{bottom} que no sean subcojuntos de algún elemento consistente en \textit{ProximoBottom} podemos afirmar que son un \textit{repair}, y los agregamos al conjunto de \textit{RepairsChicos}. Estos elementos se muestran en color marrón en la figura. Por último, en la próxima iteración, \textit{bottom} estará definido por todos los elementos que figurán en \textit{ProximoBottom} en color rojo, descartando los que se muestran en gris.
+
+
+\begin{figure}[ht]
+    \includegraphics[scale=0.3]{IteracionBottom.png}
+    \centering
+    \caption{Iteración Bottom}
+    \label{fig:iteracion_bottom}
+\end{figure}
 
 %% ...
 
