@@ -41,10 +41,8 @@ public class IARResolver {
 			AddBottomToSmallRepairs();
 			BuildNextBottom();
 		}
-		
-		Collections.sort(new ArrayList<Integer>());
-		
-		if(ABox.Facts.size() % 2 == 0) {
+				
+		if(ABox.Facts.size() % 2 == 0 && (this.top.size() != 0 || this.bottom.size() != 0)) {
 			SetTopConsistencyAndAddToBigRepairs();
 		}
 		

@@ -12,7 +12,7 @@
 \usepackage{amssymb}
 \usepackage[T1]{fontenc}
 \newtheorem{exmp}{Ejemplo}
-\usepackage[titlenumbered,ruled]{algorithm2e}
+\usepackage[linesnumbered,titlenumbered,ruled]{algorithm2e}
 
 \newcommand{\ch}{\textit{chase}}
 
@@ -539,72 +539,80 @@ Veamos ahora como se aproximan entre sí las semánticas que hemos mencionado. E
 Tal como se muestra en el gráfico, \textit{IAR} es la semántica más restrictiva, siendo esta una aproximación \textit{sana} de \textit{ICR}, y siendo esta última una aproximación \textit{sana} de \textit{AR} e \textit{ICAR}, aunque estas dos no se aproximan entre sí. Por otro lado \textit{AR} e \textit{ICAR} son aproximaciones \textit{sanas} de \textit{CAR}, la menos restrictiva de todas las semánticas. 
 
 \chapter{Resultados Formales}
+\section{Algoritmo RepairFinder}
+Presentamos ahora un algoritmo que dada una base de conocimientos $(D, \Sigma)$, con $\Sigma = \Sigma_T \cup \Sigma_N$, retorna todos sus \textit{repairs}, es decir todos los subconjuntos de $D$ maximales consistentes con respecto a $\Sigma$. Nuestro objetivo es recortar el espacio de búsqueda y evitar a la vez la mayor cantidad de consultas a la base de conocimiento.
+Sea $n$ la cardinalidad del conjunto $D$, el algoritmo \textit{naive} consiste en armar los $2^n$ subconjuntos de $D$ y para cada uno de ellos evaluar cada una de las \textit{Negstive Constraints} en $\Sigma_N$. En caso de que alguna fuera violada, decimos que el subconjunto no es consistente. Como explicamos en la sección \ref{ncs}, para evaluar una $NC: \phi(x, y) \rightarrow \bot$, podemos evalular la consulta $Q(X, Y) = \phi(X, Y)$ sobre $(D, \Sigma_T)$ y si la respuesta es distinta al conjunto vacío entonces decimos que hay una violación de tal \textit{NC}. Pero como dijimos en el párrafo anterior, queremos evitar estas consultas todo lo que se pueda.
 
-\subsection{Algoritmo para encontrar los Repairs}
-Presentamos en esta secci'on un algoritmo que dada una base de conocimientos $(D, \Sigma)$, con $\Sigma = \Sigma_T \cup \Sigma_N$, retorna todos sus \textit{repairs}, es decir todos los subconjuntos de $D$ maximales consistentes con respecto a $\Sigma$. Nuestro objetivo es recorrer la menor cantidad de subconjuntos de $D$ posibles.
-Sea $n$ la cardinalidad del conjunto $D$, el algoritmo \textit{naive} consiste en armar los $2^n$ subconjuntos de $D$ y para cada uno de ellos evaluar cada una de las \textit{Negstive Constraints} en $\Sigma_N$, y en caso de que alguna fuera violada, decimos que el subconjunto no es consistente. Como explicamos en la sección \ref{ncs}, para evaluar una $NC: \phi(x, y) \rightarrow \bot$, podemos evalular la consulta $Q(X, Y) = \phi(X, Y)$ sobre $(D, \Sigma_T)$ y si la respuesta es distina al conjunto vacío entonces decimos hay una violación de tal \textit{NC}.
+El algoritmo \textit{RepairFinder} recorta el espacio de búsqueda con una estrategia BottomUp y TopDown en simultáneo, descartando todos los subconjuntos de $D$ que sean subconjunto de algún \textit{repair} ya encontrado o superconjunto de algún subconjunto minimal inconsistente, lo que llamaremos de ahora en más \textit{culprit}. 
 
-\subsection{Algoritmo RepairFinder}
-
-Presentamos ahora un algoritmo que intenta minimizar el espacio de búsqueda y la cantidad de consultas a la base de conocimiento. 
-
+Teniendo en cuenta que si etiquetamos numéricamente todos los \textit{hechos} en $D$ y mantenemos los subconjuntos ordenados a lo largo de todo el algoritmo, verificar si un subconjunto es subconjunto de otro, tiene un costo lineal en el tamaño del subconjunto más chico. Por tal motivo, verificar inclusión de conjuntos es computacionalmente más eficiente que consultar la \textit{KB}. 
 
 \begin{algorithm}[H]
 \SetAlgoLined
     \KwIn{$(D, \Sigma)$ }
     \KwOut{Repairs para $(D, \Sigma)$ }
-
-$top \gets todosLosSubConjuntosDeUnElementoMenos(D)$\;
-$bottom \gets todosLosSubConjuntosDeUnElemento(D)$\;
+$nTop \gets \sharp(D) - 1$\;
+$nBottom \gets 1$\;
+$top \gets subConjuntosDeKElementos(D, nTop)$\;
+$bottom \gets subConjuntosDeKElementos(D, nBottom)$\;
 $culprits \gets \emptyset$\;
 $repairsChicos \gets \emptyset$\;
 $repairsGrandes \gets \emptyset$\;
-$bottomMasUno \gets \emptyset $\;
 
 \For{$s \in bottom$}{
 $s.consistente \gets chequearConsistencia(s, \Sigma)$\;
 \lIf{$\neg s.consitente$}{
 $culprits.agregar(s)$}
 }
-$bottom \gets bottom.filtrarPor(s \Rightarrow s.consistente )$
+$bottom \gets bottom.filtrarPor(s \rightarrow s.consistente )$
 
 
- \While{top $\neq \emptyset$ {\bf and} bottom $\neq \emptyset$ {\bf and} top.any.size $>$ bottom.any.size   }{
-            $ActualizarTop()$\;			
-			$ActualizarBottom()$\;
+ \While{top $\neq \emptyset$ {\bf and} bottom $\neq \emptyset$ {\bf and} nTop $>$ nBottom   }{
+            $IterarTop()$\;			
+			$IterarBottom()$\;
 }
+\If{$esPar(\sharp(D))$ {\bf and} $(top \neq \emptyset$  {\bf or} $top \neq \emptyset)$ }
+{
+$AgregarConsistentesEnTopARepairs()$\;
+}
+\Return{$repairsChicos \cup repairsGrandes$}
  \caption{RepairFinder}
 \end{algorithm}
 
 
 \begin{algorithm}[H]
 \SetAlgoLined
-    \KwIn{$(D, \Sigma)$ }
+$AgregarConsistentesEnTopARepairs()$\;
+$topInconsistentes \gets top.filtrarPor(s \rightarrow s.consistente)$\;
+$unionInconsistentes \gets unirTodos(topInconsistentes)$\;
+$proximoTop \gets subConjuntosDeKElementos(unionInconsistentes, nTop - 1)$\;
+
+$top \gets proximoTop.filtrarPor(s \rightarrow topInconsistentes.algunoCumple(t \rightarrow s \subset t$  {\bf and} $repairsGrandes.ningunoCumple(r \rightarrow s \subset r) )) $
+$nTop--$\;		
+\caption{IterarTop}
+ 
+ 
+\end{algorithm}
+
+
+\begin{algorithm}[H]
+\SetAlgoLined
 \For{$s \in top$}{
-     \lIf{$culprits.algunoCumple(c \Rightarrow c \subset s)$}{$s.consistente \gets false$}
+     \lIf{$culprits.algunoCumple(c \rightarrow c \subset s)$}{$s.consistente \gets false$}
      \Else{$s.consistente \gets chequearConsistencia(s, \Sigma)$\;
         \lIf{s.consistente}{repairsGrandes.agregar(s)}
         }
 }
-
-$topInconsistentes \gets top.filtrarPor(s \rightarrow s.consistente)$\;
-$unionInconsistentes \gets ordenar(sinRepetidos(concatenar(topInconsistentes)))$\;
-$proximoTop \gets subcojuntosDeTama\tilde{n}oTopMenosUno(unionInconsistentes)$\;
-
-$top \gets proximoTop.filtrarPor(s \rightarrow topInconsistentes.algunoCumple(t \rightarrow s \subset t$  {\bf and} $repairsGrandes.ningunoCumple(r \rightarrow s \subset r) )) $
-		
-
- \caption{ActualizarTop}
+\caption{AgregarConsistentesEnTopARepairs}
  
  
 \end{algorithm}
 
 \begin{algorithm}[H]
 \SetAlgoLined
-    \KwIn{$(D, \Sigma)$ }
 
 
- $proximoBottom \gets subcojuntosDeTama\tilde{n}oBottomMasUno(D)$\;
+ $proximoBottom \gets todosLosSubConjuntosDeKElementos(D, nBottom + 1)$\;
  $proximoBottom \gets proximoBottom.filtrarPor(s \rightarrow bottom.algunoCumple(b \rightarrow b \subset s$ {\bf and}  $culprits.ningunoCumple(c \rightarrow c \subset s)))$\;
 \For{$s \in proximoBottom$}{
      \lIf{$repairsGrandes.algunoCumple(r \rightarrow s \subset r)$}{$s.consistente \gets true$}
@@ -618,158 +626,31 @@ $top \gets proximoTop.filtrarPor(s \rightarrow topInconsistentes.algunoCumple(t 
         {$repairsChicos.agregar(s)$}
 }
 $bottom \gets proximoBottom.filtrarPor(s \rightarrow s.consistente)$\;
-
- \caption{ActualizarBottom}
+$nBottom++$\;
+ \caption{IterarBottom}
 
 \end{algorithm}
 
+\subsection{Entendiendo RepairFinder}
 
-	para todos los s en bottom consistentes cuyos padres son todos inconsistentes //esto lo miro rapido gracias al grafo
-		agregar s a repairsChicos
+En la figura \ref{fig:espacio_busqueda_repair_finder} mostramos el espacio de búsqueda del algoritmo RepairFinder. Como se muestra en la misma, inicializamos a \textit{top} como el conjunto de todos los subconjuntos de $N - 1$ elementos de $D$, y a \textit{bottom} como al conjunto de todos los subconjuntos de un elemento en $D$. El algoritmo irá iterando en este espacio, donde para cada iteración se actualizará el conjunto de \textit{repairs} y de \textit{culprits}, redefiniendo a su vez los conjuntos \textit{top} y \textit{bottom}, bajando un nivel al primero y haciendo lo contrario con el segundo.
 
+\begin{figure}[ht]
+    \includegraphics[scale=0.3]{Espacio_busqueda_RepairFinder.png}
+    \centering
+    \caption{Espacio de búsqueda RepairFinder}
+    \label{fig:espacio_busqueda_repair_finder}
+\end{figure}
 
-	para cada s en bottomMasUno:
-		si s es subConbj de un repairGrande
-			s.consistentStatus = consistent
-		si no:
-			tirar query y fijarse si es consistnete
-			si s es consistente:
-				s.consistentSatus = consistente
-			si no
-				s.consistentSatus = inconsistent
-				agregar s a culprit. (esto lo puiedo hacer porque todos sus sub conjuntos
-				son consistentes. por el absurdo: si alguno no lo fuera entonces 
-				ese sub conjunto o bien es un culprit o bien es super conjunto de un culprit).
+Veremos además que de manera \textit{invariante}, al momento de comenzar cada iteración se cumplen las siguientes condiciones:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-input: program
-
-var top = todosLosSubSetDeUnoMenos(program.Abox);
-var bottom = todosLosSetDeUnElemento(program.Abox);
-var minimalesIncosistentes = vacio;
-var repairsChicos = vacio;
-var repairsGrandes = vacio;
-var topMenos1 = vacio;
-var bottomMasUno = vacio;
-
-para cada s en bottom:
-	fijarase si es consistente o no
-	si s es inconsistente:
-		s.consistentStatus = inconsistent
-		agregar s a culprits
-	si no:
-		s.consistent = true
-	
-	bottom := bottom.filter(s -> s.consistents);
-
-while(top != vacio and bottom != vacio and (top.get(0).Facts.size() > bottom.get(0).Facts.size() )  ){
-			
-	para cada set s en top:
-	si s es superCojunto de un minimalInconsistente:
-		s.consistentStatus = inconsistent		
-			
-	para cada s en top con consistentStatus en undefined: 
-		fijarse si s es consistente (tirando las queries).
-		si s es consistente: 
-			s.consistent = true.
-			agregar s a repairsGrandes// no hace falta mirar que no sea subconjutno de algun 
-									//	repair grande existente, 
-									//pues eso lo filtro cuando elijo los hijos de topMenos1
-		si no
-			s.consistente = false. //no necesariamente es inconsistente minimal.
-	
-	topMenosUno := todos los subSet que puedo generar sacando un elemento a 
-				los set de top inconsistentes. filtrar solo a los que no sean 
-				sub conjunto de un repair grande.
-	.
-	top = topMenosUno
-
-	bottomMasUno = todos los subset de la ABox que se pueden formar agregnado un elemento 
-				de la ABox a los consistentes.
-				filtrar solo a los que no sean superConjunto de un minimal inconsistente. 
-				
-	//ir armando el grafo (hijo-padre). // el objeto AboxSubSet, donde cada uno tiene una lista de hijos y de padres
-
-	
-	para cada s en bottomMasUno:
-		si s es subConbj de un repairGrande
-			s.consistentStatus = consistent
-		si no:
-			tirar query y fijarse si es consistnete
-			si s es consistente:
-				s.consistentSatus = consistente
-			si no
-				s.consistentSatus = inconsistent
-				agregar s a culprit. (esto lo puiedo hacer porque todos sus sub conjuntos
-				son consistentes. por el absurdo: si alguno no lo fuera entonces 
-				ese sub conjunto o bien es un culprit o bien es super conjunto de un culprit).
-				
-	para todos los s en bottom consistentes cuyos padres son todos inconsistentes //esto lo miro rapido gracias al grafo
-		agregar s a repairsChicos
-	
-	bottom = bottomMasUno que sean consistentes
-}
-
-if (n es par) para cada s en topMenosUno: si es superconj de minimal  consistente: nada
-	si no tirar query, si da consistente, agregarlo a maximal consistente
-
-
-
-
-
-return {repairs: repairsChicos U repairsGrandes, intersection : intersection(this.repairs) }*/
-
-
-
-
-
-
-
-
-INVARIANTE antes de arrancar el cuerpo de cada while:
-
-TOP: 
-	no se si son o no consistentes. 
-	no son subconjuntos de ningun big repair. -> significa que si fueran consistentes serian 
-	repairs, pues todos sus super conjuntos son inconsistentes. por el absurdo: su algun 
-	superconjunto fuera consistente entonces o bien es un repair o bien es hijo de un repair.
-	
-Bottom:
-	son consistentes.
-
-Small Repairs:
-	Todos los repairs de tamaño menor que los bottom ya fueron agregados a Small Repairs.
-
-Culprits: 
-	Todos los culprits de tamaño igual o menor que bottom ya fueron agregados a Culprits.
-
-Big Repairs:
-	Todos los repairs de mayor tamaño que top ya fueron agregados a Big Repairs.
-	
-
-	
-	
-
-
-
-
-
-
-
-
+\begin{itemize}
+    \item Los elementos en \textit{top} no son subconjunto de ningún \textit{repair}.
+    \item Los elementos en \textit{bottom} son consistentes.
+    \item Todos los posibles \textit{repairs} de tamaño menor que \textit{nBottom} ya fueron agregados al conjunto \textit{Small Repairs}.
+    \item todos los \textit{culprits} de tamaño igual o menor que bottom ya fueron agregados al conjunto \textit{culprits}
+    \item Todos los \textit{repairs} de tamaño mayor que \textit{nTop} ya fueron agregados al conjunto \textit{BigRepairs}
+\end{itemize}
 
 
 
