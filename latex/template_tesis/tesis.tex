@@ -540,14 +540,13 @@ Tal como se muestra en el gráfico, \textit{IAR} es la semántica más restricti
 
 \chapter{Resultados Formales}
 \section{Algoritmo RepairFinder}
-Presentamos ahora un algoritmo que dada una base de conocimientos $(D, \Sigma)$, con $\Sigma = \Sigma_T \cup \Sigma_N$, retorna todos sus \textit{repairs}, es decir todos los subconjuntos de $D$ maximales consistentes con respecto a $\Sigma$. Nuestro objetivo es recortar el espacio de búsqueda y evitar a la vez la mayor cantidad de consultas a la base de conocimiento. Sea $n$ la cardinalidad del conjunto $D$, el algoritmo \textit{naive} consiste en armar los $2^n$ subconjuntos de $D$ y para cada uno de ellos evaluar cada una de las \textit{Negstive Constraints} en $\Sigma_N$. En caso de que alguna fuera violada, decimos que el subconjunto no es consistente. Una vez obtenida la lista de subconjuntos consistentes este algoritmo retornaría aquellos conjuntos que no son subconjunto de ningún otro en esa lista.
-
-Tal como se detalló en la sección \ref{ncs}, para evaluar una $NC: \phi(x, y) \rightarrow \bot$, podemos evalular la consulta $Q(X, Y) = \phi(X, Y)$ sobre $(D, \Sigma_T)$ y si la respuesta es distinta al conjunto vacío entonces decimos que hay una violación de tal \textit{NC}. Pero como dijimos en el párrafo anterior, queremos evitar estas consultas todo lo que se pueda.
+Presentamos ahora un algoritmo que dada una base de conocimientos $(D, \Sigma)$, con $\Sigma = \Sigma_T \cup \Sigma_N$, retorna todos sus \textit{repairs}, es decir todos los subconjuntos de $D$ maximales consistentes con respecto a $\Sigma$. Nuestro objetivo es recortar el espacio de búsqueda y evitar a la vez la mayor cantidad de consultas a la base de conocimiento. Dada una base de datos $D$ con $n$ \textit{hechos}, la cantidad de posibles subconjuntos para esa base de datos es $2^n$. Podríamos de manera \textit{naive} considerar la totalidad de los subconjuntos y para cada uno de ellos evaluar consistencia y maximalidad. Sin embargo, sabemos que es necesario organizar la búsqueda de los \textit{repairs} de manera eficiente, dada la gran cantidad de subconjuntos que necesitaríamos explorar de otro modo. Tengamos en cuenta además, que para evaluar si un subconjunto $s$ es consistente, necesitamos evaluar cada una de las \textit{Negstive Constraints} en $\Sigma_N$ contra $s$. Tal como se detalló en la sección \ref{ncs}, para evaluar una $NC: \phi(x, y) \rightarrow \bot$, podemos evalular la consulta $Q(x, y) = \phi(x, y)$ sobre $(s, \Sigma_T)$ y si la respuesta es distinta al conjunto vacío entonces decimos que hay una violación de tal \textit{NC} y que por lo tanto $s$ no es consistente. Pero como ya mencionamos, queremos minimizar estas consultas lo más posible.
 
 El algoritmo \textit{RepairFinder} recorta el espacio de búsqueda con una estrategia \textit{BottomUp} y \textit{TopDown} en simultáneo, descartando todos los subconjuntos de $D$ que sean subconjunto de algún \textit{repair} ya encontrado o superconjunto de algún subconjunto minimal inconsistente, lo que llamaremos de ahora en más \textit{culprit}. 
 
 Teniendo en cuenta que si etiquetamos numéricamente todos los \textit{hechos} en $D$ y mantenemos los subconjuntos ordenados a lo largo de todo el algoritmo, verificar si un subconjunto es subconjunto de otro, tiene un costo lineal en el tamaño del subconjunto más chico. Por tal motivo, verificar inclusión de conjuntos es computacionalmente más eficiente que consultar la \textit{KB}. 
 
+\begin{figure}
 \begin{algorithm}[H]
 \SetAlgoLined
     \KwIn{$(D, \Sigma)$ }
@@ -574,6 +573,7 @@ $AgregarConsistentesEnTopARepairs()$\;
 \Return{$repairsChicos \cup repairsGrandes$}
  \caption{RepairFinder}
 \end{algorithm}
+\end{figure}
 
 \begin{algorithm}[H]
 \SetAlgoLined
@@ -593,7 +593,7 @@ $bottom \gets bottom.filtrarPor(s \rightarrow s.consistente )$
 \begin{algorithm}[H]
 \SetAlgoLined
 $AgregarConsistentesEnTopARepairs()$\;
-$topInconsistentes \gets top.filtrarPor(s \rightarrow s.consistente)$\;
+$topInconsistentes \gets top.filtrarPor(s \rightarrow \neg s.consistente)$\;
 $unionInconsistentes \gets unirTodos(topInconsistentes)$\;
 $proximoTop \gets subConjuntosDeKElementos(unionInconsistentes, nTop - 1)$\;
 
@@ -622,8 +622,7 @@ $nTop--$\;
 \SetAlgoLined
 
 
- $proximoBottom \gets todosLosSubConjuntosDeKElementos(D, nBottom + 1)$\;
- $proximoBottom \gets proximoBottom.filtrarPor(s \rightarrow bottom.algunoCumple(b \rightarrow b \subset s$ {\bf and}  $culprits.ningunoCumple(c \rightarrow c \subset s)))$\;
+ $proximoBottom \gets subConjuntosDeKElementos(D, nBottom + 1).filtrarPor(s \rightarrow bottom.algunoCumple(b \rightarrow b \subset s$ {\bf and}  $culprits.ningunoCumple(c \rightarrow c \subset s)))$\;
 \For{$s \in proximoBottom$}{
      \lIf{$repairsGrandes.algunoCumple(r \rightarrow s \subset r)$}{$s.consistente \gets true$}
      \Else{$s.consistente \gets chequearConsistencia(s, \Sigma)$\;
@@ -643,7 +642,7 @@ $nBottom++$\;
 
 \subsection{Entendiendo RepairFinder}
 
-En la figura \ref{fig:espacio_busqueda_repair_finder} mostramos el espacio de búsqueda del algoritmo RepairFinder. Como se muestra en la misma, inicializamos a \textit{top} como el conjunto de todos los subconjuntos de $N - 1$ elementos de $D$, y a \textit{bottom} como al conjunto de todos los subconjuntos de un elemento en $D$. El algoritmo irá iterando en este espacio, donde para cada iteración se actualizará el conjunto de \textit{repairs} y de \textit{culprits}, como así también los conjuntos $top$ y $bottom$. 
+En la figura \ref{fig:espacio_busqueda_repair_finder} mostramos el espacio de búsqueda del algoritmo \textit{RepairFinder}. Como se muestra en la misma, inicializamos a \textit{top} como el conjunto de todos los subconjuntos de $N - 1$ elementos de $D$, y a \textit{bottom} como al conjunto de todos los subconjuntos de un elemento en $D$. El algoritmo irá iterando en este espacio, donde para cada iteración se actualizará el conjunto de \textit{repairs} y de \textit{culprits}, como así también los conjuntos $top$ y $bottom$. 
 
 
 
@@ -689,7 +688,7 @@ Por otro lado, todos los elementos de \textit{bottom} que no sean subcojuntos de
 \newtheorem{lemma}[theorem]{Lema}
 
 \begin{theorem}
-Dada una \textit{KB} = $(D, \Sigma)$ inconsistente, el algoritmo \textit{RepairFinder} computa el conjunto de \textit{reapirs} para esa base de conocimiento.
+Dada una \textit{KB} = $(D, \Sigma)$ inconsistente, el algoritmo \textit{RepairFinder} computa exactamente el conjunto de \textit{reapirs} para esa base de conocimiento.
 \end{theorem}
 \begin{lemma}
 Sea $k$ un número de iteración en el ciclo que se encuentra entre las líneas 9 y 12 del algoritmo \textit{RepairFinder} y sea $n$ la cardinalidad de $D$. Al finalizar la ejecución del cuerpo del ciclo en esa iteración, todos los \textit{repairs} de cardinalidad mayor o igual que $n - k$ ya fueron agregados al conjunto \textit{repairsGrandes}.
@@ -705,10 +704,24 @@ En cuanto al contenido de la variable \textit{top}, alcanza ver las líneas 1 y 
     \item Al ejecutarse la línea 4, \textit{bottom} contiene todos los subconjuntos de $D$ de un elemento.
     \item Al ejecutarse la línea 5, \textit{culprits} es el conjunto \textit{vacío}.
     \item Al ejecutarse la función \textit{InicializarBottom} en la línea 8, teniendo en cuenta lo dicho en los items anteriores, y el ciclo entre las líneas 1 y 4 de tal función, es fácil ver la variable \textit{culprits} contiene exactamente los subconjuntos incosistentes de $D$ de un solo elemento.
-    \item Teniendo en cuenta  trivialmente que si un conjunto de un elemento es inconsistente entonces es también un \textit{culprit}, podemos decir entonces que en \textit{culprits} solo se encuentran los \textit{culprits} de un elemento.
+    \item Teniendo en cuenta  trivialmente que si un conjunto de un solo elemento es inconsistente entonces es también un \textit{culprit}, podemos decir entonces que en \textit{culprits} solo se encuentran los \textit{culprits} de un elemento.
 \end{itemize}
-Notemos ahora que en la iteración $K=1$ del ciclo entre las líneas 9 y 11 del algoritmo \textit{RepairFinder}, se ejecutará por primera vez la función \textit{IterarTop}, la cual contiene en su primera línea una llamada a la función \textit{AgregarConsistentesEnTopARepairs}. En esta función, para todos los elementos en \textit{top}, que como mencionamos antes, contiene en esta iteración todos los subconjuntos de $D$ de $n-1$ elementos, se verifica que no sean superconjunto de algún elemento en \textit{culprits}. Pues dado que en \textit{culprits} se encuentran ahroa todos los \textit{culprits} de un elemento, si algún elemento $s$ de \textit{top} fuera superconjunto de algún elemento en \textit{culprits}, $s$ sería inconsistente. Caso contrario, entre las líneas 4 y 5 de esta función, se verifica la consistencia de $s$ de la manera usual, y en caso de ser consistente se lo agrega al conjunto \textit{repairsGrandes}. Es trivial ver que al ser $s$ un subconjunto de $n-1$ elementos, entonces si es consistente es un \textit{repair}, pues $D$ es inconsistente.   Por lo tanto, dado que en la llamada a esa función ser verificaron todos los subconjuntos de $n-1$ elementos, podemos decir que todos los \textit{repairs} de $n-1$ elementos han sido agregados a la variable \textit{repairsGrandes}.
+Notemos ahora que en la iteración $K=1$ del ciclo entre las líneas 9 y 11 del algoritmo \textit{RepairFinder}, se ejecutará por primera vez la función \textit{IterarTop}, la cual contiene en su primera línea una llamada a la función \textit{AgregarConsistentesEnTopARepairs}. En esta función, para todos los elementos en \textit{top}, que como mencionamos antes, contiene en esta iteración todos los subconjuntos de $D$ de $n-1$ elementos, se verifica que no sean superconjunto de algún elemento en \textit{culprits}. Pues dado que en \textit{culprits} se encuentran ahora todos los \textit{culprits} de un elemento, si algún elemento $s$ de \textit{top} fuera superconjunto de algún elemento en \textit{culprits}, $s$ sería inconsistente. Caso contrario, entre las líneas 4 y 5 de esta función, se verifica la consistencia de $s$ de la manera usual, y en caso de ser consistente se lo agrega al conjunto \textit{repairsGrandes}. Es trivial ver que al ser $s$ un subconjunto de $n-1$ elementos, entonces si es consistente es un \textit{repair}, pues $D$ es inconsistente.   Por lo tanto, dado que en la llamada a esa función se verificaron todos los subconjuntos de $n-1$ elementos, podemos decir que todos los \textit{repairs} de $n-1$ elementos han sido agregados a la variable \textit{repairsGrandes}.
 
+Paso inductivo:
+
+Asumamos que al finalizar la iteración $k$ todos los \textit{repairs} de cardinalidad mayor o igual que $n-k$ ya han sido agregados al conjunto de \textit{repairsGrandes}. Veamos que esto implica que al finalizar la iteración $k+1$ todos los \textit{repairs} de cardinalidad mayor igual que $n-(k+1)$ ya han sido agregados al conjunto de \textit{repairsGrandes}.
+
+Para ello, necesitamos probar primero el siguiente lema:
+
+Sea $k$ un número de iteración en el ciclo que se encuentra entre las líneas 9 y 12 del algoritmo. Al comenzar la ejecución del cuerpo del ciclo en esa iteración, todos los \textit{culprits} de cardinalidad menor o igual que $k$ ya han sido agregados al conjunto \textit{culprits}.
+
+Por inducción en $k$. Caso base: $k=1$.
+Notemos que 
+
+\begin{proof}
+Dada una iteraci
+\end{proof}
 
 
 

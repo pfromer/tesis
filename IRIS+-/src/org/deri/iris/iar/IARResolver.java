@@ -142,7 +142,7 @@ public class IARResolver {
 		//juntar todos los numeros ordenados
 		//sacar repetidos
 		//generar todas las posibles combinacioens de k elementos que esten incluidos en alguno de top que no sea consistente
-		
+		/*
 		List<AboxSubSet> inconsistentTop = this.top.stream().filter(s -> !s.Consistent).collect(Collectors.toList());
 		
 		Stream<Integer> stream = Stream.of();
@@ -150,15 +150,19 @@ public class IARResolver {
 			stream = Stream.concat(stream,  s.Facts.stream().map(f -> f.Id));
 
 		List<Integer> orderedNoRepeated = stream.sorted().distinct().collect(Collectors.toList());
+		*/
 		
-		List<List<Integer>> subSetsOfSizeK = this.getSubsets(orderedNoRepeated, this.top.get(0).size() -1);
+		List<Integer> factsIds = this.ABox.Facts.stream().map(f -> f.Id).collect(Collectors.toList());
+		
+		List<List<Integer>> subSetsOfSizeK = this.getSubsets(factsIds, this.top.get(0).size() -1);
 		
 		
 		List<AboxSubSet> nextTop = subSetsOfSizeK.stream().
 				map(l -> new AboxSubSet(this.ABox.Facts.stream().filter(f -> l.contains(f.Id)).collect(Collectors.toList()))).collect(Collectors.toList());
 				
 
-		this.top = nextTop.stream().filter(s -> inconsistentTop.stream().anyMatch(t -> s.isSubSetOf(t)) && !s.isSubSetOfAny(this.bigRepairs)).collect(Collectors.toList());
+		this.top = nextTop.stream().filter(s ->/* inconsistentTop.stream().anyMatch(t -> s.isSubSetOf(t)) &&*/ !s.isSubSetOfAny(this.bigRepairs)).collect(Collectors.toList());
+
 		
 
 	}
