@@ -21,7 +21,7 @@ public class IARResolver {
 	public IARResolver(Program program) {
 		this.IsConsistentFunction = program::IsConsistent;
 		this.ABox = program.ABox();
-		this.top = this.ABox.allSubSetsWithOneLess();
+		this.top = this.ABox.completeSet();
 		this.bottom = this.ABox.allSubSetsWithOneElement();
 		this.culprits = new ArrayList<AboxSubSet>();
 		this.smallRepairs = new ArrayList<AboxSubSet>();
@@ -42,7 +42,7 @@ public class IARResolver {
 			BuildNextBottom();
 		}
 				
-		if(ABox.Facts.size() % 2 == 0 && (this.top.size() != 0 || this.bottom.size() != 0)) {
+		if(ABox.Facts.size() % 2 == 1 && (this.top.size() != 0)) {
 			SetTopConsistencyAndAddToBigRepairs();
 		}
 		
@@ -117,7 +117,7 @@ public class IARResolver {
 		List<List<Integer>> subSetsOfSizeK = this.getSubsets(factsIds, this.bottom.get(0).size() + 1);
 		this.bottomPlusOne = subSetsOfSizeK.stream().
 				map(l -> new AboxSubSet(this.ABox.Facts.stream().filter(f -> l.contains(f.Id)).collect(Collectors.toList()))).filter(s -> 
-				this.bottom.stream().anyMatch(b -> b.isSubSetOf(s)) && !s.isSuperSetOfAny(culprits)).collect(Collectors.toList());
+				/*this.bottom.stream().anyMatch(b -> b.isSubSetOf(s))&& */ !s.isSuperSetOfAny(culprits)).collect(Collectors.toList());
 		
 	}
 	

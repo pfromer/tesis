@@ -134,6 +134,18 @@ public class AboxSubSet {
 		return result;
 	}
 	
+	public List<AboxSubSet> completeSet(){
+		List<AboxSubSet> result = new ArrayList<AboxSubSet>();
+		
+		int i = 0;
+		int size = this.Facts.size();
+		while(i < size) {
+			result.add(this.copyWithoutStatus());
+			i++;
+		}		
+		return result;
+	}
+	
 	private AboxSubSet allFactsBut(int i){
 		return new AboxSubSet(this.Facts.stream().filter(f -> f.Id != i).collect(Collectors.toList()));
 	}
