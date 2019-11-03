@@ -1,0 +1,43 @@
+    <html>
+	<head>
+		<script type="text/javascript">
+		
+function isSubset(subSet, superSet) {
+	return subSet.every(x => superSet.some(y => y == x));
+}
+		
+function getSubsetsRec(superSet, k, idx, current, solution, bigRepairs) {    
+		
+		
+		//successful stop clause
+	    if (current.length == k) {
+	        solution.push(Array.from(current));
+	        return;
+	    }
+	    //unseccessful stop clause
+	    if (idx == -1) return;
+	    
+		//if(bigRepairs.some(r => isSubset(current, r))) return;
+	    //"guess" x is in the subset
+		var currentCopy = Array.from(current);
+		
+		current.splice(idx,1);
+		if(bigRepairs.some(r => isSubset(current, r))) return;
+	    getSubsetsRec(superSet, k, idx-1, current, solution, bigRepairs);
+	    
+	    //"guess" x is not in the subset
+		if(bigRepairs.some(r => isSubset(currentCopy, r))) return;
+	    getSubsetsRec(superSet, k, idx-1, currentCopy, solution, bigRepairs);
+	}
+
+	function getSubsets(superSet, k, bigRepairs) {
+	    var res = [];
+	    getSubsetsRec(superSet, k, superSet.length - 1, superSet, res, bigRepairs);
+	    return res;
+	}
+	</script>
+	
+	</head>
+	<body>
+	</body>
+</html>

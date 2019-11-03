@@ -1,0 +1,40 @@
+caso 2 r esta en repairsGrandes. quiero ver que es maximal.
+
+lema: al comienzo de la iteracion K todos los repairs de tamaño mayor o igual a (n  + 2 -  k) han sido agregados al conjunto repairsGrandes.
+
+
+si este lema es cierto, entonces cuando agregue r en la iteracion k, |r| = n + 1 - k, por lo tanto al ser consistente y al no ser subconjunto de ningun repairGrande, significa que es maximal.
+por absurdo: supongamos que no es maximal. entonces, como es consistente es subconjunto de algun repair de tamaño mayor. por el lema todos los repairs estan en repairsGrandes, pero dijimos que no es subconjunto de ningun repair grande. absurdo. el absurdo provino de suponer que no es maximal.
+----------------------
+
+entonce solo falta probar este lema: 
+al comienzo de la iteracion K todos los repairs de tamaño mayor o igual a (n  + 2 -  k) han sido agregados al conjunto repairsGrandes.
+
+para eso vamos a probar:
+---
+que si para el cominezo de la iteracion k agregue todos los repairs de tamaño mayor o igual que n + 2 - k entonces durnante la iteracion k voy a agregar todos los repairs de tamaño n + 1 - k.
+---
+caso base: K = 1
+en la iteracion 1 agregue todos los reapirs de tamaño mayor o igual que n + 2 - 1 = n + 1 a reapirs. trivial, pues no hay reapirs de tamaño n + 1.
+ademas, todos los conjuntos de tamaño (n + 1 - k = n) que no son subconjutno de ningun repair estan en top. trivial, pues en top tengo a D que no es subconjutno de ningun repair. 
+
+Paso inductivo
+
+
+Iteracion K cualquiera:
+HI -> todos los repairs de tamaño n + 2 - k estan en bigRepairs y todos los conjuntos de tamaño n + 1 - k que no son subconjunto de ningun repair estan en top.
+
+1 AgregarConsistentesEnTopARepairs(); -- si son consistnetes son repairs, pues por HI no son subconjunto de ningun repair. ahora tengo en repairsGrandes todos los repairs de tamaño mayor o igual que n + 1 -k.
+
+2 top ← subConjuntosDeKElementos(D,nTop−1).filtrarPor(s→repairsGrandes.ningunoCumple(r→s⊂r)));
+  ahora tengo en top todos los elementos de tamaño n - k que no son subconjutno de ningun repairsGrande.
+  
+3 nTop−−;
+
+TErmino la iteracion k. Cominezo de la iteracion K + 1:
+todos los repairs de tamaño n + 2 - (k + 1) estan en repairsGrandes y todos los conjuntos de tamaño n + 1 - (k + 1) que no son subconjunto de ningun repairGande estan en top.
+
+-------------------------------------------
+Lema probado.
+Por lo tanto r es maximal.
+---------------
