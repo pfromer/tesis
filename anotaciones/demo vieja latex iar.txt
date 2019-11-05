@@ -1,0 +1,37 @@
+
+\begin{lemma}
+Sea $k$ un número de iteración en el ciclo que se encuentra entre las líneas 9 y 12 del algoritmo \textit{RepairsFinder} y sea $n$ la cardinalidad de $D$. Al finalizar la ejecución del cuerpo del ciclo en esa iteración, todos los \textit{repairs} de cardinalidad mayor o igual que $n - k$ ya fueron agregados al conjunto \textit{repairsGrandes}.
+\end{lemma}
+
+
+\begin{proof}
+Por inducción en $k$. Caso base: $k = 1$.
+
+Notemos que antes de ejecutarse la primera iteración del ciclo, en  \textit{top} se encuentran todos los subcojuntos de $D$ de $n-1$ elementos, y en \textit{culprits} todos los \textit{culprits} de cardinalidad 1.
+En cuanto al contenido de la variable \textit{top}, alcanza ver las líneas 1 y 3 del algoritmo, y en cuanto a \textit{culprits} notemos que:
+\begin{itemize}
+    \item Al ejecutarse la línea 4, \textit{bottom} contiene todos los subconjuntos de $D$ de un elemento.
+    \item Al ejecutarse la línea 5, \textit{culprits} es el conjunto \textit{vacío}.
+    \item Al ejecutarse la función \textit{InicializarBottom} en la línea 8, teniendo en cuenta lo dicho en los items anteriores, y el ciclo entre las líneas 1 y 4 de tal función, es fácil ver la variable \textit{culprits} contiene exactamente los subconjuntos incosistentes de $D$ de un solo elemento.
+    \item Teniendo en cuenta  trivialmente que si un conjunto de un solo elemento es inconsistente entonces es también un \textit{culprit}, podemos decir entonces que en \textit{culprits} solo se encuentran los \textit{culprits} de un elemento.
+\end{itemize}
+Notemos ahora que en la iteración $K=1$ del ciclo entre las líneas 9 y 11 del algoritmo \textit{RepairsFinder}, se ejecutará por primera vez la función \textit{IterarTop}, la cual contiene en su primera línea una llamada a la función \textit{AgregarConsistentesEnTopARepairs}. En esta función, para todos los elementos en \textit{top}, que como mencionamos antes, contiene en esta iteración todos los subconjuntos de $D$ de $n-1$ elementos, se verifica que no sean superconjunto de algún elemento en \textit{culprits}. Pues dado que en \textit{culprits} se encuentran ahora todos los \textit{culprits} de un elemento, si algún elemento $s$ de \textit{top} fuera superconjunto de algún elemento en \textit{culprits}, $s$ sería inconsistente. Caso contrario, entre las líneas 4 y 5 de esta función, se verifica la consistencia de $s$ de la manera usual, y en caso de ser consistente se lo agrega al conjunto \textit{repairsGrandes}. Es trivial ver que al ser $s$ un subconjunto de $n-1$ elementos, entonces si es consistente es un \textit{repair}, pues $D$ es inconsistente.   Por lo tanto, dado que en la llamada a esa función se verificaron todos los subconjuntos de $n-1$ elementos, podemos decir que todos los \textit{repairs} de $n-1$ elementos han sido agregados a la variable \textit{repairsGrandes}.
+
+Paso inductivo:
+
+Asumamos que al finalizar la iteración $k$ todos los \textit{repairs} de cardinalidad mayor o igual que $n-k$ ya han sido agregados al conjunto de \textit{repairsGrandes}. Veamos que esto implica que al finalizar la iteración $k+1$ todos los \textit{repairs} de cardinalidad mayor igual que $n-(k+1)$ ya han sido agregados al conjunto de \textit{repairsGrandes}.
+
+Para ello, necesitamos probar primero el siguiente lema:
+
+Sea $k$ un número de iteración en el ciclo que se encuentra entre las líneas 9 y 12 del algoritmo. Al comenzar la ejecución del cuerpo del ciclo en esa iteración, todos los \textit{culprits} de cardinalidad menor o igual que $k$ ya han sido agregados al conjunto \textit{culprits}.
+
+Por inducción en $k$. Caso base: $k=1$.
+Notemos que 
+
+\begin{proof}
+Dada una iteraci
+\end{proof}
+
+
+
+\end{proof}
