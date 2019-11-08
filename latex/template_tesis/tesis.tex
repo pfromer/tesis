@@ -645,7 +645,7 @@ En la figura \ref{fig:espacio_busqueda_repair_finder} mostramos el espacio de b�
 
 
 \begin{figure}[ht]
-    \includegraphics[scale=0.3]{Espacio_busqueda_RepairsFinder.png}
+    \includegraphics[scale=0.3]{Espacio_busqueda_RepairFinder.png}
     \centering
     \caption{Espacio de búsqueda RepairsFinder}
     \label{fig:espacio_busqueda_repair_finder}
@@ -686,7 +686,7 @@ Por otro lado, todos los elementos de \textit{bottom} que no sean subcojuntos de
 \newtheorem{lemma}[theorem]{Lema}
 
 \begin{theorem}
-Dada una \textit{KB} = $(D, \Sigma)$, el algoritmo \textit{RepairsFinder} computa exactamente el conjunto de \textit{reapirs} para esa base de conocimiento.
+Dada una \textit{KB} = $(D, \Sigma)$, el algoritmo \textit{RepairsFinder} computa exactamente el conjunto de \textit{repairs} para esa base de conocimiento.
 \end{theorem}
 
 \begin{proof}
@@ -695,8 +695,8 @@ Sea $repairs(D, \Sigma)$ el conjunto de \textit{repairs} para una base de conoci
 Para probar esto, veamos que $r$ cumple las tres cualidades necesarias para ser un \textit{repair}:
 
 \begin{itemize}
-    \item $r$ es un subconjunto de $D$.
     \item $r$ es consistente.
+    \item $r$ es un subconjunto de $D$.
     \item $r$ es maximal. 
 \end{itemize}
 
@@ -705,91 +705,114 @@ Veamos primero que $r$ es consistente. Consideremos dos casos: o bien la corrida
 
 \underline{Caso $r$ fue agregado a \textit{repairsChicos}:} Notemos que solo se agregan elementos a \textit{repairsChicos} en la línea 11 de la funcion \textit{IterarBottom}. Notemos además que esa línea dice "\textit{repairsChicos.agregar(s)}", donde $s$ es un elemento en \textit{bottom}. Debemos probar entonces que los elementos en \textit{bottom} al momento de ejecutarse tal línea del algoritmo, son subconjuntos consistentes. Podemos ahora separar nuevamente en dos casos: o bien $r$ fue agregado en la primera iteración del \textit{while} de la línea 9 del algoritmo \textit{RepairsFinder}, o bien $r$ fue agregado en alguna iteración posterior. En el primer caso, el conjunto \textit{bottom} fue terminado de definir en la línea 5 de la función \textit{InicializarBottom} como un conjunto de subconjuntos consistentes. En el segundo caso, el conjunto \textit{bottom} fue redefinido en la iteración anterior del ciclo en la línea 14 de la función \textit{IterarBottom}, otra vez como un conjunto de subconjuntos consistentes. Por lo tanto, si $r$ pertenece a \textit{repairsChicos}, entonces $r$ es consistente.
 
-\underline{Caso $r$ fue agregado a \textit{repairsGrandes}:} Notemos que en la unica linea donde se agregan elementos a \textit{repairsGrandes} es en la línea 5 de la función \textit{AgregarConsistentesEnTopARepairs} y que en esa misma línea, en la cláusula del \textit{if} se verifica consistencia. Por lo tanto,  si $r$ pertenece a \textit{repairsGrandes}, entonces $r$ es consistente.
+\underline{Caso $r$ fue agregado a \textit{repairsGrandes}:} Notemos que en la única linea donde se agregan elementos a \textit{repairsGrandes} es en la línea 5 de la función \textit{AgregarConsistentesEnTopARepairs} y que en esa misma línea, en la cláusula del \textit{if} se verifica consistencia. Por lo tanto,  si $r$ pertenece a \textit{repairsGrandes}, entonces $r$ es consistente.
 
-Veamos ahora que $r$ es un subconjunto de $D$. Si $r$ fue agregado a \textit{repairsChicos}, entonces $r$ estaba en el conjunto \textit{bottom}, que está definido en toda iteración del \textit{while} principal como un conjunto de subconjuntos de $K$ elementos de $D$, donde $K$ es un número natural entre 1 y $n/2$. Para verficar esto, notemos que \textit{bottom} se inicializa en la línea 4 del algoritmo \textit{RepairsFinder} como el conjunto formado por todos los subconjuntos de un elemento de $D$. Veamos además que en cada iteración, \textit{bottom} se redefine en la línea 14 de la función \textit{IterarBottom} como todos los elementos consistentes de \textit{proximoBottom}, donde \textit{proximoBottom} está definido como un conjunto formado por subconjuntos de $K$ elementos de $D$, donde $K$ es \textit{nBottom}, un número natural inicializado en la segunda línea del algoritmo \textit{RepairsFinder}\footnote{Veremos más adelante que efectivamente la variable \textit{nBottom} toma de manera creciente todos los valores naturales entre 1 y $j$, donde j es un número menor o igual que $\lfloor n/2 \rfloor$}.
+Veamos ahora que $r$ es un subconjunto de $D$. Si $r$ fue agregado a \textit{repairsChicos}, entonces $r$ estaba en el conjunto \textit{bottom}, que está definido en toda iteración del \textit{while} principal como un conjunto de subconjuntos de $K$ elementos de $D$. Para verficar esto, notemos que \textit{bottom} se inicializa en la línea 4 del algoritmo \textit{RepairsFinder} como el conjunto formado por todos los subconjuntos de un elemento de $D$. Veamos además que en cada iteración, \textit{bottom} se redefine en la línea 14 de la función \textit{IterarBottom} como todos los elementos consistentes de \textit{proximoBottom}, donde \textit{proximoBottom} está definido como un conjunto formado por subconjuntos de $K$ elementos de $D$, donde $K$ es \textit{nBottom}, un número natural inicializado en la segunda línea del algoritmo \textit{RepairsFinder}\footnote{Veremos más adelante que efectivamente la variable \textit{nBottom} toma de manera creciente todos los valores naturales entre 1 y $j$, donde j es un número menor o igual que $\lfloor n/2 \rfloor$}.
 
 De forma similar, si $r$ fue agregado a \textit{repairsGrandes}, entonces $r$ estaba en el conjunto \textit{top}, el cual está definido en la tercera línea del algoritmo \textit{RepairsFinder} como el conjunto formado por todos los subconjuntos de $D$ de $n$ elementos\footnote{Trivialmente hay un solo subconjunto de $D$ de $n$ elementos.}. Notemos también, que en cada iteración del algoritmo, el conjunto \textit{top} se redefine en la función \textit{IterarTop} como un conjunto formado por $k$ elementos de $D$, donde $k = nTop - 1$\footnote{Veremos que \textit{nTop} tomará a lo largo de todo el algoritmo, de manera decreciente, todos los valores naturales entre $n$ e $i$, donde $i$ es un número mayor o igual que $\lfloor n \rfloor$ + 1 en el caso $n$ impar, y mayor o igual que  $\lfloor n \rfloor$ + 2 en el caso n par.}.
 
-toda iteración del ciclo como un conjunto formado por subconjuntos de $k$ elementos de $D$, donde $K$ es un número entre 
+Por último, veamos ahora que $r$ es maximal. Probemos primero el caso para $r \in$  \textit{repairsGrandes}.
 
+
+
+
+\begin{lemma}\label{repairs_grandes_agregados}
+Sea $k$ el número de una iteración en la ejecución de $repairsFinder(D, \Sigma)$. Entonces, al momento de la llamada a la función \textit{IterarTop} en ese número de iteración, todos los \textit{repairs} $r$ tal que $|r| \geq (n + 2 - k)$ han sido agregados al conjunto $repairsGrandes$.
+\end{lemma}
+
+\begin{proof}
+Probamos este lema por inducción en el número de iteración $k=1$. Para probar el caso base $k=1$ basta notar que no existen \textit{repairs} $r$ tal que $|r| \geq (n + 2 - k) = n+1$. Por lo tanto, es trivial decir afirmar que todos los \textit{repairs} que cumplen aquella condición han sido agregados al conjunto \textit{RepairsGrandes}.
+Para probar el paso inductivo asumimos que la condición vale para una iteración $k$ cualquiera y queremos ver que esto implica que vale para la iteración $k+1$. Es decir, queremos ver que si para la iteración $k$, al momento de llamar a la función \textit{IterarTop} todos los \textit{repairs} $r$ tal que  $|r| \geq (n + 2 - k)$ han sido agregados a \textit{RepairsGrandes}, esto implica que para la iteración $k+1$, al momento de llamar a la función \textit{IterarTop}, todos los \textit{repairs} $r$ tal que  $|r| \geq (n + 2 - (k+1))$ han sido agregados a \textit{RepairsGrandes}. 
+Asumamos entonces que se está ejecutando la iteración $k$ al momento de llamarse la función \textit{IterarTop}. Notemos que lo primero que hace esta función es hacer una llamada a la función \textit{AgregarConsistentesEnTopARepairs}. Por el lema \ref{tamano_top_2}, al momento de llamarse a esta función, $top$ consta de exactamente todos los subconjuntos de $D$ con tamaño $n - k + 1$ que no son subconjunto de ningún elemento en \textit{repairsGrandes}. Por hipótesis inductiva, \textit{top} consta entonces de todos los elementos de $n - k + 1$ que no son subconjunto de ningún \textit{repair} $r$ tal que $|r| \geq (n + 2 - k)$. 
+
+
+todos los elementos en \textit{top} al momento de llamarse a esta función son conjuntos de  $n + 1 - k$ elementos. Notemos que por el lema \ref{top_no_son_subconjunto_de_repairs_grandes}, los elementos en \textit{top} no son subconjunto de ningún elemento en \textit{RepairsGrandes}, y que todo subconjunto de $D$ con $n + 1 - k$ elementos que no sea subconjunto de algún elemento en \textit{RepairsGrandes} está en \textit{top}.  
+Notemos entonces, que al momento de llamarse a la función \textit{AgregarConsistentesEnTopARepairs}
+
+\end{proof}
+
+\begin{lemma}\label{todos_los_no_sub_de_repairs_de_n-k+1_estan_en_top}
+Sea $k$ una iteración en el ciclo principal de \textit{RepairsFinder}
+
+\end{lemma}
+
+
+\begin{lemma}\label{top_no_son_subconjunto_de_repairs_grandes}
+Para toda iteración $k$, los elementos en \textit{Top} son conjuntos que no son subconjunto de ningún conjunto en \textit{RepairsGrandes}.
+\end{lemma}
+
+\begin{proof}
+Notemos que si estamos en la primera iteración el conjunto \textit{RepairsGrandes} es vacío, con lo cual el lema es trivialmente cierto. Veamos además que si estamos en alguna iteración $k$ con $|k| \geq 2$, el conjunto \textit{top} se definió en la iteración anterior, en la línea 2 de la función \textit{IterarTop}, como un conjunto formado por conjuntos que no son subconjuntos de ningún $r$ en \textit{RepairsGrandes}. 
+\end{proof}
+
+\begin{lemma}\label{tamano_repairs_grandes}
+Sea $k$ un número de iteración en la ejecución del algoritmo \textit{RepairsFinder} y sea $r$ un conjunto agregado a $repairsGrandes$ en esa iteración $k$. Entonces $|r| = n + 1 - k$.
+\end{lemma}
+
+\begin{proof}
+Notemos que si $r$ fue agregado a \textit{repairsGrandes} en una iteración $k$ entonces $r$ estaba en el conjunto \textit{top} es esa iteración $k$. Alcanza con ver entonces, que por el lema \ref{tamano_top}, todos los elementos de \textit{top} en la iteración $k$ al momento de llamarse la función \textit{AgregarConsistentesEnTopARepairs} son conjuntos de $n + 1 - k$ elementos.
+\end{proof}
+
+
+\begin{lemma}\label{tamano_top}
+Sea $k$ un número de iteración en la ejecución del algoritmo \textit{RepairsFinder} y sea $t$ un elemento en \textit{top} al momento de llamarse la función \textit{AgregarConsistentesEnTopARepairs}. Entonces $t$ es un subconjunto de $D$ de $n + 1 - k$ elementos. 
+\end{lemma}
+
+\begin{proof}
+Notemos que para el caso $n=1$ esto es trivial, pues en esa iteración $top$ consta de un solo elemento, y este elemento es la base de datos $D$ que consta de $n + 1 - k = n$ elementos. Para el caso $k \geq 2$ el conjunto \textit{top} fue definido en la la línea 2 de la función \textit{IterarTop} en la ejecución de la iteración $k-1$, por lo tanto resta ver que en la iteración $k-1$ top se definió como un conjunto de conjuntos de $n + 1 - k$ elementos. Tomando $k - 1 = j$ quiero ver que en la iteración $j$ top se definió como un conjunto de conjuntos de $n + 1 - (j + 1)$ elementos. Teniendo en cuenta la línea 2 de la función \textit{IterarTop}, quiero ver que en la iteración $j$, $nTop-1=n + 1 - (j + 1)$, es decir $nTop-1=n-j$. Para el caso $j=1$ esto es trivial. Asumamos que para un $j$ cualquiera vale que $nTop-1=n-j$ y veamos que esto implica que vale para la iteración $j+1$. Teniendo en cuenta la línea 3 de esta función, sabemos que en la iteración $j+1$ la variable \textit{nTop} valdrá un valor menos que en la iteración j, por lo tanto queremos ver que $(nTop-1) - 1 = n - (j+1) \iff nTop-1 - 1 = n - j -1 \iff nTop-1 = n - j$, siendo esta igualdad válida por hipótesis inductiva.
+\end{proof}
+
+\begin{lemma}\label{tamano_top_2}
+Sea $k$ un número de iteración en la ejecución del algoritmo \textit{RepairsFinder}. Entonces, al momento de llamarse la función \textit{AgregarConsistentesEnTopARepairs} para esa iteración $k$, el conjunto \textit{top} es exactamente el conjunto de todos los subconjuntos $t$ de $D$ tales que $|t| = n + 1 - k$ con $t \not\subset r$ para todo $r$ en \textit{repairsGrandes}.
+\end{lemma}
+
+\begin{proof}
+Notemos que para el caso $n=1$ esto es trivial, pues en esta iteración el único subconjunto de $D$ con $n + 1 - k = n$ elementos es el mismo conjunto $D$. Y notemos que justamente en esa iteración, $top$ consta justamente de un solo elemento, el conjunto $D$. Veamos además que en esta iteración al momento de llamarse la función \textit{AgregarConsistentesEnTopARepairs}, el conjunto \textit{RepairsGrandes} es el conjunto vacío, por lo tanto, de manera trivial, ningún elemento en \textit{top} es subconjunto de algun $r$ en \textit{RepairsGrandes}.
+
+Para el caso $k \geq 2$ el conjunto \textit{top} fue definido en la la línea 2 de la función \textit{IterarTop} en la ejecución de la iteración $k-1$, por lo tanto resta ver que en la iteración $k-1$ top se definió como el conjunto formado por todos los conjuntos de $n + 1 - k$ elementos que no son subconjuntos de ningún $r$ en \textit{repairsGrandes}. Tomando el cambio de variable $k - 1 = j$, quiero ver que en la iteración $j$, \textit{top} se definió como el conjunto de  todos los conjuntos de $n + 1 - (j + 1)$ elementos\footnote{Asumimos en este punto que la función subconjuntosDeKElementos(k, D) devuelve exactamente el conjunto de todos los subconjuntos de k elementos de D}. Teniendo en cuenta el primer parámetro que recibe la función subconjuntosDeKElementos en la línea 2 de la función \textit{IterarTop}, quiero ver que en la iteración $j$, $nTop-1=n + 1 - (j + 1)$, es decir $nTop-1=n-j$. Para el caso $j=1$ esto es trivial. Asumamos que para un $j$ cualquiera vale que $nTop-1=n-j$ y veamos que esto implica que vale para la iteración $j+1$. Teniendo en cuenta la línea 3 de esta función, sabemos que en la iteración $j+1$ la variable \textit{nTop} valdrá un valor menos que en la iteración j, por lo tanto queremos ver que $(nTop-1) - 1 = n - (j+1)$. Notemos entonces que $(nTop-1) - 1 = n - (j+1) \iff nTop-1 - 1 = n - j -1 \iff nTop-1 = n - j$, siendo esta igualdad válida por hipótesis inductiva.
+Por último, en la línea 2 de aquella función, se excluye explícitamente de \textit{top} a los subconjuntos de \textit{repairsGrandes}.
+\end{proof}
+
+
+
+
+
+
+
+
+
+Por último, veamos ahora que $r$ es maximal. Probemos primero el caso para $r \in$  \textit{repairsChicos}. Por absurdo, asumamos que no es maximal; es decir que existe un elemento $\alpha \in D$ tal que $\alpha \not\in r$ y $r \cup \{\alpha\}$ es consistente. Llamamos $c$ al conjunto $r \cup \{\alpha\}$. 
+
+Como $r$ se encuentra en \textit{repairsChicos}, $r$ tuvo que haber sido agregado a ese conjunto en alguna iteración $k$ del \textit{while} en \textit{repairsFinder}. Notemos que por el lema \ref{lema_bottom_k_elementos}, $r$ es un conjunto de $k$ elementos. 
 
 
 
 \end{proof}
-r esta en rep chicos:
-notemos que solo se agregan elementos a repairsChicos en la liena 11 de la funcion IterarBottom. notemos que estos elementos son elementos del conjunto Bottom.
-notemos que si estamos en la primera iteracion del while en bottom hay solo subconj consistentes (ver inicializacon, en particualr son subconj de un solo elemento).
-notemos que si no estamos en la primer iteracion, entonces bottom esta definida en base a la iteracion anterior (linea 14 de iterar bottom). y veamos que en esa misma linea bottom filtra por s consistentes.
 
 
+\begin{lemma}\label{lema_bottom_k_elementos}
+Si $k$ es el número de iteración en la corrida del algoritmo \textit{RepairsFinder} en el que un elemento $r$ fue agregado al conjunto $repairsChicos$, entonces $r$ es un conjunto de $k$ elementos. 
+\end{lemma}
 
+\begin{proof}
+Para el caso $k=1$, alcanza con ver que en la inicialización de \textit{bottom} en la línea 4 del algoritmo, esta variable fue definida como un conjunto formado por subconjuntos de un elemento, y notar además que en la función \textit{InicializarBottom}, esta variable sigue sigue conteniendo subconjuntos de un solo elemento, aunque solo los consistentes.
 
+Notemos además, que trivialmente en cada iteración $k$ del ciclo principal, la variable \textit{proximoBottom} definida en la función \textit{IterarBottom}, es un conjunto que contiene conjuntos de $k+1$ elementos. Para esto alcanza con notar que esta variable solo es asignada en la primera línea de la función \textit{IterarBottom} como un conjunto formado por $nBottom + 1$ elementos de $D$. Notemos entonces que en la primera iteración $nBottom = 1$ y que en cada iteración $nBottom$ se incrementa en uno.
 
+Teniendo en cuenta lo anterior, y notando que si estamos en una iteración $k\geq 2$, la variable $bottom$ fue asignada como un subconjunto de \textit{proximoBottom} en la iteracion $k-1$, entonces en la iteración $k$, la variable \textit{bottom} es un conjunto formado por subconjuntos de $k$ elementos.
+\end{proof}
 
+\begin{lemma}\label{lema_proximo_bottom_k+1_elementos}
+Sea $k$ el número de una iteración del ciclo principal \textit{repairsFinder}. Entonces la variable \textit{proximoBottom} 
+\end{lemma}
 
+\begin{lemma}\label{culprits_inconsistentes}
+Sea $c$ un elemento en el conjunto \textit{culprits}. Entonces $c$ es inconsistente.
+\end{lemma}
 
-dado un r cualquiera en el resultado de RepairsFinder quiero ver que r es un repair.
-
-1)
-Veamos primero que r es consistente:
-Dos opciones: 
-r esta en small repairs:
-por la inicializacion sabemos que al arrancar el primer ciclo del while en Bottom solo tenemos los subconjuntos de D de un solo elemento.
-En la linea 11 de la funcion IterarBottom se agregan a repairsChicos solamente elementos de Bottom (que ya dijimos que son consistentes)
-En la linea 14 bottom se vuelve a definir bottom como un conjunto de subconjntos consistentes.
-Por lo tanto, dado que bottom siempre se define como una variable que contiene conjuntos consistentes y dado que en small repairs solo agregamos conjuntos de bottom, entonces si r estaba en small repairs, r es consistente.
-(notar que en ningun lado del algoritmo se setea algun otro valor a bottom y notar que en ningun lado del algoritmo se agregan cosas a smallRepairs).
-
-otra forma:
-r esta en rep chicos:
-notemos que solo se agregan elementos a repairsChicos en la liena 11 de la funcion IterarBottom. notemos que estos elementos son elementos del conjunto Bottom.
-notemos que si estamos en la primera iteracion del while en bottom hay solo subconj consistentes (ver inicializacon, en particualr son subconj de un solo elemento).
-notemos que si no estamos en la primer iteracion, entonces bottom esta definida en base a la iteracion anterior (linea 14 de iterar bottom). y veamos que en esa misma linea bottom filtra por s consistentes.
-
-r esta en repairs grandes:
-notemos que en la unica linea donde se agregan elementos a repairsGrandes es en la linea 5 de la funcion AgregarConsistentesEnTopARepairs y que en esa misma linea hay un if que verifica consistencia.
-
-
-2)
-Veamos que es subconjunto de D:
-trivialmente: el algoritmo tiene como unica entrada la base de conociiento (D, Sigma) y no hay ninguna otra entada. el algoritmo solo arma subconjuntos con hechos de D y no genera hechos nuevos. por lo tanto r es un subconjunto de D.
-
-3)
-Veamos que es maximal. por absurdo. asumamos que no es maximal, es decir existe un elementio alfa tal que r U {alfa} es consistente. llamemos c a r U {alfa}
-caso 1:
-r esta en repairsChicos:
-existe alguna iteracion k en la que r fue agregado a repairsChicos.
-en esa iteracion k r fue parte del conjunto bottom (de k elementos).
-
-entonces tiene que ser que en esa iteraicon k, c esta en proximoBottom, pues en la linea 1 del algortimo vemos que proximoBottom tiene todos los subconjuntos de D de tamaño k + 1, que son superconjunto de algun elemento en bottom y no son superconjutno de allgun culprit (probar esto pero la idea es que como c es consistente no puede ser superconjunto de ningun culprit, por lo tanto esta en proximo bottom pues cumple las tres condiciones necesarias para estar en proximo bottom). por lo tanto al ser c un subconjunto de D de tamaño bBottom + 1, y al ser c un supercojunto de r, y al no ser superconjunto de ningun culprit, (probar esto) pues c es consistente, entonces c tiene que estar en proximo bottom. 
-
-
-vemos que en la linea 10 de iterarBottom hay un if que dice que solo se van a agregar s a reapirsChicos si todos los conjuntos en proximoBottom tales que son superconjunto de r no son consistentes. por lo tanto, en esa iteracion no se agrego r a repairsChicos, pues sabemos que existe c que esta en proximo bottom, que es super conj de r y que es consistente. (pero esto es absurdo pues dijimos quie r fue agregado a repairsChicos en esa iteracion k. el absurdo provino de asumir que existe tal c consistente, por lo tanto no exsiste tal c).
-
-lema, en culprits solo tengo conjuntos inconsistentes:
-demo: solo se agregan en InicializarBottom en la linea 3, con un if que dice claramente que solo se agrega si s es inconsistente. lo mismo para linea 5 de IterarBottom. por lo tanto en culprits solo hay subconj inconsistentes por lo tanto c no es supercnoj de ningun culprit pues c es consistente.
-
-caso 2:
-r esta en repairsGrandes.
-caso 1: 
-r se agergo en la primera iteracion. entonces r es la base de datos-> no existe tal c.
-caso 2:
-r se agrego en alguna iteracion k con k > 1.
-r se agrego a repairsGrandes en la linea 5 de AgregarConsistentesEnTopARepairs,, r es un elemento en top.
-top se definio en la iteracion k - 1 como 
-
-???
-
-
-
-
-
-como c tiene tamaño 
-
-
-
-
+\begin{proof}
+Trivialmente, el algoritmo \textit{RepairsFinder} solo agrega elementos a la variable \textit{culprits} si son conjuntos inconsistentes, basta con ver la línea 3 de la función \textit{InicializarBottom} y la línea 6 de la función \textit{IterarBottom} y notar que en ninguna otra línea del algoritmo se agregan elementos a este conjunto.
+\end{proof}
 
 
 
