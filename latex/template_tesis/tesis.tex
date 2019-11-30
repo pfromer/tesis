@@ -566,7 +566,7 @@ $InicializarBottom()$\;
             $IterarTop()$\;			
 			$IterarBottom()$\;
 }
-\If{$esImpar(\sharp(D))$ {\bf and} $top \neq \emptyset$ }
+\If{nBottom == nTop {\bf and} $top \neq \emptyset$ }
 {
 $AgregarConsistentesEnTopARepairs()$\;
 }
@@ -579,12 +579,12 @@ $AgregarConsistentesEnTopARepairs()$\;
 \begin{algorithm}[H]
 \SetAlgoLined
 
-\For{$s \in bottom$}{
-$s.consistente \gets chequearConsistencia(s, \Sigma)$\;
-\lIf{$\neg s.consitente$}{
-$culprits.agregar(s)$}
+\For{$b \in bottom$}{
+$b.consistente \gets chequearConsistencia(b, \Sigma)$\;
+\lIf{$\neg b.consitente$}{
+$culprits.agregar(b)$}
 }
-$bottom \gets bottom.filtrarPor(s \rightarrow s.consistente )$
+$bottom \gets bottom.filtrarPor(b \rightarrow b.consistente )$
 
  \caption{InicializarBottom}
 \end{algorithm}
@@ -594,7 +594,7 @@ $bottom \gets bottom.filtrarPor(s \rightarrow s.consistente )$
 \begin{algorithm}[H]
 \SetAlgoLined
 $AgregarConsistentesEnTopARepairs()$\;
-$top \gets subConjuntosDeKElementos(D, nTop - 1).filtrarPor(s \rightarrow repairsGrandes.ningunoCumple(r \rightarrow s \subset r) ))$\;	
+$top \gets subConjuntosDeKElementos(D, nTop - 1).filtrarPor(t \rightarrow repairsGrandes.ningunoCumple(rg \rightarrow t \subset rg) ))$\;	
 $nTop--$\;		
 \caption{IterarTop}
  
@@ -604,10 +604,10 @@ $nTop--$\;
 \begin{figure}
 \begin{algorithm}[H]
 \SetAlgoLined
-\For{$s \in top$}{
-     \lIf{$culprits.algunoCumple(c \rightarrow c \subset s)$}{$s.consistente \gets false$}
-     \Else{$s.consistente \gets chequearConsistencia(s, \Sigma)$\;
-        \lIf{s.consistente}{repairsGrandes.agregar(s)}
+\For{$t \in top$}{
+     \lIf{$culprits.algunoCumple(c \rightarrow c \subset t)$}{$t.consistente \gets false$}
+     \Else{$t.consistente \gets chequearConsistencia(t, \Sigma)$\;
+        \lIf{t.consistente}{repairsGrandes.agregar(t)}
         }
 }
 \caption{AgregarConsistentesEnTopARepairs}
@@ -619,19 +619,19 @@ $nTop--$\;
 \SetAlgoLined
 
 
- $proximoBottom \gets subConjuntosDeKElementos(D, nBottom + 1).filtrarPor(s \rightarrow culprits.ningunoCumple(c \rightarrow c \subset s))$\;
-\For{$s \in proximoBottom$}{
-     \lIf{$repairsGrandes.algunoCumple(r \rightarrow s \subset r)$}{$s.consistente \gets true$}
-     \Else{$s.consistente \gets chequearConsistencia(s, \Sigma)$\;
-        \lIf{$\neg s.consistente$}{$culprits.agregar(s)$}
+ $proximoBottom \gets subConjuntosDeKElementos(D, nBottom + 1).filtrarPor(pb \rightarrow culprits.ningunoCumple(c \rightarrow c \subset pb))$\;
+\For{$pb \in proximoBottom$}{
+     \lIf{$repairsGrandes.algunoCumple(rg \rightarrow pb \subset rg)$}{$pb.consistente \gets true$}
+     \Else{$pb.consistente \gets chequearConsistencia(pb, \Sigma)$\;
+        \lIf{$\neg pb.consistente$}{$culprits.agregar(pb)$}
         }
 }
 
-\For{$s \in bottom$}{
-     \If{$proximoBottom.filtrarPor(t \rightarrow s \subset t).todosCumplen(t \rightarrow \neg t.consistente) $}
-        {$repairsChicos.agregar(s)$}
+\For{$b \in bottom$}{
+     \If{$proximoBottom.filtrarPor(pb \rightarrow b \subset pb).todosCumplen(pb \rightarrow \neg pb.consistente) $}
+        {$repairsChicos.agregar(b)$}
 }
-$bottom \gets proximoBottom.filtrarPor(s \rightarrow s.consistente)$\;
+$bottom \gets proximoBottom.filtrarPor(b \rightarrow s.consistente)$\;
 $nBottom++$\;
  \caption{IterarBottom}
 
@@ -640,7 +640,7 @@ $nBottom++$\;
 
 \subsection{Entendiendo RepairsFinder}
 
-En la figura \ref{fig:espacio_busqueda_repair_finder} mostramos el espacio de búsqueda del algoritmo \textit{RepairsFinder}. Como se muestra en la misma, inicializamos a \textit{top} como el conjunto de todos los subconjuntos de $N - 1$ elementos de $D$, y a \textit{bottom} como al conjunto de todos los subconjuntos de un elemento en $D$. El algoritmo irá iterando en este espacio, donde para cada iteración se actualizará el conjunto de \textit{repairs} y de \textit{culprits}, como así también los conjuntos $top$ y $bottom$. 
+En la figura \ref{fig:espacio_busqueda_repair_finder} mostramos el espacio de búsqueda del algoritmo \textit{RepairsFinder}. Como se muestra en la misma, inicializamos a \textit{top} como el conjunto de todos los subconjuntos de $N$ elementos de $D$, y a \textit{bottom} como al conjunto de todos los subconjuntos de un elemento en $D$. El algoritmo irá iterando en este espacio, donde para cada iteración se actualizará el conjunto de \textit{repairs} y de \textit{culprits}, como así también los conjuntos $top$ y $bottom$. 
 
 
 
@@ -689,7 +689,7 @@ Por otro lado, todos los elementos de \textit{bottom} que no sean subcojuntos de
 Dada una \textit{KB} = $(D, \Sigma)$, el algoritmo \textit{RepairsFinder} computa exactamente el conjunto de \textit{repairs} para esa base de conocimiento.
 \end{theorem}
 
-Sea $repairs(D, \Sigma)$ el conjunto de \textit{repairs} para una base de conocimiento. Veamos que dado un un \textit{r} cualquiera en el \textit{output} de $RepairsFinder(D, \Sigma)$, $r$ pertenece al conjunto $repairs(D, \Sigma)$.
+Sea $repairs(D, \Sigma)$ el conjunto de \textit{repairs} para una base de conocimiento. Veamos que dado un \textit{r} cualquiera en el \textit{output} de $RepairsFinder(D, \Sigma)$, $r$ pertenece al conjunto $repairs(D, \Sigma)$.
 
 Para probar esto, veamos que $r$ cumple las tres cualidades necesarias para ser un \textit{repair}:
 
@@ -705,26 +705,31 @@ Caso 1: $r \in repairsGrandes$. Asumamos entonces que $r \in repairsGrandes$ y v
 
 \underline{$r$ es consistente:} Notemos que \textit{RepairsFinder} solo agrega elementos a \textit{repairsGrandes} en la línea 5 de la función \textit{AgregarConsistentesEnTopARepairs} y que en esa misma línea, en la cláusula del \textit{if} se verifica consistencia. Por lo tanto,  si $r$ pertenece a \textit{repairsGrandes}, entonces $r$ es consistente.
 
-\underline{$r$ es un subconjunto de $D$:} Si $r$ fue agregado a \textit{repairsGrandes}, entonces $r$ es un elemento que perteneció al conjunto \textit{top} para alguna iteración $k$ del algoritmo. Para verificar esto, notar que tal como se dijo en el párrafo anterior, solo se agregan elementos a \textit{repairsGrandes} en la línea 5 de la función \textit{AgregarConsistentesEnTopARepairs}, y que en esa línea se agrega el elemento $s$ al conjunto, donde $s$ es un elemento perteneciente a \textit{top}. Notemos entonces que \textit{top} se define por primera vez en la tercera línea del algoritmo \textit{RepairsFinder} como el conjunto formado por todos los subconjuntos de $D$ de $n$ elementos\footnote{Trivialmente hay un solo subconjunto de $D$ de $n$ elementos.}. Notemos también, que en cada iteración del algoritmo, el conjunto \textit{top} se redefine en la función \textit{IterarTop} como un conjunto formado por $k$ elementos de $D$, donde $k = nTop - 1$\footnote{Veremos que \textit{nTop} tomará a lo largo de todo el algoritmo, de manera decreciente, todos los valores naturales entre $n$ e $i$, donde $i$ es un número mayor o igual que $\lfloor n \rfloor$ + 1 en el caso $n$ impar, y mayor o igual que  $\lfloor n \rfloor$ + 2 en el caso n par.}.
+\underline{$r$ es un subconjunto de $D$:} Si $r$ fue agregado a \textit{repairsGrandes}, entonces $r$ es un elemento que perteneció al conjunto \textit{top} para alguna iteración $k$ del algoritmo. Para verificar esto, notar que tal como se dijo en el párrafo anterior, solo se agregan elementos a \textit{repairsGrandes} en la línea 5 de la función \textit{AgregarConsistentesEnTopARepairs}, y que en esa línea se agrega el elemento $t$ al conjunto, donde $t$ es un elemento perteneciente a \textit{top}. Notemos entonces que \textit{top} se define por primera vez en la tercera línea del algoritmo \textit{RepairsFinder} como el conjunto formado por todos los subconjuntos de $D$ de $n$ elementos\footnote{Trivialmente hay un solo subconjunto de $D$ de $n$ elementos.}. Notemos también, que en cada iteración del algoritmo, el conjunto \textit{top} se redefine en la función \textit{IterarTop} como un conjunto formado por $k$ elementos de $D$, donde $k = nTop - 1$\footnote{Veremos que \textit{nTop} tomará a lo largo de todo el algoritmo, de manera decreciente, todos los valores naturales entre $n$ e $i$, donde $i$ es un número mayor o igual que $\lfloor n \rfloor$ + 1 en el caso $n$ impar, y mayor o igual que  $\lfloor n \rfloor$ + 2 en el caso n par.}.
 
-\underline{$r$ es maximal:}  Sea $k$ el número de iteración en el que $r$ fue agregado a \textit{repairsGrandes}. Teniendo en cuenta que $r$ es un elemento de \textit{top} en la iteración $k$, y considerando el lema \ref{tamano_top_2}, resulta entonces que $|r| = n + 1 - k$. Considerando el mismo lema, $r$ no es subconjunto de ningún elemento en \textit{repairsGrandes}.
-Por el lema \ref{repairs_grandes_agregados}, todos los \textit{repairs} de cardinalidad mayor estricta que $n + 1 - k$ están en el conjunto \textit{repairsGrandes}. Por lo tanto, $r$ no es subconjunto propio de ningún \textit{repair}. Teniendo en cuenta ahora que $r$ es un subconjunto de $D$ y que es consistente, junto con el lema \ref{s_es_un_repair} resulta que $r$ es un \textit{repair}.
+\underline{$r$ es maximal:}  Vimos que si $r$ se agregó a \textit{repairsGrandes} este fue agregado en la linea 5 de la funcion \textit{AgregarConsistentesEnTopARepairsGrandes}. Notemos ahora que hay dos casos posibles, o bien la llamada a esta función se ejecutó desde la función \textit{IterarTop} en alguna iteración $k$ del \textit{while} principal del algoritmo \textit{RepairsFinder} o bien la llamada a \textit{AgregarConsistentesEnTopARepairsGrandes} se ejecutó fuera del ciclo, en la linea 14 del algoritmo \textit{RepairsFinder}.
+
+Caso A: Sea $k$ el número de iteración en el que $r$ fue agregado a \textit{repairsGrandes}. Teniendo en cuenta que $r$ es un elemento de \textit{top} en la iteración $k$, y considerando el lema \ref{tamano_top_2}, resulta entonces que $|r| = n + 1 - k$. Considerando el mismo lema, $r$ no es subconjunto de ningún elemento en \textit{repairsGrandes}.
+Por el lema \ref{repairs_grandes_agregados}, todos los \textit{repairs} de cardinalidad mayor estricta que $n + 1 - k$ están en el conjunto \textit{repairsGrandes}. Por lo tanto, $r$ no es subconjunto propio de ningún \textit{repair}. Por absurdo asumamos que $r$ no es maximal, es decir que existe un subconjunto $s \subseteq D$ tal que $s$ es consistente y $r \subset s$. Existen dos opciones, o bien $s$ es un \textit{repair} o bien $s$ está incluido en un \textit{repair}. En ambos casos resulta que $r$ es un subconjunto propio de algún \textit{repair}, lo cual es absurdo.
+
+Caso B: Sea $k$ la última iteración que se ejecutó del ciclo \textit{RepairsFinder} antes de la llamada a \textit{AgregarConsistentesEnTopARepairsGrandes} en la línea 14 del algoritmo. Teniendo en cueneta que $r$ es un elemento de \textit{top}, y considerando el lema \ref{fin_iteracion_k_top}, resulta entonces que $|r| = n - k$. Considerando el mismo lema, $r$ no es subconjunto de ningún elemento en \textit{repairsGrandes}.
+Por el lema \ref{fin_iteracion_k_repairs}, todos los \textit{repairs} de cardinalidad mayor estricta que $n - k$ están en el conjunto \textit{repairsGrandes}. Por lo tanto, $r$ no es subconjunto propio de ningún \textit{repair}. Asumiendo por absurdo que $r$ no es maximal y siguiendo el mismo razonamiento que en el caso A, resulta que $r$ es maximal.  
 
 Caso 2: $r \in repairsChicos$. Asumamos entonces que $r \in repairsChicos$ y veamos que también se cumplen las tres condiciones.
 
-\underline{$r$ es consistente:} Notemos que solo se agregan elementos a \textit{repairsChicos} en la línea 11 de la funcion \textit{IterarBottom}. Notemos además que esa línea dice "\textit{repairsChicos.agregar(s)}", donde $s$ es un elemento en \textit{bottom}. Debemos probar entonces que los elementos en \textit{bottom} al momento de ejecutarse tal línea del algoritmo, son subconjuntos consistentes. Podemos ahora separar nuevamente en dos casos: o bien $r$ fue agregado en la primera iteración del algoritmo \textit{RepairsFinder}, o bien $r$ fue agregado en alguna iteración posterior. En el primer caso, la última asignación del conjunto \textit{bottom} previa a la ejecución de tal linea fue en la línea 5 de la función \textit{InicializarBottom} como un conjunto de subconjuntos consistentes. En el segundo caso, el conjunto \textit{bottom} fue redefinido en la iteración anterior del ciclo en la línea 14 de la función \textit{IterarBottom}, otra vez como un conjunto de subconjuntos consistentes. Por lo tanto, si $r$ pertenece a \textit{repairsChicos}, entonces $r$ es consistente.
+\underline{$r$ es consistente:} Notemos que solo se agregan elementos a \textit{repairsChicos} en la línea 11 de la funcion \textit{IterarBottom}. Notemos además que esa línea dice "\textit{repairsChicos.agregar(b)}", donde $b$ es un elemento en \textit{bottom}. Debemos probar entonces que los elementos en \textit{bottom} al momento de ejecutarse tal línea del algoritmo, son subconjuntos consistentes. Podemos ahora separar nuevamente en dos casos: o bien $r$ fue agregado en la primera iteración del algoritmo \textit{RepairsFinder}, o bien $r$ fue agregado en alguna iteración posterior. En el primer caso, la última asignación del conjunto \textit{bottom} previa a la ejecución de tal línea fue en la línea 5 de la función \textit{InicializarBottom} como un conjunto de subconjuntos consistentes. En el segundo caso, el conjunto \textit{bottom} fue redefinido en la iteración anterior del ciclo en la línea 14 de la función \textit{IterarBottom}, otra vez como un conjunto de subconjuntos consistentes. Por lo tanto, si $r$ pertenece a \textit{repairsChicos}, entonces $r$ es consistente.
 
-\underline{$r$ es un subconjunto de $D$:} Si $r$ fue agregado a \textit{repairsChicos}, entonces $r$ estaba en el conjunto \textit{bottom}, que está definido en toda iteración del \textit{while} principal como un conjunto de subconjuntos de $k$ elementos de $D$. Para verficar esto, notemos que \textit{bottom} se inicializa en la línea 4 del algoritmo \textit{RepairsFinder} como el conjunto formado por todos los subconjuntos de un elemento de $D$. Veamos además que en cada iteración, \textit{bottom} se redefine en la línea 14 de la función \textit{IterarBottom} como todos los elementos consistentes de \textit{proximoBottom}, donde \textit{proximoBottom} está definido como un conjunto formado por subconjuntos de $K$ elementos de $D$, donde $K$ es \textit{nBottom}, un número natural inicializado en la segunda línea del algoritmo \textit{RepairsFinder}\footnote{Veremos más adelante que efectivamente la variable \textit{nBottom} toma de manera creciente todos los valores naturales entre 1 y $j$, donde j es un número menor o igual que $\lfloor n/2 \rfloor$}.
+\underline{$r$ es un subconjunto de $D$:} Si $r$ fue agregado a \textit{repairsChicos}, entonces $r$ estaba en el conjunto \textit{bottom}, que está definido en toda iteración del \textit{while} principal como un conjunto de subconjuntos de $k$ elementos de $D$. Para verficar esto, notemos que \textit{bottom} se inicializa en la línea 4 del algoritmo \textit{RepairsFinder} como el conjunto formado por todos los subconjuntos de un elemento de $D$. Veamos además que en cada iteración, \textit{bottom} se redefine en la línea 14 de la función \textit{IterarBottom} como todos los elementos consistentes de \textit{proximoBottom}, donde \textit{proximoBottom} está definido como un conjunto formado por subconjuntos de \textit{nBottom + 1} elementos de $D$, donde \textit{nBottom} siempre vale igual al número de iteración que se está ejecutando.
 
-\underline{$r$ es maximal:} Sea $r$ un elemento en \textit{repairsChicos}. Asumamos por absurdo que $r$ no es maximal; es decir que existe un elemento $\alpha \in D$ tal que $\alpha \not\in r$ y $r \cup \{\alpha\}$ es consistente. Llamamos $c$ al conjunto $r \cup \{\alpha\}$. Sea $k$ el número de iteración en el que $r$ fue agregado a \textit{repairsChicos}. Mirando la línea de la función \textit{IterarBottom} es fácil ver que si $r$ fue agregado a \textit{repairsChicos} entonces $r$ perteneció al conjunto \textit{bottom} en esa iteración $k$. Por el lema \ref{bottom_cardinalidad_k} sabemos además que entonces $|r| = k$. Veamos además que en esa iteraicon $k$, el conjunto $c$ perteneció a \textit{proximoBottom}. Para afirmar esto tenemos en cuenta el lema \ref{proximoBottom_cardinalidad_k}, el cual dice que en una iteración $k$, si un subconjunto $s$ de $D$ tiene cardinalidad $k+1$ y no es superconjunto de ningun \textit{culprit}, entonces al ejecutarse la línea 9 de la función \textit{IterarBottom}, $s$ está en \textit{proximoBottom}. Trivialmente, $|c| = k+1$, y además por el lema \ref{culprits_inconsistentes}, $c$ no puede ser superconjunto de ningún elemento en \textit{culprits}, pues $c$ es consistente.
-Tengamos en cuenta ahora que en la linea 10 de \textit{IterarBottom} la cláusula del \textit{if} dice que dice solo se va a agregar $r$ a reapirsChicos si todos los conjuntos en \textit{proximoBottom} que sean superconjunto de $r$ no son consistentes. Por lo tanto, en esa iteración no se pudo haber agregado $r$ a \textit{repairsChicos}, pues $c$ esta en \textit{proximoBottom} y $c$ es superconjunto de $r$ y $c$ es consistente. Pero esto es absurdo, pues dijimos que $r$ fue agregado a \textit{repairsChicos} en esa iteracion $k$. El absurdo provino de asumir que $r$ no es maximal, por lo tanto $r$ es maximal.
+\underline{$r$ es maximal:} Sea $r$ un elemento en \textit{repairsChicos}. Asumamos por absurdo que $r$ no es maximal; es decir que existe un elemento $\alpha \in D$ tal que $\alpha \not\in r$ y $r \cup \{\alpha\}$ es consistente. Llamamos $c$ al conjunto $r \cup \{\alpha\}$. Sea $k$ el número de iteración en el que $r$ fue agregado a \textit{repairsChicos}. Considerando la línea 11 de la función \textit{IterarBottom} es fácil ver que si $r$ fue agregado a \textit{repairsChicos} entonces $r$ perteneció al conjunto \textit{bottom} en esa iteración $k$. Por el lema \ref{bottom_cardinalidad_k} sabemos además que entonces $|r| = k$. Veamos además que en esa iteración $k$, el conjunto $c$ perteneció a \textit{proximoBottom}. Para afirmar esto tenemos en cuenta el lema \ref{proximoBottom_cardinalidad_k}, el cual dice que en una iteración $k$, si un subconjunto $s$ de $D$ tiene cardinalidad $k+1$ y no es superconjunto de ningun \textit{culprit}, entonces al ejecutarse la línea 9 de la función \textit{IterarBottom}, $s$ está en \textit{proximoBottom}. Trivialmente, $|c| = k+1$, y además por el lema \ref{culprits_inconsistentes}, $c$ no puede ser superconjunto de ningún elemento en \textit{culprits}, pues $c$ es consistente.
+Tengamos en cuenta ahora que en la linea 10 de \textit{IterarBottom} la cláusula del \textit{if} determina que solo se agregará $r$ a reapirsChicos cuando todos los conjuntos en \textit{proximoBottom} que sean superconjunto de $r$ no sean consistentes. Por lo tanto, en esa iteración no se pudo haber agregado $r$ a \textit{repairsChicos}, pues $c$ esta en \textit{proximoBottom} y $c$ es superconjunto de $r$ y $c$ es consistente. Pero esto es absurdo, pues dijimos que $r$ fue agregado a \textit{repairsChicos} en esa iteracion $k$.
 
 \begin{lemma}\label{bottom_cardinalidad_k}
 Sea $k$ un número de iteración en la ejecución del algoritmo \textit{RepairsFinder}. Entonces, al momento de ejecutarse la linea 9 de la función \textit{IterarBottom}, todos los elementos en \textit{bottom} son subconjuntos de $D$ de $k$ elementos.
 \end{lemma}
 
 \begin{proof}
-Para el caso $k = 1$, vemos que el conjunto \textit{bottom} se inicializó en la línea 4 del algoritmo \textit{RepairsFinder} como un conjunto formado por todos los subconjuntos de un elemento de $D$. Notar que $nBottom = 1$ al momento de esta asignación. Para el caso $k>1$ notemos que la última asignación a la variable \textit{bottom} fue en la iteración $k-1$ en la línea 14 de la función \textit{iterarBottom}. En esa línea se redefine a \textit{bottom} como todos los elementos de \textit{proximoBottom} consistentes. Tenemos que ver entonces que en esa iteración $k-1$ los elementos en \textit{proximoBottom} tienen cardinalidad $k$. Para ver esto alcanza con ver el lema \ref{proximoBottom_cardinalidad_k} y ver que entre la línea 9 y la línea 14 del algoritmo no se reasignó el conjunto \textit{proximoBottom}\footnote{Consideramos el cambio de variable, $j = k-1$. Si en la iteración $k$ todos los elementos en \textit{proximoBottom} tienen $k+1$ elementos, entonces en la iteración $j = k-1$ todos los elementos en \textit{proximoBottom} tienen $j + 1 = k$ elementos al ejecutarse la línea 9 de la función \textit{IterarBottom}.} .
+Para el caso $k = 1$, vemos que el conjunto \textit{bottom} se inicializó en la línea 4 del algoritmo \textit{RepairsFinder} como un conjunto formado por todos los subconjuntos de un elemento de $D$. Para el caso $k>1$ notemos que la última asignación a la variable \textit{bottom} fue en la iteración $k-1$ en la línea 14 de la función \textit{iterarBottom}. En esa línea se redefine a \textit{bottom} como todos los elementos de \textit{proximoBottom} consistentes. Necesitamos ver entonces que en esa iteración $k-1$ los elementos en \textit{proximoBottom} tienen cardinalidad $k$, lo cual queda probado por el lema \ref{proximoBottom_cardinalidad_k}\footnote{Consideramos el cambio de variable, $j = k-1$. Si en la iteración $k$ todos los elementos en \textit{proximoBottom} tienen $k+1$ elementos, entonces en la iteración $j = k-1$ todos los elementos en \textit{proximoBottom} tienen $j + 1 = k$ elementos al ejecutarse la línea 9 de la función \textit{IterarBottom}.} .
 \end{proof}
 
 \begin{lemma}\label{proximoBottom_cardinalidad_k}
@@ -732,7 +737,7 @@ Sea $k$ una iteración en el algoritmo \textit{RepairsFinders}. Entonces, al mom
 \end{lemma}
 
 \begin{proof}
-Veamos que la variable \textit{nBottom} tiene el valor $k$ en cada iteración $k$. Esto es trivial, pues esta variable se inicializa en 1 y en cada ciclo de \textit{RepairsFinder} se incremente en uno en la línea 15 de la función \textit{IterarBottom}. Teniendo en cuenta entonces que la variable \textit{proximoBottom} se asigna únicamente en la línea 1 de la función \textit{IterarBottom} como todos los subconjuntos de  $D$ de $nBottom + 1$ elementos que no sean superconjunto de ningún \textit{culprit}, el lema queda probado.
+Trivialmente, al comienzo de cada iteración $k$, la variable \textit{nBottom} guarda el valor $k$, pues esta se asigna en 1 antes de la primera iteración y se incrementa en una unidad al final de cada iteración. Teniendo en cuenta entonces que la variable \textit{proximoBottom} se asigna únicamente en la línea 1 de la función \textit{IterarBottom} como todos los subconjuntos de  $D$ de $nBottom + 1$ elementos que no sean superconjunto de ningún \textit{culprit}, el lema queda probado.
 \end{proof}
 
 
@@ -810,7 +815,43 @@ Sea $k$ un número de iteración en la ejecución de \textit{RepairsFinder}. Ent
 Por el lema \ref{repairs_grandes_agregados}, al momento de comenzar la iteracion k del ciclo principal de \textit{RepairsFinder}, el conjunto \textit{repairsGrandes} es el conjunto formado por todos los \textit{repairs} $r$ tal que $|r|>(n+ 1-k)$. Esto es equivalente a decir que al momento de finalizar la iteracion $k-1$, el conjunto \textit{repairsGrandes} es el conjunto formado por todos los  \textit{repairs} $r$ tal que $|r|>(n+ 1-k)$. Tomando el cambio de variable $j=k-1$ tenemos entonces que al finalizar la iteracion $j$, el conjunto \textit{repairsGrandes} es el conjunto formato por todos los \textit{repairs} $r$ tal que $|r|>n-j$.
 \end{proof}
 
- 
+
+\begin{lemma}\label{lema_iteracion_k_repairsChicos}
+Sea $k$ una iteración en la ejecución del algoritmo \textit{repairsFinder}. Entonces, al comenzar tal iteración, todos los \textit{repairs} $r$ tal que $|r| < k$ han sido agregados al conjunto \textit{repairsChicos}.
+\end{lemma}
+
+\begin{proof}
+Probamos el lema por inducción en el número de iteración $k$. Veamos que el lema es trivialmente válido para $k=1$, pues por definición de \textit{repair}, $|r| > 0$, por lo tanto no existen \textit{repairs} con $|r| < k$ en esta iteración.
+
+Veamos ahora el paso inductivo, es decir asumamos que para el comienzo de una iteración $k$ cualquiera todos los \textit{repairs} $r$ tal que $|r| < k$ están en \textit{repairsChicos} y veamos que esto implica que al comienzo de la iteración $k+1$ todos los \textit{repairs} $r$ tal que $|r| < k + 1$ habrán sido agregados al conjunto \textit{repairsChicos}.
+
+
+Sea entonces el momento en el que se va a ejecutar el \textit{for} en la línea 9 de la función \textit{IterarBottom} en la iteración $k$. Teniendo en cuenta el lema bottom, este \textit{for} va a iterar sobre el conjunto formado por todos los subconjuntos $b$ consistentes de $D$ tal que $|b| = k$.  En el cuerpo de cada iteración de este \textit{for}, se evaluará si para cada uno de estos subconjuntos $b$, sucede que para todo conjunto en \textit{proximoBottom} $pb$ que sea superconjunto de $b$ sucede que $pb$ es inconsistente. En caso de ser esto verdadero se agrega $b$ a \textit{repairsChicos}. Veamos entonces que si $r$ es un \textit{repair} $r$ tal que $|r| = k$, entonces $r$ será  agregado a \textit{repairsChicos} en alguna iteracion de este \textit{for}.
+Por absurdo asumamos que $r$ no se agrega. Hay solo dos razones posibles: o bien $r$ no está en \textit{bottom}, o bien $r$ está en \textit{bottom} pero no resulta verdadera la condición del \textit{if} en la línea 10.
+Caso 1: $r$ no esta en \textit{bottom}. Absurdo, pues $r$ es un conjunto consistente y $|r| = k$. Entonces, por el lema XX3, $r$ está en \textit{bottom}.
+Caso 2: $r$ está en \textit{bottom} pero la cláusula del \textit{if} en la linea 10 es falsa. Esto quiere decir que hay algún elemento en \textit{proximoBottom} $pb$ que es superconjunto de $r$ y $pb$ está marcado como consistente. Pero por lema \ref{finalizar_iteracion_8_proximo_bottom} $pb$ es un subconjunto consistente de $D$ con $|pb| = k + 1$. Por lo tanto, si la condición dio falsa, $pb$ es un superconjunto estricto de $r$, y $pb$ es consistente. Absurdo, pues $r$ es un \textit{repair}.
+
+
+Teniendo en cuenta los dos absurdos, si $r$ es un \textit{repair} tal que $|r| = k$, $r$ será agregado a \textit{repairsChicos} en la iteración $k$. Por lo tanto al comenzar la iteracion k + 1, teniendo en cuenta la hipóteis inductiva, al comenzar la iteración $k+1$ todos los \textit{repairs} $r$ tal que $|r| < k + 1$ habrán sido agregados al conjunto de \textit{repairsChicos}.
+
+\end{proof}
+
+\begin{lemma}\label{finalizar_iteracion_8_proximo_bottom}
+Sea $k$ una iteración en la ejecución del algoritmo \textit{repairsFinder}. Entonces, al finalizar la línea 8 de la función \textit{IterarBottom}, si para un elemento $pb$ en \textit{proximoBottom} resulta que $pb.consistente == true $, entonces $pb$ es un subconjunto consistente de $D$ y $|pb| = k +1$.
+\end{lemma}
+
+\begin{proof}
+\underline{$pb$ es consistente}: vemos que en el \textit{for} que se ejecuta en la línea 2 de la función \textit{IterarBottom}, $pb$ fue marcado como consistente en solo dos casos: o bien $pb$ es un subconjunto de algún elemento en \textit{repairsGrandes}, o bien la llamada a la función \textit{chequearConsistencia(pb, $\Sigma$)} retornó \textit{true}. En el primer caso $pb$ es consistente, pues todos los elementos en \textit{repairsGrandes} son conjuntos consistentes, en el segundo caso, dado que la función \textit{chequearConsistencia} es correcta, $pb$ también es consistente.
+
+\underline{$|pb| = k + 1$}: \textit{proximoBottom} se define en la línea 1 de la función \textit{IterarBottom} como el conjunto formado por todos los elementos de $nBottom + 1$ elementos, y sabemos que $nBottom = k$, pues $nBottom$ vale 1 en la iteración $k$ y $nBottom$ se incrementa en uno en cada iteración.
+
+\underline{$pb \subset D$}: Trivialmente, \textit{proximoBottom} fue definido como un conjunto de subconjuntos de $D$.
+\end{proof}
+
+
+
+
+
 
 
 
