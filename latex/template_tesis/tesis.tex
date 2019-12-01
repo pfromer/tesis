@@ -631,7 +631,7 @@ $nTop--$\;
      \If{$proximoBottom.filtrarPor(pb \rightarrow b \subset pb).todosCumplen(pb \rightarrow \neg pb.consistente) $}
         {$repairsChicos.agregar(b)$}
 }
-$bottom \gets proximoBottom.filtrarPor(b \rightarrow s.consistente)$\;
+$bottom \gets proximoBottom.filtrarPor(b \rightarrow b.consistente)$\;
 $nBottom++$\;
  \caption{IterarBottom}
 
@@ -826,9 +826,9 @@ Probamos el lema por inducción en el número de iteración $k$. Veamos que el l
 Veamos ahora el paso inductivo, es decir asumamos que para el comienzo de una iteración $k$ cualquiera todos los \textit{repairs} $r$ tal que $|r| < k$ están en \textit{repairsChicos} y veamos que esto implica que al comienzo de la iteración $k+1$ todos los \textit{repairs} $r$ tal que $|r| < k + 1$ habrán sido agregados al conjunto \textit{repairsChicos}.
 
 
-Sea entonces el momento en el que se va a ejecutar el \textit{for} en la línea 9 de la función \textit{IterarBottom} en la iteración $k$. Teniendo en cuenta el lema bottom, este \textit{for} va a iterar sobre el conjunto formado por todos los subconjuntos $b$ consistentes de $D$ tal que $|b| = k$.  En el cuerpo de cada iteración de este \textit{for}, se evaluará si para cada uno de estos subconjuntos $b$, sucede que para todo conjunto en \textit{proximoBottom} $pb$ que sea superconjunto de $b$ sucede que $pb$ es inconsistente. En caso de ser esto verdadero se agrega $b$ a \textit{repairsChicos}. Veamos entonces que si $r$ es un \textit{repair} $r$ tal que $|r| = k$, entonces $r$ será  agregado a \textit{repairsChicos} en alguna iteracion de este \textit{for}.
+Sea entonces el momento en el que se va a ejecutar el \textit{for} en la línea 9 de la función \textit{IterarBottom} en la iteración $k$. Teniendo en cuenta el lema \ref{lemma_bottom}, este \textit{for} va a iterar sobre el conjunto formado por todos los subconjuntos $b$ consistentes de $D$ tal que $|b| = k$.  En el cuerpo de cada iteración de este \textit{for}, se evaluará si para cada uno de estos subconjuntos $b$, sucede que para todo conjunto en \textit{proximoBottom} $pb$ que sea superconjunto de $b$ sucede que $pb$ es inconsistente. En caso de ser esto verdadero se agrega $b$ a \textit{repairsChicos}. Veamos entonces que si $r$ es un \textit{repair} $r$ tal que $|r| = k$, entonces $r$ será  agregado a \textit{repairsChicos} en alguna iteracion de este \textit{for}.
 Por absurdo asumamos que $r$ no se agrega. Hay solo dos razones posibles: o bien $r$ no está en \textit{bottom}, o bien $r$ está en \textit{bottom} pero no resulta verdadera la condición del \textit{if} en la línea 10.
-Caso 1: $r$ no esta en \textit{bottom}. Absurdo, pues $r$ es un conjunto consistente y $|r| = k$. Entonces, por el lema XX3, $r$ está en \textit{bottom}.
+Caso 1: $r$ no esta en \textit{bottom}. Absurdo, pues $r$ es un conjunto consistente y $|r| = k$.
 Caso 2: $r$ está en \textit{bottom} pero la cláusula del \textit{if} en la linea 10 es falsa. Esto quiere decir que hay algún elemento en \textit{proximoBottom} $pb$ que es superconjunto de $r$ y $pb$ está marcado como consistente. Pero por lema \ref{finalizar_iteracion_8_proximo_bottom} $pb$ es un subconjunto consistente de $D$ con $|pb| = k + 1$. Por lo tanto, si la condición dio falsa, $pb$ es un superconjunto estricto de $r$, y $pb$ es consistente. Absurdo, pues $r$ es un \textit{repair}.
 
 
@@ -837,7 +837,7 @@ Teniendo en cuenta los dos absurdos, si $r$ es un \textit{repair} tal que $|r| =
 \end{proof}
 
 \begin{lemma}\label{finalizar_iteracion_8_proximo_bottom}
-Sea $k$ una iteración en la ejecución del algoritmo \textit{repairsFinder}. Entonces, al finalizar la línea 8 de la función \textit{IterarBottom}, si para un elemento $pb$ en \textit{proximoBottom} resulta que $pb.consistente == true $, entonces $pb$ es un subconjunto consistente de $D$ y $|pb| = k +1$.
+Sea $k$ una iteración en la ejecución del algoritmo \textit{repairsFinder}. Entonces, al finalizar la línea 8 de la función \textit{IterarBottom}, si para un elemento $pb$ en \textit{proximoBottom} resulta que $pb.consistente$ es \textit{verdadero}, entonces $pb$ es un subconjunto consistente de $D$ y $|pb| = k +1$.
 \end{lemma}
 
 \begin{proof}
@@ -847,6 +847,44 @@ Sea $k$ una iteración en la ejecución del algoritmo \textit{repairsFinder}. En
 
 \underline{$pb \subset D$}: Trivialmente, \textit{proximoBottom} fue definido como un conjunto de subconjuntos de $D$.
 \end{proof}
+
+
+
+\begin{lemma}\label{lemma_bottom}
+Sea $k$ una iteración en la ejecución del algoritmo \textit{repairsFinder}. Entonces al finalizar la línea 8 de la funcion \textit{IterarBottom} en esa iteración, el conjunto  \textit{bottom} consiste exactamente en todos los subconjuntos $b$ tal que $b \subset D$, $b$ consistente y $|b| = k$.
+\end{lemma}
+
+\begin{proof}
+Ya vimos que todos los elementos en \textit{bottom} son subconjuntos de $D$. Veamos además que en cada iteración $k$ se cumple que al finalizar la línea 8 de la función \textit{IterarBottom} se cumple que $b$ es consistente y que $|b| = k$. Separamos en dos casos, $k=1$ y $k>1$.
+\underline{Caso $k=1$}: \textit{bottom} se definió en la línea 4 del algoritmo como
+todos los subconjuntos $b$ de $D$ tal que $|b| = 1$, y en la función \textit{InicializarBottom} se restringe \textit{bottom} a todos aquellos conjuntos $b$ que sean consistentes.
+
+\underline{Caso $k>1$}: Notar que en este caso \textit{bottom} se definió en la iteración $k-1$ en la línea 14 de la función \textit{IterarBottom} como el conjunto de todos los elementos en \textit{proximoBottom} que estén marcados como consistentes. Veamos entonces que al momento de ejecutarse tal línea de la función, los elementos en \textit{proximoBottom} que están marcados como consistentes son exactamente todos los subconjuntos $pb$ de $D$ tales que $pb$ es consistente y $|pb| = k$. Veamos entonces las dos inclusiones, llamo subKCosistenes al conjunto definido por todos los subconjuntos consistes $s$ de $D$ tales que $|s| = k$ y llamo \textit{proximoBottomConsistenes} al conjunto de elementos que están en \textit{proximoBottom} marcados como consistentes al momento de ejecutarse la línea 14 de la función \textit{IterarBottom} en la iteración $k-1$.
+
+\underline{$subKCosistenes \subseteq proximoBottomConsistentes$}: Notemos que \textit{proximoBottom} fue definido en la línea 1 de la misma función como el conjunto formado por todos los subconjuntos $pb \subset D$ tales que $|pb| = nBottom + 1$ y $pb$ no es superconjunto de ningún \textit{culprit}. Teniendo en cuenta que al momento de ejecutarse tal línea de la función la variable \textit{nBottom} vale $k$ para toda iteración $k$, resulta entonces trivial que en la iteración $k-1$, $nBottom + 1$ vale k y por lo tanto, después de ejecutada la línea 1, el conjunto \textit{proximoBottom} es exactamente el conjunto de todos los conjuntos $pb$ tales que $|pb| = k $ y $pb$ no es superconjunto de ningún \textit{culprit}. Dado que por el lema \ref{culprits_inconsistentes} todos los elementos en \textit{culprits} son inconsistentes, resulta que $s$ no puede ser superconjunto de algún \textit{culprit}, pues $s$ es consistente, por lo tanto $s$ está en \textit{proximoBottom} una vez ejecutada la línea 1 en la iteración $k-1$.
+Notemos que por el lema \ref{for_proximo_bottom} una vez iterados todos los elementos $pb$ en el \textit{for} de al línea 2 de la función, todos aquellos elementos $pb$ serán marcados como consistentes si solo si son consistentes. Por lo tanto $s$ será marcado como consistente una vez finalizado tal \textit{for} y por lo tanto $s \in proximoBottomConsistentes$. 
+
+\underline{$proximoBottomConsistentes \subseteq subKCosistenes$}: Sea entonces $pb$ un elemento en \textit{proximoBottom} marcado como consistente en la línea 14 de la función \textit{IterarBottom} en la iteración $k-1$. Ya vimos que $|pb| = k$, pues $nBottom + 1 = k$. Además por el lema \ref{for_proximo_bottom} dado que $pb$ fue marcado como consistente resulta que $pb$ es consistente. Por lo tanto $pn \in subKCosistenes$. 
+
+\end{proof}
+
+
+\begin{lemma}\label{for_proximo_bottom}
+Una vez finalizado el \textit{for} de la línea 2 de la función \textit{IterarBottom}, todos los elementos en \textit{proximoBottom} son marcados como consistentes si solo si son consistentes.
+\end{lemma}
+
+\begin{proof}
+Notemos que el \textit{for} de la línea 2 de la función \textit{IterarBottom} itera sobre todos los elementos en \textit{proximoBottom}. Sea entonces un elemento en $pb$ en \textit{proximoBottom} consistente. En caso de que sea subconjunto de algún elemento $rg$ en \textit{repairsGrandes} será marcado como consistente, lo cual es correcto pues todos los elementos en \textit{repairsGrandes} son consistentes.  En caso contrario se evaluará su consistencia por medio de la función \textit{chequearConsistencia}, que al ser correcta retornará \textit{verdadero}. En caso de que $pb$ sea inconsistente, $pb$ no puede ser subconjutno de ningun elemento en \textit{repairsGrandes}, y por lo tanto se evaluará consistencia por medio de la función \textit{chequearConsistencia}, que al ser correcta en este caso retornará \textit{falso}.  
+\end{proof}
+
+
+
+
+
+
+
+
+
 
 
 
