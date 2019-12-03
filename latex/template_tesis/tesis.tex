@@ -16,6 +16,23 @@
 
 \newcommand{\ch}{\textit{chase}}
 
+\newcommand{\parteEntera}{\lfloor n/2 \rfloor}
+\newcommand{\reapairs}{\textit{repairs }}
+\newcommand{\reapair}{\textit{repair }}
+\newcommand{\reapairsGrandes}{\textit{repairsGrandes }}
+\newcommand{\reapairsChicos}{\textit{repairsChicos }}
+\newcommand{\reapairsFinder}{\textit{reapairsFinder }}
+
+\newcommand{\nBottom}{\textit{nBottom }}
+\newcommand{\nTop}{\textit{nTop }}
+\newcommand{\ttop}{\textit{top }}
+\newcommand{\bottom}{\textit{bottom }}
+\newcommand{\iterarBottom}{\textit{IterarBottom }}
+\newcommand{\iterarTop}{\textit{IterarTop }}
+\newcommand{\proximoBottom}{\textit{proximoBottom }}
+\newcommand{\culprits}{\textit{culprits }}
+\newcommand{\culprit}{\textit{culprit }}
+
 \begin{document}
 
 
@@ -724,6 +741,38 @@ Caso 2: $r \in repairsChicos$. Asumamos entonces que $r \in repairsChicos$ y vea
 \underline{$r$ es maximal:} Sea $r$ un elemento en \textit{repairsChicos}. Asumamos por absurdo que $r$ no es maximal; es decir que existe un elemento $\alpha \in D$ tal que $\alpha \not\in r$ y $r \cup \{\alpha\}$ es consistente. Llamamos $c$ al conjunto $r \cup \{\alpha\}$. Sea $k$ el número de iteración en el que $r$ fue agregado a \textit{repairsChicos}. Considerando la línea 11 de la función \textit{IterarBottom} es fácil ver que si $r$ fue agregado a \textit{repairsChicos} entonces $r$ perteneció al conjunto \textit{bottom} en esa iteración $k$. Por el lema \ref{bottom_cardinalidad_k} sabemos además que entonces $|r| = k$. Veamos además que en esa iteración $k$, el conjunto $c$ perteneció a \textit{proximoBottom}. Para afirmar esto tenemos en cuenta el lema \ref{proximoBottom_cardinalidad_k}, el cual dice que en una iteración $k$, si un subconjunto $s$ de $D$ tiene cardinalidad $k+1$ y no es superconjunto de ningun \textit{culprit}, entonces al ejecutarse la línea 9 de la función \textit{IterarBottom}, $s$ está en \textit{proximoBottom}. Trivialmente, $|c| = k+1$, y además por el lema \ref{culprits_inconsistentes}, $c$ no puede ser superconjunto de ningún elemento en \textit{culprits}, pues $c$ es consistente.
 Tengamos en cuenta ahora que en la linea 10 de \textit{IterarBottom} la cláusula del \textit{if} determina que solo se agregará $r$ a reapirsChicos cuando todos los conjuntos en \textit{proximoBottom} que sean superconjunto de $r$ no sean consistentes. Por lo tanto, en esa iteración no se pudo haber agregado $r$ a \textit{repairsChicos}, pues $c$ esta en \textit{proximoBottom} y $c$ es superconjunto de $r$ y $c$ es consistente. Pero esto es absurdo, pues dijimos que $r$ fue agregado a \textit{repairsChicos} en esa iteracion $k$.
 
+Probemos ahora que dado un \textit{repair} $r_0$ perteneciente al conjunto de $repairs(D, \Sigma)$, $r_0$ se encuentra en el \textit{output} de \textit{repairsFinder(D, $\Sigma$)}.
+
+\underline{Caso $|D|$ par y $r_0 > \parteEntera$}: Notemos que por el lema \ref{repairs_grandes_agregados}, en caso de que se haya ejecutado la iteracion $k = n - |r_0| + 1$, todos los \reapairs $r$ tales que $|r| \geq n - k + 1$ habrán sido agregados al conjunto \reapairsGrandes. Pero $k = n - |r_0| + 1$, por lo tanto $n - k + 1 = |r_0|$. Es decir que si se ejecutó la iteración $k$ todos los \reapairs $r$ tales que $r \geq |r_0|$ habrán sido agregados a \reapairsGrandes, por lo tanto, en particular $r_0$ habrá sido agregado a \reapairsGrandes.
+
+Asumamos por absurdo que la última iteración que se ejecutó fue la iteracion $j$ con $j < k$. Notemos que por la condición del \textit{while} en la línea 9 del algoritmo \reapairsFinder, la última iteración que se ejecutará será la que haga valer alguna de las tres condiciones siguientes:
+
+\begin{itemize}
+    \item $bottom = \emptyset$
+    \item $top = \emptyset$
+    \item $nBottom \geq nTop$
+\end{itemize}
+
+Asumamos por absurdo que una vez ejecutada la iteración $j$ vale alguna de esas tres condiciones.
+
+\underline{Caso \bottom = $\emptyset$}: En este caso, teniendo en cuenta que la variable \bottom  se definió por última vez en la línea 14 de la función \iterarBottom durante la iteración $j$, teniendo en cuenta que \proximoBottom es en este caso el conjunto de todos los subconjuntos $s \subset D$, con $|s| = nBottom + 1$ tales que no son superconjunto de ningún elemento en \culprits, y teniendo en cuenta que por el lema \ref{culprits_inconsistentes} todos los \culprits son inconsistentes podemos decir que, gracias al lema \ref{for_proximo_bottom}, si la variable \bottom es el conjunto vacío entonces todos los subconjuntos $s \subset D$ con $|s| = j + 1$ son inconsistentes\footnote{Notemos que al ejecutarse la línea 1 de la función \iterarBottom en la iteración $j$ la variable \nBottom vale j, pues \nBottom vale 1 en la primera iteración y se incrementa en un valor en cada iteración.}.
+
+Por el lema lema \ref{maxima_cantidad_de_iteraciones} $j\leq \parteEntera$, y por lo tanto $|r_0| > j$. Hay dos opciones, o bien $|r_0| = j + 1$, o bien $|r_0| > j + 1$. En el caso $|r_0| = j + 1$, dado que todos los subconjuntos $s \in D$ tales que $|s| = j + 1$ son inconsistentes, resulta que $r_0$ es inconsistente, lo cual es absurdo. En el caso $|r_0| > j + 1$, sea $s$ algún subconjunto tal que $s \subset r_0$ con $|s| = j + 1$. Resulta entonces que $s$ es inconsistente y $s$ es subconjunto de un \reapair. Absurdo. 
+
+\underline{Caso top = $\emptyset$}: En este caso, la línea 2 de la función \iterarTop retornó el conjunto vacío durante la ejecución de la iteración $j$. Teniendo en cuenta que $nTop - 1 = n - j$ y el lema \ref{repairs_grandes_agregados} todos los \repairs $r$ tales que $r > n + 1 - j$ ya están en \reapairsGrandes. Considerando ahora los lemas \ref{tamano_top_2} y \ref{f_agregar_consistentes_en_top_a_repairs} todos los \reapairs $r$ tales que $r = n + 1 - j$ serán también agregados al conjunto \reapairsGrandes después de ejecutarse la línea 1 de la función \iterarTop. Podemos decir entonces que al ejecutarse la línea 2 de esta función todos los \reapairs $r$ tales que $|r| \geq n + 1 - j$ ya se encuentran agregados en \textit{repairsGrandes}. Por lo tanto si la línea 2 de esta función retornó vacío durante la ejecución de la iteración $j$, esto significa que todos los subconjuntos $s \subset D$ tales que $|s| = n - j$ son subconjuntos propios de algún \reapair. 
+
+Dijimos que $j < k$, y por lo tanto $n - j > n - k$, lo cual lleva a $n - j \geq n - k + 1 =|r_{0}|$. Si $n - j = |r_{0}|$ entonces por lo dicho en el párrafo anterior $r_0$ es subconjunto propio de algún \textit{repair}, lo cual es absurdo. Si $n - j > |r_0|$ entonces tomo algún subconjunto $s$ tal que $r_0 \subset s$ con $|s| = n - j$. Dado que $s$ es subconjunto propio de algún \texit{repair} $r$ resulta que $r_0 \subset r$, lo cual es absurdo.
+
+
+
+\underline{Caso $\nBottom \geq \nTop$}: Dado que $\nBottom$ se inicializa en 1, y dado que \nTop se inicializa en n, y que ambos se acercan a la misma velocidad, este caso solo puede ocurrir cuando ya se hayan ejecutado $\parteEntera$ iteraciones. Queremos ver que se ejecutó la iteración $n - |r_0| + 1$, alcanza entonces con ver que  $\parteEntera \geq n - |r_0| + 1$. Dado que $n$ es par resulta que $n - \parteEntera = \parteEntera$. Dado que $|r_0| > \parteEntera$, resulta entonces que $n - |r_0| < \parteEntera$, y por lo tanto $n - |r_0| + 1 \leq \parteEntera$.
+
+
+
+
+
+
+
 \begin{lemma}\label{bottom_cardinalidad_k}
 Sea $k$ un número de iteración en la ejecución del algoritmo \textit{RepairsFinder}. Entonces, al momento de ejecutarse la linea 9 de la función \textit{IterarBottom}, todos los elementos en \textit{bottom} son subconjuntos de $D$ de $k$ elementos.
 \end{lemma}
@@ -877,9 +926,16 @@ Una vez finalizado el \textit{for} de la línea 2 de la función \textit{IterarB
 Notemos que el \textit{for} de la línea 2 de la función \textit{IterarBottom} itera sobre todos los elementos en \textit{proximoBottom}. Sea entonces un elemento en $pb$ en \textit{proximoBottom} consistente. En caso de que sea subconjunto de algún elemento $rg$ en \textit{repairsGrandes} será marcado como consistente, lo cual es correcto pues todos los elementos en \textit{repairsGrandes} son consistentes.  En caso contrario se evaluará su consistencia por medio de la función \textit{chequearConsistencia}, que al ser correcta retornará \textit{verdadero}. En caso de que $pb$ sea inconsistente, $pb$ no puede ser subconjutno de ningun elemento en \textit{repairsGrandes}, y por lo tanto se evaluará consistencia por medio de la función \textit{chequearConsistencia}, que al ser correcta en este caso retornará \textit{falso}.  
 \end{proof}
 
+\begin{lemma}\label{maxima_cantidad_de_iteraciones}
+La máxima cantidad de iteraciones que se puede ejecutar en el \textit{while} de \reapairsFinder es $\parteEntera$.
+\end{lemma}
 
+\begin{proof}
+\underline{Caso n impar:} En este caso $n = \parteEntera + 1 + \parteEntera$. Teniendo en cuenta que \nBottom se inicializa en 1, y que \nTop se inicializa en $n$, y notando que la primera se incrementa en cada iteración en una unidad, y que la segunda va decrementando a la misma velocidad que la primera, trivialmente la condición $nTop > nBottom$ será falsa solo cuando las dos variables valgan lo mismo, es decir cuando las dos valgan $\parteEntera + 1$, lo cual solo ocurrirá después de $\parteEntera$ iteraciones. 
 
+\underline{Caso n par:} En este caso $n = \parteEntera + \parteEntera$. Con el mismo razonamiento que en el caso impar, la condición $nTop > nBottom$ será falsa solo cuando \nTop valga $\parteEntera$ y \nBottom valga $\parteEntera + 1$, lo cual solo ocurrirá después de $\parteEntera$ iteraciones. 
 
+\end{proof}
 
 
 
