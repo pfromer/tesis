@@ -690,6 +690,7 @@ Mientras tanto, en cada iteración \textit{BottomUp} procedemos de la siguiente 
 Dada una \textit{KB} = $(D, \Sigma)$, el algoritmo \textit{RepairsFinder} computa exactamente el conjunto de \textit{repairs} para esa base de conocimiento.
 \end{theorem}
 
+\begin{proof}
 Sea $repairs(D, \Sigma)$ el conjunto de \textit{repairs} para una base de conocimiento. Veamos que dado un \textit{r} cualquiera en el \textit{output} de $RepairsFinder(D, \Sigma)$, $r$ pertenece al conjunto $repairs(D, \Sigma)$.
 
 Para probar esto, veamos que $r$ cumple las tres cualidades necesarias para ser un \textit{repair}:
@@ -723,7 +724,7 @@ Caso 2: $r \in repairsChicos$. Asumamos entonces que $r \in repairsChicos$ y vea
 \underline{$r$ es un subconjunto de $D$:} Si $r$ fue agregado a \textit{repairsChicos}, entonces $r$ estaba en el conjunto \textit{bottom}, que está definido en toda iteración del \textit{while} principal como un conjunto de subconjuntos de $k$ elementos de $D$. Para verficar esto, notemos que \textit{bottom} se inicializa en la línea 4 del algoritmo \textit{RepairsFinder} como el conjunto formado por todos los subconjuntos de un elemento de $D$. Veamos además que en cada iteración, \textit{bottom} se redefine en la línea 14 de la función \textit{IterarBottom} como todos los elementos consistentes de \textit{proximoBottom}, donde \textit{proximoBottom} está definido como un conjunto formado por subconjuntos de \textit{nBottom + 1} elementos de $D$, donde \textit{nBottom} siempre vale igual al número de iteración que se está ejecutando.
 
 \underline{$r$ es maximal:} Sea $r$ un elemento en \textit{repairsChicos}. Asumamos por absurdo que $r$ no es maximal; es decir que existe un elemento $\alpha \in D$ tal que $\alpha \not\in r$ y $r \cup \{\alpha\}$ es consistente. Llamamos $c$ al conjunto $r \cup \{\alpha\}$. Sea $k$ el número de iteración en el que $r$ fue agregado a \textit{repairsChicos}. Considerando la línea 11 de la función \textit{IterarBottom} es fácil ver que si $r$ fue agregado a \textit{repairsChicos} entonces $r$ perteneció al conjunto \textit{bottom} en esa iteración $k$. Por el lema \ref{bottom_cardinalidad_k} sabemos además que entonces $|r| = k$. Veamos además que en esa iteración $k$, el conjunto $c$ perteneció a \textit{proximoBottom}. Para afirmar esto tenemos en cuenta el lema \ref{proximoBottom_cardinalidad_k}, el cual dice que en una iteración $k$, si un subconjunto $s$ de $D$ tiene cardinalidad $k+1$ y no es superconjunto de ningun \textit{culprit}, entonces al ejecutarse la línea 9 de la función \textit{IterarBottom}, $s$ está en \textit{proximoBottom}. Trivialmente, $|c| = k+1$, y además por el lema \ref{culprits_inconsistentes}, $c$ no puede ser superconjunto de ningún elemento en \textit{culprits}, pues $c$ es consistente.
-Tengamos en cuenta ahora que en la linea 10 de \textit{IterarBottom} la cláusula del \textit{if} determina que solo se agregará $r$ a reapirsChicos cuando todos los conjuntos en \textit{proximoBottom} que sean superconjunto de $r$ no sean consistentes. Por lo tanto, en esa iteración no se pudo haber agregado $r$ a \textit{repairsChicos}, pues $c$ esta en \textit{proximoBottom} y $c$ es superconjunto de $r$ y $c$ es consistente. Pero esto es absurdo, pues dijimos que $r$ fue agregado a \textit{repairsChicos} en esa iteracion $k$.
+Tengamos en cuenta ahora que en la linea 10 de \textit{IterarBottom} la cláusula del \textit{if} determina que solo se agregará $r$ a \textit{repairsChicos} cuando todos los conjuntos en \textit{proximoBottom} que sean superconjunto de $r$ no sean consistentes. Por lo tanto, en esa iteración no se pudo haber agregado $r$ a \textit{repairsChicos}, pues $c$ esta en \textit{proximoBottom} y $c$ es superconjunto de $r$ y $c$ es consistente. Pero esto es absurdo, pues dijimos que $r$ fue agregado a \textit{repairsChicos} en esa iteracion $k$.
 
 Probemos ahora que dado un \textit{repair} $r_0$ perteneciente al conjunto de $repairs(D, \Sigma)$, $r_0$ se encuentra en el \textit{output} de \textit{repairsFinder(D, $\Sigma$)}.
 
@@ -735,8 +736,11 @@ Sea de ahora en más $n = |D|$ y separemos en los siguientes cuatro casos:
     \item $n$ par o impar y  $|r_0| \leq \parteEntera$
     \item $n$ impar y $|r_0| = \parteEntera + 1$
 \end{itemize}
-
-\underline{Caso $n$ par y $r_0 > \parteEntera$}: Notemos que por el lema \ref{repairs_grandes_agregados}, en caso de que se haya ejecutado la iteracion $k = n - |r_0| + 1$, todos los \textit{repairs} $r$ tales que $|r| \geq n - k + 1$ habrán sido agregados al conjunto \textit{repairsGrandes}. Pero $k = n - |r_0| + 1$, por lo tanto $n - k + 1 = |r_0|$. Es decir que si se ejecutó la iteración $k$ todos los \textit{repairs} $r$ tales que $r \geq |r_0|$ habrán sido agregados a \textit{repairsGrandes}, por lo tanto, en particular $r_0$ habrá sido agregado a \textit{repairsGrandes}.
+\begin{center}
+ \underline{Caso $n$ par y $r_0 > \parteEntera$}
+ \end{center}
+ 
+ Notemos que por el lema \ref{repairs_grandes_agregados}, en caso de que se haya ejecutado la iteracion $k = n - |r_0| + 1$, todos los \textit{repairs} $r$ tales que $|r| \geq n - k + 1$ habrán sido agregados al conjunto \textit{repairsGrandes}. Pero $k = n - |r_0| + 1$, por lo tanto $n - k + 1 = |r_0|$. Es decir que si se ejecutó la iteración $k$ todos los \textit{repairs} $r$ tales que $r \geq |r_0|$ habrán sido agregados a \textit{repairsGrandes}, por lo tanto, en particular $r_0$ habrá sido agregado a \textit{repairsGrandes}.
 
 Asumamos por absurdo que la última iteración que se ejecutó fue la iteracion $j$ con $j < k$. Notemos que por la condición del \textit{while} en la línea 9 del algoritmo \textit{repairsFinder}, la última iteración que se ejecutará será la que haga valer alguna de las tres condiciones siguientes:
 
@@ -760,7 +764,10 @@ Dijimos que $j < k$, y por lo tanto $n - j > n - k$, lo cual lleva a $n - j \geq
 
 \underline{Caso $\textit{nBottom} \geq \textit{nTop}$}: Dado que $\textit{nBottom}$ se inicializa en 1, y dado que \textit{nTop} se inicializa en n, y que ambos se acercan a la misma velocidad, este caso solo puede ocurrir cuando ya se hayan ejecutado $\parteEntera$ iteraciones. Asumamos por absurdo que no se ejecutó la iteración $n - |r_0| + 1$. Dado que $n$ es par resulta que $n - \parteEntera = \parteEntera$. Dado que $|r_0| > \parteEntera$, resulta entonces que $n - |r_0| < \parteEntera$, y por lo tanto $n - |r_0| + 1 \leq \parteEntera$. Pero esto es absurdo, pues si se ejecutó la iteración $\parteEntera$ también se ejecuto la iteración $n - |r_0| + 1$.
 
-\underline{Caso $n$ impar y $|r_0| > \parteEntera + 1$}:
+\begin{center}
+\underline{Caso $n$ impar y $|r_0| > \parteEntera + 1$}
+ \end{center}
+
 
 Al igual que en el caso anterior, quiero ver que se ejecuto la iteración $k = n - |r_0| + 1$. Asumamos nuevamente por absurdo que la máxima iteración que se ejecutó fue la iteración $j$ con $j < k$.
 
@@ -770,7 +777,11 @@ Al igual que en el caso anterior, quiero ver que se ejecuto la iteración $k = n
 
 \underline{Caso $\textit{nBottom} \geq \textit{nTop}$}: Al igual que en el caso $n$ par esto solo puede ocurrir cuando ya se hayan ejecutado $\parteEntera$ iteraciones\footnote{En el caso par la condición $\textit{nBottom} \geq \textit{nTop}$ será verdadera cuando se cumpla $\textit{nBottom} = \parteEntera + 1$ y $\textit{nTop} = \parteEntera$. Mientras que en el caso $n$ impar la condición se cumplira cuando $\textit{nTop} = \textit{nBottom} = \parteEntera + 1$.}. Asumamos por absurdo que no se ejecutó la iteración $n - |r_0| + 1$. Dado que $n$ es impar resulta que $n - \parteEntera = \parteEntera + 1$. Por lo tanto, $|r_0| > n - \parteEntera$, con lo cual $|r_0| \geq n - \parteEntera + 1$, es decir  $n - |r_0| + 1 =< \parteEntera$. Pero la iteración $\parteEntera$ se ejecutó y una iteración menor no se ejecutó, lo cual es absurdo.
 
-\underline{Caso $|r_0| \leq \parteEntera$}: Este caso es independiente de $n$ par o impar. Queremos ver que se ejecutó la iteración $k = |r_0|$, pues si se ejecutó tal iteración, por el lema \ref{lema_iteracion_k_repairsChicos} todos los \textit{repairs} $r$ tales que $r = |r_0|$ están en \textit{repairsChicos}, por lo tanto en particular también lo estará $r_0$.
+\begin{center}
+\underline{Caso $|r_0| \leq \parteEntera$}
+ \end{center}
+
+Este caso es independiente de $n$ par o impar. Queremos ver que se ejecutó la iteración $k = |r_0|$, pues si se ejecutó tal iteración, por el lema \ref{lema_iteracion_k_repairsChicos} todos los \textit{repairs} $r$ tales que $r = |r_0|$ están en \textit{repairsChicos}, por lo tanto en particular también lo estará $r_0$.
 
 Asumamos por absurdo que no se ejecutó tal iteración. Sea $j$ la última iteración que se ejecutó, con j < k.
 
@@ -780,13 +791,18 @@ Asumamos por absurdo que no se ejecutó tal iteración. Sea $j$ la última itera
 
 \underline{Caso $\textit{nBottom} \geq \textit{nTop}$}: Esto solo puede pasar cuando ya se ejecutaron $\parteEntera$ iteraciones. Asumamos que no se ejecutó la iteración $|r_0|$. Pero $|r_0| \leq \parteEntera$. Absurdo.
 
-\underline{Caso $n$ impar y $|r_0| = \parteEntera + 1$}: Veamos primero que en este caso se tuvieron que ejecutar necesariamente $\parteEntera$ iteraciones. Para esto veamos que la condición del \textit{while} en la línea 9 del algoritmo solo será falsa cuando $\textit{nTop} = \textit{nBottom}$, es decir veamos que las condiciones $\textit{top} \neq \emptyset$ y que la condición $\textit{bottom} \neq \emptyset$ serán siempre verdaderas durante las $\parteEntera$ iteraciones, que por el lema \ref{maxima_cantidad_de_iteraciones} es el máximo de iteraciones que se pueden ejecutar. 
+\begin{center}
+\underline{Caso $n$ impar y $|r_0| = \parteEntera + 1$}
+ \end{center}
 
-Asumamos por absurdo que después de alguna alguna iteración $j$ resulta $\textit{bottom} = \emptyset$. Esto significa que todos los subconjuntos $s \subset D$ con $|s| = j$ son inconsistentes. Dijimos que por el lema \ref{maxima_cantidad_de_iteraciones} $j \leq \parteEntera$. Tomo algún conjunto $s$ particular tal que $|s| = j$ y $s \subset r_0$. Tiene que existir pues $|r_0| = \parteEntera + 1$. Pero esto es absurdo, pues $r_0$ es un  \textit{repair} y es superconjunto de un conjunto inconsistente. 
+ Veamos primero que en este caso se tuvieron que ejecutar necesariamente $\parteEntera$ iteraciones. Para esto veamos que la condición del \textit{while} en la línea 9 del algoritmo solo será falsa cuando $\textit{nTop} = \textit{nBottom}$, es decir veamos que las condiciones $\textit{top} \neq \emptyset$ y que la condición $\textit{bottom} \neq \emptyset$ serán siempre verdaderas durante las $\parteEntera$ iteraciones, que por el lema \ref{maxima_cantidad_de_iteraciones} es el máximo de iteraciones que se pueden ejecutar. 
 
-Asumamos ahora por absurdo que después de alguna alguna iteración $j$ resulta $\textit{top} = \emptyset$. Esto significa que todos los subconjuntos $s \subset D$ con $|s| = n - j$ son subconjuntos propios de algún \textit{repair}. Pero dado que $j \leq \parteEntera$ resulta para todos estos $s$ resulta que $ n - j \geq \parteEntera + 1$, pues $n$ es impar. En el caso $n - j = \parteEntera + 1$, teniendo en cuenta que estamos en el caso $|r_0| = \parteEntera + 1$ resulta que $r_0$ es subconjunto propio de algún \textit{repair}, lo cual es absurdo. En el caso $ n - j > \parteEntera + 1$, tomo algún $s$ tal que $|s| = n - j$ y $r_0 \subset s$. En este caso $r_0$ es subconjunto propio de un conjunto que es subconjunto propio de algún \textit{repair}, lo cual es absurdo.
+Asumamos por absurdo que después de alguna iteración $j$ resulta $\textit{bottom} = \emptyset$. Esto significa que todos los subconjuntos $s \subset D$ con $|s| = j$ son inconsistentes. Dijimos que por el lema \ref{maxima_cantidad_de_iteraciones} $j \leq \parteEntera$. Tomo algún conjunto $s$ particular tal que $|s| = j$ y $s \subset r_0$. Tiene que existir pues $|r_0| = \parteEntera + 1$. Pero esto es absurdo, pues $r_0$ es un  \textit{repair} y es superconjunto de un conjunto inconsistente. 
 
-Teniendo en cuenta los dos absurdos, probamos que se han ejecutado las $\parteEntera$ iteraciones y por lo tanto, al ser $n$ impar resulta que $\textit{nBottom} = \textit{nTop} = \parteEntera + 1$. Por lo tanto la condición del \textit{if} en la línea 13 del algoritmo es verdadera, pues se cumple $\textit{nBottom} = \textit{nTop}$ y se cumple $\textit{top} = \emptyset$. Esto significa que se va a ejecutar otra vez la llamada a la función \textit{AgregarConsistentesEnTopARepairs}, y por lo tanto, teniendo en cuenta que la última asignación de la variable $\textit{top}$ fue en la iteración $\parteEntera$, teniendo en cuenta el lema \ref{fin_iteracion_k_repairs} resulta que $\textit{top}$ es el conjunto de todos los subconjuntos $s \subseteq D$ tales que $|s| = \parteEntera + 1$ y $s$ no es subconjunto propio de ningún \textit{repair}. Por lo tanto $r_0$ tiene que estar en $\textit{top}$. Teniendo en cuenta ahora el lema \ref{f_agregar_consistentes_en_top_a_repairs} resulta que $r_0$ será agregado a \textit{repairsGrandes}.
+Asumamos ahora por absurdo que después de alguna iteración $j$ resulta $\textit{top} = \emptyset$. Esto significa que todos los subconjuntos $s \subset D$ con $|s| = n - j$ son subconjuntos propios de algún \textit{repair}. Pero dado que $j \leq \parteEntera$ resulta que $ n - j \geq \parteEntera + 1$, pues $n$ es impar. En el caso $n - j = \parteEntera + 1$, teniendo en cuenta que estamos en el caso $|r_0| = \parteEntera + 1$ resulta que $r_0$ es subconjunto propio de algún \textit{repair}, lo cual es absurdo. En el caso $ n - j > \parteEntera + 1$, tomo algún $s$ tal que $|s| = n - j$ y $r_0 \subset s$. En este caso $r_0$ es subconjunto propio de un conjunto que es subconjunto propio de algún \textit{repair}, lo cual es absurdo.
+
+Teniendo en cuenta los dos absurdos, probamos que se han ejecutado las $\parteEntera$ iteraciones y por lo tanto, al ser $n$ impar resulta que $\textit{nBottom} = \textit{nTop} = \parteEntera + 1$. Por lo tanto la condición del \textit{if} en la línea 13 del algoritmo es verdadera, pues se cumple $\textit{nBottom} = \textit{nTop}$ y se cumple $\textit{top} \neq \emptyset$. Esto significa que se va a ejecutar otra vez la llamada a la función \textit{AgregarConsistentesEnTopARepairs}, y por lo tanto, teniendo en cuenta que la última asignación de la variable $\textit{top}$ fue en la iteración $\parteEntera$, teniendo en cuenta el lema \ref{fin_iteracion_k_repairs} resulta que $\textit{top}$ es el conjunto de todos los subconjuntos $s \subseteq D$ tales que $|s| = \parteEntera + 1$ y $s$ no es subconjunto propio de ningún \textit{repair}. Por lo tanto $r_0$ tiene que estar en $\textit{top}$. Teniendo en cuenta ahora el lema \ref{f_agregar_consistentes_en_top_a_repairs} resulta que $r_0$ será agregado a \textit{repairsGrandes}.
+\end{proof}
 
 \begin{lemma}\label{bottom_cardinalidad_k}
 Sea $k$ un número de iteración en la ejecución del algoritmo \textit{RepairsFinder}. Entonces, al momento de ejecutarse la linea 9 de la función \textit{IterarBottom}, todos los elementos en \textit{bottom} son subconjuntos de $D$ de $k$ elementos.
