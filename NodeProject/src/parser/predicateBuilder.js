@@ -45,53 +45,12 @@ function _builder(tgdText) {
 				isPredicate : true,
 				isVariable: false,
 				isConstant: false,
-				applyMgu: function(equations){
-					var result = Object.assign({}, this);
-					result.parameters = this.parameters.map(p => p.applyMgu(equations));
-					return result;
-				},
-				countFor: function(variable){
-					return this.parameters.filter(p=> p.isEqualTo(variable)).length;
-				},
 				isEqualTo(anotherPredicate){
 					if(anotherPredicate.type != this.type) return false;
 					if(anotherPredicate.isNegated != this.isNegated) return false;
 					if(anotherPredicate.name != this.name) return false;
 					if(anotherPredicate.parameters.length != this.parameters.length) return false;
 					return anotherPredicate.parameters.length.createArrayOfNElements().every(i => anotherPredicate.parameters[i].isEqualTo(this.parameters[i]));
-				},
-				renameVariablesAndNulls : function(setOfAtoms){
-					var result = Object.assign({}, this);
-					result.parameters =  result.parameters.filter(p => p.type == 'null' || p.type == 'variable').map(p => {
-						var renamedP = p.renameIfPresentInAtoms(setOfAtoms);
-						renamedP.type = p.type;
-						return renamedP;
-					})
-					return result;
-				},
-				prependPrefixToAllVariables : function(prefix){
-					var result = Object.assign({}, this);
-					result.parameters =  result.parameters.filter(p => p.type == 'null' || p.type == 'variable').map(p => {
-						var renamedP = p.preprendPrefix(prefix);
-						renamedP.type = p.type;
-						return renamedP;
-					})
-					return result;
-				},
-				removeFirstCharacterFromAllVars: function(){
-					var result = Object.assign({}, this);
-					result.parameters =  result.parameters.filter(p => p.type == 'null' || p.type == 'variable').map(p => {
-						var renamedP = p.removeFirstCharacter();
-						renamedP.type = p.type;
-						return renamedP;
-					})
-					return result;
-
-				},
-				renameVariables(equations){
-					var result = Object.assign({}, this);
-					result.parameters = this.parameters.filter(p => p.isVariable).map(p => p.renameFromEquations(equations));					
-					return result;
 				}
 			}
 		}

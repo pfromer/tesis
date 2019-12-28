@@ -10,7 +10,6 @@ import { datalogFragmentService } from "./DatalogFragmentService";
 import { datalogFragmentConext } from "./ContextObjects";
 import { querySubmitConext } from "./ContextObjects";
 import { checkConstraintsConext } from "./ContextObjects";
-import {rewrite} from "./rewrite/rewrite";
 
 class ContainerComponent extends React.Component {
   constructor(props) {
@@ -41,7 +40,6 @@ class ContainerComponent extends React.Component {
     this.onQueryEditorChange = this.onQueryEditorChange.bind(this);
     this.onProgramEditorChange = this.onProgramEditorChange.bind(this);
     this.getFullProgram = this.getFullProgram.bind(this);
-    this.rewriteQueries = this.rewriteQueries.bind(this);
     this.queriesProgram = undefined;
     this.programWithNoQueries = undefined;
     this.programEditorInstance = undefined;
@@ -124,25 +122,6 @@ class ContainerComponent extends React.Component {
     })
   }
 
-  rewriteQueries() {
-    this.programWithNoQueries = parse(this.programEditorInstance.getValue());
-    this.queriesProgram = parse(this.queriesEditorInstace.getValue());
-    if(this.queriesProgram && this.queriesProgram.errors.length == 0 
-       && this.programWithNoQueries.errors.length == 0){
-        var tgds =  [...this.programWithNoQueries.tgds];
-        this.queriesProgram.queries.forEach(q => {
-          console.log("original query:")
-          console.log(q.toString());
-          console.log("rewritten query:");
-          var result = rewrite(q, tgds);
-          result.forEach(q => {
-              console.log("q:")
-              console.log(q.toString())
-          });
-        })      
-    }
-  }
-
   showRepairs(){
     this.statusObject.showRepairs(this);
   }
@@ -174,7 +153,6 @@ class ContainerComponent extends React.Component {
       results={this.state.results}
       alert={this.state.alert}
       checkConstraints={this.checkConstraints}
-      rewriteQueries={this.rewriteQueries}
       showIAR={this.state.showIAR}
       resultsLoading={this.state.resultsLoading}
       repairsLoading={this.state.repairsLoading}
