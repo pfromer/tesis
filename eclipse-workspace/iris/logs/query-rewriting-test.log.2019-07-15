@@ -1,0 +1,89 @@
+2019-04-15 21:36:29 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2019-04-15 21:36:29 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2019-04-15 21:36:29 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2019-06-30 16:52:51 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2019-06-30 16:52:51 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2019-06-30 16:52:51 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2019-06-30 16:52:52 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [1]
+2019-06-30 16:52:52 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [0]
+2019-06-30 16:52:52 deri.iris.queryrewriting.LinearRewriter [DEBUG] Cleaning auxiliary predicates from 2 queries.
+2019-06-30 16:52:52 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 16:52:52 deri.iris.queryrewriting.LinearRewriter [DEBUG] Applying intra-decomposition subsumption check on 2 queries.
+2019-06-30 16:52:52 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 16:55:25 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2019-06-30 16:55:25 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2019-06-30 16:55:25 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2019-06-30 16:55:25 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [1]
+2019-06-30 16:55:25 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [0]
+2019-06-30 16:55:25 deri.iris.queryrewriting.LinearRewriter [DEBUG] Cleaning auxiliary predicates from 2 queries.
+2019-06-30 16:55:25 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 16:55:25 deri.iris.queryrewriting.LinearRewriter [DEBUG] Applying intra-decomposition subsumption check on 2 queries.
+2019-06-30 16:55:25 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 16:57:52 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2019-06-30 16:57:52 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2019-06-30 16:57:52 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2019-06-30 16:59:53 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2019-06-30 16:59:53 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2019-06-30 16:59:53 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2019-06-30 16:59:53 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [1]
+2019-06-30 16:59:53 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [0]
+2019-06-30 16:59:53 deri.iris.queryrewriting.LinearRewriter [DEBUG] Cleaning auxiliary predicates from 2 queries.
+2019-06-30 16:59:53 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 16:59:53 deri.iris.queryrewriting.LinearRewriter [DEBUG] Applying intra-decomposition subsumption check on 2 queries.
+2019-06-30 16:59:53 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 17:26:24 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2019-06-30 17:26:24 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2019-06-30 17:26:24 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2019-06-30 17:26:25 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [1]
+2019-06-30 17:26:25 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [0]
+2019-06-30 17:26:25 deri.iris.queryrewriting.LinearRewriter [DEBUG] Cleaning auxiliary predicates from 2 queries.
+2019-06-30 17:26:25 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 17:26:25 deri.iris.queryrewriting.LinearRewriter [DEBUG] Applying intra-decomposition subsumption check on 2 queries.
+2019-06-30 17:26:25 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 17:39:44 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2019-06-30 17:39:52 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2019-06-30 17:40:37 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2019-06-30 17:41:01 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [1]
+2019-06-30 17:41:01 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [0]
+2019-06-30 17:41:01 deri.iris.queryrewriting.LinearRewriter [DEBUG] Cleaning auxiliary predicates from 2 queries.
+2019-06-30 17:41:02 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 17:41:02 deri.iris.queryrewriting.LinearRewriter [DEBUG] Applying intra-decomposition subsumption check on 2 queries.
+2019-06-30 17:41:02 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 17:52:14 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2019-06-30 17:54:26 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2019-06-30 17:56:13 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2019-06-30 17:56:38 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [1]
+2019-06-30 17:56:38 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [0]
+2019-06-30 17:56:38 deri.iris.queryrewriting.LinearRewriter [DEBUG] Cleaning auxiliary predicates from 2 queries.
+2019-06-30 17:56:38 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 17:56:38 deri.iris.queryrewriting.LinearRewriter [DEBUG] Applying intra-decomposition subsumption check on 2 queries.
+2019-06-30 17:56:38 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 19:09:16 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2019-06-30 19:09:18 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2019-06-30 19:09:23 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2019-06-30 19:09:32 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [1]
+2019-06-30 19:09:32 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [0]
+2019-06-30 19:09:32 deri.iris.queryrewriting.LinearRewriter [DEBUG] Cleaning auxiliary predicates from 2 queries.
+2019-06-30 19:09:32 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 19:09:32 deri.iris.queryrewriting.LinearRewriter [DEBUG] Applying intra-decomposition subsumption check on 2 queries.
+2019-06-30 19:09:32 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 19:32:51 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2019-06-30 19:32:51 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2019-06-30 19:32:51 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2019-06-30 19:32:51 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [1]
+2019-06-30 19:32:51 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [0]
+2019-06-30 19:32:51 deri.iris.queryrewriting.LinearRewriter [DEBUG] Cleaning auxiliary predicates from 2 queries.
+2019-06-30 19:32:51 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 19:32:51 deri.iris.queryrewriting.LinearRewriter [DEBUG] Applying intra-decomposition subsumption check on 2 queries.
+2019-06-30 19:32:51 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 19:46:08 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2019-06-30 19:47:22 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Decomposing query.
+2019-06-30 19:47:29 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Rewriting query.
+2019-06-30 19:47:45 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [1]
+2019-06-30 19:47:45 deri.iris.queryrewriting.LinearRewriter [TRACE] |2 [0]
+2019-06-30 19:47:45 deri.iris.queryrewriting.LinearRewriter [DEBUG] Cleaning auxiliary predicates from 2 queries.
+2019-06-30 19:47:45 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 19:47:45 deri.iris.queryrewriting.LinearRewriter [DEBUG] Applying intra-decomposition subsumption check on 2 queries.
+2019-06-30 19:47:45 deri.iris.queryrewriting.LinearRewriter [DEBUG] done.
+2019-06-30 22:45:54 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.
+2019-06-30 22:47:20 deri.iris.queryrewriting.ParallelRewriter [DEBUG] Reducing query.

@@ -44,14 +44,7 @@ function _builder(tgdText) {
 				type : "predicate",
 				isPredicate : true,
 				isVariable: false,
-				isConstant: false,
-				isEqualTo(anotherPredicate){
-					if(anotherPredicate.type != this.type) return false;
-					if(anotherPredicate.isNegated != this.isNegated) return false;
-					if(anotherPredicate.name != this.name) return false;
-					if(anotherPredicate.parameters.length != this.parameters.length) return false;
-					return anotherPredicate.parameters.length.createArrayOfNElements().every(i => anotherPredicate.parameters[i].isEqualTo(this.parameters[i]));
-				}
+				isConstant: false
 			}
 		}
 	}

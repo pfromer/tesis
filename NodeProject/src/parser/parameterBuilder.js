@@ -12,10 +12,6 @@ function _builder(){
 					result.toString = function() { return "?" + this.name }
 					var name = parameter.substring(1);
 					result.name = name;
-					result.isEqualTo = function(variable){
-						return this.type == variable.type && this.name == variable.name;
-					}
-
 					return result;
 				}
 				if (parameter.startsWith("'")){
@@ -26,9 +22,6 @@ function _builder(){
 					result.isConstant = true;
 					result.toString = function() { return "'" + this.value + "'"};
 					result.value = parameter.slice(0,-1).substring(1);
-					result.isEqualTo = function(anotherConstant){
-						return this.type == anotherConstant.type && this.value == anotherConstant.value;
-					}
 					return result;
 				}
 		}

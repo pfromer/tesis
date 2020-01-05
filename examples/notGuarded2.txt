@@ -1,0 +1,9 @@
+bottom :- ('3').
+
+DIP(?y, ?z) :- IMP(?x, ?y), Q(?Z).
+IMP(?y, ?w) :- DIP(?x, ?y).
+Q1(?x) :- DIP(?x, ?y).
+Q('a').
+DIP('a', 'b').
+
+(?x) :- Q1(?x).

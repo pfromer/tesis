@@ -9,3 +9,5 @@ padre('fede', 'manu').
 padre('fede', 'julia').
 padre('dario', 'franco').
 padre('dario', 'guille').
+
+?- tio(?x, ?y).

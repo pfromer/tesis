@@ -120,6 +120,8 @@ public class ProgramExecutor {
       double lambda = Math.pow(2*w , w) * Math.pow(2, Math.pow(2*w,w*R ));
       
       configuration.lambdaFormulaForGuardedForest = lambda;
+      
+      System.out.print("lambdaFormulaForGuardedForest: " + lambda);
 
       /*
        * Get the queries in the program: A query has the form ?- body.

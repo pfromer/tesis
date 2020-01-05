@@ -30,12 +30,12 @@ public class Program {
 	public Boolean IsConsistent(AboxSubSet subset){
 		final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();		
 		
-		if(this.isGuarded) {			
+		//if(this.isGuarded) {			
 			configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
-		}
+		/*}
 		else {
 	        configuration.evaluationStrategyFactory = new StratifiedBottomUpEvaluationStrategyFactory(new NaiveEvaluatorFactory());
-	    }
+	    }*/
 		
 		if(subset.Facts.size() == 0) return true;
 		

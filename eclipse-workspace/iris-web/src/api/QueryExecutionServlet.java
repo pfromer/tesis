@@ -33,7 +33,7 @@ public class QueryExecutionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		try {
 			
 			final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();
@@ -42,21 +42,14 @@ public class QueryExecutionServlet extends HttpServlet {
 			
 			JSONObject obj = new JSONObject(json);
 			String program = obj.getString("program");
-			Boolean isGuarded = obj.getBoolean("isGuarded");
+			
 			String variablesToShowByQuery;
 			if(obj.has("variablesToShowByQuery")){
 				variablesToShowByQuery = obj.getString("variablesToShowByQuery");
 				configuration.variablesToShow = Arrays.asList(variablesToShowByQuery.split("\\s*,\\s*"));
-			}
+			}		
 			
-			
-			if(isGuarded) {
-				configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
-			}
-			else {
-		        configuration.evaluationStrategyFactory = new StratifiedBottomUpEvaluationStrategyFactory(new NaiveEvaluatorFactory());
-		    }
-			
+			configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();			
 			
 			ProgramExecutor executor = new ProgramExecutor(program, configuration);
 			

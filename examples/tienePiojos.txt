@@ -1,0 +1,6 @@
+tienePiojos(?x) :- amigos(?x, ?y), tienePiojos(?y).
+
+amigos('fede', 'diego').
+tienePiojos('diego').
+
+?- tienePiojos(?x).
