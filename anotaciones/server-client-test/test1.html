@@ -1,0 +1,40 @@
+    <html>
+	<head>
+	
+	</head>
+	<body>
+			<script type="text/javascript">
+		
+			var program =  {
+					"ncs" : ["r1(?x, ?y).", "r2('s').", "r1(?x, ?y), r2(?x)."],
+					"tgds" : ["r1(?z, ?x) :- r1(?x, ?y), r2(?y).", "r2(?x) :- r1(?x, ?y)."],
+					"facts" : ["r1('a', 'b').", "r1('a', 'b')."],
+					"queries" : [
+						{
+							showInOutput : ["x"],
+							body: "?- r1(?x, ?y)."
+						},
+						{	
+							showInOutput : [],
+							body: "?- r2(?x)."
+						}	
+					],
+					"semantics" : "standard"
+				}
+		
+		
+
+				fetch('http://localhost:8080/iris/query'	, {
+					method: 'post',
+					body: JSON.stringify(program) 
+					}).then(function(response) {response.json().then(function(data) {
+						console.log(data);
+					});
+					});
+			
+
+
+		</script>
+	</body>
+</html>
+	
