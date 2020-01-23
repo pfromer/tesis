@@ -13,6 +13,43 @@
 \usepackage[T1]{fontenc}
 \newtheorem{exmp}{Ejemplo}
 \usepackage[linesnumbered,titlenumbered,ruled]{algorithm2e}
+\usepackage{bera}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
 
 \newcommand{\ch}{\textit{chase}}
 
@@ -80,7 +117,7 @@ Por otro lado, tanto en el campo de las bases de datos como en el de la Web Sem�
 
 El objetivo de esta tesis es presentar una herramienta... una herramienta que tiene el propósito de acercar a la comunidad una implementación de Datalog+/-, con el objetivo de poder acceder a este lenguaje de manera fácil, a través de Internet...
 
-\section{Datalog +/-}
+\section{Datalog +/-}\label{seccion_datalog}
 
 En esta sección vamos a recordar los elementos principales del lenguaje Datalog tal como se definen en el paper \textit{A General Datalog-Based Framework for
 Tractable Query Answering over Ontologies}\cite{JWS}.
@@ -88,9 +125,9 @@ Con respecto a los ingredientes elementales, se asumen constantes, nulos y varia
 Se asume (i) un universo infinito de constantes  $\Delta$ (las cuáles forman el dominio de la base de  datos), (ii) un conjunto infinito de nulos etiquetados $\Delta_{N}$ (representando valores desconocidos), y (iii) un conjunto infinito de variables X (que se utilizan en las consultas y en las dependencias). Cada constante representa un valor diferente, mientras que nulos distintos podrían representar el mismo valor. 
 Se asume un orden lexicográfico en  $\Delta \cup \Delta_{N}$, donde los símbolos de $\Delta_{N}$ siguen a los de $\Delta$. Se denota por $X$ a una sequencia de variables $X_{1}$, ..., $X_{K}$ con $k > 0$.
 
-Se definen las fórmulas atómicas, que ocurren en bases de datos, consultas, y dependencias, y que se construyen en base a los nombres de las relaciones y los términos. Se asume un \textit{esquema relacional $R$}, el cual constituye un conjunto finito de \textit{nombres de relación}, o \textit{símbolos de predicado}. La posición \textit{P[i]} identifica al \textit{i}-esimo argumento de un predicado \textit{P}. Un \textit{término t} es una constante, un nulo o variable. Una \textit{fórmula atómica} (o \textit{átomo}) a tiene la forma \textit{P}($t_{1}$,...,$t_{n}$), donde \textit{P} es un predicado $n$-ario, y $t_{1}$,...,$t_{n}$ son términos. Se denotan por \textit{pred}(a) y \textit{dom}(a) su predicado y al conjunto de sus argumentos, respectivamente. Esta notación se extiende de manera natural para conjuntos y conjunciones de átomos. 
+Se definen las fórmulas atómicas, que ocurren en bases de datos, consultas, y dependencias, y que se construyen en base a los nombres de las relaciones y los términos. Se asume un \textit{esquema relacional $R$}, el cual constituye un conjunto finito de \textit{nombres de relación}, o \textit{símbolos de predicado}. La posición \textit{P[i]} identifica al \textit{i}-esimo argumento de un predicado \textit{P}. Un \textit{término t} es una constante, un nulo o variable. Una \textit{fórmula atómica} (o \textit{átomo}) \textit{a} tiene la forma \textit{P}($t_{1}$,...,$t_{n}$), donde \textit{P} es un predicado $n$-ario, y $t_{1}$,...,$t_{n}$ son términos. Se denotan por \textit{pred}(\textit{a}) y \textit{dom(a)} su predicado y al conjunto de sus argumentos, respectivamente. Esta notación se extiende de manera natural para conjuntos y conjunciones de átomos. 
 
-Podemos definir ahora la noción de base de datos relativa a un esquema relacional, junto con la sintaxis y la semántica de las consultas conjuntivas y las consultas conjuntivas booleanas a una base de datos. Una \textit{instancia de base de datos} $D$ para un esquema relacional $R$ es un conjunto de átomos (posiblemente infinito) con predicados de R y argumentos de $\Delta$. Una consulta conjuntiva sobre $R$ tiene la forma $Q(\textbf{X}) = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$, donde $\Phi(\textbf{X},\textbf{Y})$ es una conjunción de átomos con las variables \textbf{X} y \textbf{Y}, y eventualmente constantes, pero sin nulos. Una consulta conjuntiva \textit{Booleana} sobre $R$ es una consulta conjuntiva de la forma $Q() = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$, donde todas las variables están cuantificadas existencialmente. El conjunto de todas las respuestas a una consulta conjuntiva $Q(\textbf{X}) = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$ sobre una base de datos es el conjunto de todas las tuplas \textbf{t} sobre $\Delta$ para las cuales existe un homomorfismo $\mu: \textbf{X} \cup \textbf{X} \rightarrow \Delta \cup \Delta_{N}$ tales que $\mu(\Phi(\textbf{X},\textbf{Y})) \subseteq D$ y $\mu(\textbf{X}) = D$
+Podemos definir ahora la noción de base de datos relativa a un esquema relacional, junto con la sintaxis y la semántica de las consultas conjuntivas y las consultas conjuntivas booleanas a una base de datos. Una \textit{instancia de base de datos} $D$ para un esquema relacional $R$ es un conjunto de átomos (posiblemente infinito) con predicados de R y argumentos de $\Delta$. Una consulta conjuntiva sobre $R$ tiene la forma $Q(\textbf{X}) = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$, donde $\Phi(\textbf{X},\textbf{Y})$ es una conjunción de átomos con las variables \textbf{X} e \textbf{Y}, y eventualmente constantes, pero sin nulos. Una consulta conjuntiva \textit{Booleana} sobre $R$ es una consulta conjuntiva de la forma $Q() = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$, donde todas las variables están cuantificadas existencialmente. El conjunto de todas las respuestas a una consulta conjuntiva $Q(\textbf{X}) = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$ sobre una base de datos es el conjunto de todas las tuplas \textbf{t} sobre $\Delta$ para las cuales existe un homomorfismo $\mu: \textbf{X} \cup \textbf{Y} \rightarrow \Delta \cup \Delta_{N}$ tales que $\mu(\Phi(\textbf{X},\textbf{Y})) \subseteq D$ y $\mu(\textbf{X}) = \textbf{t}$
 
 \begin{exmp}\label{ejemplo_base_d}
 Consideremos una base de datos de películas, que guarda información acerca de actores, directores y películas. El esquema relacional $R$ consiste en los predicado unarios \textit{pelicula}, \textit{actor}, \textit{director},  y en los predicados binarios \textit{actuaEn}, \textit{dirigidaPor} y \textit{trabajaronJuntos}.  Una base de datos $D$ para el esquema  $R$ puede estar dada por: 
@@ -99,7 +136,7 @@ Consideremos una base de datos de películas, que guarda información acerca de 
         actor(``Antonio Gasalla''), dirigidaPor(``Esperando la Carroza'', ``Alejandro Doria'')}\}$$
     \end{equation}
 
-Una posible consulta conjuntiva para esta base de datos podría ser Q(X) = pelicula(X) $\land$ actuaEn(X, Y), que pregunta por todas las películas en las que alguien haya actuado, cuya respuesta es el conjunto de una sola tupla $\{("Esperando la Carroza")\}$;  mientras que un ejemplo de consulta conjuntiva booleana es Q() =  actor(X) $\land$ actuaEn(``Volver al Futuro'', X), la cual pregunta si hay algún actor que haya actuado en Volver al Futuro, cuya respuesta en No.
+Una posible consulta conjuntiva para esta base de datos podría ser Q(X) = pelicula(X) $\land$ actuaEn(X, Y), que pregunta por todas las películas en las que alguien haya actuado, cuya respuesta es el conjunto de una sola tupla $\{("Esperando la Carroza")\}$;  mientras que un ejemplo de consulta conjuntiva booleana es Q() =  actor(X) $\land$ actuaEn(``Volver al Futuro'', X), la cual pregunta si hay algún actor que haya actuado en Volver al Futuro, cuya respuesta es No.
 
 \end{exmp}
 
@@ -112,8 +149,8 @@ $$D = \{\textit{pelicula(``Esperando la carroza''), pelicula(``Volver al Futuro'
 
 
 \subsection{Dependencias generadoras de tuplas (TGDs)}
-Las dependencias generadoras de tuplas (TGDs) son restricciones sobre una base de datos en la forma general de las reglas de Datalog.....
-Dado un esquema relacional $R$, una TGD $\sigma$ es una fórmula de primer orden de la forma $\forall X \forall Y \Phi (X, Y) \rightarrow \exists Z \Psi (X, Z)$, donde $ \Psi (X, Z)$ y $\Phi (X, Y)$ son conjunciones de átomos sobre $R$, llamadas el \textit{cuerpo} y la \textit{cabeza} de $\sigma$, denotadas $cuerpo(\sigma)$ y $cabeza(\sigma)$ respectivamente. Tal $\sigma$ es satisfecha en una base de datos $D$ para $R$ ssi, toda vez que exista un homomorfismo $h$ que mapea los atomos de $\Phi(X, Y)$ a atomos de $D$, existe una extensión $h\prime$ de $h$ que mapea los atomos de $\Psi (X, Z)$ a átomos de $D$. Todos los conjuntos de $TGDs$ son finitos. Usualmente omitimos los cuantificadores universales en las TGDs.
+Las dependencias generadoras de tuplas (TGDs) son restricciones sobre una base de datos en la forma general de las reglas de Datalog+/-.
+Dado un esquema relacional $R$, una TGD $\sigma$ es una fórmula de primer orden de la forma $\forall X \forall Y \Phi (X, Y) \rightarrow \exists Z \Psi (X, Z)$, donde $ \Psi (X, Z)$ y $\Phi (X, Y)$ son conjunciones de átomos sobre $R$, llamadas el \textit{cuerpo} y la \textit{cabeza} de $\sigma$, denotadas $cuerpo(\sigma)$ y $cabeza(\sigma)$ respectivamente. Tal $\sigma$ es satisfecha en una base de datos $D$ para $R$ ssi, toda vez que exista un homomorfismo $h$ que mapea los atomos de $\Phi(X, Y)$ a atomos de $D$, existe una extensión $h\prime$ de $h$ que mapea los atomos de $\Psi (X, Z)$ a átomos de $D$. Todos los conjuntos de $TGDs$ son finitos. Usualmente se omiten los cuantificadores universales en las TGDs.
 \iffalse
 \begin{exmp}
 {\rb
@@ -129,23 +166,23 @@ Dado un esquema relacional $R$, una TGD $\sigma$ es una fórmula de primer orden
 \begin{itemize}
     \item Toda película fue dirigida por un director:  $$pelicula(X) \rightarrow \exists Z dirigidaPor(X, Z)$$
     \item Si alguien dirigió una película entonces es un director: $$dirigidaPor(X, Y) \rightarrow director(Y)$$
-    \item Si alguien actuó una película entonces es un actor: $$actuaEn(X, Y) \rightarrow actor(Y)$$
+    \item Si alguien actuó en una película entonces es un actor: $$actuaEn(X, Y) \rightarrow actor(Y)$$
     \item Si un actor actuó en una película que fue dirigida por un director, eso implica que el actor y el director trabajaron juntos: $$actuaEn(X, Y) \land dirigidaPor(X, W) \rightarrow trabajaronJuntos(Y, W) $$ 
 \end{itemize}
 
-Es simple ver que ninguna de las TGDs anteriores es satisfecha en $D$. Para que esto suceda podemos considerar $D\prime$ que extiene a $D$ de la siguiente manera:
+Es simple ver que ninguna de las TGDs anteriores es satisfecha en $D$. Para que esto suceda podemos considerar $D\prime$ que extiende a $D$ de la siguiente manera:
 
 \begin{equation}
-    $$ $D\prime$ = D $\cup$ \{\textit{dirigidaPor(``Volver al Futuro'', ``Robert Zemeckis''), director(``Robert Zemeckis''), actor(``China Zorilla''), director(``Alejandro Doria), trabajaronJuntos(``Antonio Gasalla'', ``Alejandro Doria''), trabajaronJuntos(``China Zorilla'', ``Alejandro Doria'')}\}$$
+    $$ $D\prime$ = D $\cup$ \{\textit{dirigidaPor(``Volver al Futuro'', ``Robert Zemeckis''), director(``Robert Zemeckis''), actor(``China Zorilla''), director(``Alejandro Doria''), trabajaronJuntos(``Antonio Gasalla'', ``Alejandro Doria''), trabajaronJuntos(``China Zorilla'', ``Alejandro Doria'')}\}$$
 \end{equation} 
 
 Ahora todas las TGDs están satisfechas en $D\prime$.
 
 \end{exmp} 
 
-\subsection{Respondiendo consultas bajo TGDs}
+\subsection{Respondiendo consultas bajo TGDs}\label{consultas_bajo_tgds}
 
-La evaluación de una consulta conjuntiva o una consulta conjuntiva booleana sobre una base de datos bajo un conjunto de TGDs se define como se describre a continuación. Dada una base de datos $D$ para $R$, y un conjunto de TGDs $\Sigma$ sobre $R$, el conjunto de modelos de $D$ y $\Sigma$, el cual denotamos por $mods(D,\Sigma)$, es el conjunto (posiblemente infinito) de todas las bases de datos $B$ tales que (i) $D \subseteq B$ y (ii) toda $\sigma \in \Sigma$ es satisfecha en $B$. El conjunto de todas las respuestas para una consulta conjuntiva $Q$, denotado por $ans(Q, D, \Sigma)$, es el conjunto de todas las tuplas \textbf{a} tales que \textbf{a} $\in Q(B)$ para todo $B \in mods(D, \Sigma)$. La respuesta para una consulta conjuntiva booleana $Q$ a $D$ es \textit{Sí}, denotada por $D \cup \Sigma \models Q$, si solo si, $ans(Q, D, \Sigma) \neq \emptyset$. Notar que responser consultas bajo TGDs para el caso general es indecidible \cite{beeri}, aún cuando el esquema y las TGDs son fijas \cite{cali}. 
+La evaluación de una consulta conjuntiva o una consulta conjuntiva booleana sobre una base de datos bajo un conjunto de TGDs se define de la siguiente manera. Dada una base de datos $D$ para $R$, y un conjunto de TGDs $\Sigma$ sobre $R$, el conjunto de modelos de $D$ y $\Sigma$, el cual denotamos por $mods(D,\Sigma)$, es el conjunto (posiblemente infinito) de todas las bases de datos $B$ tales que (i) $D \subseteq B$ y (ii) toda $\sigma \in \Sigma$ es satisfecha en $B$. El conjunto de todas las respuestas para una consulta conjuntiva $Q$, denotado por $ans(Q, D, \Sigma)$, es el conjunto de todas las tuplas \textit{a} tales que \textit{a} $\in Q(B)$ para todo $B \in mods(D, \Sigma)$. La respuesta para una consulta conjuntiva booleana $Q$ a $D$ es \textit{Sí}, denotada por $D \cup \Sigma \models Q$, si solo si, $ans(Q, D, \Sigma) \neq \emptyset$. Notar que responser consultas bajo TGDs para el caso general es indecidible \cite{beeri}, aún cuando el esquema y las TGDs son fijas \cite{cali}. 
 
 
 \begin{exmp} \label{ejemplo_responder_consultas_bajo_tgds}
@@ -159,7 +196,7 @@ Si consideramos la base $D$ del ejemplo \ref{ejemplo_base_d} y las TGDs del ejem
 
 \end{itemize} 
 
-Notemos que el átomo \textit{película(Volver al Futuro)} está en todos los \textit{modelos} de $D$ y $\Sigma$, por lo tanto la consulta conjuntiva boleana $Q()$ = película(Volver al Futuro) evalúa a \textit{Sí} en $D$ y $\Sigma$, y lo mismo ocurre con $Q() = trabajaronJuntos(``China Zorrilla", ``Alegandro Doria")$. Por el contrario, la consulta $Q() = dirigidaPor(``Volver al Futuro", ``Robert Zemeckis")$ no es verdadera en todos los \textit{modelos} de $D$ y $\Sigma$, por lo tanto esta consulta evalúa a \textit{No}.
+Notemos que el átomo \textit{película(``Volver al Futuro'')} está en todos los \textit{modelos} de $D$ y $\Sigma$, por lo tanto la consulta conjuntiva boleana \textit{Q() = película(``Volver al Futuro'')} evalúa a \textit{Sí} en $D$ y $\Sigma$, y lo mismo ocurre con Q() = trabajaronJuntos(``China Zorrilla", ``Alegandro Doria"). Por el contrario, la consulta Q() = dirigidaPor(``Volver al Futuro", ``Robert Zemeckis") no es verdadera en todos los \textit{modelos} de $D$ y $\Sigma$, por lo tanto esta consulta evalúa a \textit{No}.
 \end{exmp} 
 
 Recordamos que el problema de evaluar una consulta conjuntiva bajo TGDs es LOGSPACE-equivalente al problema de evaluar una consulta conjuntiva booleana [\cite{Chandra}, \cite{Deutsch}, \cite{Fagin}, \cite{Johnson}]. Por eso nos enfocamos aquí solo en el problema de responder consultas conjuntivas booleanas. Recordamos también que responder consultas bajo TGDs es equivalente a responder bajo TGDs que tienen un solo átomo en sus cabezas. Por lo tanto, asumimos sin pérdida de generalidad, que toda TGD tiene un solo átomo en su cabeza.
@@ -167,10 +204,10 @@ Recordamos que el problema de evaluar una consulta conjuntiva bajo TGDs es LOGSP
 
 \subsection{El chase}
 
-El \textit{chase} es un procedimiento para reparar una base de datos con respecto a un conjunto de dependencias, de manera tal que el resultado del chase satisfaga esas dependencias. Por \textit{chase} nos referimos tanto al procedimiento como a su resultado. El TGD chase trabaja sobre una base de datos a través de aplicar las TGDs como se explica a continuación. Considere una base de datos $D$ para un esquema relacional $R$, y una TGD $\sigma$ sobre $R$ de la forma $\Phi (X, Y) \rightarrow \exists Z \Psi (X, Z)$. Entonces, $\sigma$ es \textit{aplicable} a $D$ si existe un homomorfismo \textit{h} que mapee los átomos de $\Phi (X, Y)$ a átomos de $D$. Sea $\sigma$ aplicable a $D$, y sea $h_1$ un homomorfismo que extiende \textit{h} de la siguiente manera: para cada $X_i \in \textbf{X}, h_1(X_i) = h(X_i)$; para cada $Z_j \in \textbf{Z}, h_1(Z_j) = z_j$, siendo $z_j$ un nulo "fresco", es decir, $z_j \in \Delta_N, z_j$ no ocurre en $D$, y $z_j$ sigue lexicográficamente a todos los otros nulos introducidos previamente. Al aplicar $\sigma$ a $D$, se agrega a $D$ el átomo $h_1(\Psi (X, Z))$, si no se encuntra en $D$ previamente.
-El algoritmo del chase para una base de datos $D$ y un conjunto de TGDs $\Sigma$ consiste en una aplicación exhaustiva de la regla anterior en anchura (como traduzco breadh-first fashion?), lo cual trae como resultado un chase (posiblemente infinito) para $D$ y $\Sigma$. Formalmente, el chase de nivel 0 para $D$ y $\Sigma$, denotado por $chase^0(D,\Sigma)$, se define como $D$, asignándole a cada átomo de $D$ el nivel de derivación 0. Para cada $k \geq 1$, el chase de nivel $k$ de $D$ y $\Sigma$, denotado $chase^k(D, \Sigma)$, se construye de la siguiente manera: sean $I_1,...,I_n$ todas las posibles imágenes de los cuerpos de las TGDs en $\Sigma$ relativas a algún homomorfismo tal que (i) $I_1,...,I_n \subseteq chase^{k-1}(D,\Sigma)$ y (ii) el nivel más alto de todo átomo en cada $I_i$ es $k - 1$; entonces, se aplica cada posible TGD sobre $chase^{k-1}(D,\Sigma)$, escogiendo las TGDs y los homomorfismos en un orden lineal y lexicográfico respectivamente, y asignándole a cada átomo nuevo el nivel de derivación $k$. El chase de $D$ relativo a $\Sigma$, denotado $chase(D,\Sigma)$, se define entonces como el limite de $chase^k(D,\Sigma)$ para $K \rightarrow \infty$. 
+El \textit{chase} es un procedimiento para reparar una base de datos con respecto a un conjunto de dependencias, de manera tal que el resultado del \textit{chase} satisfaga esas dependencias. Por \textit{chase} nos referimos tanto al procedimiento como a su resultado. El \textit{TGD chase} trabaja sobre una base de datos a través de aplicar las TGDs como se explica a continuación. Considere una base de datos $D$ para un esquema relacional $R$, y una TGD $\sigma$ sobre $R$ de la forma $\Phi (X, Y) \rightarrow \exists Z \Psi (X, Z)$. Entonces, $\sigma$ es \textit{aplicable} a $D$ si existe un homomorfismo \textit{h} que mapee los átomos de $\Phi (X, Y)$ a átomos de $D$. Sea $\sigma$ aplicable a $D$, y sea $h_1$ un homomorfismo que extiende \textit{h} de la siguiente manera: para cada $X_i \in \textbf{X}, h_1(X_i) = h(X_i)$; para cada $Z_j \in \textbf{Z}, h_1(Z_j) = z_j$, siendo $z_j$ un \textit{nulo fresco}, es decir, $z_j \in \Delta_N, z_j$ no ocurre en $D$, y $z_j$ sigue lexicográficamente a todos los otros nulos introducidos previamente. Al aplicar $\sigma$ a $D$, se agrega a $D$ el átomo $h_1(\Psi (X, Z))$, si no se encuntra en $D$ previamente.
+El algoritmo del \textit{chase} para una base de datos $D$ y un conjunto de TGDs $\Sigma$ consiste en una aplicación exhaustiva de la regla anterior en anchura, lo cual trae como resultado un \textit{chase} (posiblemente infinito) para $D$ y $\Sigma$. Formalmente, el \textit{chase} de nivel 0 para $D$ y $\Sigma$, denotado por $chase^0(D,\Sigma)$, se define como $D$, asignándole a cada átomo de $D$ el nivel de derivación 0. Para cada $k \geq 1$, el chase de nivel $k$ de $D$ y $\Sigma$, denotado $chase^k(D, \Sigma)$, se construye de la siguiente manera: sean $I_1,...,I_n$ todas las posibles imágenes de los cuerpos de las TGDs en $\Sigma$ relativas a algún homomorfismo tal que (i) $I_1,...,I_n \subseteq chase^{k-1}(D,\Sigma)$ y (ii) el nivel más alto de todo átomo en cada $I_i$ es $k - 1$; entonces, se aplica cada posible TGD sobre $chase^{k-1}(D,\Sigma)$, escogiendo las TGDs y los homomorfismos en un orden lineal y lexicográfico respectivamente, y asignándole a cada átomo nuevo el nivel de derivación $k$. El chase de $D$ relativo a $\Sigma$, denotado $chase(D,\Sigma)$, se define entonces como el limite de $chase^k(D,\Sigma)$ para $K \rightarrow \infty$. 
 
-El chase (posiblemente infinito) es un modelo universal, es decir que existe un homomorfismo del $chase(D, \Sigma)$ a cada $B \in mods(D,\Sigma)$. Este resultado implica que las consultas conjuntivas boolenas sobre $D$ y $\Sigma$ pueden ser evaluadas en el chase para $D$ y $\Sigma$, es decir que $D \cup \Sigma \models Q$ es equivalente a $chase(D, \Sigma) \models Q$. 
+El \textit{chase} (posiblemente infinito) es un modelo universal, es decir que existe un homomorfismo del $chase(D, \Sigma)$ a cada $B \in mods(D,\Sigma)$. Este resultado implica que las consultas conjuntivas boolenas sobre $D$ y $\Sigma$ pueden ser evaluadas en el chase para $D$ y $\Sigma$, es decir que $D \cup \Sigma \models Q$ es equivalente a $chase(D, \Sigma) \models Q$. 
 
 
 \begin{exmp}\label{ejemplo_chase}
@@ -226,13 +263,13 @@ Dado que en la tercera iteración no generamos átomos nuevos, el algoritmo del 
 
 \subsection{Datalog+/-, fragmento Guarded}
 
-Esta fragmento consiste en una clase especial de TGDs que es tratable computacionalmente, siendo a la vez lo suficientemente expresiva como para modelar ontologías. Las consultas conjuntivas booleanas relativas a estas TGDs pueden ser evaluadas en una parte finita del chase, que es de tamaño constante cuando las consulta y las TGDs están fijas. En base a este resultado, la complejidad de datos de evaluar una consulta conjuntiva booleana relativa a TGDs dentro del fragmento \textit{guarded}, resulta polinomial en el caso general y lineal para consultas atómicas.
+Esta fragmento consiste en una clase especial de TGDs que es tratable computacionalmente, siendo a la vez lo suficientemente expresiva como para modelar ontologías. Las consultas conjuntivas booleanas relativas a estas TGDs pueden ser evaluadas en una parte finita del \textit{chase}, que es de tamaño constante cuando las consulta y las TGDs están fijas. En base a este resultado, la complejidad de datos de evaluar una consulta conjuntiva booleana relativa a TGDs dentro del fragmento \textit{guarded}, resulta polinomial en el caso general y lineal para consultas atómicas.
 Una TGD $\sigma$ está en el fragmento \textit{guarded} si solo si contiene un átomo en su cuerpo que contiene todas las variables cuantificadas universalmente en $\sigma$. El primer átomo más a la izquierda con estas característica se denomina la \textit{guarda} de  $\sigma$. Al resto de los átomos de $\sigma$ los llamamos \textit{átomos laterales} de $\sigma$.
 
 \begin{exmp}\label{ejemplo_guarded}
     La TGD $actor(X) \land actuaEn(X, Y) \rightarrow \exists Z interpretoA(X, Y, Z)$ está en el fragmento \textit{guarded}, siendo \textit{actuaEn(X, Y)} la guarda y \textit{actor(X)} el átomo lateral. Mientras que la TGD $actuaEn(X, Y) \land dirigidaPor(X, W) \rightarrow trabajaronJuntos(Y, W)$ no está en el fragmento, dado que para ningún átomo del cuerpo sucede que este contenga a todas las variables que existen en el cuerpo. 
 \end{exmp}
-Notar que esta clase de TGDs aseguran decibilidad. Como se muestra en \cite{cali}, agregar una sola TGD fuera del fragmento a un programa Datalog+/- puede quitar esta propiedad.
+Notar que esta clase de TGDs asegura decibilidad. Como se muestra en \cite{cali}, agregar una sola TGD fuera del fragmento a un programa Datalog+/- puede quitar esta propiedad.
 Sea entonces $R$ un esquema relacional, $D$ una base de datos para $R$, y $\Sigma$ un conjunto de TGDs en el fragmento guarded. El \textit{chase graph} para $D$ y $\Sigma$ es un grafo dirigido que consiste en los átomos de $chase(D,\Sigma)$ como el conjunto de nodos en los cuales habrá una flecha de \textbf{a} hacia \textbf{b} si solo si \textbf{b} es obtenido de \textbf{a} y posiblemente otros átomos por medio de una sola aplicación de alguna TGD $\sigma \in \Sigma$. Aquí marcamos a \textbf{a} como la guarda si solo si \textbf{a} es la guarda de $\sigma$. Consideramos ahora al \textit{guarded chase forest} como al subgrafo del \textit{chase graph} de $D$ y $\Sigma$ que consta de (i) todos los átomos del \textit{chase graph} como nodos y (ii) una flecha desde \textbf{a} hacia \textbf{b} si solo si \textbf{b} fue obtenido a partir de \textbf{a} y posiblemente otros átomos por medio de una sola aplicación de una TGD $\sigma \in \Sigma$ con \textbf{a} como guarda.
 
 Definimos la profundidad \textit{guarded} de un átomo \textbf{a} en el \textit{guarded chase forest} para $D$ y $\Sigma$, denotada \textit{profundidad(\textbf{a})}, como la longitud del camino desde $D$ hasta \textbf{a} en el \textit{forest}. El \textit{guarded chase} de nivel menor o igual que $k$, denotado $g-chase^k(D, \Sigma)$, es el conjunto de todos los átomos en el \textit{guarded chase forest} de profundidad a lo sumo $k$.
@@ -255,7 +292,7 @@ La siguiente figura muestra el \textit{chase graph} para $D$ y $\Sigma$. Para ca
     \label{fig:chase_graph}
 \end{figure}
 
-Mostramos ahora, a modo de comparación el \textit{guarded chase forest}, para mismo $D$ y $\Sigma$. Notar que el mismo es un sub-grafo del anterior y que las profundidades de los nodos son ahora siempre menores o iguales que sus respectivos niveles de \textit{derivación} en el  \textit{chase graph}. 
+A modo de comparación, mostramos en la figura \ref{fig:guarded_forest} el \textit{guarded chase forest}, para mismo $D$ y $\Sigma$. Notar que el mismo es un sub-grafo del anterior y que las profundidades de los nodos son ahora siempre menores o iguales que sus respectivos niveles de \textit{derivación} en el  \textit{chase graph}. 
 
 \begin{figure}[ht]
     \includegraphics[scale=0.5]{guarded_chase_forest}
@@ -270,9 +307,9 @@ Mostramos ahora, a modo de comparación el \textit{guarded chase forest}, para m
 
 Sea $R$ un esquema relacional y $\Sigma$ un conjunto de TGDs para $R$. Decimos que $\Sigma$ tiene la propiedad \textit{Bounded guard-depth property} solo si, para toda base de datos $D$ y para toda consulta conjuntiva booleana $Q$, para toda vez que exista un homomorfismo $\mu$ que mapea $Q$ en el $chase(D, \Sigma)$, entonces existe un homomorfiso $\delta(Q)$ tal que todos los ancestros de $\delta(Q)$ en el $chase graph$ para $D$ y $\Sigma$ están contenidos en el $g-chase^{\gamma_k}(D, \Sigma)$, donde $\gamma_k$ solo depende de $Q$ y $R$.
 
-Tal como se muestra en \cite{JWS}, las TGDs del fragmento Guarded poseen la propiedad anterior. En resumen, todos los átomos que se encuentran en la respuesta a una consulta conjuntiva se encuentran dentro del $g-chase^{(n + 1)\cdot\delta}$, con $\delta = (2\cdot\omega)^\omega\cdot2^{(2\omega)^{\omega\cdot|R|}}$, siendo $\omega$ la máxima aridad de algún predicado en $R$ y $n$ la cantidad de átomos en la consulta.
+Tal como se muestra en \cite{JWS}, las TGDs del fragmento \textit{Guarded} poseen la propiedad anterior. En resumen, todos los átomos que se encuentran en la respuesta a una consulta conjuntiva se encuentran dentro del $g-chase^{(n + 1)\cdot\delta}$, con $\delta = (2\cdot\omega)^\omega\cdot2^{(2\omega)^{\omega\cdot|R|}}$, siendo $\omega$ la máxima aridad de algún predicado en $R$ y $n$ la cantidad de átomos en la consulta.
 
-Esta profundidad en el \textit{guarded chase forest}, es independiente del tamaño de $D$, lo cual lleva a poder afirmar que responder consultas en el fragmento \textit{guarded} es $P-complete$ en la complejidad de datos.
+Esta profundidad en el \textit{guarded chase forest}, es independiente del tamaño de $D$, gracias a lo cual se puede afirmar que responder consultas en el fragmento \textit{Guarded} es $P-complete$ en la complejidad de datos.
 
 \subsection{Datalog+/-, fragmento Lineal}
 
@@ -280,10 +317,10 @@ En el fragmento \textit{Lineal} de Datalog+/- las TGDs tienen un solo átomo en 
 
 \subsubsection{Bounded derivation-depth property}
 
-Definimos ahora la \textit{bounded derivation-depth property} para un conjunto de TGDs, la cual es estrictamente más fuerte que la \textit{ bounded guard-depth property}, dado que la primera implica la segunda, pero no al revés. Informalmente, la \textit{bounded derivation-depth property} dice que para responder a una consulta conjuntiva no es necesario ir más allá de una profundidad $k$ en el \textit{chase graph} (y no en el \textit{guarded chase forest} como en el fragmento anterior), cuyo tamaño solo depende de $Q$ y $R$.
+Definimos ahora la \textit{bounded derivation-depth property} para un conjunto de TGDs, la cual es estrictamente más fuerte que la \textit{ bounded guard-depth property}, dado que la primera implica la segunda, pero no al revés. Informalmente, la \textit{bounded derivation-depth property} dice que para responder a una consulta conjuntiva no es necesario explorar más allá de una profundidad $k$ en el \textit{chase graph} (y no en el \textit{guarded chase forest} como en el fragmento anterior), cuyo tamaño solo depende de $Q$ y $R$.
 
 \subsubsection{First-order rewritability}
-Una clase de TGDs $C$ es reescribible en primer orden o \textit{first-order rewritible} si solo si para todo conjunto de TGDs en $C$ y para toda consulta conjuntiva booleana $Q$, existe una consulta de primer orden $Q_\Sigma$ tal que, para toda base de datos $D$, sucede que $D \cup \Sigma \models Q$ si solo si $D \models Q_\Sigma$. Dado que responder consultas de primer orden es un problema en $AC_0$ en la complejidad de datos \cite{Vardi}, también se encuentra en esta clase de problemas responder consultas bajo TGDs que sean reescribibles en primer orden. Teniendo en cuenta además que toda consulta de primer orden es reescribible a una consulta $Q^*$ de \textit{SQL}, esta propiedad nos indica que para el fragmento \textit{lineal} podemos hacer uso práctico de los motores de base de datos \textit{SQL} con todas las optimizaciones ya provistas por los mismos.
+Una clase de TGDs $C$ es reescribible en primer orden o \textit{first-order rewritable} si solo si para todo conjunto de TGDs en $C$ y para toda consulta conjuntiva booleana $Q$, existe una consulta de primer orden $Q_\Sigma$ tal que, para toda base de datos $D$, sucede que $D \cup \Sigma \models Q$ si solo si $D \models Q_\Sigma$. Dado que responder consultas de primer orden es un problema en $AC_0$ en la complejidad de datos \cite{Vardi}, también se encuentra en esta clase de problemas responder consultas bajo TGDs que sean reescribibles en primer orden. Teniendo en cuenta además que toda consulta de primer orden es reescribible a una consulta $Q^*$ de \textit{SQL}, esta propiedad nos indica que para el fragmento \textit{lineal} podemos hacer uso práctico de los motores de base de datos \textit{SQL} con todas las optimizaciones ya provistas por los mismos.
 
 \begin{figure}[ht]
     \includegraphics[scale=0.3]{fo_rewrite.jpg}
@@ -312,7 +349,7 @@ Si tenemos $Q(X) = argentino(X) \land casadoCon(X, Z)$ podemos reescribir esta c
     \end{itemize}
 \end{exmp}
 
-Se han propuesto diversos algoritmos de reescritura [\cite{Kewen}, \cite{Gottlob}]. El objetivo en este caso es conseguir una reescritura lo más chica posible, dado que esto permitirá un uso práctico real de los sistemas de base de datos \textit{SQL}. Si el resultado de la reescritura fuera una consulta demasiado grande, esto atentaría contra el uso práctico real, dado que los motores \textit{SQL} no muestran buena \textit{performance} para tales consultas. 
+Se han propuesto diversos algoritmos de reescritura [\cite{Kewen}, \cite{Gottlob}]. El objetivo es siempre conseguir una reescritura lo más chica posible, dado que esto permitirá un uso práctico real de los sistemas de base de datos \textit{SQL}. Cuando el resultado de la reescritura es demasiado grande, el uso práctico se diluye; dado que los motores \textit{SQL} van perdiendo su buena performance a medida que el tamaño de la consulta aumenta. 
 
 \subsection{Negative Constraints}\label{ncs}
 Una \textit{Negative Constraint} es una fórmula de primer orden de la forma $\forall X \Phi (X) \rightarrow \bot$, donde $\Phi(X)$ es una conjunción de átomos. Estas \textit{constraints} nos ayudan a expresar restricciones sobre las ontologías.
@@ -325,9 +362,9 @@ De manera similar podemos decir que ningún miembro de una clase pertenece a una
 Responder consultas en una base de datos bajo un conjunto de TGDs $\Sigma_T$ y un conjunto de restricciones $\Sigma_C$ puede realizarse sin agregar complejidad de la siguiente manera: para cada \textit{negative constraint} $\sigma = \Phi(X,Y) \rightarrow \bot \in \Sigma_C$ verificamos que se satisface en $D$ y $\Sigma_T$, lo cual se puede hacer chequeando que la consulta conjuntiva booleana $Q_\sigma = \Phi(X, Y)$ evalúe a Falso en $D$ y $\Sigma_T$. Escribimos $D \cup \Sigma_T \models \Sigma_C$ si solo si toda $\sigma \in \Sigma_C$ es falsa en $D$ y $\Sigma_T$. Esto nos lleva inmediatamente al siguiente resultado: decimos que una consulta conjuntiva booleana es verdadera en $D$, $\Sigma_T$ y $\Sigma_C$, y lo anotamos $D \cup \Sigma_T \cup  \Sigma_C \models Q$ si solo si (i) $D \cup \Sigma_T \models Q$ o (ii) $D \cup \Sigma_T \not\models \Sigma_C$.
 
 \subsection{Equality-Generating Dependencies (EGDs) y Keys}
-Las dependencias generadoras de igualdad o \textit{Equality-Generating Dependencies} también son importantes a la hora de representar ontologías. Estas son fórmulas de primer orden que generalizas dependencias funcionales y en particular claves.
+Las dependencias generadoras de igualdad o \textit{Equality-Generating Dependencies} también son importantes a la hora de representar ontologías. Estas son fórmulas de primer orden que generalizan dependencias funcionales y en particular claves.
 
-Sin embargo, si bien es cierto que agregar negative constraints es sencillo desde el punto de vista computacional, no sucede lo mismo con las EGDs: la interacción entre las TGDs y las EGDs puede tornar indecidible el problema de responder consultas\cite{Johnson}. Se puede comprobar que un conjunto fijo de EGDs y guarded TGDs pueden simular una maquina de Turing universal, con lo cual responder consultas es indecidible para tales dependencias. Por tal motivo, consideramos ahora una clase más restringida de EGDs, a las cuales llamamos \textit{claves no conflictivas}. Tal clase de EGDs muestra una interacción controlada con las TGDs (y NCs), de manera tal que no incrementan la complejidad de responder consultas, agregando al mismo tiempo suficiente poder expresivo para poder modelar ontologías.
+Sin embargo, si bien es cierto que agregar \textit{negative constraints} es sencillo desde el punto de vista computacional, no sucede lo mismo con las EGDs: la interacción entre las TGDs y las EGDs puede tornar indecidible el problema de responder consultas\cite{Johnson}. Se puede comprobar que un conjunto fijo de EGDs y guarded TGDs pueden simular una maquina de Turing universal, con lo cual responder consultas es indecidible para tales dependencias. Por tal motivo, consideramos ahora una clase más restringida de EGDs, a las cuales llamamos \textit{claves no conflictivas}. Tal clase de EGDs muestra una interacción controlada con las TGDs (y NCs), de manera tal que no incrementan la complejidad de responder consultas, agregando al mismo tiempo suficiente poder expresivo para poder modelar ontologías.
 
 Una \textit{dependencia generadora de igualdad} (o EGD) es una fórmula $\sigma$ de primer orden de la forma $\forall X \Phi(X) \rightarrow X_i = X_j$, donde $\Phi(X)$, el cual llamamos el cuerpo de $\sigma$, es una conjunción (no necesariamente guarded) de átomos, y $X_i$ y $X_j$ son variables en $X$. Llamamos a $X_i = X_j$ a la cabeza de $\sigma$. Tal $\sigma$ se satisface en una base de datos $D$ para $R$ si solo si, siempre que exista un homomorfismo $h$ tal que $h(\Phi(X) \subseteq D$, sucede que $h(X_i) = h(X_J)$. Se suelen omitir los cuantificadores universales en estas fórmulas, y consideramos solo conjuntos finitos de EGDs.
 
@@ -338,7 +375,7 @@ La base de datos $D = \{r(a, b), r(c, d)\}$ satisface $\sigma$, dado que todo ho
 
 \end{exmp}
 
-Una EGD $\sigma$ sobre $R$ de la forma $\Phi(X) \rightarrow X_i = X_j$ es \textit{aplicable} a una base de datos $D$ si solo si existe un homorfismo $\eta : \Phi(X) \rightarrow D$ tal que $\eta(X_i)$ y $\eta(X_j)$ son distintos y no son ambos constantes. Si $\eta(X_i)$ y $\eta(X_j)$ son constantes distintas en $\Delta$, entonces hay una violación de $\sigma$, y el chase falla. Caso contrario, el resultado de aplicar $\sigma$ a $D$ es la base de datos $h(D)$ que se obtiene a partir de $D$ al reemplazar toda ocurrencia de algún elemento no constante $e https://www.overleaf.com/project/5d595ee258698f10f21f3b7a\in \{\eta(X_i), \eta(X_j)\}$ en $D$ para el otro elemento $e\prime$ (si $e$ y $e\prime$ son los dos nulos, entonces $e$ precede a $e\prime$ en orden lexicográfico.)
+Una EGD $\sigma$ sobre $R$ de la forma $\Phi(X) \rightarrow X_i = X_j$ es \textit{aplicable} a una base de datos $D$ si solo si existe un homorfismo $\eta : \Phi(X) \rightarrow D$ tal que $\eta(X_i)$ y $\eta(X_j)$ son distintos y no son ambos constantes. Si $\eta(X_i)$ y $\eta(X_j)$ son constantes distintas en $\Delta$, entonces hay una violación de $\sigma$, y el chase falla. Caso contrario, el resultado de aplicar $\sigma$ a $D$ es la base de datos $h(D)$ que se obtiene a partir de $D$ al reemplazar toda ocurrencia de algún elemento no constante $e \in \{\eta(X_i), \eta(X_j)\}$ en $D$ para el otro elemento $e\prime$ (si $e$ y $e\prime$ son los dos nulos, entonces $e$ precede a $e\prime$ en orden lexicográfico.)
 
 El chase para una base de datos $D$ y un conjunto $\Sigma_T$ de TGDs más un conjunto $\Sigma_E$ de $EGDs$, el cual llamamos \textit{full chase} y denotamos $chase(D, \Sigma_T \cup \Sigma_E)$, se computa de manera iterativa por medio de aplicar todas las EGDs que sean aplicables entre cada aplicación de cada TGD como se describió previamente.
 
@@ -355,13 +392,13 @@ Sea $D$ la base de datos $\{p(a), r(a), s(a, b)\}$. En el cómputo de $chase(D, 
 \end{exmp}
 
 \subsubsection{Separabilidad}
-Sea $R$ un esquema relacional, y sean $\Sigma_T$ y $\Sigma_E$ dos conjuntos de TGDs y EGDs sobre $R$, respectivamente. Entonces, $\Sigma_E$ es separable de $\Sigma_T$ si solo si para toda base de datos $D$ sobre $R$, se cumplen las siguientes condiciones: 
+Sea $R$ un esquema relacional, y sean $\Sigma_T$ y $\Sigma_E$ dos conjuntos de \textit{TGDs} y \textit{EGDs} sobre $R$, respectivamente. Entonces, $\Sigma_E$ es separable de $\Sigma_T$ si solo si para toda base de datos $D$ sobre $R$, se cumplen las siguientes condiciones: 
 \begin{itemize}
-    \item  Si hay una violación de una EGD $\sigma \in \Sigma_E$ en $chase(D, \Sigma_T \cup \Sigma_E)$, entonces hay también una violación de $sigma$ en $D$.
-    \item Si no hay violación de ninguna EGD $\sigma \in \Sigma_E$ entonces para toda connsulta $Q$, sucede que $chase(D, \Sigma_T \cup \Sigma_E) \models Q$ si solo si $chase(D, \Sigma_T) \models Q$.
+    \item  Si hay una violación de una \textit{EGD} $\sigma \in \Sigma_E$ en $chase(D, \Sigma_T \cup \Sigma_E)$, entonces hay también una violación de $sigma$ en $D$.
+    \item Si no hay violación de ninguna \textit{EGD} $\sigma \in \Sigma_E$ entonces para toda consulta $Q$, sucede que $chase(D, \Sigma_T \cup \Sigma_E) \models Q$ si solo si $chase(D, \Sigma_T) \models Q$.
 \end{itemize}
 
-Esto implica que agregar EGDs separables a un conjunto de TGDs no incrementa la complejiad de contestar consultas, tanto en el caso lineal como el el guarded. Esto es porque alcanza con evaluar si cada EGD se satisface en D, y si esto ocurre podemos entonces armar el chase con las TGDs solamente.
+Esto implica que agregar \textit{EGDs} separables a un conjunto de \textit{TGDs} no incrementa la complejidad de contestar consultas, tanto en el caso \textit{lineal} como el el \textit{guarded}. Lo anterior se puede afirmar gracias a que es suficiente evaluar si cada EGD se satisface en D, y si esto ocurre es posible construir el \textit{chase} sin necesidad de aplicar el algoritmo del \textit{full chase}, pues ambos arrojarán el mismo resultado.
 
 \subsubsection{Claves}
 Dado un predicado relacional $p$ sobre un esquema relacional $R$ una clave $K$ sobre $p$ es un conjunto de posiciones para el cual sucede que para toda base de datos $D$ sobre $R$ no pueden existir dos \textit{hechos} en $D$ para $p$ tales que los dos hechos tengan los mismos valores en todas las posiciones de $K$ pero distintos valores en posiciones que no estén incluidas en $K$. 
@@ -380,11 +417,11 @@ Sea $p$ un predicado ternario sobre un esquema relacional $R$. Sea $k[1]$ una cl
 \end{exmp}
 
 
-\subsubsection{Claves no conflictivas}
+\subsubsection{Claves no conflictivas}\label{claves_no_conflictivas}
 Sea $K$ una clave, y sea $\sigma$ una TGD de la forma $\Phi(X, Y) \rightarrow \exists Z r(X, Z)$. Decimos que $K$ es no conflictiva (NC) con $\sigma$ si se cumple alguna de las siguientes condiciones:
 \begin{itemize}
     \item El predicado relacional sobre el cual $K$ está definido es diferente de $r$.
-    \item Las posiciones de $K$ en $R$ no son un subconjunto propio de las posiciones de $X$ en $r$ en la cabeza de $\sigma$, y toda variable en $Z$ aparece una sola vez en la cabeza de $\sigma$. 
+    \item Las posiciones de $K$ en $r$ no son un subconjunto propio de las posiciones de $X$ en $r$ en la cabeza de $\sigma$, y toda variable en $Z$ aparece una sola vez en la cabeza de $\sigma$. 
 \end{itemize}
 
 Decimos que $K$ es no conflictiva con un conjunto de TGDs $\Sigma_T$ si solo si $k$ es no conflictiva con toda $\sigma \in \Sigma_T$. Un conjunto de claves $\Sigma_K$ es no conflictivo con $\Sigma_T$ si solo si todas clave $k \in \Sigma_K$ es no conflictiva con $\Sigma_T$.
@@ -397,7 +434,7 @@ Tal como se muestra en \cite{JWS}, la propiedad de no conflictivdad entre un con
 
 Concluímos entonces esta sección afirmando que en el caso NC, las claves no incrementan la complejidad-datos de contestar consultas bajo TGDs y constraints, tanto para el fragmento \textit{guarded} como para el \textit{lineal}.
 
-\subsection{Manejo de inconsistencia}
+\section{Manejo de inconsistencia}
 Durante mucho tiempo se ha estudiado el problema de manejar la inconsistencia en las bases de datos. En los últimos años, ha habido un creciente interés en este tema con el advenimiento de la \textit{Web Semántica}, que ha hecho que este asunto sea aún más relevante; teniendo en cuenta que en ambientes abiertos, con fuentes de información proveniente de diversos orígenes, es habitual que surjan contradicciones entre los datos.
 
 Por otro lado, es bien sabido que la inconsistencia también genera problemas en la lógica clásica. En particular, las teorías lógicas inconsistentes no tienen modelos, y por lo tanto implican todas las fórmulas; con lo cual, responder consultas en una base de conocimientos inconsistente carece de sentido. Esto llevó a que en el campo de la inteligencia artificial y de la teoría de base de datos, se haya mantenido tradicionalmente la postura de que las bases de conocimiento deberían ser totalmente libres de información inconsistente, y que esta debería ser erradicada inmediatamente. Sin embargo, en las últimas décadas, se ha reconocido que para muchas aplicaciones interesantes aquella postura es obsoleta. 
@@ -556,7 +593,7 @@ Veamos ahora como se aproximan entre sí las semánticas que hemos mencionado. E
 Tal como se muestra en el gráfico, \textit{IAR} es la semántica más restrictiva, siendo esta una aproximación \textit{sana} de \textit{ICR}, y siendo esta última una aproximación \textit{sana} de \textit{AR} e \textit{ICAR}, aunque estas dos no se aproximan entre sí. Por otro lado \textit{AR} e \textit{ICAR} son aproximaciones \textit{sanas} de \textit{CAR}, la menos restrictiva de todas las semánticas. 
 
 \chapter{Resultados Formales}
-\section{Algoritmo RepairsFinder}
+\section{Algoritmo RepairsFinder}\label{repairs_finder_section}
 Presentamos ahora un algoritmo que dada una base de conocimientos $(D, \Sigma)$, con $\Sigma = \Sigma_T \cup \Sigma_N$, retorna todos sus \textit{repairs}, es decir todos los subconjuntos de $D$ maximales consistentes con respecto a $\Sigma$. Nuestro objetivo es recortar el espacio de búsqueda y evitar a la vez la mayor cantidad de consultas a la base de conocimiento. Dada una base de datos $D$ con $n$ \textit{hechos}, la cantidad de posibles subconjuntos para esa base de datos es $2^n$. Podríamos de manera \textit{naive} considerar la totalidad de los subconjuntos y para cada uno de ellos evaluar consistencia y maximalidad. Sin embargo, sabemos que es necesario organizar la búsqueda de los \textit{repairs} de manera eficiente, dada la gran cantidad de subconjuntos que necesitaríamos explorar de otro modo. Tengamos en cuenta además, que para evaluar si un subconjunto $s$ es consistente, necesitamos evaluar cada una de las \textit{Negstive Constraints} en $\Sigma_N$ contra $s$. Tal como se detalló en la sección \ref{ncs}, para evaluar una $NC: \phi(x, y) \rightarrow \bot$, podemos evalular la consulta $Q(x, y) = \phi(x, y)$ sobre $(s, \Sigma_T)$ y si la respuesta es distinta al conjunto vacío entonces decimos que hay una violación de tal \textit{NC} y que por lo tanto $s$ no es consistente. Pero como ya mencionamos, queremos minimizar estas consultas lo más posible.
 
 El algoritmo \textit{RepairsFinder} recorta el espacio de búsqueda con una estrategia \textit{BottomUp} y \textit{TopDown} en simultáneo, descartando todos los subconjuntos de $D$ que sean subconjunto de algún \textit{repair} ya encontrado o superconjunto de algún subconjunto minimal inconsistente, lo que llamaremos de ahora en más \textit{culprit}. 
@@ -682,6 +719,7 @@ En cada iteración \textit{TopDown} se procede de la siguiente manera: para cada
 
 Mientras tanto, en cada iteración \textit{BottomUp} procedemos de la siguiente manera. Armamos el conjunto \textit{proximoBottom} como todos los subconjuntos posibles de $D$ de cardinalidad $nBottom + 1$ que no sean superconjunto de ningún \textit{culprit}. Para cada uno de ellos verificamos si son subconjunto de algún elemento en \textit{repairsGrandes}, y en caso afirmativo los marcamos como consistentes. En caso contrario verificamos consistencia consultando la \textit{KB}. Para todos aquellos que resulten inconsistentes los agregamos al conjunto de \textit{culprits}. Por otro lado, todos los elementos de \textit{bottom} que no sean subconjunto de algún elemento consistente en \textit{ProximoBottom} podemos afirmar que son un \textit{repair}, y los agregamos al conjunto de \textit{RepairsChicos}. Finalmente, en la próxima iteración, \textit{bottom} estará definido por todos los elementos en \textit{proximoBottom} que sean consistentes.
 
+\subsection{Demostración Formal}
 
 \newtheorem{theorem}{Teorema} 
 \newtheorem{lemma}[theorem]{Lema}
@@ -839,7 +877,7 @@ Sea $k$ un número de iteración en la ejecución de $repairsFinder(D, \Sigma)$.
 \begin{proof}
 Probamos este lema por inducción en el número de iteración $k$. Notemos que para probar que el lema vale para $k = 1$ necesitamos probar que el conjunto $D$ será agregado a \textit{repairsGrandes} si solo si $D$ es consistente. Notemos que al momento de llamarse la función \textit{AgregarConsistentesEnTopARepairs} en esta primera iteración, la variable \textit{top} consta de un conjunto que contiene a un único conjunto: el conjunto $D$. Notemos ahora que por el lema \ref{f_agregar_consistentes_en_top_a_repairs} $D$ será agregado a \textit{repairsGrandes} si solo si $D$ es consistente.
 
-Para probar el paso inductivo asumimos que la condición vale para una todas las iteraciones entre 1 y $k$ y queremos ver que esto implica que vale para la iteración $k+1$. Es decir, queremos ver que si vale para todas las iteraciones menores a $k+1$, entonces durante la ejecución de la iteración $k+1$, durante la ejecución de la funcion \textit{AgregarConsistentesEnTopARepairs}, se agregaran todos, y solamente aquellos \textit{repairs} $r$ tales que $|r| = (n + 1 - (k+1)) = n - k$.
+Para probar el paso inductivo asumimos que la condición vale para todas las iteraciones entre 1 y $k$ y queremos ver que esto implica que vale para la iteración $k+1$. Es decir, queremos ver que si vale para todas las iteraciones menores a $k+1$, entonces durante la ejecución de la iteración $k+1$, durante la ejecución de la funcion \textit{AgregarConsistentesEnTopARepairs}, se agregaran todos, y solamente aquellos \textit{repairs} $r$ tales que $|r| = (n + 1 - (k+1)) = n - k$.
 
 
 Asumamos entonces que se está ejecutando la llamada a la función \textit{AgregarConsistentesEnTopARepairs} para la iteración $k+1$. Por el lema \ref{tamano_top_2}, al momento de llamarse a esta función, $top$ consta de exactamente todos los subconjuntos de $D$ con cardinalidad $n - (k + 1) + 1 = n - k$ que no son subconjunto de ningún elemento en \textit{repairsGrandes}. Notemos que si se cumple la hipótesis inductiva, el conjunto \textit{repairsGrandes} es exactamente el conjunto formado por todos los \textit{repairs} $r$ tales que $|r| > n - k$. Juntando esto con lo anterior resulta entonces que $top$ consta de exactamente todos los subconjuntos de $D$ con cardinalidad $n - k + 1$ que no son subconjunto propio de ningún \textit{repair}. 
@@ -984,6 +1022,400 @@ La máxima cantidad de iteraciones que se puede ejecutar en el \textit{while} de
 %% ...
 
 \chapter{Implementación}
+
+Tal como mencionamos en la introducción, el objetivo del presente trabajo es presentar una herramienta que acerque de manera \textit{amigable} el lenguaje \textit{Datalog +/-} al público general. De esta manera, por medio de una aplicación \textit{web} queremos proveer la funcionalidad de crear ontologías, así como también la posibilidad de ejecutar consultas sobre las mismas, siendo estas consultas tolerantes a las inconsistencias que puedieran existir en los datos almacenados sobre esas ontologías. 
+
+En las páginas que siguen describiremos en detalle la implementación de esta herramienta. Cabe primero destacar que para construir nuestro sistema, hemos utilizado una herramienta ya existente, llamada \textit{IRIS}, que brinda la posibilidad de crear ontologías y ejecutar consultas en el lenguaje. Nos enfocaremos entonces en describir cuál es el alcance de \textit{IRIS}, detallando el límite entre las facilidades provistas por éste y las nuevas funcionalidades implementadas por nosotros.
+
+\section{IRIS}
+
+\textit{IRIS} es una herramienta \textit{open source}\footnote{El código se encuentra publicado en https://github.com/NICTA/iris-reasoner.} hecha en \textit{JAVA} que permite construir ontologías en \textit{Datalog +/-} y ejecutar consultas sobre las mismas. Esta herramienta fue desarrollada por un grupo de investigadores de ??, entre los años ??. De los elementos que provee el lenguaje, \textit{IRIS} brinda la posibilidad de definir \textit{TGDs}, \textit{hechos}, y \textit{consultas}. 
+
+\subsection{Usabilidad}
+Para utilizar \textit{IRIS} es necesario descargar el código de \textit{github}, instalar \textit{JAVA 8}, compilar el código en un archivo \textit{.jar}, y luego ejecutarlo. Al momento de ejecutar el archivo \textit{.jar} es necesario pasarle una serie de parámetros, entre ellos el \textit{path} a un archivo de texto que contiene el \textit{programa} a ejecutar, es decir que en este último se deben encontrar las \textit{TGDs}, los \textit{hechos} y las \textit{consultas}. Las respuestas a las \textit{consultas} son retornadas por \textit{IRIS} en \textit{standard output}. A grandes rasgos, podemos describir entonces a \textit{IRIS} como una aplicación de consola que puede procesar un \textit{programa} y devolver un resultado.
+
+\begin{figure}[ht]
+    \includegraphics[scale=0.45]{iris-console-application.png}
+    \centering
+    \caption{IRIS: aplicacion de consola}
+    \label{fig:iris_console_application}
+\end{figure}
+
+
+\subsection{Sintaxis}\label{section_sintaxis}
+La figura \ref{fig:iris_console_application} ejemplifica la sintaxis que deberá tener el input para poder ser procesado por \textit{IRIS}. En este input \textit{IRIS} puede identificar una base de conocimiento $(\Sigma_t, D)$ donde $\Sigma_t$ es un conjunto de \textit{TGDs} y $D$ es un conjunto de \textit{hechos}. En ese mismo archivo se podrán incluir un conjunto de consultas, cuyas respuestas serán retornadas por \textit{IRIS} en \textit{standard output}. Veamos ahora en detalle cual es la sintaxis que debe respetar cada uno de los elementos del lenguaje.
+
+\subsubsection{Constantes y Variables}
+Las constantes se deben notar entre comillas simples y las variables deben ser antecedidas por el símbolo de interrogación \textit{?}.
+
+\subsubsection{Átomos}
+Los átomos constan de un nombre de predicado alfanumérico seguidos por un conjunto de argumentos encerrado entre paréntesis donde los argumentos están separados por coma. Cada argumento puede ser una constante o una variable.
+
+\subsubsection{TGDs}
+Para cada \textit{TGD} se debe separar la cabeza y el cuerpo intermediando la cadena \textit{``:-''}, ubicando la cabeza a la izquierda y el cuerpo a la derecha. La cabeza constará de un solo átomo mientras que el cuerpo contendrá un conjunto de átomos separados por coma. Se debe ubicar un punto final a la derecha de cada \textit{TGD}. Las variables que se encuentren en la cabeza y no se encuentren en ningún átomo del cuerpo serán consideradas por \textit{IRIS} como \textit{nulos}.   El siguiente ejemplo muestra una \textit{TGD} que podrá ser correctamente procesada por \textit{IRIS}.
+
+\begin{center}
+    q(?x, ?y, ?z) :- p1(?x, ?y), p2('a').
+\end{center} 
+
+\subsubsection{Hechos}
+Los hechos constan de un solo átomo en donde todas los argumentos son constantes. Cada hecho debe finalizar con un punto a la derecha.
+
+\subsubsection{Consultas}\label{consultas_iris}
+Las consultas deben ser precedidas por la cadena \textit{``?-''} y seguidas por un conjunto de átomos separados por coma, en donde puede haber tanto variables como constantes como argumentos. Ejemplificamos ahora con la siguiente consulta:
+
+\begin{center}
+    ?- p1(?x, 'a'), p2(?z).
+\end{center} 
+
+Es importante mencionar que \textit{IRIS} no permite cuantificar existencialmente las variables en las consultas. De esta manera, para que la respuesta no sea vacía, todo el cuerpo de la consulta deberá mapear homomórficamente con un conjunto de átomos en el \textit{chase} que computará \textit{IRIS}, donde todos esos átomos del \textit{chase} deberán exclusivamente contener constantes en sus argumentos.
+
+\section{Extendiendo IRIS}
+Con el objetivo final de alcanzar \textit{Datalog +/-} al usuario general, y queriendo ofrecer a la vez la posibilidad de responder consultas bajo ambientes inconsistentes, hemos extendido a \textit{IRIS} con tres nuevas funcionalidades:
+
+\begin{itemize}
+    \item Nueva \textit{api} de manera que \textit{IRIS} pueda ser consultada a través de la \textit{web}.
+    \item Nuevo módulo de manejo de inconsistencia de manera que \textit{IRIS} pueda responder consultas bajo las semánticas \textit{AR} e \textit{IAR}.
+    \item Posibilidad de cuantificar existencialmente las variables en las conusltas.
+\end{itemize}
+
+Detallaremos ahora nuestra implementación para cada una de estas funcionalidades.
+
+\subsection{Api Web}
+
+Para que \textit{IRIS} pueda ser consultada a través de la \textit{web}, necesitamos exponer una \textit{api} pública, con una interfaz clara, que le permita al usuario definir un \textit{programa}, donde se puedan especificar \textit{restricciones de integridad}, \textit{tgds}, \textit{hechos}, \textit{consultas}; y donde se pueda además especificar bajo cual \textit{semántica} se quiere ejecutar a esas \textit{consultas}.
+
+Para poder responder las consultas, la implementación de esta \textit{api} accederá a los otros módulos implementados en el mismo servidor,  entre los cuales se encuentra \textit{IRIS} y otro módulos de implementación propia.
+
+\begin{figure}[ht]
+    \includegraphics[scale=0.45]{Server_Client_Iris_2.png}
+    \centering
+    \caption{Cliente - Servidor}
+    \label{fig:server_client}
+\end{figure}
+
+La figura \ref{fig:server_client} muestra la arquitectura general del nuevo sistema \textit{web}. La nueva \textit{api} está expuesta en un servidor que recibe peticiones de clientes. El módulo \textit{Api Web} solo es encargado de parsear el input recibido en formato \textit{Json}, enviarle la consulta al \textit{Módulo de Semánticas}, esperar su respuesta y devolverla al cliente otra vez en el formato \textit{Json}. Cabe aclarar que todas las comunicaciones entre los módulos \textit{Api Web}, \textit{Módulo de Semanticas}, \textit{Módulo de Repairs} y \textit{IRIS} ocurren en un mismo proceso dentro del servidor a través de llamadas a funciones implementadas en \textit{JAVA} dentro de esos módulos. De esta forma podemos ver al módulo \textit{Api Web} como un mero intermediario entre las llamadas \textit{web} de los clientes y los demás módulos del servidor que se encargan en su conjunto de procesar las consultas.
+
+
+
+Veamos ahora cuáles son los \textit{endpoints} que expone nuestra \textit{api}, y cómo 
+deben ser los \textit{requests} junto con sus respuestas.
+
+\subsubsection{Query Endpoint}\label{query_enpoint_section}
+
+Este \textit{endpoint} permite realizar \textit{consultas} para un conjunto de \textit{Restricciones de Integridad}, \textit{TGDs} y \textit{hechos}. En la figura \ref{fig:query_endpoint} se muestra en un ejemplo el formato esperado para el \textit{body} que deben tener los \textit{request} de este \textit{endpoint}.
+
+\underline{Endpoint Url:} http://localhost:8080/iris/query.
+
+\underline{Http Method:} Post.
+
+
+\begin{figure}[ht]
+    \begin{lstlisting}[language=json,firstnumber=1]
+    {"program": {
+    	"ncs" : [ { body: "r1(?x, ?y)." } ],
+        "tgds" : [
+            {
+            	head : "r1(?z, ?x)",
+            	body: "r1(?x, ?y), r2(?y)."
+            }
+        ],
+    	"facts" : [ { value: "r1('a', 'b')." }	
+    	],
+        "queries" : [
+            {
+                showInOutput : ["x"],
+                body: "r1(?x, ?y), r2(?y)."
+            }	
+        ],
+    	"semantics" : "standard"
+    }}
+    \end{lstlisting}
+    \caption{Formato esperado para una petición al Query Endpoint}
+    \label{fig:query_endpoint}
+\end{figure}
+
+
+Tal como se ejemplifica en la figura \ref{fig:query_endpoint}, el campo \textit{ncs} es un arreglo en el que cada elemento debe ser una serie de átomos separados por coma donde cada átomo debe seguir la sintaxis tal como se especificó en la sección \ref{section_sintaxis}. Cada uno de esos elementos será interpretado como el cuerpo de una \textit{Restricción de Integridad}, donde las comas que separan cada átomo representan conjunción.
+
+De manera similar, el campo \textit{tgds} debe ser un arreglo de \textit{TGDs} siguiendo la sintaxis de la sección \ref{section_sintaxis}, y lo mismo deberá ocurrir con el campo \textit{facts}. 
+
+Con respecto al campo \textit{queries}, cada elemento en el arreglo deberá ser un \textit{Json} de dos campos, donde el campo \textit{showInOuput} es un arreglo con las variables cuyos mapeos en el \textit{chase} deberán mostrarse en el \textit{output} de la consulta y donde el campo \textit{body} es el cuerpo de la consulta en sí. Notar que las variables que aparezcan en el cuerpo de la consulta y no se incluyan en el arreglo del campo \textit{showInOutput} son justamente las variables que queremos cuantificar existencialmente. En el caso en el que este arreglo sea un arreglo vacío, estaremos en el caso en el que todas las variables se deberán cuantificar existencialmente, siendo la consulta una \textit{consulta conjuntiva booleana} tal como se la detalló en la sección \ref{seccion_datalog}.
+    
+Con respecto al campo \textit{semantics}, este podrá contener alguno de los siguientes tres valores: \textit{standard}, \textit{AR} o \textit{IAR}. En el caso en que se especifique \textit{standard}, las consultas se ejecutarán bajo la semántica detallada en la sección \ref{consultas_bajo_tgds}, es decir sin manejo de inconsistencia, lo cual podrá ocurrir solo cuando todas las \textit{restricciones de integridad} se cumplan para ese conjunto de \textit{TGDs} y de \textit{hechos}. En caso contrario se le avisará al cliente que las consultas no se pueden responder bajo esa semántica, dado que no se cumplen todas las restricciones, indicándose a la vez cuáles son aquellas que no se cumplen.
+
+En la figura \ref{fig:query_endpoint_answer_2} se puede ver un ejemplo de respuesta de este \textit{endpoint} para el caso en el que en la petición del cliente el valor del campo \textit{semantics} fue \textit{standard} pero no se cumplieron algunas de las \textit{restricciones de integridad} pasadas en el campo \textit{ncs}. Vemos que en la respuesta, el campo \textit{unsatisfied} es un arreglo donde se indican los índices de las \textit{restricciones de integridad} que no fueron satisfechas en el arreglo que de \textit{ncs} que el cliente envió en la petición. 
+
+
+\begin{figure}[ht]
+    \begin{lstlisting}[language=json,firstnumber=1]
+    {
+    	"unsatisfied" :  [0,2]
+    }
+    \end{lstlisting}
+    \caption{Ejemplo de respuesta del Query Endpoint}
+    \label{fig:query_endpoint_answer_2}
+\end{figure}
+
+
+En al figura \ref{fig:query_endpoint_answer_1} se muestra un ejemplo de respuesta para una petición de un cliente que se encontró en alguno de estos dos casos:
+
+\begin{itemize}
+    \item El valor del campo \textit{semantics} es \textit{AR} o \textit{IAR}
+    \item El valor del campo \textit{semantics} es \textit{standard} y se cumplen todas las \textit{restricciones de integridad}.
+\end{itemize}
+
+\begin{figure}[ht]
+    \begin{lstlisting}[language=json,firstnumber=1]
+    {
+    	"answers" : [
+            {
+                "query" : 
+                        {
+                            showInOutput : ["x", "y"],
+                            body: "r1(?x, ?y), r2(?y)."
+                        },
+                "answer": [['a','b'],['c', 'd']]
+                        
+            },
+            {
+                "query" : 
+                        {
+                            showInOutput : [],
+                            body: "r1(?x, ?y), r2(?y)."
+                        }
+                "answer": true
+            }
+    	],
+    }
+    \end{lstlisting}
+    \caption{Ejemplo de respuesta del Query Endpoint}
+    \label{fig:query_endpoint_answer_1}
+\end{figure}
+
+\subsubsection{Repairs Endpoint}
+
+Hemos agregado además un endpoint que dado un conjunto de \textit{restricciones}, \textit{TGDs} y \textit{hechos}, retorna el conjunto de \textit{repairs}. La figura \ref{fig:repairs_endpoint} muestra con un ejemplo el formato esperado que deben tener las peticiones a este \textit{Repairs Endpoint}.
+
+\underline{Endpoint Url:} http://localhost:8080/iris/repairs.
+
+\underline{Http Method:} Get.
+
+\begin{figure}[ht]
+    \begin{lstlisting}[language=json,firstnumber=1]
+     {
+    	"ncs" : ["r1(?x, ?y).", "r2('s').", "r1(?x, ?y), r2(?x)."],
+    	"tgds" : ["r1(?z, ?x) :- r1(?x, ?y), r2(?y)."],
+    	"facts" : ["r1('a', 'b').", "r2('a', 'd').", "r1('c','b')"]
+     }
+    \end{lstlisting}
+    \caption{Formato esperado para una petición al Repairs Endpoint}
+    \label{fig:repairs_endpoint}
+\end{figure}
+
+En la figura \ref{fig:repairs_endpoint_answer} se muestra un ejemplo de respuesta para el \textit{Repairs Endpoint}.
+\begin{figure}[ht]
+    \begin{lstlisting}[language=json,firstnumber=1]
+    {
+    	"repairs" : [
+    	                ["r1('a', 'b')."], 
+    	                [ "r2('a', 'd').", "r1('c','b')"]
+    	            ]
+    }
+    \end{lstlisting}
+    \caption{Ejemplo de respuesta del Repairs Endpoint}
+    \label{fig:repairs_endpoint_answer}
+\end{figure}
+\subsection{Módulo de Semánticas}
+
+Veamos ahora en detalle cuál es la responsabilidad del \textit{Módulo de Semánticas} y cómo está implementado. Veamos primero que la interfaz que expone este módulo consta de un sólo método al que llamamos \textit{Execute}. Este método recibe un objeto \textit{executeParams}, el cual es una instancia de una clase \textit{JAVA} que contiene los mismos campos que se especificaron en el \textit{Json} de la figura \ref{fig:query_endpoint}, es decir las \textit{restricciones de integridad}, las \textit{TGDs}, los \textit{hechos}, las \textit{consultas} y la \textit{semántica} bajo la cual se desea ejecutar las consultas.
+
+Dependiendo del valor en el campo \textit{semantics}, el método \textit{Execute} hará una llamada a alguno de estos tres métodos privados: \textit{ExecuteStandard}, \textit{ExecuteAR}, o \textit{ExeciteIAR}. Veamos entonces cómo están implementados cada uno de estos tres métodos.
+
+\subsubsection{Método ExecuteStandard}
+
+
+Este método debe primero evaluar si las \textit{restricciones de integridad} son satisfechas por las \textit{TGDs} y los \textit{hechos}. Para poder determinar lo anterior, consultará al módulo de \textit{IRIS}, generando un nuevo \textit{programa}, con la sintaxis especificada en la sección \ref{section_sintaxis}, en las que los \textit{hechos} y las \textit{TGDs} son las que recibió por parámetro, mientras que las \textit{consultas} serán consultas conjuntivas \textit{booleanas} en las que el cuerpo de cada consulta será el cuerpo de cada \textit{restricción de integridad}. 
+
+Si el módulo de \textit{IRIS} devolviera \textit{true} para alguna de esas consultas, entonces determinamos que la \textit{restricción} relacionada a esa consulta es violada por las \textit{TGDs} y los \textit{hechos}. El método indicará en su respuesta cuales son aquellas restricciones que no fueron satisfechas, entendiéndose así que es imposible ejecutar las \textit{consultas} que se han requerido bajo esta semántica.
+
+En el caso en el que ninguna de las restricciones fueran violadas, entonces este método enviará un nuevo \textit{programa} a \textit{IRIS}, con las mismas \textit{TGDs} y \textit{hechos} que en la llamada anterior pero ahora sí con las consultas que el cliente desea ejecutar. Para cada consulta se instanciará una respuesta, donde la respuesta puede ser o bien un valor \textit{booleano} (en caso de que la consulta haya sido \textit{booleana}) o bien una matriz, representando las filas y las columnas de la respuesta, donde cada columna se corresponderá con cada una de las variables en el arreglo \textit{showInOutput} que se especificó para esa consulta.
+
+\subsubsection{Método ExecuteAR}
+
+Este método ejecutará las consultas bajo la semántica \textit{AR}. Para ello deberá conocer primero el conjunto de \textit{repairs} correspondientes a esas \textit{restricciones}, \textit{TGDs} y \textit{hechos}, el cual lo obtendrá por medio del \textit{Módulo de Repairs}, sobre el cual detallaremos su implementación más adelante. 
+
+Una vez obtenido el conjunto de \textit{repairs}, el método \textit{ExecuteAR} procederá de la siguiente manera: para cada \textit{repair} armará un nuevo \textit{programa} en el que los \textit{hechos} serán los mismos \textit{hechos} que se encuentren en ese \textit{repair}. Para cada \textit{programa}, las \textit{consultas} y las \textit{TGDs} serán siempre las mismas, es decir las que el método recibió por parámetro. Una vez enviados a ejecutar todos los programas al módulo de \textit{IRIS}, se computará la intersección de las respuestas para cada consulta, en donde esta intersección consistirá en una intersección de matrices para el caso de las consultas no \textit{booleanas} y en una conjunción lógica en el caso contrario.
+
+\subsubsection{Método ExecuteIAR}
+
+Ejecutaremos en este caso a las consultas bajo la semántica \textit{IAR}. Al igual que en el caso anterior, el método \textit{ExecuteIAR} obtendrá el conjunto de \textit{repairs} por medio del \textit{Módulo de Repairs}. Luego computará la intersección de los \textit{repairs} y armará un solo \textit{programa} en el que los \textit{hechos} serán la intersección obtenida, mientras que las \textit{TGDs} y las \textit{consultas} serán las mismas que recibió por parámetro. La respuesta se armará de igual manera que en el caso en el que ninguna \textit{restricción} fuera violada en el método  \textit{ExecuteStandard}.
+
+\subsection{Módulo de Repairs}\label{modulo_de_repairs}
+
+Este módulo es una implementación hecha en \textit{JAVA} del algoritmo \textit{RepairsFinder} presentado en la sección \ref{repairs_finder_section}. El código completo de esta implementación se puede ver en la sección ???. 
+
+Si bien nuestro objetivo en esta ocasión es encontrar conjuntos maximales \textit{consistentes}, cabe mencionar aquí que esta implementación puede ser fácilmente reutilizable para encontrar conjuntos maximales con respecto a otras características más allá de consistencia. Esto se debe a que los únicos parámetros que recibe esta implementación son el conjunto de \textit{hechos} más una función que debe poder recibir un subconjunto de esos hechos y devolverá un booleano indicando si aquella propiedad para la cual se desea encontrar conjuntos maximales se cumple o no para ese subconjunto. En este caso la función que le pasamos por parámetro al \textit{Modulo de Repairs} es una función que dado un conjunto de \textit{hechos} llamará al módulo de \textit{IRIS} para un conjunto de \textit{restricciones} y \textit{TGDs} fijas, con el objetivo de saber si aquellas \textit{restricciones} se sastisfacen para esas \textit{TGDs} y ese subconjunto de \textit{hechos}. De esta manera el \textit{Módulo de Repairs} desconoce totalmente a \textit{IRIS}, ya que solo ejecuta la función recibida por parámetro sin conocer la implementación de dicha función\footnote{Teniendo en cuenta esta aclaración cabe mencionar que los métodos \textit{ExecuteAr} y \textit{ExecuteIAR} deben ser capaces de instanciar esta función y pasarla por parámetro al \textit{Módulo de Repairs.}}.
+
+Teniendo en cuenta que el algoritmo necesita computar reiteradas veces inclusión entre dos conjuntos, vale destacar que implementamos esta funcionalidad numerando a todos los \textit{hechos} y manteniéndolos ordenado en todo momento. De esta manera, dado que todo subconjunto de \textit{hechos} será una lista ordenada de esos hechos, computar inclusión entre estos dos conjuntos se hará a lo sumo en \textit{n} pasos, donde \textit{n} es el tamaño del conjunto más pequeño \footnote{Ver implementación del método \textit{isSubSetOf} en la clase \textit{ABoxSubSet} en la sección ???}.
+
+\subsection{Consultas con cuantificadores existenciales}
+
+Como mencionamos en la sección \ref{consultas_iris}, \textit{IRIS} no poseía originalmente la capacidad de responder consultas en las que se cuantifique existencialmente a las variables de la forma $Q(\textbf{X}) = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$, ni tampoco consultas conjuntivas \textit{booleanas} de la forma $Q() = \exists\textbf{Y}\exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$. En efecto \textit{IRIS} solo podía responder consultas del tipo $Q(\textbf{X},\textbf{Y}) = \Phi(\textbf{X},\textbf{Y})$. 
+
+Veamos entonces cuales fueron las modificaciones que hemos añadido de manera que \textit{IRIS} pueda responder todos los tipos de consultas ejemplificadas. Tengamos en cuenta que las variables que se cuantifiquen existencialmente podrán mapear tanto a constantes como a \textit{nulos frescos} en el \textit{chase}. De esta manera las modificaciones que hicimos consistieron primero en que al momento de evaluar la consulta, buscando átomos en el \textit{chase} que mapearan \textit{homomórficamente}   con el cuerpo de la misma, \textit{IRIS} dejara de descartar necesariamente los \textit{átomos} que tuvieran \textit{nulos}. De esta manera, el método original \textit{evaluateQuery} en la clase \textit{StratifiedBottomUpEvaluationStrategy} evalúa una consulta y devuelve tuplas en las que no necesariamente todas las posiciones contienen constantes sino posiblemente también \textit{nulos frescos}.
+
+Una vez hecho este cambio agregamos una capa intermedia\footnote{ver código fuente de esta capa en la clase \textit{QueryResylt}.} que toma la lista de tuplas retornadas por la nueva versión del método \textit{evaluateQuery} y solo se queda con aquellas columnas que figuran en el arreglo \textit{showInOutput} que describimos en la sección \ref{query_enpoint_section}. Una vez filtradas las columnas descartamos ahora sí a todas aquellas filas que contengan tuplas con elementos \textit{nulos}, pues solo puede haber \textit{nulos} en las columnas correspondientes a aquellas variables que se quieren cuantificar existencialmente, y justamente esas son las columnas que descartamos en el paso anterior, pues son las que no figuran en el arreglo \textit{showInOutput}. Notar que de esta manera la respuesta final solo contiene tuplas con valores constantes.
+
+Cabe mencionar que para el caso de las consultas conjuntivas \textit{booleanas} la nueva capa intermedia no retornará ahora una lista de tuplas, sino que devolverá un valor booleano, siendo este \textit{verdadero} solo cuando el resultado devuelto por el método \textit{evaluateQuery} sea una lista de tuplas no vacía.
+
+\section{Cliente Web}
+
+Nos enfocaremos ahora en detallar la funcionalidad de nuestro \textit{cliente}, el cual está conformado por una sola página \textit{web} que brindará al usuario la posibilidad de ejecutar consultas al servidor de manera sencilla. En la figura \ref{fig:cliente_web_2} se puede ver una captura de pantalla de tal página. Durante el resto de esta sección describiremos el comportamiento de cada uno de los componentes que se muestran en la captura, así como su implementación.
+
+\subsection{Parser en el cliente}
+
+Tal como se muestra en la figura \ref{fig:cliente_web_2}, en la pantalla del \textit{cliente} se muestran dos editores de texto. El contenido de estos dos editores puede ser o bien escrito a mano por el usuario o bien cargado desde un archivo de texto almacenado en al computadora del cliente, solo después de que el usuario haya hecho \textit{click} en el botón \textit{Load Program}. En el editor izquierdo se deberán ingresar las \textit{restricciones}, \textit{claves}, \textit{tgds} y \textit{hechos}, y en el derecho las \textit{consultas}. Si el texto hubiera sido ingresado a través de la carga de un archivo, el \textit{cliente} se encargará de mostrar las \textit{consultas} que hubiere en ese archivo en el editor derecho, separándolas de los demás elementos que se mostrarán en el editor \textit{izquierdo}. 
+
+\begin{figure}[ht]
+    \includegraphics[scale=0.5]{cliente_web_2.PNG}
+    \centering
+    \caption{Cliente Web}
+    \label{fig:cliente_web_2}
+\end{figure}
+
+ 
+Para poder hacer esta separación, el \textit{cliente} cuenta con un parser propio, el cual, a través de una serie de \textit{expresiones regulares}\footnote{La implementación de estas expresiones regulares se encuentra en el archivo \textit{regexService}.}  estará encargado de \textit{parsear} los textos ingresados en los editores, detectar posibles errores de sintaxis, y luego instanciar nuestros objetos en \textit{Javascript} los cuales representarán cada uno de los elementos ingresados. Hablaremos sobre estos objetos en la sección \ref{objetos_javascript}, pero detallaremos primero cuál es la sintaxis esperada por nuestro \textit{parser}.
+
+\subsection{Sintaxis esperada}
+
+El hecho de que el cliente posea su propio \textit{parser} brinda la posibilidad no solo de detectar errores sintácticos antes de que las consultas sean enviadas al servidor, sino de también definir una sintaxis propia, no necesariamente igual a la que se mostró en la sección \ref{section_sintaxis}, la cual deberemos respetar de todos modos al momento de generar el \textit{input} para \textit{IRIS}. Hemos mantenido de todas maneras en gran medida aquella sintaxis, pues las variables, constantes, átomos y \textit{hechos} mantendrán el mismo formato. Nos enfocaremos entonces en los elementos que han cambiado su formato esperado, como las \textit{tgds} y las \textit{consultas}, así como también en aquellos nuevos elementos desconocidos por \textit{IRIS}, como las \textit{restricciones de integridad} y las \textit{claves}.
+
+\subsubsection{TGDs}
+
+Las \textit{TGDs} deberán respetar el siguiente formato: la \textit{cabeza} y el \textit{cuerpo} no se encontrarán separadas por la cadena ``:-'', sino por la cadena ``->''; además la \textit{cabeza} no se encontrará a la izquierda y el \textit{cuerpo} a la derecha, sino al revés. El siguiente es un ejemplo válido de una \textit{TGD} para nuestro cliente.
+
+\begin{center}
+ \textit{sabeProgramarEn(?x, ?y), lenguajeFront(?x) ->  frontDeveloper(?y).}
+\end{center}
+
+\subsubsection{Consultas}
+
+La sintaxis de las consultas deberá poder diferenciar aquellas variables que se quieran cuantificar existencialmente de aquellas que no. De esta manera se separará el cuerpo de la consulta de una lista de variables que no se quiere cuantificar existencialmente. Estas lista de variables se encontrarán encerradas por paréntesis, y cada una de ellas separadas por coma. El cuerpo de la consulta se encontrará a la derecha de la cadena ``:-'' tal como se muestra en el siguiente ejemplo:
+
+\begin{center}
+ \textit{(?x) :- sabeProgramarEn(?x, ?y), lenguajeFront(?x).}
+\end{center}
+
+\subsubsection{Restricciones de integridad}
+
+Las \textit{restricciones} deberán respetar el siguiente formato: se deberá mostrar el cuerpo, seguido de la cadena ``->'', seguido de o bien el caracter $\bot$, o bien la cadena \textit{bottom}. Los siguientes son ejemplos correctos de \textit{restricciones} en la sintaxis de nuestro cliente:
+
+\begin{itemize}
+    \item \textit{sabeProgramarEn(?x, 'pedro') -> $\bot$.}
+    \item \textit{casadoCon(?x, ?y), soltero(?y) -> bottom.}
+\end{itemize}
+
+\subsubsection{Claves}
+
+Las \textit{claves} se notarán siempre con la la letra \textit{k} seguida del nombre del predicado sobre el cual se quiere definir la \textit{clave} y un arreglo con los números de posiciones que definirán la clave. El nombre del predicado y el arreglo se encierran entre paréntesis. En el siguiente ejemplo se define que las posiciones de parámetro 1 y 3 son una clave sobre el predicado \textit{p}.
+
+\begin{center}
+ \textit{k(p[1,3]).}
+\end{center}
+
+\subsection{Objetos del modelo}\label{objetos_javascript}
+
+Tal como comentamos en la sección anterior, por medio de las expresiones regulares definidas en nuestro \textit{cliente}, iremos identificando los elementos del \textit{programa} introducidos en los editores y en base a esto instanciaremos objetos que representarán a cada uno de aquellos elementos. De esta manera hemos implementado un \textit{builder} para cada tipo de elemento del lenguaje, es decir un \textit{builder} para las \textit{TGDs}, otro para las \textit{consultas} y lo mismo para las \textit{restricciones de integridad}, \textit{claves} y \textit{hechos}. De esta forma, en base a la expresión regular que haga \textit{match} con cada línea del texto ingresado en el editor, nuestro parser sabrá a cual \textit{builder} llamar, y le pasará por parámetro la línea de texto correspondiente. Así, cada \textit{builder} debe implementar el método \textit{build(line)} en donde \textit{line} es una línea de texto ingresada en el editor que cumple con el formato esperado por ese \textit{builder}. Cómo ejemplo, el \textit{tgdBuilder} espera que \textit{line} sea una línea de texto que cumpla con el formato especificado para las \textit{TGDs} en la sección anterior.
+
+Cada uno de los objetos devueltos por el método \textit{build(line)} de nuestros \textit{builders} implementará una serie de métodos concernientes al elemento del lenguaje que esté representando. Por ejemplo el objeto construido por el \textit{tgdBuilder} implementa el método \textit{isGuarded}, que retornará \textit{true} solo cuando la \textit{TGD} en cuestión pertenezca al fragmento \textit{guarded}.
+
+Para ver la implementación completa de estos \textit{builders} ver carpeta \textit{builders} en el apéndice en la sección ????.
+
+\subsection{Método toJson}\label{metodo_tojson}
+
+En particular, cada uno de esos objetos deberá implementar el método \textit{toJson()}, lo cual permitirá que podamos construir el \textit{json} que enviaremos al servidor. Dicho \textit{json} deberá cumplir el formato mostrado en la figura \ref{fig:query_endpoint}. De esta manera, al momento en el que el usuario haga \textit{click} en el botón \textit{Execute Queries}, se instanciará un objeto \textit{programa}, el cual implementará el método \textit{toJson()}, cuya implementación se basará en llamar al método \textit{toJson()} de cada uno de los objetos anteriores de manera ir llenando los campos necesarios para construir el \textit{json} final.
+
+Veamos ahora algunos ejemplos del resultado esperado por el método toJson().
+
+\begin{exmp}
+Sea \textit{tgdObj} el resultado de ejecutar:
+
+\begin{center}
+   \textit{tgdBuilder.build(``sabeProgramarEn(?x, ?y), lenguajeFront(?x) ->  frontDeveloper(?y).'')} 
+\end{center}
+
+Entonces, al ejecutar el método \textit{tgdObj.toJson()} obtendremos el siguiente \textit{json} como resultado:
+
+
+\begin{lstlisting}[language=json,firstnumber=1]
+    {
+        head : "frontDeveloper(?y)",
+        body: "sabeProgramarEn(?x, ?y), lenguajeFront(?x)"
+    }
+\end{lstlisting}
+
+
+\end{exmp}
+
+\begin{exmp}
+Sea \textit{queryObj} el resultado de ejecutar:
+
+\begin{center}
+   \textit{queryBuilder.build(``(?x) :- frontDeveloper(?x)'')} 
+\end{center}
+
+Entonces, al ejecutar el método \textit{queryObj.toJson()} obtendremos el siguiente \textit{json} como resultado:
+
+
+\begin{lstlisting}[language=json,firstnumber=1]
+    {
+        showInOutput : [x],
+        body: "frontDeveloper(?x)"
+    }
+\end{lstlisting}
+\end{exmp}
+
+Especial atención requiere la implementación del método \textit{toJson()} en los objetos devueltos por el \textit{keyBuilder}. Recordemos que las \textit{claves} no son parte de la interfaz de nuestra \textit{Api Web} y que \textit{IRIS} no implementa \textit{claves}, pero teniendo en cuenta que nuestra \textit{api} implementa \textit{restricciones de integridad} podemos entonces reescribir las \textit{claves} como tales \textit{restricciones}. Veremos en la próxima sección que nuestro \textit{cliente} solo hará tal reescritura cuando las \textit{claves} sean \textit{no conflictivas}, tal como se las describió en la sección \ref{claves_no_conflictivas}. 
+
+\begin{exmp}
+Sea \textit{p} un predicado ternario y sea \textit{keyObj} el resultado de ejecutar:
+
+\begin{center}
+   \textit{queryBuilder.build(``k(p[1])'')} 
+\end{center}
+
+En este caso estamos diciendo que dadas dos instancias de \textit{p}, a igual valor del primer parámetro en cada instancia, necesariamente no podrá ocurrir que cada una de las instancias tenga una constante diferente en el segundo parámetro, y lo mismo para el tercer parámetro. Asumiendo que esta \textit{clave} es no conflictiva con todas las \textit{TGDs} del  \textit{programa}, podemos decir que esta \textit{clave} se cumplirá solo cuando ninguna de las dos siguientes \textit{restricciones} fallen:
+
+
+\begin{itemize}
+    \item \textit{$p(x, y_1, z_1), p(x, y_2, z_2), y_1 \neq y_2 \rightarrow \bot$.}
+    \item \textit{$p(x, y_1, z_1), p(x, y_2, z_2), z_1 \neq z_2 \rightarrow  \bot$.}
+\end{itemize}
+
+Por lo tanto, en este caso el resultado de ejecutar \textit{keyObj.toJson()} será un arreglo representando ambas \textit{restricciones}:
+
+\begin{lstlisting}[language=json,firstnumber=1]
+    [
+        {
+            body : "p(x, y1, z1), p(x, y2, z2), y1 != y2"
+        },
+        {
+            body : "p(x, y1, z1), p(x, y2, z2), z1 != z2"
+        }
+    ]    
+\end{lstlisting}
+\end{exmp}
+
+Veremos más adelante que el cliente mantendrá un \textit{mapa} que indicará para toda \textit{restricción} enviada al servidor a cual número de línea en el \textit{programa} corresponde esa restricción, pudiendo ser esa línea en el programa una \textit{restricción} o bien una \textit{clave}. De esta manera el \textit{cliente} podrá indicarle al usuario cuáles fueron aquellas \textit{claves} o \textit{restricciones} que no se satisfacen en el \textit{programa} ingresado.
+
+\subsection{Validación de claves no conflictivas}
+Tal como mencionamos, el \textit{cliente} hará una validación de las \textit{claves} ingresadas en el programa, y en el caso en el que alguna clave ingresada no fuera \textit{no conflictiva}, se le avisará al usuario que ese tipo de \textit{claves} no son soportadas por el sistema. Veamos ahora como 
+
+
+
+
+
 
 %%%% BIBLIOGRAFIA
 \backmatter
