@@ -51,6 +51,37 @@
       {]}{{{\color{delim}{]}}}}{1},
 }
 
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=c
+}
+
 \newcommand{\ch}{\textit{chase}}
 
 \newcommand{\parteEntera}{\lfloor n/2 \rfloor}
@@ -136,7 +167,7 @@ Consideremos una base de datos de películas, que guarda información acerca de 
         actor(``Antonio Gasalla''), dirigidaPor(``Esperando la Carroza'', ``Alejandro Doria'')}\}$$
     \end{equation}
 
-Una posible consulta conjuntiva para esta base de datos podría ser Q(X) = pelicula(X) $\land$ actuaEn(X, Y), que pregunta por todas las películas en las que alguien haya actuado, cuya respuesta es el conjunto de una sola tupla $\{("Esperando la Carroza")\}$;  mientras que un ejemplo de consulta conjuntiva booleana es Q() =  actor(X) $\land$ actuaEn(``Volver al Futuro'', X), la cual pregunta si hay algún actor que haya actuado en Volver al Futuro, cuya respuesta es No.
+Una posible consulta conjuntiva para esta base de datos podría ser Q(X) = pelicula(X) $\land$ actuaEn(X, Y), que pregunta por todas las películas en las que alguien haya actuado, cuya respuesta es el conjunto de una sola tupla \textit{\{(``Esperando la Carroza'')\}};  mientras que un ejemplo de consulta conjuntiva booleana es Q() =  actor(X) $\land$ actuaEn(``Volver al Futuro'', X), la cual pregunta si hay algún actor que haya actuado en Volver al Futuro, cuya respuesta es No.
 
 \end{exmp}
 
@@ -303,7 +334,7 @@ A modo de comparación, mostramos en la figura \ref{fig:guarded_forest} el \text
 
 \end{exmp}
 
-\subsubsection{Bounded guard-depth property para el fragmento Guarded}
+\subsubsection{Bounded guard-depth property para el fragmento Guarded}\label{guarded_forest_subsection}
 
 Sea $R$ un esquema relacional y $\Sigma$ un conjunto de TGDs para $R$. Decimos que $\Sigma$ tiene la propiedad \textit{Bounded guard-depth property} solo si, para toda base de datos $D$ y para toda consulta conjuntiva booleana $Q$, para toda vez que exista un homomorfismo $\mu$ que mapea $Q$ en el $chase(D, \Sigma)$, entonces existe un homomorfiso $\delta(Q)$ tal que todos los ancestros de $\delta(Q)$ en el $chase graph$ para $D$ y $\Sigma$ están contenidos en el $g-chase^{\gamma_k}(D, \Sigma)$, donde $\gamma_k$ solo depende de $Q$ y $R$.
 
@@ -1029,7 +1060,7 @@ En las páginas que siguen describiremos en detalle la implementación de esta h
 
 \section{IRIS}
 
-\textit{IRIS} es una herramienta \textit{open source}\footnote{El código se encuentra publicado en https://github.com/NICTA/iris-reasoner.} hecha en \textit{JAVA} que permite construir ontologías en \textit{Datalog +/-} y ejecutar consultas sobre las mismas. Esta herramienta fue desarrollada por un grupo de investigadores de ??, entre los años ??. De los elementos que provee el lenguaje, \textit{IRIS} brinda la posibilidad de definir \textit{TGDs}, \textit{hechos}, y \textit{consultas}. 
+\textit{IRIS} es una herramienta \textit{open source} hecha en \textit{JAVA} que permite construir ontologías en \textit{Datalog +/-} y ejecutar consultas sobre las mismas. El código de \textit{IRIS} se encuentra publicado en \textit{Github} y se puede descargar desde \textit{https://github.com/NICTA/iris-reasoner}. De los elementos que provee el lenguaje, \textit{IRIS} brinda la posibilidad de definir \textit{TGDs}, \textit{hechos}, y \textit{consultas}. Existen otras herramientas que permiten definir ontologías en \textit{Datalog +/-} como \textit{vLog4J}, que también es \textit{open source} y \textit{VADALOG}, siendo este último propietario.
 
 \subsection{Usabilidad}
 Para utilizar \textit{IRIS} es necesario descargar el código de \textit{github}, instalar \textit{JAVA 8}, compilar el código en un archivo \textit{.jar}, y luego ejecutarlo. Al momento de ejecutar el archivo \textit{.jar} es necesario pasarle una serie de parámetros, entre ellos el \textit{path} a un archivo de texto que contiene el \textit{programa} a ejecutar, es decir que en este último se deben encontrar las \textit{TGDs}, los \textit{hechos} y las \textit{consultas}. Las respuestas a las \textit{consultas} son retornadas por \textit{IRIS} en \textit{standard output}. A grandes rasgos, podemos describir entonces a \textit{IRIS} como una aplicación de consola que puede procesar un \textit{programa} y devolver un resultado.
@@ -1043,7 +1074,7 @@ Para utilizar \textit{IRIS} es necesario descargar el código de \textit{github}
 
 
 \subsection{Sintaxis}\label{section_sintaxis}
-La figura \ref{fig:iris_console_application} ejemplifica la sintaxis que deberá tener el input para poder ser procesado por \textit{IRIS}. En este input \textit{IRIS} puede identificar una base de conocimiento $(\Sigma_t, D)$ donde $\Sigma_t$ es un conjunto de \textit{TGDs} y $D$ es un conjunto de \textit{hechos}. En ese mismo archivo se podrán incluir un conjunto de consultas, cuyas respuestas serán retornadas por \textit{IRIS} en \textit{standard output}. Veamos ahora en detalle cual es la sintaxis que debe respetar cada uno de los elementos del lenguaje.
+La figura \ref{fig:iris_console_application} ejemplifica la sintaxis que deberá tener el input para poder ser procesado por \textit{IRIS}. En este input \textit{IRIS} puede identificar una base de conocimiento $(\Sigma_t, D)$ donde $\Sigma_t$ es un conjunto de \textit{TGDs} y $D$ es un conjunto de \textit{hechos}. En ese mismo archivo se podrán incluir un conjunto de consultas, cuyas respuestas serán retornadas por \textit{IRIS} en \textit{standard output}. Veamos ahora en detalle cuál es la sintaxis que debe respetar cada uno de los elementos del lenguaje.
 
 \subsubsection{Constantes y Variables}
 Las constantes se deben notar entre comillas simples y las variables deben ser antecedidas por el símbolo de interrogación \textit{?}.
@@ -1059,10 +1090,10 @@ Para cada \textit{TGD} se debe separar la cabeza y el cuerpo intermediando la ca
 \end{center} 
 
 \subsubsection{Hechos}
-Los hechos constan de un solo átomo en donde todas los argumentos son constantes. Cada hecho debe finalizar con un punto a la derecha.
+Los hechos constan de un solo átomo en donde todos los argumentos son constantes. Cada hecho debe finalizar con un punto a la derecha.
 
 \subsubsection{Consultas}\label{consultas_iris}
-Las consultas deben ser precedidas por la cadena \textit{``?-''} y seguidas por un conjunto de átomos separados por coma, en donde puede haber tanto variables como constantes como argumentos. Ejemplificamos ahora con la siguiente consulta:
+Las consultas deben ser precedidas por la cadena \textit{``?-''} y seguidas por un conjunto de átomos separados por coma, en donde los argumentos de cada átomo pueden ser tanto variables como constantes. Ejemplificamos ahora con la siguiente consulta:
 
 \begin{center}
     ?- p1(?x, 'a'), p2(?z).
@@ -1105,7 +1136,7 @@ deben ser los \textit{requests} junto con sus respuestas.
 
 Este \textit{endpoint} permite realizar \textit{consultas} para un conjunto de \textit{Restricciones de Integridad}, \textit{TGDs} y \textit{hechos}. En la figura \ref{fig:query_endpoint} se muestra en un ejemplo el formato esperado para el \textit{body} que deben tener los \textit{request} de este \textit{endpoint}.
 
-\underline{Endpoint Url:} http://localhost:8080/iris/query.
+\underline{Endpoint Url:} http://[url\_base]/iris/query\footnote{Se hará un \textit{deploy} de esta \textit{api} en los servidores de la facultad paro no se han definido aún las rutas.}.
 
 \underline{Http Method:} Post.
 
@@ -1113,22 +1144,22 @@ Este \textit{endpoint} permite realizar \textit{consultas} para un conjunto de \
 \begin{figure}[ht]
     \begin{lstlisting}[language=json,firstnumber=1]
     {"program": {
-    	"ncs" : [ { body: "r1(?x, ?y)." } ],
+    	"ncs" : [ { body: "r1(?x, ?y)" } ],
         "tgds" : [
             {
             	head : "r1(?z, ?x)",
-            	body: "r1(?x, ?y), r2(?y)."
+            	body: "r1(?x, ?y), r2(?y)"
             }
         ],
-    	"facts" : [ { value: "r1('a', 'b')." }	
-    	],
+    	"facts" : [ { value: "r1('a', 'b')" } ],
         "queries" : [
             {
                 showInOutput : ["x"],
-                body: "r1(?x, ?y), r2(?y)."
+                body: "r1(?x, ?y), r2(?y)"
             }	
         ],
-    	"semantics" : "standard"
+    	"semantics" : "standard",
+    	"max_depth" : 100
     }}
     \end{lstlisting}
     \caption{Formato esperado para una petición al Query Endpoint}
@@ -1136,15 +1167,17 @@ Este \textit{endpoint} permite realizar \textit{consultas} para un conjunto de \
 \end{figure}
 
 
-Tal como se ejemplifica en la figura \ref{fig:query_endpoint}, el campo \textit{ncs} es un arreglo en el que cada elemento debe ser una serie de átomos separados por coma donde cada átomo debe seguir la sintaxis tal como se especificó en la sección \ref{section_sintaxis}. Cada uno de esos elementos será interpretado como el cuerpo de una \textit{Restricción de Integridad}, donde las comas que separan cada átomo representan conjunción.
+Tal como se ejemplifica en la figura \ref{fig:query_endpoint}, el campo \textit{ncs} es un arreglo en el que cada elemento debe ser un \textit{Json} con el que campo \textit{body} que consta de una serie de átomos separados por coma donde cada átomo debe seguir la sintaxis tal como se especificó en la sección \ref{section_sintaxis}. Cada uno de esos elementos será interpretado como el cuerpo de una \textit{Restricción de Integridad}, donde las comas que separan cada átomo representan conjunción.
 
-De manera similar, el campo \textit{tgds} debe ser un arreglo de \textit{TGDs} siguiendo la sintaxis de la sección \ref{section_sintaxis}, y lo mismo deberá ocurrir con el campo \textit{facts}. 
+De manera similar, el campo \textit{tgds} es también un arreglo de objetos \textit{Json} donde cada elemento debe contener los valores \textit{head} y \textit{body}.  En el campo \textit{head} se debe incluir un solo átomo y en el campo \textit{body} una secuencia de átomos separados por coma. En cuanto al campo \textit{facts}, cada elemento en el arreglo será un objeto con un único campo \textit{value} que deberá contener un solo átomo con parámetros constantes.
 
 Con respecto al campo \textit{queries}, cada elemento en el arreglo deberá ser un \textit{Json} de dos campos, donde el campo \textit{showInOuput} es un arreglo con las variables cuyos mapeos en el \textit{chase} deberán mostrarse en el \textit{output} de la consulta y donde el campo \textit{body} es el cuerpo de la consulta en sí. Notar que las variables que aparezcan en el cuerpo de la consulta y no se incluyan en el arreglo del campo \textit{showInOutput} son justamente las variables que queremos cuantificar existencialmente. En el caso en el que este arreglo sea un arreglo vacío, estaremos en el caso en el que todas las variables se deberán cuantificar existencialmente, siendo la consulta una \textit{consulta conjuntiva booleana} tal como se la detalló en la sección \ref{seccion_datalog}.
     
 Con respecto al campo \textit{semantics}, este podrá contener alguno de los siguientes tres valores: \textit{standard}, \textit{AR} o \textit{IAR}. En el caso en que se especifique \textit{standard}, las consultas se ejecutarán bajo la semántica detallada en la sección \ref{consultas_bajo_tgds}, es decir sin manejo de inconsistencia, lo cual podrá ocurrir solo cuando todas las \textit{restricciones de integridad} se cumplan para ese conjunto de \textit{TGDs} y de \textit{hechos}. En caso contrario se le avisará al cliente que las consultas no se pueden responder bajo esa semántica, dado que no se cumplen todas las restricciones, indicándose a la vez cuáles son aquellas que no se cumplen.
 
-En la figura \ref{fig:query_endpoint_answer_2} se puede ver un ejemplo de respuesta de este \textit{endpoint} para el caso en el que en la petición del cliente el valor del campo \textit{semantics} fue \textit{standard} pero no se cumplieron algunas de las \textit{restricciones de integridad} pasadas en el campo \textit{ncs}. Vemos que en la respuesta, el campo \textit{unsatisfied} es un arreglo donde se indican los índices de las \textit{restricciones de integridad} que no fueron satisfechas en el arreglo que de \textit{ncs} que el cliente envió en la petición. 
+El campo \textit{$max\_depth$} indicará hasta cuantas iteraciones en el algoritmo del \textit{chase} el \textit{cliente} está dispuesto a esperar. Si el valor de este campo es \textit{null} entonces no habrá un máximo de iteraciones definido y se seguirá ejecutando hasta que finalice la construcción del \textit{chase} o bien hasta que ocurra un \textit{timeout}. El valor del \textit{timeout} será un valor fijo definido en la configuración del servidor.
+
+En la figura \ref{fig:query_endpoint_answer_2} se puede ver un ejemplo de respuesta de este \textit{endpoint} para el caso en el que en la petición del cliente el valor del campo \textit{semantics} fue \textit{standard} pero no se cumplieron algunas de las \textit{restricciones de integridad} pasadas en el campo \textit{ncs}. Vemos que en la respuesta, el campo \textit{unsatisfied} es un arreglo donde se indican los índices de las \textit{restricciones de integridad} que no fueron satisfechas en el arreglo de \textit{ncs} que el cliente envió en la petición. 
 
 
 \begin{figure}[ht]
@@ -1193,20 +1226,35 @@ En al figura \ref{fig:query_endpoint_answer_1} se muestra un ejemplo de respuest
     \label{fig:query_endpoint_answer_1}
 \end{figure}
 
+En el caso en el que el servidor no logre procesar la consulta antes del tiempo definido en la configuración del \textit{tiemout}, la \textit{api} responderá como se muestra en la figura \ref{fig:query_endpoint_answer_timeout}. 
+
+\begin{figure}[ht]
+    \begin{lstlisting}[language=json,firstnumber=1]
+    { "error" : "timeout" }
+    \end{lstlisting}
+    \caption{Respuesta con error de \textit{timeout}}
+    \label{fig:query_endpoint_answer_timeout}
+\end{figure}
+
 \subsubsection{Repairs Endpoint}
 
 Hemos agregado además un endpoint que dado un conjunto de \textit{restricciones}, \textit{TGDs} y \textit{hechos}, retorna el conjunto de \textit{repairs}. La figura \ref{fig:repairs_endpoint} muestra con un ejemplo el formato esperado que deben tener las peticiones a este \textit{Repairs Endpoint}.
 
-\underline{Endpoint Url:} http://localhost:8080/iris/repairs.
+\underline{Endpoint Url:} http://[url\_base]/iris/repairs.
 
 \underline{Http Method:} Get.
 
 \begin{figure}[ht]
     \begin{lstlisting}[language=json,firstnumber=1]
      {
-    	"ncs" : ["r1(?x, ?y).", "r2('s').", "r1(?x, ?y), r2(?x)."],
-    	"tgds" : ["r1(?z, ?x) :- r1(?x, ?y), r2(?y)."],
-    	"facts" : ["r1('a', 'b').", "r2('a', 'd').", "r1('c','b')"]
+    	"ncs" : [ { body: "r1(?x, ?y)" } ],
+        "tgds" : [
+            {
+            	head : "r1(?z, ?x)",
+            	body: "r1(?x, ?y), r2(?y)"
+            }
+        ],
+    	"facts" : [ { value: "r1('a', 'b')" } ]
      }
     \end{lstlisting}
     \caption{Formato esperado para una petición al Repairs Endpoint}
@@ -1261,13 +1309,27 @@ Teniendo en cuenta que el algoritmo necesita computar reiteradas veces inclusió
 
 \subsection{Consultas con cuantificadores existenciales}
 
-Como mencionamos en la sección \ref{consultas_iris}, \textit{IRIS} no poseía originalmente la capacidad de responder consultas en las que se cuantifique existencialmente a las variables de la forma $Q(\textbf{X}) = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$, ni tampoco consultas conjuntivas \textit{booleanas} de la forma $Q() = \exists\textbf{Y}\exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$. En efecto \textit{IRIS} solo podía responder consultas del tipo $Q(\textbf{X},\textbf{Y}) = \Phi(\textbf{X},\textbf{Y})$. 
+Como mencionamos en la sección \ref{consultas_iris}, \textit{IRIS} no posee la capacidad de responder consultas en las que se cuantifique existencialmente a las variables de la forma $Q(\textbf{X}) = \exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$, ni tampoco consultas conjuntivas \textit{booleanas} de la forma $Q() = \exists\textbf{Y}\exists\textbf{Y}\Phi(\textbf{X},\textbf{Y})$. En efecto \textit{IRIS} solo puede responder consultas del tipo $Q(\textbf{X},\textbf{Y}) = \Phi(\textbf{X},\textbf{Y})$. 
 
-Veamos entonces cuales fueron las modificaciones que hemos añadido de manera que \textit{IRIS} pueda responder todos los tipos de consultas ejemplificadas. Tengamos en cuenta que las variables que se cuantifiquen existencialmente podrán mapear tanto a constantes como a \textit{nulos frescos} en el \textit{chase}. De esta manera las modificaciones que hicimos consistieron primero en que al momento de evaluar la consulta, buscando átomos en el \textit{chase} que mapearan \textit{homomórficamente}   con el cuerpo de la misma, \textit{IRIS} dejara de descartar necesariamente los \textit{átomos} que tuvieran \textit{nulos}. De esta manera, el método original \textit{evaluateQuery} en la clase \textit{StratifiedBottomUpEvaluationStrategy} evalúa una consulta y devuelve tuplas en las que no necesariamente todas las posiciones contienen constantes sino posiblemente también \textit{nulos frescos}.
+Veamos entonces cuales fueron las modificaciones que hemos añadido de manera que \textit{IRIS} pueda responder todos los tipos de consultas ejemplificadas. Tengamos en cuenta que las variables que se cuantifiquen existencialmente podrán mapear tanto a constantes como a \textit{nulos frescos} en el \textit{chase}. De esta manera las modificaciones que hicimos consistieron primero en que al momento de evaluar la consulta, buscando átomos en el \textit{chase} que mapearan \textit{homomórficamente}   con el cuerpo de la misma, \textit{IRIS} dejara de descartar necesariamente los \textit{átomos} que tuvieran \textit{nulos}. De esta manera, el método original \textit{evaluateQuery} en la clase \textit{StratifiedBottomUpEvaluationStrategy} fue modificado para que al evaluar una consulta pueda devolver tuplas en las que no necesariamente todas las posiciones contengan constantes sino también \textit{nulos frescos}.
 
-Una vez hecho este cambio agregamos una capa intermedia\footnote{ver código fuente de esta capa en la clase \textit{QueryResylt}.} que toma la lista de tuplas retornadas por la nueva versión del método \textit{evaluateQuery} y solo se queda con aquellas columnas que figuran en el arreglo \textit{showInOutput} que describimos en la sección \ref{query_enpoint_section}. Una vez filtradas las columnas descartamos ahora sí a todas aquellas filas que contengan tuplas con elementos \textit{nulos}, pues solo puede haber \textit{nulos} en las columnas correspondientes a aquellas variables que se quieren cuantificar existencialmente, y justamente esas son las columnas que descartamos en el paso anterior, pues son las que no figuran en el arreglo \textit{showInOutput}. Notar que de esta manera la respuesta final solo contiene tuplas con valores constantes.
+Una vez hecho este cambio agregamos una capa intermedia\footnote{ver código fuente de esta capa en la clase \textit{QueryResult}.} que toma la lista de tuplas retornadas por la nueva versión del método \textit{evaluateQuery} y solo se queda con aquellas columnas que figuran en el arreglo \textit{showInOutput} que describimos en la sección \ref{query_enpoint_section}. Una vez filtradas las columnas descartamos ahora sí a todas aquellas filas que contengan tuplas con elementos \textit{nulos}, pues solo puede haber \textit{nulos} en las columnas correspondientes a aquellas variables que se quieren cuantificar existencialmente, y justamente esas son las columnas que descartamos en el paso anterior, pues son las que no figuran en el arreglo \textit{showInOutput}. Notar que de esta manera la respuesta final solo contiene tuplas con valores constantes.
 
 Cabe mencionar que para el caso de las consultas conjuntivas \textit{booleanas} la nueva capa intermedia no retornará ahora una lista de tuplas, sino que devolverá un valor booleano, siendo este \textit{verdadero} solo cuando el resultado devuelto por el método \textit{evaluateQuery} sea una lista de tuplas no vacía.
+
+\subsection{Profundidad máxima en el chase}
+
+Es importante mencionar que la propiedad \textit{Bounded guard-depth property} para el fragmento \textit{Guarded} tiene el valor de determinar una cota en la cantidad de iteraciones que se deberán ejecutar para computar las consultas pero que lamentablemente a fines prácticos termina siendo demasiado alta. Lo interesante de esta propiedad es que fija la cantidad de iteraciones para un determinado esquema $R$, lo cual hace que esta cota sea independiente de la cantidad de datos. Pero cuando intentamos implementar esta propiedad, que vale aclarar no está implementada en  \textit{IRIS}, notamos que los valores de estas cotas resultaban extremadamente altos, aún para programas pequeños. 
+
+A modo de ejemplo, el valor de $\delta$, tal como se describe en la sección \ref{guarded_forest_subsection} es de $8.589934592E9$ para el siguiente \textit{programa}:
+
+\begin{figure}[ht]
+    \includegraphics[scale=0.5]{programa_cota_alta.PNG}
+    \centering
+    \label{fig:programa_cota_alta}
+\end{figure}
+
+Por tal motivo el servidor implementa un \textit{timeout} como así también la posibilidad de que el cliente le pueda indicar la máxima cantidad de iteraciones que está dispuesto a esperar a través del campo \textit{$max\_depth$} como se mostró en la figura \ref{fig:query_endpoint}.  
 
 \section{Cliente Web}
 
@@ -1287,7 +1349,7 @@ Tal como se muestra en la figura \ref{fig:cliente_web_2}, en la pantalla del \te
  
 Para poder hacer esta separación, el \textit{cliente} cuenta con un parser propio, el cual, a través de una serie de \textit{expresiones regulares}\footnote{La implementación de estas expresiones regulares se encuentra en el archivo \textit{regexService}.}  estará encargado de \textit{parsear} los textos ingresados en los editores, detectar posibles errores de sintaxis, y luego instanciar nuestros objetos en \textit{Javascript} los cuales representarán cada uno de los elementos ingresados. Hablaremos sobre estos objetos en la sección \ref{objetos_javascript}, pero detallaremos primero cuál es la sintaxis esperada por nuestro \textit{parser}.
 
-\subsection{Sintaxis esperada}
+\subsection{Sintaxis}
 
 El hecho de que el cliente posea su propio \textit{parser} brinda la posibilidad no solo de detectar errores sintácticos antes de que las consultas sean enviadas al servidor, sino de también definir una sintaxis propia, no necesariamente igual a la que se mostró en la sección \ref{section_sintaxis}, la cual deberemos respetar de todos modos al momento de generar el \textit{input} para \textit{IRIS}. Hemos mantenido de todas maneras en gran medida aquella sintaxis, pues las variables, constantes, átomos y \textit{hechos} mantendrán el mismo formato. Nos enfocaremos entonces en los elementos que han cambiado su formato esperado, como las \textit{tgds} y las \textit{consultas}, así como también en aquellos nuevos elementos desconocidos por \textit{IRIS}, como las \textit{restricciones de integridad} y las \textit{claves}.
 
@@ -1309,7 +1371,7 @@ La sintaxis de las consultas deberá poder diferenciar aquellas variables que se
 
 \subsubsection{Restricciones de integridad}
 
-Las \textit{restricciones} deberán respetar el siguiente formato: se deberá mostrar el cuerpo, seguido de la cadena ``->'', seguido de o bien el caracter $\bot$, o bien la cadena \textit{bottom}. Los siguientes son ejemplos correctos de \textit{restricciones} en la sintaxis de nuestro cliente:
+Las \textit{restricciones} deberán respetar el siguiente formato: se deberá mostrar el cuerpo, seguido de la cadena ``->'', seguido de o bien el caracter $\bot$, o bien la cadena \textit{``bottom''}. Los siguientes son ejemplos correctos de \textit{restricciones} en la sintaxis de nuestro cliente:
 
 \begin{itemize}
     \item \textit{sabeProgramarEn(?x, 'pedro') -> $\bot$.}
@@ -1330,11 +1392,11 @@ Tal como comentamos en la sección anterior, por medio de las expresiones regula
 
 Cada uno de los objetos devueltos por el método \textit{build(line)} de nuestros \textit{builders} implementará una serie de métodos concernientes al elemento del lenguaje que esté representando. Por ejemplo el objeto construido por el \textit{tgdBuilder} implementa el método \textit{isGuarded}, que retornará \textit{true} solo cuando la \textit{TGD} en cuestión pertenezca al fragmento \textit{guarded}.
 
-Para ver la implementación completa de estos \textit{builders} ver carpeta \textit{builders} en el apéndice en la sección ????.
+Para ver la implementación completa de estos \textit{builders} ver carpeta \textit{builders} en el apéndice.
 
 \subsection{Método toJson}\label{metodo_tojson}
 
-En particular, cada uno de esos objetos deberá implementar el método \textit{toJson()}, lo cual permitirá que podamos construir el \textit{json} que enviaremos al servidor. Dicho \textit{json} deberá cumplir el formato mostrado en la figura \ref{fig:query_endpoint}. De esta manera, al momento en el que el usuario haga \textit{click} en el botón \textit{Execute Queries}, se instanciará un objeto \textit{programa}, el cual implementará el método \textit{toJson()}, cuya implementación se basará en llamar al método \textit{toJson()} de cada uno de los objetos anteriores de manera ir llenando los campos necesarios para construir el \textit{json} final.
+En particular, cada uno de esos objetos deberá implementar el método \textit{toJson()}, lo cual permitirá que podamos construir el \textit{json} que enviaremos al servidor. Dicho \textit{json} deberá cumplir el formato mostrado en la figura \ref{fig:query_endpoint}. De esta manera, al momento en el que el usuario haga \textit{click} en el botón \textit{Execute Queries}, se construirá un objeto \textit{json}, en base a ir llamando al método \textit{toJson()} de cada uno de los objetos anteriores.
 
 Veamos ahora algunos ejemplos del resultado esperado por el método toJson().
 
@@ -1351,10 +1413,11 @@ Entonces, al ejecutar el método \textit{tgdObj.toJson()} obtendremos el siguien
 \begin{lstlisting}[language=json,firstnumber=1]
     {
         head : "frontDeveloper(?y)",
-        body: "sabeProgramarEn(?x, ?y), lenguajeFront(?x)"
+        body : "sabeProgramarEn(?x, ?y), lenguajeFront(?x)"
     }
 \end{lstlisting}
 
+el cual será agregado al campo \textit{TGDs} del \textit{json} presentado en la figura \ref{fig:query_endpoint}.
 
 \end{exmp}
 
@@ -1410,12 +1473,64 @@ Por lo tanto, en este caso el resultado de ejecutar \textit{keyObj.toJson()} ser
 Veremos más adelante que el cliente mantendrá un \textit{mapa} que indicará para toda \textit{restricción} enviada al servidor a cual número de línea en el \textit{programa} corresponde esa restricción, pudiendo ser esa línea en el programa una \textit{restricción} o bien una \textit{clave}. De esta manera el \textit{cliente} podrá indicarle al usuario cuáles fueron aquellas \textit{claves} o \textit{restricciones} que no se satisfacen en el \textit{programa} ingresado.
 
 \subsection{Validación de claves no conflictivas}
-Tal como mencionamos, el \textit{cliente} hará una validación de las \textit{claves} ingresadas en el programa, y en el caso en el que alguna clave ingresada no fuera \textit{no conflictiva}, se le avisará al usuario que ese tipo de \textit{claves} no son soportadas por el sistema. Veamos ahora como 
+Tal como mencionamos, el \textit{cliente} hará una validación de las \textit{claves} ingresadas en el programa, y en el caso en el que alguna clave ingresada no fuera \textit{no conflictiva}, se le avisará al usuario que ese tipo de \textit{claves} no son soportadas por el sistema. Para poder hacer este chequeo, todos los objetos instanciados en el cliente que representan las \textit{claves} del programa implementan el método \textit{isNonConflicting(tgd)}, cuya implementación cumple con la definición de no conflictividad presentada en la sección \ref{claves_no_conflictivas}: 
+
+\begin{lstlisting}[caption=Implementación de claves no conflictivas]
+isNonConflicting : function(tgd){
+					return this.predicate != tgd.head.predicate.name ||
+						(!this.keyPositions.isProperSubsetOf(tgd.xPositionsInHead()) && tgd.allNullsAppearOnlyOnceInTheHead());
+					}
+\end{lstlisting}
+
+En el mismo sentido, el objeto que representa el \textit{programa} completo, definirá si una \textit{key} es no conflictiva utilizando la implementación de no conflictividad anterior:
+
+\begin{lstlisting}[caption=Implementación de claves no conflictivas]
+isNonConflicting: function(key){
+	return this.tgds.every(tgd => key.isNonConflicting(tgd));
+}
+\end{lstlisting}
+
+Para entender la implementación de esta funcionalidad en su totalidad será necesario desde ya entender el comportamiento de todas las propiedades y métodos que se invocan desde la función \textit{isNonConflicting}, cuyas implementaciones se encuentran en el apéndice en los archivos \textit{tgdBuilder}, \textit{keyBuilder} y \textit{arrayPrototype}. Creemos de todas maneras que los nombres de estos métodos y propiedades son lo suficientemente descriptivos como para que el lector pueda imaginar su comportamiento sin necesidad de leer el código completo.
+
+\subsection{Experiencia de usuario}
+
+Enumeraremos ahora todas las funcionalidades brindadas por nuestro cliente, detallando como será la \textit{experiencia del usuario} en cada caso.
+
+\subsubsection{Errores de sintaxis}
+Los errores sintácticos se mostrarán en rojo en el editor. Cuando el usuario intente ejecutar una consulta sobre un \textit{programa} que tenga errores sintácticos, se le mostrará una alerta avisándole que debe corregir dichos errores. Esta implementación se encuentra en nuestra clase \textit{Editor} que captura todos los eventos que suceden en los editores. Para cada uno de estos eventos, la clase validará los cambios contra todas nuestras expresiones regulares; de esta manera toda línea en el editor que no haga \textit{match} con ninguna expresión será marcada en rojo, tal como se muestra en la siguiente pantalla: 
+
+\begin{figure}[ht]
+    \includegraphics[scale=0.5]{cliente_web_syntax_error.PNG}
+    \centering
+    \caption{Error de sintaxis}
+    \label{fig:cliente_web_syntax_error}
+\end{figure}
+
+\subsubsection{Validación de fragmento}
+El usuario podrá validar también el fragmento de \textit{Datalog +/-} al que pertenece el programa ingresado. Al hacer \textit{click} en el botón \textit{Check Datalog Fragment}, aparecerá un cartel en pantalla indicando cual es el fragmento. Tal funcionalidad se pudo lograr gracias a la implementación del método \textit{fragment()} en los objetos devueltos por la clase \textit{tgdBuilder}. Esto quiere decir que cada objeto \textit{tgd} instanciado en nuestro cliente puede \textit{decir} a qué fragmento pertenece.
+
+Para una futura versión de este \textit{cliente} dicha funcionalidad podría ser utilizada para definir una estrategia particular de resolución de las consultas. Por ejemplo, si el \textit{programa} perteneciera al fragmento \textit{lineal} se podría llamar a un servicio de reescritura que reescriba las consultas tal como se describió en la figura \ref{fig:fo_rewrite} de la sección \textit{First-order rewritability} y una vez obtenida la reescritura enviar tales consultas a un motor de base de datos \textit{SQL}.
+
+\subsubsection{Validación de consistencia}
+
+El cliente provee también la posibilidad de validar la consistencia de un \textit{programa} sin necesidad de ejecutar consultas. En este caso, cuando el usuario haga \textit{click} en el botón \textit{Check Consistency}, el \textit{cliente} aramará un \textit{json} con la misma estructura que se muestra en la figura \ref{fig:query_endpoint} donde el campo \textit{queries} será un campo vacío. De esta manera, en caso de que el programa fuera inconsistente, la \textit{Api Web} retornara una respuesta con el formato que se muestra en la figura \ref{fig:query_endpoint_answer_2}, indicando los índices de las restricciones que no se cumplieron en el arreglo enviado por el cliente en el campo \textit{ncs}. El \textit{cliente} mantendrá una estructura de \textit{diccionario} que indicará a cual número de línea de texto en el programa ingresado corresponde cada índice de \textit{restricción} enviada en la petición. De esta manera se marcarán en color verde aquellas \textit{restricciones} o \textit{claves} que violen la consistencia, tal como se muestra en la figura  \ref{fig:cliente_web_iar_ar}.
 
 
+\begin{figure}[ht]
+    \includegraphics[scale=0.5]{cliente_web_iar_ar.PNG}
+    \centering
+    \caption{Ejecuar bajo AR - IAR}
+    \label{fig:cliente_web_iar_ar}
+\end{figure}
 
+Vemos que además en este caso aparecen dos nuevos botones que brindarán la posibilidad de ejecutar las consultas bajo la semántica \textit{AR} o \textit{IAR} más un nuevo botón que brindará la posibilidad de mostrar el conjunto de \textit{repairs} para el \textit{programa} ingresado.
 
+\subsubsection{Ejecutando consultas}
 
+Cuando el usuario presione en el botón \textit{Execute Queries} tal como se muestra en la figura \ref{fig:cliente_web_2}, se enviará el \textit{json} a la \textit{api web} tal como se muestra en la figura \ref{fig:query_endpoint}. Hay dos posibilidades, o bien el programa es consistente o bien no lo es. En el primer caso se mostrarán las respuestas para cada consulta tal como se muestra en la figura \ref{fig:cliente_web_2}. En el segundo caso, se ocultará el botón de \textit{Execute Queries} y se mostrarán los dos botones que brindan la posibilidad de ejecutar consultas bajo semántica \textit{AR} o \textit{IAR}. Al presionar alguno de esos botones se mostrarán ahora sí los resultados de ejecutar la consultas bajo la semántica elegida.
+
+\subsubsection{Manejo de error de timeout}
+En el caso en el que el servidor responda con error de \textit{timeout} o en el caso en el que el servidor tarde demasiado en responder\footnote{El \textit{cliente} definirá por configuración cuanto tiempo está dispuesto a esperar la respuesta del servidor.}, se le ofrecerá al usuario la posibilidad de definir la máxima cantidad de iteraciones a ejecutar en el algoritmo del \textit{chase}. De esta manera, el \textit{cliente} hará una segunda petición al servidor pero asignándole al campo \textit{max\_depth} el valor ingresado por el usuario.
 
 %%%% BIBLIOGRAFIA
 \backmatter
