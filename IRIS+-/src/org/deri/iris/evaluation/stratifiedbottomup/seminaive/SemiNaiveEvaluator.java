@@ -89,7 +89,7 @@ public class SemiNaiveEvaluator implements IRuleEvaluator {
       }
 
       i++;
-      if (!newTuples || i > 20) {
+      if (!newTuples) {
         break;
       }
 

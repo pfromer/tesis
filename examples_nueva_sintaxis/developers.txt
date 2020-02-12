@@ -1,0 +1,19 @@
+sabeProgramarEn(?y, ?x), lenguajeFront(?y) -> frontDeveloper(?x).
+sabeProgramarEn(?y, ?x), lenguajeBackend(?y) -> backEndDeveloper(?x).
+
+frontDeveloper(?x), backEndDeveloper(?x) -> fullStackDeveloper(?x).
+
+
+sabeProgramarEn('javascript', 'javier').
+sabeProgramarEn('javascript', 'sofia').
+
+sabeProgramarEn('php', 'sofia').
+sabeProgramarEn('JAVA', 'leandro').
+
+lenguajeFront('javascript').
+lenguajeBackend('php').
+lenguajeBackend('JAVA').
+
+?- frontDeveloper(?x).
+?- backEndDeveloper(?x).
+?- fullStackDeveloper(?x).

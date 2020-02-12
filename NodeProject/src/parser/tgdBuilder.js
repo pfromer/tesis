@@ -37,9 +37,9 @@ function _builder() {
 
 	return {
 		build : function (line) {
-			var split = line.split(":-");
-			var body = bodyModule.builder.build(split[1]);
-			var head = buildTgdHead(split[0], body);
+			var split = line.split("->");
+			var body = bodyModule.builder.build(split[0]);
+			var head = buildTgdHead(split[1], body);
 			var allVariables = [];
 			body.predicates.forEach(function (predicate) {
 				predicate.allVariables().forEach(function (variable) {

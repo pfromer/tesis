@@ -135,7 +135,11 @@ export function parse (program){
 									result.push({nc: nc, result: res.data })
 								}
 								resolve(result);						
-							});							
+							})
+							.catch(err =>{
+								console.log(err)
+					
+							});						
 						})
 					}
 					let chain = Promise.resolve();

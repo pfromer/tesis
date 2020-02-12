@@ -44,7 +44,11 @@ function _builder(){
 								res.data[0].BooleanResult = !res.data[0].BooleanResult;
 							}
 							resolve(res);						
-						});							
+						})
+						.catch(err =>{
+							console.log("hubo un error " + err)
+	
+					});							
 					})
 				}
 			}

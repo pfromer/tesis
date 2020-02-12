@@ -21,28 +21,28 @@ function _builder(){
 	return {		
 			build : function(line){				
 				return {
-                    parameters : JSON.parse(line.substring(line.indexOf('['),line.indexOf(']') + 1)),
+                    keyPositions : JSON.parse(line.substring(line.indexOf('['),line.indexOf(']') + 1)),
 					predicate : line.substring(line.indexOf('(') + 1,line.indexOf(',')),
 					type : "KEY",
 					isNonConflicting : function(tgd){
 						return this.predicate != tgd.head.predicate.name ||
-							(!this.parameters.isProperSubsetOf(tgd.xPositionsInHead()) && tgd.allNullsAppearOnlyOnceInTheHead());
+							(!this.keyPositions.isProperSubsetOf(tgd.xPositionsInHead()) && tgd.allNullsAppearOnlyOnceInTheHead());
 					},
 					toString: function(){
-						return "key(" + this.predicate + "," + "[" + this.parameters.join(",") + "]).";
+						return "key(" + this.predicate + "," + "[" + this.keyPositions.join(",") + "]).";
 					},
 					toQueryString: function(program){
 						
 						var lineNumber = Object.keys(program.arityDictionary.dictionary[this.predicate])[0];
 						var arity = program.arityDictionary.dictionary[this.predicate][lineNumber][0];
-						var p1 = buildPredicate(this.predicate, this.parameters, arity, "1");
-						var p2 = buildPredicate(this.predicate, this.parameters, arity, "2");
+						var p1 = buildPredicate(this.predicate, this.keyPositions, arity, "1");
+						var p2 = buildPredicate(this.predicate, this.keyPositions, arity, "2");
 
 
 						var inequalities = [];
 						var i = 1;
 						while(i <= arity){
-							if(!this.parameters.includes(i)){
+							if(!this.keyPositions.includes(i)){
 								inequalities.push("?x" + i + + "1" + " != " + "?x" + i + "2");
 							}
 							i++;

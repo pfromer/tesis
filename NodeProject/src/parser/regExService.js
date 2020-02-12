@@ -15,7 +15,7 @@ function _service(){
 	function repeatAndSeparateByComma (regEx){ return new RegExp("(" + regEx.source + ",\\s*)*"+ regEx.source) };
 	var factRegEx = new RegExp('^' + '(\\w+)\\(' + repeatAndSeparateByComma(constantRegEx).source  + '\\).$');
 	var queryRegEx = new RegExp('^' + "\\?-\\s*" + repeatAndSeparateByComma(queryPredicateRegEx).source + "\\.$");
-	var tgdRegEx = new RegExp('^' + withinPredicateRegEx.source + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$");
+	var tgdRegEx = new RegExp('^' + repeatAndSeparateByComma(withinPredicateRegEx).source  + "\\s*->\\s*" + withinPredicateRegEx.source  + "\\.$");
 	var ncRegEx = new RegExp('^' + bottomRegEx.source + "\\s*:-\\s*" + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\.$");
 	var existencialQueryRegEx = new RegExp('^!?(\\(\\)|\\(' + repeatAndSeparateByComma(variableRegEx).source  + '\\))' +  "\\s*:-\\s*" +repeatAndSeparateByComma(queryPredicateRegEx).source + "\\.$");
 

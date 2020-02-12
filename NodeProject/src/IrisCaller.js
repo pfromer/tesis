@@ -16,7 +16,8 @@ export function executeQuery(programText, isGuarded, variablesToShowByQuery){
         .get("http://localhost:8080/iris/query", {
         params: {
             test: JSON.stringify(internalParams)
-        }
+        },
+        //timeout: 1
         })
     )
 }
