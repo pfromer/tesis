@@ -37,7 +37,7 @@ public class SemanticExecutor {
 			case "AR":
 				return ExecuteAR();
 			case "IAR":
-				return "ExecuteIAR()";		
+				return ExecuteIAR();		
 		}
 		
 		return "";
@@ -223,11 +223,25 @@ public class SemanticExecutor {
 		return tgds + "\n" + facts + "\n" + queries;		
 	}
 
-	private void ExecuteIAR() {
-		//calclo los repairs
-		//calculo la interseccion de los repairs
-		//armo un programa con la interseccion, las tgds y las queries
-		//devuelvo el resultado
+	private String ExecuteIAR() {
+		
+		final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();
+		
+		configuration.variablesToShowByQuery = this.params.queries.stream().map(q -> q.showInOutput).collect(Collectors.toList());
+		
+		configuration.evaluationStrategyFactory = new StratifiedBottomUpEvaluationStrategyFactory(new NaiveEvaluatorFactory());
+		
+		List<org.deri.iris.iar.Fact> iarIntersection = this.getRepairsIntersection();
+		
+		String irisInput = this.makeIrisInputForFacts(iarIntersection);
+
+		ProgramExecutor executor = new ProgramExecutor(irisInput, configuration);
+		
+		ArrayList<QueryResult> output = executor.getResults();
+		
+		Gson gson = new Gson();
+
+		return gson.toJson(output);
 
 	}
 	
@@ -249,19 +263,33 @@ public class SemanticExecutor {
 		return tgds + "\n" + facts + "\n" + _nc;
 	}
 	
-	private List<List<org.deri.iris.iar.Fact>> getRepairs(){
+	private List<List<org.deri.iris.iar.Fact>> getRepairs(){		
+		return this.getIarResolver().getRepairs().stream().map(s -> this.toStringFacts(s)).collect(Collectors.toList());		
+	}
+	
+	private List<org.deri.iris.iar.Fact> getRepairsIntersection(){
+		return this.getIarResolver().getRepairsIntersection();		
+	}
+	
+	private String makeIrisInputForFacts(List<org.deri.iris.iar.Fact> _facts) {
+		String tgds = this.params.tgds.stream().map(t -> t.head + " :- "  + t.body + ".").collect(Collectors.joining("\n"));
+		String facts = _facts.stream().map(f -> f.Text).collect(Collectors.joining("\n"));
+		String queries = this.params.queries.stream().map(q -> "?-" + q.body + ".").collect(Collectors.joining("\n"));
 		
+		return tgds + "\n" + facts + "\n" + queries;
+	}
+	
+	
+	private IARResolver getIarResolver() {
 		List<String> facts = this.params.facts.stream().map(f -> f.value + ".").collect(Collectors.toList());
 		List<String> tgds = this.params.tgds.stream().map(t -> t.head + " :- "  + t.body + ".").collect(Collectors.toList());
 		List<String> ncsAsQueries = this.params.ncs.stream().map(nc -> "?-" +  nc.body + ".").collect(Collectors.toList());
 		
 		Program program = new Program(facts, tgds, ncsAsQueries, false);
 				
-		IARResolver solver = new IARResolver(program);
-		
-		return solver.getRepairs().stream().map(s -> this.toStringFacts(s)).collect(Collectors.toList());
-		
+		return new IARResolver(program);
 	}
+	
 	
 	private List<org.deri.iris.iar.Fact> toStringFacts(AboxSubSet s){
 		return s.Facts.stream().collect(Collectors.toList());

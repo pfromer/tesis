@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import oracle.net.aso.f;
+
 import java.util.function.Function;
 
 public class IARResolver {
@@ -49,6 +52,28 @@ public class IARResolver {
 		smallRepairs.addAll(bigRepairs);
 		return smallRepairs;
 	}
+	
+	
+	public List<Fact> getRepairsIntersection() {
+		 ArrayList<AboxSubSet> repairs = this.getRepairs();
+		 
+		 AboxSubSet firstRepair = repairs.get(0);
+		 
+		 List<Fact> result = new ArrayList<Fact>();
+		 
+		 for(int i = 0; i<firstRepair.Facts.size(); i++) {
+			 if(this.allRepairsContains(repairs, firstRepair.Facts.get(i))) {
+				 result.add(firstRepair.Facts.get(i));
+			 }
+		 }
+		 
+		 return result;
+	}
+	
+	private boolean allRepairsContains(ArrayList<AboxSubSet> repairs, Fact fact) {	
+		return repairs.stream().allMatch(r -> r.Facts.stream().anyMatch(f -> f.equals(fact)));
+	}
+	
 	
 	private void BuildNextBottom() {
 		this.bottom = new ArrayList<AboxSubSet>(bottomPlusOne.stream().filter(s-> s.Consistent).collect(Collectors.toList()));

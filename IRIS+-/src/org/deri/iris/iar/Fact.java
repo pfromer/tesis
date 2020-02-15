@@ -9,5 +9,9 @@ public class Fact {
 		this.Id = id;
 		this.Text = text;
 	}
+	
+	 public Boolean equals(Fact anotherFact) {
+		return this.Id == anotherFact.Id;
+	}
 
 }
