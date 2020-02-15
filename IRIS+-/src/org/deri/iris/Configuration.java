@@ -126,6 +126,8 @@ public class Configuration {
 	public double lambdaFormulaForGuardedForest = 0;
 	
 	public int maxQueryLength;
+	
+	public List<List<String>> variablesToShowByQuery;
 
     /**
      * Constructor.

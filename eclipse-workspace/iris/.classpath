@@ -18,5 +18,6 @@
 	<classpathentry kind="lib" path="C:/Git/tesis/IRIS+-/lib/postgresql-9.2-1003.jdbc4.jar"/>
 	<classpathentry kind="lib" path="C:/Git/tesis/IRIS+-/lib/xmlunit1.0.jar"/>
 	<classpathentry kind="var" path="JRE_LIB" sourcepath="/JRE_SRC"/>
+	<classpathentry kind="lib" path="C:/Git/tesis/eclipse-workspace/iris-web/WebContent/WEB-INF/lib/gson-2.8.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

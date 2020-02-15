@@ -1,0 +1,88 @@
+<html>
+<head>
+
+</head>
+<body>
+		<script type="text/javascript">
+
+		var program =  {
+			"ncs": [{
+				"body": "r9(?x), r2('b')"
+			},
+			{
+				"body": "r91(?x), r2('b')"
+			}],
+			"tgds": [{
+				"head": "r4(?x)",
+				"body": "r1(?x)"
+			},
+			{
+				"head": "r5('hola')",
+				"body": "r4(?x), r1('1')"
+			}],
+			"facts": [
+				{
+					"value": "r1('1')",
+				},
+				{
+					"value": "r1('2')",
+				},
+				{
+					"value": "r1('3')",
+				},
+				{
+					"value": "r1('4')",
+				},
+				{
+					"value": "r1('5')",
+				},
+				{
+					"value": "r1('6')",
+				},
+				{
+					"value": "r1('7')",
+				},
+				{
+					"value": "r1('8')",
+				},
+				{
+					"value": "r1('9')",
+				},
+				{
+					"value": "r2('a')",
+				},
+				{
+					"value": "r2('b')",
+				}
+			],
+			"queries": [
+				{
+					"showInOutput": [],
+					"body": "r1(?x), r2(?y)"
+				},
+				{
+					"showInOutput": ["x"],
+					"body": "r4(?x)"
+				},
+				{
+					"showInOutput": ["x"],
+					"body": "r5(?x)"
+				}
+			],
+			"semantics": "standard",
+			"max_depth": 100
+		}
+		
+		fetch('http://localhost:8080/iris/query'	, {
+			method: 'post',
+			body: JSON.stringify(program) 
+			}).then(function(response) {
+				console.log("hola");
+				console.log(response);
+			
+			});
+
+
+		</script>
+	</body>
+</html>

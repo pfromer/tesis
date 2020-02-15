@@ -14,7 +14,7 @@ public class QueryResult {
 	public QueryResult(IRelation results, List<IVariable> variableBindings, List<String> variableNamesToAdd, String query) {
 		
 		this.Query = query.toString();
-		this.VariableBindings = variableBindings.stream().filter(v -> variableNamesToAdd.stream().anyMatch(v2 -> v.toString().equals(v2))).
+		this.VariableBindings = variableBindings.stream().filter(v -> variableNamesToAdd.stream().map(v2 -> "?" + v2).anyMatch(v2 -> v.toString().equals(v2))).
 				map(v -> v.toString()).			
 				collect(Collectors.toList());
 		
@@ -28,7 +28,7 @@ public class QueryResult {
 			this.BooleanResult = false;
   	  	}
 		
-		List<Integer> positionsToConsider =  variableBindings.stream().filter(v -> variableNamesToAdd.stream().anyMatch(v2 -> v.toString().equals(v2))).map
+		List<Integer> positionsToConsider =  variableBindings.stream().filter(v -> variableNamesToAdd.stream().map(v2 -> "?" + v2).anyMatch(v2 -> v.toString().equals(v2))).map
 				(v -> variableBindings.indexOf(v)).collect(Collectors.toList());
   	  
   	  	this.Results = new ArrayList<ArrayList<String>>();

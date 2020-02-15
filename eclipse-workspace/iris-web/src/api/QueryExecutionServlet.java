@@ -1,7 +1,9 @@
 package api;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,9 +20,31 @@ import org.deri.iris.demo.ProgramExecutor;
 import org.deri.iris.demo.QueryResult;
 import org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategyFactory;
 import org.deri.iris.evaluation.stratifiedbottomup.naive.NaiveEvaluatorFactory;
+import org.deri.iris.iar.AboxSubSet;
+import org.deri.iris.iar.IARResolver;
+import org.deri.iris.semantic_executor.SemanticExecutor;
+import org.deri.iris.semantic_executor.SemanticParams;
+import org.deri.iris.iar.Program;
 import org.deri.iris.rules.safety.GuardedRuleSafetyProcessor;
 import org.json.*;
 import com.google.gson.*;
+
+
+/*
+ * 
+ * program : {
+	ncs : [],
+	tgds : [],
+	facts : [],
+	queries : [
+		{	
+			nonQuantifiedVariables : [],
+			body : ""	
+		}
+	]
+	semantic : [standard|AR|IAR]
+}
+ */
 
 
 @WebServlet(name = "query", urlPatterns = { "/query" })
@@ -31,33 +55,30 @@ public class QueryExecutionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		try {
 			
 			final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();
+		
+			
+			BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+	        String json = "";
+	        if(br != null){
+	            json = br.readLine();
+	        }
+	        
+	        Gson gson = new Gson();
 
-			String json = request.getParameter("test"); 
+	        SemanticParams params = gson.fromJson(json, SemanticParams.class);
+		
+			SemanticExecutor executor = new SemanticExecutor(params);
 			
-			JSONObject obj = new JSONObject(json);
-			String program = obj.getString("program");
+			response.getWriter().append(executor.Execute());
 			
-			String variablesToShowByQuery;
-			if(obj.has("variablesToShowByQuery")){
-				variablesToShowByQuery = obj.getString("variablesToShowByQuery");
-				configuration.variablesToShow = Arrays.asList(variablesToShowByQuery.split("\\s*,\\s*"));
-			}		
-			
-			configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();			
-			
-			ProgramExecutor executor = new ProgramExecutor(program, configuration);
-			
-			ArrayList<QueryResult> output = executor.getResults();
-			
-			Gson gson = new Gson();
-			String jsonOutput = gson.toJson(output);
-			response.getWriter().append(jsonOutput);
+			//String jsonOutput = gson.toJson(program);
+			//response.getWriter().append(jsonOutput);
 
 		} catch (Exception e) {
 			response.getWriter().append(e.toString());
@@ -77,5 +98,6 @@ public class QueryExecutionServlet extends HttpServlet {
 		r.close();
 		return builder.toString();
 	}
+	
 
 }

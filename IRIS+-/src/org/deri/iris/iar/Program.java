@@ -20,7 +20,13 @@ public class Program {
 	public List<String> tgds;
 	public List<String> ncsAsQueries;
 	public Boolean isGuarded;
-
+	
+	public Program(List<String> _facts, List<String> _tgds, List<String> _ncsAsQueries, Boolean _isGuarded) {
+		this.facts = _facts;
+		this.tgds = _tgds;
+		this.ncsAsQueries = _ncsAsQueries;
+		this.isGuarded = _isGuarded;
+	}
 	
 	public AboxSubSet ABox() {
 		AtomicInteger index = new AtomicInteger();
@@ -28,25 +34,19 @@ public class Program {
 	}
 
 	public Boolean IsConsistent(AboxSubSet subset){
-		final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();		
+		final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();
 		
-			
-		configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
+		configuration.variablesToShowByQuery = this.ncsAsQueries.stream().map(q -> new ArrayList<String>()).collect(Collectors.toList());
+		
+		configuration.evaluationStrategyFactory = new StratifiedBottomUpEvaluationStrategyFactory(new NaiveEvaluatorFactory());
 
 		
 		if(subset.Facts.size() == 0) return true;
 		
 		String program = GenerateSubProgram(subset);
 		ProgramExecutor executor = new ProgramExecutor(program, configuration);
-		ArrayList<QueryResult> output = executor.getResults();
 		
-		boolean result = !output.stream().anyMatch(q -> hasResult(q));
-		
-		return result;
-	}
-	
-	private Boolean hasResult(QueryResult q) {
-		return q.Results.size() > 0;
+		return !executor.getResults().stream().anyMatch(q -> q.BooleanResult == true);
 	}
 	
 	private String GenerateSubProgram(AboxSubSet subset) {
