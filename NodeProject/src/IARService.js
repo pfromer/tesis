@@ -1,5 +1,5 @@
 import { getIarRepairs } from "./IrisCaller";
-
+/*
 export async function intersectionRepairs(program){
 
    var facts = program.facts.map(f => f.toString());
@@ -24,4 +24,4 @@ function getIntersection(setOfSets){
       })
    })
    return result.unique();
-}
+}*/
