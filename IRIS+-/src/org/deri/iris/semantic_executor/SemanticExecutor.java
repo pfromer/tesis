@@ -10,6 +10,7 @@ import org.deri.iris.iar.AboxSubSet;
 import org.deri.iris.iar.Fact;
 import org.deri.iris.iar.IARResolver;
 import org.deri.iris.iar.Program;
+import org.deri.iris.rules.safety.GuardedRuleSafetyProcessor;
 
 import com.google.gson.Gson;
 
@@ -67,7 +68,7 @@ public class SemanticExecutor {
 						
 				configuration.variablesToShowByQuery.add(new ArrayList<String>());
 				
-				configuration.evaluationStrategyFactory = new StratifiedBottomUpEvaluationStrategyFactory(new NaiveEvaluatorFactory());
+				configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
 				
 				ProgramExecutor executor = new ProgramExecutor(irisInput, configuration);
 				
@@ -84,7 +85,7 @@ public class SemanticExecutor {
 				return this.ExecuteWithoutNcs();
 			} else {
 				Gson gson = new Gson();
-				return gson.toJson(violatingNcsIndexes);
+				return gson.toJson(new ViolatingNcsResult(violatingNcsIndexes));
 			}
 		}
 	}
@@ -96,7 +97,7 @@ public class SemanticExecutor {
 		
 		configuration.variablesToShowByQuery = this.params.queries.stream().map(q -> q.showInOutput).collect(Collectors.toList());
 		
-		configuration.evaluationStrategyFactory = new StratifiedBottomUpEvaluationStrategyFactory(new NaiveEvaluatorFactory());
+		configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
 		
 		ProgramExecutor executor = new ProgramExecutor(irisInput, configuration);
 		
@@ -113,7 +114,7 @@ public class SemanticExecutor {
 		
 		configuration.variablesToShowByQuery = this.params.queries.stream().map(q -> q.showInOutput).collect(Collectors.toList());
 		
-		configuration.evaluationStrategyFactory = new StratifiedBottomUpEvaluationStrategyFactory(new NaiveEvaluatorFactory());
+		configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
 		
 		List<List<org.deri.iris.iar.Fact>> repairs = this.getRepairs();
 		 
@@ -229,7 +230,7 @@ public class SemanticExecutor {
 		
 		configuration.variablesToShowByQuery = this.params.queries.stream().map(q -> q.showInOutput).collect(Collectors.toList());
 		
-		configuration.evaluationStrategyFactory = new StratifiedBottomUpEvaluationStrategyFactory(new NaiveEvaluatorFactory());
+		configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
 		
 		List<org.deri.iris.iar.Fact> iarIntersection = this.getRepairsIntersection();
 		

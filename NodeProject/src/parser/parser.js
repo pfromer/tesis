@@ -4,7 +4,7 @@ import * as ncModule from "./ncBuilder";
 import * as keyModule from "./keyBuilder";
 import * as factModule from "./factBuilder";
 import * as queryModule from "./queryBuilder";
-import { executeQuery } from "../IrisCaller";
+import { executeProgram } from "../IrisCaller";
 import * as existencialQueryModule from "./existencialQueryBuilder";
 import {ArityDictionary} from "./ArityDictionary";
 
@@ -40,7 +40,7 @@ export function parse (program){
 				var lineAsObject = Object.assign({lineNumber : i}, regexAndBuilder.builder.build(lines[i]));
 				regexAndBuilder.collection.push(lineAsObject);
 				matched = true;
-				programStructure.push({text: lines[i], type: lineAsObject.type, index: i});
+				programStructure.push({text: lines[i], type: lineAsObject.type, index: i, object: lineAsObject});
 				if(lineAsObject.arities){
 					arityDictionary.addArities(lineAsObject.arities(), i);
 				}
@@ -67,6 +67,27 @@ export function parse (program){
 					this.inconsistencies = undefined;
 					this.processedInconsistencies = undefined;
 					this.facts = newFacts;
+				},
+				ncsForServerDictionary : function() {
+					var result = {};
+					var i = 0;
+					var self = this;
+
+					this.programStructure.filter(e => e.type == "NC" || e.type == "KEY").forEach(function (programElement) {          
+						if(programElement.type == "NC") {
+							result[i] = programElement.object.lineNumber + 1;
+						  i++;
+						}
+						if(programElement.type == "KEY") {
+				  
+						  var ncsForKey = programElement.object.toJson(self.arityDictionary);
+						  ncsForKey.forEach(function(nc) {
+							result[i] = programElement.object.lineNumber + 1;
+							i++;
+						  });
+						}
+					  });
+					  return result;
 				},
 				programStructure : programStructure,
 				arityDictionary : arityDictionary,
@@ -95,7 +116,7 @@ export function parse (program){
 					return this.conflictingKeys; 
 				},
 				inconsistencies: undefined,
-				get getInconsistencies() {
+				/*get getInconsistencies() {
 					if(this.inconsistencies == undefined){
 						return new Promise(resolve => {
 							this.consistencyPromise().then(inconsistencies => {
@@ -114,7 +135,7 @@ export function parse (program){
 							resolve({inconsistencies: this.inconsistencies});
 						})
 					} 
-				},
+				},*/
 				processedInconsistencies: undefined,
 				get getProcessedInconsistencies(){
 					if(this.processedInconsistencies == undefined)
@@ -125,7 +146,7 @@ export function parse (program){
 				},
 				errors: errors,
 				consistencyPromise: function(){
-					var result = [];
+					/*var result = [];
 					var currentProgram = this;					
 					var getProm = function(nc) {						
 						return new Promise(resolve => {
@@ -135,10 +156,6 @@ export function parse (program){
 									result.push({nc: nc, result: res.data })
 								}
 								resolve(result);						
-							})
-							.catch(err =>{
-								console.log(err)
-					
 							});						
 						})
 					}
@@ -146,7 +163,7 @@ export function parse (program){
 					this.ncs.concat(this.keys).forEach((nc) => {
 						chain = chain.then(()=>getProm(nc))
 					});
-					return chain;
+					return chain;*/
 				},
 				programToString: function(){
 					return this.programStructure.filter(i => i.type != "QUERY" && i.type != "EXISTENCIAL QUERY").map(i=> i.text).join("\n");
@@ -161,7 +178,7 @@ export function parse (program){
 				isNonConflicting(key){
 					return this.tgds.every(tgd => key.isNonConflicting(tgd));
 				},
-				getStatus: async function(){
+				getStatus: function(){
 					if(this.cachedStatus) return this.cachedStatus;
 					var result = {};
 					if(this.errors.length > 0){
@@ -178,8 +195,11 @@ export function parse (program){
 						result = {
 							status: "CONFLICTING KEYS"
 						}
-					}				
-					else {
+					}
+					else result = {
+						status: "OK"
+					}					
+					/*else {
 						var incResult = await this.getInconsistencies;
 						if(incResult.inconsistencies.length > 0){
 							result = {
@@ -189,15 +209,50 @@ export function parse (program){
 						else result = {
 							status: "OK"
 						}	
-					}
+					}*/
 					this.cachedStatus = result;
 					return result;
 				},
 				cachedStatus: undefined,
-				execute: async function(){
-					var executionCalls = this.queries.map(q => q.execute(this));
-					var allResults = await Promise.all(executionCalls);
-					return allResults.map(r => r.data[0])
+				execute: async function(semantics){
+
+					var programJson = {
+						"ncs" : [],
+						"tgds" : [],
+						"facts" : [],
+						"queries" : [],
+						"semantics" : semantics,
+						"max_depth" : 30
+					};
+				
+					programStructure.filter(e => e.type == "NC" || e.type == "KEY").forEach(function (programElement) {
+						if(programElement.type == "NC") {
+							programJson["ncs"].push(programElement.object.toJson());
+						}
+
+						if(programElement.type == "KEY") {
+				
+							var ncsForKey = programElement.object.toJson(arityDictionary);
+							ncsForKey.forEach(function(nc) {
+								programJson["ncs"].push(nc);
+							});
+						}
+					});
+				
+					this.facts.forEach(function(fact) {
+						programJson["facts"].push(fact.toJson());
+					});
+				
+					this.tgds.forEach(function(tgd) {
+						programJson["tgds"].push(tgd.toJson());
+					});
+				
+					this.queries.forEach(function(query) {
+						programJson["queries"].push(query.toJson());
+					});
+
+					var response = await executeProgram(programJson);
+					return response;
 				},
 				getCachedThingsFrom(anotherProgram){
 					if(anotherProgram){

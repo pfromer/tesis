@@ -22,6 +22,19 @@ export function executeQuery(programText, isGuarded, variablesToShowByQuery){
     )
 }
 
+
+export async function executeProgram(programJson){
+    const response = await fetch('http://localhost:8080/iris/query'	, {
+        method: 'post',
+        body: JSON.stringify(programJson)
+        });
+
+        const json = await response.json();
+        return json;
+
+}
+
+
 export async function getIarRepairs(facts, tgds, ncsAsQueries, isGuarded){
 
     var params = {

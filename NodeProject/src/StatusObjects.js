@@ -60,45 +60,60 @@ async function onAction(actionName, component){
             alertService.setErrorSyntaxAlert(component);
             break;
         case("ARITIES ISSUES"):
-            alertService.setArityIssuesAlert(component);
+        alertService.setArityIssuesAlert(component);
             editorService.markArityIssues(component);
             break;
         case("CONFLICTING KEYS"):
-            alertService.setConflictingKeysAlert(component);
+        alertService.setConflictingKeysAlert(component);
             editorService.markConflictingKeys(component);
             break;
-        case("INCONSISTENT"):
-            alertService.setInconsistentAlert(component);
+        /*case("INCONSISTENT"):
+        alertService.setInconsistentAlert(component);
             editorService.markInconsistencies(component);
             component.statusObject = component.iarStatus;
             component.setState({showIAR : true});
-            break;
+            break;*/
         case("OK"):
-            actionSettingsDictionary[actionName].okFunction(component);
+        actionSettingsDictionary[actionName].okFunction(component);
             break;
     }
 }
 
 async function iarSubmit(component){
+
     var fullProgram = component.getFullProgram();
     var statusObject = await fullProgram.getStatus();
     switch(statusObject.status){
         case("SYNTAX ERROR"):
             alertService.setErrorSyntaxAlert(component);
             break;
-        case("INCONSISTENT"):
+        default:
+            var results = await fullProgram.execute("IAR");
+            component.setState({ results: results, resultsLoading: false});
+        /*
             var factStrings = await component.statusObject.getIntersectionRepairs(component);
             fullProgram.facts = factStrings.map(f => factModule.builder.build(f));
             var results = await fullProgram.execute();
             component.setState({ results: results});
-            break;
+            break;*/
     }
 }
 
 var actionSettingsDictionary = {
     "checkConstraints":{
-        okFunction: function(component){
-            alertService.setConsistentAlert(component);
+        okFunction: async function(component){
+
+            component.setState({ resultsLoading: true}); 
+            var results = await component.programWithNoQueries.execute("standard");
+            if(results.unsatisfied) {
+                alertService.setInconsistentAlert(component);
+                editorService.markInconsistencies(component, results.unsatisfied);
+                component.statusObject = component.iarStatus;
+                component.setState({showIAR : true, resultsLoading: false});
+            } else {
+                alertService.setConsistentAlert(component);
+                component.setState({ resultsLoading: false}); 
+            }
         },
         program: function(component){
             return component.programWithNoQueries;
@@ -108,8 +123,16 @@ var actionSettingsDictionary = {
     "submit":{
         okFunction: async function(component){
             component.setState({ resultsLoading: true}); 
-            var results = await component.getFullProgram().execute();
-            component.setState({ results: results, resultsLoading: false});
+            var results = await component.getFullProgram().execute("standard");
+            if(results.unsatisfied) {
+                alertService.setInconsistentAlert(component);
+                editorService.markInconsistencies(component, results.unsatisfied);
+                component.statusObject = component.iarStatus;
+                component.setState({showIAR : true, resultsLoading: false});
+            }
+            else {
+                component.setState({ results: results, resultsLoading: false});
+            }
         },
         program: function(component){
             return component.getFullProgram();

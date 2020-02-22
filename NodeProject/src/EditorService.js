@@ -27,9 +27,10 @@ export function markConflictingKeys(component){
     })
   }
 
-export function markInconsistencies(component){
-    component.programWithNoQueries.inconsistencies.forEach(inconsitency => {
-      component.programEditorInstance.addLineClass(inconsitency.nc.lineNumber, "text", "inconsistent-constraint");
-    });
+export function markInconsistencies(component, unsatisfiedNcsIndexes){
+    unsatisfiedNcsIndexes.forEach(ncIndex => {
+      var lineNumber =  component.programWithNoQueries.ncsForServerDictionary()[ncIndex] - 1;
+      component.programEditorInstance.addLineClass(lineNumber, "text", "inconsistent-constraint");
+    })
 }
 

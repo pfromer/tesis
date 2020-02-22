@@ -38,7 +38,7 @@ public class Program {
 		
 		configuration.variablesToShowByQuery = this.ncsAsQueries.stream().map(q -> new ArrayList<String>()).collect(Collectors.toList());
 		
-		configuration.evaluationStrategyFactory = new StratifiedBottomUpEvaluationStrategyFactory(new NaiveEvaluatorFactory());
+		configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
 
 		
 		if(subset.Facts.size() == 0) return true;

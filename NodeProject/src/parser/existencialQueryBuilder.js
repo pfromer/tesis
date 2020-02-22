@@ -31,6 +31,14 @@ function _builder(){
 					return ["?- ", bodyString, "."].join("") }
 					,
 				type : "EXISTENCIAL QUERY",
+				toJson: function() {
+					return {
+						"showInOutput" : variablesInHead.map(v => v.name),
+						"body" : this.predicates.map(p => p.toString()).join(', ')
+					}
+				},
+
+
 				execute : function(program){
 					var programWithQuery = program.toStringWithoutNcsAndEgdsAndQueries() + "\n" + this.toNonExistencialQueryString();
 					var queryString = this.toString();

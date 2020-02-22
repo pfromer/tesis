@@ -1,9 +1,9 @@
 p('a', 'a', ?x) -> bottom.
-p('a', 'a', 'b') -> bottom.
+p('a', 'b2', 'c2') -> bottom.
 
 r(?x, ?y) -> p(?z, ?x, ?y).
  
-key(p,[2]).
+key(p,[1]).
  
 p('a', 'b', 'c').
 p('a', 'b2', 'c2').

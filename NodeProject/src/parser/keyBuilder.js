@@ -58,7 +58,36 @@ function _builder(){
 					}, 
 					getQueryForProgram : function(program){
 						return program.facts.concat(this.toQueryString(program)).join("\n");
+					},
+					toJson: function(arityDictionary) {
+						var lineNumber = Object.keys(arityDictionary.dictionary[this.predicate])[0];
+						var arity = arityDictionary.dictionary[this.predicate][lineNumber][0];
+						var p1 = buildPredicate(this.predicate, this.keyPositions, arity, "1");
+						var p2 = buildPredicate(this.predicate, this.keyPositions, arity, "2");
+
+
+						var inequalities = [];
+						var i = 1;
+						while(i <= arity){
+							if(!this.keyPositions.includes(i)){
+								inequalities.push("?x" + i + + "1" + " != " + "?x" + i + "2");
+							}
+							i++;
+						}
+						
+						var ncs = [];
+
+						inequalities.forEach( ineq => {
+							ncs.push({ "body" : [p1, p2, ineq].join(", ")});
+						})
+
+						return ncs;
 					}
+
+
+
+
+
 			}
 		}
 	}

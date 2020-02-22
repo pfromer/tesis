@@ -56,6 +56,13 @@ function _builder() {
 				toString: function () {
 					return [this.head.predicate.toString(), " :- ", this.body.toString(), "."].join("");
 				},
+
+				toJson: function () {
+					return { 
+						"head" : this.head.predicate.toString(),
+						"body" : this.body.toString()
+					}
+				},
 				type : isGuarded ? "GUARDED_TGD" : "UNAGARDED_TGD",
 				arities : function(){
 					var result = this.body.arities();

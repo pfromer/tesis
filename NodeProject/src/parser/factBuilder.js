@@ -15,7 +15,10 @@ function _builder(){
 					var result = {};
 					result[this.name] = [this.parameters.length];
 					return result;
-				} 
+				},
+				toJson : function() {
+					return {"value" : predicate.toString()}
+				}
 			}
 		}
 	}
