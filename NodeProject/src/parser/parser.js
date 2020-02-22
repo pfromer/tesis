@@ -63,11 +63,6 @@ export function parse (program){
 				keys: keys,
 				queries : queries, 
 				facts: facts,
-				set setFacts(newFacts){
-					this.inconsistencies = undefined;
-					this.processedInconsistencies = undefined;
-					this.facts = newFacts;
-				},
 				ncsForServerDictionary : function() {
 					var result = {};
 					var i = 0;
@@ -115,59 +110,9 @@ export function parse (program){
 					}
 					return this.conflictingKeys; 
 				},
-				inconsistencies: undefined,
-				/*get getInconsistencies() {
-					if(this.inconsistencies == undefined){
-						return new Promise(resolve => {
-							this.consistencyPromise().then(inconsistencies => {
-								if (inconsistencies && inconsistencies.length > 0) {
-									this.inconsistencies = inconsistencies;								     
-								}      
-								else{
-									this.inconsistencies = [];
-								}
-								resolve({inconsistencies: this.inconsistencies});
-							  })
-						  })
-					}
-					else{
-						return new Promise(resolve => {
-							resolve({inconsistencies: this.inconsistencies});
-						})
-					} 
-				},*/
-				processedInconsistencies: undefined,
-				get getProcessedInconsistencies(){
-					if(this.processedInconsistencies == undefined)
-					{
-						this.processedInconsistencies = this.inconsistencies;
-					}
-					return this.processedInconsistencies;
-				},
 				errors: errors,
-				consistencyPromise: function(){
-					/*var result = [];
-					var currentProgram = this;					
-					var getProm = function(nc) {						
-						return new Promise(resolve => {
-							executeQuery(nc.getQueryForProgram(currentProgram), currentProgram.isGuarded())
-							.then(res => {
-								if(res.data.some(r => r.Results.length >0)){
-									result.push({nc: nc, result: res.data })
-								}
-								resolve(result);						
-							});						
-						})
-					}
-					let chain = Promise.resolve();
-					this.ncs.concat(this.keys).forEach((nc) => {
-						chain = chain.then(()=>getProm(nc))
-					});
-					return chain;*/
-				},
 				programToString: function(){
 					return this.programStructure.filter(i => i.type != "QUERY" && i.type != "EXISTENCIAL QUERY").map(i=> i.text).join("\n");
-
 				},
 				queriesToString: function(){
 					return this.queries.filter(i => i.type == "QUERY" || i.type == "EXISTENCIAL QUERY").map(i=> i.toString()).join("\n");
@@ -198,18 +143,7 @@ export function parse (program){
 					}
 					else result = {
 						status: "OK"
-					}					
-					/*else {
-						var incResult = await this.getInconsistencies;
-						if(incResult.inconsistencies.length > 0){
-							result = {
-								status: "INCONSISTENT"
-							}
-						}
-						else result = {
-							status: "OK"
-						}	
-					}*/
+					}
 					this.cachedStatus = result;
 					return result;
 				},
