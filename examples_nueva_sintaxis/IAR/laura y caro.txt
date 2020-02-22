@@ -1,0 +1,19 @@
+lesbiana('laura') -> bottom.
+
+esMujer(?y), esMujer(?x), sonPareja(?x, ?y) -> lesbiana(?x).
+sonPareja(?y, ?x) -> sonPareja(?x, ?y).
+esHombre(?y), esMujer(?x), sonPareja(?x, ?y) -> hetero(?x).
+lesbiana(?x), hetero(?x) -> bisexual(?x).
+ 
+esMujer('laura').
+esMujer('carolina').
+sonPareja('laura', 'carolina').
+esHombre('pedro').
+sonPareja('pedro', 'carina').
+sonPareja('pedro', 'carolina').
+esMujer('carina').
+
+
+(?x) :- lesbiana(?x).
+(?x, ?y) :- sonPareja(?x, ?y).
+(?x) :- bisexual(?x).
