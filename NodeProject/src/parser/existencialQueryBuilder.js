@@ -1,6 +1,5 @@
 import * as bodyModule from "./bodyBuilder";
 import * as parameterModule  from "./parameterBuilder";
-import { executeQuery } from "./../IrisCaller";
 import {UpdateArrayPrototype} from "./ArrayUtils";
 
 function _builder(){
@@ -37,28 +36,6 @@ function _builder(){
 						"body" : this.predicates.map(p => p.toString()).join(', ')
 					}
 				},
-
-
-				execute : function(program){
-					var programWithQuery = program.toStringWithoutNcsAndEgdsAndQueries() + "\n" + this.toNonExistencialQueryString();
-					var queryString = this.toString();
-					var isNegated = this.isNegated;
-					return new Promise(resolve => {
-                        var variablesToShowByQuery = variablesInHead.map(v => v.toString());
-						executeQuery(programWithQuery, program.isGuarded(), variablesToShowByQuery)
-						.then(res => {
-							res.data[0].Query = queryString;
-							if(isNegated){
-								res.data[0].BooleanResult = !res.data[0].BooleanResult;
-							}
-							resolve(res);						
-						})
-						.catch(err =>{
-							console.log("hubo un error " + err)
-	
-					});							
-					})
-				}
 			}
 		}
 	}

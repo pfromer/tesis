@@ -45,7 +45,6 @@ class ContainerComponent extends React.Component {
     this.programEditorInstance = undefined;
     this.queriesEditorInstace = undefined;
     this.markers = [];
-    this.intersectionRepairs = undefined;
     this.repairs = undefined;
     this.nonValidatedStatus = nonValidatedStatus;
     this.iarStatus = iarStatus;
@@ -73,7 +72,6 @@ class ContainerComponent extends React.Component {
     this.onHandleAlertClose();
     this.markers.forEach(marker => marker.clear());
     this.markers = [];
-    this.intersectionRepairs = undefined;
     this.repairs = undefined;
     this.setState({results : [], alert: {opened: false}, showIAR: false})
     this.programWithNoQueries = undefined;
