@@ -1,5 +1,4 @@
 import * as predicateModule  from "./predicateBuilder";
-import * as parameterModule  from "./parameterBuilder";
 import * as bodyModule from "./bodyBuilder";
 
 
