@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.deri.iris.iar.AboxSubSet;
 import org.deri.iris.iar.IARResolver;
 import org.deri.iris.iar.Program;
+import org.deri.iris.semantic_executor.SemanticParams;
 
 import com.google.gson.*;
 
@@ -39,7 +40,8 @@ public class IARExecutionServlet extends HttpServlet {
 	        
 	        Gson gson = new Gson();
 
-			Program program = gson.fromJson(json, Program.class);
+	        SemanticParams params = gson.fromJson(json, SemanticParams.class);
+	        Program program = new Program(params);
 			IARResolver solver = new IARResolver(program);
 			
 			ArrayList<AboxSubSet> repairs = solver.getRepairs();			

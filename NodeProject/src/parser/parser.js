@@ -148,15 +148,13 @@ export function parse (program){
 					return result;
 				},
 				cachedStatus: undefined,
-				execute: async function(semantics){
 
+				toJson: function() {
 					var programJson = {
 						"ncs" : [],
 						"tgds" : [],
 						"facts" : [],
-						"queries" : [],
-						"semantics" : semantics,
-						"max_depth" : 30
+						"queries" : []
 					};
 				
 					programStructure.filter(e => e.type == "NC" || e.type == "KEY").forEach(function (programElement) {
@@ -185,9 +183,25 @@ export function parse (program){
 						programJson["queries"].push(query.toJson());
 					});
 
-					var response = await executeProgram(programJson);
+					return programJson;
+				}, 
+
+
+				execute: async function(semantics, max_depth){
+
+					var params = this.toJson();
+
+					params.semantics = semantics;
+					params.max_depth = max_depth;
+
+					var response = await executeProgram(params);
 					return response;
 				},
+				getRepairs: async function() {
+
+				},
+
+
 				getCachedThingsFrom(anotherProgram){
 					if(anotherProgram){
 						if(anotherProgram.inconsistencies) this.inconsistencies = anotherProgram.inconsistencies;

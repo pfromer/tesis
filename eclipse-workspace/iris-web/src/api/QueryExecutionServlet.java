@@ -60,9 +60,6 @@ public class QueryExecutionServlet extends HttpServlet {
 		
 		try {
 			
-			final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();
-		
-			
 			BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
 	        String json = "";
 	        if(br != null){
@@ -76,28 +73,9 @@ public class QueryExecutionServlet extends HttpServlet {
 			SemanticExecutor executor = new SemanticExecutor(params);
 			
 			response.getWriter().append(executor.Execute());
-			
-			//String jsonOutput = gson.toJson(program);
-			//response.getWriter().append(jsonOutput);
 
 		} catch (Exception e) {
 			response.getWriter().append(e.toString());
-
 		}
 	}
-
-	private static final String loadFile(final String filename) throws IOException {
-		final FileReader r = new FileReader(filename);
-
-		final StringBuilder builder = new StringBuilder();
-
-		int ch = -1;
-		while ((ch = r.read()) >= 0) {
-			builder.append((char) ch);
-		}
-		r.close();
-		return builder.toString();
-	}
-	
-
 }

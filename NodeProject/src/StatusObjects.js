@@ -1,5 +1,6 @@
 import * as alertService from "./AlertService2";
 import * as editorService from "./EditorService";
+import * as irisCaller from "./IrisCaller"
 
 export var nonValidatedStatus = {
     submit: async function(component){
@@ -16,39 +17,13 @@ export var iarStatus = {
     },
     checkConstraints: nonValidatedStatus.checkConstraints,
     showRepairs: async function(component){
-        /*component.setState({ repairsLoading: true}); 
-        var iarResult = await intersectionRepairs(component.programWithNoQueries);
+        component.setState({ repairsLoading: true});
+        var jsonParams = component.programWithNoQueries.toJson();
+        var results = await irisCaller.getIarRepairs(jsonParams);
         component.setState({ repairsLoading: false}); 
-        component.intersectionRepairs = iarResult.intersection;
-        component.repairs = iarResult.repairs;
-        component.statusObject = component.repairsSetStatus;
-        alertService.showRepairs(component);*/
-    },
-    getIntersectionRepairs: async function(component){
-        /*component.setState({ resultsLoading: true}); 
-        var iarResult = await intersectionRepairs(component.programWithNoQueries);
-        component.setState({ resultsLoading: false}); 
-        component.intersectionRepairs = iarResult.intersection;
-        component.repairs = iarResult.repairs;
-        component.statusObject = component.repairsSetStatus;
-        return iarResult.intersection;*/
-    }
-}
-
-export var repairsSetStatus = {
-    submit: async function(component){
-        iarSubmit(component)
-    },
-    checkConstraints: async function(component){
-        nonValidatedStatus.checkConstraints(component);
-        component.statusObject = component.repairsSetStatus;
-    },
-    /*showRepairs: async function(component){
+        component.repairs = results;
         alertService.showRepairs(component);
-    },
-    /*getIntersectionRepairs: async function(component){
-        return component.intersectionRepairs;
-    }*/
+    }
 }
 
 async function onAction(actionName, component){
@@ -65,12 +40,6 @@ async function onAction(actionName, component){
         alertService.setConflictingKeysAlert(component);
             editorService.markConflictingKeys(component);
             break;
-        /*case("INCONSISTENT"):
-        alertService.setInconsistentAlert(component);
-            editorService.markInconsistencies(component);
-            component.statusObject = component.iarStatus;
-            component.setState({showIAR : true});
-            break;*/
         case("OK"):
         actionSettingsDictionary[actionName].okFunction(component);
             break;

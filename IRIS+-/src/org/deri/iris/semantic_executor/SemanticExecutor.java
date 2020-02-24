@@ -282,11 +282,8 @@ public class SemanticExecutor {
 	
 	
 	private IARResolver getIarResolver() {
-		List<String> facts = this.params.facts.stream().map(f -> f.value + ".").collect(Collectors.toList());
-		List<String> tgds = this.params.tgds.stream().map(t -> t.head + " :- "  + t.body + ".").collect(Collectors.toList());
-		List<String> ncsAsQueries = this.params.ncs.stream().map(nc -> "?-" +  nc.body + ".").collect(Collectors.toList());
 		
-		Program program = new Program(facts, tgds, ncsAsQueries, false);
+		Program program = new Program(this.params);
 				
 		return new IARResolver(program);
 	}

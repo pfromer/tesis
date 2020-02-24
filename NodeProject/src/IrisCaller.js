@@ -11,22 +11,13 @@ export async function executeProgram(programJson){
 }
 
 
-export async function getIarRepairs(facts, tgds, ncsAsQueries, isGuarded){
-
-    var params = {
-        "facts": facts,
-        "tgds": tgds,
-        "ncsAsQueries":  ncsAsQueries,
-        "isGuarded": isGuarded  
-    }
-
-    var result = []; 
+export async function getIarRepairs(programJson, max_depth){
 
     const response = await fetch('http://localhost:8080/iris/iar', {
         method: 'post',
-        body: JSON.stringify(params)
+        body: JSON.stringify(programJson)
       })
     const json = await response.json();
-    result = json.map(r => r.Facts.map(r => r.Text));
+    var result = json.map(r => r.Facts.map(r => r.Text));
     return result;
 }

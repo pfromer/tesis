@@ -12,6 +12,7 @@ import org.deri.iris.demo.QueryResult;
 import org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategyFactory;
 import org.deri.iris.evaluation.stratifiedbottomup.naive.NaiveEvaluatorFactory;
 import org.deri.iris.rules.safety.GuardedRuleSafetyProcessor;
+import org.deri.iris.semantic_executor.SemanticParams;
 
 
 
@@ -26,6 +27,12 @@ public class Program {
 		this.tgds = _tgds;
 		this.ncsAsQueries = _ncsAsQueries;
 		this.isGuarded = _isGuarded;
+	}
+	
+	public Program(SemanticParams params) {		
+		this.facts = params.facts.stream().map(f -> f.value + ".").collect(Collectors.toList());
+		this.tgds = params.tgds.stream().map(t -> t.head + " :- "  + t.body + ".").collect(Collectors.toList());
+		this.ncsAsQueries = params.ncs.stream().map(nc -> "?-" +  nc.body + ".").collect(Collectors.toList());
 	}
 	
 	public AboxSubSet ABox() {

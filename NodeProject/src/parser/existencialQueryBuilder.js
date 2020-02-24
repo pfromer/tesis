@@ -21,7 +21,7 @@ function _builder(){
 				variablesInHead : variablesInHead,	
         predicates : body.predicates,
         isBoolean: function() {return this.variablesInHead.length == 0},
-				toString : function(){
+				toString : function() {
 										var bodyString = this.predicates.map(p => p.toString()).join(', ');
                     return [isNegated ? "!" : "","(" + this.variablesInHead.map(v => v.toString()).join(", ") + ")", " :- ", bodyString, "."].join("")
                  },

@@ -5,7 +5,6 @@ import { parse } from "./parser/parser";
 import { MainComponent } from "./MainComponent";
 import { nonValidatedStatus } from "./StatusObjects";
 import { iarStatus } from "./StatusObjects";
-import { repairsSetStatus } from "./StatusObjects";
 import { datalogFragmentService } from "./DatalogFragmentService";
 import { datalogFragmentConext } from "./ContextObjects";
 import { querySubmitConext } from "./ContextObjects";
@@ -47,8 +46,7 @@ class ContainerComponent extends React.Component {
     this.markers = [];
     this.repairs = undefined;
     this.nonValidatedStatus = nonValidatedStatus;
-    this.iarStatus = iarStatus;
-    this.repairsSetStatus = repairsSetStatus;    
+    this.iarStatus = iarStatus;  
     this.statusObject = this.nonValidatedStatus;
     this.datalogFragmentService = datalogFragmentService;
     this.context = undefined;
