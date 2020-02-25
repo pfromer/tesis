@@ -5,6 +5,7 @@ import { parse } from "./parser/parser";
 import { MainComponent } from "./MainComponent";
 import { nonValidatedStatus } from "./StatusObjects";
 import { iarStatus } from "./StatusObjects";
+import { arStatus } from "./StatusObjects";
 import { datalogFragmentService } from "./DatalogFragmentService";
 import { datalogFragmentConext } from "./ContextObjects";
 import { querySubmitConext } from "./ContextObjects";
@@ -29,6 +30,8 @@ class ContainerComponent extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.executeAR = this.executeAR.bind(this);
+    this.executeIAR = this.executeIAR.bind(this);
     this.onFileLoaded = this.onFileLoaded.bind(this);
     this.setProgramEditorInstace = this.setProgramEditorInstace.bind(this);
     this.setQueriesEditorInstace = this.setQueriesEditorInstace.bind(this);
@@ -46,7 +49,6 @@ class ContainerComponent extends React.Component {
     this.markers = [];
     this.repairs = undefined;
     this.nonValidatedStatus = nonValidatedStatus;
-    this.iarStatus = iarStatus;  
     this.statusObject = this.nonValidatedStatus;
     this.datalogFragmentService = datalogFragmentService;
     this.context = undefined;
@@ -122,9 +124,22 @@ class ContainerComponent extends React.Component {
     this.statusObject.showRepairs(this);
   }
 
+  async executeIAR() {
+    this.statusObject = iarStatus;
+    this.handleSubmit();
+  }
+
+  async executeAR() {
+    this.statusObject = arStatus;
+    this.handleSubmit();
+  }
+
 
   async handleSubmit(event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    } 
+    
     this.context = querySubmitConext;
     if(!this.programWithNoQueries){
       this.programWithNoQueries = parse(this.programEditorInstance.getValue());
@@ -143,6 +158,8 @@ class ContainerComponent extends React.Component {
       onQueryEditorChange={this.onQueryEditorChange} 
       onFileLoaded={this.onFileLoaded} 
       checkDatalogFragment={this.checkDatalogFragment} 
+      executeAR={this.executeAR}
+      executeIAR={this.executeIAR}
       showRepairs={this.showRepairs} 
       queriesText={this.state.queriesText} 
       setQueriesEditorInstace={this.setQueriesEditorInstace}

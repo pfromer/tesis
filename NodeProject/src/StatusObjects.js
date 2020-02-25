@@ -11,11 +11,10 @@ export var nonValidatedStatus = {
     }
 }
 
-export var iarStatus = {
+var inconsistentStatus = {
     submit: async function(component){
-        iarSubmit(component)
+        inconsistentSubmit(component)
     },
-    checkConstraints: nonValidatedStatus.checkConstraints,
     showRepairs: async function(component){
         component.setState({ repairsLoading: true});
         var jsonParams = component.programWithNoQueries.toJson();
@@ -25,6 +24,24 @@ export var iarStatus = {
         alertService.showRepairs(component);
     }
 }
+
+export var iarStatus = {
+    submit: async function(component){
+        inconsistentSubmit(component, "IAR")
+    },
+    checkConstraints: nonValidatedStatus.checkConstraints,
+    showRepairs: inconsistentStatus.showRepairs
+}
+
+export var arStatus = {
+    submit: async function(component){
+        inconsistentSubmit(component, "AR")
+    },
+    checkConstraints: nonValidatedStatus.checkConstraints,
+    showRepairs: inconsistentStatus.showRepairs
+}
+
+
 
 async function onAction(actionName, component){
     var statusObject = await actionSettingsDictionary[actionName].program(component).getStatus();
@@ -46,7 +63,7 @@ async function onAction(actionName, component){
     }
 }
 
-async function iarSubmit(component){
+async function inconsistentSubmit(component, semantic){
 
     var fullProgram = component.getFullProgram();
     var statusObject = await fullProgram.getStatus();
@@ -55,7 +72,7 @@ async function iarSubmit(component){
             alertService.setErrorSyntaxAlert(component);
             break;
         default:
-            var results = await fullProgram.execute("IAR");
+            var results = await fullProgram.execute(semantic);
             component.setState({ results: results, resultsLoading: false});
     }
 }
@@ -69,7 +86,7 @@ var actionSettingsDictionary = {
             if(results.unsatisfied) {
                 alertService.setInconsistentAlert(component);
                 editorService.markInconsistencies(component, results.unsatisfied);
-                component.statusObject = component.iarStatus;
+                component.statusObject = iarStatus;
                 component.setState({showIAR : true, resultsLoading: false});
             } else {
                 alertService.setConsistentAlert(component);
@@ -88,7 +105,7 @@ var actionSettingsDictionary = {
             if(results.unsatisfied) {
                 alertService.setInconsistentAlert(component);
                 editorService.markInconsistencies(component, results.unsatisfied);
-                component.statusObject = component.iarStatus;
+                component.statusObject = iarStatus;
                 component.setState({showIAR : true, resultsLoading: false});
             }
             else {

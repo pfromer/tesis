@@ -75,18 +75,47 @@ export class MainComponent extends React.Component {
                     </Form.Group>
                   </Col>
                 </Form.Row>
-                <Form.Row>
+                
+                  {!this.props.showIAR ?  (
+                    <Form.Row>
                   <Col>
                   <Form.Group>
-                    <Button type="submit" variant='info' style={this.props.showIAR? buttonIARStyle : buttonStyle } >
-                    Execute Queries {this.props.showIAR ? '- IAR SEMANTICS' : ''}
+                    <Button type="submit" variant='info' style={ buttonStyle } >
+                    Execute Queries {this.props.showIAR}
                     <LoadingSymbol
                       show={this.props.resultsLoading}
                     />
                     </Button>
                   </Form.Group>
                     </Col>
-                </Form.Row>
+                    </Form.Row>
+                  ) : (
+                    <Form.Row>
+                  <Col>
+                  <Form.Group>
+                    <Button onClick={this.props.executeIAR} type="button" variant='info' style={buttonIARStyle } >
+                    Execute Queries - IAR SEMANTICS
+                    <LoadingSymbol
+                      show={this.props.resultsLoading}
+                    />
+                    </Button>
+                  </Form.Group>
+                    </Col>
+
+                    <Col>
+                    <Form.Group>
+                      <Button onClick={this.props.executeAR} type="button" variant='info' style={buttonIARStyle } >
+                      Execute Queries - AR SEMANTICS
+                      <LoadingSymbol
+                        show={this.props.resultsLoading}
+                      />
+                      </Button>
+                    </Form.Group>
+                      </Col>
+                      </Form.Row>
+                  )
+                }
+
                 <Form.Row>
                   <Col>
                   <Form.Group>
