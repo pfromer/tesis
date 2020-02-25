@@ -1,0 +1,15 @@
+amigos(?x, ?y) -> tieneAmigos(?x).
+amigos(?x, ?y) -> tieneAmigos(?y).
+amigos(?x, ?y), tienePiojos(?x) -> tienePiojos(?y).
+
+pelado(?x), tienePiojos(?x) -> bottom.
+
+
+tienePiojos('federico').
+amigos('federico', 'miguel').
+amigos('miguel', 'pablo').
+pelado('pablo').
+
+() :- tieneAmigos(?x).
+(?x) :- tieneAmigos(?x).
+

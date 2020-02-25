@@ -73,7 +73,7 @@ async function inconsistentSubmit(component, semantic){
             break;
         default:
             var results = await fullProgram.execute(semantic);
-            component.setState({ results: results, resultsLoading: false});
+            component.setState({ results:  mapResultsToQuery(component, results), resultsLoading: false});
     }
 }
 
@@ -109,11 +109,18 @@ var actionSettingsDictionary = {
                 component.setState({showIAR : true, resultsLoading: false});
             }
             else {
-                component.setState({ results: results, resultsLoading: false});
+                component.setState({ results: mapResultsToQuery(component, results), resultsLoading: false});
             }
         },
         program: function(component){
             return component.getFullProgram();
         }
     }
+}
+
+function mapResultsToQuery(component, results) {
+    for(var i = 0; i < results.length ; i ++ ) {
+        results[i].Query = component.getFullProgram().queries[i].toString();
+    }
+    return results;
 }
