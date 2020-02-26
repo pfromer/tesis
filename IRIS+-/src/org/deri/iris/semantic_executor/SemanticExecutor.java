@@ -70,6 +70,8 @@ public class SemanticExecutor {
 				
 				configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
 				
+				configuration.max_depth = params.max_depth;
+				
 				ProgramExecutor executor = new ProgramExecutor(irisInput, configuration);
 				
 				ArrayList<QueryResult> output = executor.getResults();
@@ -99,6 +101,8 @@ public class SemanticExecutor {
 		
 		configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
 		
+		configuration.max_depth = params.max_depth;
+		
 		ProgramExecutor executor = new ProgramExecutor(irisInput, configuration);
 		
 		ArrayList<QueryResult> output = executor.getResults();
@@ -115,6 +119,8 @@ public class SemanticExecutor {
 		configuration.variablesToShowByQuery = this.params.queries.stream().map(q -> q.showInOutput).collect(Collectors.toList());
 		
 		configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
+		
+		configuration.max_depth = params.max_depth;
 		
 		List<List<org.deri.iris.iar.Fact>> repairs = this.getRepairs();
 		 
@@ -231,6 +237,8 @@ public class SemanticExecutor {
 		configuration.variablesToShowByQuery = this.params.queries.stream().map(q -> q.showInOutput).collect(Collectors.toList());
 		
 		configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
+		
+		configuration.max_depth = params.max_depth;
 		
 		List<org.deri.iris.iar.Fact> iarIntersection = this.getRepairsIntersection();
 		

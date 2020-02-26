@@ -8,5 +8,5 @@ public class SemanticParams {
 	public List<Fact> facts;
 	public List<ExistencialQuery> queries;
 	public String semantics;
-	public int max_depth;
+	public Integer max_depth;
 }

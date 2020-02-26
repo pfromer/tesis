@@ -5,6 +5,7 @@ export function setErrorSyntaxAlert(component){
         })
 
 };
+
 export function setArityIssuesAlert(component){
     setAlert(component,{
         heading: component.context.arityIssueAlertHeading,
@@ -12,12 +13,14 @@ export function setArityIssuesAlert(component){
     })
 
 };
+
 export function setConflictingKeysAlert(component){
     setAlert(component,{
         heading: component.context.conflictingKeysHeading,
         lines: component.programWithNoQueries.getConflictingKeys.map(k => k.toString())
     })
 };
+
 export function setInconsistentAlert(component){
     setAlert(component,{
         heading: "Not consistent.",
@@ -38,11 +41,13 @@ export function setLinearFragmentAlert(component){
         lines: ["Your program is in the Linear Fragment."]
     })
 };
+
 export function setGuardedFragmentAlert(component){
     setAlert(component,{
         lines: ["Your program is in the Guarded Fragment."]
     })
 };
+
 export function setOutOfGuardedFragmentAlert(component){
     setAlert(component,{
         heading: "Out of the Guarded Fragment. Optimizations on the query answering process are not guaranteed.", 
@@ -56,8 +61,6 @@ export function showRepairs(component){
         lines: component.repairs,
     })
 };
-
-
 
 function setAlert(component, params){       
     component.setState(

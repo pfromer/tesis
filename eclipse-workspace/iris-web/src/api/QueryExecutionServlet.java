@@ -13,17 +13,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.deri.iris.Configuration;
 import org.deri.iris.KnowledgeBaseFactory;
 import org.deri.iris.demo.ProgramExecutor;
 import org.deri.iris.demo.QueryResult;
+import org.deri.iris.demo.TimeoutDtoResult;
 import org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategyFactory;
 import org.deri.iris.evaluation.stratifiedbottomup.naive.NaiveEvaluatorFactory;
 import org.deri.iris.iar.AboxSubSet;
 import org.deri.iris.iar.IARResolver;
 import org.deri.iris.semantic_executor.SemanticExecutor;
 import org.deri.iris.semantic_executor.SemanticParams;
+import org.deri.iris.semantic_executor.ViolatingNcsResult;
 import org.deri.iris.iar.Program;
 import org.deri.iris.rules.safety.GuardedRuleSafetyProcessor;
 import org.json.*;
@@ -58,7 +61,7 @@ public class QueryExecutionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		try {
+		try {	
 			
 			BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
 	        String json = "";
@@ -68,14 +71,50 @@ public class QueryExecutionServlet extends HttpServlet {
 	        
 	        Gson gson = new Gson();
 
-	        SemanticParams params = gson.fromJson(json, SemanticParams.class);
-		
-			SemanticExecutor executor = new SemanticExecutor(params);
-			
-			response.getWriter().append(executor.Execute());
+	        SemanticParams params = gson.fromJson(json, SemanticParams.class);		
+
+	        final Thread t = new Thread(new ExecutionTask(params, response));
+
+			t.setPriority(Thread.MIN_PRIORITY);
+			t.start();
+
+			try {
+				t.join(30000);
+			} catch (final InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			if (t.isAlive()) {				
+				response.getWriter().append(gson.toJson(new TimeoutDtoResult()));
+				t.stop();
+			}
 
 		} catch (Exception e) {
 			response.getWriter().append(e.toString());
 		}
 	}
+	
+	static class ExecutionTask implements Runnable {
+		ExecutionTask(final SemanticParams params, HttpServletResponse response) {
+			this.params = params;
+			this.response = response;
+		}
+
+		// @Override
+		@Override
+		public void run() {
+			SemanticExecutor executor = new SemanticExecutor(params);
+			try {
+				this.response.getWriter().append(executor.Execute());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		private final SemanticParams params;
+		private HttpServletResponse response;
+
+	}
 }
+
+

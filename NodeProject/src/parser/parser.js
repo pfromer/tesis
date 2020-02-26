@@ -16,6 +16,7 @@ export function parse (program){
 	var keys = [];		
 	var queries = [];
 	var errors = [];
+	var max_depth;
 	
 	var lines = program.split('\n');
 
@@ -47,12 +48,18 @@ export function parse (program){
 			}
 		});
 		if(!matched){
-			if(!regExModule.service.whiteSpacesRegEx.test(lines[i])) {
-				errors.push({lineNumber : i, text: lines[i]})
-				programStructure.push({text: lines[i], type: "SYNTAX_ERROR", index : i})
-			}
-			else{
-				programStructure.push({text: " ", type: "EMPTY_LINE", index : i})
+
+			if(regExModule.service.maxDepthRegex.test(lines[i])) {
+				programStructure.push({text: lines[i], type: "MAX_DEPTH", index : i});
+				max_depth = parseInt(lines[i].split('=')[1].trim());
+			} else {
+				if(!regExModule.service.whiteSpacesRegEx.test(lines[i])) {
+					errors.push({lineNumber : i, text: lines[i]})
+					programStructure.push({text: lines[i], type: "SYNTAX_ERROR", index : i})
+				}
+				else{
+					programStructure.push({text: " ", type: "EMPTY_LINE", index : i})
+				}
 			}
 		}
 	}
@@ -63,6 +70,7 @@ export function parse (program){
 				keys: keys,
 				queries : queries, 
 				facts: facts,
+				max_depth: max_depth,
 				ncsForServerDictionary : function() {
 					var result = {};
 					var i = 0;
@@ -187,12 +195,12 @@ export function parse (program){
 				}, 
 
 
-				execute: async function(semantics, max_depth){
+				execute: async function(semantics){
 
 					var params = this.toJson();
 
 					params.semantics = semantics;
-					params.max_depth = max_depth;
+					params.max_depth = this.max_depth;
 
 					var response = await executeProgram(params);
 					return response;

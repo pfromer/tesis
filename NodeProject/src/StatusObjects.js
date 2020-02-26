@@ -102,6 +102,11 @@ var actionSettingsDictionary = {
         okFunction: async function(component){
             component.setState({ resultsLoading: true}); 
             var results = await component.getFullProgram().execute("standard");
+            if (results.error) {
+                alert("server timeout");
+                component.setState({resultsLoading: false});
+                return;
+            }
             if(results.unsatisfied) {
                 alertService.setInconsistentAlert(component);
                 editorService.markInconsistencies(component, results.unsatisfied);

@@ -122,12 +122,10 @@ public class Configuration {
     public Boolean showAsJson = true;
     
     public List<String> variablesToShow;
-
-	public double lambdaFormulaForGuardedForest = 0;
-	
-	public int maxQueryLength;
-	
+		
 	public List<List<String>> variablesToShowByQuery;
+	
+	public Integer max_depth;
 
     /**
      * Constructor.

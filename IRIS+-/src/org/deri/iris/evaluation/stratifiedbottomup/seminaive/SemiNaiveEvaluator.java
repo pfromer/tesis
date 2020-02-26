@@ -89,7 +89,8 @@ public class SemiNaiveEvaluator implements IRuleEvaluator {
       }
 
       i++;
-      if (!newTuples) {
+      if (!newTuples || ( configuration.max_depth != null && i > configuration.max_depth)) {
+    	  
         break;
       }
 

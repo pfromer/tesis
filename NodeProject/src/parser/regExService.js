@@ -18,6 +18,7 @@ function _service(){
 	var tgdRegEx = new RegExp('^' + repeatAndSeparateByComma(withinPredicateRegEx).source  + "\\s*->\\s*" + withinPredicateRegEx.source  + "\\.$");
 	var ncRegEx = new RegExp('^' + repeatAndSeparateByComma(withinPredicateRegEx).source + "\\s*->\\s*" +  bottomRegEx.source + "\\.$");
 	var existencialQueryRegEx = new RegExp('^!?(\\(\\)|\\(' + repeatAndSeparateByComma(variableRegEx).source  + '\\))' +  "\\s*:-\\s*" +repeatAndSeparateByComma(queryPredicateRegEx).source + "\\.$");
+	var maxDepthRegex =  new RegExp('^max_depth=[0-9]*');
 
 	function repeatAndSeparateNElementsByComma (regEx, n){ 		
 		var arr = [];
@@ -57,6 +58,7 @@ function _service(){
 		factRegEx : factRegEx,
 		queryRegEx : queryRegEx,
 		existencialQueryRegEx: existencialQueryRegEx,
+		maxDepthRegex : maxDepthRegex,
 		arrayOfMatches : function(regEx, _text){
 			var f = match => { return match[0]};
 			return arrayOfMatchesTemplate(regEx, _text, f);
