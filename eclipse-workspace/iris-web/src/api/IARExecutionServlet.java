@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.deri.iris.demo.TimeoutDtoResult;
 import org.deri.iris.iar.AboxSubSet;
 import org.deri.iris.iar.IARResolver;
 import org.deri.iris.iar.Program;
@@ -41,21 +42,55 @@ public class IARExecutionServlet extends HttpServlet {
 	        Gson gson = new Gson();
 
 	        SemanticParams params = gson.fromJson(json, SemanticParams.class);
-	        Program program = new Program(params);
-			IARResolver solver = new IARResolver(program);
-			
-			ArrayList<AboxSubSet> repairs = solver.getRepairs();			
-			
-			String jsonOutput = gson.toJson(repairs);
-			response.getWriter().append(jsonOutput);
+	        
+	        final Thread t = new Thread(new RepairsTask(params, response));
+
+			t.setPriority(Thread.MIN_PRIORITY);
+			t.start();
+
+			try {
+				t.join(30000);
+			} catch (final InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			if (t.isAlive()) {				
+				response.getWriter().append(gson.toJson(new TimeoutDtoResult()));
+				t.stop();
+			}
 
 		} catch (Exception e) {
 			response.getWriter().append(e.toString());
-
 		}
 	}
-	
-	
-	
-}
+	        
+	static class RepairsTask implements Runnable {
+		RepairsTask(final SemanticParams params, HttpServletResponse response) {
+			this.params = params;
+			this.response = response;
+		}
+
+		// @Override
+		@Override
+		public void run() {
+			Program program = new Program(this.params);
+			IARResolver solver = new IARResolver(program);
+			ArrayList<AboxSubSet> repairs = solver.getRepairs();	
+			Gson gson = new Gson();
+			String jsonOutput = gson.toJson(repairs);
+			try {
+				this.response.getWriter().append(jsonOutput);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		private final SemanticParams params;
+		private HttpServletResponse response;
+
+	}
+}      
+	        
+	        
+	       
 

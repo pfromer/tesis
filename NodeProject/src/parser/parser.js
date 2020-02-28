@@ -191,17 +191,15 @@ export function parse (program){
 						programJson["queries"].push(query.toJson());
 					});
 
+					programJson.max_depth = this.max_depth;
+
 					return programJson;
 				}, 
 
 
 				execute: async function(semantics){
-
 					var params = this.toJson();
-
 					params.semantics = semantics;
-					params.max_depth = this.max_depth;
-
 					var response = await executeProgram(params);
 					return response;
 				},

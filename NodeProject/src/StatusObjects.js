@@ -19,9 +19,13 @@ var inconsistentStatus = {
         component.setState({ repairsLoading: true});
         var jsonParams = component.programWithNoQueries.toJson();
         var results = await irisCaller.getIarRepairs(jsonParams);
+        if(results.error) {
+            alert("Server Timeout");
+        } else {            
+            component.repairs = results;            
+            alertService.showRepairs(component);
+        }
         component.setState({ repairsLoading: false}); 
-        component.repairs = results;
-        alertService.showRepairs(component);
     }
 }
 
@@ -103,7 +107,7 @@ var actionSettingsDictionary = {
             component.setState({ resultsLoading: true}); 
             var results = await component.getFullProgram().execute("standard");
             if (results.error) {
-                alert("server timeout");
+                alert("Server Timeout");
                 component.setState({resultsLoading: false});
                 return;
             }

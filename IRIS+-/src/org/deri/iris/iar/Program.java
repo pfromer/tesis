@@ -21,6 +21,7 @@ public class Program {
 	public List<String> tgds;
 	public List<String> ncsAsQueries;
 	public Boolean isGuarded;
+	public Integer max_depth;
 	
 	public Program(List<String> _facts, List<String> _tgds, List<String> _ncsAsQueries, Boolean _isGuarded) {
 		this.facts = _facts;
@@ -33,6 +34,7 @@ public class Program {
 		this.facts = params.facts.stream().map(f -> f.value + ".").collect(Collectors.toList());
 		this.tgds = params.tgds.stream().map(t -> t.head + " :- "  + t.body + ".").collect(Collectors.toList());
 		this.ncsAsQueries = params.ncs.stream().map(nc -> "?-" +  nc.body + ".").collect(Collectors.toList());
+		this.max_depth = params.max_depth;
 	}
 	
 	public AboxSubSet ABox() {
@@ -46,7 +48,8 @@ public class Program {
 		configuration.variablesToShowByQuery = this.ncsAsQueries.stream().map(q -> new ArrayList<String>()).collect(Collectors.toList());
 		
 		configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
-
+		
+		configuration.max_depth = this.max_depth;
 		
 		if(subset.Facts.size() == 0) return true;
 		
