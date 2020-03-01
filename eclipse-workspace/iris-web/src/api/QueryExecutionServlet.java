@@ -15,7 +15,9 @@ import org.deri.iris.semantic_executor.SemanticExecutor;
 import org.deri.iris.semantic_executor.SemanticParams;
 import com.google.gson.*;
 
-@WebServlet(name = "query", urlPatterns = { "/query" })
+@WebServlet(name = "query", urlPatterns = {
+	"/query"
+})
 public class QueryExecutionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -24,21 +26,21 @@ public class QueryExecutionServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		try {	
-			
+	throws ServletException, IOException {
+
+		try {
+
 			BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
-	        String json = "";
-	        if(br != null){
-	            json = br.readLine();
-	        }
-	        
-	        Gson gson = new Gson();
+			String json = "";
+			if (br != null) {
+				json = br.readLine();
+			}
 
-	        SemanticParams params = gson.fromJson(json, SemanticParams.class);		
+			Gson gson = new Gson();
 
-	        final Thread t = new Thread(new ExecutionTask(params, response));
+			SemanticParams params = gson.fromJson(json, SemanticParams.class);
+
+			final Thread t = new Thread(new ExecutionTask(params, response));
 
 			t.setPriority(Thread.MIN_PRIORITY);
 			t.start();
@@ -49,7 +51,7 @@ public class QueryExecutionServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			if (t.isAlive()) {				
+			if (t.isAlive()) {
 				response.getWriter().append(gson.toJson(new TimeoutDtoResult()));
 				t.stop();
 			}
@@ -58,7 +60,7 @@ public class QueryExecutionServlet extends HttpServlet {
 			response.getWriter().append(e.toString());
 		}
 	}
-	
+
 	static class ExecutionTask implements Runnable {
 		ExecutionTask(final SemanticParams params, HttpServletResponse response) {
 			this.params = params;
@@ -81,5 +83,3 @@ public class QueryExecutionServlet extends HttpServlet {
 
 	}
 }
-
-

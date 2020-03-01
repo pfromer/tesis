@@ -20,31 +20,32 @@ import org.deri.iris.semantic_executor.SemanticParams;
 
 import com.google.gson.*;
 
-
-@WebServlet(name = "repairs_finder", urlPatterns = { "/repairs_finder" })
+@WebServlet(name = "repairs_finder", urlPatterns = {
+	"/repairs_finder"
+})
 public class RepairsFinderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			
-			BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
-	        String json = "";
-	        if(br != null){
-	            json = br.readLine();
-	        }
-	        
-	        Gson gson = new Gson();
 
-	        SemanticParams params = gson.fromJson(json, SemanticParams.class);
-	        
-	        final Thread t = new Thread(new RepairsTask(params, response));
+			BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+			String json = "";
+			if (br != null) {
+				json = br.readLine();
+			}
+
+			Gson gson = new Gson();
+
+			SemanticParams params = gson.fromJson(json, SemanticParams.class);
+
+			final Thread t = new Thread(new RepairsTask(params, response));
 
 			t.setPriority(Thread.MIN_PRIORITY);
 			t.start();
@@ -55,7 +56,7 @@ public class RepairsFinderServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			if (t.isAlive()) {				
+			if (t.isAlive()) {
 				response.getWriter().append(gson.toJson(new TimeoutDtoResult()));
 				t.stop();
 			}
@@ -64,7 +65,7 @@ public class RepairsFinderServlet extends HttpServlet {
 			response.getWriter().append(e.toString());
 		}
 	}
-	        
+
 	static class RepairsTask implements Runnable {
 		RepairsTask(final SemanticParams params, HttpServletResponse response) {
 			this.params = params;
@@ -74,11 +75,11 @@ public class RepairsFinderServlet extends HttpServlet {
 		// @Override
 		@Override
 		public void run() {
-			
+
 			Program program = new Program(this.params);
 			ConsistentFunctionBuilder functionBuilder = new ConsistentFunctionBuilder(program);
 			RepairsFinder solver = new RepairsFinder(program, functionBuilder::IsConsistent);
-			ArrayList<AboxSubSet> repairs = solver.getRepairs();	
+			ArrayList<AboxSubSet> repairs = solver.getRepairs();
 			Gson gson = new Gson();
 			String jsonOutput = gson.toJson(repairs);
 			try {
@@ -92,8 +93,4 @@ public class RepairsFinderServlet extends HttpServlet {
 		private HttpServletResponse response;
 
 	}
-}      
-	        
-	        
-	       
-
+}
