@@ -3,36 +3,42 @@ import * as editorService from "./EditorService";
 import * as irisCaller from "./IrisCaller"
 
 export var nonValidatedStatus = {
-    submit: async function(component){
+    submit: async function (component) {
         onAction("submit", component)
     },
-    checkConstraints: async function(component){
+    checkConstraints: async function (component) {
         onAction("checkConstraints", component)
     }
 }
 
 var inconsistentStatus = {
-    submit: async function(component){
+    submit: async function (component) {
         inconsistentSubmit(component)
     },
-    showRepairs: async function(component){
-        component.setState({ repairsLoading: true});
+    showRepairs: async function (component) {
+        component.setState({
+            repairsLoading: true
+        });
         var jsonParams = component.programWithNoQueries.toJson();
         var results = await irisCaller.getIarRepairs(jsonParams);
-        if(results.error) {
+        if (results.error) {
             alert(results.error);
-            component.setState({ repairsLoading: false}); 
+            component.setState({
+                repairsLoading: false
+            });
             return;
         }
-        component.repairs = results;            
+        component.repairs = results;
         alertService.showRepairs(component);
-        component.setState({ repairsLoading: false}); 
-       
+        component.setState({
+            repairsLoading: false
+        });
+
     }
 }
 
 export var iarStatus = {
-    submit: async function(component){
+    submit: async function (component) {
         inconsistentSubmit(component, "IAR")
     },
     checkConstraints: nonValidatedStatus.checkConstraints,
@@ -40,97 +46,114 @@ export var iarStatus = {
 }
 
 export var arStatus = {
-    submit: async function(component){
+    submit: async function (component) {
         inconsistentSubmit(component, "AR")
     },
     checkConstraints: nonValidatedStatus.checkConstraints,
     showRepairs: inconsistentStatus.showRepairs
 }
 
-
-
-async function onAction(actionName, component){
+async function onAction(actionName, component) {
     var statusObject = await actionSettingsDictionary[actionName].program(component).getStatus();
-    switch(statusObject.status){
-        case("SYNTAX ERROR"):
+    switch (statusObject.status) {
+        case ("SYNTAX ERROR"):
             alertService.setErrorSyntaxAlert(component);
             break;
-        case("ARITIES ISSUES"):
-        alertService.setArityIssuesAlert(component);
+        case ("ARITIES ISSUES"):
+            alertService.setArityIssuesAlert(component);
             editorService.markArityIssues(component);
             break;
-        case("CONFLICTING KEYS"):
-        alertService.setConflictingKeysAlert(component);
+        case ("CONFLICTING KEYS"):
+            alertService.setConflictingKeysAlert(component);
             editorService.markConflictingKeys(component);
             break;
-        case("OK"):
-        actionSettingsDictionary[actionName].okFunction(component);
+        case ("OK"):
+            actionSettingsDictionary[actionName].okFunction(component);
             break;
     }
 }
 
-async function inconsistentSubmit(component, semantic){
+async function inconsistentSubmit(component, semantic) {
 
     var fullProgram = component.getFullProgram();
     var statusObject = await fullProgram.getStatus();
-    switch(statusObject.status){
-        case("SYNTAX ERROR"):
+    switch (statusObject.status) {
+        case ("SYNTAX ERROR"):
             alertService.setErrorSyntaxAlert(component);
             break;
         default:
             var results = await fullProgram.execute(semantic);
-            component.setState({ results:  mapResultsToQuery(component, results), resultsLoading: false});
+            component.setState({
+                results: mapResultsToQuery(component, results),
+                resultsLoading: false
+            });
     }
 }
 
 var actionSettingsDictionary = {
-    "checkConstraints":{
-        okFunction: async function(component){
+    "checkConstraints": {
+        okFunction: async function (component) {
 
-            component.setState({ resultsLoading: true}); 
+            component.setState({
+                resultsLoading: true
+            });
             var results = await component.programWithNoQueries.execute("standard");
-            if(results.unsatisfied) {
+            if (results.unsatisfied) {
                 alertService.setInconsistentAlert(component);
                 editorService.markInconsistencies(component, results.unsatisfied);
                 component.statusObject = iarStatus;
-                component.setState({showIAR : true, resultsLoading: false});
+                component.setState({
+                    showIAR: true,
+                    resultsLoading: false
+                });
             } else {
                 alertService.setConsistentAlert(component);
-                component.setState({ resultsLoading: false}); 
+                component.setState({
+                    resultsLoading: false
+                });
             }
         },
-        program: function(component){
+        program: function (component) {
             return component.programWithNoQueries;
         }
 
     },
-    "submit":{
-        okFunction: async function(component){
-            component.setState({ resultsLoading: true}); 
+    "submit": {
+        okFunction: async function (component) {
+            component.setState({
+                resultsLoading: true
+            });
             var results = await component.getFullProgram().execute("standard");
             if (results.error) {
                 alert(results.error);
-                component.setState({resultsLoading: false});
+                component.setState({
+                    resultsLoading: false
+                });
                 return;
             }
-            if(results.unsatisfied) {
+            if (results.unsatisfied) {
                 alertService.setInconsistentAlert(component);
                 editorService.markInconsistencies(component, results.unsatisfied);
                 component.statusObject = iarStatus;
-                component.setState({showIAR : true, resultsLoading: false});
-            }
-            else {
-                component.setState({ results: mapResultsToQuery(component, results), resultsLoading: false});
+                component.setState({
+                    showIAR: true,
+                    resultsLoading: false
+                });
+            } else {
+                component.setState({
+                    results: mapResultsToQuery(component, results),
+                    resultsLoading: false
+                });
             }
         },
-        program: function(component){
+        program: function (component) {
             return component.getFullProgram();
         }
     }
 }
 
 function mapResultsToQuery(component, results) {
-    for(var i = 0; i < results.length ; i ++ ) {
+    for (var i = 0; i < results.length; i++) {
         results[i].Query = component.getFullProgram().queries[i].toString();
     }
     return results;

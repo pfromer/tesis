@@ -10,8 +10,8 @@ import { LoadProgramButton } from "./LoadProgramButton";
 import { Editor } from "./Editor";
 import { AlertDismissable  } from "./AlertDismissable";
 import { LoadingSymbol  } from "./LoadingSymbol";
-import * as regExModule from "./parser/regExService";
-import {UpdateArrayPrototype} from "./parser/ArrayUtils";
+import * as regExModule from "../services/regExService";
+import {UpdateArrayPrototype} from "../parser/ArrayUtils";
 
 export class MainComponent extends React.Component {
   constructor(props) {

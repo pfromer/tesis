@@ -1,4 +1,4 @@
-import * as predicateModule  from "./predicateBuilder";
+import * as predicateModule from "./predicateBuilder";
 import * as bodyModule from "./bodyBuilder";
 
 
@@ -19,14 +19,14 @@ function _builder() {
 			predicate: predicate,
 			name: predicate.name,
 			parameters: predicate.parameters,
-			toString : predicate.toString
+			toString: predicate.toString
 		}
 	}
 
 	var buildTgdHead = function (headText, tgdBody) {
 		return {
 			predicate: buildTgdHeadPredicate(headText, tgdBody),
-			prependPrefixToAllVariables: function(prefix){
+			prependPrefixToAllVariables: function (prefix) {
 				var result = Object.assign({}, this);
 				result.predicate = result.predicate.prependPrefixToAllVariables(prefix);
 				return result;
@@ -35,7 +35,7 @@ function _builder() {
 	};
 
 	return {
-		build : function (line) {
+		build: function (line) {
 			var split = line.split("->");
 			var body = bodyModule.builder.build(split[0]);
 			var head = buildTgdHead(split[1], body);
@@ -45,7 +45,7 @@ function _builder() {
 					allVariables.push(variable);
 				});
 			});
-			
+
 			var isGuarded = body.predicates.some(p => p.hasAllVariables(allVariables));
 
 			return {
@@ -57,32 +57,31 @@ function _builder() {
 				},
 
 				toJson: function () {
-					return { 
-						"head" : this.head.predicate.toString(),
-						"body" : this.body.toString()
+					return {
+						"head": this.head.predicate.toString(),
+						"body": this.body.toString()
 					}
 				},
-				type : isGuarded ? "GUARDED_TGD" : "UNAGARDED_TGD",
-				arities : function(){
+				type: isGuarded ? "GUARDED_TGD" : "UNAGARDED_TGD",
+				arities: function () {
 					var result = this.body.arities();
-					if(this.head.predicate.name in result){
-						result[this.head.predicate.name].push(this.head.predicate.parameters.length);						
-					}
-					else{
+					if (this.head.predicate.name in result) {
+						result[this.head.predicate.name].push(this.head.predicate.parameters.length);
+					} else {
 						result[this.head.predicate.name] = [this.head.predicate.parameters.length];
 					}
 					return result;
 				},
-				xPositionsInHead : function(){
+				xPositionsInHead: function () {
 					var result = [];
-					this.head.predicate.parameters.forEach((parameter,index)=>{
-						if(parameter.type === "variable"){
-							result.push(index +1);
+					this.head.predicate.parameters.forEach((parameter, index) => {
+						if (parameter.type === "variable") {
+							result.push(index + 1);
 						}
 					})
 					return result;
 				},
-				allNullsAppearOnlyOnceInTheHead : function(){
+				allNullsAppearOnlyOnceInTheHead: function () {
 					var allNullNames = this.head.predicate.parameters.filter(p => p.type == 'null').map(p => p.name);
 					return allNullNames.unique().length == allNullNames.length;
 				}

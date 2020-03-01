@@ -1,5 +1,5 @@
-import * as parameterModule  from "./parameterBuilder";
-import * as regExModule from "./regExService";
+import * as parameterModule from "./parameterBuilder";
+import * as regExModule from "../../services/regExService";
 
 
 function _builder(tgdText) {
@@ -12,17 +12,16 @@ function _builder(tgdText) {
 				parametersAsObjets.push(parameterModule.builder.build(parameters[i]));
 			};
 
-			var getName = function(){
-				if (regExModule.service.equalRegex.test(predicateText)){
+			var getName = function () {
+				if (regExModule.service.equalRegex.test(predicateText)) {
 					return "equals";
 				}
-				if(regExModule.service.notEqualRegex.test(predicateText)){
+				if (regExModule.service.notEqualRegex.test(predicateText)) {
 					return "not_Equals";
 				}
-				if(regExModule.service.negatedPredicateRegEx.test(predicateText)){
+				if (regExModule.service.negatedPredicateRegEx.test(predicateText)) {
 					return predicateText.split("(")[0].trim().substring(1);
-				}
-				else if(regExModule.service.withinPredicateRegEx.test(predicateText)){
+				} else if (regExModule.service.withinPredicateRegEx.test(predicateText)) {
 					return predicateText.split("(")[0].trim();
 				}
 			};
@@ -32,17 +31,21 @@ function _builder(tgdText) {
 			return {
 				name: getName(),
 				parameters: parametersAsObjets,
-				hasVariable: function(varName){return this.allVariables().some(v => varName == v)},
-				allVariables: function(){return this.parameters.filter(p => p.type == 'variable').map(p => p.name)},
+				hasVariable: function (varName) {
+					return this.allVariables().some(v => varName == v)
+				},
+				allVariables: function () {
+					return this.parameters.filter(p => p.type == 'variable').map(p => p.name)
+				},
 				hasAllVariables: function (variables) {
 					return variables.every(v => this.hasVariable(v));
 				},
-				isNegated : isNegated,
+				isNegated: isNegated,
 				toString: function () {
 					return [this.isNegated ? "!" : "", this.name, "(", this.parameters.map(p => p.toString()).join(", "), ")"].join("");
 				},
-				type : "predicate",
-				isPredicate : true,
+				type: "predicate",
+				isPredicate: true,
 				isVariable: false,
 				isConstant: false
 			}

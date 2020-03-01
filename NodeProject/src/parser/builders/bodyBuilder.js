@@ -1,38 +1,39 @@
-import * as predicateModule  from "./predicateBuilder";
-import * as regExModule from "./regExService";
+import * as predicateModule from "./predicateBuilder";
+import * as regExModule from "../../services/regExService";
 
 
-function _builder(){
-	
-	var build = function(bodyText){
+function _builder() {
+
+	var build = function (bodyText) {
 		var predicates = regExModule.service.arrayOfMatches(regExModule.service.queryPredicateRegEx, bodyText);
 		var predicatesAsObjects = [];
 		for (var i = 0; i < predicates.length; i++) {
 			predicatesAsObjects.push(predicateModule.builder.build(predicates[i]));
-		}		
-		return { 
-			predicates: predicatesAsObjects, 
-			hasVariable : function(v){ return predicatesAsObjects.some(p => p.hasVariable(v))},
-			toString : function(){
+		}
+		return {
+			predicates: predicatesAsObjects,
+			hasVariable: function (v) {
+				return predicatesAsObjects.some(p => p.hasVariable(v))
+			},
+			toString: function () {
 				return this.predicates.map(p => p.toString()).join(", ");
 			},
-			arities : function(){
+			arities: function () {
 				var result = {};
 				this.predicates.forEach(predicate => {
-					if(predicate.name in result){
+					if (predicate.name in result) {
 						result[predicate.name].push(predicate.parameters.length);
-					}
-					else{
+					} else {
 						result[predicate.name] = [predicate.parameters.length];
 					}
 				});
 				return result;
 			}
-		};		
+		};
 	}
-	
+
 	return {
-		build : build
+		build: build
 	}
 }
 

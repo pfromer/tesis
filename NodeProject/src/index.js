@@ -1,15 +1,33 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
-import { parse } from "./parser/parser";
-import { MainComponent } from "./MainComponent";
-import { nonValidatedStatus } from "./StatusObjects";
-import { iarStatus } from "./StatusObjects";
-import { arStatus } from "./StatusObjects";
-import { datalogFragmentService } from "./DatalogFragmentService";
-import { datalogFragmentConext } from "./ContextObjects";
-import { querySubmitConext } from "./ContextObjects";
-import { checkConstraintsConext } from "./ContextObjects";
+import {
+  parse
+} from "./parser/parser";
+import {
+  MainComponent
+} from "./components/MainComponent";
+import {
+  nonValidatedStatus
+} from "./services/StatusObjects";
+import {
+  iarStatus
+} from "./services/StatusObjects";
+import {
+  arStatus
+} from "./services/StatusObjects";
+import {
+  datalogFragmentService
+} from "./services/DatalogFragmentService";
+import {
+  datalogFragmentConext
+} from "./services/ContextObjects";
+import {
+  querySubmitConext
+} from "./services/ContextObjects";
+import {
+  checkConstraintsConext
+} from "./services/ContextObjects";
 
 class ContainerComponent extends React.Component {
   constructor(props) {
@@ -51,9 +69,9 @@ class ContainerComponent extends React.Component {
     this.datalogFragmentService = datalogFragmentService;
     this.context = undefined;
   }
-  
-  
-  getFullProgram(){
+
+
+  getFullProgram() {
     var result = Object.assign({}, this.programWithNoQueries);
     result.queries = this.queriesProgram.queries;
     result.errors = result.errors.concat(this.queriesProgram.errors);
@@ -61,17 +79,23 @@ class ContainerComponent extends React.Component {
   }
 
 
-  onQueryEditorChange(){
+  onQueryEditorChange() {
     this.onHandleAlertClose();
     this.queriesProgram = undefined;
   }
 
-  onProgramEditorChange(){
+  onProgramEditorChange() {
     this.onHandleAlertClose();
     this.markers.forEach(marker => marker.clear());
     this.markers = [];
     this.repairs = undefined;
-    this.setState({results : [], alert: {opened: false}, showIAR: false})
+    this.setState({
+      results: [],
+      alert: {
+        opened: false
+      },
+      showIAR: false
+    })
     this.programWithNoQueries = undefined;
     this.statusObject = this.nonValidatedStatus;
   }
@@ -85,7 +109,7 @@ class ContainerComponent extends React.Component {
   }
 
   setProgramEditorInstace(editor) {
-    this.programEditorInstance = editor;    
+    this.programEditorInstance = editor;
   }
 
   setQueriesEditorInstace(editor) {
@@ -94,8 +118,7 @@ class ContainerComponent extends React.Component {
 
   checkConstraints() {
     this.context = checkConstraintsConext;
-    if (!this.programWithNoQueries)
-    {
+    if (!this.programWithNoQueries) {
       this.programWithNoQueries = parse(this.programEditorInstance.getValue());
     }
     this.statusObject.checkConstraints(this);
@@ -103,8 +126,7 @@ class ContainerComponent extends React.Component {
 
   checkDatalogFragment() {
     this.context = datalogFragmentConext;
-    if (!this.programWithNoQueries)
-    {
+    if (!this.programWithNoQueries) {
       this.programWithNoQueries = parse(this.programEditorInstance.getValue());
     }
     this.datalogFragmentService.checkDatalogFragment(this);
@@ -118,7 +140,7 @@ class ContainerComponent extends React.Component {
     })
   }
 
-  showRepairs(){
+  showRepairs() {
     this.statusObject.showRepairs(this);
   }
 
@@ -136,10 +158,10 @@ class ContainerComponent extends React.Component {
   async handleSubmit(event) {
     if (event) {
       event.preventDefault();
-    } 
-    
+    }
+
     this.context = querySubmitConext;
-    if(!this.programWithNoQueries){
+    if (!this.programWithNoQueries) {
       this.programWithNoQueries = parse(this.programEditorInstance.getValue());
     }
     this.queriesProgram = parse(this.queriesEditorInstace.getValue());
@@ -147,32 +169,67 @@ class ContainerComponent extends React.Component {
   }
 
   render() {
-    return (
-    <MainComponent
-      handleSubmit={this.handleSubmit}
-      programText={this.state.programText} 
-      setProgramEditorInstace={this.setProgramEditorInstace}
-      onProgramEditorChange={this.onProgramEditorChange} 
-      onQueryEditorChange={this.onQueryEditorChange} 
-      onFileLoaded={this.onFileLoaded} 
-      checkDatalogFragment={this.checkDatalogFragment} 
-      executeAR={this.executeAR}
-      executeIAR={this.executeIAR}
-      showRepairs={this.showRepairs} 
-      queriesText={this.state.queriesText} 
-      setQueriesEditorInstace={this.setQueriesEditorInstace}
-      results={this.state.results}
-      alert={this.state.alert}
-      checkConstraints={this.checkConstraints}
-      showIAR={this.state.showIAR}
-      resultsLoading={this.state.resultsLoading}
-      repairsLoading={this.state.repairsLoading}
-    />
+    return ( <
+      MainComponent handleSubmit = {
+        this.handleSubmit
+      }
+      programText = {
+        this.state.programText
+      }
+      setProgramEditorInstace = {
+        this.setProgramEditorInstace
+      }
+      onProgramEditorChange = {
+        this.onProgramEditorChange
+      }
+      onQueryEditorChange = {
+        this.onQueryEditorChange
+      }
+      onFileLoaded = {
+        this.onFileLoaded
+      }
+      checkDatalogFragment = {
+        this.checkDatalogFragment
+      }
+      executeAR = {
+        this.executeAR
+      }
+      executeIAR = {
+        this.executeIAR
+      }
+      showRepairs = {
+        this.showRepairs
+      }
+      queriesText = {
+        this.state.queriesText
+      }
+      setQueriesEditorInstace = {
+        this.setQueriesEditorInstace
+      }
+      results = {
+        this.state.results
+      }
+      alert = {
+        this.state.alert
+      }
+      checkConstraints = {
+        this.checkConstraints
+      }
+      showIAR = {
+        this.state.showIAR
+      }
+      resultsLoading = {
+        this.state.resultsLoading
+      }
+      repairsLoading = {
+        this.state.repairsLoading
+      }
+      />
     );
   }
 }
 
-ReactDOM.render(<ContainerComponent />, document.getElementById("root"));
+ReactDOM.render( < ContainerComponent / > , document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

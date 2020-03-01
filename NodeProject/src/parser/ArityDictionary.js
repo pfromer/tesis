@@ -1,15 +1,15 @@
-export function ArityDictionary(){
+export function ArityDictionary() {
 
     this.dictionary = {};
 
     var self = this;
     var consistentResult = undefined;
 
-    this.addArities = function(arities, lineNumber){
-        if(arities){
-            for (const predicateName in arities){
+    this.addArities = function (arities, lineNumber) {
+        if (arities) {
+            for (const predicateName in arities) {
                 var i = parseInt(lineNumber);
-                if(! Object.keys(this.dictionary).some(k => k== predicateName)){
+                if (!Object.keys(this.dictionary).some(k => k == predicateName)) {
                     this.dictionary[predicateName] = {};
                 }
                 this.dictionary[predicateName][i] = arities[predicateName];
@@ -17,64 +17,67 @@ export function ArityDictionary(){
         }
     }
 
-    this.aritiesAreConsistent = function(){
-        if(!self.consistentResult)
-        {
+    this.aritiesAreConsistent = function () {
+        if (!self.consistentResult) {
             var predicatesNotArityConsistent = [];
             for (const predicateName in this.dictionary) {
                 var allAritiesByLine = this.dictionary[predicateName];
                 var allArities = [];
-                for (const lineNumber in allAritiesByLine){
-                    allArities = allArities.concat(allAritiesByLine[lineNumber]);              
+                for (const lineNumber in allAritiesByLine) {
+                    allArities = allArities.concat(allAritiesByLine[lineNumber]);
                 }
-                if(allArities.unique().length > 1){
+                if (allArities.unique().length > 1) {
                     predicatesNotArityConsistent.push(predicateName);
                 }
             }
 
-            if(predicatesNotArityConsistent.length == 0){
-                self.consistentResult = {result : true}
-            }
-            else{
-                self.consistentResult = {result : false, predicatesNotArityConsistent : predicatesNotArityConsistent }
+            if (predicatesNotArityConsistent.length == 0) {
+                self.consistentResult = {
+                    result: true
+                }
+            } else {
+                self.consistentResult = {
+                    result: false,
+                    predicatesNotArityConsistent: predicatesNotArityConsistent
+                }
             }
         }
         return self.consistentResult;
     }
 
-    this.getLessCommonArityLinesForPredicate = function(predicateName){
+    this.getLessCommonArityLinesForPredicate = function (predicateName) {
 
         var aritiesByLine = this.dictionary[predicateName];
         var aritiesCounts = {};
-        for (const lineNumber in aritiesByLine){
+        for (const lineNumber in aritiesByLine) {
             aritiesByLine[lineNumber].forEach(arity => {
-                if(aritiesCounts[arity]){
+                if (aritiesCounts[arity]) {
                     aritiesCounts[arity]++
-                }
-                else{
+                } else {
                     aritiesCounts[arity] = 1
                 }
-            })     
+            })
         }
 
         var mostCommon = Math.max.apply(null, Object.values(aritiesCounts));
-        var mostCommonArity = Object.keys(aritiesCounts).find(k => aritiesCounts[k] == mostCommon );
+        var mostCommonArity = Object.keys(aritiesCounts).find(k => aritiesCounts[k] == mostCommon);
         var lessCommonArities = Object.keys(aritiesCounts).filter(k => k != mostCommonArity);
 
         var result = [];
 
-        lessCommonArities.forEach( a => 
-            {
-                for (const lineNumber in aritiesByLine){
-                    if (aritiesByLine[lineNumber].some(arity => arity == a)){
-                       result.push({lineNumber : lineNumber, arity : a}) 
-                    }
-                }     
+        lessCommonArities.forEach(a => {
+            for (const lineNumber in aritiesByLine) {
+                if (aritiesByLine[lineNumber].some(arity => arity == a)) {
+                    result.push({
+                        lineNumber: lineNumber,
+                        arity: a
+                    })
+                }
             }
-        )
+        })
         return result;
     }
-} 
+}
 
 
 
