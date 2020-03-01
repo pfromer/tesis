@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.deri.iris.demo.TimeoutDtoResult;
 import org.deri.iris.iar.AboxSubSet;
-import org.deri.iris.iar.IARResolver;
+import org.deri.iris.iar.RepairsFinder;
 import org.deri.iris.iar.Program;
 import org.deri.iris.semantic_executor.ConsistentFunctionBuilder;
 import org.deri.iris.semantic_executor.SemanticParams;
@@ -77,7 +77,7 @@ public class IARExecutionServlet extends HttpServlet {
 			
 			Program program = new Program(this.params);
 			ConsistentFunctionBuilder functionBuilder = new ConsistentFunctionBuilder(program);
-			IARResolver solver = new IARResolver(program, functionBuilder::IsConsistent);
+			RepairsFinder solver = new RepairsFinder(program, functionBuilder::IsConsistent);
 			ArrayList<AboxSubSet> repairs = solver.getRepairs();	
 			Gson gson = new Gson();
 			String jsonOutput = gson.toJson(repairs);

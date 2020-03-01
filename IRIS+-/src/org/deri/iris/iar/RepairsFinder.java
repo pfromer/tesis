@@ -10,7 +10,7 @@ import oracle.net.aso.f;
 
 import java.util.function.Function;
 
-public class IARResolver {
+public class RepairsFinder {
 	
 	private AboxSubSet ABox;
 	private ArrayList<AboxSubSet> bigRepairs;
@@ -21,7 +21,7 @@ public class IARResolver {
 	private List<AboxSubSet> bottom;
 	private List<AboxSubSet> bottomPlusOne;
 	
-	public IARResolver(Program program, Function<AboxSubSet, Boolean> consistentFunction) {
+	public RepairsFinder(Program program, Function<AboxSubSet, Boolean> consistentFunction) {
 		this.IsConsistentFunction = consistentFunction;
 		this.ABox = program.ABox();
 		this.top = this.ABox.completeSet();

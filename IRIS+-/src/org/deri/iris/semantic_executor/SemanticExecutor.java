@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.deri.iris.Configuration;
 import org.deri.iris.KnowledgeBaseFactory;
 import org.deri.iris.iar.AboxSubSet;
-import org.deri.iris.iar.IARResolver;
+import org.deri.iris.iar.RepairsFinder;
 import org.deri.iris.iar.Program;
 import org.deri.iris.rules.safety.GuardedRuleSafetyProcessor;
 
@@ -235,10 +235,10 @@ public class SemanticExecutor {
 	}
 	
 	
-	private IARResolver getIarResolver() {		
+	private RepairsFinder getIarResolver() {		
 		Program program = new Program(this.params);
 		ConsistentFunctionBuilder functionBuilder = new ConsistentFunctionBuilder(program);
-		return new IARResolver(program, functionBuilder::IsConsistent);
+		return new RepairsFinder(program, functionBuilder::IsConsistent);
 	}	
 	
 	private List<org.deri.iris.iar.Fact> toStringFacts(AboxSubSet s){

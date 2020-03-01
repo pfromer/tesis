@@ -23,7 +23,7 @@ import org.deri.iris.demo.TimeoutDtoResult;
 import org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategyFactory;
 import org.deri.iris.evaluation.stratifiedbottomup.naive.NaiveEvaluatorFactory;
 import org.deri.iris.iar.AboxSubSet;
-import org.deri.iris.iar.IARResolver;
+import org.deri.iris.iar.RepairsFinder;
 import org.deri.iris.semantic_executor.SemanticExecutor;
 import org.deri.iris.semantic_executor.SemanticParams;
 import org.deri.iris.semantic_executor.ViolatingNcsResult;
