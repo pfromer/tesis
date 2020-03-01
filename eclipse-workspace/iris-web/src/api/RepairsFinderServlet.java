@@ -12,17 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.deri.iris.demo.TimeoutDtoResult;
-import org.deri.iris.iar.AboxSubSet;
-import org.deri.iris.iar.RepairsFinder;
-import org.deri.iris.iar.Program;
+import org.deri.iris.repairs_finder.AboxSubSet;
+import org.deri.iris.repairs_finder.RepairsFinder;
+import org.deri.iris.repairs_finder.Program;
 import org.deri.iris.semantic_executor.ConsistentFunctionBuilder;
 import org.deri.iris.semantic_executor.SemanticParams;
 
 import com.google.gson.*;
 
 
-@WebServlet(name = "iar", urlPatterns = { "/iar" })
-public class IARExecutionServlet extends HttpServlet {
+@WebServlet(name = "repairs_finder", urlPatterns = { "/repairs_finder" })
+public class RepairsFinderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	/**

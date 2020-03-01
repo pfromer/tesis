@@ -23,7 +23,7 @@ export async function executeProgram(programJson) {
 
 export async function getIarRepairs(programJson) {
     var error;
-    const response = await axios.post('http://localhost:8080/iris/iar', JSON.stringify(programJson), {
+    const response = await axios.post('http://localhost:8080/iris/repairs_finder', JSON.stringify(programJson), {
             timeout: 99999999
         })
         .catch(err => {

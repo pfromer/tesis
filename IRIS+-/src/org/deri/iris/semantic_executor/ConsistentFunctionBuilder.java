@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 import org.deri.iris.Configuration;
 import org.deri.iris.KnowledgeBaseFactory;
 import org.deri.iris.demo.ProgramExecutor;
-import org.deri.iris.iar.AboxSubSet;
+import org.deri.iris.repairs_finder.AboxSubSet;
+import org.deri.iris.repairs_finder.Program;
 import org.deri.iris.rules.safety.GuardedRuleSafetyProcessor;
-import org.deri.iris.iar.Program;
 
 public class ConsistentFunctionBuilder {
 	

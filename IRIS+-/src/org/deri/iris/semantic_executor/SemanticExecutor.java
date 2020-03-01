@@ -6,14 +6,14 @@ import java.util.stream.Collectors;
 
 import org.deri.iris.Configuration;
 import org.deri.iris.KnowledgeBaseFactory;
-import org.deri.iris.iar.AboxSubSet;
-import org.deri.iris.iar.RepairsFinder;
-import org.deri.iris.iar.Program;
 import org.deri.iris.rules.safety.GuardedRuleSafetyProcessor;
 
 import com.google.gson.Gson;
 import org.deri.iris.demo.ProgramExecutor;
 import org.deri.iris.demo.QueryResult;
+import org.deri.iris.repairs_finder.AboxSubSet;
+import org.deri.iris.repairs_finder.Program;
+import org.deri.iris.repairs_finder.RepairsFinder;
 
 
 
@@ -97,7 +97,7 @@ public class SemanticExecutor {
 
 	private String ExecuteAR() {
 		
-		List<List<org.deri.iris.iar.Fact>> repairs = this.getRepairs();
+		List<List<org.deri.iris.repairs_finder.Fact>> repairs = this.getRepairs();
 		 
 	    ArrayList<ArrayList<QueryResult>> allResults = new ArrayList<ArrayList<QueryResult>>();
 		
@@ -176,7 +176,7 @@ public class SemanticExecutor {
 		return true;
 	}
 
-	private String makeIrisInputForRepair(List<org.deri.iris.iar.Fact> repair) {
+	private String makeIrisInputForRepair(List<org.deri.iris.repairs_finder.Fact> repair) {
 		String tgds = this.params.tgds.stream().map(t -> t.head + " :- "  + t.body + ".").collect(Collectors.joining("\n"));
 		String facts = repair.stream().map(f -> f.Text).collect(Collectors.joining("\n"));
 		String queries = this.params.queries.stream().map(q -> "?-" + q.body + ".").collect(Collectors.joining("\n"));
@@ -186,7 +186,7 @@ public class SemanticExecutor {
 
 	private String ExecuteIAR() {
 				
-		List<org.deri.iris.iar.Fact> iarIntersection = this.getRepairsIntersection();
+		List<org.deri.iris.repairs_finder.Fact> iarIntersection = this.getRepairsIntersection();
 		
 		String irisInput = this.makeIrisInputForFacts(iarIntersection);
 
@@ -218,15 +218,15 @@ public class SemanticExecutor {
 		return tgds + "\n" + facts + "\n" + _nc;
 	}
 	
-	private List<List<org.deri.iris.iar.Fact>> getRepairs(){		
+	private List<List<org.deri.iris.repairs_finder.Fact>> getRepairs(){		
 		return this.getIarResolver().getRepairs().stream().map(s -> this.toStringFacts(s)).collect(Collectors.toList());		
 	}
 	
-	private List<org.deri.iris.iar.Fact> getRepairsIntersection(){
+	private List<org.deri.iris.repairs_finder.Fact> getRepairsIntersection(){
 		return this.getIarResolver().getRepairsIntersection();		
 	}
 	
-	private String makeIrisInputForFacts(List<org.deri.iris.iar.Fact> _facts) {
+	private String makeIrisInputForFacts(List<org.deri.iris.repairs_finder.Fact> _facts) {
 		String tgds = this.params.tgds.stream().map(t -> t.head + " :- "  + t.body + ".").collect(Collectors.joining("\n"));
 		String facts = _facts.stream().map(f -> f.Text).collect(Collectors.joining("\n"));
 		String queries = this.params.queries.stream().map(q -> "?-" + q.body + ".").collect(Collectors.joining("\n"));
@@ -241,7 +241,7 @@ public class SemanticExecutor {
 		return new RepairsFinder(program, functionBuilder::IsConsistent);
 	}	
 	
-	private List<org.deri.iris.iar.Fact> toStringFacts(AboxSubSet s){
+	private List<org.deri.iris.repairs_finder.Fact> toStringFacts(AboxSubSet s){
 		return s.Facts.stream().collect(Collectors.toList());
 	}
 	
