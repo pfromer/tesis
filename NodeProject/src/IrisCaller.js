@@ -1,31 +1,33 @@
+const axios = require("axios");
+
 
 export async function executeProgram(programJson){
-    const response = await fetch('http://localhost:8080/iris/query'	, {
-        method: 'post',
-        body: JSON.stringify(programJson)
-        });
+    var error;
+    const response = await axios.post('http://localhost:8080/iris/query',JSON.stringify(programJson), {timeout: 99999999} )
+    .catch(err=> {
+        error = err;
+    })
 
-        const json = await response.json();
-        debugger;
+    if(!error) {
+        const json = await response.data;
         return json;
-
+    } else {
+        return {error : "The server seems to be down."};
+    }
 }
 
 
 export async function getIarRepairs(programJson){
+    var error;
+    const response = await axios.post('http://localhost:8080/iris/iar',JSON.stringify(programJson), {timeout: 99999999} )
+    .catch(err=> {
+        error = err;
+    })
 
-    debugger
-
-    const response = await fetch('http://localhost:8080/iris/iar', {
-        method: 'post',
-        body: JSON.stringify(programJson)
-      })
-    const json = await response.json();
-
-    if(json.error) {
-       return json; 
+    if(!error) {
+        const json = await response.data;
+        return json.map(r => r.Facts.map(r => r.Text));
+    } else {
+        return {error : "The server seems to be down."};
     }
-
-    var result = json.map(r => r.Facts.map(r => r.Text));
-    return result;
 }
