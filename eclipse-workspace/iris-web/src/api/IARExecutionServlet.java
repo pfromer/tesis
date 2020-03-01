@@ -15,6 +15,7 @@ import org.deri.iris.demo.TimeoutDtoResult;
 import org.deri.iris.iar.AboxSubSet;
 import org.deri.iris.iar.IARResolver;
 import org.deri.iris.iar.Program;
+import org.deri.iris.semantic_executor.ConsistentFunctionBuilder;
 import org.deri.iris.semantic_executor.SemanticParams;
 
 import com.google.gson.*;
@@ -73,8 +74,10 @@ public class IARExecutionServlet extends HttpServlet {
 		// @Override
 		@Override
 		public void run() {
+			
 			Program program = new Program(this.params);
-			IARResolver solver = new IARResolver(program);
+			ConsistentFunctionBuilder functionBuilder = new ConsistentFunctionBuilder(program);
+			IARResolver solver = new IARResolver(program, functionBuilder::IsConsistent);
 			ArrayList<AboxSubSet> repairs = solver.getRepairs();	
 			Gson gson = new Gson();
 			String jsonOutput = gson.toJson(repairs);

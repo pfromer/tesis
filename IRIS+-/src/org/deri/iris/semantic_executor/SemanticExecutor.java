@@ -7,15 +7,11 @@ import java.util.stream.Collectors;
 import org.deri.iris.Configuration;
 import org.deri.iris.KnowledgeBaseFactory;
 import org.deri.iris.iar.AboxSubSet;
-import org.deri.iris.iar.Fact;
 import org.deri.iris.iar.IARResolver;
 import org.deri.iris.iar.Program;
 import org.deri.iris.rules.safety.GuardedRuleSafetyProcessor;
 
 import com.google.gson.Gson;
-
-import org.deri.iris.evaluation.stratifiedbottomup.StratifiedBottomUpEvaluationStrategyFactory;
-import org.deri.iris.evaluation.stratifiedbottomup.naive.NaiveEvaluatorFactory;
 import org.deri.iris.demo.ProgramExecutor;
 import org.deri.iris.demo.QueryResult;
 
@@ -45,11 +41,6 @@ public class SemanticExecutor {
 	}
 
 	private String ExecuteStandard() {
-		
-		//si ncs es lista vacia armo el programa concatenando todo y devuelvo el resultado
-		//si ncs no es vacia armo una query por cada nc y me fijo si alguno da resultado
-			//opcion 1 : ninguna da resultado-> concateno todo y devuelvo el resultado
-			//opcion 2: alguna da resultado-> devuelvo error diciendo cuales ncs son violadas
 		
 		if(this.params.ncs.size() == 0) {
 			return this.ExecuteWithoutNcs();
@@ -95,15 +86,7 @@ public class SemanticExecutor {
 	private String ExecuteWithoutNcs() {
 		String irisInput = this.generateIrisInput();
 		
-		final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();
-		
-		configuration.variablesToShowByQuery = this.params.queries.stream().map(q -> q.showInOutput).collect(Collectors.toList());
-		
-		configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
-		
-		configuration.max_depth = params.max_depth;
-		
-		ProgramExecutor executor = new ProgramExecutor(irisInput, configuration);
+		ProgramExecutor executor = new ProgramExecutor(irisInput, getConfiguration());
 		
 		ArrayList<QueryResult> output = executor.getResults();
 		
@@ -113,14 +96,6 @@ public class SemanticExecutor {
 	}
 
 	private String ExecuteAR() {
-
-		final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();
-		
-		configuration.variablesToShowByQuery = this.params.queries.stream().map(q -> q.showInOutput).collect(Collectors.toList());
-		
-		configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
-		
-		configuration.max_depth = params.max_depth;
 		
 		List<List<org.deri.iris.iar.Fact>> repairs = this.getRepairs();
 		 
@@ -128,7 +103,7 @@ public class SemanticExecutor {
 		
 		for (int i = 0; i < repairs.size(); i++) { 
 			String irisInput = this.makeIrisInputForRepair(repairs.get(i));
-			ProgramExecutor executor = new ProgramExecutor(irisInput, configuration);
+			ProgramExecutor executor = new ProgramExecutor(irisInput, getConfiguration());
 			ArrayList<QueryResult> output = executor.getResults();
 			allResults.add(output);
 		}
@@ -143,28 +118,7 @@ public class SemanticExecutor {
 		Gson gson = new Gson();
 
 		return gson.toJson(arResults);
-		
-		
-		/*
-		public Boolean IsBoolean;
-		
-		public Boolean BooleanResult;
-		
-		public String Query;
-		
-		public List<String> VariableBindings;
-		
-		public ArrayList<ArrayList<String>> Results;
-		*/
-
-		
-		//calculo los repairs
-		//para cada repair armo un programa (tgds, r, queries)
-		//para cada query, devuelvo solo los resultados que figuran en el resulatado de todos los repairs
 	}
-	
-	
-	
 
 	private QueryResult getArResultsFor(ArrayList<ArrayList<QueryResult>> allResults, int i) {
 		
@@ -231,20 +185,12 @@ public class SemanticExecutor {
 	}
 
 	private String ExecuteIAR() {
-		
-		final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();
-		
-		configuration.variablesToShowByQuery = this.params.queries.stream().map(q -> q.showInOutput).collect(Collectors.toList());
-		
-		configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
-		
-		configuration.max_depth = params.max_depth;
-		
+				
 		List<org.deri.iris.iar.Fact> iarIntersection = this.getRepairsIntersection();
 		
 		String irisInput = this.makeIrisInputForFacts(iarIntersection);
 
-		ProgramExecutor executor = new ProgramExecutor(irisInput, configuration);
+		ProgramExecutor executor = new ProgramExecutor(irisInput, getConfiguration());
 		
 		ArrayList<QueryResult> output = executor.getResults();
 		
@@ -289,16 +235,26 @@ public class SemanticExecutor {
 	}
 	
 	
-	private IARResolver getIarResolver() {
-		
+	private IARResolver getIarResolver() {		
 		Program program = new Program(this.params);
-				
-		return new IARResolver(program);
-	}
-	
+		ConsistentFunctionBuilder functionBuilder = new ConsistentFunctionBuilder(program);
+		return new IARResolver(program, functionBuilder::IsConsistent);
+	}	
 	
 	private List<org.deri.iris.iar.Fact> toStringFacts(AboxSubSet s){
 		return s.Facts.stream().collect(Collectors.toList());
+	}
+	
+	private Configuration getConfiguration() {
+		final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();
+		
+		configuration.variablesToShowByQuery = this.params.queries.stream().map(q -> q.showInOutput).collect(Collectors.toList());
+		
+		configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
+		
+		configuration.max_depth = params.max_depth;
+		
+		return configuration;
 	}
 	
 }

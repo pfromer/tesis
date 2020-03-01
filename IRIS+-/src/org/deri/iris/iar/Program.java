@@ -41,30 +41,4 @@ public class Program {
 		AtomicInteger index = new AtomicInteger();
 		return new AboxSubSet(this.facts.stream().map(f -> new Fact(f,index.getAndIncrement())).collect(Collectors.toList()));
 	}
-
-	public Boolean IsConsistent(AboxSubSet subset){
-		final Configuration configuration = KnowledgeBaseFactory.getDefaultConfiguration();
-		
-		configuration.variablesToShowByQuery = this.ncsAsQueries.stream().map(q -> new ArrayList<String>()).collect(Collectors.toList());
-		
-		configuration.ruleSafetyProcessor = new GuardedRuleSafetyProcessor();
-		
-		configuration.max_depth = this.max_depth;
-		
-		if(subset.Facts.size() == 0) return true;
-		
-		String program = GenerateSubProgram(subset);
-		ProgramExecutor executor = new ProgramExecutor(program, configuration);
-		
-		return !executor.getResults().stream().anyMatch(q -> q.BooleanResult == true);
-	}
-	
-	private String GenerateSubProgram(AboxSubSet subset) {
-		
-		String tgds =  this.tgds.stream().collect(Collectors.joining("\n"));
-		String facts = subset.Facts.stream().map(f -> f.Text).collect(Collectors.joining("\n"));
-		String queries = this.ncsAsQueries.stream().collect(Collectors.joining("\n"));
-		
-		return tgds + "\n" + facts + "\n" + queries;
-	}
 }
