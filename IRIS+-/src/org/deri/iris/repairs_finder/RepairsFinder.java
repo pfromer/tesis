@@ -22,7 +22,7 @@ public class RepairsFinder {
 		this.IsConsistentFunction = consistentFunction;
 		this.ABox = program.ABox();
 		this.top = this.ABox.completeSet();
-		this.bottom = this.ABox.allSubSetsWithOneElement();
+		this.bottom = this.ABox.listWithEmptySubSet();
 		this.culprits = new ArrayList<AboxSubSet> ();
 		this.smallRepairs = new ArrayList<AboxSubSet> ();
 		this.bigRepairs = new ArrayList<AboxSubSet> ();
@@ -42,7 +42,7 @@ public class RepairsFinder {
 			BuildNextBottom();
 		}
 
-		if (ABox.Facts.size() % 2 == 1 && (this.top.size() != 0)) {
+		if (this.top.size() == this.bottom.size() && (this.top.size() != 0)) {
 			SetTopConsistencyAndAddToBigRepairs();
 		}
 

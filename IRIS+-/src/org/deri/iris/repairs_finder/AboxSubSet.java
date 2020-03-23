@@ -115,19 +115,6 @@ public class AboxSubSet {
 		return "[" + this.Facts.stream().map(f -> f.Text).collect(Collectors.joining(",")) + "] - " + cons;
 	}
 
-	//todo pasar esto a metodos de AboxSubSet
-	public List<AboxSubSet> allSubSetsWithOneLess() {
-		List<AboxSubSet> result = new ArrayList<AboxSubSet> ();
-
-		int i = 0;
-		int size = this.Facts.size();
-		while (i<size) {
-			result.add(allFactsBut(this.Facts.get(i).Id));
-			i++;
-		}
-		return result;
-	}
-
 	public List<AboxSubSet> completeSet() {
 		List<AboxSubSet> result = new ArrayList<AboxSubSet> ();
 
@@ -140,40 +127,14 @@ public class AboxSubSet {
 		return result;
 	}
 
-	private AboxSubSet allFactsBut(int i) {
-		return new AboxSubSet(this.Facts.stream().filter(f -> f.Id != i).collect(Collectors.toList()));
-	}
-
 	public boolean Contains(Fact f) {
 		return this.Facts.stream().anyMatch(f2 -> f2.equals(f));
 	}
-
-	public ArrayList<AboxSubSet> allPossibleSubSetsWithOneMore(List<AboxSubSet> l) {
-		ArrayList<AboxSubSet> result = new ArrayList<AboxSubSet> ();
-
-		l.forEach(s -> {
-			this.Facts.forEach(f -> {
-				if (!s.Contains(f)) {
-					AboxSubSet s2 = s.copyWithoutStatus();
-					s2.add(f);
-					if (!result.stream().anyMatch(s4 -> s2.equals(s4))) {
-						result.add(s2);
-					}
-				}
-			});
-		});
-
-		return result;
+	
+	public List<AboxSubSet> listWithEmptySubSet() {
+		AboxSubSet emptySubset= new AboxSubSet();
+		List<AboxSubSet> list = new ArrayList<AboxSubSet>();
+		list.add(emptySubset);
+		return list;
 	}
-
-	public List<AboxSubSet> allSubSetsWithOneElement() {
-		return this.Facts.stream().map(f -> listWithOneElement(f)).collect(Collectors.toList());
-	}
-
-	private AboxSubSet listWithOneElement(Fact fact) {
-		AboxSubSet result = new AboxSubSet();
-		result.add(fact);
-		return result;
-	}
-
 }
